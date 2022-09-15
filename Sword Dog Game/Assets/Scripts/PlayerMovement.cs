@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
+    [SerializeField] private float speed = 2f;
 
     void Start()
     {
@@ -13,31 +14,10 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        //Right
-        if (Input.GetKey(KeyCode.D))
-        {
-            //TODO: cap velocity
-            rb.AddForce(transform.right * 2);
-        }
-
-        //Slow down when you let go of key
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            //TODO: Slow down, dont immediately stop
-            rb.velocity = Vector2.zero;
-        }
-
-        //Left
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(transform.right * -2);
-        }
-
-        //Slow down when you let go of key
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            //TODO: Slow down, dont immediately stop
-            rb.velocity = Vector2.zero;
-        }
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float targetVelocity = Mathf.Lerp(rb.velocity.x, moveX * speed, 0.1f);
+        rb.velocity = new Vector3(targetVelocity, rb.velocity.y, 0);
+        GetComponent<Animator>().SetFloat("speed", targetVelocity / speed);
+        GetComponent<Animator>().SetFloat("absSpeed", Mathf.Abs(targetVelocity / speed));
     }
 }
