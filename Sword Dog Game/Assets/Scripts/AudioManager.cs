@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public enum GameArea
     {
-        MENU, FOREST, TOWN, CAVE;
+        MENU, FOREST, TOWN, CAVE
     }
 
     /// <summary>
