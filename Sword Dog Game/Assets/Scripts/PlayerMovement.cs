@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 upperLeftCorner;
     Vector2 upperRightCorner;
-
+    public int slopeSamples = 2;
 
     void Start()
     {
@@ -219,25 +219,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
-        RaycastHit2D front = Physics2D.Raycast(upperLeftCorner + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
-        RaycastHit2D back = Physics2D.Raycast(upperRightCorner + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
-        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, upperLeftCorner + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
-        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, upperRightCorner + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
-        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, back.point, Color.red);
-        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, front.point, Color.red);
-
-        if (front && back)
+        if (slopeSamples < 2)
         {
-            isOnSlope = true;
-            int posNeg = (back.point.y - front.point.y) / (back.point.x - front.point.x) > 0 ? 1 : -1;
-
-            slopeSideAngle = Vector2.Angle((back.point - front.point), Vector2.right) * posNeg;
+            Debug.LogError("SlopeCheck needs at least 2 samples!");
+            return;
         }
-        else
+        Vector3[] samples = new Vector3[slopeSamples];
+        float xStep = (upperRightCorner.x - upperLeftCorner.x) / (slopeSamples - 1);
+        for(int i = 0; i < samples.Length; i++)
         {
-            isOnSlope = false;
-            slopeSideAngle = 0;
+            Vector2 position = new Vector2(upperLeftCorner.x + (xStep * i), upperLeftCorner.y);
+            RaycastHit2D hit = Physics2D.Raycast((position) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
+            Debug.DrawLine(position + (Vector2)transform.position, position + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
+            Debug.DrawLine(position + (Vector2)transform.position, hit.point, Color.red);
+            samples[i] = hit.point;
         }
+        Vector2 totalSlope = default;
+        for(int i = 1; i < samples.Length; i++)
+        {
+            totalSlope += new Vector2((samples[i].y - samples[i - 1].y), (samples[i].x - samples[i - 1].x));
+        }
+        Vector2 finalSlope = totalSlope / samples.Length;
+        int posNeg = (finalSlope.y/finalSlope.x) > 0 ? 1 : -1;
+        slopeSideAngle = Vector2.Angle(finalSlope, Vector2.up) * posNeg;
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
