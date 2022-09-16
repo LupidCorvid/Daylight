@@ -10,7 +10,7 @@ public class SpeakParticle : MonoBehaviour
     public float drag;
 
     public float lifeTime = 5;
-    float startTime;
+    public float startTime;
 
     // Start is called before the first frame update
     void Start()
