@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public enum GameArea
     {
-        MENU, FOREST, TOWN
+        MENU, FOREST, TOWN, CAVE;
     }
 
     /// <summary>
@@ -184,11 +184,11 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        // // Scene specific SFX effects
-        // if (currentArea == GameArea.UNDERGROUND)
-        //     sfx.SetFloat("Reverb", -4f);
-        // else
-        //     sfx.SetFloat("Reverb", -10000f);
+        // Scene specific SFX effects
+        if (currentArea == GameArea.CAVE)
+            sfx.SetFloat("Reverb", -4f);
+        else
+            sfx.SetFloat("Reverb", -10000f);
     }
 
     public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)
