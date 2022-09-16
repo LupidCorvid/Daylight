@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
-    public float moveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown;
+    public float moveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown, timeSinceJumpPressed;
     private int stepDirection;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         colliderSize = GetComponent<BoxCollider2D>().size;
+        timeSinceJumpPressed = 0.2f;
 
         stepDirection = 1;
         facingRight = true;
@@ -300,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        // If the player should jump...
+        // if player presses jump button
         if (Input.GetButton("Jump"))
         {
             if (!isJumping)
@@ -308,14 +309,19 @@ public class PlayerMovement : MonoBehaviour
                 holdingJump = true;
             }
 
-            if ((isGrounded || lastOnLand < 0.15f) && jumpCooldown <= 0f && !isJumping && slopeDownAngle <= maxSlopeAngle)
-            {
-                // Add a vertical force to the player
-                isGrounded = false;
-                isJumping = true;
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
-            }
+            timeSinceJumpPressed = 0.0f;
         }
+
+        // incorporates coyote time and input buffering
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && jumpCooldown <= 0f && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        {
+            // Add a vertical force to the player
+            isGrounded = false;
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
+        }
+
+        timeSinceJumpPressed += Time.deltaTime;
     }
 }
