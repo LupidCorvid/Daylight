@@ -39,11 +39,18 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
 
+    Collider2D cldr;
+
+    Vector2 upperLeftCorner;
+    Vector2 upperRightCorner;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         colliderSize = GetComponent<BoxCollider2D>().size;
+        cldr = GetComponent<Collider2D>();
 
         stepDirection = 1;
         facingRight = true;
@@ -58,6 +65,9 @@ public class PlayerMovement : MonoBehaviour
             instance = gameObject;
             DontDestroyOnLoad(gameObject);
         }
+
+        upperLeftCorner = new Vector2( - cldr.bounds.extents.x + cldr.offset.x,cldr.bounds.extents.y + cldr.offset.y);
+        upperRightCorner = new Vector2(cldr.bounds.extents.x + cldr.offset.x, upperLeftCorner.y);
     }
     
     void FixedUpdate()
@@ -110,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
         // check if player is on ground
         CheckGround();
+        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
         // jump code
         if (Input.GetButton("Jump") && isGrounded && jumpCooldown <= 0f && !isJumping)
@@ -208,23 +219,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
-        RaycastHit2D front = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
-        RaycastHit2D back = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
-        if (front)
+        RaycastHit2D front = Physics2D.Raycast(upperLeftCorner + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
+        RaycastHit2D back = Physics2D.Raycast(upperRightCorner + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
+        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, upperLeftCorner + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
+        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, upperRightCorner + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
+        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, back.point, Color.red);
+        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, front.point, Color.red);
+
+        if (front && back)
         {
             isOnSlope = true;
-            slopeSideAngle = Vector2.Angle(front.normal, Vector2.up);
-        }
-        else if (back)
-        {
-            isOnSlope = true;
-            slopeSideAngle = Vector2.Angle(back.normal, Vector2.up);
+            int posNeg = (back.point.y - front.point.y)/(back.point.x - front.point.x) > 0 ? 1 : -1;
+
+            slopeSideAngle = Vector2.Angle((back.point - front.point), Vector2.right) * posNeg;
         }
         else
         {
             isOnSlope = false;
-            slopeSideAngle = 0.0f;
+            slopeSideAngle = 0;
         }
+
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
