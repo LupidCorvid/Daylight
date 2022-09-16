@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     bool facingRight, trotting;
     float moveX, targetVelocity;
     int stepDirection;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] private float speed = 4f;
 
     void Start()
     {
@@ -66,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 // stop here
                 case 0 or 5 or 6 or 11:
-                    Debug.Log(frame + " stop");
                     anim.SetTrigger("trot");
                     trotting = false;
                     stepDirection = 1;
@@ -74,13 +73,11 @@ public class PlayerMovement : MonoBehaviour
 
                 // step backwards here
                 case 1 or 2 or 7 or 8:
-                    Debug.Log(frame + " backwards");
                     stepDirection = -1;
                     break;
 
                 // step forwards here
                 case 3 or 4 or 9 or 10:
-                    Debug.Log(frame + " stop");
                     stepDirection = 1;
                     break;
             }
