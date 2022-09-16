@@ -298,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
         {
             beenOnLand = 0f;
         }
-        else
+        else 
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
@@ -335,6 +335,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
         }
 
-        timeSinceJumpPressed += Time.deltaTime;
+        if (timeSinceJumpPressed < 1f)
+            timeSinceJumpPressed += Time.deltaTime;
     }
 }
