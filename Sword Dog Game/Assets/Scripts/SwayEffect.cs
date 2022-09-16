@@ -81,7 +81,11 @@ public class SwayEffect : MonoBehaviour
     {
         if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX"))
         {
-            swayVelocity += ((collision.attachedRigidbody.velocity.x) * Time.deltaTime);
+            float distanceModifier = 1;
+            distanceModifier = Mathf.Abs((transform.position.x - collision.transform.position.x)/collision.bounds.extents.x);
+            distanceModifier = Mathf.Clamp(distanceModifier, 0, 1);
+            distanceModifier = 1 - distanceModifier;
+            swayVelocity += ((collision.attachedRigidbody.velocity.x) * Time.deltaTime) * distanceModifier;
         }
     }
     private void FixedUpdate()
