@@ -7,26 +7,26 @@ public class PlayerMovement : MonoBehaviour
     public static GameObject instance;
     private Rigidbody2D rb;
     private Animator anim;
-    private bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump, releaseJump;
-    private float moveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown;
+    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
+    public float moveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown, timeSinceJumpPressed;
     private int stepDirection;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
 
     // Radius of the overlap circle to determine if grounded
-    const float groundedRadius = .12f;
+    const float groundedRadius = 0.2f;
 
     // A mask determining what is ground to the character
     [SerializeField] public LayerMask whatIsGround;
 
-    // A position marking where to check if the player is grounded
-    [SerializeField] public Transform groundCheck;
+    // Positions marking where to check if the player is grounded
+    [SerializeField] public Transform[] groundChecks;
 
     // Amount of force added when the player jumps
     [SerializeField] private float jumpForce = 2000f;
 
     // How much to smooth out movement
-    [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;   
+    [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
 
     // Slope variables
     private Vector2 colliderSize;
@@ -49,8 +49,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        colliderSize = GetComponent<BoxCollider2D>().size;
         cldr = GetComponent<Collider2D>();
+        colliderSize = GetComponent<BoxCollider2D>().size;
+        timeSinceJumpPressed = 0.2f;
 
         stepDirection = 1;
         facingRight = true;
@@ -66,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        upperLeftCorner = new Vector2( - cldr.bounds.extents.x + cldr.offset.x,cldr.bounds.extents.y + cldr.offset.y);
+        upperLeftCorner = new Vector2(-cldr.bounds.extents.x + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2(cldr.bounds.extents.x + cldr.offset.x, upperLeftCorner.y);
     }
-    
-    void FixedUpdate()
+
+    void Update()
     {
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
@@ -87,14 +88,27 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("trot");
             trotting = true;
         }
-        
+
+        // jump code
+        Jump();
+
+        // release jump
+        if (Input.GetButtonUp("Jump"))
+        {
+            holdingJump = false;
+            jumpCooldown = 0.0f;
+        }
+    }
+
+    void FixedUpdate()
+    {
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
             Flip();
         }
 
-        // apply velocity, dampening between current and target velocity for smooth movement
+        // calculate target velocity
         Vector3 targetVelocity = new Vector2(moveX * speed, rb.velocity.y);
 
         // sloped movement
@@ -103,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
             targetVelocity.Set(moveX * speed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
+        // apply velocity, dampening between current and target
         if (moveX == 0.0 && rb.velocity.x != 0.0f)
         {
             if (canWalkOnSlope)
@@ -120,34 +135,18 @@ public class PlayerMovement : MonoBehaviour
 
         // check if player is on ground
         CheckGround();
+
+        // rotate player based on slope
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
-        // jump code
-        if (Input.GetButton("Jump") && isGrounded && jumpCooldown <= 0f && !isJumping)
-        {
-            Jump();
-        }
-
-        if (Input.GetButtonUp("Jump"))
-        {
-            releaseJump = true;
-            jumpCooldown = 0.0f;
-        }
-
+        // hold jump distance extentions
         if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
-        }
-
-        if (releaseJump)
-        {
-            holdingJump = false;
-        }
-
-        //hold jump distance extentions
-        if (holdingJump && isJumping)
-        {
-            rb.AddForce(new Vector2(0f, jumpForce / 500f / jumpTime));
+            if (holdingJump)
+            {
+                rb.AddForce(new Vector2(0f, jumpForce / 500f / jumpTime));
+            }
         }
     }
 
@@ -183,9 +182,10 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
-        
+
         // step forwards again if still moving
-        if (moveX != 0) {
+        if (moveX != 0)
+        {
             stepDirection = 1;
         }
 
@@ -229,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
         if (front && back)
         {
             isOnSlope = true;
-            int posNeg = (back.point.y - front.point.y)/(back.point.x - front.point.x) > 0 ? 1 : -1;
+            int posNeg = (back.point.y - front.point.y) / (back.point.x - front.point.x) > 0 ? 1 : -1;
 
             slopeSideAngle = Vector2.Angle((back.point - front.point), Vector2.right) * posNeg;
         }
@@ -238,7 +238,6 @@ public class PlayerMovement : MonoBehaviour
             isOnSlope = false;
             slopeSideAngle = 0;
         }
-
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -279,17 +278,18 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, whatIsGround);
-        for (int i = 0; i < colliders.Length; i++)
+        foreach (Transform groundCheck in groundChecks)
         {
-            if (colliders[i].gameObject != gameObject && colliders[i].gameObject.tag == "Ground")
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, whatIsGround);
+            for (int i = 0; i < colliders.Length; i++)
             {
-                isGrounded = true;
-                lastOnLand = 0f;
-
-                if (!wasGrounded && jumpCooldown <= 0.1f)
+                if (colliders[i].gameObject != gameObject && colliders[i].gameObject.tag == "Ground")
                 {
-                    jumpCooldown = 0.05f;
+                    isGrounded = true;
+                    lastOnLand = 0f;
+
+                    if (!wasGrounded && jumpCooldown <= 0.1f)
+                        jumpCooldown = 0.05f;
                 }
             }
         }
@@ -302,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f))
+            if (jumpTime > 0.1f && !(rb.velocity.y > 0f))
             {
                 isJumping = false;
                 jumpTime = 0f;
@@ -314,18 +314,27 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        // If the player should jump...
-        if (lastOnLand < 0.15f && !isJumping && slopeDownAngle <= maxSlopeAngle) // incorporates coyote time with lastOnLand
+        // if player presses jump button
+        if (Input.GetButton("Jump"))
         {
-            // Add a vertical force to the player
-            isGrounded = false;
             if (!isJumping)
             {
                 holdingJump = true;
             }
+
+            timeSinceJumpPressed = 0.0f;
+        }
+
+        // incorporates coyote time and input buffering
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && jumpCooldown <= 0f && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        {
+            // Add a vertical force to the player
+            isGrounded = false;
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce * .7f)); //force added during a jump
+            rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
         }
+
+        timeSinceJumpPressed += Time.deltaTime;
     }
 }
