@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 6300512340327299632}
   - component: {fileID: 6300512340327299635}
   - component: {fileID: 6300512340327299634}
+  - component: {fileID: 7713005219475735744}
+  - component: {fileID: 223483409846595020}
+  - component: {fileID: 2076971703553780711}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -36,7 +39,7 @@ Transform:
   - {fileID: 715932471944003825}
   - {fileID: 2792928474455710887}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6300512340327299646
 SpriteRenderer:
@@ -158,7 +161,7 @@ MonoBehaviour:
   speed: 4
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   groundChecks:
   - {fileID: 715932471944003825}
   - {fileID: 2792928474455710887}
@@ -168,6 +171,10 @@ MonoBehaviour:
   maxSlopeAngle: 45
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  slopeSamples: 2
+  dead: 0
+  resetting: 0
+  invincible: 0
 --- !u!61 &6300512340327299634
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -194,6 +201,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7798686, y: 2.4797149}
   m_EdgeRadius: 0
+--- !u!114 &7713005219475735744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27618e3b4adf2734dad1befe7f7cc0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 
+  position: {x: 0, y: 0}
+  savedOnce: 0
+--- !u!114 &223483409846595020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df05cb1eef40ca8469b954cc128d4d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!81 &2076971703553780711
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
 --- !u!1 &7222040838773025709
 GameObject:
   m_ObjectHideFlags: 0

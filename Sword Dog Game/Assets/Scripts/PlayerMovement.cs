@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public static GameObject instance;
+    public static PlayerMovement controller;
     private Rigidbody2D rb;
     private Animator anim;
     public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
@@ -45,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 upperRightCorner;
     public int slopeSamples = 2;
 
+    public bool dead, resetting, invincible;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            controller = this;
             instance = gameObject;
             DontDestroyOnLoad(gameObject);
         }
@@ -98,6 +102,16 @@ public class PlayerMovement : MonoBehaviour
             holdingJump = false;
             jumpCooldown = 0.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            GameObject.FindObjectOfType<CinematicBars>().Show(500, .3f);
+        }
+        if (Input.GetKeyUp(KeyCode.V))
+        {
+            GameObject.FindObjectOfType<CinematicBars>().Hide(.3f);
+        }
+
     }
 
     void FixedUpdate()

@@ -16,15 +16,11 @@ public class CameraController : MonoBehaviour
             return targetTracker.position + offset;
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
+        targetTracker = PlayerMovement.instance.transform;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }
 
