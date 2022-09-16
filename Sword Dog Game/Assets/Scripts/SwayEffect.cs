@@ -6,6 +6,7 @@ using Unity.Collections;
 public class SwayEffect : MonoBehaviour
 {
     public Sprite texture;
+    Renderer rend;
 
     Mesh originalMesh;
     MeshFilter meshFilter;
@@ -31,6 +32,7 @@ public class SwayEffect : MonoBehaviour
     void Start()
     {
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
+        rend = GetComponent<Renderer>();
         meshFilter = GetComponent<MeshFilter>();
         originalMesh = meshFilter.sharedMesh;
         originalSnapshot = Mesh.AcquireReadOnlyMeshData(meshFilter.sharedMesh);
@@ -104,9 +106,12 @@ public class SwayEffect : MonoBehaviour
                 swayPosition = -limit;
             swayVelocity /= limit;
         }
-        if (rotate)
-            swayRotate(swayPosition);
-        else
-            sway(swayPosition);
+        if (rend.isVisible)
+        {
+            if (rotate)
+                swayRotate(swayPosition);
+            else
+                sway(swayPosition);
+        }
     }
 }
