@@ -39,6 +39,8 @@ public class SwayEffect : MonoBehaviour
         Mesh.MeshDataArray tempData = Mesh.AcquireReadOnlyMeshData(meshFilter.sharedMesh);
         meshFilter.sharedMesh = new Mesh();
         Mesh.ApplyAndDisposeWritableMeshData(tempData, meshFilter.sharedMesh);
+        meshFilter.mesh.RecalculateBounds();
+        meshFilter.mesh.RecalculateNormals();
     }
 
     public void sway(float intensity)
