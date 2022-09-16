@@ -5,6 +5,8 @@ using Unity.Collections;
 
 public class SwayEffect : MonoBehaviour
 {
+    public Sprite texture;
+
     Mesh originalMesh;
     MeshFilter meshFilter;
     Mesh.MeshDataArray originalSnapshot;
@@ -28,6 +30,7 @@ public class SwayEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
         meshFilter = GetComponent<MeshFilter>();
         originalMesh = meshFilter.sharedMesh;
         originalSnapshot = Mesh.AcquireReadOnlyMeshData(meshFilter.sharedMesh);
@@ -38,7 +41,7 @@ public class SwayEffect : MonoBehaviour
 
     public void sway(float intensity)
     {
-        NativeArray<Vector3> vertices = new NativeArray<Vector3>(24, Allocator.Temp);
+        NativeArray<Vector3> vertices = new NativeArray<Vector3>(originalSnapshot[0].vertexCount, Allocator.Temp);
         originalSnapshot[0].GetVertices(vertices);
         Vector3[] newVertices = new Vector3[vertices.Length];
         for (int i = 0; i < vertices.Length; i++)
@@ -50,7 +53,7 @@ public class SwayEffect : MonoBehaviour
     }
     public void swayRotate(float intensity)
     {
-        NativeArray<Vector3> vertices = new NativeArray<Vector3>(24, Allocator.Temp);
+        NativeArray<Vector3> vertices = new NativeArray<Vector3>(originalSnapshot[0].vertexCount, Allocator.Temp);
         originalSnapshot[0].GetVertices(vertices);
         Vector3[] newVertices = new Vector3[vertices.Length];
         for (int i = 0; i < vertices.Length; i++)
