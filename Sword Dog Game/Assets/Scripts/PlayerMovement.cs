@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTime += Time.fixedDeltaTime;
             if (holdingJump)
             {
-                rb.AddForce(new Vector2(0f, jumpForce / 500f / jumpTime));
+                rb.AddForce(new Vector2(0f, jumpForce / 300f / jumpTime));
             }
         }
     }
@@ -315,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // if player presses jump button
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             if (!isJumping)
             {
