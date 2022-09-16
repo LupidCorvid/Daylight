@@ -240,6 +240,10 @@ public class PlayerMovement : MonoBehaviour
             // Debug.DrawRay(hit.point, slopeNormalPerp, Color.yellow, 0.01f, false);
         }
 
+        // float currentRotZ = transform.localRotation.eulerAngles.z;
+        // float rotZ = Mathf.Lerp(currentRotZ, slopeDownAngle, 0.2f);
+        // transform.rotation = Quaternion.Euler(0, 0, rotZ);
+
         if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)
         {
             canWalkOnSlope = false;
