@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 715932471944003825}
+  - {fileID: 2792928474455710887}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 79c1c3c14e2a3cf4b876295e92ebaea5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -124,7 +125,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -142,11 +143,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a19d9467069d64e865e3d3be6d1a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facingRight: 0
+  trotting: 0
+  isGrounded: 0
+  wasGrounded: 0
+  isJumping: 0
+  holdingJump: 0
+  moveX: 0
+  beenOnLand: 0
+  lastOnLand: 0
+  jumpTime: 0
+  jumpCooldown: 0
+  timeSinceJumpPressed: 0
   speed: 4
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1
-  groundCheck: {fileID: 715932471944003825}
+  groundChecks:
+  - {fileID: 715932471944003825}
+  - {fileID: 2792928474455710887}
   jumpForce: 500
   movementSmoothing: 0.05
   slopeCheckDistance: 2
@@ -166,7 +181,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010911226, y: 0.037145436}
+  m_Offset: {x: -0.010911226, y: 0.07369894}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -177,7 +192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7798686, y: 2.552822}
+  m_Size: {x: 2.7798686, y: 2.4797149}
   m_EdgeRadius: 0
 --- !u!1 &7222040838773025709
 GameObject:
@@ -189,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715932471944003825}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundCheckLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +218,38 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222040838773025709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.16, z: 0}
+  m_LocalPosition: {x: -0.85, y: -1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6300512340327299633}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7366465506947558132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2792928474455710887}
+  m_Layer: 0
+  m_Name: GroundCheckRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2792928474455710887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366465506947558132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: -1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
