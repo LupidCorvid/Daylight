@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTime += Time.fixedDeltaTime;
             if (holdingJump)
             {
-                rb.AddForce(new Vector2(0f, jumpForce / 500f / jumpTime));
+                rb.AddForce(new Vector2(0f, jumpForce / 300f / jumpTime));
             }
         }
     }
@@ -195,13 +195,13 @@ public class PlayerMovement : MonoBehaviour
     void CalculateSpeedMultiplier()
     {
         // calculate trot "speed" multiplier
-        float speedMultiplier = rb.velocity.x / speed;
+        float speedMultiplier = rb.velocity.x;
 
         // disregard direction of movement
         speedMultiplier = Mathf.Abs(speedMultiplier);
 
         // clamp to minimum speed + scale magnitude of normal speed (makes for smoother transitions)
-        speedMultiplier = Mathf.Max(0.7f, 1.1f * speedMultiplier);
+        speedMultiplier = Mathf.Max(0.7f, 1.1f * speedMultiplier / 4);
 
         // multiply by "step direction" - determines whether animation plays forwards/backwards for smoother stopping
         speedMultiplier *= stepDirection;
@@ -302,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
         {
             beenOnLand = 0f;
         }
-        else
+        else 
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
@@ -319,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // if player presses jump button
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             if (!isJumping)
             {
@@ -339,6 +339,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
         }
 
-        timeSinceJumpPressed += Time.deltaTime;
+        if (timeSinceJumpPressed < 1f)
+            timeSinceJumpPressed += Time.deltaTime;
     }
 }
