@@ -254,22 +254,41 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("SlopeCheck needs at least 2 samples!");
             return;
         }
-        Vector3[] samples = new Vector3[slopeSamples];
+        List<Vector3> samples = new List<Vector3>(slopeSamples);
         float xStep = (upperRightCorner.x - upperLeftCorner.x) / (slopeSamples - 1);
-        for(int i = 0; i < samples.Length; i++)
+        for(int i = 0; i < slopeSamples; i++)
         {
             Vector2 position = new Vector2(upperLeftCorner.x + (xStep * i), upperLeftCorner.y);
             RaycastHit2D hit = Physics2D.Raycast((position) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + cldr.bounds.size.y, whatIsGround);
+            //Debug.DrawLine(position + (Vector2)transform.position, position + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
+            //Debug.DrawLine(position + (Vector2)transform.position, hit.point, Color.red);
+            samples.Add(hit.point);
+            //if (hit.point != new Vector2(0, 0))
+            //    samples[i] = hit.point;
+            //else
+            //    samples[i] = (position + Vector2.down * (/*slopeCheckDistance + */cldr.bounds.size.y)) + (Vector2)transform.position;
             Debug.DrawLine(position + (Vector2)transform.position, position + (Vector2)transform.position + Vector2.down * (slopeCheckDistance + cldr.bounds.size.y));
-            Debug.DrawLine(position + (Vector2)transform.position, hit.point, Color.red);
-            samples[i] = hit.point;
+            Debug.DrawLine(position + (Vector2)transform.position, samples[i], Color.red);
+
+        }
+        for(int i = samples.Count - 1; i >= 0; i--)
+        {
+            if(samples[i] == new Vector3(0,0,0))
+            {
+                samples.RemoveAt(i);
+            }
+        }
+        if(samples.Count == 0)
+        {
+            return;
         }
         Vector2 totalSlope = default;
-        for(int i = 1; i < samples.Length; i++)
+        for (int i = 1; i < samples.Count; i++)
         {
-            totalSlope += new Vector2((samples[i].y - samples[i - 1].y), (samples[i].x - samples[i - 1].x));
+            //totalSlope += new Vector2((samples[i].y - samples[i - 1].y), (samples[i].x - samples[i - 1].x));
+            totalSlope += new Vector2(samples[i].y - samples[i - 1].y, samples[i].x - samples[i - 1].x);
         }
-        Vector2 finalSlope = totalSlope / samples.Length;
+        Vector2 finalSlope = new Vector2( totalSlope.x, totalSlope.y * 1.0f / (samples.Count));
         int posNeg = (finalSlope.y/finalSlope.x) > 0 ? 1 : -1;
         slopeSideAngle = Vector2.Angle(finalSlope, Vector2.up) * posNeg;
     }
