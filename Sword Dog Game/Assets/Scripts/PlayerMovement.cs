@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
-    public float moveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown, timeSinceJumpPressed;
-    private int stepDirection;
+    public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown, timeSinceJumpPressed;
+    public int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
 
@@ -75,10 +75,26 @@ public class PlayerMovement : MonoBehaviour
         upperRightCorner = new Vector2(cldr.bounds.extents.x + cldr.offset.x, upperLeftCorner.y);
     }
 
+    IEnumerator RemoveStop()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        stops--;
+    }
+
     void Update()
     {
+        // remember previous movement input
+        prevMoveX = moveX;
+
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
+
+        // track stops per second
+        if (prevMoveX != 0 && moveX == 0)
+        {
+            stops++;
+            StartCoroutine("RemoveStop");
+        }
 
         // fix input spam breaking trot state
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
@@ -103,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
             jumpCooldown = 0.0f;
         }
 
+        // TODO REMOVE - debug cinematic bars keybind
         if (Input.GetKeyDown(KeyCode.V))
         {
             GameObject.FindObjectOfType<CinematicBars>().Show(500, .3f);
@@ -174,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
     // stops trotting on specific frames if player has released input
     public void StopTrot(int frame)
     {
-        if (moveX == 0)
+        if ((moveX == 0 && stops <= 4) || (stops > 4 && Mathf.Abs(rb.velocity.x) < 0.01f))
         {
             switch (frame)
             {
@@ -196,9 +213,8 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
-
         // step forwards again if still moving
-        if (moveX != 0)
+        else
         {
             stepDirection = 1;
         }
