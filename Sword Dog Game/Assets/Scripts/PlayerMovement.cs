@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
     // stops trotting on specific frames if player has released input
     public void StopTrot(int frame)
     {
-        if ((moveX == 0 && stops <= 4) || (stops > 4 && Mathf.Abs(rb.velocity.x) < 0.01f))
+        if ((moveX == 0 && stops <= 2) || (stops > 2 && Mathf.Abs(rb.velocity.x) < 0.01f))
         {
             switch (frame)
             {
