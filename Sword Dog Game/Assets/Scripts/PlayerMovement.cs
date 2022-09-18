@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
-    public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpCooldown, timeSinceJumpPressed;
+    public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
     public int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         cldr = GetComponent<Collider2D>();
         colliderSize = GetComponent<BoxCollider2D>().size;
         timeSinceJumpPressed = 0.2f;
+        jumpSpeedMultiplier = 1.0f;
 
         stepDirection = 1;
         facingRight = true;
@@ -116,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
         {
             holdingJump = false;
-            jumpCooldown = 0.0f;
         }
 
         // TODO REMOVE - debug cinematic bars keybind
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(moveX * speed, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(moveX * speed * jumpSpeedMultiplier, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
@@ -174,8 +174,10 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
+            jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
             if (holdingJump)
             {
+                jumpSpeedMultiplier *= 1.25f;
                 rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
             }
         }
@@ -341,9 +343,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isGrounded = true;
                     lastOnLand = 0f;
-
-                    if (!wasGrounded && jumpCooldown <= 0.1f)
-                        jumpCooldown = 0.05f;
                 }
             }
         }
@@ -358,11 +357,10 @@ public class PlayerMovement : MonoBehaviour
                 beenOnLand += Time.fixedDeltaTime;
             if (jumpTime > 0.1f && !(rb.velocity.y > 0f))
             {
+                jumpSpeedMultiplier = 1f;
                 isJumping = false;
                 jumpTime = 0f;
             }
-            if (jumpCooldown > 0f)
-                jumpCooldown -= Time.fixedDeltaTime;
         }
     }
 
@@ -383,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && jumpCooldown <= 0f && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping && slopeDownAngle <= maxSlopeAngle)
         {
             // Add a vertical force to the player
             isGrounded = false;
