@@ -96,9 +96,9 @@ public class SwayEffect : MonoBehaviour
             if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
             {
                 //Affects additional force applied to grass behind the launching object
-                const float PUSH_BACK_STRENGTH = 1.0f / 70;
+                const float PUSH_BACK_STRENGTH = 1.0f / 130;
                 //Affects all grass around the launching or landing object
-                const float PUSH_AWAY_STRENGTH = 1.0f / 65;
+                const float PUSH_AWAY_STRENGTH = 1.0f / 115;
 
                 distanceModifier = (transform.position.x - collision.transform.position.x)/collision.bounds.extents.x;
                 distanceModifier = Mathf.Clamp(distanceModifier, -1, 1);
