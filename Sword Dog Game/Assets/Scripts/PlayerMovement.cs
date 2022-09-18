@@ -102,8 +102,8 @@ public class PlayerMovement : MonoBehaviour
             trotting = false;
         }
 
-        // start trotting if player gives input
-        if (moveX != 0 && !trotting)
+        // start trotting if player gives input and is moving
+        if (moveX != 0 && !trotting && rb.velocity.x != 0)
         {
             anim.SetTrigger("trot");
             trotting = true;
@@ -191,7 +191,8 @@ public class PlayerMovement : MonoBehaviour
     // stops trotting on specific frames if player has released input
     public void StopTrot(int frame)
     {
-        if ((moveX == 0 && stops <= 2) || (stops > 2 && Mathf.Abs(rb.velocity.x) < 0.01f))
+        if (((moveX == 0 || (moveX != 0 && rb.velocity.x == 0)) && stops <= 2) // if either not giving input or giving input against a barrier *and* hasn't stopped moving more than twice in the last second
+            || (stops > 2 && Mathf.Abs(rb.velocity.x) < 0.01f)) // or has stopped moving more than twice in the last second and moving sufficiently slowly
         {
             switch (frame)
             {
