@@ -359,6 +359,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
+                anim.SetTrigger("land");
                 jumpTime = 0f;
             }
         }
@@ -386,8 +387,9 @@ public class PlayerMovement : MonoBehaviour
             // Add a vertical force to the player
             isGrounded = false;
             isJumping = true;
+            anim.SetTrigger("jump");
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce)); //force added during a jump
+            rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
         }
 
         if (timeSinceJumpPressed < 1f)
