@@ -5,53 +5,72 @@ using UnityEngine;
 public class SwordFollow : MonoBehaviour
 {
     public GameObject player;
-    Vector2 playerLocation;
-    Vector2 swordTargetLocation;
-    Vector2 swordPreviousLocation;
+    Vector3 playerLocation;
+    Vector3 swordTargetLocation;
+    Vector3 swordPreviousLocation;
     public float speed;
     public float adjustLocationY;
-    public float adjustLocationX;
+    public float adjustLocationX, adjustDefaultX;
     SpriteRenderer sr;
     Rigidbody2D rb;
+
+    private PlayerMovement pmScript;
+    bool triggeredPMScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        //adjust the adustLocation variables per sword type
-        speed = 2;
+        //adjust the adjustLocation variables per sword type
+        speed = 12;
         adjustLocationY = 1;
-        adjustLocationX = -.5f;
+        adjustDefaultX = -.5f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        
+        triggeredPMScript = false;
     }
     
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Assigns target transform values
+        //Accesses PlayerMovement script ONCE
+        if(triggeredPMScript == false)
+        {
+            pmScript = player.GetComponent<PlayerMovement>();
+            triggeredPMScript = true;
+        }
+        
         if(player != null)
         {
+            //Assigns target transform values
+            pmScript = player.GetComponent<PlayerMovement>();
+
             player = GameObject.FindGameObjectWithTag("Player");
             playerLocation = player.transform.position;
-            swordTargetLocation = new Vector2(player.transform.position.x + adjustLocationX, player.transform.position.y + adjustLocationY);
-        }
+            swordTargetLocation = new Vector3(player.transform.position.x + adjustLocationX, player.transform.position.y + adjustLocationY);
 
-        //Moves and checks to flip sprite
-        swordPreviousLocation = transform.position;
-        transform.position = Vector2.Lerp(transform.position, swordTargetLocation, speed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+            //Moves
+            swordPreviousLocation = transform.position;
+            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, speed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
 
-        if (swordPreviousLocation.x > transform.position.x)
-        {
-            adjustLocationX = .5f;
-            sr.flipX = true;
-            //TODO: add some sort of delay so it isnt flickering
+            //Checks when to flip and adjust sprite
+            
+            if (pmScript.isJumping)
+            {
+                if (pmScript.facingRight == false) adjustLocationX = -adjustDefaultX - .5f;
+                else adjustLocationX = adjustDefaultX + .5f;
+            }
+            else if (pmScript.facingRight == false)
+            {
+                adjustLocationX = -adjustDefaultX;
+                sr.flipX = true;
+            }
+            else
+            {
+                adjustLocationX = adjustDefaultX;
+                sr.flipX = false;
+            }
         }
-        else
-        {
-            adjustLocationX = -.5f;
-            sr.flipX = false;
-        }
-
     }
 }
