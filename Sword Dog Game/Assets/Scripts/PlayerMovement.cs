@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTime += Time.fixedDeltaTime;
             if (holdingJump)
             {
-                rb.AddForce(new Vector2(0f, jumpForce / 300f / jumpTime));
+                rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
             }
         }
     }
@@ -371,12 +371,15 @@ public class PlayerMovement : MonoBehaviour
         // if player presses jump button
         if (Input.GetButtonDown("Jump"))
         {
+            timeSinceJumpPressed = 0.0f;
+        }
+
+        if (Input.GetButton("Jump") && timeSinceJumpPressed < 0.2f)
+        {
             if (!isJumping)
             {
                 holdingJump = true;
             }
-
-            timeSinceJumpPressed = 0.0f;
         }
 
         // incorporates coyote time and input buffering
