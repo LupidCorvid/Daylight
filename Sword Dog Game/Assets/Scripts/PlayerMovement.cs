@@ -332,17 +332,22 @@ public class PlayerMovement : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         isGrounded = false;
+        anim.SetBool("ground_close", false);
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        foreach (Transform groundCheck in groundChecks)
+        for (int i = 0; i < groundChecks.Length; i++)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, whatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundChecks[i].position, groundedRadius, whatIsGround);
+            for (int j = 0; j < colliders.Length; j++)
             {
-                if (colliders[i].gameObject != gameObject && colliders[i].gameObject.tag == "Ground")
+                if (colliders[j].gameObject != gameObject && colliders[j].gameObject.tag == "Ground")
                 {
-                    isGrounded = true;
-                    lastOnLand = 0f;
+                    if (i > 1 && isJumping)
+                        anim.SetBool("ground_close", true);
+                    else {
+                        isGrounded = true;
+                        lastOnLand = 0f;
+                    }
                 }
             }
         }
