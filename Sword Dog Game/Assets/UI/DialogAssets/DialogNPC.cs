@@ -16,6 +16,9 @@ public class DialogNPC : MonoBehaviour
 
     public bool skipSpaceWait = true;
 
+    float waitTime = 0;
+    float waitStart;
+
     public string outString = "";
     //number of characters/second
     /*Dialogue guide:
@@ -23,6 +26,11 @@ public class DialogNPC : MonoBehaviour
      * [b] is bark 
      * [b, a, v, c] is bark, acceleration, velocity, count
      * [w, t] is wait with time
+     * [ss, s] is setspeed with speed
+     * 
+     * Maybe add:
+     * [c] clear output box
+     * [ip] wait for input to progress
      * 
      */
     // Start is called before the first frame update
@@ -34,7 +42,7 @@ public class DialogNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lastReadTime + speed < Time.time)
+        if(lastReadTime + speed < Time.time && Time.time > waitStart + waitTime)
         {
             lastReadTime = Time.time;
             readDialog();
@@ -44,7 +52,7 @@ public class DialogNPC : MonoBehaviour
     {
         if (position >= dialog.Length)
             return;
-        if (dialog[position] == '[')
+        while(dialog[position] == '[')
         {
             int endPos = dialog.IndexOf(']', position);
             List<string> parameters = new List<string>();
@@ -61,8 +69,10 @@ public class DialogNPC : MonoBehaviour
             processStringEffect(parameters.ToArray());
             position = endPos + 1;
         }
+
         outString += dialog[position];
         position++;
+
         while(skipSpaceWait && dialog.Length > position && (dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
         {
             outString += dialog[position];
@@ -76,21 +86,59 @@ public class DialogNPC : MonoBehaviour
         {
             return;
         }
-        if(input[0] == "b")
+        switch(input[0])
         {
-            if (input.Length == 3)
-            {
-                barkEffect(float.Parse(input[1]), float.Parse(input[2]));
-            }
-            else if (input.Length == 1)
-            {
-                barkEffect();
-            }
+            case "b":
+                if (input.Length == 3)
+                {
+                    barkEffect(float.Parse(input[1]), float.Parse(input[2]));
+                }
+                else if (input.Length == 1)
+                {
+                    barkEffect();
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for bark(b)!");
+                break;
+
+            case "ss":
+                if(input.Length == 2)
+                {
+                    speed = float.Parse(input[1]);
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for set speed(ss)!");
+                break;
+
+            case "w":
+                if (input.Length == 2)
+                {
+                    waitTime = float.Parse(input[1]);
+                    waitStart = Time.time;
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for wait(w)!");
+                break;
+            default:
+                Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
+                break;
+
         }
-        else
-        {
-            Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
-        }
+        //if(input[0] == "b")
+        //{
+        //    if (input.Length == 3)
+        //    {
+        //        barkEffect(float.Parse(input[1]), float.Parse(input[2]));
+        //    }
+        //    else if (input.Length == 1)
+        //    {
+        //        barkEffect();
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
+        //}
     }
     public void barkEffect(float velocity = -1, float acceleration = 3)
     {
