@@ -95,11 +95,28 @@ public class SwayEffect : MonoBehaviour
             
             if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
             {
+                //Affects additional force applied to grass behind the launching object
+                const float PUSH_BACK_STRENGTH = 1.0f / 70;
+                //Affects all grass around the launching or landing object
+                const float PUSH_AWAY_STRENGTH = 1.0f / 65;
+
                 distanceModifier = (transform.position.x - collision.transform.position.x)/collision.bounds.extents.x;
                 distanceModifier = Mathf.Clamp(distanceModifier, -1, 1);
                 distanceModifier += distanceModifier > 0 ? -1 : 1;
                 distanceModifier *= -1;
-                swayVelocity += Mathf.Abs(objectsWithVelocity[collision.attachedRigidbody].y - collision.attachedRigidbody.velocity.y)/75 * distanceModifier;
+                swayVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_AWAY_STRENGTH * distanceModifier;
+
+                //For pushing grass behind something being launched
+                if(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y > .25f)
+                {
+                    if(transform.position.x - collision.transform.position.x < 0 && collision.attachedRigidbody.velocity.x > 0
+                        || transform.position.x - collision.transform.position.x > 0 && collision.attachedRigidbody.velocity.x < 0)
+                    {
+                        swayVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_BACK_STRENGTH * distanceModifier 
+                                        * Mathf.Abs(collision.attachedRigidbody.velocity.x);
+                    }
+                }
+                
                 objectsWithVelocity[collision.attachedRigidbody] = collision.attachedRigidbody.velocity;
             }
         }
