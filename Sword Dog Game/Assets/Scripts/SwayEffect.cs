@@ -28,6 +28,8 @@ public class SwayEffect : MonoBehaviour
 
     public bool rotate = false;
 
+    public Dictionary<Rigidbody2D, Vector2> objectsWithVelocity = new Dictionary<Rigidbody2D, Vector2>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,8 +92,34 @@ public class SwayEffect : MonoBehaviour
             distanceModifier = Mathf.Clamp(distanceModifier, 0, 1);
             distanceModifier = 1 - distanceModifier;
             swayVelocity += ((collision.attachedRigidbody.velocity.x) * Time.deltaTime) * distanceModifier;
+            
+            if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
+            {
+                distanceModifier = (transform.position.x - collision.transform.position.x)/collision.bounds.extents.x;
+                distanceModifier = Mathf.Clamp(distanceModifier, -1, 1);
+                distanceModifier += distanceModifier > 0 ? -1 : 1;
+                distanceModifier *= -1;
+                swayVelocity += Mathf.Abs(objectsWithVelocity[collision.attachedRigidbody].y - collision.attachedRigidbody.velocity.y)/75 * distanceModifier;
+                objectsWithVelocity[collision.attachedRigidbody] = collision.attachedRigidbody.velocity;
+            }
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null && !objectsWithVelocity.ContainsKey(collision.attachedRigidbody)) 
+        {
+            objectsWithVelocity.Add(collision.attachedRigidbody, collision.attachedRigidbody.velocity);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
+        {
+            objectsWithVelocity.Remove(collision.attachedRigidbody);
+        }
+    }
+
     private void FixedUpdate()
     {
         //Wind direction makes it so that wind rolls in the same direction as things are bending
