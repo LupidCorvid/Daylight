@@ -49,18 +49,14 @@ public class DialogNPC : MonoBehaviour
             int endPos = dialog.IndexOf(']', position);
             List<string> parameters = new List<string>();
 
-            int processPosition = dialog.IndexOf(',', position);
-            int endProcessPosition = dialog.IndexOf(',', processPosition + 1);
-            if (endProcessPosition == -1)
-                endProcessPosition = endPos;
-            parameters.Add(dialog.Substring(position + 1, endProcessPosition - position - 1));
-            while (true)
+            int lastProcessPosition = position;
+            for (int i = lastProcessPosition; i <= endPos; i++)
             {
-                if (processPosition != -1 && processPosition <= endPos)
-                    parameters.Add(dialog.Substring(processPosition, endProcessPosition));
-                else
-                    break;
-                processPosition = dialog.IndexOf(',', processPosition + 1);
+                if(dialog[i] == ',' || i == endPos)
+                {
+                    parameters.Add(dialog.Substring(lastProcessPosition + 1, i - lastProcessPosition - 1));
+                    lastProcessPosition = i;
+                }
             }
             processStringEffect(parameters.ToArray());
             position = endPos + 1;
