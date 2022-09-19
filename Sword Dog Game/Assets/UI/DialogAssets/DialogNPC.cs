@@ -19,6 +19,9 @@ public class DialogNPC : MonoBehaviour
     float waitTime = 0;
     float waitStart;
 
+    public int autoBarkFrequency = 3;
+    private int barkCooldown = 0;
+
     public string outString = "";
     //number of characters/second
     /*Dialogue guide:
@@ -27,6 +30,7 @@ public class DialogNPC : MonoBehaviour
      * [b, a, v, c] is bark, acceleration, velocity, count
      * [w, t] is wait with time
      * [ss, s] is setspeed with speed
+     * [abf] is auto bark frequency
      * 
      * [c] clear output box
      * [ip] wait for input to progress
@@ -77,6 +81,18 @@ public class DialogNPC : MonoBehaviour
         outString += dialog[position];
         position++;
 
+
+        if (dialog.Length > position && !(dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
+        {
+            if (barkCooldown > autoBarkFrequency)
+            {
+                barkEffect();
+                barkCooldown = 0;
+            }
+            barkCooldown++;
+
+        }
+
         while(skipSpaceWait && dialog.Length > position && (dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
         {
             outString += dialog[position];
@@ -125,6 +141,14 @@ public class DialogNPC : MonoBehaviour
                 break;
             case "c":
                 outString = "";
+                break;
+            case "abf":
+                if (input.Length == 2)
+                {
+                    autoBarkFrequency = int.Parse(input[1]);
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for set auto bark frequency (abf)!");
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
