@@ -28,7 +28,6 @@ public class DialogNPC : MonoBehaviour
      * [w, t] is wait with time
      * [ss, s] is setspeed with speed
      * 
-     * Maybe add:
      * [c] clear output box
      * [ip] wait for input to progress
      * 
@@ -42,17 +41,20 @@ public class DialogNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lastReadTime + speed < Time.time && Time.time > waitStart + waitTime)
+        while ((lastReadTime + speed < Time.time && Time.time > waitStart + waitTime))
         {
             lastReadTime = Time.time;
             readDialog();
+
+            if(position == dialog.Length - 1 && speed == 0)
+            {
+                Debug.LogWarning("Speed was left at 0, this could prevent anything else from running! Always return speed to non-zero once finishing");
+            }
         }
     }
     public void readDialog()
     {
-        if (position >= dialog.Length)
-            return;
-        while(dialog[position] == '[')
+        while(position < dialog.Length && dialog[position] == '[')
         {
             int endPos = dialog.IndexOf(']', position);
             List<string> parameters = new List<string>();
@@ -69,6 +71,8 @@ public class DialogNPC : MonoBehaviour
             processStringEffect(parameters.ToArray());
             position = endPos + 1;
         }
+        if (position >= dialog.Length)
+            return;
 
         outString += dialog[position];
         position++;
@@ -118,6 +122,9 @@ public class DialogNPC : MonoBehaviour
                 }
                 else
                     Debug.LogWarning("Invalid number of parameters for wait(w)!");
+                break;
+            case "c":
+                outString = "";
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
