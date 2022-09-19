@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement controller;
     private Rigidbody2D rb;
     private Animator anim;
-    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
+    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump, hasLeapt;
     public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
     public int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
@@ -88,6 +88,10 @@ public class PlayerMovement : MonoBehaviour
 
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
+        if (isJumping && !hasLeapt)
+        {
+            moveX = 0;
+        }
 
         // track stops per second
         if (prevMoveX != 0 && moveX == 0)
@@ -103,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // start trotting if player gives input and is moving
-        if (moveX != 0 && !trotting && rb.velocity.x != 0)
+        if (moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
         {
             anim.SetTrigger("trot");
             trotting = true;
@@ -170,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
         // hold jump distance extentions
-        if (isJumping)
+        if (isJumping && hasLeapt)
         {
             jumpTime += Time.fixedDeltaTime;
             jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
@@ -179,6 +183,16 @@ public class PlayerMovement : MonoBehaviour
                 jumpSpeedMultiplier *= 1.25f;
                 rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
             }
+        }
+
+        // trigger fall animation
+        if (!isJumping && rb.velocity.y < 0 && !isGrounded)
+        {
+            anim.SetTrigger("fall");
+        }
+        if (isGrounded)
+        {
+            anim.ResetTrigger("fall");
         }
     }
 
@@ -199,7 +213,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // stop here
                 case 0 or 5 or 6 or 11:
-                    anim.SetTrigger("trot");
+                    if (!isJumping)
+                        anim.SetTrigger("trot");
                     trotting = false;
                     stepDirection = 1;
                     break;
@@ -346,6 +361,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (isJumping && (!hasLeapt || jumpTime < 0.1f))
+            anim.SetBool("grounded", false);
+        else
+            anim.SetBool("grounded", isGrounded);
+
+
         if (!isGrounded)
         {
             beenOnLand = 0f;
@@ -354,11 +375,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (jumpTime > 0.1f && !(rb.velocity.y > 0f))
+            if (!(rb.velocity.y > 0f) && isJumping && hasLeapt)
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
-                anim.SetTrigger("land");
+                hasLeapt = false;
                 jumpTime = 0f;
             }
         }
@@ -386,12 +407,23 @@ public class PlayerMovement : MonoBehaviour
             // Add a vertical force to the player
             isGrounded = false;
             isJumping = true;
+            hasLeapt = false;
+            StopCoroutine(Leap());
+            StartCoroutine(Leap());
             anim.SetTrigger("jump");
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
         }
 
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
+    }
+
+    private IEnumerator Leap()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("leap time");
+        anim.ResetTrigger("jump");
+        hasLeapt = true;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
     }
 }
