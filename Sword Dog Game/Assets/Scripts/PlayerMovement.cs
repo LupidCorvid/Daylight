@@ -254,10 +254,16 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
-        if(leftHit.point == new Vector2(0,0))
+        if (leftHit.point == new Vector2(0, 0))
+        {
             leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
+            leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
+        }
         if (rightHit.point == new Vector2(0, 0))
+        {
             rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
+            rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
+        }
 
         Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
         Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
@@ -271,9 +277,9 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
 
-        int right = leftHit.distance < rightHit.distance ? 1 : -1;
-        //Not sure why the x value needs to be nearhit, but it is 
-        Vector2 acrossCheckSpot = new Vector2(nearHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
+        int right = leftHit.distance < rightHit.distance ? -1 : 1;
+        
+        Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot, 
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
