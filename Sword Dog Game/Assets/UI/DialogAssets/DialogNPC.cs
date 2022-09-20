@@ -21,6 +21,7 @@ public class DialogNPC : MonoBehaviour
 
     public int autoBarkFrequency = 3;
     private int barkCooldown = 0;
+    public Vector2 randBarkRange = new Vector2(3, 3);
 
     public string outString = "";
     //number of characters/second
@@ -31,6 +32,7 @@ public class DialogNPC : MonoBehaviour
      * [w, t] is wait with time
      * [ss, s] is setspeed with speed
      * [abf] is auto bark frequency
+     * [abf, min, max] sets the random range of abf, with max being exclusive
      * 
      * [c] clear output box
      * [ip] wait for input to progress
@@ -88,6 +90,10 @@ public class DialogNPC : MonoBehaviour
             {
                 barkEffect();
                 barkCooldown = 0;
+                if(randBarkRange.x < randBarkRange.y)
+                {
+                    autoBarkFrequency = (int)Random.Range(randBarkRange.x, randBarkRange.y);
+                }
             }
             barkCooldown++;
 
@@ -146,6 +152,13 @@ public class DialogNPC : MonoBehaviour
                 if (input.Length == 2)
                 {
                     autoBarkFrequency = int.Parse(input[1]);
+                    randBarkRange = new Vector2(autoBarkFrequency, autoBarkFrequency);
+                    
+                }
+                else if (input.Length == 3)
+                {
+                    randBarkRange = new Vector2(int.Parse(input[1]), int.Parse(input[2]));
+                    autoBarkFrequency = (int)Random.Range(randBarkRange.x, randBarkRange.y);
                 }
                 else
                     Debug.LogWarning("Invalid number of parameters for set auto bark frequency (abf)!");
