@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7126628110183227447}
   - component: {fileID: 1776515896214617442}
   - component: {fileID: 5148224894978601666}
+  - component: {fileID: 2853227938318664618}
   m_Layer: 5
   m_Name: DialogText
   m_TagString: Untagged
@@ -232,6 +233,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2853227938318664618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330677434094278056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896a66d406b408e40bbe77110f081b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 9014590673416053926}
+  panelAlpha: 255
+  textDisplay: {fileID: 5148224894978601666}
 --- !u!1 &2686455128359140146
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,12 +324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -396,6 +412,7 @@ GameObject:
   - component: {fileID: 4329312431166739757}
   - component: {fileID: 4119309944230453091}
   - component: {fileID: 2588478590455316477}
+  - component: {fileID: 9014590673416053926}
   m_Layer: 5
   m_Name: DialogBox
   m_TagString: Untagged
@@ -419,10 +436,10 @@ RectTransform:
   m_Father: {fileID: 2686455128359140158}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 180}
-  m_SizeDelta: {x: -300, y: -440}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 9.8418, y: -114.93404}
+  m_SizeDelta: {x: 825.9771, y: 165.9045}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4119309944230453091
 CanvasRenderer:
@@ -462,3 +479,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &9014590673416053926
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4106592902636363592}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
