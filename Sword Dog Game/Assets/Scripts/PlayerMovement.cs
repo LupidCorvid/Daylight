@@ -423,7 +423,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("leap time");
         anim.ResetTrigger("jump");
         hasLeapt = true;
-        rb.velocity = Vector2.zero;
+        //rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
     }
 }

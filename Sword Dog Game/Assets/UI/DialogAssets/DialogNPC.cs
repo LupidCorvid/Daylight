@@ -24,6 +24,10 @@ public class DialogNPC : MonoBehaviour
     public Vector2 randBarkRange = new Vector2(3, 3);
 
     public string outString = "";
+
+    public static Dictionary<string, string> stringVariables = new Dictionary<string, string>();
+
+    private bool waitFrameForChar = false;
     //number of characters/second
     /*Dialogue guide:
      * [] is escape
@@ -33,6 +37,10 @@ public class DialogNPC : MonoBehaviour
      * [ss, s] is setspeed with speed
      * [abf] is auto bark frequency
      * [abf, min, max] sets the random range of abf, with max being exclusive
+     * [j, pos] jumps position to new position
+     * CONSTRAIN VAR SIZES SO THAT DIALOG ISNT OFFSET BY IT TOO MUCH
+     * [svar, val] sets a var with a value. If it does not exist it is created
+     * [var] reads a var and puts the value of it on the dialog out
      * 
      * [c] clear output box
      * [ip] wait for input to progress
@@ -57,6 +65,7 @@ public class DialogNPC : MonoBehaviour
                 Debug.LogWarning("Speed was left at 0, this could prevent anything else from running! Always return speed to non-zero once finishing");
             }
         }
+        DialogController.main.text = outString;
     }
     public void readDialog()
     {
@@ -74,12 +83,17 @@ public class DialogNPC : MonoBehaviour
                     lastProcessPosition = i;
                 }
             }
-            processStringEffect(parameters.ToArray());
             position = endPos + 1;
+            processStringEffect(parameters.ToArray());
         }
         if (position >= dialog.Length)
             return;
 
+        if(waitFrameForChar)
+        {
+            waitFrameForChar = false;
+            return;
+        }
         outString += dialog[position];
         position++;
 
@@ -162,6 +176,15 @@ public class DialogNPC : MonoBehaviour
                 }
                 else
                     Debug.LogWarning("Invalid number of parameters for set auto bark frequency (abf)!");
+                break;
+            case "j":
+                if (input.Length == 2)
+                {
+                    position = int.Parse(input[1]);
+                    waitFrameForChar = true;
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for jump (j)!");
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
