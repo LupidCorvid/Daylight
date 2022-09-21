@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement controller;
     private Rigidbody2D rb;
     private Animator anim;
-    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump, hasLeapt;
+    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
     public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
     public int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
@@ -88,10 +88,6 @@ public class PlayerMovement : MonoBehaviour
 
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
-        if (isJumping && !hasLeapt)
-        {
-            moveX = 0;
-        }
 
         // track stops per second
         if (prevMoveX != 0 && moveX == 0)
@@ -174,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
         // hold jump distance extentions
-        if (isJumping && hasLeapt)
+        if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
             jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
@@ -361,7 +357,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (isJumping && (!hasLeapt || jumpTime < 0.1f))
+        if (isJumping && jumpTime < 0.1f)
             anim.SetBool("grounded", false);
         else
             anim.SetBool("grounded", isGrounded);
@@ -375,11 +371,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f) && isJumping && hasLeapt)
+            if (!(rb.velocity.y > 0f) && isJumping)
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
-                hasLeapt = false;
                 jumpTime = 0f;
             }
         }
@@ -407,23 +402,12 @@ public class PlayerMovement : MonoBehaviour
             // Add a vertical force to the player
             isGrounded = false;
             isJumping = true;
-            hasLeapt = false;
-            StopCoroutine(Leap());
-            StartCoroutine(Leap());
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
             anim.SetTrigger("jump");
         }
 
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
-    }
-
-    private IEnumerator Leap()
-    {
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("leap time");
-        anim.ResetTrigger("jump");
-        hasLeapt = true;
-        //rb.velocity = Vector2.zero;
-        rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
     }
 }
