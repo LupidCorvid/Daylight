@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         // TODO REMOVE - debug cinematic bars keybind
         if (Input.GetKeyDown(KeyCode.V))
         {
-            GameObject.FindObjectOfType<CinematicBars>().Show(500, .3f);
+            GameObject.FindObjectOfType<CinematicBars>().Show(200, .3f);
         }
         if (Input.GetKeyUp(KeyCode.V))
         {
