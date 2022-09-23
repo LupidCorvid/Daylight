@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public LayerMask whatIsGround;
 
     // Positions marking where to check if the player is grounded
-    [SerializeField] public Transform[] groundChecks;
+    //[SerializeField] public Transform[] groundChecks;
+    public CollisionsTracker groundCheck;
 
     // Amount of force added when the player jumps
     [SerializeField] private float jumpForce = 2000f;
@@ -340,24 +341,35 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
         anim.SetBool("ground_close", false);
 
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        for (int i = 0; i < groundChecks.Length; i++)
+
+        //// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        //for (int i = 0; i < groundChecks.Length; i++)
+        //{
+        //    Collider2D[] colliders = Physics2D.OverlapCircleAll(groundChecks[i].position, groundedRadius, whatIsGround);
+        //    for (int j = 0; j < colliders.Length; j++)
+        //    {
+        //        if (colliders[j].gameObject != gameObject && colliders[j].gameObject.tag == "Ground")
+        //        {
+        //            if (i > 1 && isJumping)
+        //                anim.SetBool("ground_close", true);
+        //            else {
+        //                isGrounded = true;
+        //                lastOnLand = 0f;
+        //            }
+        //        }
+        //    }
+        //}
+        foreach(Collider2D collision in groundCheck.triggersInContact)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundChecks[i].position, groundedRadius, whatIsGround);
-            for (int j = 0; j < colliders.Length; j++)
+            //Debug.Log(LayerMask.GetMask("Terrain"));
+            if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
             {
-                if (colliders[j].gameObject != gameObject && colliders[j].gameObject.tag == "Ground")
-                {
-                    if (i > 1 && isJumping)
-                        anim.SetBool("ground_close", true);
-                    else {
-                        isGrounded = true;
-                        lastOnLand = 0f;
-                    }
-                }
+                anim.SetBool("grounded", true);
+                isGrounded = true;
+                lastOnLand = 0f;
+                break;
             }
         }
-
         if (isJumping && jumpTime < 0.1f)
             anim.SetBool("grounded", false);
         else
