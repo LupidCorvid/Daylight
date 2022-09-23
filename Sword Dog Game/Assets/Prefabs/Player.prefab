@@ -219,20 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 0
-  trotting: 0
   isGrounded: 0
-  wasGrounded: 0
   isJumping: 0
-  holdingJump: 0
-  moveX: 0
-  prevMoveX: 0
-  beenOnLand: 0
-  lastOnLand: 0
-  jumpTime: 0
-  jumpSpeedMultiplier: 0
-  timeSinceJumpPressed: 0
-  stepDirection: 0
-  stops: 0
   speed: 4
   whatIsGround:
     serializedVersion: 2
@@ -240,7 +228,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1533826926726959872}
   jumpForce: 500
   movementSmoothing: 0.05
-  slopeCheckDistance: 2
+  slopeCheckDistance: 2.5
   maxSlopeAngle: 45
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}

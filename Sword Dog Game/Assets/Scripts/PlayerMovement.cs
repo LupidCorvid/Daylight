@@ -8,9 +8,10 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement controller;
     private Rigidbody2D rb;
     private Animator anim;
-    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
-    public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
-    public int stepDirection, stops;
+    private bool trotting, wasGrounded, holdingJump;
+    public bool facingRight, isGrounded, isJumping;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
+    private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
 
@@ -181,6 +182,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
             }
         }
+        else 
+        {
+            jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.3f);
+        }
 
         // trigger fall animation
         if (!isJumping && rb.velocity.y < 0 && !isGrounded)
@@ -305,9 +310,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
+        anim.SetBool("ground_close", false);
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         if (hit)
         {
+            anim.SetBool("ground_close", true);
             // Debug.DrawRay(hit.point, hit.normal, Color.red, 0.01f, false);
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -339,8 +346,6 @@ public class PlayerMovement : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         isGrounded = false;
-        anim.SetBool("ground_close", false);
-
 
         //// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         //for (int i = 0; i < groundChecks.Length; i++)
@@ -415,7 +420,7 @@ public class PlayerMovement : MonoBehaviour
             // Add a vertical force to the player
             isGrounded = false;
             isJumping = true;
-            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
             anim.SetTrigger("jump");
         }
