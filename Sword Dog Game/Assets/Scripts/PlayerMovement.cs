@@ -423,6 +423,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
             anim.SetTrigger("jump");
+            GetComponentInChildren<SoundPlayer>().PlaySound(0);
         }
 
         if (timeSinceJumpPressed < 1f)
