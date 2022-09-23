@@ -243,8 +243,9 @@ public class PlayerMovement : MonoBehaviour
         // disregard direction of movement
         speedMultiplier = Mathf.Abs(speedMultiplier);
 
-        // clamp to minimum speed + scale magnitude of normal speed (makes for smoother transitions)
-        speedMultiplier = Mathf.Max(0.7f, 1.1f * speedMultiplier / 4);
+        // scale + clamp magnitude of normal speed (makes for smoother transitions)
+        speedMultiplier = 1.1f * speedMultiplier / 4;
+        speedMultiplier = Mathf.Clamp(speedMultiplier, 0.7f, 1.5f);
 
         // multiply by "step direction" - determines whether animation plays forwards/backwards for smoother stopping
         speedMultiplier *= stepDirection;
