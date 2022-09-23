@@ -8,9 +8,10 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement controller;
     private Rigidbody2D rb;
     private Animator anim;
-    public bool facingRight, trotting, isGrounded, wasGrounded, isJumping, holdingJump;
-    public float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
-    public int stepDirection, stops;
+    private bool trotting, wasGrounded, holdingJump;
+    public bool facingRight, isJumping, isGrounded;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
+    private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
 
