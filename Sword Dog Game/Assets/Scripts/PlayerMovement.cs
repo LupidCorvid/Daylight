@@ -73,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        upperLeftCorner = new Vector2(-cldr.bounds.extents.x + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
-        upperRightCorner = new Vector2(cldr.bounds.extents.x + cldr.offset.x, upperLeftCorner.y);
+        upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
+        upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
     }
 
     IEnumerator RemoveStop()
@@ -298,14 +298,24 @@ public class PlayerMovement : MonoBehaviour
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
         
         Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
+        Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 4);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot, 
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
+        RaycastHit2D across2 = Physics2D.Raycast(acrossCheck2,
+                                                new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
+        Debug.DrawLine(across2.point, acrossCheck2, Color.green);
 
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y)/(rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
-        slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+        float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
+        if (Mathf.Abs(acrossPercent2 - acrossPercent) < .1)
+        {
+            slopeSideAngle = 0;
+            return;
+        }
 
+        slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
