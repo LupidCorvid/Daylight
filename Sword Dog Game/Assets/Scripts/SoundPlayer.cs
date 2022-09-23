@@ -13,7 +13,7 @@ public class SoundPlayer : MonoBehaviour
         sources = transform.GetComponents<AudioSource>();
     }
 
-    public void PlaySound(int sound)
+    public void PlaySound(int sound, bool loop = false)
     {
         AudioClip clip = clips[sound];
         foreach (AudioSource source in sources)
@@ -29,7 +29,7 @@ public class SoundPlayer : MonoBehaviour
             if (!sources[index].isPlaying)
             {
                 sources[index].clip = clip;
-                sources[index].loop = false;
+                sources[index].loop = loop;
                 sources[index].Play();
                 return;
             }
