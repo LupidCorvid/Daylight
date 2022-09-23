@@ -180,6 +180,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
             }
         }
+        else 
+        {
+            jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.1f);
+        }
 
         // trigger fall animation
         if (!isJumping && rb.velocity.y < 0 && !isGrounded)
@@ -371,7 +375,6 @@ public class PlayerMovement : MonoBehaviour
                 beenOnLand += Time.fixedDeltaTime;
             if (!(rb.velocity.y > 0f) && isJumping)
             {
-                jumpSpeedMultiplier = 1f;
                 isJumping = false;
                 jumpTime = 0f;
             }
