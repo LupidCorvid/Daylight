@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 4f;
 
     // Radius of the overlap circle to determine if grounded
-    const float groundedRadius = 0.2f;
+    const float groundedRadius = 0.3f;
 
     // A mask determining what is ground to the character
     [SerializeField] public LayerMask whatIsGround;
@@ -304,9 +304,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
+        anim.SetBool("ground_close", false);
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         if (hit)
         {
+            anim.SetTrigger("ground_close");
             // Debug.DrawRay(hit.point, hit.normal, Color.red, 0.01f, false);
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -338,7 +340,6 @@ public class PlayerMovement : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         isGrounded = false;
-        anim.SetBool("ground_close", false);
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         for (int i = 0; i < groundChecks.Length; i++)
@@ -346,14 +347,10 @@ public class PlayerMovement : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundChecks[i].position, groundedRadius, whatIsGround);
             for (int j = 0; j < colliders.Length; j++)
             {
-                if (colliders[j].gameObject != gameObject && colliders[j].gameObject.tag == "Ground")
+                if (colliders[j].gameObject != gameObject)
                 {
-                    if (i > 1 && isJumping)
-                        anim.SetBool("ground_close", true);
-                    else {
-                        isGrounded = true;
-                        lastOnLand = 0f;
-                    }
+                    isGrounded = true;
+                    lastOnLand = 0f;
                 }
             }
         }

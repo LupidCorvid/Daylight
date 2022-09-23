@@ -38,8 +38,6 @@ Transform:
   m_Children:
   - {fileID: 715932471944003825}
   - {fileID: 2792928474455710887}
-  - {fileID: 7958842198436970442}
-  - {fileID: 7416512658199628495}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,11 +168,9 @@ MonoBehaviour:
   groundChecks:
   - {fileID: 715932471944003825}
   - {fileID: 2792928474455710887}
-  - {fileID: 7958842198436970442}
-  - {fileID: 7416512658199628495}
   jumpForce: 500
   movementSmoothing: 0.05
-  slopeCheckDistance: 2
+  slopeCheckDistance: 2.5
   maxSlopeAngle: 45
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
@@ -242,37 +238,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6300512340327299644}
   m_Enabled: 1
---- !u!1 &6508458406914567501
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7416512658199628495}
-  m_Layer: 0
-  m_Name: GroundCheckLowRight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7416512658199628495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6508458406914567501}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8644, y: -1.9221, z: 0}
-  m_LocalScale: {x: 1.5747241, y: 0.7194282, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6300512340327299633}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7222040838773025709
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,37 +294,6 @@ Transform:
   m_GameObject: {fileID: 7366465506947558132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8644, y: -1.5768, z: 0}
-  m_LocalScale: {x: 1.5747241, y: 0.7194282, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6300512340327299633}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8893925606935015798
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7958842198436970442}
-  m_Layer: 0
-  m_Name: GroundCheckLowLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7958842198436970442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8893925606935015798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0254, y: -1.9221, z: 0}
   m_LocalScale: {x: 1.5747241, y: 0.7194282, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
