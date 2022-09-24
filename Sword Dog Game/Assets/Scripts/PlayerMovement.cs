@@ -324,19 +324,19 @@ public class PlayerMovement : MonoBehaviour
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;
-            if (acrossPercent != 0 && acrossPercent2 != 0)
+            if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded || isGrounded))
                 return;
         }
         slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
         if (onlyRotateWhenGrounded)
         {
-            if (nearHit.distance > colliderSize.y + 3)
+            if (nearHit.distance > colliderSize.y + slopeCheckDistance)
                 slopeSideAngle = lastGroundedSlope;
             else
             {
                 //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
-                slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/3f);
+                slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/slopeCheckDistance);
             }
         }
         if (isGrounded)
