@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool dead, resetting, invincible;
 
+    public bool onlyRotateWhenGrounded;
+    float lastGroundedSlope = 0;
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -271,14 +275,18 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
-
+        
         if (leftHit.point == new Vector2(0, 0))
         {
+            if (onlyRotateWhenGrounded)
+                return;
             leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
         }
         if (rightHit.point == new Vector2(0, 0))
         {
+            if (onlyRotateWhenGrounded)
+                return;
             rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
         }
@@ -286,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
         Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
 
-        if (leftHit.distance == rightHit.distance)
+        if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
         {
             slopeSideAngle = 0;
             return;
@@ -309,13 +317,31 @@ public class PlayerMovement : MonoBehaviour
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y)/(rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
         float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
-        if (Mathf.Abs(acrossPercent2 - acrossPercent) < .1)
+
+        
+
+        //Makessure that it is not reading the slope of the underside of a slope by not taking abs val. 
+        if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;
-            return;
+            if (acrossPercent != 0 && acrossPercent2 != 0)
+                return;
         }
-
         slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+
+        if (onlyRotateWhenGrounded)
+        {
+            if (nearHit.distance > colliderSize.y + 3)
+                slopeSideAngle = lastGroundedSlope;
+            else
+            {
+                //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
+                slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/3f);
+            }
+        }
+        if (isGrounded)
+            lastGroundedSlope = slopeSideAngle;
+
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -356,24 +382,6 @@ public class PlayerMovement : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         isGrounded = false;
-
-        //// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        //for (int i = 0; i < groundChecks.Length; i++)
-        //{
-        //    Collider2D[] colliders = Physics2D.OverlapCircleAll(groundChecks[i].position, groundedRadius, whatIsGround);
-        //    for (int j = 0; j < colliders.Length; j++)
-        //    {
-        //        if (colliders[j].gameObject != gameObject && colliders[j].gameObject.tag == "Ground")
-        //        {
-        //            if (i > 1 && isJumping)
-        //                anim.SetBool("ground_close", true);
-        //            else {
-        //                isGrounded = true;
-        //                lastOnLand = 0f;
-        //            }
-        //        }
-        //    }
-        //}
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
             //Debug.Log(LayerMask.GetMask("Terrain"));
