@@ -414,6 +414,8 @@ public class PlayerMovement : MonoBehaviour
                 jumpTime = 0f;
             }
         }
+
+        anim.SetBool("jump", isJumping);
     }
 
     void Jump()
@@ -432,19 +434,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (timeSinceJumpPressed < 1f)
+            timeSinceJumpPressed += Time.deltaTime;
+
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping)
         {
+            if (isOnSlope && slopeDownAngle > maxSlopeAngle)
+                return;
+            
             // Add a vertical force to the player
             isGrounded = false;
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
-            anim.SetTrigger("jump");
-            GetComponentInChildren<SoundPlayer>().PlaySound(0);
-        }
-
-        if (timeSinceJumpPressed < 1f)
-            timeSinceJumpPressed += Time.deltaTime;
+            anim.SetTrigger("start_jump");
+            GetComponentInChildren<SoundPlayer>()?.PlaySound(0);
+        }        
     }
 }

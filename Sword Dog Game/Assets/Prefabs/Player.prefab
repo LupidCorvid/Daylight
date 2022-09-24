@@ -236,6 +236,7 @@ MonoBehaviour:
   dead: 0
   resetting: 0
   invincible: 0
+  onlyRotateWhenGrounded: 0
 --- !u!61 &6300512340327299634
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -360,6 +361,10 @@ PrefabInstance:
     - target: {fileID: 2106051775409183644, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
       propertyPath: m_Name
       value: SoundPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106051775409183644, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
