@@ -358,9 +358,17 @@ public class PlayerMovement : MonoBehaviour
                 slopeSideAngle = Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg;
                 
             }
+            else if (!isGrounded)
+            {
+                const float ROTATION_INTENSITY = 75;
+                int negative = 1;
+                if (lastUngroundedVelocity.x < 0)
+                    negative = -1;
+                slopeSideAngle = lastGroundedSlope + (lastUngroundedVelocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+            }
             else
             {
-                slopeSideAngle = lastGroundedSlope;
+               slopeSideAngle = lastGroundedSlope;
                 //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
                 //slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/slopeCheckDistance);
             }
