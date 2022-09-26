@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 lastUngroundedVelocity = default;
 
+    //[Range(1,2)]
     public float rotationSpeed = 1;
     
 
@@ -338,6 +339,9 @@ public class PlayerMovement : MonoBehaviour
         if (onlyRotateWhenGrounded)
         {
             //Raw distances wont work, as they include collider space that is not rotated
+            //Vector2 colliderLLCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(-colliderSize.x, -colliderSize.y);
+            //Vector2 colliderLRCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(colliderSize.x, -colliderSize.y);
+            //Transform.rotation method seems to work better, as it is affected by any changes made by gravity and such
             Vector2 colliderLLCorner = transform.rotation * new Vector2(-colliderSize.x, -colliderSize.y);
             Vector2 colliderLRCorner = transform.rotation * new Vector2(colliderSize.x, -colliderSize.y);
             Vector2 nearCorner = right == -1 ? colliderLLCorner : colliderLRCorner;
@@ -349,33 +353,46 @@ public class PlayerMovement : MonoBehaviour
             //if(isGrounded)
             {
                 //Currently teleports to a close rotation then stops (something causes it to stop running this after rotating at all)
-                float distanceModifier = lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed * Mathf.Abs(-farHit.distance - farCorner.y);
-                //Vector2 tempLeft = leftHit.point + (right == -1 ? Vector2.up * lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed : default);
-                //Vector2 tempRight = rightHit.point + (right == 1 ? Vector2.up * lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed : default);
-                Vector2 tempLeft = leftHit.point + (right == -1 ? distanceModifier * Vector2.up : default);
-                Vector2 tempRight = rightHit.point + (right == 1 ? distanceModifier * Vector2.up : default);
+                //farHit.distance seems high to start with
 
-                slopeSideAngle = Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg;
-                
-            }
-            else if (!isGrounded)
-            {
-                const float ROTATION_INTENSITY = 75;
-                int negative = 1;
-                if (lastUngroundedVelocity.x < 0)
-                    negative = -1;
-                slopeSideAngle = lastGroundedSlope + (lastUngroundedVelocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+                //float distanceModifier = lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed * Mathf.Abs(-farHit.distance - farCorner.y);
+                //float distanceModifier = lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed * Mathf.Abs(((farHit.point - (Vector2)transform.position) - farCorner).y);
+                //RaycastHit2D test = Physics2D.Raycast(nearCorner,
+                //                                Vector2.down, 2, whatIsGround);
+                //float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed * test.distance);
+                //This should be the distance to move this frame
+                float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed);
+                //lastUngroundedVelocity.y += lastUngroundedVelocity.y * -5f * Time.deltaTime;
+                Vector2 tempLeft = leftHit.point + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.up : default);
+                Vector2 tempRight = rightHit.point + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.up : default);
+                //Problem is the same on both sides if both statements here are commented out
+                Debug.DrawLine(tempRight, tempLeft, Color.magenta);
+                //Both work the same (problem is not with these)
+                //slopeSideAngle = (lastGroundedSlope + slopeSideAngle) / 2f;
+                //slopeSideAngle = Mathf.Lerp(lastGroundedSlope, slopeSideAngle, distanceModifier/2);
+                //slopeSideAngle += (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg - slopeSideAngle) ;
+                slopeSideAngle = (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
+                //slopeSideAngle = Vector2.SignedAngle(Vector2.right, tempRight - tempLeft);
+
             }
             else
             {
                slopeSideAngle = lastGroundedSlope;
-                //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
-                //slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/slopeCheckDistance);
             }
         }
         if (isGrounded)
             lastGroundedSlope = slopeSideAngle;
 
+    }
+    void MidAirVelocityRotation()
+    {
+        const float ROTATION_INTENSITY = 75;
+        int negative = 1;
+        if (!facingRight)
+            negative = -1;
+        float additionalRotation = (lastUngroundedVelocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+        additionalRotation = Mathf.Clamp(additionalRotation, -90, 90);
+        slopeSideAngle = lastGroundedSlope + additionalRotation;
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -411,7 +428,8 @@ public class PlayerMovement : MonoBehaviour
     void CheckGround()
     {
         SlopeCheck();
-
+        if (!isGrounded)
+            MidAirVelocityRotation();
         lastOnLand = Mathf.Clamp(lastOnLand + Time.fixedDeltaTime, 0, 20f);
 
         bool wasGrounded = isGrounded;
