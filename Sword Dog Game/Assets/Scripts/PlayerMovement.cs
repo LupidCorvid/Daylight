@@ -365,10 +365,10 @@ public class PlayerMovement : MonoBehaviour
                 //Vector2 tempLeft = leftHit.point + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.up : default);
                 //Vector2 tempRight = rightHit.point + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.up : default);
 
-                Debug.DrawLine(tempRight, tempLeft, Color.magenta);
+                Debug.DrawLine(tempRight + (Vector2)transform.position, tempLeft + (Vector2)transform.position, Color.magenta);
                 
                 //should modify the next rotation so that the tempLeft and tempRight are at their appropriate spots
-                slopeSideAngle += (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
+                slopeSideAngle = (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
 
             }
             else if(!isGrounded)
