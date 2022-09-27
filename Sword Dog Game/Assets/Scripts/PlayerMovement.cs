@@ -357,7 +357,8 @@ public class PlayerMovement : MonoBehaviour
                 //farHit.distance seems high to start with
 
                 //Should just be the distance to move next frame
-                float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed * Mathf.Abs(-nearHit.distance - nearCorner.y));
+                //Seems to rotate slower on left or right depending on whether it uses nearHit or farHit (removing it entirely fixes it)
+                float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed); //* Mathf.Abs(-nearHit.distance - nearCorner.y));
                 Vector2 tempLeft = colliderLLCorner + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.down : default);
                 Vector2 tempRight = colliderLRCorner + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.down : default);
 
@@ -367,7 +368,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.DrawLine(tempRight, tempLeft, Color.magenta);
                 
                 //should modify the next rotation so that the tempLeft and tempRight are at their appropriate spots
-                slopeSideAngle = (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
+                slopeSideAngle += (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
 
             }
             else if(!isGrounded)
