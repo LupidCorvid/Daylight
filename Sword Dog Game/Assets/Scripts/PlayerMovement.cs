@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSlopeAngle;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
-    private float slopeSideAngle;
+    public float slopeSideAngle;
     private Vector2 slopeNormalPerp;
     private bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public bool dead, resetting, invincible;
 
     public bool onlyRotateWhenGrounded;
-    float lastGroundedSlope = 0;
+    public float lastGroundedSlope = 0;
 
     Vector2 lastUngroundedVelocity = default;
 
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         cldr = GetComponent<Collider2D>();
         colliderSize = GetComponent<BoxCollider2D>().size;
         timeSinceJumpPressed = 0.2f;
@@ -277,7 +277,13 @@ public class PlayerMovement : MonoBehaviour
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
-
+    //public void groundTriggerEnter(Collider2D collision)
+    //{
+    //    if(collision.gameObject.layer == Mathf.Pow(2, whatIsGround))
+    //    {
+            
+    //    }
+    //}
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
@@ -336,42 +342,43 @@ public class PlayerMovement : MonoBehaviour
         }
         slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
-        if (onlyRotateWhenGrounded)
+        if (onlyRotateWhenGrounded && false)
         {
-            //Raw distances wont work, as they include collider space that is not rotated
-            //Vector2 colliderLLCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(-colliderSize.x, -colliderSize.y);
-            //Vector2 colliderLRCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(colliderSize.x, -colliderSize.y);
-            //Transform.rotation method seems to work better, as it is affected by any changes made by gravity and such
-            //Left rotation adjustments seem to happen faster than to the right
-            Vector2 colliderLLCorner = transform.rotation * new Vector2(-colliderSize.x, -colliderSize.y);
-            Vector2 colliderLRCorner = transform.rotation * new Vector2(colliderSize.x, -colliderSize.y);
-            Vector2 nearCorner = right == -1 ? colliderLLCorner : colliderLRCorner;
-            Vector2 farCorner = right == 1 ? colliderLLCorner : colliderLRCorner;
+            ////Raw distances wont work, as they include collider space that is not rotated
+            ////Vector2 colliderLLCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(-colliderSize.x, -colliderSize.y);
+            ////Vector2 colliderLRCorner = Quaternion.Euler(0, 0, slopeSideAngle) * new Vector2(colliderSize.x, -colliderSize.y);
+            ////Transform.rotation method seems to work better, as it is affected by any changes made by gravity and such
+            ////Left rotation adjustments seem to happen faster than to the right
+            //Vector2 colliderLLCorner = transform.rotation * new Vector2(-colliderSize.x, -colliderSize.y);
+            //Vector2 colliderLRCorner = transform.rotation * new Vector2(colliderSize.x, -colliderSize.y);
+            //Vector2 nearCorner = right == -1 ? colliderLLCorner : colliderLRCorner;
+            //Vector2 farCorner = right == 1 ? colliderLLCorner : colliderLRCorner;
 
-            //if (Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && Mathf.Abs(-nearHit.distance - nearCorner.y) <= 0.05f)
-            //if(Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && Mathf.Abs(-nearHit.distance - nearCorner.y) <= 0.05f)
-            if(Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && isGrounded)
-            //if(isGrounded)
-            {
-                //Currently teleports to a close rotation then stops (something causes it to stop running this after rotating at all)
-                //farHit.distance seems high to start with
+            ////if (Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && Mathf.Abs(-nearHit.distance - nearCorner.y) <= 0.05f)
+            ////if(Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && Mathf.Abs(-nearHit.distance - nearCorner.y) <= 0.05f)
+            //if(Mathf.Abs(-farHit.distance - farCorner.y) > 0.05f && isGrounded)
+            ////if(isGrounded)
+            //{
+            //    //Currently teleports to a close rotation then stops (something causes it to stop running this after rotating at all)
+            //    //farHit.distance seems high to start with
 
-                //Should just be the distance to move next frame
-                //Seems to rotate slower on left or right depending on whether it uses nearHit or farHit (removing it entirely fixes it)
-                float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed); //* Mathf.Abs(-nearHit.distance - nearCorner.y));
-                Vector2 tempLeft = colliderLLCorner + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.down : default);
-                Vector2 tempRight = colliderLRCorner + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.down : default);
+            //    //Should just be the distance to move next frame
+            //    //Seems to rotate slower on left or right depending on whether it uses nearHit or farHit (removing it entirely fixes it)
+            //    float distanceModifier = (lastUngroundedVelocity.y * Time.deltaTime * rotationSpeed); //* Mathf.Abs(-nearHit.distance - nearCorner.y));
+            //    Vector2 tempLeft = colliderLLCorner + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.down : default);
+            //    Vector2 tempRight = colliderLRCorner + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.down : default);
 
-                //Vector2 tempLeft = leftHit.point + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.up : default);
-                //Vector2 tempRight = rightHit.point + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.up : default);
+            //    //Vector2 tempLeft = leftHit.point + (colliderLLCorner.y < colliderLRCorner.y ? distanceModifier * Vector2.up : default);
+            //    //Vector2 tempRight = rightHit.point + (colliderLRCorner.y < colliderLLCorner.y ? distanceModifier * Vector2.up : default);
 
-                Debug.DrawLine(tempRight + (Vector2)transform.position, tempLeft + (Vector2)transform.position, Color.magenta);
+            //    Debug.DrawLine(tempRight + (Vector2)transform.position, tempLeft + (Vector2)transform.position, Color.magenta);
                 
-                //should modify the next rotation so that the tempLeft and tempRight are at their appropriate spots
-                slopeSideAngle = (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
+            //    //should modify the next rotation so that the tempLeft and tempRight are at their appropriate spots
+            //    slopeSideAngle = (Mathf.Atan((tempRight.y - tempLeft.y) / (tempRight.x - tempLeft.x)) * Mathf.Rad2Deg);
 
-            }
-            else if(!isGrounded)
+            //}
+            //else if(!isGrounded)
+            if(true)
             {
                slopeSideAngle = lastGroundedSlope;
             }
