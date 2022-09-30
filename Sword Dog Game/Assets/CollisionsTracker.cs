@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CollisionsTracker : MonoBehaviour
 {
     public List<Collider2D> collidersInContact = new List<Collider2D>();
 
     public List<Collider2D> triggersInContact = new List<Collider2D>();
+    public event Action<Collider2D> triggerEnter;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class CollisionsTracker : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         triggersInContact.Add(collision);
+        triggerEnter?.Invoke(collision);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

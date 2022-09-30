@@ -51,7 +51,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool onlyRotateWhenGrounded;
     float lastGroundedSlope = 0;
-    
+    float lastUngroundedSlope = 0;
+    public float landAnimTime = .5f;
+    float lastLand = 0;
 
     void Start()
     {
@@ -79,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+
+        groundCheck.triggerEnter += checkIfLanding;
+    }
+
+    public void checkIfLanding(Collider2D collision)
+    {
+        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
+        {
+            lastLand = Time.time;
+        }
     }
 
     IEnumerator RemoveStop()
@@ -331,16 +343,33 @@ public class PlayerMovement : MonoBehaviour
 
         if (onlyRotateWhenGrounded)
         {
-            if (nearHit.distance > colliderSize.y + slopeCheckDistance)
-                slopeSideAngle = lastGroundedSlope;
-            else
-            {
-                //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
-                slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/slopeCheckDistance);
-            }
+            //if (nearHit.distance > colliderSize.y + slopeCheckDistance)
+            //    slopeSideAngle = lastGroundedSlope;
+            //else
+            //{
+            //    //Add variable for the last slope when grounded. The interpolate between that and the new grounded slope through the distance to the ground
+            //    slopeSideAngle = Mathf.Lerp(slopeSideAngle, lastGroundedSlope, (nearHit.distance - colliderSize.y)/slopeCheckDistance);
+            //}
+        }
+        if (!isGrounded)
+        {
+            const float ROTATION_INTENSITY = 75;
+            int negative = 1;
+            if (!facingRight)
+                negative = -1;
+            slopeSideAngle = lastGroundedSlope + (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
         }
         if (isGrounded)
             lastGroundedSlope = slopeSideAngle;
+        else
+            lastUngroundedSlope = slopeSideAngle;
+        if (isGrounded)
+        {
+            if(lastLand + landAnimTime > Time.time)
+            {
+                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, (Time.time - lastLand) / (landAnimTime));
+            }
+        }
 
     }
 
