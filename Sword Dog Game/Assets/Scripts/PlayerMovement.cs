@@ -207,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // fall detection
-        if (!isJumping && rb.velocity.y < 0 && !isGrounded && !isFalling)
+        if (beenOnLand >= 0.1f && !isJumping && !isGrounded && !isFalling)
         {
             anim.SetTrigger("fall");
             isFalling = true;
@@ -221,6 +221,22 @@ public class PlayerMovement : MonoBehaviour
                 isFalling = false;
                 fallTime = 0.0f;
             }   
+        }
+
+        if (!isGrounded)
+        {
+            beenOnLand = 0f;
+        }
+        else
+        {
+            if (beenOnLand < 5f)
+                beenOnLand += Time.fixedDeltaTime;
+            if (!(rb.velocity.y > 0f) && isJumping)
+            {
+                jumpSpeedMultiplier = 1f;
+                isJumping = false;
+                jumpTime = 0f;
+            }
         }
     }
 
@@ -432,23 +448,6 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("grounded", false);
         else
             anim.SetBool("grounded", isGrounded);
-
-
-        if (!isGrounded)
-        {
-            beenOnLand = 0f;
-        }
-        else 
-        {
-            if (beenOnLand < 5f)
-                beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f) && isJumping)
-            {
-                jumpSpeedMultiplier = 1f;
-                isJumping = false;
-                jumpTime = 0f;
-            }
-        }
 
         anim.SetBool("jump", isJumping);
     }
