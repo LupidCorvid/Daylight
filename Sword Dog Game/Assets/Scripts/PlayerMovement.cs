@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
     public float landAnimTime = .5f;
     float lastLand = 0;
 
+    Vector2 lastMidairVelocity;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -288,17 +290,17 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         
-        if (leftHit.point == new Vector2(0, 0))
+        if (leftHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
         {
-            if (onlyRotateWhenGrounded)
-                return;
+            //if (onlyRotateWhenGrounded)
+            //    return;
             leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
         }
-        if (rightHit.point == new Vector2(0, 0))
+        if (rightHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
         {
-            if (onlyRotateWhenGrounded)
-                return;
+            //if (onlyRotateWhenGrounded)
+            //    return;
             rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
         }
@@ -336,10 +338,11 @@ public class PlayerMovement : MonoBehaviour
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;
-            if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded || isGrounded))
+            if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded /*|| isGrounded*/))
                 return;
         }
-        slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+        if(!float.IsNaN(unsmoothedSlope))
+            slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
         if (onlyRotateWhenGrounded)
         {
@@ -362,12 +365,16 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
             lastGroundedSlope = slopeSideAngle;
         else
+        {
+            lastMidairVelocity = rb.velocity;
             lastUngroundedSlope = slopeSideAngle;
+        }
         if (isGrounded)
         {
             if(lastLand + landAnimTime > Time.time)
             {
-                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, (Time.time - lastLand) / (landAnimTime));
+                //float adjustedRotationTime = landAnimTime/lastMidairVelocity.y;
+                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand)* Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
             }
         }
 
