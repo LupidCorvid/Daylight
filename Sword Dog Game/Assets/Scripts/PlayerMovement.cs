@@ -375,7 +375,9 @@ public class PlayerMovement : MonoBehaviour
             int negative = 1;
             if (!facingRight)
                 negative = -1;
-            slopeSideAngle = lastGroundedSlope + (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+            float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+            slopeSideAngle = lastGroundedSlope + rotationAmount;
         }
         if (isGrounded)
             lastGroundedSlope = slopeSideAngle;
