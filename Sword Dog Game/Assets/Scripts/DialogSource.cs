@@ -119,7 +119,6 @@ public class DialogSource
                 }
             }
             barkCooldown++;
-
         }
 
         while (skipSpaceWait && dialog.Length > position && (dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
