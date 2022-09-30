@@ -27,6 +27,9 @@ public class DialogSource
 
     private bool waitFrameForChar = false;
 
+    public Vector2 defaultBarkAcceleration;
+    public Vector2 defaultBarkVelocity;
+
     public event Action barkDefault;
     public event Action<Vector2, Vector2> bark;
 
@@ -45,6 +48,7 @@ public class DialogSource
      * [svar, val] sets a var with a value. If it does not exist it is created
      * [var] reads a var and puts the value of it on the dialog out
      * [exit] exits dialog (closes the box, but is typically controlled by the thing holding it)
+     * [sdb, x, y, x,y ] sets default bark settings
      * 
      * [c] clear output box
      * [ip] wait for input to progress
@@ -76,7 +80,7 @@ public class DialogSource
         }
         return outString;
     }
-    public void readDialog()
+    private void readDialog()
     {
         while (position < dialog.Length && dialog[position] == '[')
         {
@@ -145,6 +149,10 @@ public class DialogSource
                 {
                     barkEffect();
                 }
+                else if (input.Length == 5)
+                {
+                    barkEffect(float.Parse(input[1]), float.Parse(input[2]), float.Parse(input[3]), float.Parse(input[4]));
+                }
                 else
                     Debug.LogWarning("Invalid number of parameters for bark(b)!");
                 break;
@@ -197,6 +205,15 @@ public class DialogSource
             case "exit":
                 exit?.Invoke();
                 break;
+            case "sdb":
+                if (input.Length == 5)
+                {
+                    defaultBarkVelocity = new Vector2(float.Parse(input[1]), float.Parse(input[2]));
+                    defaultBarkAcceleration = new Vector2(float.Parse(input[3]), float.Parse(input[4]));
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for set default bark (sdb)!");
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 break;
@@ -208,15 +225,16 @@ public class DialogSource
     {
         DialogController.main.openBox();
     }
-
-    public void barkEffect(float velocity = -1, float acceleration = 3)
+    public void barkEffect()
     {
-        //GameObject addedObject = Instantiate(barkFXPrefab, transform.position, transform.rotation);
-        //SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
-        //addedParticle.velocity.y = velocity;
-        //addedParticle.acceleration.y = acceleration;
-        //addedParticle.startTime = Time.time;
+        bark?.Invoke(defaultBarkVelocity, defaultBarkAcceleration);
+    }
+    public void barkEffect(float velocity, float acceleration)
+    {
         bark?.Invoke(new Vector2(0, velocity), new Vector2(0, acceleration));
-
+    }
+    public void barkEffect(float velocityX, float velocityY, float accelerationX, float accelerationY)
+    {
+        bark?.Invoke(new Vector2(velocityX, velocityY), new Vector2(accelerationX, accelerationY));
     }
 }
