@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool facingRight, isGrounded, isJumping;
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed;
+    public bool facingRight, isGrounded, isJumping, isFalling;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         colliderSize = GetComponent<BoxCollider2D>().size;
         timeSinceJumpPressed = 0.2f;
         jumpSpeedMultiplier = 1.0f;
+        fallTime = 0.0f;
+        jumpTime = 0.0f;
 
         stepDirection = 1;
         facingRight = true;
@@ -147,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
         {
             GameObject.FindObjectOfType<CinematicBars>().Hide(.3f);
         }
-
     }
 
     void FixedUpdate()
@@ -205,14 +206,21 @@ public class PlayerMovement : MonoBehaviour
             jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.3f);
         }
 
-        // trigger fall animation
-        if (!isJumping && rb.velocity.y < 0 && !isGrounded)
+        // fall detection
+        if (!isJumping && rb.velocity.y < 0 && !isGrounded && !isFalling)
         {
             anim.SetTrigger("fall");
+            isFalling = true;
         }
-        if (isGrounded)
+        if (isFalling)
         {
-            anim.ResetTrigger("fall");
+            fallTime += Time.fixedDeltaTime;
+            if (isGrounded && fallTime > 0.1f)
+            {
+                anim.ResetTrigger("fall");
+                isFalling = false;
+                fallTime = 0.0f;
+            }   
         }
     }
 
@@ -420,7 +428,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
-        if (isJumping && jumpTime < 0.1f)
+        if ((isJumping && jumpTime < 0.1f) || (isFalling && fallTime < 0.1f))
             anim.SetBool("grounded", false);
         else
             anim.SetBool("grounded", isGrounded);
