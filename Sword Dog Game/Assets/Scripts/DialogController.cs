@@ -12,6 +12,10 @@ public class DialogController : MonoBehaviour
 
     public TextMeshProUGUI textDisplay;
 
+    public DialogSource source;
+
+    public bool reading = false;
+
     public string text
     {
         get
@@ -32,7 +36,8 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (reading)
+            textDisplay.text = source.read();
     }
     public void openBox()
     {
