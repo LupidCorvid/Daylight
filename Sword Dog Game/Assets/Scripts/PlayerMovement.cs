@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool facingRight, isGrounded, isJumping, isFalling;
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime;
+    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         colliderSize = GetComponent<BoxCollider2D>().size;
         timeSinceJumpPressed = 0.2f;
         jumpSpeedMultiplier = 1.0f;
+        sprintSpeedMultiplier = 1.0f;
         fallTime = 0.0f;
         jumpTime = 0.0f;
 
@@ -111,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
 
+        anim.SetBool("moveX", moveX != 0);
+
         // track stops per second
         if (prevMoveX != 0 && moveX == 0)
         {
@@ -125,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // start trotting if player gives input and is moving
-        if (moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
+        if (isGrounded && moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
         {
             anim.SetTrigger("trot");
             trotting = true;
@@ -149,6 +152,29 @@ public class PlayerMovement : MonoBehaviour
         {
             GameObject.FindObjectOfType<CinematicBars>().Hide(.3f);
         }
+
+        // sprinting
+        if (trotting && !isSprinting && Input.GetButton("Sprint"))
+        {
+            isSprinting = true;
+            anim.SetTrigger("start_sprint");
+        }
+        if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0)
+        {
+            isSprinting = false;
+            anim.ResetTrigger("start_sprint");
+        }
+        anim.SetBool("sprinting", isSprinting);
+
+        if (isSprinting)
+        {
+            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.05f);
+        }
+        else
+        {
+            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+        }
+
     }
 
     void FixedUpdate()
@@ -160,12 +186,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(moveX * speed * jumpSpeedMultiplier, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(moveX * speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f), rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(moveX * speed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(moveX * speed * Mathf.Min(sprintSpeedMultiplier, 2.0f) * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target
