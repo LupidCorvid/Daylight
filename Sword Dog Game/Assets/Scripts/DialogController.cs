@@ -16,6 +16,8 @@ public class DialogController : MonoBehaviour
 
     public bool reading = false;
 
+    public DialogResponseController responseController;
+
     public string text
     {
         get
