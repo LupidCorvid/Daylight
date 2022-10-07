@@ -52,16 +52,32 @@ public class SwordFollow : MonoBehaviour
 
             //Moves
             swordPreviousLocation = transform.position;
-            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, speed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 5 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
 
             //Checks when to flip and adjust sprite
             
             if (pmScript.isJumping)
             {
-                if (pmScript.facingRight == false) adjustLocationX = -adjustDefaultX - .5f;
+                if (!pmScript.facingRight) adjustLocationX = -adjustDefaultX - .5f;
                 else adjustLocationX = adjustDefaultX + .5f;
+                
+                adjustLocationY = 1.1f;
             }
-            else if (pmScript.facingRight == false)
+            else
+            {
+                adjustLocationY = 0.7f;
+            }
+
+            if (pmScript.isSprinting)
+            {
+                adjustDefaultX = Mathf.Lerp(adjustDefaultX, 0.2f, 0.1f);
+            }
+            else
+            {
+                adjustDefaultX = -0.2f;
+            }
+            
+            if (pmScript.facingRight == false)
             {
                 adjustLocationX = -adjustDefaultX;
                 sr.flipX = true;
