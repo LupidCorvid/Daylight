@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 slopeNormalPerp;
     private bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
+    public float calculatedSpeed = 4.0f;
 
     Collider2D cldr;
 
@@ -175,11 +176,13 @@ public class PlayerMovement : MonoBehaviour
         {
             sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
         }
-
     }
 
     void FixedUpdate()
     {
+        // calculate speed
+        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f);
+
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
@@ -187,12 +190,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(moveX * speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f), rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(moveX * calculatedSpeed, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(moveX * speed * Mathf.Min(sprintSpeedMultiplier, 2.0f) * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target
