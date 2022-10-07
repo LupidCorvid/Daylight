@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         // grab movement input from horizontal axis
         moveX = Input.GetAxisRaw("Horizontal");
 
-        anim.SetBool("moveX", moveX != 0);
+        anim.SetBool("moveX", moveX != 0 && Mathf.Abs(rb.velocity.x) > 0f);
 
         // track stops per second
         if (prevMoveX != 0 && moveX == 0)
@@ -157,7 +157,8 @@ public class PlayerMovement : MonoBehaviour
         if (trotting && !isSprinting && Input.GetButton("Sprint"))
         {
             isSprinting = true;
-            anim.SetTrigger("start_sprint");
+            if (!isJumping)
+                anim.SetTrigger("start_sprint");
         }
         if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0)
         {
