@@ -5,6 +5,8 @@ using System;
 
 public class DialogSource
 {
+    public string originalDialog;
+
     public string dialog;
     public int position;
 
@@ -34,6 +36,13 @@ public class DialogSource
     public event Action<Vector2, Vector2> bark;
 
     public event Action exit;
+
+    public event Action<string[]> requestOptionsStart;
+
+    bool waiting = false;
+
+    public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
+    public List<string> responseOutputsNumeric = new List<string>();
     //number of characters/second
     /*Dialogue guide:
      * [] is escape
@@ -53,10 +62,13 @@ public class DialogSource
      * [c] clear output box
      * [ip] wait for input to progress
      * 
+     * 
+     * [prompt, 1, 1r, 2, 2r, ...] //Prompts with a number of options with their names and their results
+     * 
      */
     public DialogSource(string dialog)
     {
-        this.dialog = dialog;
+        this.originalDialog = dialog;
     }
 
     public static DialogSource fromFile(string filePath)
@@ -68,6 +80,7 @@ public class DialogSource
 
     public string read()
     {
+        
         while ((lastReadTime + speed < Time.time && Time.time > waitStart + waitTime))
         {
             lastReadTime = Time.time;
@@ -82,6 +95,8 @@ public class DialogSource
     }
     private void readDialog()
     {
+        if (waiting)
+            return;
         while (position < dialog.Length && dialog[position] == '[')
         {
             int endPos = dialog.IndexOf(']', position);
@@ -214,6 +229,25 @@ public class DialogSource
                 else
                     Debug.LogWarning("Invalid number of parameters for set default bark (sdb)!");
                 break;
+            case "prompt":
+                waiting = true;
+                responseOutputs.Clear();
+                responseOutputsNumeric.Clear();
+
+                List<string> options = new List<string>();
+                if(input.Length % 2 == 0)
+                {
+                    Debug.LogError("Not all responses have an output!");
+                }
+                for(int i = 1; i < input.Length; i += 2)
+                {
+                    options.Add(input[i]);
+                    responseOutputs.Add(input[i], input[i + 1]);
+                    responseOutputsNumeric.Add(input[i + 1]);
+                }
+                promptResponse(options.ToArray());
+
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 break;
@@ -221,10 +255,14 @@ public class DialogSource
         }
     }
 
-    public void interact()
+    public void resetDialog()
     {
-        DialogController.main.openBox();
+        dialog = originalDialog;
     }
+    //public void interact()
+    //{
+    //    DialogController.main.openBox();
+    //}
     public void barkEffect()
     {
         bark?.Invoke(defaultBarkVelocity, defaultBarkAcceleration);
@@ -236,5 +274,23 @@ public class DialogSource
     public void barkEffect(float velocityX, float velocityY, float accelerationX, float accelerationY)
     {
         bark?.Invoke(new Vector2(velocityX, velocityY), new Vector2(accelerationX, accelerationY));
+    }
+
+    public void promptResponse(params string[] options)
+    {
+        if(requestOptionsStart?.Method == null)
+        {
+            Debug.LogError("No set responder to requestOptionsStart, prompt will never open and dialog will freeze!");
+        }
+        requestOptionsStart(options);
+    }
+
+    public void receiveResponse(int response)
+    {
+        if (position < dialog.Length)
+            dialog = dialog.Insert(position, responseOutputsNumeric[response]);
+        else
+            dialog += responseOutputsNumeric[response];
+        waiting = false;
     }
 }

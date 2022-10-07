@@ -29,8 +29,7 @@ public class DialogController : MonoBehaviour
             textDisplay.text = value;
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         main = this;
     }
@@ -52,5 +51,25 @@ public class DialogController : MonoBehaviour
         panel.alpha = 0;
         panel.interactable = false;
         panel.blocksRaycasts = false;
+        responseController.close();
+    }
+
+    public void promptSelections(params string[] options)
+    {
+        responseController.setResponses(options);
+        
+    }
+    public void receiveResponse(int response)
+    {
+        source.receiveResponse(response);
+        responseController.close();
+    }
+
+    public void setSource(DialogSource newSource)
+    {
+        if(source != null)
+            source.requestOptionsStart -= promptSelections;
+        source = newSource;
+        newSource.requestOptionsStart += promptSelections;
     }
 }

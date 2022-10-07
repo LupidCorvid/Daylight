@@ -20,7 +20,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public void interact()
     {
         dialogSource.position = 0;
-        DialogController.main.source = dialogSource;
+        dialogSource.resetDialog();
+        //DialogController.main.source = dialogSource;
+        DialogController.main.setSource(dialogSource);
         DialogController.main.openBox();
         DialogController.main.reading = true;
     }

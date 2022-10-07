@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class DialogResponseController : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class DialogResponseController : MonoBehaviour
     {
         set
         {
-            _selectedOption = value;
+            _selectedOption = value % options.Count;
             chooseOption(_selectedOption);
         }
         get
@@ -28,22 +29,33 @@ public class DialogResponseController : MonoBehaviour
 
     }
 
+    public event Action<int> optionChosen;
+
+    public bool awaitingResponse = false;
+
+    private void Start()
+    {
+        optionChosen += DialogController.main.receiveResponse;
+    }
+
+
     public void addResponse(string text)
     {
-        GameObject addedObject = Instantiate(responsePrefab, transform);
+        GameObject addedObject = Instantiate(responsePrefab, responsesContainer.transform);
         options.Add(addedObject);
+        addedObject.GetComponent<TextMeshProUGUI>().text = text;
     }
 
     public void clearResponses()
     {
-        for(int i = options.Count; i >= 0; i++)
+        for(int i = options.Count - 1; i >= 0; i--)
         {
             Destroy(options[i]);
             options.RemoveAt(i);
         }
     }
 
-    public event Action<int> optionChosen;
+    
 
     public void setResponses(params string[] text)
     {
@@ -53,6 +65,8 @@ public class DialogResponseController : MonoBehaviour
             addResponse(text[i]);
         }
         open();
+        chooseOption(0);
+        awaitingResponse = true;
     }
 
     public void chooseOption(int option)
@@ -92,6 +106,17 @@ public class DialogResponseController : MonoBehaviour
         {
             selectedOption++;
         }
+        else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.T))
+        {
+            if(awaitingResponse)
+                chooseOption();
+        }
+    }
+
+    public void chooseOption()
+    {
+        optionChosen?.Invoke(selectedOption);
+        awaitingResponse = false;
     }
 
 }

@@ -1953,6 +1953,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355129581}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &377864932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8582701020454626246, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+  m_PrefabInstance: {fileID: 1915910063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a460a13f1d1431a48bd6f755d34ac5e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &377864933 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 1587670768740313410, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
@@ -7744,7 +7755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   dialog: '[c][abf, 1, 4][ss, .25][sdb, -1, -1, 0, 4]This[w, 1][b] is a   [b]    
-    [ss,.75]tester![w,3] [exit]'
+    [ss,.75]tester![prompt, Yes, ok, no, not so much][w,3] [exit]'
 --- !u!61 &1578129669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8981,6 +8992,18 @@ PrefabInstance:
       propertyPath: m_margin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1587670768740313410, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587670768740313410, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587670768740313410, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2455126864228406024, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -9077,6 +9100,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2853227938318664618, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: responseController
+      value: 
+      objectReference: {fileID: 377864932}
     - target: {fileID: 5614000698960060738, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -9087,7 +9114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7579645417772780178, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_Padding.m_Left
-      value: 45
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8582701020454626246, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: canvasGroup
