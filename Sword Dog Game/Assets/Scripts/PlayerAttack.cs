@@ -35,7 +35,6 @@ public class PlayerAttack : MonoBehaviour
         // attack input detection + combo tracking
         if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3)
         {
-            Debug.Log("attack");
             isAttacking = true;
             attackCombo++;
             anim.SetTrigger("attack" + attackCombo);
