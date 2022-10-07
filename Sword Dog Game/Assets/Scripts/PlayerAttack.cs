@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float yInput = Input.GetAxisRaw("Vertical");
+
         // attack cooldown
         if (attackCooldown > 0)
         {
@@ -35,6 +37,11 @@ public class PlayerAttack : MonoBehaviour
         // attack input detection + combo tracking
         if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3)
         {
+            // set attack direction + context
+            if (!isAttacking)
+            {
+                anim.SetFloat("attack_direction", yInput);
+            }
             isAttacking = true;
             attackCombo++;
             anim.SetTrigger("attack" + attackCombo);
