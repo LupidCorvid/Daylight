@@ -46,6 +46,11 @@ public class DialogSource
 
     public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
     public List<string> responseOutputsNumeric = new List<string>();
+
+    public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
+
+
+    public const string BLOCKS_SIGNATURE = "-Blocks";
     //number of characters/second
     /*Dialogue guide:
      * [] is escape
@@ -71,6 +76,9 @@ public class DialogSource
      * [prompt, 1, 1r, 2, 2r, ...] //Prompts with a number of options with their names and their results
      * 
      * [lf, path] //Sets output to be dialog from a text file at the path
+     * [lf, path, block] //Loads a block from a specific path
+     * [llf, block] //Loads a different block from within the current file
+     * 
      * 
      */
     public DialogSource(string dialog)
@@ -78,32 +86,84 @@ public class DialogSource
         this.originalDialog = dialog;
     }
 
+    public static Dictionary<string, string> getBlocks(string loadedText)
+    {
+        Dictionary<string, string> blocks = new Dictionary<string, string>();
+        if (loadedText.Length > BLOCKS_SIGNATURE.Length && loadedText.Substring(0, 7) == BLOCKS_SIGNATURE)
+        {
+            int lastBlockStart = 0;
+            for (int i = BLOCKS_SIGNATURE.Length; i < loadedText.Length; i++)
+            {
+                if (loadedText[i] == '{')
+                {
+                    
+                    string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
+                    //titleChunk = titleChunk.LastIndexOf('\n');
+                    string blockName;
+                    if (titleChunk.LastIndexOf('\n') != -1)
+                        blockName = loadedText.Substring(titleChunk.LastIndexOf('\n') + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf('\n') + lastBlockStart));
+                    else
+                        continue;
+                    //Maybe change to use a short string series instead?
+                    string blockText = loadedText.Substring(i + 3, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
+                    blocks.Add(blockName, blockText);
+                    lastBlockStart = i + 1;
+                }
+            }
+        }
+        return blocks;
+    }
     public static DialogSource LoadFromFile(string filePath)
     {
         //string gottenText = File.ReadAllText(Path.Combine(Application.persistentDataPath, filePath));
         ////Have system for further selection within files, like grouping of text
-        return new DialogSource(LoadFile(filePath));
+        string loadedText = LoadFile(filePath);
+        //DialogSource returnDialog = new DialogSource(LoadFile(filePath));
+        Dictionary<string, string> blocks = getBlocks(loadedText);
+
+        DialogSource returnDialog;
+        if (blocks.ContainsKey("Default"))
+            returnDialog = new DialogSource(blocks["Default"]);
+        else
+            returnDialog = new DialogSource(loadedText);
+        returnDialog.dialogBlocks = blocks;
+        return returnDialog;
     }
 
     public static string LoadFile(string filePath)
     {
         string gottenText = File.ReadAllText(Path.Combine(Application.dataPath + @"\Dialog\", filePath));
-        //Have system for further selection within files, like grouping of text
         return gottenText;
     }
 
     public void changeToFile(string filePath)
     {
-        dialog = LoadFile(filePath);
+        string loadedText = LoadFile(filePath);
+        Dictionary<string, string> blocks = getBlocks(loadedText);
+        if (blocks.ContainsKey("Default"))
+            dialog = blocks["Default"];
+        else
+            dialog = loadedText;
+        dialogBlocks = blocks;
         position = 0;
     }
 
-    public static DialogSource fromFile(string filePath)
+    public void changeToBlock(string block)
     {
-        Debug.LogError("DialogSource.fromFile is not yet implemented!");
-        return null;
-        //return new DialogSource()
+        if (dialogBlocks.ContainsKey(block))
+        {
+            dialog = dialogBlocks[block];
+            position = 0;
+        }
+        else
+            Debug.LogError("Couldnt find a block called " + block);
     }
+    //public static DialogSource fromFile(string filePath)
+    //{
+    //    Debug.LogError("DialogSource.fromFile is not yet implemented!");
+    //    return null;
+    //    //return new DialogSource()
+    //}
 
     public string read()
     {
@@ -121,14 +181,14 @@ public class DialogSource
         return outString;
     }
 
-    private int getCommandEnd(string input, int startPosition)
+    private static int getCommandEnd(string input, int startPosition, char openChar = '[', char closeChar = ']')
     {
         int depth = 0;
         for(int i = startPosition; i < input.Length; i++)
         {
-            if (input[i] == '[')
+            if (input[i] == openChar)
                 depth++;
-            if (input[i] == ']')
+            if (input[i] == closeChar)
                 depth--;
 
             if (depth == 0)
@@ -136,6 +196,7 @@ public class DialogSource
         }
         return input.Length;
     }
+    
 
     private void readDialog()
     {
@@ -299,11 +360,7 @@ public class DialogSource
 
                 break;
             case "sh":
-                if (input.Length > 2)
-                {
-
-                }
-                else if (input.Length == 1)
+                if (input.Length == 1)
                 {
                     setDisplayHeader("");
                 }
@@ -322,8 +379,17 @@ public class DialogSource
                 else
                     Debug.LogWarning("Invalid number of arguments for loadFile [lf]!");
                 break;
+            case "llf":
+                if (input.Length == 2)
+                {
+                    changeToBlock(input[1]);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for loadLocalFile [llf]!");
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
+                //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call
                 break;
 
         }
@@ -333,10 +399,7 @@ public class DialogSource
     {
         dialog = originalDialog;
     }
-    //public void interact()
-    //{
-    //    DialogController.main.openBox();
-    //}
+
     public void barkEffect()
     {
         bark?.Invoke(defaultBarkVelocity, defaultBarkAcceleration);
@@ -364,7 +427,7 @@ public class DialogSource
         if (position < dialog.Length)
             dialog = dialog.Insert(position, responseOutputsNumeric[response % responseOutputs.Count]);
         else
-            dialog += responseOutputsNumeric[response];
+            dialog += responseOutputsNumeric[response % responseOutputs.Count];
         waiting = false;
     }
 

@@ -1,0 +1,23 @@
+-Blocks
+Default{
+	[llf,TesterStart]
+}
+
+TesterStart{
+	[ss, .075][sdb, 1, -1, 0, 1][c] Choose yes or no for different responses! [prompt, yes, [llf,TesterYes], no, [llf,TesterNo]]
+}
+
+TesterYes{
+	[c] Okay then. This is a tester [w,2] [exit]
+}
+
+TesterNo{
+	[sh, bye][c]bye then [w, 2] [exit]
+}
+
+Talk2{
+	[c]This displays when you talk with me twice.
+}
+Talk3{
+	[c]This displays when you talk with me thrice.
+}
