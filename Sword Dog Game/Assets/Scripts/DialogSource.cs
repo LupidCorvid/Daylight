@@ -87,7 +87,7 @@ public class DialogSource
 
     public static string LoadFile(string filePath)
     {
-        string gottenText = File.ReadAllText(Path.Combine(Application.persistentDataPath, filePath));
+        string gottenText = File.ReadAllText(Path.Combine(Application.dataPath + @"\Dialog\", filePath));
         //Have system for further selection within files, like grouping of text
         return gottenText;
     }
