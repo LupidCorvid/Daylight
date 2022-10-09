@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 
 public class DialogSource
 {
@@ -69,10 +70,32 @@ public class DialogSource
      * 
      * [prompt, 1, 1r, 2, 2r, ...] //Prompts with a number of options with their names and their results
      * 
+     * [lf, path] //Sets output to be dialog from a text file at the path
+     * 
      */
     public DialogSource(string dialog)
     {
         this.originalDialog = dialog;
+    }
+
+    public static DialogSource LoadFromFile(string filePath)
+    {
+        //string gottenText = File.ReadAllText(Path.Combine(Application.persistentDataPath, filePath));
+        ////Have system for further selection within files, like grouping of text
+        return new DialogSource(LoadFile(filePath));
+    }
+
+    public static string LoadFile(string filePath)
+    {
+        string gottenText = File.ReadAllText(Path.Combine(Application.persistentDataPath, filePath));
+        //Have system for further selection within files, like grouping of text
+        return gottenText;
+    }
+
+    public void changeToFile(string filePath)
+    {
+        dialog = LoadFile(filePath);
+        position = 0;
     }
 
     public static DialogSource fromFile(string filePath)
@@ -123,11 +146,16 @@ public class DialogSource
             //int endPos = dialog.IndexOf(']', position);
             int endPos = getCommandEnd(dialog, position);
             List<string> parameters = new List<string>();
+            int depth = 0;
 
             int lastProcessPosition = position;
             for (int i = lastProcessPosition; i <= endPos; i++)
             {
-                if (dialog[i] == ',' || i == endPos)
+                if (dialog[i] == '[')
+                    depth++;
+                if (dialog[i] == ']')
+                    depth--;
+                if ((dialog[i] == ',' && depth == 1) || i == endPos)
                 {
                     parameters.Add(dialog.Substring(lastProcessPosition + 1, i - lastProcessPosition - 1));
                     lastProcessPosition = i;
@@ -285,6 +313,14 @@ public class DialogSource
                 }
                 else
                     Debug.LogWarning("Invalid number of arguments for setHeader[sh]!");
+                break;
+            case "lf":
+                if (input.Length == 2)
+                {
+                    changeToFile(input[1]);
+                }
+                else
+                    Debug.LogWarning("Invalid number of arguments for loadFile [lf]!");
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
