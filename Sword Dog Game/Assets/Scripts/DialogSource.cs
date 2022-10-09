@@ -93,13 +93,31 @@ public class DialogSource
         }
         return outString;
     }
+
+    private int getCommandEnd(string input, int startPosition)
+    {
+        int depth = 0;
+        for(int i = startPosition; i < input.Length; i++)
+        {
+            if (input[i] == '[')
+                depth++;
+            if (input[i] == ']')
+                depth--;
+
+            if (depth == 0)
+                return i;
+        }
+        return input.Length;
+    }
+
     private void readDialog()
     {
         if (waiting)
             return;
         while (position < dialog.Length && dialog[position] == '[')
         {
-            int endPos = dialog.IndexOf(']', position);
+            //int endPos = dialog.IndexOf(']', position);
+            int endPos = getCommandEnd(dialog, position);
             List<string> parameters = new List<string>();
 
             int lastProcessPosition = position;

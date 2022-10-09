@@ -33,6 +33,8 @@ public class DialogResponseController : MonoBehaviour
 
     public bool awaitingResponse = false;
 
+    private bool openedLastFrame = false;
+
     private void Start()
     {
         optionChosen += DialogController.main.receiveResponse;
@@ -64,7 +66,10 @@ public class DialogResponseController : MonoBehaviour
         {
             addResponse(text[i]);
         }
-        open();
+        openedLastFrame = true;
+        //open();
+        //Need delay from the openedOnFrame so that the pointer does not jump
+
         chooseOption(0);
         awaitingResponse = true;
     }
@@ -79,6 +84,7 @@ public class DialogResponseController : MonoBehaviour
         finalPosition.x = (-responsesContainer.rect.width + 20) + responsesContainer.position.x;
         finalPosition.y = options[option].transform.position.y;
         selectedObjectPointer.transform.position = finalPosition;
+
     }
 
     public void open()
@@ -109,11 +115,21 @@ public class DialogResponseController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.T))
         {
             if(awaitingResponse)
-                chooseOption();
+                makeChoice();
         }
     }
 
-    public void chooseOption()
+    private void FixedUpdate()
+    {
+        if (openedLastFrame)
+        {
+            openedLastFrame = false;
+            chooseOption(selectedOption);
+            open();
+        }
+    }
+
+    public void makeChoice()
     {
         optionChosen?.Invoke(selectedOption);
         awaitingResponse = false;
