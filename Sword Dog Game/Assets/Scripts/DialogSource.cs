@@ -39,6 +39,8 @@ public class DialogSource
 
     public event Action<string[]> requestOptionsStart;
 
+    public event Action<string> changeHeaderName;
+
     bool waiting = false;
 
     public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
@@ -62,6 +64,8 @@ public class DialogSource
      * [c] clear output box
      * [ip] wait for input to progress
      * 
+     * [sh, val] // sets header to a new string
+     * [sh] //clears header
      * 
      * [prompt, 1, 1r, 2, 2r, ...] //Prompts with a number of options with their names and their results
      * 
@@ -266,6 +270,22 @@ public class DialogSource
                 promptResponse(options.ToArray());
 
                 break;
+            case "sh":
+                if (input.Length > 2)
+                {
+
+                }
+                else if (input.Length == 1)
+                {
+                    setDisplayHeader("");
+                }
+                else if (input.Length == 2)
+                {
+                    setDisplayHeader(input[1]);
+                }
+                else
+                    Debug.LogWarning("Invalid number of arguments for setHeader[sh]!");
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 break;
@@ -306,9 +326,14 @@ public class DialogSource
     public void receiveResponse(int response)
     {
         if (position < dialog.Length)
-            dialog = dialog.Insert(position, responseOutputsNumeric[response]);
+            dialog = dialog.Insert(position, responseOutputsNumeric[response % responseOutputs.Count]);
         else
             dialog += responseOutputsNumeric[response];
         waiting = false;
+    }
+
+    public void setDisplayHeader(string newHeader)
+    {
+        changeHeaderName?.Invoke(newHeader);
     }
 }

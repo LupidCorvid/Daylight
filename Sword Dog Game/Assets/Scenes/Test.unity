@@ -5120,6 +5120,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126762521}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1128246646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4952926397378706089, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+  m_PrefabInstance: {fileID: 1915910063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1152728110
 GameObject:
   m_ObjectHideFlags: 0
@@ -7754,8 +7765,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
-  dialog: '[c][abf, 1, 4][ss, .25][sdb, -1, -1, 0, 4]This[w, 1][b] is a   [b]    
-    [ss,.75]tester![ss,.25][prompt, Yes, [c]ok, no, [c]not so much] [w,3] [exit]'
+  dialog: '[sh, Tester][c][abf, 1, 4][ss, .25][sdb, -1, -1, 0, 4]This[w, 1][b] is
+    a   [b]     [ss,.75]tester![ss,.25][prompt, Yes, [c] [sh]ok, no, [c]not so much]
+    [w,3] [exit]'
 --- !u!61 &1578129669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8964,6 +8976,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 589683606632211866, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -195
+      objectReference: {fileID: 0}
+    - target: {fileID: 589683606632211866, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65
+      objectReference: {fileID: 0}
     - target: {fileID: 1401140974741087912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9101,6 +9121,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2853227938318664618, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: headerDisplay
+      value: 
+      objectReference: {fileID: 1128246646}
+    - target: {fileID: 2853227938318664618, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: responseController
       value: 
       objectReference: {fileID: 377864932}
@@ -9115,6 +9139,10 @@ PrefabInstance:
     - target: {fileID: 7579645417772780178, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_Padding.m_Left
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139606318346354515, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_Name
+      value: NameHeader
       objectReference: {fileID: 0}
     - target: {fileID: 8582701020454626246, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: canvasGroup

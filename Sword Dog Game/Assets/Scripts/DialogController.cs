@@ -12,6 +12,8 @@ public class DialogController : MonoBehaviour
 
     public TextMeshProUGUI textDisplay;
 
+    public TextMeshProUGUI headerDisplay;
+
     public DialogSource source;
 
     public bool reading = false;
@@ -29,6 +31,7 @@ public class DialogController : MonoBehaviour
             textDisplay.text = value;
         }
     }
+
     void Awake()
     {
         main = this;
@@ -67,9 +70,18 @@ public class DialogController : MonoBehaviour
 
     public void setSource(DialogSource newSource)
     {
-        if(source != null)
+        if (source != null)
+        {
             source.requestOptionsStart -= promptSelections;
+            source.changeHeaderName -= setHeaderName;
+        }
         source = newSource;
         newSource.requestOptionsStart += promptSelections;
+        newSource.changeHeaderName += setHeaderName;
+    }
+
+    public void setHeaderName(string newName)
+    {
+        headerDisplay.text = newName;
     }
 }
