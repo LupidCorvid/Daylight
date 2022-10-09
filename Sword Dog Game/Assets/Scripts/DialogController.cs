@@ -76,6 +76,8 @@ public class DialogController : MonoBehaviour
             source.changeHeaderName -= setHeaderName;
         }
         source = newSource;
+        text = "";
+        headerDisplay.text = "";
         newSource.requestOptionsStart += promptSelections;
         newSource.changeHeaderName += setHeaderName;
     }

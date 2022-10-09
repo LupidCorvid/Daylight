@@ -398,6 +398,8 @@ public class DialogSource
     public void resetDialog()
     {
         dialog = originalDialog;
+        outString = "";
+        position = 0;
     }
 
     public void barkEffect()
