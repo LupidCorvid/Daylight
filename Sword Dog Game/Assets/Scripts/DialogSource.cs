@@ -12,7 +12,7 @@ public class DialogSource
     public int position;
 
     //Time to wait between words
-    public float speed;
+    public float speed = 0.75f;
     float lastReadTime = 0;
 
     public bool skipSpaceWait = true;
@@ -115,10 +115,7 @@ public class DialogSource
     }
     public static DialogSource LoadFromFile(string filePath)
     {
-        //string gottenText = File.ReadAllText(Path.Combine(Application.persistentDataPath, filePath));
-        ////Have system for further selection within files, like grouping of text
         string loadedText = LoadFile(filePath);
-        //DialogSource returnDialog = new DialogSource(LoadFile(filePath));
         Dictionary<string, string> blocks = getBlocks(loadedText);
 
         DialogSource returnDialog;
@@ -146,6 +143,7 @@ public class DialogSource
             dialog = loadedText;
         dialogBlocks = blocks;
         position = 0;
+        waiting = false;
     }
 
     public void changeToBlock(string block)
@@ -154,9 +152,10 @@ public class DialogSource
         {
             dialog = dialogBlocks[block];
             position = 0;
+            waiting = false;
         }
         else
-            Debug.LogError("Couldnt find a block called " + block);
+            Debug.LogError("Couldnt find a block called " + block + ". Make sure you are in the right file!");
     }
     //public static DialogSource fromFile(string filePath)
     //{
@@ -202,6 +201,7 @@ public class DialogSource
     {
         if (waiting)
             return;
+        ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')
         {
             //int endPos = dialog.IndexOf(']', position);
@@ -376,6 +376,11 @@ public class DialogSource
                 {
                     changeToFile(input[1]);
                 }
+                else if(input.Length == 3)
+                {
+                    changeToFile(input[1]);
+                    changeToBlock(input[2]);
+                }
                 else
                     Debug.LogWarning("Invalid number of arguments for loadFile [lf]!");
                 break;
@@ -429,7 +434,7 @@ public class DialogSource
         if (position < dialog.Length)
             dialog = dialog.Insert(position, responseOutputsNumeric[response % responseOutputs.Count]);
         else
-            dialog += responseOutputsNumeric[response % responseOutputs.Count];
+            dialog += responseOutputsNumeric[response % responseOutputsNumeric.Count];
         waiting = false;
     }
 

@@ -1,14 +1,10 @@
 -Blocks
 Default{
-	[llf,TesterStart]
-}
-
-TesterStart{
-	[ss, .075][sdb, 1, -1, 0, 1][c] Choose yes or no for different responses! [prompt, yes, [llf,TesterYes], no, [llf,TesterNo]]
+	[ss, .075][sdb, 1, -1, 0, 1][c]Choose yes or no for different responses! [prompt, yes, [llf,TesterYes], no, [llf,TesterNo]]
 }
 
 TesterYes{
-	[c] Okay then. This is a tester [w,2] [exit]
+	[c]Okay then. This is a tester [w,2] [exit]
 }
 
 TesterNo{
@@ -16,8 +12,9 @@ TesterNo{
 }
 
 Talk2{
-	[c]This displays when you talk with me twice.
+	[ss, .075][c]This displays when you talk with me twice. [w,2] [exit]
 }
+
 Talk3{
-	[c]This displays when you talk with me thrice.
+	[ss, .075][c]This displays when you talk with me thrice.[w,2] [exit]
 }
