@@ -7772,6 +7772,7 @@ MonoBehaviour:
   - '[lf,TesterDialog.txt]'
   numInteractions: 0
   loopInteractions: 0
+  alreadyTalking: 0
 --- !u!61 &1578129669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9157,17 +9158,33 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4952926397378706089, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
+    - target: {fileID: 4952926397378706089, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_fontSizeBase
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4952926397378706089, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2979243837832940634, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
     - target: {fileID: 5148224894978601666, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_fontSize
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5148224894978601666, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
+    - target: {fileID: 5148224894978601666, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_fontSizeBase
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 5148224894978601666, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2979243837832940634, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
     - target: {fileID: 5614000698960060738, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

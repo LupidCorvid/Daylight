@@ -12,7 +12,7 @@ public class DialogSource
     public int position;
 
     //Time to wait between words
-    public float speed = 0.75f;
+    public float speed = 0.075f;
     float lastReadTime = 0;
 
     public bool skipSpaceWait = true;
@@ -42,13 +42,14 @@ public class DialogSource
 
     public event Action<string> changeHeaderName;
 
+    public event Action startWaitingForInput;
     bool waiting = false;
+    bool waitingForButtonInput = false;
 
     public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
     public List<string> responseOutputsNumeric = new List<string>();
 
     public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
-
 
     public const string BLOCKS_SIGNATURE = "-Blocks";
     //number of characters/second
@@ -61,9 +62,14 @@ public class DialogSource
      * [abf] is auto bark frequency
      * [abf, min, max] sets the random range of abf, with max being exclusive
      * [j, pos] jumps position to new position
+     * 
      * CONSTRAIN VAR SIZES SO THAT DIALOG ISNT OFFSET BY IT TOO MUCH
-     * [svar, val] sets a var with a value. If it does not exist it is created
-     * [var] reads a var and puts the value of it on the dialog out
+     * [svar, var, val] sets a var with a value. If it does not exist it is created
+     * [gvar, var] reads a var and puts the value of it on the dialog out
+     * [gvar, var, exists, else] //Outputs one option if a var exists, and the other if it does not
+     * [rvar, var] //Removes a var. Gives a warning if the var does not exist.
+     * [gvar, var, var2, true, false] //Checks if a var equals another var
+     * 
      * [exit] exits dialog (closes the box, but is typically controlled by the thing holding it)
      * [sdb, x, y, x,y ] sets default bark settings
      * 
@@ -79,6 +85,7 @@ public class DialogSource
      * [lf, path, block] //Loads a block from a specific path
      * [llf, block] //Loads a different block from within the current file
      * 
+     * [wi] //Waits for user input to continue
      * 
      */
     public DialogSource(string dialog)
@@ -166,7 +173,8 @@ public class DialogSource
 
     public string read()
     {
-        
+        if (waiting || waitingForButtonInput)
+            return outString;
         while ((lastReadTime + speed < Time.time && Time.time > waitStart + waitTime))
         {
             lastReadTime = Time.time;
@@ -199,7 +207,7 @@ public class DialogSource
 
     private void readDialog()
     {
-        if (waiting)
+        if (waiting || waitingForButtonInput)
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')
@@ -392,6 +400,62 @@ public class DialogSource
                 else
                     Debug.LogError("Invalid number of arguments for loadLocalFile [llf]!");
                 break;
+            case "wi":
+                if (input.Length == 1)
+                {
+                    waitingForButtonInput = true;
+                    startWaitingForInput?.Invoke();
+                }
+                else
+                    Debug.LogError("Invalid number or arguments for waitInput[wi]!");
+                break;
+            case "svar":
+                if(input.Length == 3)
+                {
+                    if (!stringVariables.ContainsKey(input[1]))
+                        stringVariables.Add(input[1], input[2]);
+                    else
+                        stringVariables[input[1]] = input[2];
+                }
+                else
+                    Debug.LogError("Invalid number or arguments for set var [svar]!");
+                break;
+            case "gvar":
+                if(input.Length == 2)
+                {
+                    if(stringVariables.ContainsKey(input[1]))
+                        dialog = dialog.Insert(position, stringVariables[input[1]]);
+                }
+                else if(input.Length == 4)
+                {
+                    if(stringVariables.ContainsKey(input[1]))
+                        dialog = dialog.Insert(position, input[2]);
+                    else
+                        dialog = dialog.Insert(position, input[3]);
+                }
+                else if (input.Length == 5)
+                {
+                    if(stringVariables.ContainsKey(input[1]))
+                    {
+                        if(stringVariables[input[1]] == input[2])
+                            dialog = dialog.Insert(position, input[3]);
+                        else
+                            dialog = dialog.Insert(position, input[4]);
+                    }
+                }
+                else
+                    Debug.LogError("Invalid number or arguments for get var [gvar]!");
+                break;
+            case "rvar":
+                if(input.Length == 2)
+                {
+                    if (stringVariables.ContainsKey(input[1]))
+                        stringVariables.Remove(input[1]);
+                    else
+                        Debug.LogWarning("No variable called " + input[1] + " found, this may be intentional, but make sure that the referenced variable is named correctly " +
+                            "(remember whitespace is counted)");
+                }
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call
@@ -433,9 +497,18 @@ public class DialogSource
     {
         if (position < dialog.Length)
             dialog = dialog.Insert(position, responseOutputsNumeric[response % responseOutputs.Count]);
-        else
+        else if (response % responseOutputsNumeric.Count < responseOutputsNumeric.Count)
             dialog += responseOutputsNumeric[response % responseOutputsNumeric.Count];
         waiting = false;
+    }
+
+    public void receiveButtonInput()
+    {
+        if(!waitingForButtonInput)
+        {
+            //skip dialog? Skip to next jump or load statement or wait for input statement
+        }
+        waitingForButtonInput = false;
     }
 
     public void setDisplayHeader(string newHeader)

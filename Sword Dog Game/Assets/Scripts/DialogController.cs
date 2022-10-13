@@ -41,7 +41,11 @@ public class DialogController : MonoBehaviour
     void Update()
     {
         if (reading)
+        {
+            if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return))
+                pauseWaitForInputEnd();
             textDisplay.text = source.read();
+        }
     }
     public void openBox()
     {
@@ -74,16 +78,28 @@ public class DialogController : MonoBehaviour
         {
             source.requestOptionsStart -= promptSelections;
             source.changeHeaderName -= setHeaderName;
+            source.startWaitingForInput -= pauseWaitForInputStart;
         }
         source = newSource;
         text = "";
         headerDisplay.text = "";
         newSource.requestOptionsStart += promptSelections;
         newSource.changeHeaderName += setHeaderName;
+        newSource.startWaitingForInput += pauseWaitForInputStart;
     }
 
     public void setHeaderName(string newName)
     {
         headerDisplay.text = newName;
+    }
+
+    public void pauseWaitForInputStart()
+    {
+        
+    }
+
+    public void pauseWaitForInputEnd()
+    {
+        source.receiveButtonInput();
     }
 }

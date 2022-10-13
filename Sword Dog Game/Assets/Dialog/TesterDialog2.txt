@@ -4,17 +4,17 @@ Default{
 }
 
 TesterYes{
-	[c]Okay then. This is a tester [w,2] [exit]
+	[c][svar, tester, true]Okay then. This is a tester [w,.5] [wi] [exit]
 }
 
 TesterNo{
-	[sh, bye][c]bye then [w, 2] [exit]
+	[sh, bye][c][svar, tester, false]bye then [w, .5] [wi] [exit]
 }
 
 Talk2{
-	[ss, .075][c]This displays when you talk with me twice. [w,2] [exit]
+	[ss, .075][c]This displays when you talk with me twice. [gvar, tester, true,You said yes!,You said no :(] [w,2] [exit]
 }
 
 Talk3{
-	[ss, .075][c]This displays when you talk with me thrice.[w,2] [exit]
+	[ss, .075][c]This displays when you talk with me thrice. [gvar, tester][w,2] [exit]
 }
