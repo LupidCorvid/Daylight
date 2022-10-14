@@ -26,10 +26,14 @@ public class PlayerHealth : MonoBehaviour
 
         UpdateHealth();
 
-        // TODO remove debug keybind 
+        // TODO remove debug keybinds 
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(1);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Heal(1);
         }
     }
 
