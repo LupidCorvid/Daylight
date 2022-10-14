@@ -440,6 +440,8 @@ MonoBehaviour:
   headerDisplay: {fileID: 0}
   reading: 0
   responseController: {fileID: 0}
+  anim: {fileID: 0}
+  readWhenOpen: 0
 --- !u!1 &2686455128359140146
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +609,7 @@ GameObject:
   - component: {fileID: 2588478590455316477}
   - component: {fileID: 9014590673416053926}
   - component: {fileID: 665316838169195977}
+  - component: {fileID: 1640350794769312133}
   m_Layer: 5
   m_Name: DialogBox
   m_TagString: Untagged
@@ -706,6 +709,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1640350794769312133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4106592902636363592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d2b02cacb519749b7785726bed5884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5229605821941382300
 GameObject:
   m_ObjectHideFlags: 0
