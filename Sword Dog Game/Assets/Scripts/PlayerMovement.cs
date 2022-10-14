@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting;
+    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint;
     private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     public float landAnimTime = .5f;
     float lastLand = 0;
 
+    public float stamina = 0.0f, maxStamina = 6.0f, minStamina = 1.0f;
+
     Vector2 lastMidairVelocity;
 
     void Start()
@@ -69,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         sprintSpeedMultiplier = 1.0f;
         fallTime = 0.0f;
         jumpTime = 0.0f;
+        canResprint = true;
 
         stepDirection = 1;
         facingRight = true;
@@ -155,25 +158,39 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // sprinting
-        if (trotting && !isSprinting && Input.GetButton("Sprint"))
+        if (trotting && !isSprinting && Input.GetButton("Sprint") && stamina >= minStamina && canResprint)
         {
             isSprinting = true;
             if (!isJumping)
                 anim.SetTrigger("start_sprint");
-        }
-        if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0)
+        }      
+        if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0 || stamina <= 0)
         {
             isSprinting = false;
             anim.ResetTrigger("start_sprint");
         }
+
+        if (stamina <= minStamina)
+        {
+            canResprint = false;
+        }
+        if (Input.GetButtonUp("Sprint"))
+        {
+            canResprint = true;
+        }
+
         anim.SetBool("sprinting", isSprinting);
 
         if (isSprinting)
         {
+            if (stamina > 0)
+                stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
             sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.05f);
         }
         else
         {
+            if (stamina < maxStamina)
+                stamina = Mathf.Clamp(stamina + Time.deltaTime, 0, maxStamina);
             sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
         }
     }
