@@ -27,7 +27,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    BaseAI ai;
+    public BaseAI ai;
 
     public virtual void Start()
     {

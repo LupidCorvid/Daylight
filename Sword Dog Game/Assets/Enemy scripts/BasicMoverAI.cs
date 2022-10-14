@@ -17,6 +17,13 @@ public class BasicMoverAI : BaseAI
     {
 
     }
+    public override void Update()
+    {
+        base.Update();
+
+        testForLedge(rb.velocity.x > 0);
+        moveInDirection(target.position);
+    }
 
     //determines if the AI should jump when moving in a direction
     private bool testForLedge(bool movingRight)
@@ -31,7 +38,7 @@ public class BasicMoverAI : BaseAI
         }
         Debug.DrawLine(transform.position, hit.point);
         if (hit.distance > 4)
-            return true;
+            Jump();
         return false;
     }
 
@@ -39,11 +46,20 @@ public class BasicMoverAI : BaseAI
     {
         if(target.x > transform.position.x)
         {
-            //Move right
+            rb.AddForce(Vector2.right * Time.deltaTime * 1000);
         }
         else
         {
-            //Move left
+            rb.AddForce(Vector2.left * Time.deltaTime * 1000);
+        }
+        if(target.y - transform.position.y > 3 && false)//Make sure is grounded 
+        {
+            Jump();
         }
     }
+    public void Jump()
+    {
+        rb.AddForce(Vector2.up * 20);
+    }
+
 }

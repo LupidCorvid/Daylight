@@ -24,9 +24,12 @@ public class BaseAI
 
     public Transform target;
 
+    public Rigidbody2D rb;
+
     public BaseAI(EnemyBase baseScript)
     {
         enemyBase = baseScript;
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
