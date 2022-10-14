@@ -147,11 +147,11 @@ public class PlayerMovement : MonoBehaviour
         // TODO REMOVE - debug cinematic bars keybind
         if (Input.GetKeyDown(KeyCode.V))
         {
-            GameObject.FindObjectOfType<CinematicBars>().Show(200, .3f);
+            FindObjectOfType<CinematicBars>().Show(200, .3f);
         }
         if (Input.GetKeyUp(KeyCode.V))
         {
-            GameObject.FindObjectOfType<CinematicBars>().Hide(.3f);
+            FindObjectOfType<CinematicBars>().Hide(.3f);
         }
 
         // sprinting
@@ -346,15 +346,11 @@ public class PlayerMovement : MonoBehaviour
         
         if (leftHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
         {
-            //if (onlyRotateWhenGrounded)
-            //    return;
             leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
         }
         if (rightHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
         {
-            //if (onlyRotateWhenGrounded)
-            //    return;
             rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
             rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
         }
@@ -420,7 +416,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if(lastLand + landAnimTime > Time.time)
             {
-                //float adjustedRotationTime = landAnimTime/lastMidairVelocity.y;
                 slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand)* Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
             }
         }
@@ -434,7 +429,7 @@ public class PlayerMovement : MonoBehaviour
         if (hit)
         {
             anim.SetBool("ground_close", true);
-            // Debug.DrawRay(hit.point, hit.normal, Color.red, 0.01f, false);
+
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 
@@ -444,7 +439,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             slopeDownAngleOld = slopeDownAngle;
-            // Debug.DrawRay(hit.point, slopeNormalPerp, Color.yellow, 0.01f, false);
+
         }
 
         if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)

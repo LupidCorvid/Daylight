@@ -6,13 +6,11 @@ public class TextboxAnimationController : MonoBehaviour
 {
     public void finishOpen()
     {
-        Debug.Log("Opened");
         DialogController.main.finishOpen();
     }
 
     public void finishClose()
     {
-        Debug.Log("Closed");
         DialogController.main.finishClose();
     }
 }

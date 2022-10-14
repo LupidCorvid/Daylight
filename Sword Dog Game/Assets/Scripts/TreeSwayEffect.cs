@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// DEPRECATED
+/// </summary>
 public class TreeSwayEffect : MonoBehaviour
 {
     public Sprite treeTexture;
