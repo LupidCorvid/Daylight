@@ -20,6 +20,10 @@ public class DialogController : MonoBehaviour
 
     public DialogResponseController responseController;
 
+    public Animator anim;
+
+    public bool readWhenOpen = false;
+
     public string text
     {
         get
@@ -47,18 +51,35 @@ public class DialogController : MonoBehaviour
             textDisplay.text = source.read();
         }
     }
-    public void openBox()
+    public void finishOpen()
     {
-        panel.alpha = panelAlpha;
+        //panel.alpha = panelAlpha;
         panel.interactable = true;
         panel.blocksRaycasts = true;
+        if (readWhenOpen)
+            reading = true;
+    }
+    public void openBox()
+    {
+        anim.SetBool("requestClose", false);
+        panel.alpha = panelAlpha;
+        textDisplay.alpha = 255;
+        headerDisplay.alpha = 255;
     }
     public void closeBox()
+    {
+        anim.SetBool("requestClose", true);
+        textDisplay.alpha = 0;
+        headerDisplay.alpha = 0;
+    }
+    public void finishClose()
     {
         panel.alpha = 0;
         panel.interactable = false;
         panel.blocksRaycasts = false;
         responseController.close();
+        if (readWhenOpen)
+            reading = false;
     }
 
     public void promptSelections(params string[] options)

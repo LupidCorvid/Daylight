@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2591983749293105047}
   - component: {fileID: 2591983749293105128}
   - component: {fileID: 2591983749293105045}
+  - component: {fileID: 4726395057258711020}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 747c8468a80c5e248a051d3aa239febc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
   speed: 0
   adjustLocationY: 0
   adjustLocationX: 0
+  adjustDefaultX: 0
 --- !u!50 &2591983749293105045
 Rigidbody2D:
   serializedVersion: 4
@@ -123,3 +125,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4726395057258711020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591983749293105129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c95e8b75645d4bb269556a9000853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
