@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
     {
         attackCombo = 0;
         isAttacking = false;
-        attackCooldown = cooldownLength;
+        // attackCooldown = cooldownLength;
         for (int i = 1; i <= 3; i++)
         {
             anim.ResetTrigger("attack" + i);

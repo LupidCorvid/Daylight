@@ -91,6 +91,9 @@ GameObject:
   - component: {fileID: 223483409846595020}
   - component: {fileID: 2076971703553780711}
   - component: {fileID: 7333625409189861786}
+  - component: {fileID: 3808553446418265509}
+  - component: {fileID: 675094675918066877}
+  - component: {fileID: 3260013332793364472}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -316,7 +319,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b719922b2be42b4980d3dd59447589e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCombo: 0
+  isAttacking: 0
+  canAttack: 1
   cooldownLength: 0.5
+  attackCooldown: 0
+--- !u!114 &3808553446418265509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c95e8b75645d4bb269556a9000853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!114 &675094675918066877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf911889eebd9a843b603059d991ef39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3260013332793364472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce84b4c9217370a4bbafd1f7a80b1ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  dead: 0
+  hearts: []
+  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
 --- !u!1 &7456999618654572873
 GameObject:
   m_ObjectHideFlags: 0
