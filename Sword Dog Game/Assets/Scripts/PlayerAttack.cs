@@ -49,15 +49,6 @@ public class PlayerAttack : MonoBehaviour
         
         // perhaps useful in the future for preventing sprint/jump from interrupting attack
         anim.SetBool("attacking", isAttacking);
-
-        // DEBUG: trigger hitstop + flash animation
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            // this code is absolutely horrible, in the future we will prob want an instance variable reference to the sword object or to do this in swordfollow
-            GameObject.FindObjectOfType<SwordFollow>().GetComponent<SimpleFlash>().Flash(1f, 3, true);
-            GetComponent<SimpleFlash>().Flash(1f, 3, true);
-            GetComponent<TimeStop>().StopTimeDefault();
-        }
     }
 
     // stops attacks -- called from animation events in return states
