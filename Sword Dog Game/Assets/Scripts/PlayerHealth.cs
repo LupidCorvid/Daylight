@@ -24,8 +24,6 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         }
 
-        UpdateHealth();
-
         // TODO remove debug keybinds 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -62,12 +60,14 @@ public class PlayerHealth : MonoBehaviour
             FindObjectOfType<SwordFollow>().GetComponent<SimpleFlash>().Flash(1f, 3, true);
             GetComponent<SimpleFlash>().Flash(1f, 3, true);
             GetComponent<TimeStop>().StopTimeDefault();
+            UpdateHealth();
         }
     }
 
     public void Heal(int amount)
     {
         health += amount;
+        UpdateHealth();
     }
 
     // TODO something more fancy later for deaths
