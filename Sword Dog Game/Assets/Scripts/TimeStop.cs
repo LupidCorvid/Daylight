@@ -5,8 +5,8 @@ using UnityEngine;
 public class TimeStop : MonoBehaviour
 {
 
-    public float lastStopTime = 0;
-    float stopTimeDuration = .5f;
+    public float lastStopTime = -100;
+    float stopTimeDuration = 0;
 
     public static float regularTimeSpeed = 1;
 
