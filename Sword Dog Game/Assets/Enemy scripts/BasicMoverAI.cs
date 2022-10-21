@@ -37,7 +37,7 @@ public class BasicMoverAI : BaseAI
             hit.distance = new Vector3(2 * negative, -2).magnitude;
         }
         Debug.DrawLine(transform.position, hit.point);
-        if (hit.distance > 1.2)
+        if (hit.distance > 3)
             Jump();
         return false;
     }
@@ -52,15 +52,21 @@ public class BasicMoverAI : BaseAI
         {
             rb.AddForce(Vector2.left * Time.deltaTime * 1000);
         }
-        if(target.y - transform.position.y > 3)//Make sure is grounded 
+        if(target.y - transform.position.y > 4)//Make sure is grounded 
         {
             Jump();
         }
     }
     public void Jump()
     {
-        if(Physics2D.Raycast(transform.position, Vector2.down, .25f, LayerMask.GetMask("Terrain")))
-        rb.AddForce(Vector2.up * 20);
+        foreach (Collider2D collision in enemyBase.GetComponentInChildren<CollisionsTracker>().triggersInContact)
+        {
+            if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Terrain"))
+            {
+                rb.AddForce(Vector2.up * 100);
+                return;
+            }
+        }
     }
 
 }
