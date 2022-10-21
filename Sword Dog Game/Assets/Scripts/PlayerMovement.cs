@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
                 if (!isJumping)
                     anim.SetTrigger("start_sprint");
             }      
-            if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0 || stamina <= 0)
+            if (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0)
             {
                 isSprinting = false;
                 anim.ResetTrigger("start_sprint");
