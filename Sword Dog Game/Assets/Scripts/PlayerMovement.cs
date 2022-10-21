@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 upperLeftCorner;
     Vector2 upperRightCorner;
 
-    public bool dead, resetting, invincible;
+    public bool resetting, invincible;
 
     public bool onlyRotateWhenGrounded;
     float lastGroundedSlope = 0;
@@ -110,88 +110,91 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // remember previous movement input
-        prevMoveX = moveX;
-
-        // grab movement input from horizontal axis
-        moveX = Input.GetAxisRaw("Horizontal");
-
-        anim.SetBool("moveX", moveX != 0 && Mathf.Abs(rb.velocity.x) > 0f);
-
-        // track stops per second
-        if (prevMoveX != 0 && moveX == 0)
+        if (!PlayerHealth.dead) // && not paused(?)
         {
-            stops++;
-            StartCoroutine("RemoveStop");
-        }
+            // remember previous movement input
+            prevMoveX = moveX;
 
-        // fix input spam breaking trot state
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
-        {
-            trotting = false;
-        }
+            // grab movement input from horizontal axis
+            moveX = Input.GetAxisRaw("Horizontal");
 
-        // start trotting if player gives input and is moving
-        if (isGrounded && moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
-        {
-            anim.SetTrigger("trot");
-            trotting = true;
-        }
+            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(rb.velocity.x) > 0f);
 
-        // jump code
-        Jump();
+            // track stops per second
+            if (prevMoveX != 0 && moveX == 0)
+            {
+                stops++;
+                StartCoroutine("RemoveStop");
+            }
 
-        // release jump
-        if (Input.GetButtonUp("Jump"))
-        {
-            holdingJump = false;
-        }
+            // fix input spam breaking trot state
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
+            {
+                trotting = false;
+            }
 
-        // TODO REMOVE - debug cinematic bars keybind
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            FindObjectOfType<CinematicBars>().Show(200, .3f);
-        }
-        if (Input.GetKeyUp(KeyCode.V))
-        {
-            FindObjectOfType<CinematicBars>().Hide(.3f);
-        }
+            // start trotting if player gives input and is moving
+            if (isGrounded && moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
+            {
+                anim.SetTrigger("trot");
+                trotting = true;
+            }
 
-        // sprinting
-        if (trotting && !isSprinting && Input.GetButton("Sprint") && stamina >= minStamina && canResprint)
-        {
-            isSprinting = true;
-            if (!isJumping)
-                anim.SetTrigger("start_sprint");
-        }      
-        if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0 || stamina <= 0)
-        {
-            isSprinting = false;
-            anim.ResetTrigger("start_sprint");
-        }
+            // jump code
+            Jump();
 
-        if (stamina <= minStamina)
-        {
-            canResprint = false;
-        }
-        if (Input.GetButtonUp("Sprint"))
-        {
-            canResprint = true;
-        }
+            // release jump
+            if (Input.GetButtonUp("Jump"))
+            {
+                holdingJump = false;
+            }
 
-        anim.SetBool("sprinting", isSprinting);
+            // // TODO REMOVE - debug cinematic bars keybind
+            // if (Input.GetKeyDown(KeyCode.V))
+            // {
+            //     FindObjectOfType<CinematicBars>().Show(200, .3f);
+            // }
+            // if (Input.GetKeyUp(KeyCode.V))
+            // {
+            //     FindObjectOfType<CinematicBars>().Hide(.3f);
+            // }
 
-        if (isSprinting)
-        {
-            if (stamina > 0)
-                stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
-            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.05f);
-        }
-        else
-        {
-            if (stamina < maxStamina)
-                stamina = Mathf.Clamp(stamina + Time.deltaTime, 0, maxStamina);
-            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+            // sprinting
+            if (trotting && !isSprinting && Input.GetButton("Sprint") && stamina >= minStamina && canResprint)
+            {
+                isSprinting = true;
+                if (!isJumping)
+                    anim.SetTrigger("start_sprint");
+            }      
+            if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0 || stamina <= 0)
+            {
+                isSprinting = false;
+                anim.ResetTrigger("start_sprint");
+            }
+
+            if (stamina <= minStamina)
+            {
+                canResprint = false;
+            }
+            if (Input.GetButtonUp("Sprint"))
+            {
+                canResprint = true;
+            }
+
+            anim.SetBool("sprinting", isSprinting);
+
+            if (isSprinting)
+            {
+                if (stamina > 0)
+                    stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.05f);
+            }
+            else
+            {
+                if (stamina < maxStamina)
+                    stamina = Mathf.Clamp(stamina + Time.deltaTime, 0, maxStamina);
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+            }
         }
     }
 
@@ -207,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(moveX * calculatedSpeed, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(PlayerHealth.dead ? 0 : moveX * calculatedSpeed, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)

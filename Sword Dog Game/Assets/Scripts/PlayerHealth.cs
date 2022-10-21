@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     private int maxHealth = 8;
     public int health = 8;
-    public bool dead;
+    public static bool dead;
     private float iFrameTime = 1.0f, lastDamaged = 0f;
 
     // Start is called before the first frame update
@@ -75,5 +75,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health = 0;
         dead = true;
+        var rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        GetComponent<Animator>().SetTrigger("death");
     }
 }

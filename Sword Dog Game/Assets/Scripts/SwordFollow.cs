@@ -51,8 +51,6 @@ public class SwordFollow : MonoBehaviour
 
             var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
             swordTargetLocation = player.transform.position + offset;
-            
-            Debug.Log(player.transform.rotation.z);
 
             //Moves
             swordPreviousLocation = transform.position;
