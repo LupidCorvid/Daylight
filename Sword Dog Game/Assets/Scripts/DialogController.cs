@@ -61,7 +61,7 @@ public class DialogController : MonoBehaviour
     }
     public void openBox()
     {
-        CanvasManager.HideHealth();
+        CanvasManager.HideHUD();
         anim.SetBool("requestClose", false);
         panel.alpha = panelAlpha;
         textDisplay.alpha = 255;
@@ -75,7 +75,7 @@ public class DialogController : MonoBehaviour
     }
     public void finishClose()
     {
-        CanvasManager.ShowHealth();
+        CanvasManager.ShowHUD();
         panel.alpha = 0;
         panel.interactable = false;
         panel.blocksRaycasts = false;
