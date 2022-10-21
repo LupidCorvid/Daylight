@@ -196,6 +196,11 @@ public class PlayerMovement : MonoBehaviour
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
         }
+        else
+        {
+            moveX = 0;
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
     }
 
     void FixedUpdate()
