@@ -18,6 +18,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public bool alreadyTalking;
 
+    bool stoppedTalkingThisFrame = false;
+
     public void Awake()
     {
         dialogSource = new DialogSource(dialog[numInteractions % dialog.Count]);
@@ -27,7 +29,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
     public void interact()
     {
-        if (!alreadyTalking)
+        if (!alreadyTalking && !stoppedTalkingThisFrame)
         {
             if (loopInteractions)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
@@ -42,6 +44,11 @@ public class DialogNPC : MonoBehaviour, IInteractable
             numInteractions++;
             alreadyTalking = true;
         }
+    }
+
+    private void LateUpdate()
+    {
+        stoppedTalkingThisFrame = false;
     }
 
     public void setNewSource(DialogSource newSource)
@@ -63,6 +70,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         DialogController.main.closeBox();
         DialogController.main.reading = false;
         alreadyTalking = false;
+        stoppedTalkingThisFrame = true;
     }
     public void barkEffect()
     {

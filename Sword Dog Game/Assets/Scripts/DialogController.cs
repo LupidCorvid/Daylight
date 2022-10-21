@@ -44,10 +44,10 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return))
+            pauseWaitForInputEnd();
         if (reading)
         {
-            if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return))
-                pauseWaitForInputEnd();
             textDisplay.text = source.read();
         }
     }
@@ -123,6 +123,6 @@ public class DialogController : MonoBehaviour
 
     public void pauseWaitForInputEnd()
     {
-        source.receiveButtonInput();
+        source?.receiveButtonInput();
     }
 }
