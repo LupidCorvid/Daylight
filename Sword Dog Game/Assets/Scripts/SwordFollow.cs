@@ -48,20 +48,24 @@ public class SwordFollow : MonoBehaviour
 
             player = GameObject.FindGameObjectWithTag("Player");
             playerLocation = player.transform.position;
-            swordTargetLocation = new Vector3(player.transform.position.x + adjustLocationX, player.transform.position.y + adjustLocationY);
+
+            var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
+            swordTargetLocation = player.transform.position + offset;
+            
+            Debug.Log(player.transform.rotation.z);
 
             //Moves
             swordPreviousLocation = transform.position;
-            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 5 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 4 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
 
             //Checks when to flip and adjust sprite
             
             if (pmScript.isJumping)
             {
-                if (!pmScript.facingRight) adjustLocationX = -adjustDefaultX - .5f;
-                else adjustLocationX = adjustDefaultX + .5f;
+                if (!pmScript.facingRight) adjustLocationX = -adjustDefaultX - .8f;
+                else adjustLocationX = adjustDefaultX + .8f;
                 
-                adjustLocationY = 1.1f;
+                adjustLocationY = 0.9f;
             }
             else
             {
@@ -87,6 +91,9 @@ public class SwordFollow : MonoBehaviour
                 adjustLocationX = adjustDefaultX;
                 sr.flipX = false;
             }
+
+            // Rotates based on player rotation
+            transform.rotation = player.transform.rotation;
         }
     }
 }
