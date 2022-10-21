@@ -160,17 +160,13 @@ public class PlayerMovement : MonoBehaviour
             // }
 
             // sprinting
-            if (trotting && !isSprinting)
+            if (trotting && !isSprinting && Input.GetButton("Sprint") && stamina >= minStamina && canResprint)
             {
-                if ((Input.GetButton("Sprint") && canResprint && stamina >= minStamina) || Input.GetButtonDown("Sprint"))
-                {
-                    isSprinting = true;
-                    if (!isJumping)
-                        anim.SetTrigger("start_sprint");
-                }
-            }
-
-            if (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0)
+                isSprinting = true;
+                if (!isJumping)
+                    anim.SetTrigger("start_sprint");
+            }      
+            if (Input.GetButtonUp("Sprint") || moveX == 0 || rb.velocity.x == 0 || stamina <= 0)
             {
                 isSprinting = false;
                 anim.ResetTrigger("start_sprint");
