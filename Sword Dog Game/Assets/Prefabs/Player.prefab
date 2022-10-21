@@ -229,6 +229,7 @@ MonoBehaviour:
   isJumping: 0
   isFalling: 0
   isSprinting: 0
+  canResprint: 0
   speed: 4
   whatIsGround:
     serializedVersion: 2
@@ -246,6 +247,9 @@ MonoBehaviour:
   invincible: 0
   onlyRotateWhenGrounded: 1
   landAnimTime: 1.25
+  stamina: 6
+  maxStamina: 6
+  minStamina: 1
 --- !u!61 &6300512340327299634
 BoxCollider2D:
   m_ObjectHideFlags: 0
