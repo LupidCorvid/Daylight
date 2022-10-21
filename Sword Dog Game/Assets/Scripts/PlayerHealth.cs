@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
             // TODO this code is absolutely horrible, in the future we will prob want an instance variable reference to the sword object or to do this in swordfollow
             FindObjectOfType<SwordFollow>().GetComponent<SimpleFlash>().Flash(1f, 3, true);
             GetComponent<SimpleFlash>().Flash(1f, 3, true);
-            GetComponent<TimeStop>().StopTimeDefault();
+            GetComponent<TimeStop>().StopTime();
             UpdateHealth();
         }
     }

@@ -4,57 +4,43 @@ using UnityEngine;
 
 public class TimeStop : MonoBehaviour
 {
-    private float Speed;
-    private bool RestoreTime;
 
-    // Start is called before the first frame update
-    void Start()
+    public float lastStopTime = 0;
+    float stopTimeDuration = .5f;
+
+    public static float regularTimeSpeed = 1;
+
+    public float lastReductionAmount = 0.9f;
+
+    float regularFixedDeltaTime;
+
+    private void Awake()
     {
-        RestoreTime = false;
+        regularTimeSpeed = Time.timeScale;
+        //Time.fixedDeltaTime = regularTimeSpeed;
+        regularFixedDeltaTime = Time.fixedDeltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (RestoreTime)
-        {
-            if (Time.timeScale < 1f)
-            {
-                Time.timeScale += Time.deltaTime * Speed;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-                RestoreTime = false;
-            }
-        }
-    }
-
-    public void StopTime(float ChangeTime, int RestoreSpeed, float Delay)
-    {
-        Speed = RestoreSpeed;
-
-        if (Delay > 0)
-        {
-            StopCoroutine(StartTimeAgain(Delay));
-            StartCoroutine(StartTimeAgain(Delay));
-        }
+        if (stopTimeDuration == 0 || stopTimeDuration + lastStopTime < Time.time)
+            Time.timeScale = regularTimeSpeed;
         else
         {
-            RestoreTime = true;
+            float scalar = Mathf.Lerp(regularTimeSpeed - (lastReductionAmount * regularTimeSpeed), regularTimeSpeed, (Time.time - lastStopTime) / stopTimeDuration);
+            Time.timeScale = Mathf.Clamp(scalar, 0, 1);
+            Time.fixedDeltaTime = Mathf.Clamp(scalar, 0, 1) * regularFixedDeltaTime;
         }
-
-        Time.timeScale = ChangeTime;
+            
     }
 
-    public void StopTimeDefault()
+    public void StopTime(float amount = .45f, float length = .5f)
     {
-        StopTime(0.05f, 100, 0.2f);
-    }
-
-    IEnumerator StartTimeAgain(float amt)
-    {
-        yield return new WaitForSecondsRealtime(amt);
-        RestoreTime = true;
+        if (length >= stopTimeDuration - (Time.time - lastStopTime) || lastReductionAmount < amount || stopTimeDuration + lastStopTime < Time.time)
+        {
+            lastStopTime = Time.time;
+            lastReductionAmount = amount;
+            stopTimeDuration = length;
+        }
     }
 }
