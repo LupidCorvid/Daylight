@@ -7763,29 +7763,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526745629}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1537528841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 887462815160828151, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
-  m_PrefabInstance: {fileID: 1915910063}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1570420154 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6022121546034609200, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
-  m_PrefabInstance: {fileID: 1915910063}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1570420158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570420154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82731c262290f91478c3d8dfa5de8fba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillAmount: 1
 --- !u!1 &1578129665
 GameObject:
   m_ObjectHideFlags: 0
@@ -9101,10 +9078,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2137076464, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
-      propertyPath: myHealthBar
-      value: 
-      objectReference: {fileID: 1537528841}
     - target: {fileID: 1081677785711053259, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9311,6 +9284,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277294204025221987, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

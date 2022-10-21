@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    public static GameObject instance, healthBar;
+    public static GameObject instance, HUD;
     public static List<Heart> hearts;
     public List<Heart> myHearts;
-    public GameObject myHealthBar;
-    private static float healthBarScale = 1.0f;
+    public GameObject myHUD;
+    private static float HUDscale = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class CanvasManager : MonoBehaviour
         {
             instance = gameObject;
             hearts = myHearts;
-            healthBar = myHealthBar;
+            HUD = myHUD;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -30,16 +30,16 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.transform.localScale = Vector3.Lerp(healthBar.transform.localScale, new Vector3(healthBarScale, healthBarScale, healthBarScale), 0.05f);
+        HUD.transform.localScale = Vector3.Lerp(HUD.transform.localScale, new Vector3(HUDscale, HUDscale, HUDscale), 0.05f);
     }
 
-    public static void HideHealth()
+    public static void HideHUD()
     {
-        healthBarScale = 0.0f;
+        HUDscale = 0.0f;
     }
 
-    public static void ShowHealth()
+    public static void ShowHUD()
     {
-        healthBarScale = 1.0f;
+        HUDscale = 1.0f;
     }
 }

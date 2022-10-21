@@ -7,7 +7,6 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     public int attackCombo = 0;
     public bool isAttacking = false, canAttack = true;
-    [SerializeField] private float cooldownLength = 0.5f;
     public float attackCooldown = 0.0f;
 
     // Start is called before the first frame update
@@ -59,7 +58,6 @@ public class PlayerAttack : MonoBehaviour
     {
         attackCombo = 0;
         isAttacking = false;
-        // attackCooldown = cooldownLength;
         for (int i = 1; i <= 3; i++)
         {
             anim.ResetTrigger("attack" + i);
