@@ -6,8 +6,8 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioMixer mixer, sfx;
-    public AudioMixerGroup mixerGroup;
+    public AudioMixer mixer;
+    public AudioMixerGroup music, sounds;
     public AudioClip currentSong;
     public GameArea currentArea;
 
@@ -93,7 +93,7 @@ public class AudioManager : MonoBehaviour
             s.loop = false;
             s.playOnAwake = false;
             s.volume = 0.0f;
-            s.outputAudioMixerGroup = mixerGroup;
+            s.outputAudioMixerGroup = music;
         }
 
         foreach (AudioSource s in BGM2)
@@ -101,7 +101,7 @@ public class AudioManager : MonoBehaviour
             s.loop = false;
             s.playOnAwake = false;
             s.volume = 0.0f;
-            s.outputAudioMixerGroup = mixerGroup;
+            s.outputAudioMixerGroup = music;
         }
     }
 
@@ -188,9 +188,9 @@ public class AudioManager : MonoBehaviour
 
         // Scene specific SFX effects
         if (currentArea == GameArea.CAVE)
-            sfx.SetFloat("Reverb", -4f);
+            mixer.SetFloat("Reverb", -4f);
         else
-            sfx.SetFloat("Reverb", -10000f);
+            mixer.SetFloat("Reverb", -10000f);
     }
 
     public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)
