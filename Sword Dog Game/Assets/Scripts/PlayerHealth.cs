@@ -9,11 +9,14 @@ public class PlayerHealth : MonoBehaviour
     public int health = 8;
     public static bool dead;
     private float iFrameTime = 1.0f, lastDamaged = 0f;
+    private Animator anim;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,10 @@ public class PlayerHealth : MonoBehaviour
     {
         health += amount;
         UpdateHealth();
+        if (dead)
+        {
+            anim.SetTrigger("wakeup");
+        }
     }
 
     // TODO something more fancy later for deaths
@@ -75,8 +82,13 @@ public class PlayerHealth : MonoBehaviour
     {
         health = 0;
         dead = true;
-        var rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(0, rb.velocity.y);
-        GetComponent<Animator>().SetTrigger("death");
+        anim.SetTrigger("death");
+    }
+
+    public void WakeUp()
+    {
+        dead = false;
+        anim.ResetTrigger("wakeup");
     }
 }
