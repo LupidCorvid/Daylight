@@ -66,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
                 FindObjectOfType<SwordFollow>().GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<TimeStop>().StopTime();
+                StartCoroutine(AudioManager.instance.Muffle());
                 UpdateHealth();
             }
         }

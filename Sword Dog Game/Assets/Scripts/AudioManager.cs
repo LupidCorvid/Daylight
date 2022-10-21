@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     private bool firstSet = true;
     private bool firstSongPlayed = false;
 
+    public AudioMixerSnapshot normal, hurt;
+
     /// <summary>
     /// List of all different game areas that may have different sets of music
     /// </summary>
@@ -392,4 +394,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public IEnumerator Muffle()
+    {
+        hurt.TransitionTo(0.1f);
+        yield return new WaitForSeconds(1f);
+        normal.TransitionTo(1f);
+    }
 }
