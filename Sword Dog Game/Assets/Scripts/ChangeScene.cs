@@ -36,7 +36,7 @@ public class ChangeScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!changingScene && collision.gameObject.tag == "Player" && !PlayerMovement.controller.dead && !PlayerMovement.controller.resetting && !GameSaver.loading)
+        if (!changingScene && collision.gameObject.tag == "Player" && !PlayerHealth.dead && !PlayerMovement.controller.resetting && !GameSaver.loading)
         {
             StartCoroutine(LoadNextScene());
         }

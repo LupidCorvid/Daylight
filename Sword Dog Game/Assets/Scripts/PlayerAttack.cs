@@ -19,36 +19,39 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float yInput = Input.GetAxisRaw("Vertical");
+        if (!PlayerHealth.dead) // && not paused(?)
+        {
+            float yInput = Input.GetAxisRaw("Vertical");
 
-        // attack cooldown
-        if (attackCooldown > 0)
-        {
-            canAttack = false;
-            attackCooldown -= Time.deltaTime;
-        }
-        if (attackCooldown <= 0 && !isAttacking)
-        {
-            attackCombo = 0;
-            canAttack = true;
-            attackCooldown = 0;
-        }
-
-        // attack input detection + combo tracking
-        if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3)
-        {
-            // set attack direction + context
-            if (!isAttacking)
+            // attack cooldown
+            if (attackCooldown > 0)
             {
-                anim.SetFloat("attack_direction", yInput);
+                canAttack = false;
+                attackCooldown -= Time.deltaTime;
             }
-            isAttacking = true;
-            attackCombo++;
-            anim.SetTrigger("attack" + attackCombo);
+            if (attackCooldown <= 0 && !isAttacking)
+            {
+                attackCombo = 0;
+                canAttack = true;
+                attackCooldown = 0;
+            }
+
+            // attack input detection + combo tracking
+            if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3)
+            {
+                // set attack direction + context
+                if (!isAttacking)
+                {
+                    anim.SetFloat("attack_direction", yInput);
+                }
+                isAttacking = true;
+                attackCombo++;
+                anim.SetTrigger("attack" + attackCombo);
+            }
+            
+            // perhaps useful in the future for preventing sprint/jump from interrupting attack
+            anim.SetBool("attacking", isAttacking);
         }
-        
-        // perhaps useful in the future for preventing sprint/jump from interrupting attack
-        anim.SetBool("attacking", isAttacking);
     }
 
     // stops attacks -- called from animation events in return states

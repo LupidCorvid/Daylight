@@ -18,7 +18,7 @@ public class GameSaver : MonoBehaviour
 
     public void SaveGame()
     {
-        if (!PlayerMovement.controller.dead && !PlayerMovement.controller.resetting && !loading) {
+        if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
             SaveData data = new SaveData();
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
@@ -32,7 +32,7 @@ public class GameSaver : MonoBehaviour
         if (!loading) { // load game can only happen from menu
             if (PlayerMovement.controller == null) {
                 StartCoroutine(LoadSaveFile());
-            } else if (!PlayerMovement.controller.resetting && !PlayerMovement.controller.dead) {
+            } else if (!PlayerMovement.controller.resetting && !PlayerHealth.dead) {
                 StartCoroutine(LoadSaveFile());
             }
         }
