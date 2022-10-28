@@ -16,6 +16,7 @@ public class SwordFollow : MonoBehaviour
 
     private PlayerMovement pmScript;
     bool triggeredPMScript;
+    public GameObject tip;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class SwordFollow : MonoBehaviour
         
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
+            rb.isKinematic = false;
             rb.gravityScale = 0;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -92,15 +94,15 @@ public class SwordFollow : MonoBehaviour
                 adjustDefaultX = Mathf.Lerp(adjustDefaultX, -0.2f, 0.4f);
             }
             
-            if (pmScript.facingRight == false)
+            if (!pmScript.facingRight)
             {
                 adjustLocationX = -adjustDefaultX;
-                sr.flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
             }
             else
             {
                 adjustLocationX = adjustDefaultX;
-                sr.flipX = false;
+                transform.localScale = new Vector3(1, 1, 1);
             }
         }
         else
@@ -108,6 +110,14 @@ public class SwordFollow : MonoBehaviour
             rb.gravityScale = 5;
             rb.constraints = RigidbodyConstraints2D.None;
             rb.AddTorque((sr.flipX) ? -5f : 5f);
+        }
+    }
+
+    public void Freeze()
+    {
+        if (PlayerHealth.dead)
+        {
+            rb.isKinematic = true;
         }
     }
 }
