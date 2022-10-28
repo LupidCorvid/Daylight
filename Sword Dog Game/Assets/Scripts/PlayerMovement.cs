@@ -207,6 +207,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
+            isSprinting = false;
+            isJumping = false;
+            sprintSpeedMultiplier = 1.0f;
+            jumpSpeedMultiplier = 1.0f;
         }
     }
 
