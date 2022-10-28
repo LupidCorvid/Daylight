@@ -27,18 +27,7 @@ public class RockLobberAI : BaseAI
             return 1 / enemyBase.attackSpeed;
         }
     }
-    public float moveSpeed
-    {
-        get
-        {
-            return enemyBase.moveSpeed;
-        }
-        set
-        {
-            enemyBase.moveSpeed = value;
-        }
 
-    }
 
     public RockLobberAI(EnemyBase baseScript, GameObject rockPrefab) : base(baseScript)
     {
