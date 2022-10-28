@@ -18,15 +18,14 @@ public class SwordTip : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            // do damage here
+            // TODO do damage here
         }
         else if (other.gameObject.tag == "Ground")
         {
-            Debug.Log("ground");
             sword.Freeze();
         }
     }

@@ -109,7 +109,7 @@ public class SwordFollow : MonoBehaviour
         {
             rb.gravityScale = 5;
             rb.constraints = RigidbodyConstraints2D.None;
-            rb.AddTorque((sr.flipX) ? -5f : 5f);
+            rb.AddTorque(transform.localScale.x * 5f);
         }
     }
 
@@ -118,6 +118,8 @@ public class SwordFollow : MonoBehaviour
         if (PlayerHealth.dead)
         {
             rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0f;
         }
     }
 }

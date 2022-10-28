@@ -22,6 +22,19 @@ public class BaseAI
         }
     }
 
+    public float moveSpeed
+    {
+        get
+        {
+            return enemyBase.moveSpeed;
+        }
+        set
+        {
+            enemyBase.moveSpeed = value;
+        }
+
+    }
+
     public Transform target;
 
     public Rigidbody2D rb;
