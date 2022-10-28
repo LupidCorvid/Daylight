@@ -6,7 +6,7 @@ public class RockLobberAI : BaseAI
 {
     public GameObject rockProjectile;
 
-    public float projectileSpeed = 12;
+    public float projectileSpeed = 17;
 
 
     public AIstate state;
@@ -78,7 +78,7 @@ public class RockLobberAI : BaseAI
     {
         Vector2 relTar = target.position - transform.position;
         float projSpeed = projectileSpeed;
-        float grav = rb.gravityScale * 9.8f;
+        float grav = rockProjectile.GetComponent<Rigidbody2D>().gravityScale * 9.8f;
         float angle;
         angle = Mathf.Atan((Mathf.Sqrt(Mathf.Pow(projSpeed, 4) - grav * (grav * Mathf.Pow(relTar.x, 2) + 2 * relTar.y
                           * Mathf.Pow(projSpeed, 2))) + Mathf.Pow(projSpeed, 2)) / (grav * relTar.x));
