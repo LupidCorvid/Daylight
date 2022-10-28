@@ -110,6 +110,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (timeSinceJumpPressed < 1f)
+            timeSinceJumpPressed += Time.deltaTime;
+            
         if (!PlayerHealth.dead) // && not paused(?)
         {
             // remember previous movement input
@@ -523,9 +526,6 @@ public class PlayerMovement : MonoBehaviour
                 holdingJump = true;
             }
         }
-
-        if (timeSinceJumpPressed < 1f)
-            timeSinceJumpPressed += Time.deltaTime;
 
         // incorporates coyote time and input buffering
         if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping)
