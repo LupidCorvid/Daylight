@@ -22,7 +22,7 @@ public class SwordTip : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            // do damage here
+            // TODO do damage here
         }
         else if (other.gameObject.tag == "Ground")
         {
