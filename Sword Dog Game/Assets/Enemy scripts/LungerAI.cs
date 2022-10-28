@@ -48,7 +48,7 @@ public class LungerAI : BaseAI
             {
                 rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
             }
-            if(Mathf.Abs(target.transform.position.y - transform.position.y) < 2 && Mathf.Abs(target.transform.position.x - transform.position.x) < 10)
+            if(Mathf.Abs(target.transform.position.y - transform.position.y) < 2 && Mathf.Abs(target.position.x - transform.position.x) < 10 && Mathf.Abs(target.position.x - transform.position.x) > 1.5f)
             {
                 if(lastLunge + cooldown < Time.time)
                 {
@@ -60,16 +60,23 @@ public class LungerAI : BaseAI
         }
         else if (state == AIStates.charging)
         {
+            float strength = getLungeStrength();
+            if (float.IsNaN(strength) || Mathf.Abs(strength) > 35)
+            {
+                state = AIStates.moving;
+                return;
+            }
             rb.sharedMaterial = ((Lunger)enemyBase).friction;
+            rb.drag = 5;
             if (chargeStart + chargeTime > Time.time)
             {
                 state = AIStates.lunging;
                 Lunge();
-                state = AIStates.lunging;
             }
         }
         else if (state == AIStates.lunging)
         {
+            rb.drag = 0;
             if (Mathf.Abs(rb.velocity.x) < 1)
                 state = AIStates.moving;
         }
@@ -79,14 +86,19 @@ public class LungerAI : BaseAI
         float strength = getLungeStrength();
         if(!float.IsNaN(strength))
         {
-            rb.velocity = new Vector2(strength * Mathf.Cos(attackAngle), strength * Mathf.Sin(attackAngle));
+            int neg = 1;
+            if (target.transform.position.x - transform.position.x < 0)
+                neg = -1;
+            rb.velocity = new Vector2(strength * Mathf.Cos(attackAngle) * neg, strength * Mathf.Sin(attackAngle));
         }
     }
     public float getLungeStrength()
     {
         float grav = rb.gravityScale * 9.8f;
         //Adds some to the direction so that the enemy doesnt just stop on top of the player
-        Vector2 relTar = (target.transform.position - transform.position) * 1.5f;
+        Vector2 relTar = (target.transform.position - transform.position) * 1.25f;
+        if (relTar.x < 0)
+            relTar = new Vector2( relTar.x * -1, relTar.y);
         float strength = ((1.0f / Mathf.Cos(attackAngle)) * Mathf.Sqrt(((grav * Mathf.Pow(relTar.x, 2)/2)/(relTar.x * Mathf.Tan(attackAngle) - relTar.y))));
         return strength;
     }
