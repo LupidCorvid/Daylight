@@ -41,7 +41,7 @@ public class SwordFollow : MonoBehaviour
             triggeredPMScript = true;
         }
         
-        if(player != null && !PlayerHealth.dead)
+        if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
             rb.gravityScale = 0;
 
@@ -56,7 +56,17 @@ public class SwordFollow : MonoBehaviour
 
             //Moves
             swordPreviousLocation = transform.position;
-            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 2 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+            
+            if (!PlayerHealth.gettingUp)
+            {
+                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 2 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+                transform.rotation = player.transform.rotation;
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 4 * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation, 4 * Time.deltaTime);
+            }
 
             //Checks when to flip and adjust sprite
             
@@ -91,16 +101,10 @@ public class SwordFollow : MonoBehaviour
                 adjustLocationX = adjustDefaultX;
                 sr.flipX = false;
             }
-
-            // Rotates based on player rotation
-            transform.rotation = player.transform.rotation;
         }
-        else if (!PlayerHealth.gettingUp)
+        else
         {
             rb.gravityScale = 5;
-        }
-        else {
-            rb.gravityScale = -0.4f;
         }
     }
 }
