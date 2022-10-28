@@ -32,11 +32,11 @@ public class PlayerHealth : MonoBehaviour
         // TODO remove debug keybinds 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TakeDamage(10);
+            TakeDamage(1);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Heal(10);
+            Heal(1);
         }
     }
 
