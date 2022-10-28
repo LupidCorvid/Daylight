@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class BasicMoverAI : BaseAI
 {
+    public float moveSpeed
+    {
+        get
+        {
+            return enemyBase.moveSpeed;
+        }
+        set
+        {
+            enemyBase.moveSpeed = value;
+        }
+
+    }
+    public float maxSpeed = 20;
+
     enum states
     {
         attacking,
@@ -46,11 +60,13 @@ public class BasicMoverAI : BaseAI
     {
         if(target.x > transform.position.x)
         {
-            rb.AddForce(Vector2.right * Time.deltaTime * 1000);
+            if(rb.velocity.x < maxSpeed)
+                rb.AddForce(Vector2.right * Time.deltaTime * 500 * moveSpeed);
         }
         else
         {
-            rb.AddForce(Vector2.left * Time.deltaTime * 1000);
+            if(rb.velocity.x > -maxSpeed)
+                rb.AddForce(Vector2.left * Time.deltaTime * 500 * moveSpeed);
         }
         if(target.y - transform.position.y > 4)//Make sure is grounded 
         {
