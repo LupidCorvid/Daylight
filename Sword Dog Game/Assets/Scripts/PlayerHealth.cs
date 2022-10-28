@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     private int maxHealth = 8;
     public int health = 8;
-    public static bool dead;
+    public static bool dead, gettingUp;
     private float iFrameTime = 1.0f, lastDamaged = 0f;
     private Animator anim;
     private Rigidbody2D rb;
@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dead = false;
+        gettingUp = false;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -30,11 +32,11 @@ public class PlayerHealth : MonoBehaviour
         // TODO remove debug keybinds 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TakeDamage(1);
+            TakeDamage(10);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Heal(1);
+            Heal(10);
         }
     }
 
@@ -93,7 +95,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void WakeUp()
     {
+        gettingUp = false;
         dead = false;
         anim.ResetTrigger("wakeup");
+    }
+
+    public void GettingUp()
+    {
+        gettingUp = true;
     }
 }

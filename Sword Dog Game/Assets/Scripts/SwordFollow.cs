@@ -35,14 +35,16 @@ public class SwordFollow : MonoBehaviour
     void FixedUpdate()
     {
         //Accesses PlayerMovement script ONCE
-        if(triggeredPMScript == false)
+        if(!triggeredPMScript)
         {
             pmScript = player.GetComponent<PlayerMovement>();
             triggeredPMScript = true;
         }
         
-        if(player != null)
+        if(player != null && !PlayerHealth.dead)
         {
+            rb.gravityScale = 0;
+
             //Assigns target transform values
             pmScript = player.GetComponent<PlayerMovement>();
 
@@ -50,7 +52,7 @@ public class SwordFollow : MonoBehaviour
             playerLocation = player.transform.position;
 
             var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
-            swordTargetLocation = player.transform.position + offset;
+            swordTargetLocation = playerLocation + offset;
 
             //Moves
             swordPreviousLocation = transform.position;
@@ -92,6 +94,13 @@ public class SwordFollow : MonoBehaviour
 
             // Rotates based on player rotation
             transform.rotation = player.transform.rotation;
+        }
+        else if (!PlayerHealth.gettingUp)
+        {
+            rb.gravityScale = 5;
+        }
+        else {
+            rb.gravityScale = -0.4f;
         }
     }
 }
