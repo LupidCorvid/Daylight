@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
-            
+
         if (!PlayerHealth.dead) // && not paused(?)
         {
             // remember previous movement input
@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (stamina > 0)
                     stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
-                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.05f);
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
             }
             else
             {
@@ -207,6 +207,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
+            isSprinting = false;
+            isJumping = false;
+            sprintSpeedMultiplier = 1.0f;
+            jumpSpeedMultiplier = 1.0f;
         }
     }
 
@@ -416,7 +420,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         bool onLedge = false;
-        //Makessure that it is not reading the slope of the underside of a slope by not taking abs val. 
+        //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;

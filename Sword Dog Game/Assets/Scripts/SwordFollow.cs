@@ -44,6 +44,7 @@ public class SwordFollow : MonoBehaviour
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
             rb.gravityScale = 0;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             //Assigns target transform values
             pmScript = player.GetComponent<PlayerMovement>();
@@ -105,6 +106,8 @@ public class SwordFollow : MonoBehaviour
         else
         {
             rb.gravityScale = 5;
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.AddTorque((sr.flipX) ? -5f : 5f);
         }
     }
 }
