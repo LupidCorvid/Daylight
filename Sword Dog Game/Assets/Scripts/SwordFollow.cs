@@ -35,14 +35,16 @@ public class SwordFollow : MonoBehaviour
     void FixedUpdate()
     {
         //Accesses PlayerMovement script ONCE
-        if(triggeredPMScript == false)
+        if(!triggeredPMScript)
         {
             pmScript = player.GetComponent<PlayerMovement>();
             triggeredPMScript = true;
         }
         
-        if(player != null)
+        if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
+            rb.gravityScale = 0;
+
             //Assigns target transform values
             pmScript = player.GetComponent<PlayerMovement>();
 
@@ -50,11 +52,21 @@ public class SwordFollow : MonoBehaviour
             playerLocation = player.transform.position;
 
             var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
-            swordTargetLocation = player.transform.position + offset;
+            swordTargetLocation = playerLocation + offset;
 
             //Moves
             swordPreviousLocation = transform.position;
-            transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 2 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+            
+            if (!PlayerHealth.gettingUp)
+            {
+                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 2 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
+                transform.rotation = player.transform.rotation;
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 4 * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation, 4 * Time.deltaTime);
+            }
 
             //Checks when to flip and adjust sprite
             
@@ -89,9 +101,10 @@ public class SwordFollow : MonoBehaviour
                 adjustLocationX = adjustDefaultX;
                 sr.flipX = false;
             }
-
-            // Rotates based on player rotation
-            transform.rotation = player.transform.rotation;
+        }
+        else
+        {
+            rb.gravityScale = 5;
         }
     }
 }

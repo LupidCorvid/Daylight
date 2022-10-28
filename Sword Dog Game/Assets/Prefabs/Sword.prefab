@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2591983749293105128}
   - component: {fileID: 2591983749293105045}
   - component: {fileID: 4726395057258711020}
-  m_Layer: 0
+  - component: {fileID: 1242605522}
+  m_Layer: 8
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2591983749293105047
 SpriteRenderer:
@@ -138,3 +139,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!60 &1242605522
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591983749293105129}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.7, y: 0.74}
+    newSize: {x: 1.7, y: 0.74}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.82, y: -0.11}
+      - {x: 0.83, y: -0.049999997}
+      - {x: 0.83, y: 0.089999996}
+      - {x: 0.74, y: 0.13}
+      - {x: 0.47, y: 0.34}
+      - {x: 0.39999998, y: 0.35999998}
+      - {x: 0.31, y: 0.35999998}
+      - {x: 0.29, y: 0.21}
+      - {x: -0.62, y: 0.19}
+      - {x: -0.84, y: 0.03}
+      - {x: -0.84999996, y: 0}
+      - {x: -0.84999996, y: -0.04}
+      - {x: -0.59999996, y: -0.19999999}
+      - {x: -0.26999998, y: -0.22999999}
+      - {x: 0.22999999, y: -0.22}
+      - {x: 0.29999998, y: -0.35999998}
+      - {x: 0.41, y: -0.35999998}
+      - {x: 0.51, y: -0.32999998}
+      - {x: 0.56, y: -0.26999998}
+      - {x: 0.59999996, y: -0.19}
+      - {x: 0.79999995, y: -0.13}
+  m_UseDelaunayMesh: 0
