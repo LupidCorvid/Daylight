@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class BasicMoverAI : BaseAI
 {
-    public float moveSpeed
-    {
-        get
-        {
-            return enemyBase.moveSpeed;
-        }
-        set
-        {
-            enemyBase.moveSpeed = value;
-        }
 
-    }
     public float maxSpeed = 20;
 
     enum states

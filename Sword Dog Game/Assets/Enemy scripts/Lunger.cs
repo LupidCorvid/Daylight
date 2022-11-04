@@ -6,6 +6,7 @@ public class Lunger : EnemyBase
 {
     public PhysicsMaterial2D slippery;
     public PhysicsMaterial2D friction;
+    public PhysicsMaterial2D stopping;
 
     public void Awake()
     {

@@ -17,6 +17,9 @@ public class LungerAI : BaseAI
     public float chargeTime = 1;
     public float chargeStart;
 
+    public bool waitForFullStop = true;
+
+
     public float cooldown
     {
         get
@@ -29,9 +32,12 @@ public class LungerAI : BaseAI
 
     public float lastLunge;
 
+    public Collider2D cldr;
+
     public LungerAI(EnemyBase enemyBase) : base(enemyBase)
     {
         state = AIStates.moving;
+        cldr = enemyBase.GetComponent<Collider2D>();
     }
 
     public override void Update()
@@ -39,36 +45,48 @@ public class LungerAI : BaseAI
         base.Update();
         if(state == AIStates.moving)
         {
-            rb.sharedMaterial = ((Lunger)enemyBase).slippery;
+            cldr.sharedMaterial = ((Lunger)enemyBase).slippery;
             if (target.transform.position.x < transform.position.x)
             {
-                rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
+                //rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
+                moveDirection(Vector2.left);
             }
             else if (target.transform.position.x > transform.position.x)
             {
-                rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
+                //rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
+                moveDirection(Vector2.right);
             }
             if(Mathf.Abs(target.transform.position.y - transform.position.y) < 2 && Mathf.Abs(target.position.x - transform.position.x) < 10 && Mathf.Abs(target.position.x - transform.position.x) > 1.5f)
             {
                 if(lastLunge + cooldown < Time.time)
                 {
                     state = AIStates.charging;
-                    chargeStart = Time.time;
+                    //chargeStart = Time.time;
+                    chargeStart = 25565.7777f;
                 }
             }
 
         }
         else if (state == AIStates.charging)
         {
+            //Maybe should be moved after trajectory check
+            cldr.sharedMaterial = ((Lunger)enemyBase).stopping;
+            if (chargeStart == 25565.7777f)
+            {
+                if (Mathf.Abs(rb.velocity.x) > .05f)
+                    return;
+                chargeStart = Time.time;
+            }
             float strength = getLungeStrength();
             if (float.IsNaN(strength) || Mathf.Abs(strength) > 35)
             {
                 state = AIStates.moving;
                 return;
             }
-            rb.sharedMaterial = ((Lunger)enemyBase).friction;
+            //cldr.sharedMaterial = ((Lunger)enemyBase).stopping;
             rb.drag = 5;
-            if (chargeStart + chargeTime > Time.time)
+            //Also check for grounded once that is put into enemyBase
+            if (chargeStart + chargeTime > Time.time && (!waitForFullStop || rb.velocity.x < .05f))
             {
                 state = AIStates.lunging;
                 Lunge();
@@ -102,5 +120,13 @@ public class LungerAI : BaseAI
         float strength = ((1.0f / Mathf.Cos(attackAngle)) * Mathf.Sqrt(((grav * Mathf.Pow(relTar.x, 2)/2)/(relTar.x * Mathf.Tan(attackAngle) - relTar.y))));
         return strength;
     }
+
+    public void moveDirection(Vector2 relDirection)
+    {
+        Vector3 velocity = rb.velocity;
+        rb.velocity = Vector3.SmoothDamp(rb.velocity, relDirection * moveSpeed, ref velocity, .05f);
+    }
+
+    
 
 }
