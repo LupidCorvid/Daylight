@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class TextWave : TextEffect
+public class TextWiggle : TextEffect
 {
     public float intensity = 1;
     public float speed = 1;
-    public float waveLength = 1;
 
-    public TextWave(float intensity = 1, float speed = 1, float waveLength = 1)
+    public TextWiggle(int intensity = 1, int speed = 1)
     {
         this.intensity = intensity;
         this.speed = speed;
-        this.waveLength = waveLength;
     }
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
@@ -22,7 +20,7 @@ public class TextWave : TextEffect
         if (endPoint == -1 || endPoint > textMesh.characterCount)
             endPoint = textMesh.characterCount;
 
-        for(int i = start; i < endPoint; i++)
+        for (int i = start; i < endPoint; i++)
         {
             //Sets up indexes needed to find appropriate vertices
             TMP_CharacterInfo info = textMesh.characterInfo[i];
@@ -30,8 +28,7 @@ public class TextWave : TextEffect
             int vertexIndex = info.vertexIndex;
 
             //Calculates offset
-            float offset = Mathf.Sin(info.vertex_BL.position.x/waveLength + (Time.time * speed)) * intensity;
-            Vector3 offsetVector = new Vector3(0, offset, 0);
+            Vector3 offsetVector = new Vector3(((Mathf.PerlinNoise(Time.time * speed, 0 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, ((Mathf.PerlinNoise(Time.time * speed, 50 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, 0);
 
             //Applies changes made to the vertices
             textMesh.meshInfo[index].vertices[vertexIndex + 0] += offsetVector;

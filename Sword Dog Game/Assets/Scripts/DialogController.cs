@@ -41,7 +41,9 @@ public class DialogController : MonoBehaviour
     void Awake()
     {
         main = this;
-        textEffects.Add(new TextWave(5, 1, 10));
+        textEffects.Add(new TextWave(5, 5, 50));
+        textEffects.Add(new TextShake(1));
+        textEffects.Add(new TextWiggle(1, 5));
         textDisplay.ForceMeshUpdate();
 
         textDisplay.OnPreRenderText += applyTextEffects;
