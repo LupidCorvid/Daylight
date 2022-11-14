@@ -7,11 +7,13 @@ public class TextWave : TextEffect
 {
     public float intensity = 1;
     public float speed = 1;
+    public float waveLength = 1;
 
-    public TextWave(float intensity, float speed)
+    public TextWave(float intensity = 1, float speed = 1, float waveLength = 1)
     {
         this.intensity = intensity;
         this.speed = speed;
+        this.waveLength = waveLength;
     }
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
@@ -25,14 +27,9 @@ public class TextWave : TextEffect
             int index = info.materialReferenceIndex;
             int vertexIndex = info.vertexIndex;
 
-            float offset = Mathf.Sin(info.vertex_BL.position.x + (Time.time * speed)) * intensity;
+            float offset = Mathf.Sin(info.vertex_BL.position.x/waveLength + (Time.time * speed)) * intensity;
 
             Vector3 offsetVector = new Vector3(0, offset, 0);
-            //offsetVector = Vector3.up;
-            //textMesh.mesh.vertices[info.vertexIndex].y += offset;
-            //textMesh.mesh.vertices[info.vertexIndex + 1].y += offset;
-            //textMesh.mesh.vertices[info.vertexIndex + 2].y += offset;
-            //textMesh.mesh.vertices[info.vertexIndex + 3].y += offset;
             textMesh.meshInfo[index].vertices[vertexIndex + 0] += offsetVector;
             textMesh.meshInfo[index].vertices[vertexIndex + 1] += offsetVector;
             textMesh.meshInfo[index].vertices[vertexIndex + 2] += offsetVector;

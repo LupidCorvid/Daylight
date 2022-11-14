@@ -38,15 +38,11 @@ public class DialogController : MonoBehaviour
         }
     }
 
-    Vector3[] origVertices;
-
     void Awake()
     {
         main = this;
-        textEffects.Add(new TextWave(5, 1));
+        textEffects.Add(new TextWave(5, 1, 10));
         textDisplay.ForceMeshUpdate();
-
-        origVertices = textDisplay.mesh.vertices;
 
         textDisplay.OnPreRenderText += applyTextEffects;
     }
@@ -66,12 +62,6 @@ public class DialogController : MonoBehaviour
             //origVertices = textDisplay.mesh.vertices;
             
         }
-    }
-
-
-    private void FixedUpdate()
-    {
-        //applyTextEffects();
     }
 
     public void finishOpen()
@@ -155,21 +145,6 @@ public class DialogController : MonoBehaviour
         {
             textEffects[i].ApplyEffectToMesh(info);
         }
-        //if (origVertices.Length == textDisplay.mesh.vertices.Length)
-        //{
-        //    //textDisplay.mesh.SetVertices(origVertices);
-        //    //textDisplay.ForceMeshUpdate();
-        //    Vector3[] partialVertices = new Vector3[origVertices.Length];
-        //    origVertices.CopyTo(partialVertices, 0);
-
-        //    for (int i = 0; i < textEffects.Count; i++)
-        //    {
-        //        textEffects[i].ApplyEffectToMesh(info);
-        //    }
-
-        //    //textDisplay.mesh.SetVertices(partialVertices);
-        //    //textDisplay.canvasRenderer.SetMesh(textDisplay.mesh);
-        //}
     }
 
 
