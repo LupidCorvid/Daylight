@@ -43,10 +43,12 @@ public class DialogController : MonoBehaviour
     void Awake()
     {
         main = this;
-        textEffects.Add(new TextWave(.25f, 1));
+        textEffects.Add(new TextWave(5, 1));
         textDisplay.ForceMeshUpdate();
 
         origVertices = textDisplay.mesh.vertices;
+
+        textDisplay.OnPreRenderText += applyTextEffects;
     }
 
     // Update is called once per frame
@@ -57,13 +59,19 @@ public class DialogController : MonoBehaviour
         if (reading)
         {
             textDisplay.text = source.read();
-            origVertices = textDisplay.mesh.vertices;
+            textDisplay.ForceMeshUpdate();
+            //origVertices = textDisplay.mesh.vertices;
+            //applyTextEffects();
+            //textDisplay.ForceMeshUpdate();
+            //origVertices = textDisplay.mesh.vertices;
+            
         }
     }
 
+
     private void FixedUpdate()
     {
-        applyTextEffects();
+        //applyTextEffects();
     }
 
     public void finishOpen()
@@ -141,15 +149,27 @@ public class DialogController : MonoBehaviour
         source?.receiveButtonInput();
     }
 
-    public void applyTextEffects()
+    public void applyTextEffects(TMP_TextInfo info)
     {
-        textDisplay.mesh.SetVertices(origVertices);
-
         for (int i = 0; i < textEffects.Count; i++)
         {
-            textEffects[i].ApplyEffectToMesh(textDisplay);
+            textEffects[i].ApplyEffectToMesh(info);
         }
-        textDisplay.canvasRenderer.SetMesh(textDisplay.mesh);
+        //if (origVertices.Length == textDisplay.mesh.vertices.Length)
+        //{
+        //    //textDisplay.mesh.SetVertices(origVertices);
+        //    //textDisplay.ForceMeshUpdate();
+        //    Vector3[] partialVertices = new Vector3[origVertices.Length];
+        //    origVertices.CopyTo(partialVertices, 0);
+
+        //    for (int i = 0; i < textEffects.Count; i++)
+        //    {
+        //        textEffects[i].ApplyEffectToMesh(info);
+        //    }
+
+        //    //textDisplay.mesh.SetVertices(partialVertices);
+        //    //textDisplay.canvasRenderer.SetMesh(textDisplay.mesh);
+        //}
     }
 
 
