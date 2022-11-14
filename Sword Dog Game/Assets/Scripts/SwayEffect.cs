@@ -80,7 +80,14 @@ public class SwayEffect : MonoBehaviour
     {
         meshFilter.sharedMesh = originalMesh;
         meshFilter.sharedMesh.SetVertices(originalMesh.vertices);
-        Mesh.ApplyAndDisposeWritableMeshData(originalSnapshot, meshFilter.sharedMesh);
+        try
+        {
+            Mesh.ApplyAndDisposeWritableMeshData(originalSnapshot, meshFilter.sharedMesh);
+        }
+        catch
+        {
+            //Only here to prevent having to stop debugging every time this recompiles when running
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

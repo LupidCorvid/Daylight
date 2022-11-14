@@ -24,7 +24,7 @@ public class DialogController : MonoBehaviour
 
     public bool readWhenOpen = false;
 
-    
+    public List<TextEffect> textEffects = new List<TextEffect>();
 
     public string text
     {
@@ -38,9 +38,15 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    Vector3[] origVertices;
+
     void Awake()
     {
         main = this;
+        textEffects.Add(new TextWave(.25f, 1));
+        textDisplay.ForceMeshUpdate();
+
+        origVertices = textDisplay.mesh.vertices;
     }
 
     // Update is called once per frame
@@ -51,8 +57,15 @@ public class DialogController : MonoBehaviour
         if (reading)
         {
             textDisplay.text = source.read();
+            origVertices = textDisplay.mesh.vertices;
         }
     }
+
+    private void FixedUpdate()
+    {
+        applyTextEffects();
+    }
+
     public void finishOpen()
     {
         //panel.alpha = panelAlpha;
@@ -127,4 +140,18 @@ public class DialogController : MonoBehaviour
     {
         source?.receiveButtonInput();
     }
+
+    public void applyTextEffects()
+    {
+        textDisplay.mesh.SetVertices(origVertices);
+
+        for (int i = 0; i < textEffects.Count; i++)
+        {
+            textEffects[i].ApplyEffectToMesh(textDisplay);
+        }
+        textDisplay.canvasRenderer.SetMesh(textDisplay.mesh);
+    }
+
+
+
 }

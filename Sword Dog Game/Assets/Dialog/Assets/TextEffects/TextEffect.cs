@@ -9,5 +9,5 @@ public abstract class TextEffect
     //End of -1 means no end
     public int end = -1;
 
-    public abstract void ApplyEffectToMesh(in TMP_Text textMesh);
+    public abstract void ApplyEffectToMesh(TMP_Text textMesh);
 }
