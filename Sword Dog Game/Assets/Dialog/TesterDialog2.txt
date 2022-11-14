@@ -1,6 +1,6 @@
 -Blocks
 Default{
-	[ss, .075][sdb, 1, -1, 0, 1][c]Choose yes or no for different responses! [prompt, yes, [llf,TesterYes], no, [llf,TesterNo]] [exit]
+	[ss, .075][sdb, 1, -1, 0, 1][c]Choose yes [IA,<size=15>]or no [IA,</size>]for different responses! [prompt, yes, [llf,TesterYes], no, [llf,TesterNo]] [exit]
 }
 
 TesterYes{
@@ -8,7 +8,7 @@ TesterYes{
 }
 
 TesterNo{
-	[sh, bye][c][svar, tester, false]bye then [w, .5] [wi] [exit]
+	[sh, bye][c][svar, tester, false] [w, .5] [wi] [exit]
 }
 
 Talk2{

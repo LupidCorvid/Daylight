@@ -87,6 +87,8 @@ public class DialogSource
      * 
      * [wi] //Waits for user input to continue
      * 
+     * [IA, text] //Instantly adds some text. Meant for use with tmppro styling
+     * 
      */
     public DialogSource(string dialog)
     {
@@ -455,6 +457,14 @@ public class DialogSource
                         Debug.LogWarning("No variable called " + input[1] + " found, this may be intentional, but make sure that the referenced variable is named correctly " +
                             "(remember whitespace is counted)");
                 }
+                break;
+            case "IA":
+                if (input.Length == 2)
+                {
+                    outString += input[1];
+                }
+                else
+                    Debug.LogWarning("Instant Add has too many parameters!");
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
