@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LungerAI : BaseAI
 {
+    private const float START_LEAP_TIME = 25565.7777f;
+
     AIStates state;
     public enum AIStates
     {
@@ -62,7 +64,7 @@ public class LungerAI : BaseAI
                 {
                     state = AIStates.charging;
                     //chargeStart = Time.time;
-                    chargeStart = 25565.7777f;
+                    chargeStart = START_LEAP_TIME;
                 }
             }
 
@@ -71,9 +73,9 @@ public class LungerAI : BaseAI
         {
             //Maybe should be moved after trajectory check
             cldr.sharedMaterial = ((Lunger)enemyBase).stopping;
-            if (chargeStart == 25565.7777f)
+            if (chargeStart == START_LEAP_TIME)
             {
-                if (Mathf.Abs(rb.velocity.x) > .05f)
+                if (Mathf.Abs(rb.velocity.x) > .05f && enemyBase.slopeChecker.isGrounded)
                     return;
                 chargeStart = Time.time;
             }
@@ -83,9 +85,7 @@ public class LungerAI : BaseAI
                 state = AIStates.moving;
                 return;
             }
-            //cldr.sharedMaterial = ((Lunger)enemyBase).stopping;
             rb.drag = 5;
-            //Also check for grounded once that is put into enemyBase
             if (chargeStart + chargeTime > Time.time && (!waitForFullStop || rb.velocity.x < .05f))
             {
                 state = AIStates.lunging;
@@ -113,19 +113,15 @@ public class LungerAI : BaseAI
     public float getLungeStrength()
     {
         float grav = rb.gravityScale * 9.8f;
-        //Adds some to the direction so that the enemy doesnt just stop on top of the player
-        Vector2 relTar = (target.transform.position - transform.position) * 1.25f;
+        //Adds some to the direction so that the enemy doesnt just stop on top of the player (removed because it will only land on top at edge of range)
+        Vector2 relTar = (target.transform.position - transform.position) * 1f;
         if (relTar.x < 0)
             relTar = new Vector2( relTar.x * -1, relTar.y);
         float strength = ((1.0f / Mathf.Cos(attackAngle)) * Mathf.Sqrt(((grav * Mathf.Pow(relTar.x, 2)/2)/(relTar.x * Mathf.Tan(attackAngle) - relTar.y))));
         return strength;
     }
 
-    public void moveDirection(Vector2 relDirection)
-    {
-        Vector3 velocity = rb.velocity;
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, relDirection * moveSpeed, ref velocity, .05f);
-    }
+    
 
     
 

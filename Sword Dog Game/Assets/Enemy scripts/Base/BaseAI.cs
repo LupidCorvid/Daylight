@@ -61,5 +61,10 @@ public class BaseAI
     {
 
     }
+    public virtual void moveDirection(Vector2 relDirection)
+    {
+        Vector3 velocity = rb.velocity;
+        rb.velocity = Vector3.SmoothDamp(rb.velocity, relDirection * moveSpeed, ref velocity, .05f);
+    }
 
 }

@@ -24,6 +24,8 @@ public class DialogController : MonoBehaviour
 
     public bool readWhenOpen = false;
 
+    
+
     public string text
     {
         get

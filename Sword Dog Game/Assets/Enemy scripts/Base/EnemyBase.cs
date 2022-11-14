@@ -29,8 +29,11 @@ public class EnemyBase : MonoBehaviour
 
     public BaseAI ai;
 
+    public SlopeAdjuster slopeChecker;
+
     public virtual void Start()
     {
+        slopeChecker ??= GetComponent<SlopeAdjuster>();
         ai?.Start();
     }
 
