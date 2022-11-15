@@ -12,7 +12,7 @@ TesterNo{
 }
 
 Talk2{
-	[ss, .075][c]This displays when you talk with me twice. [gvar, tester, true,You said yes!,You said no :(] [w,2] [exit]
+	[ss, .075][c]This displays when you talk with me [TFX, Wiggle, 1, 5]twice [/TFX, Wiggle]. [gvar, tester, true,You said yes!,You said no :(] [w,2] [exit]
 }
 
 Talk3{
@@ -20,5 +20,5 @@ Talk3{
 }
 
 Talk4{
-	[ss, .05][IA,<size=70>]Leave![IA,</size>] [w, .5] [exit]
+	[ss, .05][IA,<size=70>][TFX, Shake, 1]Leave! [/TFX, Shake][IA,</size>] [w, .5] [exit]
 }
