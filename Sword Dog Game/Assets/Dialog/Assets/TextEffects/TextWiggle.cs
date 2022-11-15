@@ -8,10 +8,11 @@ public class TextWiggle : TextEffect
     public float intensity = 1;
     public float speed = 1;
 
-    public TextWiggle(int intensity = 1, int speed = 1)
+    public TextWiggle(float intensity = 1, float speed = 1)
     {
         this.intensity = intensity;
         this.speed = speed;
+        type = "Wiggle";
     }
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)

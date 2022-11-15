@@ -43,6 +43,13 @@ public class DialogSource
     public event Action<string> changeHeaderName;
 
     public event Action startWaitingForInput;
+
+    public event Action clear;
+
+    public event Action<string[]> addEffect;
+
+    public event Action<string> removeEffect;
+
     bool waiting = false;
     bool waitingForButtonInput = false;
 
@@ -313,6 +320,7 @@ public class DialogSource
                 break;
             case "c":
                 outString = "";
+                clear?.Invoke();
                 break;
             case "abf":
                 if (input.Length == 2)
@@ -466,6 +474,15 @@ public class DialogSource
                 else
                     Debug.LogWarning("Instant Add has too many parameters!");
                 break;
+            case "TFX":
+                addEffect?.Invoke(input);
+                break;
+            case "/TFX":
+                if (input.Length == 2)
+                    removeEffect?.Invoke(input[1]);
+                else
+                    Debug.LogWarning("/TFX only takes one parameter!");
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call
@@ -479,6 +496,7 @@ public class DialogSource
         dialog = originalDialog;
         outString = "";
         position = 0;
+        clear?.Invoke();
     }
 
     public void barkEffect()

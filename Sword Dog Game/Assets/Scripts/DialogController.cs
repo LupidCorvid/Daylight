@@ -41,9 +41,9 @@ public class DialogController : MonoBehaviour
     void Awake()
     {
         main = this;
-        textEffects.Add(new TextWave(5, 5, 50));
-        textEffects.Add(new TextShake(1));
-        textEffects.Add(new TextWiggle(1, 5));
+        //textEffects.Add(new TextWave(5, 5, 50));
+        //textEffects.Add(new TextShake(1));
+        //textEffects.Add(new TextWiggle(1, 5));
         textDisplay.ForceMeshUpdate();
 
         textDisplay.OnPreRenderText += applyTextEffects;
@@ -58,10 +58,6 @@ public class DialogController : MonoBehaviour
         {
             textDisplay.text = source.read();
             textDisplay.ForceMeshUpdate();
-            //origVertices = textDisplay.mesh.vertices;
-            //applyTextEffects();
-            //textDisplay.ForceMeshUpdate();
-            //origVertices = textDisplay.mesh.vertices;
             
         }
     }
@@ -117,13 +113,21 @@ public class DialogController : MonoBehaviour
             source.requestOptionsStart -= promptSelections;
             source.changeHeaderName -= setHeaderName;
             source.startWaitingForInput -= pauseWaitForInputStart;
+            source.clear -= OutputCleared;
+            source.addEffect -= AddEffect;
+            source.removeEffect -= RemoveEffect;
         }
         source = newSource;
         text = "";
         headerDisplay.text = "";
+        textEffects.Clear();
         newSource.requestOptionsStart += promptSelections;
         newSource.changeHeaderName += setHeaderName;
         newSource.startWaitingForInput += pauseWaitForInputStart;
+        newSource.clear += OutputCleared;
+        newSource.addEffect += AddEffect;
+        newSource.removeEffect += RemoveEffect;
+
     }
 
     public void setHeaderName(string newName)
@@ -149,6 +153,53 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    public void RemoveEffect(string type)
+    {
+        if (type[0] == ' ')
+            type = type.Substring(1);
+        for(int i = textEffects.Count - 1; i >= 0; i--)
+        {
+            if(textEffects[i].type.ToUpperInvariant().Contains(type.ToUpperInvariant()))
+            {
+                textEffects[i].end = GetLengthNoCommands();
+                return;
+            }
+        }
+        Debug.LogWarning("There was no effect of type " + type + " to end!");
+    }
 
+    public void AddEffect(string[] input)
+    {
+        string[] newInput = new string[input.Length - 1];
+        for(int i = 1; i < input.Length; i++)
+        {
+            newInput[i - 1] = input[i];
+        }
+        TextEffect effect = TextEffect.MakeEffect(newInput, GetLengthNoCommands());
+        if(effect != null)
+            textEffects.Add(effect);
+    }
+
+    public void OutputCleared()
+    {
+        textEffects.Clear();
+    }
+
+    public int GetLengthNoCommands()
+    {
+        int depth = 0;
+        int length = 0;
+        for(int i = 0; i < text.Length; i++)
+        {
+            if (text[i] == '<')
+                depth++;
+            if (depth == 0)
+                length++;
+
+            if (text[i] == '>')
+                depth--;
+        }
+        return length;
+    }
 
 }

@@ -14,8 +14,10 @@ public class TextWave : TextEffect
         this.intensity = intensity;
         this.speed = speed;
         this.waveLength = waveLength;
+        type = "Wave";
     }
 
+    //Effects seem to be applied to index 0 a ton, and it gets worse the more text there is. It may be because it is there first, and so it gets the most hits
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
     {
         int endPoint = end;

@@ -7,9 +7,10 @@ public class TextShake : TextEffect
 {
     public float intensity = 1;
 
-    public TextShake(int intensity = 1)
+    public TextShake(float intensity = 1)
     {
         this.intensity = intensity;
+        type = "Shake";
     }
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
