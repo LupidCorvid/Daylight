@@ -20,6 +20,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     bool stoppedTalkingThisFrame = false;
 
+
     public void Awake()
     {
         dialogSource = new DialogSource(dialog[numInteractions % dialog.Count]);
@@ -29,7 +30,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
     public void interact()
     {
-        if (!alreadyTalking && !stoppedTalkingThisFrame)
+        if (!alreadyTalking && !stoppedTalkingThisFrame && !DialogController.dialogOpen && DialogController.closedAnimator)
         {
             if (loopInteractions)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));

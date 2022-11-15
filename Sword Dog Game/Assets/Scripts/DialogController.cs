@@ -18,6 +18,11 @@ public class DialogController : MonoBehaviour
 
     public bool reading = false;
 
+    public static bool dialogOpen
+    {
+        get { return main.reading; }
+    }
+
     public DialogResponseController responseController;
 
     public Animator anim;
@@ -38,12 +43,11 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    public static bool closedAnimator = true;
+
     void Awake()
     {
         main = this;
-        //textEffects.Add(new TextWave(5, 5, 50));
-        //textEffects.Add(new TextShake(1));
-        //textEffects.Add(new TextWiggle(1, 5));
         textDisplay.ForceMeshUpdate();
 
         textDisplay.OnPreRenderText += applyTextEffects;
@@ -64,7 +68,6 @@ public class DialogController : MonoBehaviour
 
     public void finishOpen()
     {
-        //panel.alpha = panelAlpha;
         panel.interactable = true;
         panel.blocksRaycasts = true;
         if (readWhenOpen)
@@ -81,6 +84,7 @@ public class DialogController : MonoBehaviour
     public void closeBox()
     {
         anim.SetBool("requestClose", true);
+        closedAnimator = false;
         textDisplay.alpha = 0;
         headerDisplay.alpha = 0;
     }
@@ -93,6 +97,7 @@ public class DialogController : MonoBehaviour
         responseController.close();
         if (readWhenOpen)
             reading = false;
+        closedAnimator = true;
     }
 
     public void promptSelections(params string[] options)

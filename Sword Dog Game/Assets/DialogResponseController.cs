@@ -19,7 +19,10 @@ public class DialogResponseController : MonoBehaviour
     {
         set
         {
+            if (value < 0)
+                value += options.Count;
             _selectedOption = value % options.Count;
+
             chooseOption(_selectedOption);
         }
         get
