@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     float lastLand = 0;
 
     public float stamina = 0.0f, maxStamina = 6.0f, minStamina = 1.0f;
+    public bool noFall = false;
 
     Vector2 lastMidairVelocity;
 
@@ -286,16 +287,17 @@ public class PlayerMovement : MonoBehaviour
         // fall detection
         if (beenOnLand >= 0.1f && !isJumping && !isGrounded && !isFalling)
         {
-            if (!ChangeScene.changingScene)
+            if (!noFall)
             {
                 anim.SetTrigger("fall");
                 isFalling = true;
             }
+            noFall = false;
         }
         if (isFalling)
         {
             fallTime += Time.fixedDeltaTime;
-            if ((isGrounded && fallTime > 0.1f) || ChangeScene.changingScene)
+            if ((isGrounded && fallTime > 0.1f))
             {
                 anim.ResetTrigger("fall");
                 isFalling = false;
