@@ -75,14 +75,16 @@ public class SwayEffect : MonoBehaviour
     public void OnDestroy()
     {
         meshFilter.sharedMesh = originalMesh;
+        originalSnapshot.Dispose();
     }
+
     public void OnApplicationQuit()
     {
         meshFilter.sharedMesh = originalMesh;
         meshFilter.sharedMesh.SetVertices(originalMesh.vertices);
         try
         {
-            Mesh.ApplyAndDisposeWritableMeshData(originalSnapshot, meshFilter.sharedMesh);
+            //Mesh.ApplyAndDisposeWritableMeshData(originalSnapshot, meshFilter.sharedMesh);
         }
         catch
         {
