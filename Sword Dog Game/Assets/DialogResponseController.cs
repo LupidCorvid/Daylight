@@ -84,7 +84,7 @@ public class DialogResponseController : MonoBehaviour
         option = Mathf.Abs(option) % options.Count;
 
         Vector3 finalPosition = default;
-        finalPosition.x = (-responsesContainer.rect.width + 20) + responsesContainer.position.x;
+        finalPosition.x = (-responsesContainer.rect.width + 45) + responsesContainer.position.x;
         finalPosition.y = options[option].transform.position.y;
         selectedObjectPointer.transform.position = finalPosition;
 
