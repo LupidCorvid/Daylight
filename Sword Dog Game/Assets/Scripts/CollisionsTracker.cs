@@ -12,7 +12,7 @@ public class CollisionsTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChangeScene.changeScene += ClearAll;
+        ChangeScene.clearCollisions += ClearAll;
     }
 
     // Update is called once per frame

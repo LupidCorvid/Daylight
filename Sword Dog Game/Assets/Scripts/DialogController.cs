@@ -52,7 +52,7 @@ public class DialogController : MonoBehaviour
 
         textDisplay.OnPreRenderText += applyTextEffects;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -64,6 +64,9 @@ public class DialogController : MonoBehaviour
             textDisplay.ForceMeshUpdate();
             
         }
+        
+        if (main == null || main != this)
+            main = this;
     }
 
     public void finishOpen()

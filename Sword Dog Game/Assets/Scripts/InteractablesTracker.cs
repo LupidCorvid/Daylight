@@ -14,6 +14,11 @@ public class InteractablesTracker : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ChangeScene.clearInteractables += ClearAll;
+    }
+
     // Start is called before the first frame update
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,6 +44,11 @@ public class InteractablesTracker : MonoBehaviour
             }
         }
         return nearest.interactable;
+    }
+
+    private void ClearAll()
+    {
+        interactables.Clear();
     }
 
 }
