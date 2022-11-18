@@ -12,7 +12,7 @@ public class CollisionsTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ChangeScene.changeScene += ClearAll;
     }
 
     // Update is called once per frame
@@ -37,5 +37,10 @@ public class CollisionsTracker : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         collidersInContact.Remove(collision.collider);
+    }
+    private void ClearAll()
+    {
+        collidersInContact.Clear();
+        triggersInContact.Clear();
     }
 }

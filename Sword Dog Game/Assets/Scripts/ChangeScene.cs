@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class ChangeScene : MonoBehaviour
     public static bool changingScene;
     public static bool noFalling = false;
     public bool noFall = false;
+    public static Action changeScene;
 
     // Start is called before the first frame update
     void Start()
@@ -46,17 +48,15 @@ public class ChangeScene : MonoBehaviour
         changingScene = true;
         noFalling = noFall;
         crossfade.SetTrigger("start");
-        yield return new WaitForSeconds(0.9f);
-        // if (SceneManager.GetActiveScene().name == "Tutorial" && scene == "1stScene")
-        // {
-        //     Player.controller.initialFall = true;
-        // }
+        yield return new WaitForSeconds(1f);
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)
         {
             GameObject.Destroy(eventSystem.gameObject);
         }
         SceneHelper.LoadScene(scene);
+        changeScene?.Invoke();
+        crossfade.SetTrigger("stop");
         SpawnManager.spawningAt = spawn;
         changingScene = false;
     }
