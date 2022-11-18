@@ -58,6 +58,7 @@ public class ChangeScene : MonoBehaviour
         changeScene?.Invoke();
         crossfade.SetTrigger("stop");
         SpawnManager.spawningAt = spawn;
+        yield return new WaitForSeconds(0.1f);
         changingScene = false;
     }
 
