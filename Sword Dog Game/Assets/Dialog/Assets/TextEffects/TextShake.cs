@@ -26,6 +26,12 @@ public class TextShake : TextEffect
             int index = info.materialReferenceIndex;
             int vertexIndex = info.vertexIndex;
 
+            //Skips empty characters as they reapply their affects to index 0
+            //Also works to have:
+            //if(vertexIndex == 0 && i != 0)
+            if (info.character == '\r' || info.character == '\n' || info.character == '\t' || info.character == ' ')
+                continue;
+
             //Calculates offset
             Vector3 offsetVector = new Vector3(Random.Range(-intensity, intensity), Random.Range(-intensity, intensity), 0);
             
