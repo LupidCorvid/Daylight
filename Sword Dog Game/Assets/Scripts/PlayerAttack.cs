@@ -42,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
                 if (!isAttacking)
                 {
                     anim.SetFloat("attack_direction", yInput);
+                    anim.SetBool("jump", false);
                 }
                 isAttacking = true;
                 attackCombo++;

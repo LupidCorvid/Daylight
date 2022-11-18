@@ -549,4 +549,9 @@ public class PlayerMovement : MonoBehaviour
             GetComponentInChildren<SoundPlayer>()?.PlaySound(0);
         }        
     }
+
+    public void StartedJump()
+    {
+        anim.ResetTrigger("start_jump");
+    }
 }
