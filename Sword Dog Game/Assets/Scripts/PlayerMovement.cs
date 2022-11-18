@@ -149,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.B))
             {
                 anim.SetTrigger("bark");
-                barkEffect();
             }
 
             // jump code

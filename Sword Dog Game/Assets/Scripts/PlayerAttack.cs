@@ -56,7 +56,6 @@ public class PlayerAttack : MonoBehaviour
     // stops attacks -- called from animation events in return states
     private void StopAttack()
     {
-        Debug.Log("stop attack");
         attackCombo = 0;
         isAttacking = false;
         // attackCooldown = cooldownLength;
