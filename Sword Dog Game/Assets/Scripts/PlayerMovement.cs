@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
+    [SerializeField] private GameObject barkFXPrefab;
+    [SerializeField] private Transform mouth;
 
     // Radius of the overlap circle to determine if grounded
     const float groundedRadius = 0.2f;
@@ -141,6 +143,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetTrigger("trot");
                 trotting = true;
+            }
+
+            // bark code
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                anim.SetTrigger("bark");
+                barkEffect();
             }
 
             // jump code
@@ -553,5 +562,15 @@ public class PlayerMovement : MonoBehaviour
     public void StartedJump()
     {
         anim.ResetTrigger("start_jump");
+    }
+
+    public void barkEffect()
+    {
+        GameObject addedObject = Instantiate(barkFXPrefab, mouth.position, transform.rotation);
+        SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
+        addedParticle.velocity.y = -1;
+        addedParticle.velocity.x = facingRight ? 1 : -1;
+        addedParticle.acceleration.y = 3;
+        addedParticle.startTime = Time.time;
     }
 }
