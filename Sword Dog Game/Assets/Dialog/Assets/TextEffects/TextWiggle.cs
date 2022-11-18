@@ -34,8 +34,6 @@ public class TextWiggle : TextEffect
             if (info.character == '\r' || info.character == '\n' || info.character == '\t' || info.character == ' ')
                 continue;
 
-            //if (vertexIndex == 0)
-            //    continue;
             //Calculates offset
             Vector3 offsetVector = new Vector3(((Mathf.PerlinNoise(Time.time * speed, 0 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, ((Mathf.PerlinNoise(Time.time * speed, 50 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, 0);
 
