@@ -286,13 +286,16 @@ public class PlayerMovement : MonoBehaviour
         // fall detection
         if (beenOnLand >= 0.1f && !isJumping && !isGrounded && !isFalling)
         {
-            anim.SetTrigger("fall");
-            isFalling = true;
+            if (!ChangeScene.changingScene)
+            {
+                anim.SetTrigger("fall");
+                isFalling = true;
+            }
         }
         if (isFalling)
         {
             fallTime += Time.fixedDeltaTime;
-            if (isGrounded && fallTime > 0.1f)
+            if ((isGrounded && fallTime > 0.1f) || ChangeScene.changingScene)
             {
                 anim.ResetTrigger("fall");
                 isFalling = false;
