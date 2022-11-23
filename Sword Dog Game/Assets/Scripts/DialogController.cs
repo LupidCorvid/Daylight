@@ -51,6 +51,8 @@ public class DialogController : MonoBehaviour
         textDisplay.ForceMeshUpdate();
 
         textDisplay.OnPreRenderText += applyTextEffects;
+
+        ChangeScene.changeScene += closeBox;
     }
 
     // Update is called once per frame
@@ -88,6 +90,8 @@ public class DialogController : MonoBehaviour
         textDisplay.alpha = 0;
         headerDisplay.alpha = 0;
     }
+
+
     public void finishClose()
     {
         CanvasManager.ShowHUD();

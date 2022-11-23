@@ -6,6 +6,11 @@ public class InteractablesTracker : MonoBehaviour
 {
     public List<IInteractable> interactables = new List<IInteractable>();
 
+    private void Awake()
+    {
+        ChangeScene.changeScene += clearInteractables;
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.T))
@@ -41,4 +46,8 @@ public class InteractablesTracker : MonoBehaviour
         return nearest.interactable;
     }
 
+    public void clearInteractables()
+    {
+        interactables.Clear();
+    }
 }
