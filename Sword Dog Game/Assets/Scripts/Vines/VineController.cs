@@ -5,7 +5,10 @@ using UnityEngine;
 public class VineController : MonoBehaviour
 {
     public List<Sprite> segmentSprites = new List<Sprite>();
-    public Sprite end;
+    public Sprite tailSprite;
+    public Sprite headSprite;
+
+    public bool randomizeSprites = true;
 
     public float length = 5;
 
@@ -18,6 +21,12 @@ public class VineController : MonoBehaviour
     public GameObject segmentPrefab;
 
     public bool generateVinesRuntime = false;
+
+    public float windStrength = 5;
+    public float windSpeed = 3;
+    //Lower wind volatility means objects near eachother have similar swaying motion
+    public float windVolatility = 0.2f;
+
 
     private void Awake()
     {
@@ -61,6 +70,38 @@ public class VineController : MonoBehaviour
         for(int i = 0; i < numSegments; i++)
         {
             AddNewSegment();
+        }
+
+        if (headSprite != null)
+            segments[0].GetComponent<SpriteRenderer>().sprite = headSprite;
+        if (tailSprite != null)
+            segments[0].GetComponent<SpriteRenderer>().sprite = tailSprite;
+
+        setSegmentWind();
+        setSegmentSprites();
+    }
+
+    public void setSegmentWind()
+    {
+        foreach(VineSegment segment in segments)
+        {
+            segment.windSpeed = windSpeed;
+            segment.windStrength = windStrength;
+            segment.windVolatility = windVolatility;
+        }
+    }
+
+    public void setSegmentSprites()
+    {
+        if (segmentSprites.Count > 0)
+        {
+            for(int i = 0; i < segments.Count; i++)
+            {
+                if (randomizeSprites)
+                    segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[Random.Range(0, segmentSprites.Count)];
+                else
+                    segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[i % segmentSprites.Count];
+            }
         }
     }
 }

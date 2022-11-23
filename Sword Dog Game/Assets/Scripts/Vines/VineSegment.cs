@@ -23,8 +23,11 @@ public class VineSegment : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<Rigidbody2D>() != null)
-            rb.velocity += collision.GetComponent<Rigidbody2D>().velocity * Time.deltaTime;
+        if (((int)Mathf.Pow(2, collision.gameObject.layer) & LayerMask.GetMask("TerrainFX", "Utility")) == 0)
+        {
+            if (collision.GetComponent<Rigidbody2D>() != null)
+                rb.velocity += collision.GetComponent<Rigidbody2D>().velocity * Time.deltaTime;
+        }
     }
     public void FixedUpdate()
     {

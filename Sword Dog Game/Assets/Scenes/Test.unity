@@ -2902,12 +2902,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ddf9c78124eff469e4c98140df5dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentSprites: []
-  end: {fileID: 0}
+  segmentSprites:
+  - {fileID: 21300000, guid: 73dbb0e7cc682de4c8fe39b11d5e249f, type: 3}
+  - {fileID: 21300000, guid: 0755bee8f992b8a43abe647551861d4b, type: 3}
+  tailSprite: {fileID: 0}
+  headSprite: {fileID: 0}
+  randomizeSprites: 0
   length: 5
-  numSegments: 10
+  numSegments: 20
   segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
   generateVinesRuntime: 1
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
 --- !u!4 &459496902
 Transform:
   m_ObjectHideFlags: 0
@@ -2916,7 +2923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459496899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: 3, z: -0.28374147}
+  m_LocalPosition: {x: -0.76, y: 3, z: -0.28374147}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4380,11 +4387,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentSprites: []
-  end: {fileID: 0}
+  tailSprite: {fileID: 0}
+  headSprite: {fileID: 0}
+  randomizeSprites: 1
   length: 5
   numSegments: 10
   segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
   generateVinesRuntime: 1
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
 --- !u!4 &693360511
 Transform:
   m_ObjectHideFlags: 0
@@ -6018,11 +6030,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentSprites: []
-  end: {fileID: 0}
+  tailSprite: {fileID: 0}
+  headSprite: {fileID: 0}
+  randomizeSprites: 1
   length: 5
   numSegments: 50
   segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
   generateVinesRuntime: 1
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
 --- !u!4 &1152603955
 Transform:
   m_ObjectHideFlags: 0
@@ -8723,11 +8740,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentSprites: []
-  end: {fileID: 0}
+  tailSprite: {fileID: 0}
+  headSprite: {fileID: 0}
+  randomizeSprites: 1
   length: 5
   numSegments: 5
   segmentPrefab: {fileID: 1070321199}
   generateVinesRuntime: 0
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
 --- !u!4 &1564554995
 Transform:
   m_ObjectHideFlags: 0
@@ -10104,12 +10126,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ddf9c78124eff469e4c98140df5dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentSprites: []
-  end: {fileID: 0}
+  segmentSprites:
+  - {fileID: 21300000, guid: 73dbb0e7cc682de4c8fe39b11d5e249f, type: 3}
+  - {fileID: 21300000, guid: 0755bee8f992b8a43abe647551861d4b, type: 3}
+  tailSprite: {fileID: 0}
+  headSprite: {fileID: 0}
+  randomizeSprites: 0
   length: 5
-  numSegments: 10
+  numSegments: 20
   segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
   generateVinesRuntime: 1
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
 --- !u!4 &1908672995
 Transform:
   m_ObjectHideFlags: 0
@@ -10118,7 +10147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908672992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.02, y: 3, z: -0.28374147}
+  m_LocalPosition: {x: -3.12, y: 3, z: -0.28374147}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
