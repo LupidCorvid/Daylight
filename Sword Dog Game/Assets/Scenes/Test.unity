@@ -4309,8 +4309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentSprites: []
   end: {fileID: 0}
-  length: 2
-  numSegments: 5
+  length: 5
+  numSegments: 10
   segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
   generateVinesRuntime: 1
 --- !u!4 &693360511
@@ -5267,6 +5267,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1564554995}
     m_Modifications:
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_Anchor.y
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedRigidBody
+      value: 
+      objectReference: {fileID: 1070321204}
     - target: {fileID: 7602361877450296100, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
       propertyPath: m_Anchor.y
       value: 0.375
@@ -11374,6 +11390,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1564554995}
     m_Modifications:
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_Anchor.y
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1314740151187401508, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_ConnectedRigidBody
+      value: 
+      objectReference: {fileID: 1564554993}
+    - target: {fileID: 7602361877450296100, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+      propertyPath: m_Distance
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 7602361877450296100, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
       propertyPath: m_ConnectedRigidBody
       value: 

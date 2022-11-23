@@ -6,7 +6,7 @@ public class VineSegment : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    public DistanceJoint2D connection;
+    public HingeJoint2D connection;
 
 
     public float windStrength = 1;
@@ -18,7 +18,7 @@ public class VineSegment : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        connection = GetComponent<DistanceJoint2D>();
+        connection = GetComponent<HingeJoint2D>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
