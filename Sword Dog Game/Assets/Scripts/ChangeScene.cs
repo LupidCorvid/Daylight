@@ -12,13 +12,13 @@ public class ChangeScene : MonoBehaviour
     public string spawn;
     private Animator crossfade;
     public static bool changingScene;
-    public static bool noFalling = false;
     public bool noFall = false;
-    public static Action changeScene;
+    public static Action clearCollisions, clearInteractables;
 
     // Start is called before the first frame update
     void Start()
     {
+        changingScene = false;
         crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
     }
 
@@ -46,20 +46,21 @@ public class ChangeScene : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         changingScene = true;
-        noFalling = noFall;
         crossfade.SetTrigger("start");
+        DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
+        PlayerMovement.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)
         {
             GameObject.Destroy(eventSystem.gameObject);
         }
         SceneHelper.LoadScene(scene);
-        changeScene?.Invoke();
+        clearCollisions?.Invoke();
+        clearInteractables?.Invoke();
         crossfade.SetTrigger("stop");
+        DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
-        yield return new WaitForSeconds(0.1f);
-        changingScene = false;
     }
 
 }

@@ -6,17 +6,17 @@ public class InteractablesTracker : MonoBehaviour
 {
     public List<IInteractable> interactables = new List<IInteractable>();
 
-    private void Awake()
-    {
-        ChangeScene.changeScene += clearInteractables;
-    }
-
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.T))
         {
             getNearest()?.interact();
         }
+    }
+
+    private void Start()
+    {
+        ChangeScene.clearInteractables += ClearAll;
     }
 
     // Start is called before the first frame update
@@ -46,8 +46,9 @@ public class InteractablesTracker : MonoBehaviour
         return nearest.interactable;
     }
 
-    public void clearInteractables()
+    private void ClearAll()
     {
         interactables.Clear();
     }
+
 }
