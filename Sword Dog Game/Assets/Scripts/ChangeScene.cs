@@ -15,6 +15,8 @@ public class ChangeScene : MonoBehaviour
     public bool noFall = false;
     public static Action clearCollisions, clearInteractables;
 
+    public static Action changeScene;
+
     // Start is called before the first frame update
     void Start()
     {
