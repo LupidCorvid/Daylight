@@ -16,11 +16,11 @@ public class VineController : MonoBehaviour
 
     Rigidbody2D rb;
 
-    List<VineSegment> segments = new List<VineSegment>();
+    public List<VineSegment> segments = new List<VineSegment>();
 
     public GameObject segmentPrefab;
 
-    public bool generateVinesRuntime = false;
+    public bool generateVinesOnStart = false;
 
     public float windStrength = 5;
     public float windSpeed = 3;
@@ -31,7 +31,7 @@ public class VineController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (generateVinesRuntime)
+        if (generateVinesOnStart)
             loadSegments();
     }
 
@@ -40,6 +40,8 @@ public class VineController : MonoBehaviour
         GameObject newSegment = Instantiate(segmentPrefab, transform);
         Collider2D sgmntCldr = newSegment.GetComponent<Collider2D>();
         VineSegment vinePart = newSegment.GetComponent<VineSegment>();
+        
+        vinePart.fillInComponents();
 
         float sizePerSegment = (length / numSegments) * sgmntCldr.bounds.size.y;
 
@@ -51,7 +53,6 @@ public class VineController : MonoBehaviour
         {
             vinePart.transform.position = segments[segments.Count - 1].transform.position - (sizePerSegment  * Vector3.up);
             vinePart.connection.connectedBody = segments[segments.Count - 1].rb;
-            //vinePart.connection.connectedAnchor = Vector2.down * 1;
             vinePart.connection.connectedAnchor = sgmntCldr.bounds.extents.y * Vector2.down;
         }
         else
@@ -67,15 +68,12 @@ public class VineController : MonoBehaviour
 
     public void loadSegments()
     {
+        ClearSegments();
+
         for(int i = 0; i < numSegments; i++)
         {
             AddNewSegment();
         }
-
-        if (headSprite != null)
-            segments[0].GetComponent<SpriteRenderer>().sprite = headSprite;
-        if (tailSprite != null)
-            segments[0].GetComponent<SpriteRenderer>().sprite = tailSprite;
 
         setSegmentWind();
         setSegmentSprites();
@@ -93,15 +91,32 @@ public class VineController : MonoBehaviour
 
     public void setSegmentSprites()
     {
-        if (segmentSprites.Count > 0)
+        if (segments.Count <= 0)
+            return;
+
+        for(int i = 0; i < segments.Count; i++)
         {
-            for(int i = 0; i < segments.Count; i++)
-            {
-                if (randomizeSprites)
-                    segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[Random.Range(0, segmentSprites.Count)];
-                else
-                    segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[i % segmentSprites.Count];
-            }
+            if (segmentSprites.Count <= 0)
+                break;
+
+            if (randomizeSprites)
+                segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[Random.Range(0, segmentSprites.Count)];
+            else
+                segments[i].GetComponent<SpriteRenderer>().sprite = segmentSprites[i % segmentSprites.Count];
+        }
+
+        if (headSprite != null)
+            segments[0].GetComponent<SpriteRenderer>().sprite = headSprite;
+        if (tailSprite != null)
+            segments[segments.Count - 1].GetComponent<SpriteRenderer>().sprite = tailSprite;
+    }
+
+    public void ClearSegments()
+    {
+        for(int i = segments.Count - 1; i >= 0; i--)
+        {
+            DestroyImmediate(segments[i].gameObject);
+            segments.RemoveAt(i);
         }
     }
 }

@@ -17,6 +17,11 @@ public class VineSegment : MonoBehaviour
 
     private void Awake()
     {
+        fillInComponents();        
+    }
+
+    public void fillInComponents()
+    {
         rb = GetComponent<Rigidbody2D>();
         connection = GetComponent<HingeJoint2D>();
     }
