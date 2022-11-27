@@ -106,6 +106,10 @@ MonoBehaviour:
   adjustLocationY: 0
   adjustLocationX: 0
   adjustDefaultX: 0
+  rb: {fileID: 0}
+  pmScript: {fileID: 0}
+  tip: {fileID: 0}
+  attackMoveTracker: {fileID: 0}
 --- !u!50 &2591983749293105045
 Rigidbody2D:
   serializedVersion: 4
@@ -150,7 +154,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -230,10 +234,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7871543, y: -0.023497105}
+  m_Offset: {x: -0.2549383, y: -0.023497105}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -244,7 +248,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0953598, y: 0.14235425}
+  m_Size: {x: 1.1597918, y: 0.36090684}
   m_EdgeRadius: 0
 --- !u!114 &6489693130039104005
 MonoBehaviour:
@@ -259,3 +263,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 2591983749293105128}
+  damage: 1
+  knockback: 0
