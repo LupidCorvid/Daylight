@@ -58,7 +58,7 @@ public class SwordFollow : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.gravityScale = 0;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             //Assigns target transform values
             pmScript = player.GetComponent<PlayerMovement>();
