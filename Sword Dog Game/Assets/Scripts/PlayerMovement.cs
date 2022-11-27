@@ -63,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 lastMidairVelocity;
 
+    //Here for access from the sword follow script
+    public GameObject attackMoveTracker;
+
+    public bool attacking = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

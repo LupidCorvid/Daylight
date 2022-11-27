@@ -74,8 +74,15 @@ public class SwayEffect : MonoBehaviour
     }
     public void OnDestroy()
     {
-        meshFilter.sharedMesh = originalMesh;
-        originalSnapshot.Dispose();
+        try
+        {
+            meshFilter.sharedMesh = originalMesh;
+            originalSnapshot.Dispose();
+        }
+        catch
+        {
+            //Only here to prevent errors from stoping debug    
+        }
     }
 
     public void OnApplicationQuit()

@@ -18,6 +18,8 @@ public class SwordFollow : MonoBehaviour
     bool triggeredPMScript;
     public GameObject tip;
 
+    public GameObject attackMoveTracker;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +37,22 @@ public class SwordFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Accesses PlayerMovement script ONCE
-        if(!triggeredPMScript)
+        //Find attackMoveTracker if it is null
+        pmScript ??= player.GetComponent<PlayerMovement>();
+        attackMoveTracker = pmScript.attackMoveTracker;
+
+        if (pmScript.attacking)
         {
-            pmScript = player.GetComponent<PlayerMovement>();
-            triggeredPMScript = true;
+            AttackMove();
+            //Check for contact damage
+            return;
         }
+        ////Accesses PlayerMovement script ONCE
+        //if(!triggeredPMScript)
+        //{
+        //    pmScript = player.GetComponent<PlayerMovement>();
+        //    triggeredPMScript = true;
+        //}
         
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
@@ -112,6 +124,23 @@ public class SwordFollow : MonoBehaviour
             rb.AddTorque(transform.localScale.x * 5f);
         }
     }
+
+    public void AttackMove()
+    {
+        //Moves to match the attack tracker animator
+
+        rb.freezeRotation = false;
+
+        rb.velocity = (attackMoveTracker.transform.position - transform.position) * 60;
+        int neg = -1;
+        if (transform.rotation.eulerAngles.z < attackMoveTracker.transform.rotation.eulerAngles.z)
+            neg = 1;
+
+        //Multiplied by 60 to match the time of the frame in the animation
+        rb.angularVelocity = (Quaternion.Angle(transform.rotation, attackMoveTracker.transform.rotation)) * 60 * neg;
+
+    }
+
 
     public void Freeze()
     {
