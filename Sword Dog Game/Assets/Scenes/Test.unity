@@ -385,6 +385,7 @@ MonoBehaviour:
   moveSpeed: 1
   attackSpeed: 1
   maxHealth: 10
+  health: 10
   slopeChecker: {fileID: 0}
 --- !u!1 &40723977
 GameObject:
@@ -3670,6 +3671,7 @@ MonoBehaviour:
   moveSpeed: 0
   attackSpeed: 1
   maxHealth: 10
+  health: 10
   slopeChecker: {fileID: 0}
   rockPrefab: {fileID: 8666362523932513522, guid: 82ef0a8410ae2ac4391630df02892510, type: 3}
 --- !u!61 &291899774
@@ -9871,6 +9873,7 @@ MonoBehaviour:
   moveSpeed: 5
   attackSpeed: 1
   maxHealth: 10
+  health: 10
   slopeChecker: {fileID: 0}
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
@@ -24044,6 +24047,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1242605522, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2591983749293105046, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -24091,6 +24098,38 @@ PrefabInstance:
     - target: {fileID: 2591983749293105129, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591983749293105129, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280208853786250205, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303456632554008699, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1597918
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303456632554008699, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Size.y
+      value: 0.36090684
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303456632554008699, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.2549383
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303456632554008699, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.023497105
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303456632554008699, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489693130039104005, guid: 4c697a9f02ec7994d87bcbb4269f1fef, type: 3}
+      propertyPath: knockback
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

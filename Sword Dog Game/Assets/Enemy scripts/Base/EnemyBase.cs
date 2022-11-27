@@ -9,23 +9,7 @@ public class EnemyBase : MonoBehaviour
     public float attackSpeed = 1;
 
     public int maxHealth = 10;
-    private int _health = 10;
-    public int health
-    {
-        get
-        {
-            return _health;
-        }
-        set
-        {
-            if (value > maxHealth)
-                _health = maxHealth;
-            else
-                _health = value;
-            if (_health <= 0)
-                die();
-        }
-    }
+    public int health = 10;
 
     public BaseAI ai;
 
@@ -45,5 +29,12 @@ public class EnemyBase : MonoBehaviour
     public void die()
     {
         Destroy(gameObject);
+    }
+
+    public virtual void TakeDamage(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+            die();
     }
 }

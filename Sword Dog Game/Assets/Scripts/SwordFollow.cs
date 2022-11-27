@@ -12,9 +12,9 @@ public class SwordFollow : MonoBehaviour
     public float adjustLocationY;
     public float adjustLocationX, adjustDefaultX;
     SpriteRenderer sr;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
-    private PlayerMovement pmScript;
+    public PlayerMovement pmScript;
     bool triggeredPMScript;
     public GameObject tip;
 
@@ -58,7 +58,6 @@ public class SwordFollow : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.gravityScale = 0;
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             //Assigns target transform values
             pmScript = player.GetComponent<PlayerMovement>();
@@ -74,13 +73,15 @@ public class SwordFollow : MonoBehaviour
             
             if (!PlayerHealth.gettingUp)
             {
-                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 2 + 4 * pmScript.calculatedSpeed * Time.deltaTime); //start value, end val, value used to interpolate between a and b
-                transform.rotation = player.transform.rotation;
+                rb.velocity = (swordTargetLocation - transform.position) * (2 + 4 * pmScript.calculatedSpeed) / 5;
+
+
+                rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10;
             }
             else
             {
-                transform.position = Vector3.Lerp(transform.position, swordTargetLocation, 4 * Time.deltaTime);
-                transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation, 4 * Time.deltaTime);
+                rb.velocity = (swordTargetLocation - transform.position) * (4 * pmScript.calculatedSpeed) / 5;
+                rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10 * 4;
             }
 
             //Checks when to flip and adjust sprite
@@ -129,16 +130,19 @@ public class SwordFollow : MonoBehaviour
     {
         //Moves to match the attack tracker animator
 
-        rb.freezeRotation = false;
-
         rb.velocity = (attackMoveTracker.transform.position - transform.position) * 60;
+
+        ////Multiplied by 60 to match the time of the frame in the animation
+        rb.angularVelocity = getAngleDirection(transform.rotation, attackMoveTracker.transform.rotation) * 60;
+
+    }
+
+    public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)
+    {
         int neg = -1;
-        if (transform.rotation.eulerAngles.z < attackMoveTracker.transform.rotation.eulerAngles.z)
+        if (rotation1.eulerAngles.z < rotation2.eulerAngles.z)
             neg = 1;
-
-        //Multiplied by 60 to match the time of the frame in the animation
-        rb.angularVelocity = (Quaternion.Angle(transform.rotation, attackMoveTracker.transform.rotation)) * 60 * neg;
-
+        return (Quaternion.Angle(rotation1, rotation2)) * neg;
     }
 
 

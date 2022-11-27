@@ -6,6 +6,10 @@ public class SwordTip : MonoBehaviour
 {
     public SwordFollow sword;
 
+    public int damage = 1;
+
+    public float knockback = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,25 @@ public class SwordTip : MonoBehaviour
         else if (other.gameObject.tag == "Ground")
         {
             sword.Freeze();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!sword.pmScript.attacking)
+            return;
+
+        EnemyBase enemy = other.GetComponent<EnemyBase>();
+        Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
+
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+
+        if(otherRb != null)
+        {
+            otherRb.velocity += ((Vector2)(other.transform.position - transform.position).normalized) * knockback * (Mathf.Clamp(sword.rb.velocity.magnitude, 0, 2));
         }
     }
 }
