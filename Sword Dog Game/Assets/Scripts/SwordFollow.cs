@@ -15,7 +15,6 @@ public class SwordFollow : MonoBehaviour
     public Rigidbody2D rb;
 
     public PlayerMovement pmScript;
-    bool triggeredPMScript;
     public GameObject tip;
 
     public GameObject attackMoveTracker;
@@ -29,8 +28,6 @@ public class SwordFollow : MonoBehaviour
         adjustDefaultX = -.5f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        
-        triggeredPMScript = false;
     }
     
 
@@ -130,6 +127,18 @@ public class SwordFollow : MonoBehaviour
 
     public void AttackMove()
     {
+        //Make sure that the sword is facing the right direction
+        if (!pmScript.facingRight)
+        {
+            adjustLocationX = -adjustDefaultX;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            adjustLocationX = adjustDefaultX;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
         //Moves to match the attack tracker animator
 
         rb.velocity = (attackMoveTracker.transform.position - transform.position) * 60;
