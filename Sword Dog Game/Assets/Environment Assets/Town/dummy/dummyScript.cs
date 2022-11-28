@@ -24,8 +24,8 @@ public class dummyScript : EnemyBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        flag = true;
-        print("hi");
+        //flag = true;
+        //print("hi");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -77,11 +77,13 @@ public class SwordFollow : MonoBehaviour
 
 
                 rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10;
+                //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 1;
             }
             else
             {
                 rb.velocity = (swordTargetLocation - transform.position) * (4 * pmScript.calculatedSpeed) / 5;
                 rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10 * 4;
+                //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 1;
             }
 
             //Checks when to flip and adjust sprite
@@ -139,10 +141,9 @@ public class SwordFollow : MonoBehaviour
 
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)
     {
-        int neg = -1;
-        if (rotation1.eulerAngles.z < rotation2.eulerAngles.z)
-            neg = 1;
-        return (Quaternion.Angle(rotation1, rotation2)) * neg;
+        int neg = (Vector3.Cross(rotation1 * Vector3.right, rotation2 * Vector3.right).z) < 0 ? -1 : 1;
+
+        return (Quaternion.Angle(rotation2, rotation1)) * neg;
     }
 
 
