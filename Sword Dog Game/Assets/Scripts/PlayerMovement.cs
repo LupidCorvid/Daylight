@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static GameObject instance;
     public static PlayerMovement controller;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
     public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint;
@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
     //Here for access from the sword follow script
     public GameObject attackMoveTracker;
+
+    [SerializeField] private GameObject sprintDust;
 
     public bool attacking = false;
 
@@ -189,6 +191,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0)
             {
+                // bad code
+                // if (isSprinting)
+                //     GameObject.Instantiate(sprintDust, new Vector3(transform.position.x + (facingRight ? -2.3f : 2.3f), transform.position.y - 0.9f), Quaternion.identity).GetComponent<SpriteRenderer>().flipX = !facingRight;
                 isSprinting = false;
                 anim.ResetTrigger("start_sprint");
             }
@@ -264,6 +269,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
         }
 
+        // if (!isGrounded)
+        // {
+        //     GetComponent<BoxCollider2D>().sharedMaterial = slippery;
+        // }
+
         // calculate speed multiplier for trot animation
         CalculateSpeedMultiplier();
 
@@ -281,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
-                rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
+                rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
         else 
@@ -562,7 +572,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
+            rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
             GetComponentInChildren<SoundPlayer>()?.PlaySound(0);
         }        

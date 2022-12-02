@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 10
   m_Name: AttackMoveTracker
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a19d9467069d64e865e3d3be6d1a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   facingRight: 0
   isGrounded: 0
   isJumping: 0
@@ -339,6 +340,7 @@ MonoBehaviour:
   minStamina: 1
   noFall: 0
   attackMoveTracker: {fileID: 2170697637293356661}
+  sprintDust: {fileID: 37055940391111458, guid: e59d02c40c13c9d4b969fe319802b4b1, type: 3}
   attacking: 0
 --- !u!61 &6300512340327299634
 BoxCollider2D:
@@ -357,7 +359,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.7, y: 3.5}
+    oldSize: {x: 3.8, y: 3.5}
     newSize: {x: 3.5, y: 3.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogResponseController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class DialogResponseController : MonoBehaviour
     public RectTransform responsesContainer;
 
     public CanvasGroup canvasGroup;
+
+    public CanvasScaler scaler;
     
     private int _selectedOption = 0;
     public int selectedOption
@@ -84,7 +87,9 @@ public class DialogResponseController : MonoBehaviour
         option = Mathf.Abs(option) % options.Count;
 
         Vector3 finalPosition = default;
-        finalPosition.x = (-responsesContainer.rect.width + 45) + responsesContainer.position.x;
+        //finalPosition.x = (-responsesContainer.rect.width) + responsesContainer.position.x;
+        finalPosition.x = responsesContainer.position.x + (responsesContainer.rect.xMin + (responsesContainer.rect.width * .5f)) * (Screen.width/scaler.referenceResolution.x);
+
         finalPosition.y = options[option].transform.position.y;
         selectedObjectPointer.transform.position = finalPosition;
 

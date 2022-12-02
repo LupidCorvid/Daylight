@@ -51,7 +51,7 @@ public class DialogSource
     public event Action<string> removeEffect;
 
     bool waiting = false;
-    bool waitingForButtonInput = false;
+    public bool waitingForButtonInput = false;
 
     public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
     public List<string> responseOutputsNumeric = new List<string>();
