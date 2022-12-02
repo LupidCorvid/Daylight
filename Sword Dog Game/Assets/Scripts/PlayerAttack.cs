@@ -42,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
                 if (!isAttacking)
                 {
                     anim.SetFloat("attack_direction", yInput);
+                    SwordFollow.sword.speed = 2;
                 }
                 isAttacking = true;
                 attackCombo++;
