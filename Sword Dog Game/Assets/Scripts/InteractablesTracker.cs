@@ -5,12 +5,23 @@ using UnityEngine;
 public class InteractablesTracker : MonoBehaviour
 {
     public List<IInteractable> interactables = new List<IInteractable>();
+    public IInteractable nearest;
+
+    //On enter start animation for appearing, on exit start animation that ends in deletion
+    GameObject interactPrompt;
+
+    public static KeyCode interactKey = KeyCode.T;
+
+    private void FixedUpdate()
+    {
+        nearest = getNearest();
+    }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(interactKey))
         {
-            getNearest()?.interact();
+            nearest?.interact();
         }
     }
 
