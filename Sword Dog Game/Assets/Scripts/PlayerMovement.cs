@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
     //Here for access from the sword follow script
     public GameObject attackMoveTracker;
 
+    [SerializeField] private GameObject sprintDust;
+
     public bool attacking = false;
 
     void Start()
@@ -189,6 +191,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0)
             {
+                // bad code
+                // if (isSprinting)
+                //     GameObject.Instantiate(sprintDust, new Vector3(transform.position.x + (facingRight ? -2.3f : 2.3f), transform.position.y - 0.9f), Quaternion.identity).GetComponent<SpriteRenderer>().flipX = !facingRight;
                 isSprinting = false;
                 anim.ResetTrigger("start_sprint");
             }
