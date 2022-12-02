@@ -281,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
-                rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
+                rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
         else 
@@ -562,7 +562,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce)); // force added during a jump
+            rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
             GetComponentInChildren<SoundPlayer>()?.PlaySound(0);
         }        
