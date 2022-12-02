@@ -37,7 +37,7 @@ public class SwordFollow : MonoBehaviour
         // Singleton design pattern
         if (instance != null && instance != this)
         {
-            // Destroy(gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -63,7 +63,7 @@ public class SwordFollow : MonoBehaviour
         }
         else
         {
-            speed = Mathf.Lerp(speed, 100, 0.01f);
+            speed = Mathf.Lerp(speed, 100, 0.05f);
         }
         ////Accesses PlayerMovement script ONCE
         //if(!triggeredPMScript)
