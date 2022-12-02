@@ -264,6 +264,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
         }
 
+        // if (!isGrounded)
+        // {
+        //     GetComponent<BoxCollider2D>().sharedMaterial = slippery;
+        // }
+
         // calculate speed multiplier for trot animation
         CalculateSpeedMultiplier();
 
@@ -281,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
-                rb.AddForce(new Vector2(0f, jumpForce / 400f / jumpTime));
+                rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
         else 
