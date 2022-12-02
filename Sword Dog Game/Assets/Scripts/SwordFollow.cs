@@ -75,6 +75,7 @@ public class SwordFollow : MonoBehaviour
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
             cldr.isTrigger = true;
+            gameObject.layer = 11;
             rb.isKinematic = false;
             rb.gravityScale = 0;
 
@@ -142,6 +143,7 @@ public class SwordFollow : MonoBehaviour
         else
         {
             cldr.isTrigger = false;
+            gameObject.layer = 10;
             rb.gravityScale = 5;
             rb.constraints = RigidbodyConstraints2D.None;
             rb.AddTorque(transform.localScale.x * 5f);

@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 38064316}
   - component: {fileID: 38064321}
   - component: {fileID: 38064322}
+  - component: {fileID: 38064323}
   m_Layer: 10
   m_Name: TestingSlopers
   m_TagString: Untagged
@@ -387,6 +388,19 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   slopeChecker: {fileID: 0}
+--- !u!114 &38064323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38064315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c95e8b75645d4bb269556a9000853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
 --- !u!1 &40723977
 GameObject:
   m_ObjectHideFlags: 0
@@ -4175,6 +4189,7 @@ GameObject:
   - component: {fileID: 291899775}
   - component: {fileID: 291899774}
   - component: {fileID: 291899773}
+  - component: {fileID: 291899779}
   m_Layer: 10
   m_Name: TestingSlopers (1)
   m_TagString: Untagged
@@ -4342,6 +4357,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &291899779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291899772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c95e8b75645d4bb269556a9000853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
 --- !u!1 &303463451
 GameObject:
   m_ObjectHideFlags: 0
@@ -10448,6 +10476,7 @@ GameObject:
   - component: {fileID: 1021038682}
   - component: {fileID: 1021038681}
   - component: {fileID: 1021038680}
+  - component: {fileID: 1021038686}
   m_Layer: 10
   m_Name: TestingSlopers (2)
   m_TagString: Untagged
@@ -10617,6 +10646,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1021038686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021038679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c95e8b75645d4bb269556a9000853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
 --- !u!1 &1027897706
 GameObject:
   m_ObjectHideFlags: 0
