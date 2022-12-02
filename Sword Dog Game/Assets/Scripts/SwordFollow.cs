@@ -13,6 +13,7 @@ public class SwordFollow : MonoBehaviour
     public float adjustLocationX, adjustDefaultX;
     SpriteRenderer sr;
     public Rigidbody2D rb;
+    public Collider2D cldr;
 
     public PlayerMovement pmScript;
     public GameObject tip;
@@ -28,6 +29,7 @@ public class SwordFollow : MonoBehaviour
         adjustDefaultX = -.5f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        cldr = gameObject.GetComponent<Collider2D>();
     }
     
 
@@ -53,6 +55,7 @@ public class SwordFollow : MonoBehaviour
         
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
+            cldr.isTrigger = true;
             rb.isKinematic = false;
             rb.gravityScale = 0;
 
@@ -119,6 +122,7 @@ public class SwordFollow : MonoBehaviour
         }
         else
         {
+            cldr.isTrigger = false;
             rb.gravityScale = 5;
             rb.constraints = RigidbodyConstraints2D.None;
             rb.AddTorque(transform.localScale.x * 5f);
