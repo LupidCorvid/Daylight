@@ -36,5 +36,6 @@ public class EnemyBase : MonoBehaviour
         health -= amount;
         if (health <= 0)
             die();
+        GetComponent<SimpleFlash>().Flash(1f, 3, true);
     }
 }
