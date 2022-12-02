@@ -8,6 +8,8 @@ public class RockLobberAI : BaseAI
 
     public float projectileSpeed = 17;
 
+    public float stopRange = 2f;
+
 
     public AIstate state;
     public enum AIstate
@@ -91,11 +93,11 @@ public class RockLobberAI : BaseAI
         }
         else if (state == AIstate.moving)
         {
-            if(target.transform.position.x < transform.position.x)
+            if(target.transform.position.x + stopRange < transform.position.x)
             {
                 rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
             }
-            else if(target.transform.position.x > transform.position.x)
+            else if(target.transform.position.x - stopRange > transform.position.x)
             {
                 rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
             }

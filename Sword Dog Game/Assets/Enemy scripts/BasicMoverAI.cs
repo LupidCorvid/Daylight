@@ -6,6 +6,7 @@ public class BasicMoverAI : BaseAI
 {
 
     public float maxSpeed = 20;
+    public float stopRange = 2f;
 
     enum states
     {
@@ -47,12 +48,12 @@ public class BasicMoverAI : BaseAI
 
     private void moveInDirection(Vector3 target)
     {
-        if(target.x > transform.position.x)
+        if(target.x - stopRange > transform.position.x)
         {
             if(rb.velocity.x < maxSpeed)
                 rb.AddForce(Vector2.right * Time.deltaTime * 500 * moveSpeed);
         }
-        else
+        else if (target.x + stopRange < transform.position.x)
         {
             if(rb.velocity.x > -maxSpeed)
                 rb.AddForce(Vector2.left * Time.deltaTime * 500 * moveSpeed);
