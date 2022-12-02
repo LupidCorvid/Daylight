@@ -45,6 +45,8 @@ public class DialogController : MonoBehaviour
 
     public static bool closedAnimator = true;
 
+    public Animator DotAnimator;
+
     void Awake()
     {
         main = this;
@@ -149,12 +151,16 @@ public class DialogController : MonoBehaviour
 
     public void pauseWaitForInputStart()
     {
-        
+        DotAnimator.SetTrigger("Open");
     }
 
     public void pauseWaitForInputEnd()
     {
+        if(source?.waitingForButtonInput == true)
+            DotAnimator.SetTrigger("Close");
         source?.receiveButtonInput();
+
+        
     }
 
     public void applyTextEffects(TMP_TextInfo info)
