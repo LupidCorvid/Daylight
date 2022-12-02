@@ -18,18 +18,33 @@ public class SwordFollow : MonoBehaviour
     public PlayerMovement pmScript;
     public GameObject tip;
 
+    public static SwordFollow sword;
+    public static GameObject instance;
+
     public GameObject attackMoveTracker;
 
     // Start is called before the first frame update
     void Start()
     {
+        speed = 100;
         //adjust the adjustLocation variables per sword type
-        speed = 12;
         adjustLocationY = 1;
         adjustDefaultX = -.5f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
+
+        // Singleton design pattern
+        if (instance != null && instance != this)
+        {
+            // Destroy(gameObject);
+        }
+        else
+        {
+            sword = this;
+            instance = gameObject;
+            DontDestroyOnLoad(gameObject);
+        }
     }
     
 
@@ -45,6 +60,10 @@ public class SwordFollow : MonoBehaviour
             AttackMove();
             //Check for contact damage
             return;
+        }
+        else
+        {
+            speed = Mathf.Lerp(speed, 100, 0.01f);
         }
         ////Accesses PlayerMovement script ONCE
         //if(!triggeredPMScript)
@@ -73,7 +92,7 @@ public class SwordFollow : MonoBehaviour
             
             if (!PlayerHealth.gettingUp)
             {
-                rb.velocity = (swordTargetLocation - transform.position) * (2 + 4 * pmScript.calculatedSpeed) / 5;
+                rb.velocity = (swordTargetLocation - transform.position) * (speed + 4 * pmScript.calculatedSpeed) / 5;
 
 
                 rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10;
