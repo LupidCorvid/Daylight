@@ -49,8 +49,8 @@ public class SwordTip : MonoBehaviour
 
         if(otherRb != null)
         {
-            if(otherRb.isKinematic)
-                otherRb.velocity += ((Vector2)(other.transform.position - transform.position).normalized) * knockback * (Mathf.Clamp(sword.rb.velocity.magnitude, 0, 2));
+            if(otherRb.bodyType != RigidbodyType2D.Static && otherRb != sword.pmScript.rb)
+                otherRb.AddForce(((Vector2)(other.transform.position - transform.position).normalized) * knockback * (Mathf.Clamp(sword.rb.velocity.magnitude, 0, 2)));
         }
     }
 }

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static GameObject instance;
     public static PlayerMovement controller;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
     public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint;
