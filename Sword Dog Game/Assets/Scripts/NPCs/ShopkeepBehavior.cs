@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopkeepBehavior : MonoBehaviour
+public class ShopkeepBehavior : DialogNPC
 {
     Animator anim;
     float waitToLook = 0f;
@@ -20,20 +20,10 @@ public class ShopkeepBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!talking)
-        {
-            if (finishTalkingSequence) StartCoroutine(finishedTalking());
-
-            else idle();
-
-            //Debug
-            if (Input.GetKeyDown(KeyCode.Alpha9) && !finishTalkingSequence)
-            {
-                talking = true;
-            }
-        }
-
-        else talkingToPlayer();
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if(!finishTalkingSequence)
+            idle();
     }
 
     private void idle()
@@ -70,19 +60,20 @@ public class ShopkeepBehavior : MonoBehaviour
             anim.Play("SK_upright_lookAtPlayer");
         }
 
-        //Debug
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            finishTalkingSequence = true;
-            talking = false;
-        }
     }
 
+    public override void exitDialog()
+    {
+        base.exitDialog();
+        StartCoroutine(finishedTalking());
+        
+    }
     IEnumerator finishedTalking()
     {
         foundPlayerPosition = false;
         waitToLook = 0;
         if(playerPosition.x < transform.position.x) anim.Play("SK_upright_resetHead");
+        finishTalkingSequence = true;
 
         yield return new WaitForSeconds(2);
 

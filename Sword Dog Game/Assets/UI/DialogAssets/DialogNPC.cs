@@ -20,10 +20,14 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     bool stoppedTalkingThisFrame = false;
 
+    public GameObject barkSpawnLocation;
 
     public void Awake()
     {
-        dialogSource = new DialogSource(dialog[numInteractions % dialog.Count]);
+        if (dialog.Count > 0)
+            dialogSource = new DialogSource(dialog[numInteractions % dialog.Count]);
+        else
+            dialogSource = new DialogSource("[exit]");
         dialogSource.bark += barkEffect;
         dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
@@ -66,7 +70,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.exit += exitDialog;
     }
 
-    public void exitDialog()
+    public virtual void exitDialog()
     {
         DialogController.main.closeBox();
         DialogController.main.reading = false;
@@ -75,7 +79,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
     public void barkEffect()
     {
-        GameObject addedObject = Instantiate(barkFXPrefab, transform.position, transform.rotation);
+        GameObject addedObject = Instantiate(barkFXPrefab, barkSpawnLocation?.transform?.position ?? transform.position, barkSpawnLocation?.transform?.rotation ?? transform.rotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
         addedParticle.velocity.y = -1;
         addedParticle.acceleration.y = 3;
@@ -83,7 +87,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
     public void barkEffect(Vector2 velocity, Vector2 acceleration)
     {
-        GameObject addedObject = Instantiate(barkFXPrefab, transform.position, transform.rotation);
+        GameObject addedObject = Instantiate(barkFXPrefab, barkSpawnLocation?.transform?.position ?? transform.position, barkSpawnLocation?.transform?.rotation ?? transform.rotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
         addedParticle.velocity = velocity;
         addedParticle.acceleration = acceleration;
