@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralBehavior : MonoBehaviour
+public class GeneralBehavior : DialogNPC
 {
     Animator anim;
     float waitToLook = 0f;
@@ -19,20 +19,10 @@ public class GeneralBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!talking)
-        {
-            if (finishTalkingSequence) StartCoroutine(finishedTalking());
-
-            else idle();
-
-            //Debug
-            if (Input.GetKeyDown(KeyCode.Alpha7) && !finishTalkingSequence)
-            {
-                talking = true;
-            }
-        }
-
-        else talkingToPlayer();
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            idle();
     }
 
     private void idle()
@@ -53,6 +43,13 @@ public class GeneralBehavior : MonoBehaviour
         if (waitToLook >= 15) waitToLook = 0;
     }
 
+
+    public override void exitDialog()
+    {
+        base.exitDialog();
+        StartCoroutine(finishedTalking());
+
+    }
     private void talkingToPlayer()
     {
         //if the player is on the left side, play turn head animation
