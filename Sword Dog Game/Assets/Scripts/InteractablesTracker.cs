@@ -21,7 +21,7 @@ public class InteractablesTracker : MonoBehaviour
     {
         if (Input.GetKeyDown(interactKey))
         {
-            nearest?.interact();
+            nearest?.interact(transform.parent.gameObject);
         }
     }
 

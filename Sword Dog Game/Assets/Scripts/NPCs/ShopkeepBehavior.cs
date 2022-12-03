@@ -8,7 +8,7 @@ public class ShopkeepBehavior : DialogNPC
     float waitToLook = 0f;
     bool talking, finishTalkingSequence = false;
 
-    Vector2 playerPosition = new Vector2(0, 0);
+    Transform playerPosition;
     bool foundPlayerPosition = false;
 
     // Start is called before the first frame update
@@ -47,17 +47,14 @@ public class ShopkeepBehavior : DialogNPC
         //if the player is on the left side, play turn head animation
         //When the player finishes talking, if the head is turned, reset the position
 
-        //Find the side the player is on
-        if (!foundPlayerPosition)
-        {
-            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position; //Edit for possible null reference
-            foundPlayerPosition = true;
-        }
-
         //Play the head turn anim
-        if(playerPosition.x < transform.position.x)
+        if(playerPosition.position.x < transform.position.x)
         {
             anim.Play("SK_upright_lookAtPlayer");
+        }
+        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("SK_upright_idle"))
+        {
+            anim.Play("SK_upright_resetHead");
         }
 
     }
@@ -68,11 +65,17 @@ public class ShopkeepBehavior : DialogNPC
         StartCoroutine(finishedTalking());
         
     }
+
+    public override void interact(GameObject user)
+    {
+        base.interact(user);
+        playerPosition = user.transform;
+    }
     IEnumerator finishedTalking()
     {
         foundPlayerPosition = false;
         waitToLook = 0;
-        if(playerPosition.x < transform.position.x) anim.Play("SK_upright_resetHead");
+        if(playerPosition.position.x < transform.position.x) anim.Play("SK_upright_resetHead");
         finishTalkingSequence = true;
 
         yield return new WaitForSeconds(2);

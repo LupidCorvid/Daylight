@@ -29,10 +29,10 @@ public class DialogNPC : MonoBehaviour, IInteractable
         else
             dialogSource = new DialogSource("[exit]");
         dialogSource.bark += barkEffect;
-        dialogSource.barkDefault += barkEffect;
+        //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
     }
-    public void interact()
+    public virtual void interact(GameObject user)
     {
         if (!alreadyTalking && !stoppedTalkingThisFrame && !DialogController.dialogOpen && DialogController.closedAnimator)
         {
@@ -61,12 +61,12 @@ public class DialogNPC : MonoBehaviour, IInteractable
         if(dialogSource != null)
         {
             dialogSource.bark -= barkEffect;
-            dialogSource.barkDefault -= barkEffect;
+            //dialogSource.barkDefault -= barkEffect;
             dialogSource.exit -= exitDialog;
         }
         dialogSource = newSource;
         dialogSource.bark += barkEffect;
-        dialogSource.barkDefault += barkEffect;
+        //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
     }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class dummyScript : EnemyBase
 {
     Animator dummyHitAnim;
-    bool flag = false;
     // Start is called before the first frame update
     public override void Start()
     {

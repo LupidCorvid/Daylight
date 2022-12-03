@@ -33,7 +33,7 @@ public class DialogSource
     public Vector2 defaultBarkAcceleration;
     public Vector2 defaultBarkVelocity;
 
-    public event Action barkDefault;
+    //public event Action barkDefault;
     public event Action<Vector2, Vector2> bark;
 
     public event Action exit;
