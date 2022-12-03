@@ -38,7 +38,7 @@ public class GeneralBehavior : MonoBehaviour
     private void idle()
     {
         waitToLook += Time.deltaTime;
-        print(waitToLook);
+        // print(waitToLook);
         
 
         if (waitToLook >= 7)
