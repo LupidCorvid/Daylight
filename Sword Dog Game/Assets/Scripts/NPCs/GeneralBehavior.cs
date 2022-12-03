@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralBehavior : DialogNPC
+public class GeneralBehavior : MonoBehaviour
 {
     Animator anim;
     float waitToLook = 0f;
@@ -19,16 +19,26 @@ public class GeneralBehavior : DialogNPC
 
     void FixedUpdate()
     {
-        if (alreadyTalking)
-            talkingToPlayer();
-        else if (!finishTalkingSequence)
-            idle();
+        if (!talking)
+        {
+            if (finishTalkingSequence) StartCoroutine(finishedTalking());
+
+            else idle();
+
+            //Debug
+            if (Input.GetKeyDown(KeyCode.Alpha7) && !finishTalkingSequence)
+            {
+                talking = true;
+            }
+        }
+
+        else talkingToPlayer();
     }
 
     private void idle()
     {
         waitToLook += Time.deltaTime;
-        //print(waitToLook);
+        // print(waitToLook);
         
 
         if (waitToLook >= 7)
@@ -67,12 +77,13 @@ public class GeneralBehavior : DialogNPC
         {
             anim.Play("GEN_lookAtPlayer");
         }
-    }
 
-    public override void exitDialog()
-    {
-        base.exitDialog();
-        StartCoroutine(finishedTalking());
+        //Debug
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            finishTalkingSequence = true;
+            talking = false;
+        }
     }
 
     IEnumerator finishedTalking()
@@ -83,7 +94,6 @@ public class GeneralBehavior : DialogNPC
                 || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
         {
             anim.Play("GEN_resetHead");
-            finishTalkingSequence = true;
         }
 
         yield return new WaitForSeconds(2);
