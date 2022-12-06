@@ -30,8 +30,8 @@ public class DialogSource
 
     private bool waitFrameForChar = false;
 
-    public Vector2 defaultBarkAcceleration;
-    public Vector2 defaultBarkVelocity;
+    public Vector2 defaultBarkAcceleration = new Vector2(0, 1);
+    public Vector2 defaultBarkVelocity = new Vector2(1, -1);
 
     //public event Action barkDefault;
     public event Action<Vector2, Vector2> bark;
@@ -49,6 +49,9 @@ public class DialogSource
     public event Action<string[]> addEffect;
 
     public event Action<string> removeEffect;
+
+    //Is just used for things like DialogNpc to have reactions to certain events
+    public event Action<string[]> callEvent;
 
     bool waiting = false;
     public bool waitingForButtonInput = false;
@@ -69,6 +72,7 @@ public class DialogSource
      * [abf] is auto bark frequency
      * [abf, min, max] sets the random range of abf, with max being exclusive
      * [j, pos] jumps position to new position
+     * 
      * 
      * CONSTRAIN VAR SIZES SO THAT DIALOG ISNT OFFSET BY IT TOO MUCH
      * [svar, var, val] sets a var with a value. If it does not exist it is created
@@ -95,6 +99,8 @@ public class DialogSource
      * [wi] //Waits for user input to continue
      * 
      * [IA, text] //Instantly adds some text. Meant for use with tmppro styling
+     * 
+     * [CE, p1, p2, p3, ...] //Calls an event. Only works if the thing running it has a listener to the event. Parameters are parsed by the listener.
      * 
      */
     public DialogSource(string dialog)
@@ -482,6 +488,9 @@ public class DialogSource
                     removeEffect?.Invoke(input[1]);
                 else
                     Debug.LogWarning("/TFX only takes one parameter!");
+                break;
+            case "CE":
+                callEvent?.Invoke(input[1..]);
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
