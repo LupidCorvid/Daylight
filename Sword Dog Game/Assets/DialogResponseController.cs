@@ -88,7 +88,7 @@ public class DialogResponseController : MonoBehaviour
 
         Vector3 finalPosition = default;
         //finalPosition.x = (-responsesContainer.rect.width) + responsesContainer.position.x;
-        finalPosition.x = responsesContainer.position.x + (responsesContainer.rect.xMin + (responsesContainer.rect.width * .5f)) * (Screen.width/scaler.referenceResolution.x);
+        finalPosition.x = responsesContainer.position.x + (responsesContainer.rect.xMin + (responsesContainer.rect.width * .425f)) * (Screen.width/scaler.referenceResolution.x);
 
         finalPosition.y = options[option].transform.position.y;
         selectedObjectPointer.transform.position = finalPosition;
