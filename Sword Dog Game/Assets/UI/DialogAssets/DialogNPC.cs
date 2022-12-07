@@ -60,14 +60,21 @@ public class DialogNPC : MonoBehaviour, IInteractable
     {
         if(dialogSource != null)
         {
+            dialogSource.callEvent -= eventCalled;
             dialogSource.bark -= barkEffect;
             //dialogSource.barkDefault -= barkEffect;
             dialogSource.exit -= exitDialog;
         }
         dialogSource = newSource;
+        dialogSource.callEvent += eventCalled;
         dialogSource.bark += barkEffect;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
+    }
+
+    public virtual void eventCalled(params string[] input)
+    {
+
     }
 
     public virtual void exitDialog()

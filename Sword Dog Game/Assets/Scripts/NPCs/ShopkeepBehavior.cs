@@ -82,5 +82,18 @@ public class ShopkeepBehavior : DialogNPC
 
         finishTalkingSequence = false;
     }
+    public override void eventCalled(params string[] input)
+    {
+        base.eventCalled(input);
+        if (input.Length == 0)
+            return;
+        if (input[0] == "OpenShop")
+            openShop();
+    }
+
+    public void openShop()
+    {
+        Debug.Log("Attempted to open shop. Shop is not yet implemented!");
+    }
 
 }
