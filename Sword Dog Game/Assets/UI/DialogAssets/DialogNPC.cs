@@ -94,7 +94,16 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
     public void barkEffect(Vector2 velocity, Vector2 acceleration)
     {
-        GameObject addedObject = Instantiate(barkFXPrefab, barkSpawnLocation?.transform?.position ?? transform.position, barkSpawnLocation?.transform?.rotation ?? transform.rotation);
+        Vector2 spawnLocation = transform.position;
+        Quaternion spawnRotation = transform.rotation;
+
+        if(barkSpawnLocation != null)
+        {
+            spawnLocation = barkSpawnLocation.transform.position;
+            spawnRotation = barkSpawnLocation.transform.rotation;
+        }
+
+        GameObject addedObject = Instantiate(barkFXPrefab, spawnLocation, spawnRotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
         addedParticle.velocity = velocity;
         addedParticle.acceleration = acceleration;
