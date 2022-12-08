@@ -31,9 +31,13 @@ public class SwayEffect : MonoBehaviour
     public Dictionary<Rigidbody2D, Vector2> objectsWithVelocity = new Dictionary<Rigidbody2D, Vector2>();
 
     public SoundPlayer soundPlayer;
+
+    //Used for culling
+    public static Transform player;
     // Start is called before the first frame update
     void Start()
     {
+        player ??= GameObject.FindGameObjectWithTag("Player").transform;
         soundPlayer = GetComponent<SoundPlayer>();
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
         rend = GetComponent<Renderer>();
@@ -163,6 +167,10 @@ public class SwayEffect : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Culling
+        if ((player.position - transform.position).x > 15 || (player.position - transform.position).y > 10)
+            return;
+
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         int windDirection = (windStrength > 0 ? -1 : 1);
         float lastVelocity = swayVelocity;
@@ -187,7 +195,7 @@ public class SwayEffect : MonoBehaviour
             else
                 sway(swayPosition);
         }
-        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3)
+        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3.75)
         {
             soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3);
         }
