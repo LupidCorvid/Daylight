@@ -37,7 +37,7 @@ public class SwayEffect : MonoBehaviour
 
     //Used for sound capping
     public static int windSounds = 0;
-    public static int windSoundCap = 100;
+    public static int windSoundCap = 400;
 
     // Start is called before the first frame update
     void Start()
