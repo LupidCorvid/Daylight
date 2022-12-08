@@ -200,7 +200,7 @@ public class SwayEffect : MonoBehaviour
             else
                 sway(swayPosition);
         }
-        Debug.Log(windSounds);
+
         if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3 && windSounds < windSoundCap)
         {
             AudioClip rustleFX = AudioManager.instance?.Find("Ambience.WindyForest.RustleFX");
