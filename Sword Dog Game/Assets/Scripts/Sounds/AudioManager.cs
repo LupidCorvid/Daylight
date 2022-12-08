@@ -418,12 +418,12 @@ public class AudioManager : MonoBehaviour
         {
             foreach (SoundNode node in ((SoundCategory)current).children)
             {
-                if (node.name == path[0])
+                if (path.Count > 0 && node.name == path[0])
                 {
-                    Debug.Log("Found " + path[0]);
+                    // Debug.Log("Found " + path[0]);
                     current = node;
                     path.RemoveAt(0);
-                    Find(node, path);
+                    return Find(node, path);
                 }
             }
             Debug.LogError("Invalid sound path provided!");
