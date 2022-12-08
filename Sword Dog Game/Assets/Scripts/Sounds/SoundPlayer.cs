@@ -12,8 +12,11 @@ public class SoundPlayer : MonoBehaviour
         sources = transform.GetComponents<AudioSource>();
     }
 
-    public void PlaySound(AudioClip clip, bool loop = false)
+    public void PlaySound(string path, bool loop = false)
     {
+        AudioClip clip = AudioManager.instance.Find(path);
+        if (clip == null) return;
+        
         foreach (AudioSource source in sources)
         {
             if (source.clip == clip && source.isPlaying)

@@ -405,31 +405,29 @@ public class AudioManager : MonoBehaviour
     public AudioClip Find(string soundPath)
     {
         List<string> path = new List<string>(soundPath.Split("."));
-        SoundNode current = database;
+        return Find(database, path);
+    }
 
-        search: while (path.Count > 0)
+    public AudioClip Find(SoundNode current, List<string> path)
+    {
+        if (current is SoundPlayable)
         {
-            if (current is SoundCategory)
+            return ((SoundPlayable)current).GetClip();
+        }
+        else if (current is SoundCategory)
+        {
+            foreach (SoundNode node in ((SoundCategory)current).children)
             {
-                foreach (SoundNode node in ((SoundCategory)current).children)
+                if (node.name == path[0])
                 {
-                    if (node.name == path[0])
-                    {
-                        current = node;
-                        path.RemoveAt(0);
-                        goto search;
-                    }
-                }
-                Debug.LogError("Invalid sound path provided!");
-                return null;
-            }
-            else if (current is SoundPlayable)
-            {
-                if (current.name == path[0])
-                {
-                    return ((SoundPlayable)current).GetClip();
+                    Debug.Log("Found " + path[0]);
+                    current = node;
+                    path.RemoveAt(0);
+                    Find(node, path);
                 }
             }
+            Debug.LogError("Invalid sound path provided!");
+            return null;
         }
         Debug.LogError("Invalid sound path provided!");
         return null;

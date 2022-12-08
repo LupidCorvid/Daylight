@@ -9,6 +9,8 @@ public class SoundSet : SoundPlayable
 
     public override AudioClip GetClip()
     {
-        return clips[Random.Range(0, clips.Count)];
+        int index = Random.Range(0, clips.Count);
+        Debug.Log(index + " " + clips.Count);
+        return clips[index];
     }
 }

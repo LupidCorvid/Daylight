@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject sprintDust;
 
     public bool attacking = false;
+    [SerializeField] private SoundPlayer soundPlayer;
 
     void Start()
     {
@@ -574,6 +575,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
+            soundPlayer.PlaySound("Impacts.Steps.MediumStep");
         }        
     }
 
