@@ -575,7 +575,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
-            soundPlayer.PlaySound("Impacts.Steps.MediumStep");
         }        
     }
 
@@ -592,5 +591,10 @@ public class PlayerMovement : MonoBehaviour
         addedParticle.velocity.x = facingRight ? 1 : -1;
         addedParticle.acceleration.y = 3;
         addedParticle.startTime = Time.time;
+    }
+
+    public void PlaySound(string path)
+    {
+        soundPlayer.PlaySound(path);
     }
 }
