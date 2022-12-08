@@ -109,7 +109,7 @@ public class SwayEffect : MonoBehaviour
             distanceModifier = Mathf.Abs((transform.position.x - collision.transform.position.x)/collision.bounds.extents.x);
             distanceModifier = Mathf.Clamp(distanceModifier, 0, 1);
             distanceModifier = 1 - distanceModifier;
-            swayVelocity += ((collision.attachedRigidbody.velocity.x) * Time.deltaTime) * distanceModifier;
+            float physicsVelocity = ((collision.attachedRigidbody.velocity.x) * Time.deltaTime) * distanceModifier;
             
             if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
             {
@@ -122,7 +122,7 @@ public class SwayEffect : MonoBehaviour
                 distanceModifier = Mathf.Clamp(distanceModifier, -1, 1);
                 distanceModifier += distanceModifier > 0 ? -1 : 1;
                 distanceModifier *= -1;
-                swayVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_AWAY_STRENGTH * distanceModifier;
+                physicsVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_AWAY_STRENGTH * distanceModifier;
 
                 //For pushing grass behind something being launched
                 if(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y > .25f)
@@ -130,12 +130,20 @@ public class SwayEffect : MonoBehaviour
                     if(transform.position.x - collision.transform.position.x < 0 && collision.attachedRigidbody.velocity.x > 0
                         || transform.position.x - collision.transform.position.x > 0 && collision.attachedRigidbody.velocity.x < 0)
                     {
-                        swayVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_BACK_STRENGTH * distanceModifier 
+                        physicsVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_BACK_STRENGTH * distanceModifier 
                                         * Mathf.Abs(collision.attachedRigidbody.velocity.x);
+
                     }
                 }
                 
                 objectsWithVelocity[collision.attachedRigidbody] = collision.attachedRigidbody.velocity;
+            }
+            swayVelocity += physicsVelocity;
+            if(Mathf.Abs(physicsVelocity) > 0.01f)
+            {
+
+                Debug.Log("Rustle");
+                soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3));
             }
         }
     }
@@ -160,7 +168,8 @@ public class SwayEffect : MonoBehaviour
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         int windDirection = (windStrength > 0 ? -1 : 1);
         float lastVelocity = swayVelocity;
-        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.deltaTime * windStrength;
+        //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
+        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
         swayVelocity += windEffect;
         swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
         swayPosition += swayVelocity;
@@ -180,10 +189,10 @@ public class SwayEffect : MonoBehaviour
             else
                 sway(swayPosition);
         }
-        if(windEffect > windStrength * .5f * Time.deltaTime)
+        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3)
         {
             Debug.Log("Blowing wind");
-            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect * 2);
+            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3);
         }
     }
 }
