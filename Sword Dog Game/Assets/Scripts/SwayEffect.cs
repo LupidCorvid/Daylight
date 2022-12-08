@@ -141,8 +141,6 @@ public class SwayEffect : MonoBehaviour
             swayVelocity += physicsVelocity;
             if(Mathf.Abs(physicsVelocity) > 0.01f)
             {
-
-                Debug.Log("Rustle");
                 soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3));
             }
         }
@@ -191,7 +189,6 @@ public class SwayEffect : MonoBehaviour
         }
         if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3)
         {
-            Debug.Log("Blowing wind");
             soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3);
         }
     }
