@@ -14,9 +14,13 @@ public class SoundPlayer : MonoBehaviour
 
     public void PlaySound(string path, float volume = 1, bool loop = false)
     {
-        AudioClip clip = AudioManager.instance?.Find(path);
+        PlaySound(AudioManager.instance?.Find(path), volume, loop);
+    }
+    
+    public void PlaySound(AudioClip clip, float volume = 1, bool loop = false)
+    {
         if (clip == null) return;
-        
+
         foreach (AudioSource source in sources)
         {
             if (source.clip == clip && source.isPlaying)

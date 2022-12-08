@@ -34,6 +34,11 @@ public class SwayEffect : MonoBehaviour
 
     //Used for culling
     public static Transform player;
+
+    //Used for sound capping
+    public static int windSounds = 0;
+    public static int windSoundCap = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -195,9 +200,21 @@ public class SwayEffect : MonoBehaviour
             else
                 sway(swayPosition);
         }
-        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3)
+        Debug.Log(windSounds);
+        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3 && windSounds < windSoundCap)
         {
-            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3 * .75f);
+            AudioClip rustleFX = AudioManager.instance?.Find("Ambience.WindyForest.RustleFX");
+            if (rustleFX != null)
+            {
+                soundPlayer.PlaySound(rustleFX, windEffect / Time.fixedDeltaTime * 0.075f * 4f / 3 * .75f);
+                windSounds++;
+                Invoke("EndWindSound", rustleFX.length);
+            }
         }
     }
+    
+    private void EndWindSound()
+    {
+        windSounds--;
+    } 
 }
