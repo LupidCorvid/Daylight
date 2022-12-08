@@ -30,9 +30,11 @@ public class SwayEffect : MonoBehaviour
 
     public Dictionary<Rigidbody2D, Vector2> objectsWithVelocity = new Dictionary<Rigidbody2D, Vector2>();
 
+    public SoundPlayer soundPlayer;
     // Start is called before the first frame update
     void Start()
     {
+        soundPlayer = GetComponent<SoundPlayer>();
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
         rend = GetComponent<Renderer>();
         meshFilter = GetComponent<MeshFilter>();
