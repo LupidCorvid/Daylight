@@ -145,7 +145,7 @@ public class SwayEffect : MonoBehaviour
             swayVelocity += physicsVelocity;
             if(Mathf.Abs(physicsVelocity) > 0.01f)
             {
-                soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3));
+                soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3 * .5f));
             }
         }
     }
@@ -195,9 +195,9 @@ public class SwayEffect : MonoBehaviour
             else
                 sway(swayPosition);
         }
-        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3.75)
+        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3)
         {
-            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3);
+            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect/Time.fixedDeltaTime * 0.075f * 4f/3 * .75f);
         }
     }
 }
