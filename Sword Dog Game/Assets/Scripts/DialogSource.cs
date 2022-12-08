@@ -172,8 +172,9 @@ public class DialogSource
     {
         if (dialogBlocks.ContainsKey(block))
         {
-            dialog = dialogBlocks[block];
-            position = 0;
+            //dialog = dialogBlocks[block];
+            //position = 0;
+            dialog = dialog.Insert(position, dialogBlocks[block]);
             waiting = false;
         }
         else
