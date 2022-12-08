@@ -51,17 +51,17 @@ public class VineController : MonoBehaviour
         
         if (segments.Count > 0)
         {
-            vinePart.transform.position = segments[segments.Count - 1].transform.position - (sizePerSegment  * Vector3.up);
+            vinePart.transform.position = segments[segments.Count - 1].transform.position - (sizePerSegment  * (transform.rotation * Vector3.up));
             vinePart.connection.connectedBody = segments[segments.Count - 1].rb;
-            vinePart.connection.connectedAnchor = sgmntCldr.bounds.extents.y * Vector2.down;
+            vinePart.connection.connectedAnchor = sgmntCldr.bounds.extents.y * (transform.rotation * Vector2.down);
         }
         else
         {
-            vinePart.transform.position = transform.position - (sizePerSegment / 2 * Vector3.up);
+            vinePart.transform.position = transform.position - (sizePerSegment / 2 * (transform.rotation * Vector3.up));
             vinePart.connection.connectedBody = rb;
         }
 
-        vinePart.connection.anchor = Vector2.up * sgmntCldr.bounds.extents.y;
+        vinePart.connection.anchor = (Vector2.up) * sgmntCldr.bounds.extents.y;
 
         segments.Add(vinePart);
     }
