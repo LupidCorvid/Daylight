@@ -1,19 +1,14 @@
 -Blocks
 Default{
 [sh,The General][abf,10][ss, .05] Hi there.[w, .35] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
-[prompt, Fear,[llf,Fear], Joy, [llf,Joy], Wobbly, [llf,Wobbly]] [wi]
-Thank you for listening![w, 1] [exit]
+[prompt, Fear,[llf,Fear], Joy, [llf,Joy], Wobbly, [llf,Wobbly]] [wi] Thank you for listening![w, 1] [exit]
 }
 Fear{
-[ss, .025][IA,<size=200%>][TFX, Shake, 1]AAAAAHHHH!!![/TFX,Shake][IA,</size>][wi] [llf,Exit]
+[ss, .025][IA,<size=200%>][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
 }
 Joy{
-[ss, .05][TFX, Wave, 5, 5, 50]Yaaaaay![/TFX,Wave][wi] [llf,Exit]
+[ss, .05][TFX, Wave, 5, 5, 50]Yaaaaay![/TFX,Wave]
 }
 Wobbly{
-[ss, 0.05][IA,<size=125%>][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>][wi] [llf,Exit]
-}
-Exit{
-
-[ss, 0.05]Thank you for listening! [w,1.15] [exit]
+[ss, 0.05][IA,<size=125%>][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>]
 }
