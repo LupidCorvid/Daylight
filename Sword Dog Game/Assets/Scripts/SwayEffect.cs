@@ -206,7 +206,7 @@ public class SwayEffect : MonoBehaviour
             AudioClip rustleFX = AudioManager.instance?.Find("Ambience.WindyForest.RustleFX");
             if (rustleFX != null)
             {
-                soundPlayer.PlaySound(rustleFX, windEffect / Time.fixedDeltaTime * 0.075f * 4f / 3 * .75f);
+                soundPlayer.PlaySound(rustleFX, windEffect / Time.fixedDeltaTime * 0.04f);
                 windSounds++;
                 Invoke("EndWindSound", rustleFX.length);
             }
