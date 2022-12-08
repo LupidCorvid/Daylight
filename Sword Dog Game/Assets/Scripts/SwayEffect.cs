@@ -159,7 +159,9 @@ public class SwayEffect : MonoBehaviour
     {
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         int windDirection = (windStrength > 0 ? -1 : 1);
-        swayVelocity += Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.deltaTime * windStrength;
+        float lastVelocity = swayVelocity;
+        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.deltaTime * windStrength;
+        swayVelocity += windEffect;
         swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
         swayPosition += swayVelocity;
 
@@ -177,6 +179,11 @@ public class SwayEffect : MonoBehaviour
                 swayRotate(swayPosition);
             else
                 sway(swayPosition);
+        }
+        if(windEffect > windStrength * .5f * Time.deltaTime)
+        {
+            Debug.Log("Blowing wind");
+            soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", windEffect * 2);
         }
     }
 }
