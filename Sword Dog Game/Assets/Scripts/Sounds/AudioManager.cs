@@ -6,8 +6,8 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioMixer mixer, sfx;
-    public AudioMixerGroup mixerGroup;
+    public AudioMixer musicMixer, sfxMixer;
+    public AudioMixerGroup musicMixerGroup;
     public AudioClip currentSong;
     public GameArea currentArea;
 
@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
     private bool firstSongPlayed = false;
 
     public AudioMixerSnapshot normal, hurt;
+    public SoundCategory database;
 
     /// <summary>
     /// List of all different game areas that may have different sets of music
@@ -93,7 +94,7 @@ public class AudioManager : MonoBehaviour
             s.loop = false;
             s.playOnAwake = false;
             s.volume = 0.0f;
-            s.outputAudioMixerGroup = mixerGroup;
+            s.outputAudioMixerGroup = musicMixerGroup;
         }
 
         foreach (AudioSource s in BGM2)
@@ -101,7 +102,7 @@ public class AudioManager : MonoBehaviour
             s.loop = false;
             s.playOnAwake = false;
             s.volume = 0.0f;
-            s.outputAudioMixerGroup = mixerGroup;
+            s.outputAudioMixerGroup = musicMixerGroup;
         }
     }
 
@@ -149,24 +150,24 @@ public class AudioManager : MonoBehaviour
 
         // Volume controls (hold down + or -)
         float vol;
-        mixer.GetFloat("Volume", out vol);
+        musicMixer.GetFloat("Volume", out vol);
 
         if (Input.GetKey("="))
         {
             if (vol < 0f)
                 vol += 0.1f;
-            mixer.SetFloat("Volume", vol);
+            musicMixer.SetFloat("Volume", vol);
         }
 
         if (Input.GetKey("-"))
         {
             if (vol > -80f)
                 vol -= 0.1f;
-            mixer.SetFloat("Volume", vol);
+            musicMixer.SetFloat("Volume", vol);
         }
 
         float pitch;
-        mixer.GetFloat("Pitch", out pitch);
+        musicMixer.GetFloat("Pitch", out pitch);
         if (pitch <= 0.05f)
         {
             SetPitch(1f);
@@ -188,9 +189,9 @@ public class AudioManager : MonoBehaviour
 
         // Scene specific SFX effects
         if (currentArea == GameArea.CAVE)
-            sfx.SetFloat("Reverb", -4f);
+            sfxMixer.SetFloat("Reverb", -4f);
         else
-            sfx.SetFloat("Reverb", -10000f);
+            sfxMixer.SetFloat("Reverb", -10000f);
     }
 
     public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)
@@ -318,7 +319,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetPitch(float pitch)
     {
-        mixer.SetFloat("Pitch", pitch);
+        musicMixer.SetFloat("Pitch", pitch);
     }
 
     public IEnumerator PitchDown()
@@ -399,5 +400,38 @@ public class AudioManager : MonoBehaviour
         hurt.TransitionTo(0.1f);
         yield return new WaitForSeconds(1f);
         normal.TransitionTo(1f);
+    }
+
+    public AudioClip Find(string soundPath)
+    {
+        List<string> path = new List<string>(soundPath.Split("."));
+        SoundNode current = database;
+
+        search: while (path.Count > 0)
+        {
+            if (current is SoundCategory)
+            {
+                foreach (SoundNode node in ((SoundCategory)current).children)
+                {
+                    if (node.name == path[0])
+                    {
+                        current = node;
+                        path.RemoveAt(0);
+                        goto search;
+                    }
+                }
+                Debug.LogError("Invalid sound path provided!");
+                return null;
+            }
+            else if (current is SoundPlayable)
+            {
+                if (current.name == path[0])
+                {
+                    return ((SoundPlayable)current).GetClip();
+                }
+            }
+        }
+        Debug.LogError("Invalid sound path provided!");
+        return null;
     }
 }

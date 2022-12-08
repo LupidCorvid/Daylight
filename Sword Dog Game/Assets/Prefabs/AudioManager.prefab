@@ -41,17 +41,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1692982821856884710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5685af64a3ea9c479f329892663d20a, type: 3}
+  m_Script: {fileID: 11500000, guid: 991e11d9120a7b44ea21d239af729f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
-  sfx: {fileID: 24100000, guid: 2fb86d5d0a3982d48942d16bb0d88023, type: 2}
-  mixerGroup: {fileID: 24300002, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
+  musicMixer: {fileID: 24100000, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
+  sfxMixer: {fileID: 24100000, guid: 2fb86d5d0a3982d48942d16bb0d88023, type: 2}
+  musicMixerGroup: {fileID: 24300002, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
   currentSong: {fileID: 0}
-  currentArea: 1
+  currentArea: 0
   BGM1: []
   BGM2: []
   volume: 1
   fadeDuration: 1
   normal: {fileID: 24500006, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
   hurt: {fileID: -780703057569719066, guid: 0a55a7605b1e0414293560dbe5625874, type: 2}
+  database: {fileID: 11400000, guid: 82152fdb8a2a7c742be6e2a8f0d8cd90, type: 2}

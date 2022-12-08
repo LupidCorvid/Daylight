@@ -5,7 +5,6 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     private AudioSource[] sources;
-    public AudioClip[] clips;
 
     // Start is called before the first frame update
     void Start()
@@ -13,9 +12,8 @@ public class SoundPlayer : MonoBehaviour
         sources = transform.GetComponents<AudioSource>();
     }
 
-    public void PlaySound(int sound, bool loop = false)
+    public void PlaySound(AudioClip clip, bool loop = false)
     {
-        AudioClip clip = clips[sound];
         foreach (AudioSource source in sources)
         {
             if (source.clip == clip && source.isPlaying)
@@ -48,4 +46,5 @@ public class SoundPlayer : MonoBehaviour
             }
         }
     }
+
 }
