@@ -173,7 +173,7 @@ public class SwayEffect : MonoBehaviour
     private void FixedUpdate()
     {
         //Culling
-        if ((player.position - transform.position).x > 15 || (player.position - transform.position).y > 10)
+        if ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15)
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending
