@@ -110,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded)
         {
             lastLand = Time.time;
+            soundPlayer.PlaySound("Impacts.Landing");
         }
     }
 
