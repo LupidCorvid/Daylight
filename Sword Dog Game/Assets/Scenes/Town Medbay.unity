@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166697935}
   - component: {fileID: 166697936}
+  - component: {fileID: 166697937}
   m_Layer: 7
   m_Name: Level
   m_TagString: Untagged
@@ -178,6 +179,19 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &166697937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166697934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1001 &324237320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,6 +540,7 @@ GameObject:
   - component: {fileID: 1125474346}
   - component: {fileID: 1125474348}
   - component: {fileID: 1125474347}
+  - component: {fileID: 1125474349}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
@@ -626,6 +641,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1125474349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125474345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &1259258488
 GameObject:
   m_ObjectHideFlags: 0

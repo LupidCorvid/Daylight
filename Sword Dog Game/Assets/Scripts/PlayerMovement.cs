@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool attacking = false;
     [SerializeField] private SoundPlayer soundPlayer;
+    public Ground.Type currentGround;
 
     void Start()
     {
@@ -535,6 +536,7 @@ public class PlayerMovement : MonoBehaviour
             if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
             {
                 anim.SetBool("grounded", true);
+                currentGround = collision.gameObject.TryGetComponent(out Ground ground) ? ground.type : Ground.Type.GRASS;
                 isGrounded = true;
                 lastOnLand = 0f;
                 break;
@@ -596,6 +598,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlaySound(string path)
     {
+        soundPlayer.PlaySound(path);
+    }
+
+    public void PlayStepSound()
+    {
+        string path = "Impacts.Steps.SoftStep";
+        switch (currentGround)
+        {
+            case Ground.Type.ROCK:
+                path = "Impacts.Steps.MediumStep";
+                break;
+            case Ground.Type.WOOD:
+                path = "Impacts.Steps.WoodenStep";
+                break;
+            case Ground.Type.GRASS:
+                path = "Impacts.Steps.SoftStep";
+                break;
+        }
         soundPlayer.PlaySound(path);
     }
 }
