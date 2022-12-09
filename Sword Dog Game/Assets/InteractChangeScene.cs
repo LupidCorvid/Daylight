@@ -17,6 +17,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,8 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public void interact(GameObject user)
     {
-        StartCoroutine(LoadNextScene());
+        if(!changingScene)
+            StartCoroutine(LoadNextScene());
     }
 
     public void showPrompt(GameObject prompt)
