@@ -53,10 +53,7 @@ public class ChangeScene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         PlayerMovement.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
-        if (eventSystem != null)
-        {
-            GameObject.Destroy(eventSystem.gameObject);
-        }
+        GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
