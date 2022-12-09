@@ -56,7 +56,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
                 addedPrompt.transform.localScale = promptSpawnLocation.localScale;
             }
             spawnedPrompt = addedPrompt.GetComponent<Animator>();
-            spawnedPrompt.SetFloat("InteractType", 0);
+            spawnedPrompt.SetFloat("InteractType", 3);
         }
         else
         {
