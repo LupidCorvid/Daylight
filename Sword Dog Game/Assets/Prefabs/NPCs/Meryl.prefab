@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 97294771630012861}
   - component: {fileID: 97294771630012862}
   - component: {fileID: 97294771630012863}
+  - component: {fileID: 3328643770172790151}
   m_Layer: 0
   m_Name: Meryl
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &97294771630012862
 SpriteRenderer:
@@ -105,3 +106,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3328643770172790151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97294771630012848}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18eab93de4aaa94090683bbf4213c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
+  dialog:
+  - '[lf,Meryl.txt]'
+  numInteractions: 0
+  loopInteractions: 0
+  alreadyTalking: 0
+  barkSpawnLocation: {fileID: 0}
+  promptPrefab: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+  spawnedPrompt: {fileID: 0}
+  promptSpawnLocation: {fileID: 0}
