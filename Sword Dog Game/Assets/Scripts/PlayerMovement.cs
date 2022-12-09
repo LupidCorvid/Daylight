@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void checkIfLanding(Collider2D collision)
     {
-        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded)
+        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene)
         {
             lastLand = Time.time;
             soundPlayer.PlaySound("Impacts.Landing");

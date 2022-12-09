@@ -11,7 +11,7 @@ public class ChangeScene : MonoBehaviour
     public string scene;
     public string spawn;
     private Animator crossfade;
-    public static bool changingScene;
+    public static bool changingScene = false;
     public bool noFall = false;
     public static Action clearCollisions, clearInteractables;
 
@@ -20,7 +20,6 @@ public class ChangeScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        changingScene = false;
         crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
     }
 

@@ -21,5 +21,6 @@ public class Crossfade : MonoBehaviour
     void EndFade()
     {
         GetComponent<Animator>().SetTrigger("stop");
+        ChangeScene.changingScene = false;
     }
 }
