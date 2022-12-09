@@ -96,9 +96,15 @@ public class DialogNPC : MonoBehaviour, IInteractable
         DialogController.main.reading = false;
         alreadyTalking = false;
         stoppedTalkingThisFrame = true;
-        if(inRange)
+        Invoke("tryShowPrompt", 1.5f);
+    }
+
+    private void tryShowPrompt()
+    {
+        if (inRange)
             showPrompt(promptPrefab);
     }
+
     public void barkEffect()
     {
         GameObject addedObject = Instantiate(barkFXPrefab, barkSpawnLocation?.transform?.position ?? transform.position, barkSpawnLocation?.transform?.rotation ?? transform.rotation);
