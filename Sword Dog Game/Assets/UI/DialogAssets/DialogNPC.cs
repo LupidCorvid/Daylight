@@ -133,7 +133,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void showPrompt(GameObject prompt)
     {
-
+        if (alreadyTalking)
+            return;
         if (spawnedPrompt == null)
         {
             GameObject addedPrompt;
