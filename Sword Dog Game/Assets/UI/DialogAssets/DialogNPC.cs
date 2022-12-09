@@ -62,6 +62,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
             alreadyTalking = true;
             hidePrompt(null);
         }
+        else if (alreadyTalking)
+            dialogSource.skippingText = true;
     }
 
     private void LateUpdate()

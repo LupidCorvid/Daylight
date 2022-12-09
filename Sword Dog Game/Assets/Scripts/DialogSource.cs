@@ -62,6 +62,8 @@ public class DialogSource
     public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
 
     public const string BLOCKS_SIGNATURE = "-Blocks";
+
+    public bool skippingText = false;
     //number of characters/second
     /*Dialogue guide:
      * [] is escape
@@ -189,15 +191,16 @@ public class DialogSource
 
     public string read()
     {
-        if (waiting || waitingForButtonInput)
+        if ((waiting || waitingForButtonInput) && (!skippingText))
             return outString;
-        while ((lastReadTime + speed < Time.time && Time.time > waitStart + waitTime))
+        while ((((lastReadTime + speed < Time.time || skippingText) && Time.time > waitStart + waitTime)))
         {
             lastReadTime = Time.time;
             readDialog();
 
             if (position == dialog.Length - 1 && speed == 0)
             {
+                skippingText = false;
                 Debug.LogWarning("Speed was left at 0, this could prevent anything else from running! Always return speed to non-zero once finishing");
             }
         }
@@ -223,7 +226,7 @@ public class DialogSource
 
     private void readDialog()
     {
-        if (waiting || waitingForButtonInput)
+        if ((waiting || waitingForButtonInput) && (!skippingText))
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')
@@ -319,14 +322,18 @@ public class DialogSource
             case "w":
                 if (input.Length == 2)
                 {
-                    waitTime = float.Parse(input[1]);
-                    waitStart = Time.time;
+                    if (!skippingText)
+                    {
+                        waitTime = float.Parse(input[1]);
+                        waitStart = Time.time;
+                    }
                 }
                 else
                     Debug.LogWarning("Invalid number of parameters for wait(w)!");
                 break;
             case "c":
                 outString = "";
+                skippingText = false;
                 clear?.Invoke();
                 break;
             case "abf":
@@ -354,6 +361,7 @@ public class DialogSource
                     Debug.LogWarning("Invalid number of parameters for jump (j)!");
                 break;
             case "exit":
+                skippingText = false;
                 exit?.Invoke();
                 break;
             case "sdb":
@@ -367,6 +375,7 @@ public class DialogSource
                 break;
             case "prompt":
                 waiting = true;
+                skippingText = false;
                 responseOutputs.Clear();
                 responseOutputsNumeric.Clear();
 
@@ -422,6 +431,7 @@ public class DialogSource
                 {
                     waitingForButtonInput = true;
                     startWaitingForInput?.Invoke();
+                    skippingText = false;
                 }
                 else
                     Debug.LogError("Invalid number or arguments for waitInput[wi]!");
