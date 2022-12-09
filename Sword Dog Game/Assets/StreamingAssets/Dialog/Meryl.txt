@@ -1,4 +1,11 @@
 -Blocks
 Default{
-[sh,Meryl][abf,10][ss, .05] Hi.[w, .35] I am practicing to become a voice actor.[w, 1] [exit]
+[sh,Meryl][abf,10][ss, .05] Hello! [w, .2] What can I do for you? 
+[prompt, Heal, [llf,Heal], Leave, [llf,Exit]] [wi] [exit]
+}
+Heal{
+[c]You're in tip top shape! Come back if you ever need healing. [wi] [exit]
+}
+Exit{
+[c]Take care! [wi] [exit]
 }

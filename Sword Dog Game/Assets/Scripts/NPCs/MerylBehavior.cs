@@ -69,11 +69,12 @@ public class MerylBehavior : DialogNPC
     {
         foundPlayerPosition = false;
         //waitToLook = 0;
+        /*
         if ((playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
                 || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
         {
             anim.Play("GEN_resetHead");
-        }
+        }*/
 
         yield return new WaitForSeconds(2);
 
