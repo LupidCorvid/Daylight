@@ -151,7 +151,6 @@ public class DialogSource
 
     public static string LoadFile(string filePath)
     {
-        Debug.Log(Application.streamingAssetsPath);
         string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath + @"\Dialog\", filePath));
         return gottenText;
     }
