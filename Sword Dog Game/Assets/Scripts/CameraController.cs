@@ -17,6 +17,11 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        transform.position = targetPoint;
+    }
+
     // Update is called once per frame
     void Update()
     {

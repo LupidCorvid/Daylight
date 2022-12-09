@@ -17,7 +17,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public void interact(GameObject user)
     {
-        if(!changingScene)
+        if (!changingScene)
             StartCoroutine(LoadNextScene());
     }
 
@@ -73,10 +73,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1f);
         PlayerMovement.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
-        if (eventSystem != null)
-        {
-            GameObject.Destroy(eventSystem.gameObject);
-        }
+        GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene(scene);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();
