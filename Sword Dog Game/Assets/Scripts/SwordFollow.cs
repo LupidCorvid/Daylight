@@ -46,6 +46,17 @@ public class SwordFollow : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    void OnEnable()
+    {
+        if (player != null)
+        {
+            playerLocation = player.transform.position;
+            var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
+            swordTargetLocation = playerLocation + offset;
+        }
+        
+    }
     
 
     // Update is called once per frame
