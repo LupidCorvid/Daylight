@@ -11,7 +11,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     public string scene;
     public string spawn;
     private Animator crossfade;
-    public static bool changingScene;
     public bool noFall = false;
 
     public Animator spawnedPrompt;
@@ -27,7 +26,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
-        changingScene = false;
         crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
     }
 
@@ -39,7 +37,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public void interact(GameObject user)
     {
-        if(!changingScene)
+        if(!ChangeScene.changingScene)
             StartCoroutine(LoadNextScene());
     }
 
@@ -73,7 +71,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     IEnumerator LoadNextScene()
     {
-        changingScene = true;
+        ChangeScene.changingScene = true;
         crossfade.SetTrigger("start");
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
