@@ -72,6 +72,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SoundPlayer soundPlayer;
     public Ground.Type currentGround;
 
+    private float realVelocity;
+    private Vector3 lastPosition;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -150,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // start trotting if player gives input and is moving
-            if (isGrounded && moveX != 0 && !trotting && rb.velocity.x != 0 && !isJumping)
+            if (isGrounded && moveX != 0 && !trotting && Mathf.Abs(realVelocity) >= 0.01f && !isJumping)
             {
                 anim.SetTrigger("trot");
                 trotting = true;
@@ -241,6 +244,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
+        lastPosition = transform.position;
+
         // calculate speed
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f);
 
@@ -350,8 +356,8 @@ public class PlayerMovement : MonoBehaviour
     // stops trotting on specific frames if player has released input
     public void StopTrot(int frame)
     {
-        if (((moveX == 0 || (moveX != 0 && rb.velocity.x == 0)) && stops <= 2) // if either not giving input or giving input against a barrier *and* hasn't stopped moving more than twice in the last second
-            || (stops > 2 && Mathf.Abs(rb.velocity.x) < 0.01f)) // or has stopped moving more than twice in the last second and moving sufficiently slowly
+        if (((moveX == 0 || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f)) && stops <= 2) // if either not giving input or giving input against a barrier *and* hasn't stopped moving more than twice in the last second
+            || (stops > 2 && Mathf.Abs(realVelocity) < 0.01f)) // or has stopped moving more than twice in the last second and moving sufficiently slowly
         {
             switch (frame)
             {
