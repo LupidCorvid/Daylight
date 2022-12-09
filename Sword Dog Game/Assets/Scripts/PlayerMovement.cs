@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
     public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint;
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
 
-            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(rb.velocity.x) > 0f);
+            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0f);
 
             // track stops per second
             if (prevMoveX != 0 && moveX == 0)
@@ -184,6 +184,15 @@ public class PlayerMovement : MonoBehaviour
             //     FindObjectOfType<CinematicBars>().Hide(.3f);
             // }
 
+            if (!isSprinting && timeSinceSprint < 1f)
+            {
+                timeSinceSprint += Time.deltaTime;
+            }
+            else
+            {
+                timeSinceSprint = 0;
+            }
+
             // sprinting
             if (trotting && !isSprinting)
             {
@@ -213,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
                 canResprint = true;
             }
 
-            anim.SetBool("sprinting", isSprinting);
+            anim.SetBool("sprinting", isSprinting || timeSinceSprint < 0.1f);
 
             if (isSprinting)
             {
