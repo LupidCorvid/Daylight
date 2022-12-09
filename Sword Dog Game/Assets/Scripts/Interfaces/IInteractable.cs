@@ -11,6 +11,12 @@ public interface IInteractable
         get;
     }
 
+    public bool inRange
+    {
+        get;
+        set;
+    }
+
     public void showPrompt(GameObject prompt);
 
     public void hidePrompt(GameObject prompt);

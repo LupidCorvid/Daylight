@@ -17,11 +17,17 @@ public class InteractablesTracker : MonoBehaviour
         IInteractable newNearest = getNearest();
         if(nearest != newNearest)
         {
-            if(nearest != null)
+            if (nearest != null)
+            {
                 nearest.hidePrompt(interactPrompt);
+                nearest.inRange = false;
+            }
             nearest = newNearest;
-            if(nearest != null)
+            if (nearest != null)
+            {
                 nearest.showPrompt(interactPrompt);
+                nearest.inRange = true;
+            }
         }
     }
 

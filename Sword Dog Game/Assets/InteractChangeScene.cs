@@ -18,6 +18,12 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public Transform promptSpawnLocation;
 
+    private bool _inRange = false;
+    public bool inRange
+    {
+        get { return _inRange; }
+        set { _inRange = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
