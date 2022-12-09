@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
     public float calculatedSpeed = 4.0f;
+    public float sprintWindUpPercent = 1.0f;
 
     Collider2D cldr;
 
@@ -184,15 +185,6 @@ public class PlayerMovement : MonoBehaviour
             //     FindObjectOfType<CinematicBars>().Hide(.3f);
             // }
 
-            if (!isSprinting && timeSinceSprint < 1f)
-            {
-                timeSinceSprint += Time.deltaTime;
-            }
-            else if (isSprinting)
-            {
-                timeSinceSprint = 0;
-            }
-
             // sprinting
             if (trotting && !isSprinting)
             {
@@ -226,14 +218,23 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSprinting)
             {
+                timeSinceSprint = 0;
+
                 if (stamina > 0)
                     stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
+
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
             }
             else
             {
+                if (timeSinceSprint < 1f)
+                    timeSinceSprint += Time.deltaTime;
+
+                sprintWindUpPercent = 1;
+
                 if (stamina < maxStamina)
                     stamina = Mathf.Clamp(stamina + Time.deltaTime, 0, maxStamina);
+                    
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
         }
@@ -257,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = transform.position;
 
         // calculate speed
-        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f);
+        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
