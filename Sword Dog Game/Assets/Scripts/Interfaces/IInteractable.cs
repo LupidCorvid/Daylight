@@ -10,4 +10,8 @@ public interface IInteractable
     {
         get;
     }
+
+    public void showPrompt(GameObject prompt);
+
+    public void hidePrompt(GameObject prompt);
 }

@@ -22,6 +22,10 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public GameObject barkSpawnLocation;
 
+    public Animator spawnedPrompt;
+
+    public Transform promptSpawnLocation;
+
     public void Awake()
     {
         if (dialog.Count > 0)
@@ -109,4 +113,33 @@ public class DialogNPC : MonoBehaviour, IInteractable
         addedParticle.acceleration = acceleration;
         addedParticle.startTime = Time.time;
     }
+
+    public void hidePrompt(GameObject prompt)
+    {
+        if (spawnedPrompt != null)
+            spawnedPrompt.SetTrigger("Close");
+    }
+
+    public void showPrompt(GameObject prompt)
+    {
+
+        if (spawnedPrompt == null)
+        {
+            GameObject addedPrompt;
+            if (promptSpawnLocation == null)
+                addedPrompt = Instantiate(prompt, transform.position + (1 * Vector3.up), transform.rotation);
+            else
+            {
+                addedPrompt = Instantiate(prompt, promptSpawnLocation.position, promptSpawnLocation.rotation);
+                addedPrompt.transform.localScale = promptSpawnLocation.localScale;
+            }
+            spawnedPrompt = addedPrompt.GetComponent<Animator>();
+            spawnedPrompt.SetFloat("InteractType", 1);
+        }
+        else
+        {
+            spawnedPrompt.SetTrigger("Reopen");
+        }
+    }
+
 }

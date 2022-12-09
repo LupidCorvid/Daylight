@@ -8,13 +8,21 @@ public class InteractablesTracker : MonoBehaviour
     public IInteractable nearest;
 
     //On enter start animation for appearing, on exit start animation that ends in deletion
-    GameObject interactPrompt;
+    public GameObject interactPrompt;
 
     public static KeyCode interactKey = KeyCode.T;
 
     private void FixedUpdate()
     {
-        nearest = getNearest();
+        IInteractable newNearest = getNearest();
+        if(nearest != newNearest)
+        {
+            if(nearest != null)
+                nearest.hidePrompt(interactPrompt);
+            nearest = newNearest;
+            if(nearest != null)
+                nearest.showPrompt(interactPrompt);
+        }
     }
 
     private void Update()
@@ -44,17 +52,16 @@ public class InteractablesTracker : MonoBehaviour
 
     public IInteractable getNearest()
     {
-        (IInteractable interactable, float distance) nearest = (null, 99999);
-
+        (IInteractable interactable, float distance) closest = (null, 99999);
         foreach(IInteractable interactable in interactables)
         {
             float distance = Vector2.Distance(interactable.gameObject.transform.position, transform.position);
-            if (distance < nearest.distance)
+            if (distance < closest.distance)
             {
-                nearest = (interactable, distance);
+                closest = (interactable, distance);
             }
         }
-        return nearest.interactable;
+        return closest.interactable;
     }
 
     private void ClearAll()

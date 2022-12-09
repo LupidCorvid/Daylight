@@ -18479,6 +18479,7 @@ MonoBehaviour:
   loopInteractions: 0
   alreadyTalking: 0
   barkSpawnLocation: {fileID: 0}
+  spawnedPrompt: {fileID: 0}
 --- !u!61 &1578129669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22109,6 +22110,7 @@ MonoBehaviour:
   loopInteractions: 0
   alreadyTalking: 0
   barkSpawnLocation: {fileID: 0}
+  spawnedPrompt: {fileID: 0}
 --- !u!212 &1938978146
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24350,6 +24352,65 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+--- !u!1001 &456533515307791092
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_Name
+      value: InteractPromptObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.1738653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4576828
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500123113781330371, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
 --- !u!50 &1423023124790180663
 Rigidbody2D:
   serializedVersion: 4
