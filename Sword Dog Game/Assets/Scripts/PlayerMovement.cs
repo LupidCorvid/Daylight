@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 timeSinceSprint += Time.deltaTime;
             }
-            else
+            else if (isSprinting)
             {
                 timeSinceSprint = 0;
             }
