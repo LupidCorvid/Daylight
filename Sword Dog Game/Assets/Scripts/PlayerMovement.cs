@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint;
+    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding;
     private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
@@ -137,8 +137,19 @@ public class PlayerMovement : MonoBehaviour
 
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
+            
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0f);
+
+            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f))
+            {
+                if (moveX == 0)
+                {
+                    anim.SetTrigger("skidding");
+                    isSkidding = true;
+                }
+            }
+            if (isSkidding) moveX = 0;
 
             // track stops per second
             if (prevMoveX != 0 && moveX == 0)
@@ -227,6 +238,9 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                if (timeSinceSprint > 0.1f)
+                    isSkidding = false;
+
                 if (timeSinceSprint < 1f)
                     timeSinceSprint += Time.deltaTime;
 
@@ -263,7 +277,10 @@ public class PlayerMovement : MonoBehaviour
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            Flip();
+            if (!isSkidding)
+            {
+                Flip();
+            }
         }
 
         // calculate target velocity
@@ -645,5 +662,10 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
         soundPlayer.PlaySound(path);
+    }
+
+    public void StopSkid()
+    {
+        isSkidding = false;
     }
 }
