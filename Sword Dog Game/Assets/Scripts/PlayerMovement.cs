@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
     public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding;
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -138,6 +138,14 @@ public class PlayerMovement : MonoBehaviour
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
             
+            if (moveX == 0 && timeIdle < 1f)
+            {
+                timeIdle += Time.deltaTime;
+            }
+            else if (moveX != 0)
+            {
+                timeIdle = 0;
+            }
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0f);
 
@@ -220,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 canResprint = false;
             }
-            if (Input.GetButtonUp("Sprint"))
+            if (!canResprint && (Input.GetButtonUp("Sprint") || (timeIdle > 0.1f && stamina > minStamina)))
             {
                 canResprint = true;
             }
