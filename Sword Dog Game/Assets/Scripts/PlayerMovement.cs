@@ -151,11 +151,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f))
             {
-                if (moveX == 0)
-                {
-                    anim.SetTrigger("skidding");
-                    isSkidding = true;
-                }
+                anim.SetTrigger("skidding");
+                isSkidding = true;
             }
             if (isSkidding) moveX = 0;
 
@@ -248,8 +245,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (timeSinceSprint > 0.1f)
                 {
-                    isSkidding = false;
-                    anim.ResetTrigger("skidding");
+                    StopSkid();
                 }
 
                 if (timeSinceSprint < 1f)
@@ -678,5 +674,6 @@ public class PlayerMovement : MonoBehaviour
     public void StopSkid()
     {
         isSkidding = false;
+        anim.ResetTrigger("skidding");
     }
 }
