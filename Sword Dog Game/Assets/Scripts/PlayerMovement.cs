@@ -239,7 +239,10 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 if (timeSinceSprint > 0.1f)
+                {
                     isSkidding = false;
+                    anim.ResetTrigger("skidding");
+                }
 
                 if (timeSinceSprint < 1f)
                     timeSinceSprint += Time.deltaTime;
