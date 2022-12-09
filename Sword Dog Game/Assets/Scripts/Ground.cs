@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     public enum Type {
-        GRASS, WOOD, ROCK
+        GRASS, WOOD, ROCK, SAND
     }
 
     public Type type;

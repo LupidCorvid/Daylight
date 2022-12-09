@@ -664,6 +664,9 @@ public class PlayerMovement : MonoBehaviour
             case Ground.Type.WOOD:
                 path = "Impacts.Steps.WoodenStep";
                 break;
+            case Ground.Type.SAND:
+                path = "Impacts.Steps.RoughStep";
+                break;
             case Ground.Type.GRASS:
                 path = "Impacts.Steps.SoftStep";
                 break;
