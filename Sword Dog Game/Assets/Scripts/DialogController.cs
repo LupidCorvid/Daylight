@@ -45,6 +45,7 @@ public class DialogController : MonoBehaviour
 
     public static bool closedAnimator = true;
     public bool openedThisFrame = false;
+    public bool gotResponseThisFrame = false;
 
     public Animator DotAnimator;
 
@@ -63,7 +64,7 @@ public class DialogController : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return)) && source != null)
         {
-            if(!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading)
+            if(!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
                 source.skippingText = true;
             pauseWaitForInputEnd();
         }
@@ -81,6 +82,7 @@ public class DialogController : MonoBehaviour
     private void LateUpdate()
     {
         openedThisFrame = false;
+        gotResponseThisFrame = false;
     }
 
     public void finishOpen()
@@ -128,6 +130,7 @@ public class DialogController : MonoBehaviour
     {
         source.receiveResponse(response);
         responseController.close();
+        gotResponseThisFrame = true;
     }
 
     public void setSource(DialogSource newSource)
@@ -189,7 +192,7 @@ public class DialogController : MonoBehaviour
         {
             if(textEffects[i].type.ToUpperInvariant().Contains(type.ToUpperInvariant()))
             {
-                textEffects[i].end = GetLengthNoCommands();
+                textEffects[i].end = GetLengthNoCommandsRealTime();
                 return;
             }
         }
@@ -203,7 +206,7 @@ public class DialogController : MonoBehaviour
         {
             newInput[i - 1] = input[i];
         }
-        TextEffect effect = TextEffect.MakeEffect(newInput, GetLengthNoCommands());
+        TextEffect effect = TextEffect.MakeEffect(newInput, GetLengthNoCommandsRealTime());
         if(effect != null)
             textEffects.Add(effect);
     }
@@ -225,6 +228,27 @@ public class DialogController : MonoBehaviour
                 length++;
 
             if (text[i] == '>')
+                depth--;
+        }
+        return length;
+    }
+
+    /// <summary>
+    /// Reads the next part of the string that hasnt been "pushed" yet instead of what is already out
+    /// </summary>
+    /// <returns></returns>
+    public int GetLengthNoCommandsRealTime()
+    {
+        int depth = 0;
+        int length = 0;
+        for (int i = 0; i < source.outString.Length; i++)
+        {
+            if (source.outString[i] == '<')
+                depth++;
+            if (depth == 0)
+                length++;
+
+            if (source.outString[i] == '>')
                 depth--;
         }
         return length;
