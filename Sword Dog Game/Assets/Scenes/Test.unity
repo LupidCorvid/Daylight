@@ -5808,6 +5808,7 @@ GameObject:
   - component: {fileID: 595241397}
   - component: {fileID: 595241396}
   - component: {fileID: 595241402}
+  - component: {fileID: 595241403}
   m_Layer: 7
   m_Name: Seat
   m_TagString: Untagged
@@ -5996,6 +5997,19 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &595241403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595241394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &628292879
 GameObject:
   m_ObjectHideFlags: 0
