@@ -55,6 +55,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource.position = 0;
             dialogSource.resetDialog();
             //DialogController.main.source = dialogSource;
+            DialogController.main.openedThisFrame = true;
             DialogController.main.setSource(dialogSource);
             DialogController.main.openBox();
             DialogController.main.readWhenOpen = true;
@@ -62,8 +63,6 @@ public class DialogNPC : MonoBehaviour, IInteractable
             alreadyTalking = true;
             hidePrompt(null);
         }
-        else if (alreadyTalking)
-            dialogSource.skippingText = true;
     }
 
     private void LateUpdate()

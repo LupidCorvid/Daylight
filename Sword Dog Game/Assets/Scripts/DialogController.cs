@@ -44,6 +44,7 @@ public class DialogController : MonoBehaviour
     }
 
     public static bool closedAnimator = true;
+    public bool openedThisFrame = false;
 
     public Animator DotAnimator;
 
@@ -60,8 +61,12 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return))
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return)) && source != null)
+        {
+            if(!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading)
+                source.skippingText = true;
             pauseWaitForInputEnd();
+        }
         if (reading)
         {
             textDisplay.text = source.read();
@@ -71,6 +76,11 @@ public class DialogController : MonoBehaviour
         
         if (main == null || main != this)
             main = this;
+    }
+
+    private void LateUpdate()
+    {
+        openedThisFrame = false;
     }
 
     public void finishOpen()

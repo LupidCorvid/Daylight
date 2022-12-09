@@ -53,7 +53,7 @@ public class DialogSource
     //Is just used for things like DialogNpc to have reactions to certain events
     public event Action<string[]> callEvent;
 
-    bool waiting = false;
+    public bool waiting = false;
     public bool waitingForButtonInput = false;
 
     public Dictionary<string, string> responseOutputs = new Dictionary<string, string>();
@@ -191,9 +191,9 @@ public class DialogSource
 
     public string read()
     {
-        if ((waiting || waitingForButtonInput) && (!skippingText))
+        if ((waiting || waitingForButtonInput))
             return outString;
-        while ((((lastReadTime + speed < Time.time || skippingText) && Time.time > waitStart + waitTime)))
+        while ((((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime))) || skippingText)
         {
             lastReadTime = Time.time;
             readDialog();
@@ -226,7 +226,7 @@ public class DialogSource
 
     private void readDialog()
     {
-        if ((waiting || waitingForButtonInput) && (!skippingText))
+        if ((waiting || waitingForButtonInput))
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')
@@ -538,6 +538,7 @@ public class DialogSource
         {
             Debug.LogError("No set responder to requestOptionsStart, prompt will never open and dialog will freeze!");
         }
+        skippingText = false;
         requestOptionsStart(options);
     }
 
@@ -548,6 +549,7 @@ public class DialogSource
         else if (response % responseOutputsNumeric.Count < responseOutputsNumeric.Count)
             dialog += responseOutputsNumeric[response % responseOutputsNumeric.Count];
         waiting = false;
+        skippingText = false;
     }
 
     public void receiveButtonInput()
