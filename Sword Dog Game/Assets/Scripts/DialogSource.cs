@@ -182,18 +182,12 @@ public class DialogSource
         else
             Debug.LogError("Couldnt find a block called " + block + ". Make sure you are in the right file!");
     }
-    //public static DialogSource fromFile(string filePath)
-    //{
-    //    Debug.LogError("DialogSource.fromFile is not yet implemented!");
-    //    return null;
-    //    //return new DialogSource()
-    //}
 
     public string read()
     {
         if ((waiting || waitingForButtonInput))
             return outString;
-        while ((((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime))) || skippingText)
+        while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {
             lastReadTime = Time.time;
             readDialog();
