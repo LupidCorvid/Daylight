@@ -57,9 +57,9 @@ public class ChangeScene : MonoBehaviour
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
-        crossfade.SetTrigger("stop");
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
+        Crossfade.changeScene?.Invoke();
     }
 
 }

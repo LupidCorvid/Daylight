@@ -21,10 +21,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        transform.position = targetPoint;
-    }
+    // void Awake()
+    // {
+    //     transform.position = targetPoint;
+    // }
 
     void Start()
     {
