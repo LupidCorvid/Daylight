@@ -22,9 +22,17 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public GameObject barkSpawnLocation;
 
+    public GameObject promptPrefab;
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
+
+    private bool _inRange = false;
+    public bool inRange
+    {
+        get { return _inRange; }
+        set { _inRange = value; }
+    }
 
     public void Awake()
     {
@@ -52,6 +60,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             DialogController.main.readWhenOpen = true;
             numInteractions++;
             alreadyTalking = true;
+            hidePrompt(null);
         }
     }
 
@@ -87,6 +96,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
         DialogController.main.reading = false;
         alreadyTalking = false;
         stoppedTalkingThisFrame = true;
+        if(inRange)
+            showPrompt(promptPrefab);
     }
     public void barkEffect()
     {
