@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SwordFollow : MonoBehaviour
 {
@@ -22,10 +24,13 @@ public class SwordFollow : MonoBehaviour
     public static GameObject instance;
 
     public GameObject attackMoveTracker;
+    public static Action sceneChange;
+    public static Vector3 newPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneChange += Snap;
         speed = 100;
         //adjust the adjustLocation variables per sword type
         adjustLocationY = 1;
@@ -46,19 +51,7 @@ public class SwordFollow : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    void OnEnable()
-    {
-        if (player != null)
-        {
-            playerLocation = player.transform.position;
-            var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
-            swordTargetLocation = playerLocation + offset;
-        }
-        
-    }
     
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -200,5 +193,12 @@ public class SwordFollow : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0f;
         }
+    }
+
+    private void Snap()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
+        swordTargetLocation = newPos + offset;
     }
 }
