@@ -43,4 +43,18 @@ public class CollisionsTracker : MonoBehaviour
         collidersInContact.Clear();
         triggersInContact.Clear();
     }
+
+    public void clean()
+    {
+        for(int i = collidersInContact.Count - 1; i >=0; i--)
+        {
+            if (collidersInContact[i] == null)
+                collidersInContact.RemoveAt(i);
+        }
+        for (int i = triggersInContact.Count - 1; i >= 0; i--)
+        {
+            if (triggersInContact[i] == null)
+                triggersInContact.RemoveAt(i);
+        }
+    }
 }

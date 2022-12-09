@@ -53,14 +53,25 @@ public class InteractablesTracker : MonoBehaviour
     public IInteractable getNearest()
     {
         (IInteractable interactable, float distance) closest = (null, 99999);
-        foreach(IInteractable interactable in interactables)
+        bool needsClean = false;
+
+        foreach (IInteractable interactable in interactables)
         {
+            if (interactable == null || interactable.gameObject == null || transform == null)
+            {
+                needsClean = true;
+                continue;
+            }
             float distance = Vector2.Distance(interactable.gameObject.transform.position, transform.position);
             if (distance < closest.distance)
             {
                 closest = (interactable, distance);
             }
         }
+
+        if (needsClean)
+            clean();
+
         return closest.interactable;
     }
 
@@ -68,5 +79,15 @@ public class InteractablesTracker : MonoBehaviour
     {
         interactables.Clear();
     }
-
+    /// <summary>
+    /// Removes all null variables from the list
+    /// </summary>
+    public void clean()
+    {
+        for(int i = interactables.Count - 1; i >= 0; i--)
+        {
+            if (interactables[i] == null)
+                interactables.RemoveAt(i);
+        }
+    }
 }

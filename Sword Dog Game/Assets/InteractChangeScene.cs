@@ -1,0 +1,85 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
+public class InteractChangeScene : MonoBehaviour, IInteractable
+{
+    public string scene;
+    public string spawn;
+    private Animator crossfade;
+    public static bool changingScene;
+    public bool noFall = false;
+
+    public Animator spawnedPrompt;
+
+    public Transform promptSpawnLocation;
+    // Start is called before the first frame update
+    void Start()
+    {
+        changingScene = false;
+        crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void interact(GameObject user)
+    {
+        StartCoroutine(LoadNextScene());
+    }
+
+    public void showPrompt(GameObject prompt)
+    {
+        if (spawnedPrompt == null)
+        {
+            GameObject addedPrompt;
+            if (promptSpawnLocation == null)
+                addedPrompt = Instantiate(prompt, transform.position + (1 * Vector3.up), transform.rotation);
+            else
+            {
+                addedPrompt = Instantiate(prompt, promptSpawnLocation.position, promptSpawnLocation.rotation);
+                addedPrompt.transform.localScale = promptSpawnLocation.localScale;
+            }
+            spawnedPrompt = addedPrompt.GetComponent<Animator>();
+            spawnedPrompt.SetFloat("InteractType", 0);
+        }
+        else
+        {
+            spawnedPrompt.SetTrigger("Reopen");
+        }
+    }
+
+    public void hidePrompt(GameObject prompt)
+    {
+
+        if (spawnedPrompt != null)
+            spawnedPrompt.SetTrigger("Close");
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        changingScene = true;
+        crossfade.SetTrigger("start");
+        DialogController.main.closeBox();
+        yield return new WaitForSeconds(1f);
+        PlayerMovement.controller.noFall = true;
+        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        if (eventSystem != null)
+        {
+            GameObject.Destroy(eventSystem.gameObject);
+        }
+        SceneHelper.LoadScene(scene);
+        ChangeScene.clearCollisions?.Invoke();
+        ChangeScene.clearInteractables?.Invoke();
+        crossfade.SetTrigger("stop");
+        DialogController.closedAnimator = true;
+        SpawnManager.spawningAt = spawn;
+    }
+}

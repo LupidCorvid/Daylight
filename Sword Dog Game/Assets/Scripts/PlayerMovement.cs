@@ -530,10 +530,18 @@ public class PlayerMovement : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         isGrounded = false;
+
+        bool needsClean = false;
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
             //Debug.Log(LayerMask.GetMask("Terrain"));
+            if (collision == null)
+            {
+                needsClean = true;
+                continue;
+            }
             if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
+
             {
                 anim.SetBool("grounded", true);
                 currentGround = collision.gameObject.TryGetComponent(out Ground ground) ? ground.type : Ground.Type.GRASS;
@@ -542,6 +550,9 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        if (needsClean)
+            groundCheck.clean();
+
         if ((isJumping && jumpTime < 0.1f) || (isFalling && fallTime < 0.1f))
             anim.SetBool("grounded", false);
         else
@@ -549,6 +560,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool("jump", isJumping);
     }
+
 
     void Jump()
     {
