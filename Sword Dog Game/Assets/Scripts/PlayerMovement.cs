@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 timeSinceSprint = 0;
 
-                if (stamina > 0)
+                if (stamina > 0 && sprintWindUpPercent == 1.0f)
                     stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
 
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
