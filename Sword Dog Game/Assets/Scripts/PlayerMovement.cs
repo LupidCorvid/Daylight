@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0f);
 
-            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f))
+            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded)
             {
                 anim.SetTrigger("skidding");
                 isSkidding = true;
@@ -599,6 +599,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("grounded", isGrounded);
 
         anim.SetBool("jump", isJumping);
+        if (!isGrounded && isSkidding) StopSkid();
     }
 
 
