@@ -18,6 +18,7 @@ public class DialogResponseController : MonoBehaviour
     public CanvasScaler scaler;
     
     private int _selectedOption = 0;
+    private TextMeshProUGUI text;
     public int selectedOption
     {
         set
@@ -86,11 +87,24 @@ public class DialogResponseController : MonoBehaviour
             return;
         option = Mathf.Abs(option) % options.Count;
 
+        if (text != null)
+        {
+            text.fontStyle = FontStyles.Normal;
+            text.characterSpacing = 0f;
+            text.color = Color.white;
+        }
+
         Vector3 finalPosition = default;
         //finalPosition.x = (-responsesContainer.rect.width) + responsesContainer.position.x;
         finalPosition.x = responsesContainer.position.x + (responsesContainer.rect.xMin + (responsesContainer.rect.width * .425f)) * (Screen.width/scaler.referenceResolution.x);
 
         finalPosition.y = options[option].transform.position.y;
+
+        text = options[option].GetComponent<TextMeshProUGUI>();
+        text.fontStyle = FontStyles.Bold;
+        text.characterSpacing = -6.5f;
+        text.color = new Color32(255, 221, 49, 255);
+        
         selectedObjectPointer.transform.position = finalPosition;
 
     }
