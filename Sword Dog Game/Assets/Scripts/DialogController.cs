@@ -122,6 +122,7 @@ public class DialogController : MonoBehaviour
         if (readWhenOpen)
             reading = false;
         closedAnimator = true;
+        InteractablesTracker.alreadyInteracting = false;
     }
 
     public void promptSelections(params string[] options)

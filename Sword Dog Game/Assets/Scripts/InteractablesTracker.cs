@@ -9,24 +9,27 @@ public class InteractablesTracker : MonoBehaviour
 
     //On enter start animation for appearing, on exit start animation that ends in deletion
     public GameObject interactPrompt;
-
     public static KeyCode interactKey = KeyCode.T;
+    public static bool alreadyInteracting = false;
 
     private void FixedUpdate()
     {
-        IInteractable newNearest = getNearest();
-        if(nearest != newNearest)
+        if (!alreadyInteracting)
         {
-            if (nearest != null)
+            IInteractable newNearest = getNearest();
+            if (nearest != newNearest)
             {
-                nearest.hidePrompt(interactPrompt);
-                nearest.inRange = false;
-            }
-            nearest = newNearest;
-            if (nearest != null)
-            {
-                nearest.showPrompt(interactPrompt);
-                nearest.inRange = true;
+                if (nearest != null)
+                {
+                    nearest.hidePrompt(interactPrompt);
+                    nearest.inRange = false;
+                }
+                nearest = newNearest;
+                if (nearest != null)
+                {
+                    nearest.showPrompt(interactPrompt);
+                    nearest.inRange = true;
+                }
             }
         }
     }

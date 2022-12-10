@@ -61,6 +61,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             DialogController.main.readWhenOpen = true;
             numInteractions++;
             alreadyTalking = true;
+            InteractablesTracker.alreadyInteracting = true;
             hidePrompt(null);
         }
     }
