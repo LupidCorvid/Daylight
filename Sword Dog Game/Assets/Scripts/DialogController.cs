@@ -31,6 +31,8 @@ public class DialogController : MonoBehaviour
 
     public List<TextEffect> textEffects = new List<TextEffect>();
 
+    public bool endedWaitThisFrame = false;
+
     public string text
     {
         get
@@ -83,6 +85,7 @@ public class DialogController : MonoBehaviour
     {
         openedThisFrame = false;
         gotResponseThisFrame = false;
+        endedWaitThisFrame = false;
     }
 
     public void finishOpen()
@@ -169,10 +172,12 @@ public class DialogController : MonoBehaviour
 
     public void pauseWaitForInputEnd()
     {
-        if(source?.waitingForButtonInput == true)
+        if (source?.waitingForButtonInput == true)
+        {
             DotAnimator.SetTrigger("Close");
+            endedWaitThisFrame = true;
+        }
         source?.receiveButtonInput();
-
         
     }
 

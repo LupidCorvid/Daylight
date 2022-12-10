@@ -37,7 +37,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public void interact(GameObject user)
     {
-        if(!ChangeScene.changingScene)
+        if(!ChangeScene.changingScene && !DialogController.main.reading && !DialogController.main.endedWaitThisFrame)
             StartCoroutine(LoadNextScene());
     }
 
