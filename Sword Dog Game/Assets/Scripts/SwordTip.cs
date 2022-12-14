@@ -22,30 +22,21 @@ public class SwordTip : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            // TODO do damage here
-        }
-        else if (other.gameObject.tag == "Ground")
-        {
-            sword.Freeze();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (PlayerHealth.dead && other.gameObject.CompareTag("Ground"))
+        {
+            sword.Freeze();
+            return;
+        }
+
         if (!sword.pmScript.attacking)
             return;
 
         EnemyBase enemy = other.GetComponent<EnemyBase>();
         Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
 
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        enemy?.TakeDamage(damage);
 
         if(otherRb != null)
         {
