@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DialogNPC : MonoBehaviour, IInteractable
 {
@@ -35,6 +36,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
     }
 
     public GameObject interactor;
+
+    public Action closedDialog;
 
     public void Awake()
     {
@@ -103,6 +106,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         stoppedTalkingThisFrame = true;
         Invoke("tryShowPrompt", 1.5f);
         interactor = null;
+        closedDialog?.Invoke();
     }
 
     private void tryShowPrompt()
