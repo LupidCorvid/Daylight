@@ -9,19 +9,7 @@ public class CutsceneCustomInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-        CutsceneController controller = (CutsceneController)target;
         
-        foreach(CutsceneData data in controller.cutscenes)
-        {
-            
-        }
-
-
-        if (GUILayout.Button("Add new of type"))
-        {
-            controller.addNewCutscene();
-        }
     }
 }
 #endif

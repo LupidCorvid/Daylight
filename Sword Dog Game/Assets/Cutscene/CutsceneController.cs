@@ -8,16 +8,6 @@ public class CutsceneController : MonoBehaviour
     public List<CutsceneData> cutscenes = new List<CutsceneData>();
 
 
-    public enum types
-    {
-        NPC = 0,
-        Wait,
-        simult,
-        interr
-    }
-
-    public types newType;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,24 +22,4 @@ public class CutsceneController : MonoBehaviour
         cutscenes.Add(newCutscene);
     }
 
-    public void addNewCutscene()
-    {
-        CutsceneData newCutscene = null;
-        switch(newType)
-        {
-            case types.NPC:
-                newCutscene = new CutsceneNPCDialog();
-                break;
-            case types.interr:
-                newCutscene = new InterruptibleCutscenes();
-                break;
-            case types.simult:
-                newCutscene = new SimultaneousCustscene();
-                break;
-            case types.Wait:
-                newCutscene = new WaitCutscene();
-                break;
-        }
-        addCutscene(newCutscene);
-    }
 }
