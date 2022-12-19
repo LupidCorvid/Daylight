@@ -34,6 +34,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
         set { _inRange = value; }
     }
 
+    public GameObject interactor;
+
     public void Awake()
     {
         if (dialog.Count > 0)
@@ -48,6 +50,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     {
         if (!alreadyTalking && !stoppedTalkingThisFrame && !DialogController.dialogOpen && DialogController.closedAnimator)
         {
+            interactor = user;
             if (loopInteractions)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
             else if (numInteractions < dialog.Count)
@@ -99,6 +102,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         alreadyTalking = false;
         stoppedTalkingThisFrame = true;
         Invoke("tryShowPrompt", 1.5f);
+        interactor = null;
     }
 
     private void tryShowPrompt()

@@ -81,4 +81,19 @@ public class MerylBehavior : DialogNPC
         finishTalkingSequence = false;
     }
 
+    public override void eventCalled(params string[] input)
+    {
+        base.eventCalled(input);
+        switch(input[0])
+        {
+            case "heal":
+                healUser();
+                break;
+        }
+    }
+    public void healUser()
+    {
+        interactor?.GetComponent<PlayerHealth>()?.Heal(100);
+    }
+
 }
