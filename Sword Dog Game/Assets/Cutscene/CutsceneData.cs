@@ -5,12 +5,12 @@ using UnityEditor;
 using System;
 
 [Serializable]
-public class CutsceneData
+public class CutsceneData : MonoBehaviour
 {
     public bool finished = false;
     public Action finish;
 
-    public virtual void onLoad()
+    public virtual void Start()
     {
 
     }
@@ -29,6 +29,11 @@ public class CutsceneData
     {
         finished = true;
         finish?.Invoke();
+    }
+
+    public virtual void cycleExecution()
+    {
+
     }
 
     public CutsceneData()
@@ -53,7 +58,7 @@ public class CutsceneNPCDialog : CutsceneData
     {
 
     }
-    public override void onLoad()
+    public override void Start()
     {
         npc.closedDialog += finishedSegment;
     }
@@ -109,9 +114,9 @@ public class SimultaneousCustscene : CutsceneData
         
     }
 
-    public override void onLoad()
+    public override void Start()
     {
-        base.onLoad();
+        base.Start();
 
         foreach(CutsceneData data in cutscenes)
         {
@@ -161,9 +166,9 @@ public class InterruptibleCutscenes : CutsceneData
 
     }
 
-    public override void onLoad()
+    public override void Start()
     {
-        base.onLoad();
+        base.Start();
 
         foreach (CutsceneData data in cutscenes)
         {
@@ -180,5 +185,32 @@ public class InterruptibleCutscenes : CutsceneData
             data.abort();
         }
     }
+}
 
+public class MoveToPointCutscene : CutsceneData
+{
+    public Vector2 targetPoint;
+    private Vector2 startPoint;
+
+    public float startTime;
+    public float travelTime = 1;
+
+    public override void startSegment()
+    {
+        base.startSegment();
+        startPoint = transform.position;
+        startTime = Time.time;
+    }
+
+    public override void cycleExecution()
+    {
+        base.cycleExecution();
+        transform.position = new Vector3(Mathf.Lerp(startPoint.x, targetPoint.x, (Time.time - startTime) / travelTime), Mathf.Lerp(startPoint.x, targetPoint.x, (Time.time - startTime) / travelTime));
+    }
+
+    public override void finishedSegment()
+    {
+        base.finishedSegment();
+        transform.position = targetPoint;
+    }
 }

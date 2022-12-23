@@ -9,7 +9,7 @@ public class CutsceneCustomInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        
+        base.OnInspectorGUI();
     }
 }
 #endif

@@ -11,15 +11,7 @@ public class CutsceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(CutsceneData cutscene in cutscenes)
-        {
-            cutscene.onLoad();
-        }
-    }
-
-    public void addCutscene(CutsceneData newCutscene)
-    {
-        cutscenes.Add(newCutscene);
+        
     }
 
 }
