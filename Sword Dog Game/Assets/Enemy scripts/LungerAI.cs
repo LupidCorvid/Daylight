@@ -51,12 +51,12 @@ public class LungerAI : BaseAI
             if (target.transform.position.x < transform.position.x)
             {
                 //rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
-                moveDirection(Vector2.left);
+                movement.MoveRight();
             }
             else if (target.transform.position.x > transform.position.x)
             {
                 //rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
-                moveDirection(Vector2.right);
+                movement.MoveRight();
             }
             if(Mathf.Abs(target.transform.position.y - transform.position.y) < 2 && Mathf.Abs(target.position.x - transform.position.x) < 10 && Mathf.Abs(target.position.x - transform.position.x) > 1.5f)
             {
@@ -99,6 +99,7 @@ public class LungerAI : BaseAI
                 state = AIStates.moving;
         }
     }
+
     public void Lunge()
     {
         float strength = getLungeStrength();
@@ -110,6 +111,7 @@ public class LungerAI : BaseAI
             rb.velocity = new Vector2(strength * Mathf.Cos(attackAngle) * neg, strength * Mathf.Sin(attackAngle));
         }
     }
+
     public float getLungeStrength()
     {
         float grav = rb.gravityScale * 9.8f;

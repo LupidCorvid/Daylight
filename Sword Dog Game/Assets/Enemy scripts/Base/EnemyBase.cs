@@ -12,12 +12,18 @@ public class EnemyBase : MonoBehaviour
     public int health = 10;
 
     public BaseAI ai;
+    public BaseMovement movement;
 
     public SlopeAdjuster slopeChecker;
 
     public virtual void Start()
     {
         slopeChecker ??= GetComponent<SlopeAdjuster>();
+        movement ??= GetComponent<BaseMovement>();
+        if(movement != null)
+            movement.slopeChecker ??= slopeChecker;
+        ai.movement = movement;
+
         ai?.Start();
     }
 

@@ -222,13 +222,14 @@ GameObject:
   - component: {fileID: 38064321}
   - component: {fileID: 38064322}
   - component: {fileID: 38064323}
+  - component: {fileID: 38064324}
   m_Layer: 10
   m_Name: TestingSlopers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &38064316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   attackSpeed: 1
   maxHealth: 10
   health: 10
+  movement: {fileID: 0}
   slopeChecker: {fileID: 0}
 --- !u!114 &38064323
 MonoBehaviour:
@@ -401,6 +403,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!114 &38064324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38064315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9f36a5ae2bc2f4d819855c834780b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slopeChecker: {fileID: 0}
+  slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
+  friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  applyVisualModifications: 0
+  movementSmoothing: 0.05
 --- !u!1 &40723977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,13 +3462,14 @@ GameObject:
   - component: {fileID: 291899774}
   - component: {fileID: 291899773}
   - component: {fileID: 291899779}
+  - component: {fileID: 291899780}
   m_Layer: 10
   m_Name: TestingSlopers (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &291899773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3467,6 +3487,7 @@ MonoBehaviour:
   attackSpeed: 1
   maxHealth: 10
   health: 10
+  movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   rockPrefab: {fileID: 8666362523932513522, guid: 82ef0a8410ae2ac4391630df02892510, type: 3}
 --- !u!61 &291899774
@@ -3623,6 +3644,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!114 &291899780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291899772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9f36a5ae2bc2f4d819855c834780b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slopeChecker: {fileID: 0}
+  slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
+  friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  applyVisualModifications: 0
+  movementSmoothing: 0.05
 --- !u!1 &303463451
 GameObject:
   m_ObjectHideFlags: 0
@@ -7607,13 +7645,14 @@ GameObject:
   - component: {fileID: 1021038681}
   - component: {fileID: 1021038680}
   - component: {fileID: 1021038686}
+  - component: {fileID: 1021038687}
   m_Layer: 10
   m_Name: TestingSlopers (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1021038680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7631,6 +7670,7 @@ MonoBehaviour:
   attackSpeed: 1
   maxHealth: 10
   health: 10
+  movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
@@ -7789,6 +7829,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!114 &1021038687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021038679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9f36a5ae2bc2f4d819855c834780b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slopeChecker: {fileID: 0}
+  slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
+  friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  applyVisualModifications: 0
+  movementSmoothing: 0.05
 --- !u!1 &1027897706
 GameObject:
   m_ObjectHideFlags: 0
@@ -18488,6 +18545,7 @@ MonoBehaviour:
   promptPrefab: {fileID: 0}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  interactor: {fileID: 0}
 --- !u!61 &1578129669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22121,6 +22179,7 @@ MonoBehaviour:
   promptPrefab: {fileID: 0}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  interactor: {fileID: 0}
 --- !u!212 &1938978146
 SpriteRenderer:
   m_ObjectHideFlags: 0

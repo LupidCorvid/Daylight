@@ -6,6 +6,8 @@ public class BaseAI
 {
     public EnemyBase enemyBase;
 
+    public BaseMovement movement;
+
     public Transform transform
     {
         get
@@ -60,11 +62,6 @@ public class BaseAI
     public virtual void FixedUpdate()
     {
 
-    }
-    public virtual void moveDirection(Vector2 relDirection)
-    {
-        Vector3 velocity = rb.velocity;
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, relDirection * moveSpeed, ref velocity, .05f);
     }
 
 }

@@ -95,11 +95,11 @@ public class RockLobberAI : BaseAI
         {
             if(target.transform.position.x + stopRange < transform.position.x)
             {
-                rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
+                movement.MoveLeft();
             }
             else if(target.transform.position.x - stopRange > transform.position.x)
             {
-                rb.AddForce(Vector2.right * moveSpeed * Time.deltaTime * 500);
+                movement.MoveRight();
             }
             if (lastAttack + attackCooldown < Time.time && !float.IsNaN(getAttackAngle()) && Mathf.Abs(Vector2.Distance(target.position, transform.position)) > 4)
                 state = AIstate.attacking;

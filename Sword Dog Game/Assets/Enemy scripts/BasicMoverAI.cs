@@ -50,13 +50,11 @@ public class BasicMoverAI : BaseAI
     {
         if(target.x - stopRange > transform.position.x)
         {
-            if(rb.velocity.x < maxSpeed)
-                rb.AddForce(Vector2.right * Time.deltaTime * 500 * moveSpeed);
+            movement.MoveRight();
         }
         else if (target.x + stopRange < transform.position.x)
         {
-            if(rb.velocity.x > -maxSpeed)
-                rb.AddForce(Vector2.left * Time.deltaTime * 500 * moveSpeed);
+            movement.MoveLeft();
         }
         if(target.y - transform.position.y > 4)//Make sure is grounded 
         {
