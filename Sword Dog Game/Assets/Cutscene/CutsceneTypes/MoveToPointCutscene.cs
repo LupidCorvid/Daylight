@@ -5,35 +5,59 @@ using System;
 
 public class MoveToPointCutscene : CutsceneData
 {
-    public Vector2 targetPoint;
     private Vector2 startPoint;
 
     public float startTime;
-    public float travelTime = 1;
+
+    public List<PositionTime> points = new List<PositionTime>();
+    int curPoint = 0;
 
     public override void startSegment()
     {
         base.startSegment();
         startPoint = transform.position;
         startTime = Time.time;
+        curPoint = 0;
     }
 
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if(Time.time - startTime > travelTime)
+        if(curPoint >= points.Count)
         {
             finishedSegment();
             return;
         }
 
-        transform.position = new Vector3(Mathf.Lerp(startPoint.x, targetPoint.x, (Time.time - startTime) / travelTime), Mathf.Lerp(startPoint.y, targetPoint.y, (Time.time - startTime) / travelTime));
+        if(Time.time - startTime >= points[curPoint].travelTime)
+        {       
+            startPoint = points[curPoint].toPoint;
+            curPoint++;
+            startTime = Time.time;
+            return;
+        }
+
+        transform.position = new Vector3(Mathf.Lerp(startPoint.x, points[curPoint].toPoint.x, (Time.time - startTime) / points[curPoint].travelTime), Mathf.Lerp(startPoint.y, points[curPoint].toPoint.y, (Time.time - startTime) / points[curPoint].travelTime));
 
     }
 
     public override void finishedSegment()
     {
         base.finishedSegment();
-        transform.position = targetPoint;
+        if(points.Count > 0)
+            transform.position = points[^1].toPoint;
+    }
+
+    [Serializable]
+    public struct PositionTime
+    {
+        public float travelTime;
+        public Vector2 toPoint;
+
+        public PositionTime(float time, Vector2 point)
+        {
+            travelTime = time;
+            toPoint = point;
+        }
     }
 }
