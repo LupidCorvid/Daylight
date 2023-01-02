@@ -42,7 +42,7 @@ public class BasicMoverAI : BaseAI
         }
         Debug.DrawLine(transform.position, hit.point);
         if (hit.distance > 3)
-            Jump();
+            movement.Jump();
         return false;
     }
 
@@ -58,18 +58,7 @@ public class BasicMoverAI : BaseAI
         }
         if(target.y - transform.position.y > 4)//Make sure is grounded 
         {
-            Jump();
-        }
-    }
-    public void Jump()
-    {
-        foreach (Collider2D collision in enemyBase.GetComponentInChildren<CollisionsTracker>().triggersInContact)
-        {
-            if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Terrain"))
-            {
-                rb.AddForce(Vector2.up * 100);
-                return;
-            }
+            movement.Jump();
         }
     }
 

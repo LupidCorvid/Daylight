@@ -21,6 +21,8 @@ public class BaseMovement : MonoBehaviour
     [Range(0, .3f)] [SerializeField] 
     private float movementSmoothing = 0.05f;
 
+    //Need to make a version where enemies dont get to turn immediately
+    public bool snappyDirectionChange = true;
 
     public void Start()
     {
@@ -41,9 +43,12 @@ public class BaseMovement : MonoBehaviour
         rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector3(-targetVelocity, rb.velocity.y), ref velocity, movementSmoothing);
     }
 
-    public void Jump()
+    public void Jump(float jumpForce = 50)
     {
-        
+        if (!slopeChecker.isGrounded)
+            return;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
 
     }
 
