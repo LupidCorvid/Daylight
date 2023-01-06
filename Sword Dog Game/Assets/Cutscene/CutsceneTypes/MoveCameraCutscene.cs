@@ -111,6 +111,13 @@ public class MoveCameraCutscene : CutsceneData
             CameraController.main.externalControl = false;
     }
 
+    public override void abort()
+    {
+        base.abort();
+        if (useMainCamera && freeCameraOnExit)
+            CameraController.main.externalControl = false;
+    }
+
     [Serializable]
     public struct CameraTransform
     {

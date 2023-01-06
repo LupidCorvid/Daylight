@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class InterruptibleCutscenes : CutsceneData
+public class InterruptibleCutscene : CutsceneData
 {
     public CutsceneData[] cutscenes;
 
-    public InterruptibleCutscenes(CutsceneData[] cutscenes)
+    public InterruptibleCutscene(CutsceneData[] cutscenes)
     {
         this.cutscenes = cutscenes;
     }
 
-    public InterruptibleCutscenes()
+    public InterruptibleCutscene()
     {
 
     }
@@ -44,7 +44,8 @@ public class InterruptibleCutscenes : CutsceneData
 
         foreach (CutsceneData data in cutscenes)
         {
-            data.finish += (() => finishedSegment());
+            if(data != null)
+                data.finish += (() => finishedSegment());
         }
     }
 
@@ -54,7 +55,8 @@ public class InterruptibleCutscenes : CutsceneData
 
         foreach (CutsceneData data in cutscenes)
         {
-            data.abort();
+            if(data != null)
+                data.abort();
         }
     }
 }

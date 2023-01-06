@@ -4144,7 +4144,7 @@ MonoBehaviour:
   - {fileID: 890950046}
   - {fileID: 890950044}
   - {fileID: 890950044}
-  - {fileID: 1782807993}
+  - {fileID: 1782807996}
   cutsceneNumber: 0
 --- !u!4 &341828992
 Transform:
@@ -21353,7 +21353,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782807994}
+  - component: {fileID: 1782807996}
   - component: {fileID: 1782807993}
+  - component: {fileID: 1782807995}
   m_Layer: 0
   m_Name: CameraCutsceneTester
   m_TagString: Untagged
@@ -21383,6 +21385,7 @@ MonoBehaviour:
     transition: 1
   target: {fileID: 0}
   freeCameraOnExit: 1
+  useMainCamera: 1
 --- !u!4 &1782807994
 Transform:
   m_ObjectHideFlags: 0
@@ -21398,6 +21401,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1782807995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 890950045}
+  interactor: {fileID: 0}
+--- !u!114 &1782807996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  cutscenes:
+  - RequireCompletion: 1
+    cutscene: {fileID: 1782807995}
+  - RequireCompletion: 0
+    cutscene: {fileID: 1782807993}
 --- !u!1 &1836654671
 GameObject:
   m_ObjectHideFlags: 0

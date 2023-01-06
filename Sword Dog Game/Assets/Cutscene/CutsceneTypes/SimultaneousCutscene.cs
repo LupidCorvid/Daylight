@@ -3,39 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SimultaneousCustscene : CutsceneData
+public class SimultaneousCutscene : CutsceneData
 {
-    private int _numCompleted;
 
-    public int numCompleted
-    {
-        get { return _numCompleted; }
-        set
-        {
-            if (numCompleted >= cutscenes.Length && !finished)
-                finishedSegment();
-        }
-    }
+    public CutscenePair[] cutscenes;
 
-    public CutsceneData[] cutscenes;
-    public SimultaneousCustscene(CutsceneData[] cutscenes)
+    public SimultaneousCutscene(CutscenePair[] cutscenes)
     {
         this.cutscenes = cutscenes;
     }
 
-    public SimultaneousCustscene()
+    public SimultaneousCutscene()
     {
 
     }
 
     public override void startSegment()
     {
-        base.startSegment();
-        numCompleted = 0;
-
-        foreach (CutsceneData data in cutscenes)
+        foreach (CutscenePair data in cutscenes)
         {
-            data.startSegment();
+            data.cutscene.finish += partialFinish;
+        }
+
+        foreach (CutscenePair data in cutscenes)
+        {
+            data.cutscene.startSegment();
         }
 
     }
@@ -44,9 +36,67 @@ public class SimultaneousCustscene : CutsceneData
     {
         base.Start();
 
-        foreach (CutsceneData data in cutscenes)
+        
+    }
+
+    public override void abort()
+    {
+        base.abort();
+        foreach (CutscenePair data in cutscenes)
         {
-            data.finish += (() => numCompleted++);
+            if(data.cutscene != null && !data.cutscene.finished)
+                data.cutscene.abort();
+        }
+
+        foreach (CutscenePair data in cutscenes)
+        {
+            data.cutscene.finish -= partialFinish;
+        }
+    }
+
+    public bool checkIfRequiredFinished()
+    {
+        foreach(CutscenePair cutscene in cutscenes)
+        {
+            if (cutscene.RequireCompletion && !cutscene.cutscene.finished)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void partialFinish()
+    {
+        if (checkIfRequiredFinished())
+            finishedSegment();
+    }
+
+    public override void finishedSegment()
+    {
+        abort();
+        base.finishedSegment();
+    }
+
+    public override void cycleExecution()
+    {
+        base.cycleExecution();
+        foreach(CutscenePair cutscene in cutscenes)
+        {
+            if (cutscene.cutscene != null && !cutscene.cutscene.finished)
+                cutscene.cutscene.cycleExecution();
+        }
+    }
+
+    [Serializable]
+    public struct CutscenePair
+    {
+        public bool RequireCompletion;
+        public CutsceneData cutscene;
+
+        public CutscenePair(bool required, CutsceneData data)
+        {
+            RequireCompletion = required;
+            cutscene = data;
         }
     }
 }
