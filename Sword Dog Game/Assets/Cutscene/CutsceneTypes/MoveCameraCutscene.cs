@@ -33,6 +33,8 @@ public class MoveCameraCutscene : CutsceneData
             target = Camera.main;
         if (useMainCamera)
             CameraController.main.externalControl = true;
+
+        changingToNewTransform();
     }
 
     public override void cycleExecution()
@@ -47,6 +49,8 @@ public class MoveCameraCutscene : CutsceneData
         if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .05f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .05f)
         {
             curPoint++;
+            if (curPoint < points.Count)
+                changingToNewTransform();
             return;
         }
 
@@ -63,6 +67,14 @@ public class MoveCameraCutscene : CutsceneData
 
         }
 
+    }
+
+    public void changingToNewTransform()
+    {
+        if (points[curPoint].letterbox && !CinematicBars.current.beingAdded)
+            CinematicBars.current.Show();
+        else if (!points[curPoint].letterbox && CinematicBars.current.beingAdded)
+            CinematicBars.current.Hide();
     }
 
     public void LinearMovement(CameraTransform transform)
@@ -109,6 +121,8 @@ public class MoveCameraCutscene : CutsceneData
             target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
         if (useMainCamera && freeCameraOnExit)
             CameraController.main.externalControl = false;
+        if (CinematicBars.current.beingAdded)
+            CinematicBars.current.Hide();
     }
 
     public override void abort()
@@ -116,6 +130,8 @@ public class MoveCameraCutscene : CutsceneData
         base.abort();
         if (useMainCamera && freeCameraOnExit)
             CameraController.main.externalControl = false;
+        if (CinematicBars.current.beingAdded)
+            CinematicBars.current.Hide();
     }
 
     [Serializable]
