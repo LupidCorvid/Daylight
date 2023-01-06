@@ -4145,6 +4145,10 @@ MonoBehaviour:
   - {fileID: 890950044}
   - {fileID: 890950044}
   - {fileID: 1782807996}
+  - {fileID: 1782808000}
+  - {fileID: 1782807997}
+  - {fileID: 1782807998}
+  - {fileID: 1782807999}
   cutsceneNumber: 0
 --- !u!4 &341828992
 Transform:
@@ -21358,6 +21362,10 @@ GameObject:
   - component: {fileID: 1782807996}
   - component: {fileID: 1782807993}
   - component: {fileID: 1782807995}
+  - component: {fileID: 1782808000}
+  - component: {fileID: 1782807999}
+  - component: {fileID: 1782807998}
+  - component: {fileID: 1782807997}
   m_Layer: 0
   m_Name: CameraCutsceneTester
   m_TagString: Untagged
@@ -21438,6 +21446,65 @@ MonoBehaviour:
     cutscene: {fileID: 1782807995}
   - RequireCompletion: 0
     cutscene: {fileID: 1782807993}
+--- !u!114 &1782807997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7544282153493438230371120e94c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  objectsToMove:
+  - objectToMove: {fileID: 890950041}
+    newLocation: {x: 2, y: -1, z: 0}
+    newScale: {x: -1, y: 1, z: 1}
+--- !u!114 &1782807998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 2
+--- !u!114 &1782807999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 0
+--- !u!114 &1782808000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 1
 --- !u!1 &1836654671
 GameObject:
   m_ObjectHideFlags: 0

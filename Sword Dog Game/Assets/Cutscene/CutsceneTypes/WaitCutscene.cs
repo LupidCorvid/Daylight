@@ -7,6 +7,7 @@ public class WaitCutscene : CutsceneData
 {
     public float waitTime;
 
+    float startTime;
     public WaitCutscene(float time)
     {
         waitTime = time;
@@ -20,12 +21,14 @@ public class WaitCutscene : CutsceneData
     public override void startSegment()
     {
         base.startSegment();
-        wait();
+        startTime = Time.time;
     }
 
-    public IEnumerator wait()
+    public override void cycleExecution()
     {
-        yield return new WaitForSeconds(waitTime);
-        finishedSegment();
+        base.cycleExecution();
+        if (startTime + waitTime <= Time.time)
+            finishedSegment();
     }
+
 }
