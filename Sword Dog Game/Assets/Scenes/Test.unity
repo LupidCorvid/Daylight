@@ -4143,6 +4143,8 @@ MonoBehaviour:
   - {fileID: 890950042}
   - {fileID: 890950046}
   - {fileID: 890950044}
+  - {fileID: 890950044}
+  - {fileID: 1782807993}
   cutsceneNumber: 0
 --- !u!4 &341828992
 Transform:
@@ -21341,6 +21343,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1908672995}
   m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1782807992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782807994}
+  - component: {fileID: 1782807993}
+  m_Layer: 0
+  m_Name: CameraCutsceneTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1782807993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  startTime: 0
+  points:
+  - zoom: 2.5
+    speed: 2
+    point: {x: 0, y: 0}
+    letterbox: 0
+    transition: 1
+  target: {fileID: 0}
+  freeCameraOnExit: 1
+--- !u!4 &1782807994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782807992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.849457, y: 6.27493, z: 1.2456598}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836654671
 GameObject:

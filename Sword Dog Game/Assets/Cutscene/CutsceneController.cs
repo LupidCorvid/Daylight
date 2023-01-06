@@ -35,8 +35,12 @@ public class CutsceneController : MonoBehaviour
             cutscenes[i].finish += cutscenes[i + 1].startSegment;
             cutscenes[i].finish += (() => cutsceneNumber++);
         }
-        if(cutscenes.Count > 0)
+
+        if (cutscenes.Count > 0)
+        {
             cutscenes[^1].finish += (() => inCutscene = false);
+            cutscenes[^1].finish += (() => cutsceneNumber++);
+        }
     }
 
 
@@ -48,6 +52,7 @@ public class CutsceneController : MonoBehaviour
 
     private void Update()
     {
-        cutscenes[cutsceneNumber].cycleExecution();
+        if(cutsceneNumber < cutscenes.Count)
+            cutscenes[cutsceneNumber].cycleExecution();
     }
 }
