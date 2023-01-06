@@ -8,11 +8,15 @@ public class CutsceneNPCDialog : CutsceneData
     [SerializeField]
     public DialogNPC npc;
     public GameObject interactor;
+    public bool overrideDialog = true;
 
-    public CutsceneNPCDialog(DialogNPC npc, GameObject user)
+    public string dialog;
+
+    public CutsceneNPCDialog(DialogNPC npc, GameObject user, string dialog)
     {
         this.npc = npc;
         interactor = user;
+        this.dialog = dialog;
     }
 
     public CutsceneNPCDialog()
@@ -21,13 +25,26 @@ public class CutsceneNPCDialog : CutsceneData
     }
     public override void Start()
     {
-        npc.closedDialog += finishedSegment;
+        
     }
 
     public override void startSegment()
     {
         base.startSegment();
-        npc.interact(interactor);
+        npc.closedDialog += finishedSegment;
+        npc.interactor = interactor;
+        if (overrideDialog)
+        {
+            npc.setNewSource(new DialogSource(dialog));
+            npc.openDialog();
+        }
+        else
+            npc.interact(interactor);
+    }
+    public override void finishedSegment()
+    {
+        npc.closedDialog -= finishedSegment;
+        base.finishedSegment();
     }
 
     public override void abort()

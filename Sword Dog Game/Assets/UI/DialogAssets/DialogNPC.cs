@@ -58,18 +58,22 @@ public class DialogNPC : MonoBehaviour, IInteractable
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
             else if (numInteractions < dialog.Count)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
-            dialogSource.position = 0;
-            dialogSource.resetDialog();
-            //DialogController.main.source = dialogSource;
-            DialogController.main.openedThisFrame = true;
-            DialogController.main.setSource(dialogSource);
-            DialogController.main.openBox();
-            DialogController.main.readWhenOpen = true;
-            numInteractions++;
-            alreadyTalking = true;
-            InteractablesTracker.alreadyInteracting = true;
+            openDialog();
             hidePrompt(null);
         }
+    }
+
+    public virtual void openDialog()
+    {
+        dialogSource.position = 0;
+        dialogSource.resetDialog();
+        DialogController.main.openedThisFrame = true;
+        DialogController.main.setSource(dialogSource);
+        DialogController.main.openBox();
+        DialogController.main.readWhenOpen = true;
+        numInteractions++;
+        alreadyTalking = true;
+        InteractablesTracker.alreadyInteracting = true;
     }
 
     private void LateUpdate()
