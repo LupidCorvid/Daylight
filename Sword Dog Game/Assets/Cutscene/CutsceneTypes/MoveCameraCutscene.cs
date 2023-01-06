@@ -33,8 +33,8 @@ public class MoveCameraCutscene : CutsceneData
             target = Camera.main;
         if (useMainCamera)
             CameraController.main.externalControl = true;
-
-        changingToNewTransform();
+        if(points.Count > 0)
+            changingToNewTransform();
     }
 
     public override void cycleExecution()

@@ -11,6 +11,8 @@ public class CutsceneController : MonoBehaviour
 
     public int cutsceneNumber = 0;
 
+    public bool autoFillList = true;
+
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
     /*Other cutscene data ideas:
@@ -24,6 +26,9 @@ public class CutsceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (autoFillList)
+            FillListFromComponents();
+
         setupCutsceneChain();
         StartCutscene();
     }
@@ -43,6 +48,12 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
+
+    public void FillListFromComponents()
+    {
+        cutscenes.Clear();
+        cutscenes.AddRange(GetComponents<CutsceneData>());
+    }
 
     public void StartCutscene()
     {
