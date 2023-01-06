@@ -52,9 +52,20 @@ public class BaseMovement : MonoBehaviour
 
     }
 
+    //Could try to account for velocity. As of now only predictable when standing still
+    //Meant to be used for the ai to clear gaps
     public void TargetedJump(Vector2 target)
     {
-
+        Vector2 relTar = target - (Vector2)transform.position;
+        float projSpeed = 5;
+        float grav = rb.gravityScale * 9.8f;
+        float angle;
+        angle = Mathf.Atan((Mathf.Sqrt(Mathf.Pow(projSpeed, 4) - grav * (grav * Mathf.Pow(relTar.x, 2) + 2 * relTar.y
+                          * Mathf.Pow(projSpeed, 2))) + Mathf.Pow(projSpeed, 2)) / (grav * relTar.x));
+        if (relTar.x < 0)
+            angle += Mathf.PI;
+        if(!float.IsNaN(angle))
+            rb.velocity = new Vector2(projSpeed * Mathf.Cos(angle), projSpeed * Mathf.Sin(angle));
     }
 
     public void NotMoving()
