@@ -10,9 +10,6 @@ public class CutsceneController : MonoBehaviour
     public static bool inCutscene = false;
 
     public int cutsceneNumber = 0;
-
-    public bool autoFillList = true;
-
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
     /*Other cutscene data ideas:
@@ -26,8 +23,6 @@ public class CutsceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (autoFillList)
-            FillListFromComponents();
 
         setupCutsceneChain();
         StartCutscene();
@@ -52,11 +47,38 @@ public class CutsceneController : MonoBehaviour
     public void FillListFromComponents()
     {
         cutscenes.Clear();
-        cutscenes.AddRange(GetComponents<CutsceneData>());
+        List<CutsceneData> newList = new List<CutsceneData>();
+        newList.AddRange(GetComponents<CutsceneData>());
+
+        List<CutsceneData> nestedScenes = new List<CutsceneData>();
+
+        foreach(CutsceneData data in newList)
+        {
+            
+            if (data as SimultaneousCutscene != null)
+            {
+                SimultaneousCutscene multiCutscene = (SimultaneousCutscene)data;
+                foreach (SimultaneousCutscene.CutscenePair pair in multiCutscene.cutscenes)
+                {
+                    nestedScenes.Add(pair.cutscene);
+                }
+            }
+        }
+
+        for(int i = newList.Count - 1; i >= 0; --i)
+        {
+            if(nestedScenes.Contains(newList[i]))
+            {
+                newList.RemoveAt(i);
+            }
+        }
+        cutscenes = newList;
     }
 
     public void StartCutscene()
     {
+        if (cutscenes.Count <= 0)
+            return;
         inCutscene = true;
         cutscenes[0].startSegment();
     }
