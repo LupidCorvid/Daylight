@@ -90,6 +90,7 @@ public class PlayerHealth : MonoBehaviour
         dead = true;
         rb.velocity = new Vector2(0, rb.velocity.y);
         anim.SetTrigger("death");
+        CutsceneController.PlayCutscene("PlayerDeath");
     }
 
     public void WakeUp()

@@ -61,4 +61,16 @@ public class ChangeScene : MonoBehaviour
         Crossfade.changeScene?.Invoke();
     }
 
+    public static void ChangeSceneMinimal(string scene)
+    {
+        changingScene = true;
+        DialogController.main.closeBox();
+        PlayerMovement.controller.noFall = true;
+        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        GameObject.Destroy(eventSystem?.gameObject);
+        SceneHelper.LoadScene(scene);
+        clearCollisions?.Invoke();
+        clearInteractables?.Invoke();
+    }
+
 }

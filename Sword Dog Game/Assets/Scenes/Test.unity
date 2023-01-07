@@ -3635,11 +3635,10 @@ GameObject:
   - component: {fileID: 294639849}
   - component: {fileID: 294639848}
   - component: {fileID: 294639847}
-  - component: {fileID: 294639853}
-  - component: {fileID: 294639852}
   - component: {fileID: 294639851}
+  - component: {fileID: 294639852}
   m_Layer: 0
-  m_Name: CutsceneTester2
+  m_Name: DeathCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3672,7 +3671,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  startTime: 0
   points:
   - zoom: 10
     speed: 3
@@ -3697,8 +3695,11 @@ MonoBehaviour:
   cutscenes:
   - {fileID: 294639848}
   - {fileID: 294639847}
-  - {fileID: 294639853}
+  - {fileID: 294639851}
+  - {fileID: 294639852}
   cutsceneNumber: 0
+  cutsceneName: PlayerDeath
+  playingThisCutscene: 0
 --- !u!4 &294639850
 Transform:
   m_ObjectHideFlags: 0
@@ -3723,11 +3724,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 294639845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  waitTime: 1
+  FadeIn: 1
 --- !u!114 &294639852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3737,38 +3738,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 294639845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 53bd7890511cd5249841711e48b2c70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  startTime: 0
-  points:
-  - zoom: 5
-    speed: 2
-    point: {x: 6, y: 2}
-    letterbox: 0
-    transition: 1
-  target: {fileID: 0}
-  freeCameraOnExit: 1
-  useMainCamera: 1
---- !u!114 &294639853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294639845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  cutscenes:
-  - RequireCompletion: 0
-    cutscene: {fileID: 294639852}
-  - RequireCompletion: 1
-    cutscene: {fileID: 294639851}
+  changeToScene: Town Medbay
+  toNewCutscene: Revived
 --- !u!1 &303463451
 GameObject:
   m_ObjectHideFlags: 0
@@ -4296,6 +4271,8 @@ MonoBehaviour:
   - {fileID: 1782807998}
   - {fileID: 1782807999}
   cutsceneNumber: 0
+  cutsceneName: 
+  playingThisCutscene: 0
 --- !u!4 &341828992
 Transform:
   m_ObjectHideFlags: 0
@@ -21532,7 +21509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  startTime: 0
   points:
   - zoom: 2.5
     speed: 2
@@ -21607,6 +21583,8 @@ MonoBehaviour:
   finished: 0
   objectsToMove:
   - objectToMove: {fileID: 890950041}
+    getFromName: 0
+    transformName: 
     newLocation: {x: 2, y: -100, z: 0}
     newScale: {x: -1, y: 1, z: 1}
 --- !u!114 &1782807998

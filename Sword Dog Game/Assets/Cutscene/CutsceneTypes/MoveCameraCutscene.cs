@@ -6,8 +6,6 @@ using System;
 public class MoveCameraCutscene : CutsceneData
 {
 
-    public float startTime;
-
     public List<CameraTransform> points = new List<CameraTransform>();
     int curPoint = 0;
 
@@ -27,7 +25,6 @@ public class MoveCameraCutscene : CutsceneData
     public override void startSegment()
     {
         base.startSegment();
-        startTime = Time.time;
         curPoint = 0;
         if(useMainCamera)
             target = Camera.main;
@@ -116,13 +113,13 @@ public class MoveCameraCutscene : CutsceneData
 
     public override void finishedSegment()
     {
-        base.finishedSegment();
         if (points.Count > 0)
             target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
         if (useMainCamera && freeCameraOnExit)
             CameraController.main.externalControl = false;
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
+        base.finishedSegment();
     }
 
     public override void abort()

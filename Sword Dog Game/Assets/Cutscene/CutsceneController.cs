@@ -10,22 +10,65 @@ public class CutsceneController : MonoBehaviour
     public static bool inCutscene = false;
 
     public int cutsceneNumber = 0;
+
+    public static Dictionary<string, CutsceneController> AllCutscenes = new Dictionary<string, CutsceneController>();
+
+    public string cutsceneName;
+
+    public bool playingThisCutscene;
+
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
     /*Other cutscene data ideas:
      * wait until another cutscene finishes
      * Move to different points in a sequence
      * Integrate player movement to allow use of animator when moving
-     * 
+     * Allow for loading new scenes through cutscenes
      * 
      */
+
+    public static void CheckForLoadCutsceneTransition()
+    {
+        foreach(string[] param in SceneHelper.betweenSceneData)
+        {
+            if (param.Length <= 1)
+                continue;
+            if(param[0] == "cutsceneOnLoad")
+            {
+                if (AllCutscenes.ContainsKey(param[1]))
+                    AllCutscenes[param[1]].StartCutscene();
+                else
+                    Debug.LogError("Couldnt find a cutscene in new scene of name " + param[1]);
+            }
+            
+        }
+    }
+
+    public static void PlayCutscene(string name)
+    {
+        if (AllCutscenes.ContainsKey(name))
+            AllCutscenes[name].StartCutscene();
+        else
+            Debug.LogWarning("Failed load cutscene. No cutscene with name " + name + " found");
+    }
+
+    public void Awake()
+    {
+        setupCutsceneChain();
+        if (AllCutscenes.ContainsKey(cutsceneName))
+        {
+            Debug.LogError("There is already a cutscene with the name " + cutsceneName);
+        }
+        else
+            AllCutscenes.Add(cutsceneName, this);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
-        setupCutsceneChain();
-        StartCutscene();
+        
+        
+        
     }
 
     public void setupCutsceneChain()
@@ -38,8 +81,8 @@ public class CutsceneController : MonoBehaviour
 
         if (cutscenes.Count > 0)
         {
-            cutscenes[^1].finish += (() => inCutscene = false);
             cutscenes[^1].finish += (() => cutsceneNumber++);
+            cutscenes[^1].finish += FinishCutscene;
         }
     }
 
@@ -80,12 +123,19 @@ public class CutsceneController : MonoBehaviour
         if (cutscenes.Count <= 0)
             return;
         inCutscene = true;
+        playingThisCutscene = true;
         cutscenes[0].startSegment();
+    }
+
+    public void FinishCutscene()
+    {
+        inCutscene = false;
+        playingThisCutscene = false;
     }
 
     private void Update()
     {
-        if(cutsceneNumber < cutscenes.Count)
+        if(cutsceneNumber < cutscenes.Count && playingThisCutscene)
             cutscenes[cutsceneNumber].cycleExecution();
     }
 }
