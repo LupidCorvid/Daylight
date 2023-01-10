@@ -27,7 +27,7 @@ public class MoveCameraCutscene : CutsceneData
         base.startSegment();
         curPoint = 0;
         if(useMainCamera)
-            target = Camera.main;
+            target = CameraController.mainCam;
         if (useMainCamera)
             CameraController.main.externalControl = true;
         if(points.Count > 0)

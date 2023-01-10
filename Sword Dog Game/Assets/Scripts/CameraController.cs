@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
 
     public static CameraController main;
 
+    public static Camera mainCam;
+
     public Vector3 targetPoint
     {
         get
@@ -34,7 +36,8 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         sceneChange += Snap;
-        main ??= this;
+        main = this;
+        mainCam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
