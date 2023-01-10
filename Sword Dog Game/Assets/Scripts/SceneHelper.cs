@@ -22,9 +22,15 @@ public static partial class SceneHelper
     static void ActivatorAndUnloader(Scene scene, LoadSceneMode mode)
     {
         ImbetweenUnloads?.Invoke();
+        SceneManager.sceneUnloaded += finishedUnload;
         SceneManager.sceneLoaded -= ActivatorAndUnloader;
         SceneManager.SetActiveScene(scene);
         SceneManager.UnloadSceneAsync(PendingPreviousScene);
+        //FinishedChangeScene?.Invoke();
+    }
+
+    public static void finishedUnload(Scene scene)
+    {
         FinishedChangeScene?.Invoke();
     }
 }

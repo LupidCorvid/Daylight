@@ -8,6 +8,9 @@ public class CutsceneNPCDialog : CutsceneData
     [SerializeField]
     public DialogNPC npc;
     public GameObject interactor;
+    public bool getInteractorByName;
+    public string interactorName;
+
     public bool overrideDialog = true;
 
     public string dialog;
@@ -25,13 +28,16 @@ public class CutsceneNPCDialog : CutsceneData
     }
     public override void Start()
     {
-        
+
     }
 
     public override void startSegment()
     {
         base.startSegment();
         npc.closedDialog += finishedSegment;
+        if (getInteractorByName)
+            interactor = GameObject.Find(interactorName);
+
         npc.interactor = interactor;
         if (overrideDialog)
         {

@@ -10,11 +10,17 @@ public class Crossfade : MonoBehaviour
 
     public static Crossfade current;
 
+    public static Action FadeStart;
+    public static Action FadeEnd;
+
+
     void Start()
     {
         current = this;
         changeScene += SceneChange;
         animator = GetComponent<Animator>();
+        FadeStart += FadeOut;
+        FadeEnd += FadeIn;
     }
 
     private void SceneChange()
@@ -37,4 +43,17 @@ public class Crossfade : MonoBehaviour
     {
         animator.SetTrigger("start");
     }
+
+    public void FadeOut()
+    {
+        if (this != null)
+            StartFade();
+    }
+
+    public void FadeIn()
+    {
+        if (this != null)
+            EndFade();
+    }
+
 }

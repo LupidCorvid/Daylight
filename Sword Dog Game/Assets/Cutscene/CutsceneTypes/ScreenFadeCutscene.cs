@@ -15,9 +15,11 @@ public class ScreenFadeCutscene : CutsceneData
         base.startSegment();
         startTime = Time.time;
         if (FadeIn)
-            Crossfade.current.StartFade();
+            //Crossfade.current.StartFade();
+            Crossfade.FadeStart?.Invoke();
         else
-            Crossfade.current.StopFade();
+            Crossfade.FadeEnd?.Invoke();
+            //Crossfade.current.StopFade();
     }
 
     public override void cycleExecution()

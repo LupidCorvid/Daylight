@@ -29,7 +29,7 @@ public class MoveObjectsCutscene : CutsceneData
                 }
                 toMove.transform.position = transform.newLocation;
                 toMove.transform.localScale = transform.newScale;
-
+                toMove.transform.eulerAngles = new Vector3(0, 0, transform.newRotation);
             }
         }
         finishedSegment();
@@ -44,14 +44,16 @@ public class MoveObjectsCutscene : CutsceneData
 
         public Vector3 newLocation;
         public Vector3 newScale;
+        public float newRotation;
 
-        public MoveObject(Transform objectToMove, Vector3 location, Vector3 newScale, bool GetFromName = false, string TransformName = "")
+        public MoveObject(Transform objectToMove, Vector3 location, Vector3 newScale, float newRotation = 0, bool GetFromName = false, string TransformName = "")
         {
             this.objectToMove = objectToMove;
             newLocation = location;
             this.newScale = newScale;
             transformName = TransformName;
             getFromName = GetFromName;
+            this.newRotation = newRotation;
         }
     }
 }
