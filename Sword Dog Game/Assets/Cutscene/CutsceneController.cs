@@ -35,19 +35,25 @@ public class CutsceneController : MonoBehaviour
 
     public static void CheckForLoadCutsceneTransition()
     {
-        foreach(string[] param in SceneHelper.betweenSceneData)
+
+        for(int i = SceneHelper.betweenSceneData.Count - 1; i >= 0 ; i--)
         {
-            if (param.Length <= 1)
+            if (SceneHelper.betweenSceneData[i].Length <= 1)
                 continue;
-            if(param[0] == "cutsceneOnLoad")
+            if (SceneHelper.betweenSceneData[i][0] == "cutsceneOnLoad")
             {
-                if (AllCutscenes.ContainsKey(param[1]))
-                    AllCutscenes[param[1]].StartCutscene();
+                if (AllCutscenes.ContainsKey(SceneHelper.betweenSceneData[i][1]))
+                    AllCutscenes[SceneHelper.betweenSceneData[i][1]].StartCutscene();
                 else
-                    Debug.LogError("Couldnt find a cutscene in new scene of name " + param[1]);
+                    Debug.LogError("Couldnt find a cutscene in new scene of name " + SceneHelper.betweenSceneData[i][1]);
+                SceneHelper.betweenSceneData.RemoveAt(i);
             }
-            
         }
+    }
+
+    public static void ClearCutscenes()
+    {
+        AllCutscenes.Clear();
     }
 
     public static void PlayCutscene(string name)
@@ -68,6 +74,14 @@ public class CutsceneController : MonoBehaviour
         }
         else
             AllCutscenes.Add(cutsceneName, this);
+    }
+
+    public void OnDestroy()
+    {
+        if(AllCutscenes.ContainsKey(cutsceneName))
+        {
+            AllCutscenes.Remove(cutsceneName);
+        }
     }
 
     // Start is called before the first frame update

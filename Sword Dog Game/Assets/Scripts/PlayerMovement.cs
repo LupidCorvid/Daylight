@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
 
-        if (!PlayerHealth.dead) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement) // && not paused(?)
         {
             // remember previous movement input
             prevMoveX = moveX;

@@ -15,6 +15,10 @@ public class CutsceneNPCDialog : CutsceneData
 
     public string dialog;
 
+    public bool restorePriorDialog;
+
+    private DialogSource priorDialog;
+
     public CutsceneNPCDialog(DialogNPC npc, GameObject user, string dialog)
     {
         this.npc = npc;
@@ -41,6 +45,8 @@ public class CutsceneNPCDialog : CutsceneData
         npc.interactor = interactor;
         if (overrideDialog)
         {
+            if(restorePriorDialog)
+                priorDialog = npc.dialogSource;
             npc.setNewSource(new DialogSource(dialog));
             npc.openDialog();
         }
@@ -50,13 +56,19 @@ public class CutsceneNPCDialog : CutsceneData
     public override void finishedSegment()
     {
         npc.closedDialog -= finishedSegment;
+        if (restorePriorDialog)
+            npc.setNewSource(priorDialog);
         base.finishedSegment();
+
     }
 
     public override void abort()
     {
         base.abort();
         npc.exitDialog();
+        if (restorePriorDialog)
+            npc.setNewSource(priorDialog);
+
     }
 
 }

@@ -56,6 +56,7 @@ public class ChangeScene : MonoBehaviour
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
@@ -69,6 +70,7 @@ public class ChangeScene : MonoBehaviour
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
         //DialogController.closedAnimator = true;
 
     }
