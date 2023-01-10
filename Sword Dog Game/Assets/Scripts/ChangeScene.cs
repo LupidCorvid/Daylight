@@ -63,6 +63,7 @@ public class ChangeScene : MonoBehaviour
 
     public static void ChangeSceneMinimal(string scene)
     {
+        changingScene = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene(scene);

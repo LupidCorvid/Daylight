@@ -59,7 +59,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             else if (numInteractions < dialog.Count)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
             openDialog();
-            hidePrompt(null);
+            //hidePrompt(null);
         }
     }
 
@@ -74,6 +74,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
         numInteractions++;
         alreadyTalking = true;
         InteractablesTracker.alreadyInteracting = true;
+
+        if(interactor?.GetComponentInChildren<InteractablesTracker>()?.nearest != null)
+            interactor.GetComponentInChildren<InteractablesTracker>().nearest.hidePrompt(null);
     }
 
     private void LateUpdate()

@@ -17,6 +17,12 @@ public class CutsceneController : MonoBehaviour
 
     public bool playingThisCutscene;
 
+    public bool stopInteractions;
+    public bool stopMovement;
+
+    public static bool cutsceneStopInteractions = false;
+    public static bool cutsceneStopMovement = false;
+
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
     /*Other cutscene data ideas:
@@ -126,10 +132,21 @@ public class CutsceneController : MonoBehaviour
         inCutscene = true;
         playingThisCutscene = true;
         cutscenes[0].startSegment();
+
+        if (stopInteractions)
+            cutsceneStopInteractions = true;
+        if (stopMovement)
+            cutsceneStopMovement = true;
     }
 
     public void FinishCutscene()
     {
+        if (playingThisCutscene && cutsceneStopInteractions && stopInteractions)
+            cutsceneStopInteractions = false;
+        if (playingThisCutscene && cutsceneStopMovement && stopMovement)
+            cutsceneStopMovement = false;
+
+
         inCutscene = false;
         playingThisCutscene = false;
     }
