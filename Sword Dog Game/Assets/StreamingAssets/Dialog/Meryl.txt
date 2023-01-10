@@ -3,9 +3,15 @@ Default{
 [sh,Meryl][abf,10][ss, .05] Hello! [w, .2] What can I do for you? 
 [prompt, Heal, [llf,Heal], Leave, [llf,Exit]] [wi] [exit]
 }
+
 Heal{
 [c][CE,heal]You're in tip top shape![w, .15] Come back if you ever need healing. [wi] [exit]
 }
+
 Exit{
 [c]Take care! [wi] [exit]
+}
+
+Revive{
+[sh,Meryl][abf,10][ss, .05][c][CE,heal][w, .25] You should be fine to leave now.[w, .15] Be more careful this time. [wi] [exit]
 }

@@ -6,10 +6,21 @@ using UnityEngine;
 public class Crossfade : MonoBehaviour
 {
     public static Action changeScene;
+    private Animator animator;
+
+    public static Crossfade current;
+
+    public static Action FadeStart;
+    public static Action FadeEnd;
+
 
     void Start()
     {
+        current = this;
         changeScene += SceneChange;
+        animator = GetComponent<Animator>();
+        FadeStart += FadeOut;
+        FadeEnd += FadeIn;
     }
 
     private void SceneChange()
@@ -20,7 +31,29 @@ public class Crossfade : MonoBehaviour
 
     void EndFade()
     {
-        GetComponent<Animator>().SetTrigger("stop");
+        animator.SetTrigger("stop");
         ChangeScene.changingScene = false;
     }
+
+    public void StopFade()
+    {
+        animator.SetTrigger("stop");
+    }
+    public void StartFade()
+    {
+        animator.SetTrigger("start");
+    }
+
+    public void FadeOut()
+    {
+        if (this != null)
+            StartFade();
+    }
+
+    public void FadeIn()
+    {
+        if (this != null)
+            EndFade();
+    }
+
 }

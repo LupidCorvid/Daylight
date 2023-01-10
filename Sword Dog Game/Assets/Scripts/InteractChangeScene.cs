@@ -84,6 +84,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         SceneHelper.LoadScene(scene);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();

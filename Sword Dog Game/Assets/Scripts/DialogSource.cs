@@ -87,7 +87,6 @@ public class DialogSource
      * [sdb, x, y, x,y ] sets default bark settings
      * 
      * [c] clear output box
-     * [ip] wait for input to progress
      * 
      * [sh, val] // sets header to a new string
      * [sh] //clears header

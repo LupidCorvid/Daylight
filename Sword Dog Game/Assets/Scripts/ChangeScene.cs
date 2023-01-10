@@ -56,9 +56,23 @@ public class ChangeScene : MonoBehaviour
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
+    }
+
+    public static void ChangeSceneMinimal(string scene)
+    {
+        changingScene = true;
+        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        GameObject.Destroy(eventSystem?.gameObject);
+        SceneHelper.LoadScene(scene);
+        clearCollisions?.Invoke();
+        clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
+        //DialogController.closedAnimator = true;
+
     }
 
 }

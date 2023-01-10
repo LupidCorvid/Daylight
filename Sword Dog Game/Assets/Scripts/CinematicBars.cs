@@ -8,7 +8,9 @@ public class CinematicBars : MonoBehaviour
 {
     private RectTransform topBar, bottomBar;
     private float targetSize, changeSizeAmount;
-    private bool isActive;
+    private bool isActive = false;
+    public bool beingAdded = false;
+    public static CinematicBars current;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class CinematicBars : MonoBehaviour
         bottomBar.anchorMin = new Vector2(0, 0);
         bottomBar.anchorMax = new Vector2(1, 0);
         bottomBar.sizeDelta = new Vector2(0, 0);
+
+        current = this;
     }
 
     // Update is called once per frame
@@ -57,17 +61,20 @@ public class CinematicBars : MonoBehaviour
         }
     }
 
-    public void Show(float targetSize, float time)
+    public void Show(float targetSize = 125, float time = 2)
     {
+
         this.targetSize = targetSize;
         changeSizeAmount = (targetSize - topBar.sizeDelta.y) / time;
         isActive = true;
+        beingAdded = true;
     }
 
-    public void Hide(float time)
+    public void Hide(float time = 2)
     {
         targetSize = 0f;
         changeSizeAmount = (targetSize - topBar.sizeDelta.y) / time;
         isActive = true;
+        beingAdded = false;
     }
 }

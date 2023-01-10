@@ -9,7 +9,24 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool facingRight, isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding;
+    public bool isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding;
+
+    public bool facingRight
+    {
+        get
+        {
+            return transform.localScale.x > 0;
+        }
+        set
+        {
+            int neg = 1;
+            if (value)
+                neg *= -1;
+
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * neg, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
     private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
@@ -130,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
 
-        if (!PlayerHealth.dead) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement) // && not paused(?)
         {
             // remember previous movement input
             prevMoveX = moveX;

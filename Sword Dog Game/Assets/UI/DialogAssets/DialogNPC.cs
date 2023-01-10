@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DialogNPC : MonoBehaviour, IInteractable
 {
@@ -36,6 +37,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public GameObject interactor;
 
+    public Action closedDialog;
+
     public void Awake()
     {
         if (dialog.Count > 0)
@@ -55,18 +58,25 @@ public class DialogNPC : MonoBehaviour, IInteractable
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
             else if (numInteractions < dialog.Count)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
-            dialogSource.position = 0;
-            dialogSource.resetDialog();
-            //DialogController.main.source = dialogSource;
-            DialogController.main.openedThisFrame = true;
-            DialogController.main.setSource(dialogSource);
-            DialogController.main.openBox();
-            DialogController.main.readWhenOpen = true;
-            numInteractions++;
-            alreadyTalking = true;
-            InteractablesTracker.alreadyInteracting = true;
-            hidePrompt(null);
+            openDialog();
+            //hidePrompt(null);
         }
+    }
+
+    public virtual void openDialog()
+    {
+        dialogSource.position = 0;
+        dialogSource.resetDialog();
+        DialogController.main.openedThisFrame = true;
+        DialogController.main.setSource(dialogSource);
+        DialogController.main.openBox();
+        DialogController.main.readWhenOpen = true;
+        numInteractions++;
+        alreadyTalking = true;
+        InteractablesTracker.alreadyInteracting = true;
+
+        if(interactor?.GetComponentInChildren<InteractablesTracker>()?.nearest != null)
+            interactor.GetComponentInChildren<InteractablesTracker>().nearest.hidePrompt(null);
     }
 
     private void LateUpdate()
@@ -103,6 +113,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         stoppedTalkingThisFrame = true;
         Invoke("tryShowPrompt", 1.5f);
         interactor = null;
+        closedDialog?.Invoke();
     }
 
     private void tryShowPrompt()
