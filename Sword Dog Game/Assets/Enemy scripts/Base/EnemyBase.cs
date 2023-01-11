@@ -22,7 +22,8 @@ public class EnemyBase : MonoBehaviour
         movement ??= GetComponent<BaseMovement>();
         if(movement != null)
             movement.slopeChecker ??= slopeChecker;
-        ai.movement = movement;
+        if(ai != null)
+            ai.movement = movement;
 
         ai?.Start();
     }

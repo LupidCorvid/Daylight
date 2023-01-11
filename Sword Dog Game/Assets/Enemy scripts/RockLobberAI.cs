@@ -8,14 +8,15 @@ public class RockLobberAI : BaseAI
 
     public float projectileSpeed = 17;
 
-    public float stopRange = 2f;
+    public float stopRange = 15f;
 
 
     public AIstate state;
     public enum AIstate
     {
         moving,
-        attacking
+        rangedAttacking,
+        meleeAttacking
     }
 
     public float lastAttack = -100;
@@ -83,26 +84,48 @@ public class RockLobberAI : BaseAI
     {
         base.Update();
 
-        if (state == AIstate.attacking)
+        if (state == AIstate.rangedAttacking)
         {
-            
-            //Wait for attack animation to playout and finish
+            //Wait for attack prep animation to finish
             attack();
+            //Wait for attack animation to finish
             state = AIstate.moving;
             
         }
         else if (state == AIstate.moving)
         {
-            if(target.transform.position.x + stopRange < transform.position.x)
+            if (target.transform.position.x + stopRange < transform.position.x)
             {
-                movement.MoveLeft();
+                movement.MoveLeft(moveSpeed);
             }
-            else if(target.transform.position.x - stopRange > transform.position.x)
+            else if (target.transform.position.x - stopRange > transform.position.x)
             {
-                movement.MoveRight();
+                movement.MoveRight(moveSpeed);
             }
-            if (lastAttack + attackCooldown < Time.time && !float.IsNaN(getAttackAngle()) && Mathf.Abs(Vector2.Distance(target.position, transform.position)) > 4)
-                state = AIstate.attacking;
+            else
+                movement.NotMoving();
+
+            if (Vector2.Distance(target.position, transform.position) <= 7)
+                state = AIstate.meleeAttacking;
+            else if (Vector2.Distance(target.position, transform.position) <= stopRange * .66f)
+            {
+                if (target.transform.position.x < transform.position.x)
+                    movement.MoveRight(moveSpeed);
+                else
+                    movement.MoveLeft(moveSpeed);
+
+            }
+            else if (lastAttack + attackCooldown < Time.time && !float.IsNaN(getAttackAngle()))
+                state = AIstate.rangedAttacking;
         }
+        else if (state == AIstate.meleeAttacking)
+        {
+            //NYI
+            if (Vector2.Distance(target.position, transform.position) > 7)
+                state = AIstate.rangedAttacking;
+            else
+                state = AIstate.moving;
+        }
+        
     }
 }
