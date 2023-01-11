@@ -30,6 +30,8 @@ public class BasicMoverAI : BaseAI
     }
 
     //determines if the AI should jump when moving in a direction
+    //Ignore this and go for a node-based system instead
+    //Use colliders to the left and right to check for both walls and if the player is in range
     private bool testForLedge(bool movingRight)
     {
         //This current method will not work for this as it assumes that hitboxes are both constant and square

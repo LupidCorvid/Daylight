@@ -9,10 +9,14 @@ public class CollisionsTracker : MonoBehaviour
 
     public List<Collider2D> triggersInContact = new List<Collider2D>();
     public event Action<Collider2D> triggerEnter;
+    public event Action<Collision2D> colliderEnter;
+
+    public Collider2D cldr;
     // Start is called before the first frame update
     void Start()
     {
         ChangeScene.clearCollisions += ClearAll;
+        cldr = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,7 @@ public class CollisionsTracker : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collidersInContact.Add(collision.collider);
+        colliderEnter?.Invoke(collision);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

@@ -32,6 +32,11 @@ public class EnemyBase : MonoBehaviour
         ai?.Update();
     }
 
+    public virtual void FixedUpdate()
+    {
+        ai?.FixedUpdate();
+    }
+
     public void die()
     {
         Destroy(gameObject);
@@ -42,6 +47,6 @@ public class EnemyBase : MonoBehaviour
         health -= amount;
         if (health <= 0)
             die();
-        GetComponent<SimpleFlash>().Flash(1f, 3, true);
+        GetComponent<SimpleFlash>()?.Flash(1f, 3, true);
     }
 }

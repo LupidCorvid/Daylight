@@ -10,16 +10,16 @@ public class BaseMovement : MonoBehaviour
     public PhysicsMaterial2D slippery;
     public PhysicsMaterial2D friction;
 
-    Vector3 velocity;
+    protected Vector3 velocity;
 
-    Collider2D cldr;
+    protected Collider2D cldr;
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     //flipping and animating based on movement
     public bool applyVisualModifications = false;
     [Range(0, .3f)] [SerializeField] 
-    private float movementSmoothing = 0.05f;
+    protected float movementSmoothing = 0.05f;
 
     //Need to make a version where enemies dont get to turn immediately
     public bool snappyDirectionChange = true;
