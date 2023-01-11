@@ -24,7 +24,7 @@ public class BaseMovement : MonoBehaviour
     //Need to make a version where enemies dont get to turn immediately
     public bool snappyDirectionChange = true;
 
-    public void Start()
+    public virtual void Start()
     {
         slopeChecker ??= GetComponent<SlopeAdjuster>();
         cldr ??= GetComponent<Collider2D>();

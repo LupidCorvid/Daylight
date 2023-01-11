@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class FlyingMovement : BaseMovement
 {
+    public override void Start()
+    {
+        base.Start();
+        movementSmoothing = .15f;
+    }
+
     public void MoveDirection(Vector2 targetVelocity)
     {
         cldr.sharedMaterial = slippery;
