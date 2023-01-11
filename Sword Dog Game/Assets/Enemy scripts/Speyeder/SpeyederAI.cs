@@ -54,6 +54,8 @@ public class SpeyederAI : BaseAI
     {
         base.FixedUpdate();
 
+        transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(web.connectedBody.transform.position - transform.position, Vector2.up));
+
         switch (state)
         {
             case states.idle:
