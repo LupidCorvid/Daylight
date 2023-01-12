@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collidersInContact: []
   triggersInContact: []
+  cldr: {fileID: 0}
 --- !u!1 &6300512340327299644
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ GameObject:
   - component: {fileID: 3808553446418265509}
   - component: {fileID: 675094675918066877}
   - component: {fileID: 3260013332793364472}
+  - component: {fileID: 633449435745536244}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -311,12 +313,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  facingRight: 0
   isGrounded: 0
   isJumping: 0
   isFalling: 0
   isSprinting: 0
   canResprint: 0
+  isSkidding: 0
   speed: 4
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   mouth: {fileID: 2381358681662667084}
@@ -462,6 +464,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 8
+--- !u!114 &633449435745536244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64820407f745964428ff5e83f5b5f922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sword: {fileID: 0}
 --- !u!1 &6676018890620208525
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,6 +61,7 @@ public class SpeyederAI : BaseAI
             case states.idle:
                 if(target.transform.position.y < transform.position.y)
                 {
+                    
                     //Find time it would take to drop to player's height
                     float timeToFall = Mathf.Sqrt(Mathf.Abs((-transform.position.y) / (9.8f * rb.gravityScale)));
                     //Given that time find if the player would be in range given their velocity in that time
@@ -69,6 +70,7 @@ public class SpeyederAI : BaseAI
                         web.distance = Mathf.Abs((transform.position.y - target.position.y) + preferredHeight);
                         transform.position -= Vector3.down * Time.deltaTime * 0.001f;//Done to make physics update, otherwise it wont fall
                         state = states.dropping;
+                        rb.drag = 0;
                     }
                 }
                 break;
@@ -87,6 +89,8 @@ public class SpeyederAI : BaseAI
                     state = states.returning;
                 break;
             case states.returning:
+                //Prevents it from swinging too much if hit with knockback (swings get bigger as it gets closer to the resetPosition)
+                rb.drag = 1;
                 web.distance -= 1 * moveSpeed * Time.deltaTime;
                 transform.position += Vector3.up * Time.deltaTime * moveSpeed * 1;
                 if (web.distance <= preferredHeight)

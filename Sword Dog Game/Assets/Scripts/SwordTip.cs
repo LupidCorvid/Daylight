@@ -10,6 +10,10 @@ public class SwordTip : MonoBehaviour
 
     public float knockback = 0;
 
+    public List<Collider2D> sameAttackCollisions = new List<Collider2D>();
+
+    public Animator swordAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +26,14 @@ public class SwordTip : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void ClearCollisions()
     {
+        sameAttackCollisions.Clear();
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+
         if (PlayerHealth.dead && other.gameObject.CompareTag("Ground"))
         {
             sword.Freeze();
@@ -32,6 +42,11 @@ public class SwordTip : MonoBehaviour
 
         if (!sword.pmScript.attacking)
             return;
+
+        if (sameAttackCollisions.Contains(other))
+            return;
+        sameAttackCollisions.Add(other);
+
 
         EnemyBase enemy = other.GetComponent<EnemyBase>();
         Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
