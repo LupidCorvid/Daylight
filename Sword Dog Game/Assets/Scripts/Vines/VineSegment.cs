@@ -14,6 +14,7 @@ public class VineSegment : MonoBehaviour
     //Lower wind volatility means objects near eachother have similar swaying motion
     public float windVolatility = 0.2f;
 
+    public float reactiveResponseScalar = 1;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class VineSegment : MonoBehaviour
         if (((int)Mathf.Pow(2, collision.gameObject.layer) & LayerMask.GetMask("TerrainFX", "Utility")) == 0)
         {
             if (collision.GetComponent<Rigidbody2D>() != null)
-                rb.velocity += collision.GetComponent<Rigidbody2D>().velocity * Time.deltaTime;
+                rb.velocity += collision.GetComponent<Rigidbody2D>().velocity * Time.deltaTime * reactiveResponseScalar;
         }
     }
     public void FixedUpdate()

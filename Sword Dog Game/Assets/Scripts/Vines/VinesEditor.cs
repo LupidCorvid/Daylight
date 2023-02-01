@@ -27,6 +27,10 @@ public class VinesEditor : Editor
         {
             controller.setSegmentSprites();
         }
+        if (GUILayout.Button("Update Movement Reaction Scalar"))
+        {
+            controller.UpdateSegmentScalars();
+        }
 
     }
 }

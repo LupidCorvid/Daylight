@@ -28,6 +28,8 @@ public class VineController : MonoBehaviour
     public float windVolatility = 0.2f;
 
 
+    public float MovementReactionScalar = 1;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -109,6 +111,14 @@ public class VineController : MonoBehaviour
             segments[0].GetComponent<SpriteRenderer>().sprite = headSprite;
         if (tailSprite != null)
             segments[segments.Count - 1].GetComponent<SpriteRenderer>().sprite = tailSprite;
+    }
+
+    public void UpdateSegmentScalars()
+    {
+        foreach(VineSegment segment in segments)
+        {
+            segment.reactiveResponseScalar = MovementReactionScalar;
+        }
     }
 
     public void ClearSegments()
