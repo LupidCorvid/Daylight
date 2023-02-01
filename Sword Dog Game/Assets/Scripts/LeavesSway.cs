@@ -59,7 +59,7 @@ public class LeavesSway : MonoBehaviour
             particleHandler.Emit(Mathf.Clamp((int)(Random.Range(15, 30) * (transform.position - lastPosition).magnitude), 1, 30));
             rested = false;
         }
-        if ((transform.position - lastPosition).magnitude <= .01)
+        if ((transform.position - lastPosition).magnitude <= .025)
             rested = true;
 
         lastPosition = transform.position;
