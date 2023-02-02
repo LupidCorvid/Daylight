@@ -22,8 +22,10 @@ public class LeavesSway : MonoBehaviour
 
     public bool waitUntilRestingToDropAgain = false;
 
-    bool rested = true;
-
+    public float ShakenDropCooldown;
+    private float lastShakeDrop;
+    private Vector3 lastLastPosition; //
+    
     public void Start()
     {
         lastRotation = transform.root.eulerAngles.z;
@@ -54,14 +56,17 @@ public class LeavesSway : MonoBehaviour
 
     public void checkSpawnParticles()
     {
-        if((transform.position - lastPosition).magnitude > leavesDropSensitivity * Time.deltaTime)
+        if ((transform.position - lastPosition).magnitude > leavesDropSensitivity * Time.deltaTime && lastShakeDrop + ShakenDropCooldown <= Time.time)
         {
-            particleHandler.Emit(Mathf.Clamp((int)(Random.Range(15, 30) * (transform.position - lastPosition).magnitude), 1, 30));
-            rested = false;
+            //particleHandler.Emit(Mathf.Clamp((int)(Random.Range(15, 30) * (transform.position - lastPosition).magnitude), 1, 30));
+            ParticleSystem.EmitParams velocitySetter = new ParticleSystem.EmitParams();
+            //Might not want? Should try to simulate inertia, but because of the spring motion some leaves are launched upward
+            velocitySetter.velocity = (transform.position - lastLastPosition) + (Vector3.down * .04f);
+            particleHandler.Emit(velocitySetter, Random.Range(15, 30));
+            lastShakeDrop = Time.time;
         }
-        if ((transform.position - lastPosition).magnitude <= .025)
-            rested = true;
 
+        lastLastPosition = lastPosition;
         lastPosition = transform.position;
     }
 }
