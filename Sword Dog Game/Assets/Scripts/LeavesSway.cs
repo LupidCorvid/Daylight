@@ -20,9 +20,9 @@ public class LeavesSway : MonoBehaviour
 
     public float leavesDropSensitivity = 1;
 
-    public bool waitUntilRestingToDropAgain = false;
+    public bool waitUntilRestingToDropAgain = true;
 
-    public float ShakenDropCooldown;
+    public float ShakenDropCooldown = 5;
     private float lastShakeDrop;
     private Vector3 lastLastPosition; //
     
