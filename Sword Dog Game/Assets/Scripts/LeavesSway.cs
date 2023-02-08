@@ -37,6 +37,7 @@ public class LeavesSway : MonoBehaviour
     public bool Group;
     public List<LeavesSway> groupMembers = new List<LeavesSway>();
 
+    public SpriteRenderer sprite;
 
     public void Start()
     {
@@ -45,7 +46,7 @@ public class LeavesSway : MonoBehaviour
         lastPosition = transform.position;
 
         cldr = GetComponent<Collider2D>();
-
+        sprite = GetComponentInChildren<SpriteRenderer>();
         if (Group)
             groupMembers.AddRange(transform.parent.GetComponentsInChildren<LeavesSway>());
     }
@@ -69,7 +70,7 @@ public class LeavesSway : MonoBehaviour
         else
             newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed) + transform.position.x) * swayVolatility, 0) * 2) - 1) * swayIntensity;
 
-        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + (lastRotation - newRotation));
+        sprite.transform.rotation = Quaternion.Euler(0, 0, sprite.transform.rotation.eulerAngles.z + (lastRotation - newRotation));
         lastRotation = newRotation;
     }
 
