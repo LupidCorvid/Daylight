@@ -35,7 +35,7 @@ public class LeavesSway : MonoBehaviour
 
     public float passingEmmissionSensitivity = 2;
     public bool Group;
-    List<LeavesSway> groupMembers = new List<LeavesSway>();
+    public List<LeavesSway> groupMembers = new List<LeavesSway>();
 
 
     public void Start()
@@ -90,7 +90,7 @@ public class LeavesSway : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea")) 
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || collision.gameObject.CompareTag("PassingLeavesBlacklist")) 
             return;
 
         if (lastDrop + dropCooldown > Time.time)
