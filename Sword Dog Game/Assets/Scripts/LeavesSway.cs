@@ -31,7 +31,7 @@ public class LeavesSway : MonoBehaviour
 
     Collider2D cldr;
     float lastDrop;
-    float dropCooldown = 0.5f;
+    float dropCooldown = 0.05f;
 
     public float passingEmmissionSensitivty = 2;
 
@@ -84,6 +84,9 @@ public class LeavesSway : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea")) 
+            return;
+
         if (lastDrop + dropCooldown > Time.time)
             return;
 
@@ -93,7 +96,7 @@ public class LeavesSway : MonoBehaviour
             if (collision.attachedRigidbody.velocity.magnitude >= passingEmmissionSensitivty)
             {
                 ParticleSystem.EmitParams particleSetter = new ParticleSystem.EmitParams();
-                particleSetter.velocity = new Vector2(collision.attachedRigidbody.velocity.x * .5f, collision.attachedRigidbody.velocity.y - (9.8f * Time.deltaTime));
+                particleSetter.velocity = new Vector2(collision.attachedRigidbody.velocity.x * .5f, .5f * collision.attachedRigidbody.velocity.y - (9.8f * Time.deltaTime));
                 particleSetter.position = (cldr.ClosestPoint(collision.transform.position) - (Vector2)transform.position);
                 if (particleSetter.velocity.y < -9.8)
                     particleSetter.velocity = new Vector3(particleSetter.velocity.x, -9.8f, 0);
@@ -101,16 +104,19 @@ public class LeavesSway : MonoBehaviour
                 ParticleSystem.EmitParams tempSetter = new ParticleSystem.EmitParams();
 
                 int dropNum = Mathf.Clamp((int)collision.attachedRigidbody.velocity.magnitude, 0, 15);
-                dropNum = (int)((dropNum * Random.Range(1, 1.5f)) * collision.bounds.extents.magnitude);
                 
+                dropNum = (int)((dropNum * Random.Range(1, 1.5f)) * collision.bounds.extents.magnitude/2);
+                if (collision.bounds.extents.magnitude >= 1.5f)
+                    dropNum = dropNum / 3;
                 for (int i = 0; i < dropNum; i++)
                 {
                     tempSetter.velocity = particleSetter.velocity * Random.Range(.25f, 1.1f);
                     tempSetter.velocity += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-                    tempSetter.position = particleSetter.position + (Random.Range(-1f, 1f) * (collision.transform.rotation * collision.bounds.extents));
+                    tempSetter.position = particleSetter.position + (Random.Range(-1.2f, 1.2f) * (collision.transform.rotation * collision.bounds.extents));
                     
                     particleHandler.Emit(tempSetter, 1);
                 }
+
                 lastDrop = Time.time;
             }
                 

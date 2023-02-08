@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 89910437372718827}
   - component: {fileID: 89910437372718826}
-  - component: {fileID: 89910437372718824}
   - component: {fileID: 1644694081}
   m_Layer: 0
   m_Name: leaf1
@@ -87,26 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &89910437372718824
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89910437372718829}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 41555b1d39939b944a7a817d470c9d2f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1644694081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +108,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910437796227659
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +240,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910438289433479
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +372,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910438361826817
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +504,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910438412686868
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +720,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910439249507666
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +852,9 @@ MonoBehaviour:
   leavesDropSensitivity: 1
   waitUntilRestingToDropAgain: 0
   ShakenDropCooldown: 0
+  minImpactDrop: 10
+  maxImpactDrop: 20
+  passingEmmissionSensitivty: 2
 --- !u!1 &89910439303006875
 GameObject:
   m_ObjectHideFlags: 0
