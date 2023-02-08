@@ -26,6 +26,7 @@ public class SpeyederAI : BaseAI
     public float lastLand;
     public float returnWaitTime = 1.25f;
 
+
     public enum states
     {
         idle,
@@ -46,7 +47,7 @@ public class SpeyederAI : BaseAI
     {
         base.Start();
         target ??= GameObject.Find("Player(Clone)").transform;
-        resetPosition = (Vector2)transform.position;
+        resetPosition = (Vector2)transform.position - web.connectedBody.position;
         state = states.idle;
     }
 
@@ -63,7 +64,7 @@ public class SpeyederAI : BaseAI
                 {
                     
                     //Find time it would take to drop to player's height. Might be wrong as it isnt relative height?
-                    float timeToFall = Mathf.Sqrt(Mathf.Abs((-transform.position.y) / (9.8f * rb.gravityScale)));
+                    float timeToFall = Mathf.Sqrt(Mathf.Abs((/*target.transform.position.y*/ - transform.position.y) / (9.8f * rb.gravityScale)));
                     //Given that time find if the player would be in range given their velocity in that time
                     if (Mathf.Abs(((Vector2)target.transform.position + (targetPhys.velocity * timeToFall)).x - transform.position.x) <= 1)
                     {
@@ -75,10 +76,10 @@ public class SpeyederAI : BaseAI
                 }
                 break;
             case states.dropping:
-                if(target.position.y < (resetPosition + Vector2.down * web.distance).y)
+                if(target.position.y < ((Vector2)web.connectedBody.position + resetPosition + Vector2.down * web.distance).y)
                     web.distance = Mathf.Abs((transform.position.y - target.position.y) + preferredHeight);
 
-                if (Vector2.Distance(transform.position, resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
+                if (Vector2.Distance(transform.position, (Vector2)web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
                 {
                     lastLand = Time.time;
                     state = states.landStop;
