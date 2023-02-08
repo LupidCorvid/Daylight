@@ -25,12 +25,23 @@ public class LeavesSway : MonoBehaviour
     public float ShakenDropCooldown = 5;
     private float lastShakeDrop;
     private Vector3 lastLastPosition; //
-    
+
+    public int minImpactDrop = 10;
+    public int maxImpactDrop = 20;
+
+    Collider2D cldr;
+    float lastDrop;
+    float dropCooldown = 0.5f;
+
+    public float passingEmmissionSensitivty = 2;
+
     public void Start()
     {
         lastRotation = transform.root.eulerAngles.z;
         particleHandler = GetComponentInChildren<ParticleSystem>();
         lastPosition = transform.position;
+
+        cldr = GetComponent<Collider2D>();
     }
 
     public void FixedUpdate()
@@ -38,6 +49,8 @@ public class LeavesSway : MonoBehaviour
         updateRotations();
         checkSpawnParticles();
     }
+
+    ///Maybe add triggers so that it knows when something is falling through the leaves, and spawns leaves around them at their speed as they fall (so that they look like they broke through the canopy)
 
     public void updateRotations()
     {
@@ -62,11 +75,46 @@ public class LeavesSway : MonoBehaviour
             ParticleSystem.EmitParams velocitySetter = new ParticleSystem.EmitParams();
             //Might not want? Should try to simulate inertia, but because of the spring motion some leaves are launched upward
             velocitySetter.velocity = (transform.position - lastLastPosition) + (Vector3.down * .04f);
-            particleHandler.Emit(velocitySetter, Random.Range(15, 30));
+            particleHandler.Emit(velocitySetter, Random.Range(minImpactDrop, maxImpactDrop));
             lastShakeDrop = Time.time;
         }
 
         lastLastPosition = lastPosition;
         lastPosition = transform.position;
+    }
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (lastDrop + dropCooldown > Time.time)
+            return;
+
+        Vector2 nextLocation = ((cldr.ClosestPoint(collision.transform.position)) + collision.attachedRigidbody.velocity * Time.deltaTime/7);
+        if (!cldr.OverlapPoint(nextLocation))
+        {
+            if (collision.attachedRigidbody.velocity.magnitude >= passingEmmissionSensitivty)
+            {
+                ParticleSystem.EmitParams particleSetter = new ParticleSystem.EmitParams();
+                particleSetter.velocity = new Vector2(collision.attachedRigidbody.velocity.x * .5f, collision.attachedRigidbody.velocity.y - (9.8f * Time.deltaTime));
+                particleSetter.position = (cldr.ClosestPoint(collision.transform.position) - (Vector2)transform.position);
+                if (particleSetter.velocity.y < -9.8)
+                    particleSetter.velocity = new Vector3(particleSetter.velocity.x, -9.8f, 0);
+
+                ParticleSystem.EmitParams tempSetter = new ParticleSystem.EmitParams();
+
+                int dropNum = Mathf.Clamp((int)collision.attachedRigidbody.velocity.magnitude, 0, 15);
+                dropNum = (int)((dropNum * Random.Range(1, 1.5f)) * collision.bounds.extents.magnitude);
+                
+                for (int i = 0; i < dropNum; i++)
+                {
+                    tempSetter.velocity = particleSetter.velocity * Random.Range(.25f, 1.1f);
+                    tempSetter.velocity += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+                    tempSetter.position = particleSetter.position + (Random.Range(-1f, 1f) * (collision.transform.rotation * collision.bounds.extents));
+                    
+                    particleHandler.Emit(tempSetter, 1);
+                }
+                lastDrop = Time.time;
+            }
+                
+        }
+            
     }
 }

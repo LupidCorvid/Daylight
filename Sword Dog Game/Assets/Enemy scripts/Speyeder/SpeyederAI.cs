@@ -62,7 +62,7 @@ public class SpeyederAI : BaseAI
                 if(target.transform.position.y < transform.position.y)
                 {
                     
-                    //Find time it would take to drop to player's height
+                    //Find time it would take to drop to player's height. Might be wrong as it isnt relative height?
                     float timeToFall = Mathf.Sqrt(Mathf.Abs((-transform.position.y) / (9.8f * rb.gravityScale)));
                     //Given that time find if the player would be in range given their velocity in that time
                     if (Mathf.Abs(((Vector2)target.transform.position + (targetPhys.velocity * timeToFall)).x - transform.position.x) <= 1)
