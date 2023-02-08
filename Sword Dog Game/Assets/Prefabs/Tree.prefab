@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 89910437372718827}
   - component: {fileID: 89910437372718826}
   - component: {fileID: 1644694081}
-  m_Layer: 0
+  - component: {fileID: 5544461539170441016}
+  m_Layer: 6
   m_Name: leaf1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +111,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &5544461539170441016
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910437372718829}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.87
 --- !u!1 &89910437796227659
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +141,8 @@ GameObject:
   - component: {fileID: 89910437796227656}
   - component: {fileID: 89910437796227638}
   - component: {fileID: 923582729}
-  m_Layer: 0
+  - component: {fileID: 2291765398889969175}
+  m_Layer: 6
   m_Name: leaf2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +261,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &2291765398889969175
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910437796227659}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.87
 --- !u!1 &89910438289433479
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +291,8 @@ GameObject:
   - component: {fileID: 89910438289433476}
   - component: {fileID: 89910438289433474}
   - component: {fileID: 1761060057}
-  m_Layer: 0
+  - component: {fileID: 5702081016859442352}
+  m_Layer: 6
   m_Name: leaf5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +411,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &5702081016859442352
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910438289433479}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.87
 --- !u!1 &89910438361826817
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +441,8 @@ GameObject:
   - component: {fileID: 89910438361826830}
   - component: {fileID: 89910438361826828}
   - component: {fileID: 669720664}
-  m_Layer: 0
+  - component: {fileID: 1941928558460416145}
+  m_Layer: 6
   m_Name: leaf6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +561,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &1941928558460416145
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910438361826817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.27
 --- !u!1 &89910438412686868
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +675,8 @@ GameObject:
   - component: {fileID: 89910438546602430}
   - component: {fileID: 89910438546602428}
   - component: {fileID: 320028773}
-  m_Layer: 0
+  - component: {fileID: 1043183320829557262}
+  m_Layer: 6
   m_Name: leaf4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +795,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &1043183320829557262
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910438546602417}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.87
 --- !u!1 &89910439249507666
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +825,8 @@ GameObject:
   - component: {fileID: 89910439249507667}
   - component: {fileID: 89910439249507665}
   - component: {fileID: 1226547702}
-  m_Layer: 0
+  - component: {fileID: 7110250528759525158}
+  m_Layer: 6
   m_Name: leaf3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,7 +945,24 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 2
+  passingEmmissionSensitivity: 5
+  Group: 1
+--- !u!58 &7110250528759525158
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89910439249507666}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000047683716, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.87
 --- !u!1 &89910439303006875
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +1012,7 @@ GameObject:
   - component: {fileID: 8536018901948849095}
   - component: {fileID: 2987618108195016951}
   - component: {fileID: 6445466148570856922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5776,7 +5884,7 @@ GameObject:
   - component: {fileID: 6533835055804249812}
   - component: {fileID: 3249845090788364451}
   - component: {fileID: 9164410319044959686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10648,7 +10756,7 @@ GameObject:
   - component: {fileID: 5299935291402547763}
   - component: {fileID: 3345405926248254616}
   - component: {fileID: 4005552566920471421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15520,7 +15628,7 @@ GameObject:
   - component: {fileID: 5180278721586938227}
   - component: {fileID: 4460584075078378713}
   - component: {fileID: 2498455495052639990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20392,7 +20500,7 @@ GameObject:
   - component: {fileID: 3546198600237296824}
   - component: {fileID: 2011087829694119981}
   - component: {fileID: 5851225173291993273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25264,7 +25372,7 @@ GameObject:
   - component: {fileID: 6194213528481239931}
   - component: {fileID: 1980641037052198026}
   - component: {fileID: 7366813247001885418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

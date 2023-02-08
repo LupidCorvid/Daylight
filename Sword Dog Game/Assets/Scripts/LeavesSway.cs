@@ -33,7 +33,10 @@ public class LeavesSway : MonoBehaviour
     float lastDrop;
     float dropCooldown = 0.05f;
 
-    public float passingEmmissionSensitivty = 2;
+    public float passingEmmissionSensitivity = 2;
+    public bool Group;
+    List<LeavesSway> groupMembers = new List<LeavesSway>();
+
 
     public void Start()
     {
@@ -42,6 +45,9 @@ public class LeavesSway : MonoBehaviour
         lastPosition = transform.position;
 
         cldr = GetComponent<Collider2D>();
+
+        if (Group)
+            groupMembers.AddRange(transform.parent.GetComponentsInChildren<LeavesSway>());
     }
 
     public void FixedUpdate()
@@ -93,7 +99,16 @@ public class LeavesSway : MonoBehaviour
         Vector2 nextLocation = ((cldr.ClosestPoint(collision.transform.position)) + collision.attachedRigidbody.velocity * Time.deltaTime/7);
         if (!cldr.OverlapPoint(nextLocation))
         {
-            if (collision.attachedRigidbody.velocity.magnitude >= passingEmmissionSensitivty)
+            if(Group)
+            {
+                foreach(LeavesSway sway in groupMembers)
+                {
+                    if (sway.cldr.OverlapPoint(nextLocation))
+                        return;
+                }
+            }
+
+            if (collision.attachedRigidbody.velocity.magnitude >= passingEmmissionSensitivity)
             {
                 ParticleSystem.EmitParams particleSetter = new ParticleSystem.EmitParams();
                 particleSetter.velocity = new Vector2(collision.attachedRigidbody.velocity.x * .5f, .5f * collision.attachedRigidbody.velocity.y - (9.8f * Time.deltaTime));

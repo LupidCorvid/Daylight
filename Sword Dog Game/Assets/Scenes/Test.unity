@@ -3590,7 +3590,8 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 5
+  passingEmmissionSensitivity: 2
+  Group: 0
 --- !u!95 &270827909
 Animator:
   serializedVersion: 4
@@ -32973,7 +32974,8 @@ MonoBehaviour:
   ShakenDropCooldown: 0
   minImpactDrop: 10
   maxImpactDrop: 20
-  passingEmmissionSensitivty: 5
+  passingEmmissionSensitivity: 2
+  Group: 0
 --- !u!95 &1909771759
 Animator:
   serializedVersion: 4
@@ -35663,6 +35665,54 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 320028773, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 320028773, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 669720664, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 669720664, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 923582729, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 923582729, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226547702, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226547702, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644694081, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644694081, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761060057, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761060057, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
+      propertyPath: passingEmmissionSensitivty
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 89910439303006872, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
       propertyPath: m_RootOrder
       value: 4
