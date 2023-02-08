@@ -90,13 +90,18 @@ public class LeavesSway : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || collision.gameObject.CompareTag("PassingLeavesBlacklist")) 
+        
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility") || collision.gameObject.CompareTag("PassingLeavesBlacklist"))
             return;
 
         if (lastDrop + dropCooldown > Time.time)
             return;
 
-        Vector2 nextLocation = ((cldr.ClosestPoint(collision.transform.position)) + collision.attachedRigidbody.velocity * Time.deltaTime/7);
+        
+        if (!cldr.OverlapPoint(collision.transform.position))
+            return;
+
+        Vector2 nextLocation = ((cldr.ClosestPoint(collision.transform.position)) + collision.attachedRigidbody.velocity * Time.deltaTime/1);//1 was 7
         if (!cldr.OverlapPoint(nextLocation))
         {
             if(Group)
@@ -104,6 +109,8 @@ public class LeavesSway : MonoBehaviour
                 foreach(LeavesSway sway in groupMembers)
                 {
                     if (sway.cldr.OverlapPoint(nextLocation))
+                        return;
+                    if (sway.cldr.OverlapPoint(nextLocation + collision.attachedRigidbody.velocity * .25f))
                         return;
                 }
             }
@@ -120,9 +127,10 @@ public class LeavesSway : MonoBehaviour
 
                 int dropNum = Mathf.Clamp((int)collision.attachedRigidbody.velocity.magnitude, 0, 15);
                 
-                dropNum = (int)((dropNum * Random.Range(1, 1.5f)) * collision.bounds.extents.magnitude/2);
+                dropNum = (int)((dropNum * Random.Range(1, 1.5f)) * collision.bounds.extents.magnitude/1f);
                 if (collision.bounds.extents.magnitude >= 1.5f)
-                    dropNum = dropNum / 3;
+                    dropNum = dropNum / 2;
+
                 for (int i = 0; i < dropNum; i++)
                 {
                     tempSetter.velocity = particleSetter.velocity * Random.Range(.25f, 1.1f);

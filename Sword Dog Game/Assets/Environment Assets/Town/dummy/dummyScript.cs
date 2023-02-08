@@ -15,11 +15,11 @@ public class dummyScript : EnemyBase
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        ////dummyHitAnim.Play("test");
-        //if (flag) dummyHitAnim.Play("dummyHit");
-    }
+    //void FixedUpdate()
+    //{
+    //    ////dummyHitAnim.Play("test");
+    //    //if (flag) dummyHitAnim.Play("dummyHit");
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
