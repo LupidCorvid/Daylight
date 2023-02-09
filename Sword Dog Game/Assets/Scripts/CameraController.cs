@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
 
     public static Camera mainCam;
 
+    Rigidbody2D rb;
+
     public Vector3 targetPoint
     {
         get
@@ -35,6 +37,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         sceneChange += Snap;
         main = this;
         mainCam = GetComponent<Camera>();
@@ -44,7 +47,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         targetTracker = PlayerMovement.instance.transform;
-        
+        rb.velocity = Vector2.zero;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }
 
