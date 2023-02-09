@@ -107,6 +107,7 @@ public class DialogSource
     public DialogSource(string dialog)
     {
         this.originalDialog = dialog;
+        this.dialog = dialog;
     }
 
     public static Dictionary<string, string> getBlocks(string loadedText)
@@ -184,7 +185,7 @@ public class DialogSource
 
     public string read()
     {
-        if ((waiting || waitingForButtonInput))
+        if ((waiting || waitingForButtonInput || dialog == null))
             return outString;
         while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {

@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public Collider2D cldr;
+
     public bool externalControl = false;
 
     // void Awake()
@@ -41,6 +43,7 @@ public class CameraController : MonoBehaviour
         sceneChange += Snap;
         main = this;
         mainCam = GetComponent<Camera>();
+        cldr = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame

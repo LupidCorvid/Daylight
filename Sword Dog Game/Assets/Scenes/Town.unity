@@ -2211,6 +2211,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+--- !u!61 &972283624 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1683319927, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+  m_PrefabInstance: {fileID: 972283623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978232409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,6 +3361,85 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a477189f9becfd449a2f89805a6eba65, type: 3}
+--- !u!1001 &1650882254
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1205727677339176264, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176265, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: speaker
+      value: 
+      objectReference: {fileID: 7962026614343422546}
+    - target: {fileID: 1205727677339176265, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 972283624}
+    - target: {fileID: 1205727677339176265, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: textDialog
+      value: '[ss,.05] I was talking to you! [w, 3] [exit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176266, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_Name
+      value: DialogMinibubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176266, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.0033417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205727677339176267, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
 --- !u!1 &1681706419
 GameObject:
   m_ObjectHideFlags: 0
@@ -4028,6 +4112,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8886986453328694049, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+      propertyPath: dialogDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886986453328694049, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+      propertyPath: interruptDialog
+      value: '[ss,.05] I was talking to you! [w, 3] [exit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886986453328694049, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+      propertyPath: miniBubblePrefab
+      value: 
+      objectReference: {fileID: 1205727677339176266, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+--- !u!114 &7962026614343422546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8886986453328694049, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+  m_PrefabInstance: {fileID: 7962026614343422545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b9a5633a2f6874898f1fece8590479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
