@@ -108,7 +108,7 @@ public class MiniBubbleController : MonoBehaviour
 
     public void close()
     {
-        //reading = false;
+        reading = false;
 
         anim.SetTrigger("Close");
         closing = true;

@@ -1,10 +1,14 @@
 -Blocks
 Default{
-[sh,The General][abf,10][ss, .05][gvar,LeftGeneral,[llf,Left],Hi there.[w, .35] ] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
+[sh,The General][abf,10][ss, .05][series,LeftGeneral,Hi there.[w, .35],[llf,Left],[llf,Left2], [ss, .3]... [w, 1] [exit]] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
 [prompt, Fear,[llf,Fear], Joy, [llf,Joy], Wobbly, [llf,Wobbly]] [wi] [ss, .05] Thank you for listening![w, 1] [exit]
 }
+
 Left{
-That was rude of you.[rvar,LeftGeneral][w, .35] Anyways,[w, .35] }
+That was rude of you.[w, .35] Anyways,[w, .35] }
+Left2{
+Why do I bother talking to you if you are going to keep leaving?[w, .35] Don't leave this time. [wi] [c]}
+
 Fear{
 [ss, .025][IA,<size=200%>][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
 }
@@ -13,4 +17,7 @@ Joy{
 }
 Wobbly{
 [ss, 0.05][IA,<size=125%>][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>]
+}
+Interrupted{
+[ss,.05][mcount,LeftGeneral,+,1] [series,LeftGeneral, ,I was talking to you! [w, 3], Really?[w, .45] Again? [w, 3], I give up. [w, 2], [ss, .2]...] [exit]
 }

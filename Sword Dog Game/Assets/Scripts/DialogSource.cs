@@ -27,6 +27,7 @@ public class DialogSource
     public string outString = "";
 
     public static Dictionary<string, string> stringVariables = new Dictionary<string, string>();
+    public static Dictionary<string, int> counterVariables = new Dictionary<string, int>();
 
     private bool waitFrameForChar = false;
 
@@ -61,6 +62,7 @@ public class DialogSource
 
     public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
 
+
     public const string BLOCKS_SIGNATURE = "-Blocks";
 
     public bool skippingText = false;
@@ -82,6 +84,13 @@ public class DialogSource
      * [gvar, var, exists, else] //Outputs one option if a var exists, and the other if it does not
      * [rvar, var] //Removes a var. Gives a warning if the var does not exist.
      * [gvar, var, var2, true, false] //Checks if a var equals another var
+     * 
+     * 
+     * [mcount, var, op, val] //Modify a counter variable or create one. operators can be +, -, /, *
+     * [gcount, var, op, val, T] //Read counter, output based on it. operators can be >, <, <=, >=, =, !=. Output T if true
+     * [gcount, var, op, val, T, F] 
+     * [series, var, 1, 2, 3, 4, ...]// given a counter, output dialog that relates that that count % the entries
+     * [lseries, var, 1, 2, 3, 4, ...] //Same as series but loops
      * 
      * [exit] exits dialog (closes the box, but is typically controlled by the thing holding it)
      * [sdb, x, y, x,y ] sets default bark settings
@@ -374,11 +383,11 @@ public class DialogSource
                 responseOutputsNumeric.Clear();
 
                 List<string> options = new List<string>();
-                if(input.Length % 2 == 0)
+                if (input.Length % 2 == 0)
                 {
                     Debug.LogError("Not all responses have an output!");
                 }
-                for(int i = 1; i < input.Length; i += 2)
+                for (int i = 1; i < input.Length; i += 2)
                 {
                     options.Add(input[i]);
                     responseOutputs.Add(input[i], input[i + 1]);
@@ -404,7 +413,7 @@ public class DialogSource
                 {
                     changeToFile(input[1]);
                 }
-                else if(input.Length == 3)
+                else if (input.Length == 3)
                 {
                     changeToFile(input[1]);
                     changeToBlock(input[2]);
@@ -431,7 +440,7 @@ public class DialogSource
                     Debug.LogError("Invalid number or arguments for waitInput[wi]!");
                 break;
             case "svar":
-                if(input.Length == 3)
+                if (input.Length == 3)
                 {
                     if (!stringVariables.ContainsKey(input[1]))
                         stringVariables.Add(input[1], input[2]);
@@ -442,23 +451,23 @@ public class DialogSource
                     Debug.LogError("Invalid number or arguments for set var [svar]!");
                 break;
             case "gvar":
-                if(input.Length == 2)
+                if (input.Length == 2)
                 {
-                    if(stringVariables.ContainsKey(input[1]))
+                    if (stringVariables.ContainsKey(input[1]))
                         dialog = dialog.Insert(position, stringVariables[input[1]]);
                 }
-                else if(input.Length == 4)
+                else if (input.Length == 4)
                 {
-                    if(stringVariables.ContainsKey(input[1]))
+                    if (stringVariables.ContainsKey(input[1]))
                         dialog = dialog.Insert(position, input[2]);
                     else
                         dialog = dialog.Insert(position, input[3]);
                 }
                 else if (input.Length == 5)
                 {
-                    if(stringVariables.ContainsKey(input[1]))
+                    if (stringVariables.ContainsKey(input[1]))
                     {
-                        if(stringVariables[input[1]] == input[2])
+                        if (stringVariables[input[1]] == input[2])
                             dialog = dialog.Insert(position, input[3]);
                         else
                             dialog = dialog.Insert(position, input[4]);
@@ -468,7 +477,7 @@ public class DialogSource
                     Debug.LogError("Invalid number or arguments for get var [gvar]!");
                 break;
             case "rvar":
-                if(input.Length == 2)
+                if (input.Length == 2)
                 {
                     if (stringVariables.ContainsKey(input[1]))
                         stringVariables.Remove(input[1]);
@@ -496,6 +505,129 @@ public class DialogSource
                 break;
             case "CE":
                 callEvent?.Invoke(input[1..]);
+                break;
+            case "mcount":
+                if (input.Length == 4)
+                {
+                    if (!counterVariables.ContainsKey(input[1]))
+                    {
+                        counterVariables.Add(input[1], 0);
+                    }
+
+                    switch (input[2])
+                    {
+                        case "+":
+                            counterVariables[input[1]] += int.Parse(input[3]);
+                            break;
+                        case "-":
+                            counterVariables[input[1]] -= int.Parse(input[3]);
+                            break;
+                        case "/":
+                            if (int.Parse(input[3]) == 0)
+                            {
+                                Debug.LogWarning("Counters: Cannot divide by 0!");
+                                break;
+                            }
+                            counterVariables[input[1]] /= int.Parse(input[3]);
+                            break;
+                        case "*":
+                            counterVariables[input[1]] *= int.Parse(input[3]);
+                            break;
+                        case "=":
+                            counterVariables[input[1]] = int.Parse(input[3]);
+                            break;
+                        default:
+                            Debug.LogWarning("No valid operation for counters " + input[1]);
+                            break;
+                    }
+
+                }
+                else
+                    Debug.LogWarning("mcount takes 4 parameters!");
+                break;
+
+            case "gcount":
+                if (input.Length == 5 || input.Length == 6)
+                {
+                    if(counterVariables.ContainsKey(input[1]))
+                    {
+                        bool output = false;
+                        
+                        switch(input[2])
+                        {
+                            case ">":
+                                output = counterVariables[input[1]] > int.Parse(input[3]);
+                                break;
+                            case "<":
+                                output = counterVariables[input[1]] < int.Parse(input[3]);
+                                break;
+                            case "<=":
+                                output = counterVariables[input[1]] <= int.Parse(input[3]);
+                                break;
+                            case ">=":
+                                output = counterVariables[input[1]] >= int.Parse(input[3]);
+                                break;
+                            case "=":
+                                output = counterVariables[input[1]] == int.Parse(input[3]);
+                                break;
+                            case "!=":
+                                output = counterVariables[input[1]] != int.Parse(input[3]);
+                                break;
+                            default:
+                                Debug.LogWarning("No valid operation for counters compare " + input[1]);
+                                break;
+                        }
+                        if (output)
+                            dialog = dialog.Insert(position, input[4]);
+                        else if (input.Length == 6)
+                            dialog = dialog.Insert(position, input[5]);
+                    }
+                }
+                else
+                    Debug.LogWarning("gcount takes 5 or 6 parameters!"); 
+                break;
+
+            case "dcounter": //display counter
+                if (input.Length == 2)
+                {
+                    if (counterVariables.ContainsKey(input[1]))
+                        dialog = dialog.Insert(position, "" + counterVariables[input[2]]);
+                    else
+                        dialog = dialog.Insert(position, "" + 0);
+                }
+                else
+                    Debug.LogWarning("dcounter takes 2 parameters!");
+                break;
+
+            case "series":
+                if (input.Length > 3)
+                {
+                    if (counterVariables.ContainsKey(input[1]))
+                    {
+                        if(counterVariables[input[1]] + 2 <= input.Length)
+                            dialog = dialog.Insert(position, input[counterVariables[input[1]] + 2]);
+                        else
+                            dialog = dialog.Insert(position, input[input.Length - 1]);
+                    }
+                    else
+                        dialog = dialog.Insert(position, input[2]);
+                }
+                else
+                    Debug.LogWarning("series takes a series after the variable to read!");
+                break;
+            case "lseries":
+                if (input.Length <= 2)
+                {
+                    if (counterVariables.ContainsKey(input[1]))
+                    {
+
+                        dialog = dialog.Insert(position, input[2 + (counterVariables[input[1]] % (input.Length - 2))]);
+                    }
+                    else
+                        dialog = dialog.Insert(position, input[2]);
+                }
+                else
+                    Debug.LogWarning("series takes a series after the variable to read!");
                 break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
