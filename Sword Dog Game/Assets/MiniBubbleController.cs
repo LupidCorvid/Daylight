@@ -34,7 +34,8 @@ public class MiniBubbleController : MonoBehaviour
         textDisplay = GetComponentInChildren<TextMeshPro>();
 
         mainCamera = CameraController.main.cldr;
-        setSource(new DialogSource(textDialog));
+        if(dialog == null)
+            setSource(new DialogSource(textDialog));
         anim = GetComponent<Animator>();
     }
 
@@ -108,8 +109,8 @@ public class MiniBubbleController : MonoBehaviour
     public void close()
     {
         //reading = false;
-        if (!closing)
-            anim.SetTrigger("Close");
+
+        anim.SetTrigger("Close");
         closing = true;
     }
 

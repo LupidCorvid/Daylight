@@ -98,7 +98,7 @@ Transform:
   - {fileID: 6106341815000964578}
   - {fileID: 4320902303548221474}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7962026614516624370
 SpriteRenderer:
@@ -194,6 +194,10 @@ MonoBehaviour:
   promptPrefab: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 4320902303548221474}
+  interactor: {fileID: 0}
+  dialogDistance: 10
+  miniBubblePrefab: {fileID: 1205727677339176266, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+  interruptDialog: '[ss,.05][svar,LeftGeneral,:(] I was talking to you! [w, 3] [exit]'
 --- !u!61 &7287610671076781999
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 -Blocks
 Default{
-[sh,The General][abf,10][ss, .05] Hi there.[w, .35] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
+[sh,The General][abf,10][ss, .05][gvar,LeftGeneral,[llf,Left],Hi there.[w, .35] ] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
 [prompt, Fear,[llf,Fear], Joy, [llf,Joy], Wobbly, [llf,Wobbly]] [wi] [ss, .05] Thank you for listening![w, 1] [exit]
 }
+Left{
+That was rude of you.[rvar,LeftGeneral][w, .35] Anyways,[w, .35] }
 Fear{
 [ss, .025][IA,<size=200%>][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
 }
