@@ -604,7 +604,7 @@ public class DialogSource
                 {
                     if (counterVariables.ContainsKey(input[1]))
                     {
-                        if(counterVariables[input[1]] + 2 <= input.Length)
+                        if(counterVariables[input[1]] + 2 < input.Length)
                             dialog = dialog.Insert(position, input[counterVariables[input[1]] + 2]);
                         else
                             dialog = dialog.Insert(position, input[input.Length - 1]);
@@ -616,7 +616,7 @@ public class DialogSource
                     Debug.LogWarning("series takes a series after the variable to read!");
                 break;
             case "lseries":
-                if (input.Length <= 2)
+                if (input.Length > 2)
                 {
                     if (counterVariables.ContainsKey(input[1]))
                     {
