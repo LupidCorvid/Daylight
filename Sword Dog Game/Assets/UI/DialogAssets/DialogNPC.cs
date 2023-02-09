@@ -6,6 +6,9 @@ using System;
 public class DialogNPC : MonoBehaviour, IInteractable
 {
     public GameObject barkFXPrefab;
+    public GameObject miniBubblePrefab;
+
+    public Vector2 miniBubbleOffset = new Vector2(0, 2);
 
     public DialogSource dialogSource;
 

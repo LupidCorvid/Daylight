@@ -13,8 +13,6 @@ public class GeneralBehavior : DialogNPC
 
     public float dialogDistance;
 
-    public GameObject miniBubblePrefab;
-
     public string interruptDialog;
 
     // Start is called before the first frame update
@@ -35,9 +33,10 @@ public class GeneralBehavior : DialogNPC
             if(Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
             {
                 exitDialog();
-                GameObject addedObj = Instantiate(miniBubblePrefab, transform.position, Quaternion.identity);
+                GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
                 MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
                 bubble.speaker = this;
+                bubble.offset = miniBubbleOffset;
                 bubble.setSource(new DialogSource(interruptDialog));
             }
         }

@@ -11,10 +11,29 @@ public class ShopkeepBehavior : DialogNPC
     Transform playerPosition;
     bool foundPlayerPosition = false;
 
+    public float advertisingCooldown = 15;
+    public float lastAdvert = -15;
+
+    public CollisionsTracker advertCldr;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+        advertCldr.triggerEnter += advertise;
+    }
+
+    public void advertise(Collider2D collider)
+    {
+        if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time)
+        {
+            GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
+            MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
+            bubble.speaker = this;
+            bubble.offset = miniBubbleOffset;
+            bubble.setSource(new DialogSource("[ss, .05][IA,<size=75%>]Interested in buying anything?[w, 1] [exit]"));
+            lastAdvert = Time.time;
+        }
     }
 
     // Update is called once per frame
@@ -41,6 +60,7 @@ public class ShopkeepBehavior : DialogNPC
 
         if (waitToLook >= 9) waitToLook = 0;
     }
+
 
     private void talkingToPlayer()
     {
