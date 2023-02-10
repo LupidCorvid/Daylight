@@ -25,10 +25,10 @@ public class SpawnManager : MonoBehaviour
                 spawnPoint = spawnPointObj.transform;
                 Vector3 newPos = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
                 player.position = newPos;
-                SwordFollow.sceneChange?.Invoke();
                 SwordFollow.newPos = newPos;
-                CameraController.sceneChange?.Invoke();
+                SwordFollow.sceneChange?.Invoke();
                 CameraController.newPos = newPos;
+                CameraController.sceneChange?.Invoke();
             }
             transform.position = player.position;
         }
