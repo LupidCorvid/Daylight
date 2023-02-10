@@ -171,7 +171,6 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("skidding");
                 isSkidding = true;
             }
-            if (isSkidding) moveX = 0;
 
             // track stops per second
             if (prevMoveX != 0 && moveX == 0)
@@ -229,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0)
+            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0))
             {
                 // bad code
                 // if (isSprinting)
@@ -260,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (timeSinceSprint > 0.1f)
+                if (timeSinceSprint > 0.1f && isSkidding)
                 {
                     StopSkid();
                 }
@@ -308,12 +307,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(PlayerHealth.dead ? 0 : moveX * calculatedSpeed, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(PlayerHealth.dead || isSkidding ? 0 : moveX * calculatedSpeed, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(isSkidding? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target
