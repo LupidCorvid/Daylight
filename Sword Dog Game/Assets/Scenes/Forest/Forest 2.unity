@@ -9509,9 +9509,9 @@ GameObject:
   - component: {fileID: 1360313685}
   - component: {fileID: 1360313686}
   - component: {fileID: 1360313687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cave mouth
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11692,7 +11692,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1597004726}
   - component: {fileID: 1597004727}
-  m_Layer: 0
+  - component: {fileID: 1597004730}
+  - component: {fileID: 1597004729}
+  - component: {fileID: 1597004728}
+  m_Layer: 7
   m_Name: fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11766,6 +11769,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1597004728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597004725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8c50a842bd6314ca32ca3748734e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edge1: {fileID: 1597004730}
+  edge2: {fileID: 1597004729}
+--- !u!68 &1597004729
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597004725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 5.969706, y: 3.7764037}
+  - {x: 8.607215, y: -3.3987622}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &1597004730
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597004725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 5.894177, y: 3.7764022}
+  - {x: 5.812678, y: -3.7008746}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1599184284
 GameObject:
   m_ObjectHideFlags: 0
