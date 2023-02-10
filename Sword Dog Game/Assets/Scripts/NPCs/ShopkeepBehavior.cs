@@ -25,7 +25,8 @@ public class ShopkeepBehavior : DialogNPC
 
     public void advertise(Collider2D collider)
     {
-        if(Mathf.Pow(2, collider.gameObject.layer) == LayerMask.GetMask("Terrain"))
+        if (collider.gameObject.tag != "Player")
+            return;
         if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time)
         {
             GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);

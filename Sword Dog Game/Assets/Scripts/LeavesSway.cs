@@ -29,13 +29,13 @@ public class LeavesSway : MonoBehaviour
     public int minImpactDrop = 10;
     public int maxImpactDrop = 20;
 
-    Collider2D cldr;
+    public Collider2D cldr;
     float lastDrop;
     float dropCooldown = 0.05f;
 
     public float passingEmmissionSensitivity = 2;
     public bool Group;
-    public List<LeavesSway> groupMembers = new List<LeavesSway>();
+    private List<LeavesSway> groupMembers = new List<LeavesSway>();
 
     public SpriteRenderer sprite;
 
