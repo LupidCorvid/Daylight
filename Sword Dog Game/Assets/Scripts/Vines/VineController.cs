@@ -30,6 +30,9 @@ public class VineController : MonoBehaviour
 
     public float MovementReactionScalar = 1;
 
+    public bool maintainVineAspectRatio = true;
+    public float width = 1;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,15 +50,17 @@ public class VineController : MonoBehaviour
 
         float sizePerSegment = (length / numSegments) * sgmntCldr.bounds.size.y;
 
+        if(maintainVineAspectRatio)
+            newSegment.transform.localScale = new Vector3((length / numSegments), (length / numSegments), 1);
+        else
+            newSegment.transform.localScale = new Vector3(newSegment.transform.localScale.x * width, (length / numSegments), 1);
 
-        newSegment.transform.localScale = new Vector3((length / numSegments), (length / numSegments), 1);
 
-        
         if (segments.Count > 0)
         {
             vinePart.transform.position = segments[segments.Count - 1].transform.position - (sizePerSegment  * (transform.rotation * Vector3.up));
             vinePart.connection.connectedBody = segments[segments.Count - 1].rb;
-            vinePart.connection.connectedAnchor = sgmntCldr.bounds.extents.y * (transform.rotation * Vector2.down);
+            vinePart.connection.connectedAnchor = (sgmntCldr.bounds.extents.y * (transform.rotation * Vector2.down));
         }
         else
         {

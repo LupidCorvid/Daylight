@@ -145,6 +145,7 @@ public class CutsceneController : MonoBehaviour
             return;
         inCutscene = true;
         playingThisCutscene = true;
+        cutsceneNumber = 0;
         cutscenes[0].startSegment();
 
         if (stopInteractions)
