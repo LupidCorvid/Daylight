@@ -11,6 +11,7 @@ public class Parallax : MonoBehaviour
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
     private float textureUnitSizeY;
+    public bool useOffset;
 
 
     private void Start()
@@ -21,7 +22,14 @@ public class Parallax : MonoBehaviour
         // adjust tiling size for infinite scrolling
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.size = new Vector2(spriteRenderer.size.x * (infiniteHorizontal ? 3 : 1), spriteRenderer.size.y * (infiniteVertical ? 3 : 1));
-        
+        if (useOffset)
+        {
+            Vector3 offset = cameraTransform.transform.position - transform.position;
+            //Vector3 offset = cameraTransform.transform.position;
+            transform.position = transform.position + new Vector3((offset.x * effectMultiplier.x), (offset.y * effectMultiplier.y));
+        }
+            
+
         // calculate texture unit size for infinite scrolling
         Sprite sprite = spriteRenderer.sprite;
         Texture2D texture = sprite.texture;
