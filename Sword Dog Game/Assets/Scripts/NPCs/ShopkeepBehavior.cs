@@ -25,7 +25,7 @@ public class ShopkeepBehavior : DialogNPC
 
     public void advertise(Collider2D collider)
     {
-        if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time)
+        if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time && collider.gameObject.CompareTag("Player"))
         {
             GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
             MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
