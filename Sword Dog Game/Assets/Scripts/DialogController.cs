@@ -102,6 +102,7 @@ public class DialogController : MonoBehaviour
         panel.alpha = panelAlpha;
         textDisplay.alpha = 255;
         headerDisplay.alpha = 255;
+        DotAnimator.ResetTrigger("Close");
     }
     public void closeBox()
     {
@@ -109,6 +110,7 @@ public class DialogController : MonoBehaviour
         closedAnimator = false;
         textDisplay.alpha = 0;
         headerDisplay.alpha = 0;
+        DotAnimator.SetTrigger("Close");
     }
 
 
