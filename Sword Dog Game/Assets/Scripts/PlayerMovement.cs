@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding;
+    public bool isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
 
     public bool facingRight
     {
@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
 
-            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded)
+            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded && canSkid)
             {
                 anim.SetTrigger("skidding");
                 isSkidding = true;
