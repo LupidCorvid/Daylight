@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 72164611}
   - component: {fileID: 72164612}
   - component: {fileID: 72164613}
+  - component: {fileID: 72164614}
   m_Layer: 0
   m_Name: mtn3
   m_TagString: Untagged
@@ -788,15 +789,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72164610}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67e0c17e02f199240b040389bf7ca1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMultiplier: {x: 0.02, y: 0.02}
+  effectMultiplier: {x: -0.002, y: 0.002}
   infiniteHorizontal: 0
   infiniteVertical: 0
   useOffset: 1
+--- !u!114 &72164614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72164610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: 0.01, y: 0.01}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &105695193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1754,7 @@ GameObject:
   - component: {fileID: 254116622}
   - component: {fileID: 254116623}
   - component: {fileID: 254116624}
+  - component: {fileID: 254116625}
   m_Layer: 0
   m_Name: mtn2
   m_TagString: Untagged
@@ -1819,15 +1836,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254116621}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67e0c17e02f199240b040389bf7ca1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMultiplier: {x: 0.01, y: 0.01}
+  effectMultiplier: {x: -0.001, y: 0.001}
   infiniteHorizontal: 0
   infiniteVertical: 0
   useOffset: 1
+--- !u!114 &254116625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254116621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: 0.0025, y: 0.0025}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &269911582
 GameObject:
   m_ObjectHideFlags: 0
@@ -8111,6 +8143,7 @@ GameObject:
   - component: {fileID: 1399418136}
   - component: {fileID: 1399418137}
   - component: {fileID: 1399418138}
+  - component: {fileID: 1399418139}
   m_Layer: 0
   m_Name: mtn1
   m_TagString: Untagged
@@ -8192,15 +8225,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399418135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67e0c17e02f199240b040389bf7ca1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMultiplier: {x: 0.03, y: 0.03}
+  effectMultiplier: {x: -0.003, y: 0.003}
   infiniteHorizontal: 0
   infiniteVertical: 0
   useOffset: 1
+--- !u!114 &1399418139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399418135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: 0.005, y: 0.005}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1420991677
 GameObject:
   m_ObjectHideFlags: 0
