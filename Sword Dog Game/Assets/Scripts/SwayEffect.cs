@@ -37,7 +37,8 @@ public class SwayEffect : MonoBehaviour
 
     //Used for sound capping
     public static int windSounds = 0;
-    public static int windSoundCap = 400;
+    public static int windSoundCap = 200;
+    public static float windSoundCooldownMax = 0.1f, windSoundCooldown = windSoundCooldownMax;
 
     // Start is called before the first frame update
     void Start()
@@ -150,7 +151,7 @@ public class SwayEffect : MonoBehaviour
             swayVelocity += physicsVelocity;
             if(Mathf.Abs(physicsVelocity) > 0.01f)
             {
-                soundPlayer.PlaySound("Ambience.WindyForest.RustleFX", Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3 * .5f));
+                PlayWindSound(Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3 * .5f));
             }
         }
     }
@@ -201,20 +202,27 @@ public class SwayEffect : MonoBehaviour
                 sway(swayPosition);
         }
 
-        if(windEffect/Time.fixedDeltaTime  * 5/windStrength > 3 && windSounds < windSoundCap)
-        {
-            AudioClip rustleFX = AudioManager.instance?.Find("Ambience.WindyForest.RustleFX");
-            if (rustleFX != null)
-            {
-                soundPlayer.PlaySound(rustleFX, windEffect / Time.fixedDeltaTime * 0.04f);
-                windSounds++;
-                Invoke("EndWindSound", rustleFX.length);
-            }
-        }
+        if (windEffect/Time.fixedDeltaTime * 5/windStrength > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
+            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+
+        if (windSoundCooldown < windSoundCooldownMax)
+            windSoundCooldown += Time.fixedDeltaTime;
     }
     
+    private void PlayWindSound(float volume)
+    {
+        AudioClip rustleFX = AudioManager.instance?.Find("Ambience.GrassRustle");
+        if (rustleFX != null)
+        {
+            soundPlayer.PlaySound(rustleFX, volume);
+            windSounds++;
+            Invoke("EndWindSound", rustleFX.length);
+            windSoundCooldown = 0.0f;
+        }
+    }
+
     private void EndWindSound()
     {
         windSounds--;
-    } 
+    }
 }
