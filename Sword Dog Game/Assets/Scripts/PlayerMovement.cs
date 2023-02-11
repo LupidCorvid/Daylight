@@ -251,10 +251,6 @@ public class PlayerMovement : MonoBehaviour
             if (isSprinting)
             {
                 timeSinceSprint = 0;
-
-                if (stamina > 0 && sprintWindUpPercent == 1.0f && !isSkidding)
-                    stamina = Mathf.Clamp(stamina - Time.deltaTime, 0, maxStamina);
-
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
             }
             else
@@ -271,9 +267,14 @@ public class PlayerMovement : MonoBehaviour
                     
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
-            
-            if (stamina < maxStamina && !(isSprinting && sprintWindUpPercent == 1.0))
-                stamina = Mathf.Clamp(stamina + Time.deltaTime, 0, maxStamina);
+
+            float deltaStamina = 0.0f;
+            if (isSprinting)
+                deltaStamina -= Time.deltaTime;
+            else if (timeSinceSprint > 0.1f)
+                deltaStamina += Time.deltaTime;
+
+            stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
         }
         else
         {
