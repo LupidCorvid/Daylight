@@ -211,6 +211,9 @@ public class SwayEffect : MonoBehaviour
     
     private void PlayWindSound(float volume)
     {
+        if (soundPlayer == null)
+            return;
+
         AudioClip rustleFX = AudioManager.instance?.Find("Ambience.GrassRustle");
         if (rustleFX != null)
         {
