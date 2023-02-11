@@ -672,23 +672,25 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayStepSound()
     {
-        string path = "Impacts.Steps.SoftStep";
-        switch (currentGround)
-        {
-            case Ground.Type.ROCK:
-                path = "Impacts.Steps.MediumStep";
-                break;
-            case Ground.Type.WOOD:
-                path = "Impacts.Steps.WoodenStep";
-                break;
-            case Ground.Type.SAND:
-                path = "Impacts.Steps.RoughStep";
-                break;
-            case Ground.Type.GRASS:
-                path = "Impacts.Steps.SoftStep";
-                break;
+        if (isGrounded) {
+            string path = "Impacts.Steps.SoftStep";
+            switch (currentGround)
+            {
+                case Ground.Type.ROCK:
+                    path = "Impacts.Steps.MediumStep";
+                    break;
+                case Ground.Type.WOOD:
+                    path = "Impacts.Steps.WoodenStep";
+                    break;
+                case Ground.Type.SAND:
+                    path = "Impacts.Steps.RoughStep";
+                    break;
+                case Ground.Type.GRASS:
+                    path = "Impacts.Steps.SoftStep";
+                    break;
+            }
+            soundPlayer.PlaySound(path);
         }
-        soundPlayer.PlaySound(path);
     }
 
     public void StopSkid()
