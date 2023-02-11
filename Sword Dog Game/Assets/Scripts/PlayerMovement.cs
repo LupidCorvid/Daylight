@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
                 timeIdle = 0;
             }
 
-            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0f);
+            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
 
             if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded)
             {
