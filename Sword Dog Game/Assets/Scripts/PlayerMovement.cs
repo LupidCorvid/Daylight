@@ -147,6 +147,14 @@ public class PlayerMovement : MonoBehaviour
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
 
+        float deltaStamina = 0.0f;
+        if (isSprinting)
+            deltaStamina -= Time.deltaTime;
+        else if (timeSinceSprint > 0.1f)
+            deltaStamina += Time.deltaTime;
+        if (PlayerHealth.dead) deltaStamina = 0;
+        stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
+
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement) // && not paused(?)
         {
             // remember previous movement input
@@ -267,19 +275,16 @@ public class PlayerMovement : MonoBehaviour
                     
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
-
-            float deltaStamina = 0.0f;
-            if (isSprinting)
-                deltaStamina -= Time.deltaTime;
-            else if (timeSinceSprint > 0.1f)
-                deltaStamina += Time.deltaTime;
-            stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
         }
         else
         {
             moveX = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
             isSprinting = false;
+            anim.SetBool("sprinting", false);
+            anim.SetBool("moveX", false);
+            anim.SetBool("attacking", false);
+            timeSinceSprint = 1.0f;
             isJumping = false;
             sprintSpeedMultiplier = 1.0f;
             jumpSpeedMultiplier = 1.0f;

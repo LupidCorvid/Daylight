@@ -14,8 +14,8 @@ public class InteractablesTracker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CutsceneController.cutsceneStopInteractions) nearest = null;
-        
+        if (CutsceneController.cutsceneStopInteractions && nearest != null) nearest = null;
+
         if (!alreadyInteracting && !ChangeScene.changingScene && !CutsceneController.cutsceneStopInteractions)
         {
             IInteractable newNearest = getNearest();

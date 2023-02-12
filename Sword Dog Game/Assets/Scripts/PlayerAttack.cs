@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PlayerHealth.dead) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement) // && not paused(?)
         {
             float yInput = Input.GetAxisRaw("Vertical");
 
