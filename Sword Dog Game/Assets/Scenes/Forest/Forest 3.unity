@@ -16923,7 +16923,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.08372241, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -16934,7 +16934,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1674448, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1267470458
 SpriteRenderer:
@@ -25499,7 +25499,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1922762970}
   - component: {fileID: 1922762973}
-  - component: {fileID: 1922762972}
   m_Layer: 7
   m_Name: ledge
   m_TagString: Untagged
@@ -25522,32 +25521,6 @@ Transform:
   m_Father: {fileID: 887029406}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1922762972
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922762969}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.20771122, y: -0.6869478}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.14, y: 18.38}
-    newSize: {x: 7.14, y: 18.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.724577, y: 17.006105}
-  m_EdgeRadius: 0
 --- !u!212 &1922762973
 SpriteRenderer:
   m_ObjectHideFlags: 0
