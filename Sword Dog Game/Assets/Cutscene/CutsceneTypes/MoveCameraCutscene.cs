@@ -12,7 +12,7 @@ public class MoveCameraCutscene : CutsceneData
     public Camera target;
 
     public bool freeCameraOnExit = true;
-
+    public bool freeHudOnExit = false;
     public bool useMainCamera = true;
 
     public enum MovementType
@@ -123,7 +123,8 @@ public class MoveCameraCutscene : CutsceneData
         if (useMainCamera && freeCameraOnExit)
         {
             CameraController.main.externalControl = false;
-            CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
+            if(freeHudOnExit)
+                CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
         }
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
@@ -136,7 +137,8 @@ public class MoveCameraCutscene : CutsceneData
         if (useMainCamera && freeCameraOnExit)
         {
             CameraController.main.externalControl = false;
-            CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
+            if(freeHudOnExit)
+                CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
         }
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
