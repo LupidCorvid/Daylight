@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioMixer musicMixer, sfxMixer;
+    public AudioMixer musicMixer, sfxMixer, globalSfxMixer;
     public AudioMixerGroup musicMixerGroup;
     public AudioClip currentSong;
     public GameArea currentArea;
@@ -192,6 +192,8 @@ public class AudioManager : MonoBehaviour
             sfxMixer.SetFloat("Reverb", -4f);
         else
             sfxMixer.SetFloat("Reverb", -10000f);
+        
+        sfxMixer.SetFloat("Volume", 10 - 2*CameraController.mainCam.orthographicSize);
     }
 
     public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)

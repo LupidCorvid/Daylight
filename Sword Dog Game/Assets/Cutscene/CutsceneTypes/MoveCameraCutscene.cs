@@ -103,7 +103,7 @@ public class MoveCameraCutscene : CutsceneData
     public void ExponentialMovement(CameraTransform transform)
     {
         ExponentialZoomChange(transform);
-        ExponentialPoisitionChange(transform);
+        ExponentialPositionChange(transform);
     }
 
     public void ExponentialZoomChange(CameraTransform transform)
@@ -111,7 +111,7 @@ public class MoveCameraCutscene : CutsceneData
         target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime;
     }
 
-    public void ExponentialPoisitionChange(CameraTransform transform)
+    public void ExponentialPositionChange(CameraTransform transform)
     {
         target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime;
     }
