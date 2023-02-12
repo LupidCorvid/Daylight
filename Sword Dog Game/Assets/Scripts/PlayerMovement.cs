@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0))
+            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting))
             {
                 // bad code
                 // if (isSprinting)
