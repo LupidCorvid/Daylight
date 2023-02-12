@@ -62,7 +62,6 @@ public class DialogNPC : MonoBehaviour, IInteractable
             else if (numInteractions < dialog.Count)
                 setNewSource(new DialogSource(dialog[numInteractions % dialog.Count]));
             openDialog();
-            //hidePrompt(null);
         }
     }
 
@@ -78,8 +77,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         alreadyTalking = true;
         InteractablesTracker.alreadyInteracting = true;
 
-        if(interactor?.GetComponentInChildren<InteractablesTracker>()?.nearest != null)
-            interactor.GetComponentInChildren<InteractablesTracker>().nearest.hidePrompt(null);
+        interactor?.GetComponentInChildren<InteractablesTracker>()?.nearest?.hidePrompt();
     }
 
     private void LateUpdate()
@@ -151,7 +149,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         addedParticle.startTime = Time.time;
     }
 
-    public void hidePrompt(GameObject prompt)
+    public void hidePrompt()
     {
         if (spawnedPrompt != null)
             spawnedPrompt.SetTrigger("Close");

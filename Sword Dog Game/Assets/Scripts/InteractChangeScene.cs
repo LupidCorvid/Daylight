@@ -62,9 +62,8 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         }
     }
 
-    public void hidePrompt(GameObject prompt)
+    public void hidePrompt()
     {
-
         if (spawnedPrompt != null)
             spawnedPrompt.SetTrigger("Close");
     }

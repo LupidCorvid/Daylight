@@ -33,12 +33,11 @@ public class InteractCutscene : MonoBehaviour, IInteractable
     public void interact(GameObject user)
     {
         CutsceneController.PlayCutscene("MountainView");
-            
+        hidePrompt();
     }
 
-    public void hidePrompt(GameObject prompt)
+    public void hidePrompt()
     {
-
         if (spawnedPrompt != null)
             spawnedPrompt.SetTrigger("Close");
     }

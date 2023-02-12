@@ -19,5 +19,5 @@ public interface IInteractable
 
     public void showPrompt(GameObject prompt);
 
-    public void hidePrompt(GameObject prompt);
+    public void hidePrompt();
 }
