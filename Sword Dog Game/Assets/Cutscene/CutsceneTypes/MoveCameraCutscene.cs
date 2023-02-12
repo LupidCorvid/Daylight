@@ -121,7 +121,10 @@ public class MoveCameraCutscene : CutsceneData
         if (points.Count > 0)
             target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
         if (useMainCamera && freeCameraOnExit)
+        {
             CameraController.main.externalControl = false;
+            CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
+        }
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
         base.finishedSegment();
@@ -131,7 +134,10 @@ public class MoveCameraCutscene : CutsceneData
     {
         base.abort();
         if (useMainCamera && freeCameraOnExit)
+        {
             CameraController.main.externalControl = false;
+            CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
+        }
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
     }

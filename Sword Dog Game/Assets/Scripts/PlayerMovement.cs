@@ -273,7 +273,6 @@ public class PlayerMovement : MonoBehaviour
                 deltaStamina -= Time.deltaTime;
             else if (timeSinceSprint > 0.1f)
                 deltaStamina += Time.deltaTime;
-
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
         }
         else
@@ -284,9 +283,12 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
             sprintSpeedMultiplier = 1.0f;
             jumpSpeedMultiplier = 1.0f;
-            stamina = Mathf.Lerp(stamina, 0, 0.02f);
-            if (stamina <= 0.1f)
-                stamina = 0;
+            if (!CutsceneController.cutsceneStopMovement)
+            {
+                stamina = Mathf.Lerp(stamina, 0, 0.02f);
+                if (stamina <= 0.1f)
+                    stamina = 0;
+            }
         }
     }
 
