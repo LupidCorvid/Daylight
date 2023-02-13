@@ -46,7 +46,7 @@ public class SlopeAdjuster : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        SlopeCheckHorizontal();
+        SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
         groundedCheck();
         if (!isGrounded)
@@ -65,7 +65,7 @@ public class SlopeAdjuster : MonoBehaviour
         }
     }
 
-    private void SlopeCheckHorizontal()
+    private void SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner)
     {
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
@@ -97,6 +97,13 @@ public class SlopeAdjuster : MonoBehaviour
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;
+            if (acrossPercent > .01f)
+            {
+                if (right == 1)
+                    SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner);
+                else
+                    SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y));
+            }
             onLedge = true;
         }
         if (!float.IsNaN(unsmoothedSlope) && !onLedge)

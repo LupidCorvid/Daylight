@@ -475,11 +475,11 @@ public class PlayerMovement : MonoBehaviour
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
-        SlopeCheckHorizontal(checkPos);
+        SlopeCheckHorizontal(checkPos, upperLeftCorner, upperRightCorner);
         SlopeCheckVertical(checkPos);
     }
 
-    private void SlopeCheckHorizontal(Vector2 checkPos)
+    private void SlopeCheckHorizontal(Vector2 checkPos, Vector2 upperLeftCorner, Vector2 upperRightCorner)
     {
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
@@ -528,6 +528,14 @@ public class PlayerMovement : MonoBehaviour
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
             slopeSideAngle = 0;
+            if (acrossPercent > .01f)
+            {
+                if(right == 1)
+                    SlopeCheckHorizontal(checkPos, new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner);
+                else
+                    SlopeCheckHorizontal(checkPos, upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y));
+            }
+            //SlopeCheckHorizontal(checkPos, new Vector2(across.point.x, upperLeftCorner.y), new Vector2(across));
             onLedge = true;
             if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded /*|| isGrounded*/))
                 return;
