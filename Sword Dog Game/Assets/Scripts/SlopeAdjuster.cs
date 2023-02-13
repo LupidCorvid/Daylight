@@ -73,8 +73,13 @@ public class SlopeAdjuster : MonoBehaviour
         Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
         Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
 
+        if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
+            return;
+
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
+
+
 
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
 
@@ -86,6 +91,8 @@ public class SlopeAdjuster : MonoBehaviour
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
         Debug.DrawLine(across2.point, acrossCheck2, Color.green);
+
+        
 
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y) / (rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));

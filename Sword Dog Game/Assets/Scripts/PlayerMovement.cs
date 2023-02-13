@@ -504,7 +504,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
+        if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
             return;
 
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
@@ -530,7 +530,7 @@ public class PlayerMovement : MonoBehaviour
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
         if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
         {
-            //slopeSideAngle = 0;
+            slopeSideAngle = 0;
             if (acrossPercent > .01f)
             {
                 if(right == 1)
