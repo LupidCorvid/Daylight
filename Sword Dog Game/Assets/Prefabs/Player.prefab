@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 6300512340327299647}
   - component: {fileID: 6300512340327299632}
   - component: {fileID: 6300512340327299635}
-  - component: {fileID: 6300512340327299634}
   - component: {fileID: 7713005219475735744}
   - component: {fileID: 223483409846595020}
   - component: {fileID: 2076971703553780711}
@@ -180,6 +179,7 @@ GameObject:
   - component: {fileID: 675094675918066877}
   - component: {fileID: 3260013332793364472}
   - component: {fileID: 633449435745536244}
+  - component: {fileID: 974524988010002649}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -248,7 +248,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 79c1c3c14e2a3cf4b876295e92ebaea5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10460acc0f1f496498a03bc2b5a2a121, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -348,32 +348,8 @@ MonoBehaviour:
   attacking: 0
   soundPlayer: {fileID: 2397985649499789958}
   currentGround: 0
---- !u!61 &6300512340327299634
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300512340327299644}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.010911107, y: -0.4678527}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.8, y: 3.5}
-    newSize: {x: 3.5, y: 3.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.2421057, y: 2.1229439}
-  m_EdgeRadius: 0
+  overrideColliderWidth: 1
+  colliderWidth: {x: 2.24, y: 2.123}
 --- !u!114 &7713005219475735744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +454,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 0}
+--- !u!60 &974524988010002649
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.7, y: 3.5}
+    newSize: {x: 3.5, y: 3.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.1692922, y: 0.852159}
+      - {x: -1.1720302, y: -1.4680887}
+      - {x: -0.830632, y: -1.5630255}
+      - {x: 0.76364213, y: -1.565283}
+      - {x: 1.1530962, y: -1.4619963}
+      - {x: 1.1443914, y: 0.8693098}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6676018890620208525
 GameObject:
   m_ObjectHideFlags: 0

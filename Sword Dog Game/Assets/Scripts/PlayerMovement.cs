@@ -92,13 +92,19 @@ public class PlayerMovement : MonoBehaviour
 
     private float realVelocity;
     private Vector3 lastPosition;
+    public bool overrideColliderWidth = false;
+    public Vector2 colliderWidth = new Vector2();
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         cldr = GetComponent<Collider2D>();
-        colliderSize = GetComponent<BoxCollider2D>().size;
+        if (!overrideColliderWidth)
+            colliderSize = GetComponent<Collider2D>().bounds.size;
+        else
+            colliderSize = colliderWidth;
         timeSinceJumpPressed = 0.2f;
         jumpSpeedMultiplier = 1.0f;
         sprintSpeedMultiplier = 1.0f;
@@ -327,18 +333,18 @@ public class PlayerMovement : MonoBehaviour
         if (moveX == 0.0 && rb.velocity.x != 0.0f)
         {
             if (canWalkOnSlope)
-                GetComponent<BoxCollider2D>().sharedMaterial = friction;
+                GetComponent<Collider2D>().sharedMaterial = friction;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing * 2.5f);
         }
         else
         {
-            GetComponent<BoxCollider2D>().sharedMaterial = slippery;
+            GetComponent<Collider2D>().sharedMaterial = slippery;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
         }
 
         // if (!isGrounded)
         // {
-        //     GetComponent<BoxCollider2D>().sharedMaterial = slippery;
+        //     GetComponent<Collider2D>().sharedMaterial = slippery;
         // }
 
         // calculate speed multiplier for trot animation
