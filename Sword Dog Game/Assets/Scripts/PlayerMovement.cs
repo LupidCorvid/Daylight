@@ -579,7 +579,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         if (hit)
         {
-            anim.SetBool("ground_close", true);
+            if(hit.distance <= 2f)
+                anim.SetBool("ground_close", true);
 
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
