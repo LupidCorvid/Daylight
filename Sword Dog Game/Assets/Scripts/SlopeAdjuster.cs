@@ -79,7 +79,7 @@ public class SlopeAdjuster : MonoBehaviour
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
 
         Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
-        Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 4);
+        Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2.4f);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot,
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         RaycastHit2D across2 = Physics2D.Raycast(acrossCheck2,
