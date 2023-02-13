@@ -528,7 +528,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool onLedge = false;
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
-        if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
+        if (acrossPercent2 - acrossPercent < .0001)//If issues arise get abs value
         {
             slopeSideAngle = 0;
             if (acrossPercent > .01f)
