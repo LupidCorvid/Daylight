@@ -65,8 +65,10 @@ public class SlopeAdjuster : MonoBehaviour
         }
     }
 
-    private void SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner)
+    private void SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
+        if (runs > 2)
+            return;
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
@@ -107,9 +109,9 @@ public class SlopeAdjuster : MonoBehaviour
             if (acrossPercent > .01f)
             {
                 if (right == 1)
-                    SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner);
+                    SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
                 else
-                    SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y));
+                    SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
             }
             onLedge = true;
         }
