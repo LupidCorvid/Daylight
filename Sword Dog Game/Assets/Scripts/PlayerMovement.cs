@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
     public bool overrideColliderWidth = false;
     public Vector2 colliderWidth = new Vector2();
 
+    private Vector2 groundCheckSpot = new Vector2();
 
     void Start()
     {
@@ -129,6 +130,8 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+
+        groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
         groundCheck.triggerEnter += checkIfLanding;
     }
@@ -481,7 +484,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckHorizontal(Vector2 checkPos, Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
-        if (runs > 2)
+        if (runs > 10)
             return;
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
@@ -497,8 +500,10 @@ public class PlayerMovement : MonoBehaviour
             rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
         }
 
-        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
-        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+        if(leftHit.point != Vector2.zero)
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+        if(rightHit.point != Vector2.zero)
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
 
         if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
         {
@@ -507,7 +512,38 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
+        {
+            Vector2 leftSide = upperLeftCorner;
+            Vector2 rightSide = upperRightCorner;
+            float yLevel = groundCheckSpot.y + transform.position.y;
+
+            if (leftHit.point == Vector2.zero)
+            {
+                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), Vector2.right, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
+                
+                Debug.DrawLine(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+                leftSide.x = groundFinder.point.x - transform.position.x;
+                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                    return;
+                
+            }
+            if (rightHit.point == Vector2.zero)
+            {
+                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperRightCorner.x + transform.position.x, yLevel), Vector2.left, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
+                
+                Debug.DrawLine(new Vector2(upperRightCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+                rightSide.x = groundFinder.point.x - transform.position.x;
+                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                    return;
+            }
+            
+            SlopeCheckHorizontal(checkPos, leftSide, rightSide, runs + 1);
+            
             return;
+        }
+            
 
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;

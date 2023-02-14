@@ -12,11 +12,16 @@ public class CollisionsTracker : MonoBehaviour
     public event Action<Collision2D> colliderEnter;
 
     public Collider2D cldr;
+
+    private void Awake()
+    {
+        cldr = GetComponent<Collider2D>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         ChangeScene.clearCollisions += ClearAll;
-        cldr = GetComponent<Collider2D>();
+        
     }
 
     // Update is called once per frame
