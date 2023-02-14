@@ -28,6 +28,8 @@ public class SlopeAdjuster : MonoBehaviour
 
     public CollisionsTracker groundCheck;
 
+    private Vector2 groundCheckSpot = new Vector2();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,8 @@ public class SlopeAdjuster : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+
+        groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
         groundCheck.triggerEnter += checkIfLanding;
     }
@@ -77,6 +81,35 @@ public class SlopeAdjuster : MonoBehaviour
 
         if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
             return;
+
+
+        Vector2 leftSide = upperLeftCorner;
+        Vector2 rightSide = upperRightCorner;
+        float yLevel = groundCheckSpot.y + transform.position.y;
+
+        if (leftHit.point == Vector2.zero)
+        {
+            RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), Vector2.right, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
+
+            Debug.DrawLine(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+            leftSide.x = groundFinder.point.x - transform.position.x;
+            //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+            if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                return;
+
+        }
+        if (rightHit.point == Vector2.zero)
+        {
+            RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperRightCorner.x + transform.position.x, yLevel), Vector2.left, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
+
+            Debug.DrawLine(new Vector2(upperRightCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+            rightSide.x = groundFinder.point.x - transform.position.x;
+            //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+            if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                return;
+        }
+
+        SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
 
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
