@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.15, y: 0}
+  distance: {x: -0.15, y: 0.02}
   cam: {fileID: 0}
   startPos: {x: -3.969067, y: 2.408042, z: 0}
   changeOnZoom: 1
@@ -7665,7 +7665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.4, y: -0.05}
+  distance: {x: -0.4, y: 0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -7727,7 +7727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: 0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -27614,7 +27614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: 0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -39649,7 +39649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.1, y: -0.05}
+  distance: {x: -0.1, y: 0.06}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -53260,7 +53260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.05, y: -0.05}
+  distance: {x: -0.05, y: 0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -58261,7 +58261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.1, y: 0.05}
+  distance: {x: -0.1, y: 0.052}
   cam: {fileID: 0}
   startPos: {x: 0.34, y: -0.74, z: 0}
   changeOnZoom: 1
@@ -60715,7 +60715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: 0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -61363,6 +61363,107 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -141
   m_Sprite: {fileID: 21300000, guid: fa6b9ac67ae81274b82a29174692e9aa, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.38, y: 0.82}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1354033440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354033441}
+  - component: {fileID: 1354033443}
+  - component: {fileID: 1354033442}
+  m_Layer: 0
+  m_Name: Rock (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1354033441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354033440}
+  m_LocalRotation: {x: -0, y: -0, z: -0.093294404, w: 0.99563855}
+  m_LocalPosition: {x: -13.88, y: 2.27, z: 0}
+  m_LocalScale: {x: -3.850086, y: 3.9302256, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1681161387}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.706}
+--- !u!114 &1354033442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354033440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.3, y: 0.07}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+--- !u!212 &1354033443
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354033440}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -131
+  m_Sprite: {fileID: 21300000, guid: f48efc8e9543e2f4d8d5fe27eb21a2be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -68379,7 +68480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.4, y: 0.05}
+  distance: {x: -0.4, y: 0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -70034,7 +70135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: 0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -78843,6 +78944,7 @@ Transform:
   - {fileID: 2106493778}
   - {fileID: 1350541606}
   - {fileID: 1895892861}
+  - {fileID: 1354033441}
   m_Father: {fileID: 375892589}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96572,7 +96674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.2, y: 0.05}
+  distance: {x: -0.2, y: 0.053}
   cam: {fileID: 0}
   startPos: {x: 0.34, y: -0.74, z: 0}
   changeOnZoom: 1
@@ -99034,7 +99136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.4, y: 0.05}
+  distance: {x: -0.4, y: 0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -100092,7 +100194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89910439303006872, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.24
+      value: 7.92
       objectReference: {fileID: 0}
     - target: {fileID: 89910439303006872, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -100240,7 +100342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: {x: -0.3, y: -0.05}
+  distance: {x: -0.3, y: 0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
