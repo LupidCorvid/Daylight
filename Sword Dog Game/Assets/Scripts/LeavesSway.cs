@@ -41,7 +41,7 @@ public class LeavesSway : MonoBehaviour
 
     public void Start()
     {
-        lastDrop = Time.time + .5f;
+        lastShakeDrop = Time.time - 1.5f;
         lastRotation = transform.root.eulerAngles.z;
         particleHandler = GetComponentInChildren<ParticleSystem>();
         lastPosition = transform.position;
