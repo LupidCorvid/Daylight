@@ -23,5 +23,13 @@ public class RenderLayerSetter : MonoBehaviour
             system.sortingOrder = newLayer;
         }
 
+
+        //List<ParticleSystem> pSystems = new List<ParticleSystem>();
+        //pSystems.AddRange(GetComponentsInChildren<ParticleSystem>());
+
+        //foreach(ParticleSystem system in pSystems)
+        //{
+        //    system.main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+        //}
     }
 }
