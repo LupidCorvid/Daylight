@@ -500,11 +500,22 @@ public class PlayerMovement : MonoBehaviour
             rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
         }
 
-        if(leftHit.point != Vector2.zero)
-            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
-        if(rightHit.point != Vector2.zero)
-            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+        float minGroundDistance = 2f + colliderSize.y / 2;
+        anim.SetBool("ground_close", false);
 
+        if(leftHit.point != Vector2.zero)
+        {
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+            if (leftHit.distance <= minGroundDistance)
+                anim.SetBool("ground_close", true);
+        }
+        if(rightHit.point != Vector2.zero)
+        {
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+            if (rightHit.distance <= minGroundDistance)
+                anim.SetBool("ground_close", true);
+        }
+      
         if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
         {
             slopeSideAngle = 0;
@@ -613,8 +624,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
-        anim.SetBool("ground_close", false);
+        // anim.SetBool("ground_close", false);
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
+        // Debug.DrawLine(checkPos, hit.point, Color.cyan, 0);
         if (hit)
         {
             if(hit.distance <= 2f)
