@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -157,6 +157,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
+
+        if (timeSinceJump < 1f)
+            timeSinceJump += Time.deltaTime;
 
         float deltaStamina = 0.0f;
         if (isSprinting)
@@ -406,7 +409,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f) && isJumping && timeSinceJumpPressed > 0.2f)
+            if (!(rb.velocity.y > 0f) && isJumping && timeSinceJump > 0.2f)
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
@@ -690,6 +693,11 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        if (!isGrounded) {
+            cldr = cldr2;
+            cldr2.enabled = true;
+            cldr1.enabled = false;
+        }
         if (needsClean)
             groundCheck.clean();
 
@@ -737,6 +745,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
+            timeSinceJump = 0.0f;
         }
     }
 
