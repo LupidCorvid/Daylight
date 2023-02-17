@@ -693,11 +693,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
-        if (!isGrounded) {
-            cldr = cldr2;
-            cldr2.enabled = true;
-            cldr1.enabled = false;
-        }
         if (needsClean)
             groundCheck.clean();
 
