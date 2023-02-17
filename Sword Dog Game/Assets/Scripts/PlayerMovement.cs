@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     public bool overrideColliderWidth = false;
     public Vector2 colliderWidth = new Vector2();
 
-    private Vector2 groundCheckSpot = new Vector2();
+    public Vector2 groundCheckSpot = new Vector2();
 
     void Start()
     {
@@ -132,8 +132,8 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
-
-        groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
+        if(groundCheckSpot == default)
+            groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
         groundCheck.triggerEnter += checkIfLanding;
     }
