@@ -9891,6 +9891,7 @@ MonoBehaviour:
   passingEmmissionSensitivity: 5
   Group: 1
   sprite: {fileID: 0}
+  onExitEmit: 1
 --- !u!58 &8308994573689813433
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9970,6 +9971,7 @@ MonoBehaviour:
   passingEmmissionSensitivity: 5
   Group: 1
   sprite: {fileID: 0}
+  onExitEmit: 1
 --- !u!58 &8308994573891761251
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10049,6 +10051,7 @@ MonoBehaviour:
   passingEmmissionSensitivity: 5
   Group: 1
   sprite: {fileID: 0}
+  onExitEmit: 0
 --- !u!58 &8308994573988436050
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10182,7 +10185,7 @@ Transform:
   - {fileID: 8308994573891761250}
   - {fileID: 8308994573689813432}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8308994574743658116
 SpriteRenderer:

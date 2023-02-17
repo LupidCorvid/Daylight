@@ -5157,7 +5157,7 @@ MonoBehaviour:
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
   tension: 0.2
   dampening: 0.5
-  windStrength: 1
+  windStrength: -2
   windSpeed: 1
   windVolatility: 0.2
   limit: 0.4
@@ -9170,7 +9170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291996949}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.54, y: -5.97, z: 1.7990329}
+  m_LocalPosition: {x: 51.54, y: -5.7, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11780,7 +11780,7 @@ MonoBehaviour:
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
   tension: 0.2
   dampening: 0.5
-  windStrength: 1
+  windStrength: -2
   windSpeed: 1
   windVolatility: 0.2
   limit: 0.4
@@ -21955,7 +21955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776113061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.88, y: -5.8, z: 1.7990329}
+  m_LocalPosition: {x: 32.88, y: -5.73, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26097,7 +26097,7 @@ MonoBehaviour:
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
   tension: 0.2
   dampening: 0.5
-  windStrength: 1
+  windStrength: 2
   windSpeed: 1
   windVolatility: 0.2
   limit: 0.4
@@ -55282,7 +55282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045966173}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.18, y: -5.97, z: 1.7990329}
+  m_LocalPosition: {x: 67.18, y: -5.7, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -59126,6 +59126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52428008540424032}
+  - component: {fileID: 52428008540424036}
   m_Layer: 0
   m_Name: Tree (white)
   m_TagString: Untagged
@@ -59133,6 +59134,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &52428008540424036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52428008540424035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!4 &52428008585492648
 Transform:
   m_ObjectHideFlags: 0
@@ -59967,7 +59984,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428007750464585}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -69631,7 +69648,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428007330810873}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -69647,7 +69664,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428006897330099}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -69743,7 +69760,7 @@ MonoBehaviour:
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
   tension: 0.2
   dampening: 0.5
-  windStrength: 1
+  windStrength: 2
   windSpeed: 1
   windVolatility: 0.2
   limit: 0.4
@@ -89201,7 +89218,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428006708699925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -89217,7 +89234,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428007490678399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -89425,7 +89442,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52428008585492650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

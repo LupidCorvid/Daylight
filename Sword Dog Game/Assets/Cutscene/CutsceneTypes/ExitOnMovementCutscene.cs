@@ -14,7 +14,7 @@ public class ExitOnMovementCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        //Temp implementation
+        //Temp implementation. Can be final as long as all attempts at player movement are considered
         if(Input.GetAxisRaw("Horizontal") >= .01f || Input.GetKeyDown(KeyCode.Space))
         {
             finish();
