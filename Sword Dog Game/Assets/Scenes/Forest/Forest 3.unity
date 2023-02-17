@@ -10884,7 +10884,7 @@ GameObject:
   - component: {fileID: 711212352}
   - component: {fileID: 711212354}
   - component: {fileID: 711212353}
-  - component: {fileID: 711212355}
+  - component: {fileID: 711212357}
   - component: {fileID: 711212356}
   m_Layer: 0
   m_Name: ObserveCutscene
@@ -10946,27 +10946,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 711212353}
-  - {fileID: 711212355}
+  - {fileID: 0}
   - {fileID: 711212356}
   cutsceneNumber: 0
   cutsceneName: MountainView
   playingThisCutscene: 0
   stopInteractions: 1
   stopMovement: 1
---- !u!114 &711212355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711212351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  waitTime: 2
 --- !u!114 &711212356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10991,6 +10977,19 @@ MonoBehaviour:
   freeCameraOnExit: 1
   freeHudOnExit: 1
   useMainCamera: 1
+--- !u!114 &711212357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711212351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3351ab18d8451d4d99a0158b243399f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
 --- !u!1 &740591200
 GameObject:
   m_ObjectHideFlags: 0
