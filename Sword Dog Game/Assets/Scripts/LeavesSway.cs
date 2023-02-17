@@ -30,7 +30,7 @@ public class LeavesSway : MonoBehaviour
     public int maxImpactDrop = 20;
 
     public Collider2D cldr;
-    float lastDrop;
+    float lastDrop = 1f;
     float dropCooldown = 0.05f;
 
     public float passingEmmissionSensitivity = 2;
@@ -41,6 +41,7 @@ public class LeavesSway : MonoBehaviour
 
     public void Start()
     {
+        lastShakeDrop = Time.time - 1.5f;
         lastRotation = transform.root.eulerAngles.z;
         particleHandler = GetComponentInChildren<ParticleSystem>();
         lastPosition = transform.position;
