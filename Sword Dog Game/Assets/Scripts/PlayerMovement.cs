@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
 
+    [SerializeField] private Collider2D cldr1, cldr2;
     Collider2D cldr;
 
     Vector2 upperLeftCorner;
@@ -101,9 +102,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        cldr = GetComponent<Collider2D>();
+        cldr = cldr1;
+
         if (!overrideColliderWidth)
-            colliderSize = GetComponent<Collider2D>().bounds.size;
+            colliderSize = cldr.bounds.size;
         else
             colliderSize = colliderWidth;
         timeSinceJumpPressed = 0.2f;
@@ -336,18 +338,18 @@ public class PlayerMovement : MonoBehaviour
         if (moveX == 0.0 && rb.velocity.x != 0.0f)
         {
             if (canWalkOnSlope)
-                GetComponent<Collider2D>().sharedMaterial = friction;
+                cldr.sharedMaterial = friction;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing * 2.5f);
         }
         else
         {
-            GetComponent<Collider2D>().sharedMaterial = slippery;
+            cldr.sharedMaterial = slippery;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
         }
 
         // if (!isGrounded)
         // {
-        //     GetComponent<Collider2D>().sharedMaterial = slippery;
+        //     cldr.sharedMaterial = slippery;
         // }
 
         // calculate speed multiplier for trot animation
@@ -595,7 +597,16 @@ public class PlayerMovement : MonoBehaviour
         if(!float.IsNaN(unsmoothedSlope) && !onLedge)
             slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
-        if (!isGrounded)
+        if (isGrounded)
+        {
+            lastGroundedSlope = slopeSideAngle;
+
+            if (lastLand + landAnimTime > Time.time)
+            {
+                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+            }
+        }
+        else
         {
             const float ROTATION_INTENSITY = 75;
             int negative = 1;
@@ -604,22 +615,10 @@ public class PlayerMovement : MonoBehaviour
             float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
             rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
             slopeSideAngle = lastGroundedSlope + rotationAmount;
-        }
-        if (isGrounded)
-            lastGroundedSlope = slopeSideAngle;
-        else
-        {
+
             lastMidairVelocity = rb.velocity;
             lastUngroundedSlope = slopeSideAngle;
         }
-        if (isGrounded)
-        {
-            if(lastLand + landAnimTime > Time.time)
-            {
-                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand)* Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
-            }
-        }
-
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -676,10 +675,16 @@ public class PlayerMovement : MonoBehaviour
                 continue;
             }
             if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
-
             {
                 anim.SetBool("grounded", true);
                 currentGround = collision.gameObject.TryGetComponent(out Ground ground) ? ground.type : Ground.Type.GRASS;
+
+                // conditional collider activation
+                bool branch = collision.gameObject.CompareTag("Branch");
+                cldr = branch ? cldr2 : cldr1;
+                cldr2.enabled = branch;
+                cldr1.enabled = !branch;
+                
                 isGrounded = true;
                 lastOnLand = 0f;
                 break;
