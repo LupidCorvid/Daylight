@@ -731,7 +731,7 @@ public class PlayerMovement : MonoBehaviour
         // incorporates coyote time and input buffering
         if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping)
         {
-            if (isOnSlope && slopeDownAngle > maxSlopeAngle)
+            if (isOnSlope && slopeDownAngle > maxSlopeAngle && cldr != cldr2)
                 return;
             
             // Add a vertical force to the player
