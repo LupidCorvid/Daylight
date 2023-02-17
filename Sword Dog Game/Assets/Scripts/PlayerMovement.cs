@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
 
+    [SerializeField] private Collider2D cldr1, cldr2;
     Collider2D cldr;
 
     Vector2 upperLeftCorner;
@@ -101,9 +102,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        cldr = GetComponent<Collider2D>();
+        cldr = cldr1;
+
         if (!overrideColliderWidth)
-            colliderSize = GetComponent<Collider2D>().bounds.size;
+            colliderSize = cldr.bounds.size;
         else
             colliderSize = colliderWidth;
         timeSinceJumpPressed = 0.2f;
@@ -155,6 +157,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
+
+        if (timeSinceJump < 1f)
+            timeSinceJump += Time.deltaTime;
 
         float deltaStamina = 0.0f;
         if (isSprinting)
@@ -336,18 +341,18 @@ public class PlayerMovement : MonoBehaviour
         if (moveX == 0.0 && rb.velocity.x != 0.0f)
         {
             if (canWalkOnSlope)
-                GetComponent<Collider2D>().sharedMaterial = friction;
+                cldr.sharedMaterial = friction;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing * 2.5f);
         }
         else
         {
-            GetComponent<Collider2D>().sharedMaterial = slippery;
+            cldr.sharedMaterial = slippery;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
         }
 
         // if (!isGrounded)
         // {
-        //     GetComponent<Collider2D>().sharedMaterial = slippery;
+        //     cldr.sharedMaterial = slippery;
         // }
 
         // calculate speed multiplier for trot animation
@@ -404,7 +409,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f) && isJumping)
+            if (!(rb.velocity.y > 0f) && isJumping && timeSinceJump > 0.2f)
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
@@ -595,7 +600,16 @@ public class PlayerMovement : MonoBehaviour
         if(!float.IsNaN(unsmoothedSlope) && !onLedge)
             slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
-        if (!isGrounded)
+        if (isGrounded)
+        {
+            lastGroundedSlope = slopeSideAngle;
+
+            if (lastLand + landAnimTime > Time.time)
+            {
+                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+            }
+        }
+        else
         {
             const float ROTATION_INTENSITY = 75;
             int negative = 1;
@@ -604,22 +618,10 @@ public class PlayerMovement : MonoBehaviour
             float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
             rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
             slopeSideAngle = lastGroundedSlope + rotationAmount;
-        }
-        if (isGrounded)
-            lastGroundedSlope = slopeSideAngle;
-        else
-        {
+
             lastMidairVelocity = rb.velocity;
             lastUngroundedSlope = slopeSideAngle;
         }
-        if (isGrounded)
-        {
-            if(lastLand + landAnimTime > Time.time)
-            {
-                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand)* Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
-            }
-        }
-
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -627,10 +629,13 @@ public class PlayerMovement : MonoBehaviour
         // anim.SetBool("ground_close", false);
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         // Debug.DrawLine(checkPos, hit.point, Color.cyan, 0);
-        if (hit)
+        if (hit || isGrounded)
         {
-            if(hit.distance <= 2f)
+            if(isGrounded || hit.distance <= 2f)
                 anim.SetBool("ground_close", true);
+
+            if (isGrounded && !hit)
+                return;
 
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -673,14 +678,25 @@ public class PlayerMovement : MonoBehaviour
                 continue;
             }
             if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
-
             {
                 anim.SetBool("grounded", true);
                 currentGround = collision.gameObject.TryGetComponent(out Ground ground) ? ground.type : Ground.Type.GRASS;
+
+                // conditional collider activation
+                bool branch = collision.gameObject.CompareTag("Branch");
+                cldr = branch ? cldr2 : cldr1;
+                cldr2.enabled = branch;
+                cldr1.enabled = !branch;
+                
                 isGrounded = true;
                 lastOnLand = 0f;
                 break;
             }
+        }
+        if (!isGrounded) {
+            cldr = cldr2;
+            cldr2.enabled = true;
+            cldr1.enabled = false;
         }
         if (needsClean)
             groundCheck.clean();
@@ -700,6 +716,12 @@ public class PlayerMovement : MonoBehaviour
         // if player presses jump button
         if (Input.GetButtonDown("Jump"))
         {
+            if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
+            {
+                jumpSpeedMultiplier = 1f;
+                isJumping = false;
+                jumpTime = 0f;
+            }
             timeSinceJumpPressed = 0.0f;
         }
 
@@ -723,7 +745,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
-        }        
+            timeSinceJump = 0.0f;
+        }
     }
 
     public void StartedJump()

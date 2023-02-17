@@ -131,9 +131,9 @@ MonoBehaviour:
   ShakenDropCooldown: 5
   minImpactDrop: 10
   maxImpactDrop: 20
+  cldr: {fileID: 0}
   passingEmmissionSensitivity: 2
   Group: 0
-  groupMembers: []
   sprite: {fileID: 0}
 --- !u!1 &4124711675750376824
 GameObject:
@@ -5024,7 +5024,7 @@ GameObject:
   - component: {fileID: 7553911076716621992}
   m_Layer: 7
   m_Name: branch 1
-  m_TagString: Untagged
+  m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5043,7 +5043,7 @@ Transform:
   m_Children:
   - {fileID: 2740891233139177693}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3313480796683411609
 SpriteRenderer:
@@ -5258,7 +5258,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 2.43, y: 0}
-  m_ConnectedAnchor: {x: 60.489998, y: -1.25}
+  m_ConnectedAnchor: {x: 62.78, y: 0.41}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
