@@ -406,7 +406,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (beenOnLand < 5f)
                 beenOnLand += Time.fixedDeltaTime;
-            if (!(rb.velocity.y > 0f) && isJumping)
+            if (!(rb.velocity.y > 0f) && isJumping && timeSinceJumpPressed > 0.2f)
             {
                 jumpSpeedMultiplier = 1f;
                 isJumping = false;
@@ -708,6 +708,12 @@ public class PlayerMovement : MonoBehaviour
         // if player presses jump button
         if (Input.GetButtonDown("Jump"))
         {
+            if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
+            {
+                jumpSpeedMultiplier = 1f;
+                isJumping = false;
+                jumpTime = 0f;
+            }
             timeSinceJumpPressed = 0.0f;
         }
 
@@ -731,7 +737,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
-        }        
+        }
     }
 
     public void StartedJump()
