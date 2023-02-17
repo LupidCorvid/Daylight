@@ -701,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5974488042684677177, guid: bc0cf0cc6336db441af24dfcd8286b1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6298511979601637333, guid: bc0cf0cc6336db441af24dfcd8286b1a, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -789,7 +793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28359727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.45, y: -5.97, z: 1.7990329}
+  m_LocalPosition: {x: -17.45, y: -5.74, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3021,13 +3025,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
-  tension: 0.1
-  dampening: 0.3
+  tension: 0.2
+  dampening: 0.5
   windStrength: 1
   windSpeed: 1
   windVolatility: 0.2
-  limit: 1
-  rotate: 0
+  limit: 0.4
+  rotate: 1
   soundPlayer: {fileID: 0}
 --- !u!61 &120733493
 BoxCollider2D:
@@ -4715,6 +4719,10 @@ PrefabInstance:
     - target: {fileID: 2526062745569830981, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
       propertyPath: m_Name
       value: Rock 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526062745569830981, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3763474014948842888, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
       propertyPath: m_RootOrder
@@ -7457,13 +7465,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
-  tension: 0.1
-  dampening: 0.3
+  tension: 0.2
+  dampening: 0.5
   windStrength: 1
   windSpeed: 1
   windVolatility: 0.2
-  limit: 1
-  rotate: 0
+  limit: 0.4
+  rotate: 1
   soundPlayer: {fileID: 0}
 --- !u!61 &337074783
 BoxCollider2D:
@@ -9904,6 +9912,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5974488042684677177, guid: bc0cf0cc6336db441af24dfcd8286b1a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6298511979601637333, guid: bc0cf0cc6336db441af24dfcd8286b1a, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -12108,6 +12120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock 3
       objectReference: {fileID: 0}
+    - target: {fileID: 693837340240821111, guid: 8fd61b74bc0e4c24aa8f79a1cfa9bacf, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9078482969516225734, guid: 8fd61b74bc0e4c24aa8f79a1cfa9bacf, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -13791,7 +13807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776113061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.88, y: -5.97, z: 1.7990329}
+  m_LocalPosition: {x: 32.88, y: -5.8, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13828,6 +13844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779221251}
   - component: {fileID: 779221252}
+  - component: {fileID: 779221253}
   m_Layer: 0
   m_Name: Rock 1(white) (1)
   m_TagString: Untagged
@@ -13843,7 +13860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779221250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.59, y: -2.64, z: -0.20977603}
+  m_LocalPosition: {x: -4.120001, y: -2.64, z: -0.20977603}
   m_LocalScale: {x: 4.7264514, y: 4.333824, z: 3.428}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13902,6 +13919,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &779221253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779221250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.2, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &814390667
 GameObject:
   m_ObjectHideFlags: 0
@@ -16851,13 +16884,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
-  tension: 0.1
-  dampening: 0.3
+  tension: 0.2
+  dampening: 0.5
   windStrength: 1
   windSpeed: 1
   windVolatility: 0.2
-  limit: 1
-  rotate: 0
+  limit: 0.4
+  rotate: 1
   soundPlayer: {fileID: 0}
 --- !u!61 &1029058859
 BoxCollider2D:
@@ -19664,6 +19697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6459811838898013234, guid: f625b721dcb1b5344879a78ad55e3c9e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f625b721dcb1b5344879a78ad55e3c9e, type: 3}
@@ -20215,6 +20252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1146474997}
   - component: {fileID: 1146474996}
+  - component: {fileID: 1146474998}
   m_Layer: 0
   m_Name: rock 2(white)
   m_TagString: Untagged
@@ -20289,6 +20327,22 @@ Transform:
   m_Father: {fileID: 961896066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1146474998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146474995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1156822453
 GameObject:
   m_ObjectHideFlags: 0
@@ -24160,6 +24214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5535567794757806784, guid: 230b5876e966d0c4ab69370042a2fe97, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 230b5876e966d0c4ab69370042a2fe97, type: 3}
@@ -25335,6 +25393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345553359}
   - component: {fileID: 1345553360}
+  - component: {fileID: 1345553361}
   m_Layer: 0
   m_Name: Rock 1(white)
   m_TagString: Untagged
@@ -25350,7 +25409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345553358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.61, y: -0.48, z: -0.20977603}
+  m_LocalPosition: {x: -8.14, y: -0.48, z: -0.20977603}
   m_LocalScale: {x: 2.8565524, y: 5.73333, z: 3.428}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25409,6 +25468,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1345553361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345553358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.2, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1347670878
 GameObject:
   m_ObjectHideFlags: 0
@@ -28782,6 +28857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1508895952}
   - component: {fileID: 1508895951}
+  - component: {fileID: 1508895953}
   m_Layer: 0
   m_Name: rock 5(white)
   m_TagString: Untagged
@@ -28856,6 +28932,22 @@ Transform:
   m_Father: {fileID: 961896066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508895953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508895950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1515497798
 GameObject:
   m_ObjectHideFlags: 0
@@ -29934,6 +30026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2526062745569830981, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3763474014948842888, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -30000,6 +30096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608549025}
   - component: {fileID: 1608549024}
+  - component: {fileID: 1608549026}
   m_Layer: 0
   m_Name: rock 4(white)
   m_TagString: Untagged
@@ -30074,6 +30171,22 @@ Transform:
   m_Father: {fileID: 961896066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1608549026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608549023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1652214827
 GameObject:
   m_ObjectHideFlags: 0
@@ -30084,6 +30197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1652214829}
   - component: {fileID: 1652214828}
+  - component: {fileID: 1652214830}
   m_Layer: 0
   m_Name: Rock 1(white)
   m_TagString: Untagged
@@ -30158,6 +30272,22 @@ Transform:
   m_Father: {fileID: 961896066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1652214830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652214827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1690333035
 GameObject:
   m_ObjectHideFlags: 0
@@ -30168,6 +30298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690333036}
   - component: {fileID: 1690333037}
+  - component: {fileID: 1690333038}
   m_Layer: 0
   m_Name: Rock 1(white) (2)
   m_TagString: Untagged
@@ -30183,7 +30314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690333035}
   m_LocalRotation: {x: -0, y: -0, z: -0.10630241, w: 0.99433386}
-  m_LocalPosition: {x: 1.06, y: -4.21, z: -0.20977603}
+  m_LocalPosition: {x: 0.52999926, y: -4.21, z: -0.20977603}
   m_LocalScale: {x: -3.687577, y: 3.963282, z: 3.428}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30242,6 +30373,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1690333038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690333035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.2, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1 &1730679628
 GameObject:
   m_ObjectHideFlags: 0
@@ -34627,6 +34774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920640186}
   - component: {fileID: 1920640185}
+  - component: {fileID: 1920640187}
   m_Layer: 0
   m_Name: rock 3(white)
   m_TagString: Untagged
@@ -34701,6 +34849,22 @@ Transform:
   m_Father: {fileID: 961896066}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920640187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920640184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
 --- !u!1001 &1942716347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34776,7 +34940,7 @@ GameObject:
   - component: {fileID: 1967501284}
   - component: {fileID: 1967501283}
   - component: {fileID: 1967501282}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: broken tree 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35109,7 +35273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983004344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.2, y: -5.97, z: 1.7990329}
+  m_LocalPosition: {x: 11.2, y: -5.79, z: 1.7990329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36947,6 +37111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2526062745569830981, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3763474014948842888, guid: f84caba61dbadca41a39ff65893d04df, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -37212,13 +37380,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 21300000, guid: ecfc778d0093ae042b992a974a977ed8, type: 3}
-  tension: 0.1
-  dampening: 0.3
+  tension: 0.2
+  dampening: 0.5
   windStrength: 1
   windSpeed: 1
   windVolatility: 0.2
-  limit: 1
-  rotate: 0
+  limit: 0.4
+  rotate: 1
   soundPlayer: {fileID: 0}
 --- !u!4 &2740305172034735754
 Transform:

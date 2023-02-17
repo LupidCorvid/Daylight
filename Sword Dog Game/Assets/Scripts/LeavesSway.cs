@@ -39,6 +39,8 @@ public class LeavesSway : MonoBehaviour
 
     public SpriteRenderer sprite;
 
+    public bool onExitEmit = true;
+
     public void Start()
     {
         lastShakeDrop = Time.time - 1.5f;
@@ -92,7 +94,9 @@ public class LeavesSway : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (!onExitEmit)
+            return;
+
         if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility") || collision.gameObject.CompareTag("PassingLeavesBlacklist"))
             return;
 

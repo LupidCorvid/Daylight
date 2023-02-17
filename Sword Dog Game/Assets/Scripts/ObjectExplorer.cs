@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
 public class ObjectExplorer : EditorWindow
 {
 
@@ -91,3 +92,4 @@ public class ObjectExplorer : EditorWindow
         GUILayout.EndScrollView();
     }
 }
+#endif

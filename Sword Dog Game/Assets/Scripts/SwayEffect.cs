@@ -119,7 +119,8 @@ public class SwayEffect : MonoBehaviour
             distanceModifier = Mathf.Abs((transform.position.x - collision.transform.position.x)/collision.bounds.extents.x);
             distanceModifier = Mathf.Clamp(distanceModifier, 0, 1);
             distanceModifier = 1 - distanceModifier;
-            float physicsVelocity = ((collision.attachedRigidbody.velocity.x) * Time.deltaTime) * distanceModifier;
+            int neg = transform.localScale.x > 0 ? 1 : -1;
+            float physicsVelocity = ((collision.attachedRigidbody.velocity.x) * Time.deltaTime * neg) * distanceModifier;
             
             if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
             {
@@ -192,7 +193,8 @@ public class SwayEffect : MonoBehaviour
                 swayPosition = limit;
             else
                 swayPosition = -limit;
-            swayVelocity /= limit;
+            
+            //swayVelocity /= limit;
         }
         if (rend.isVisible)
         {
