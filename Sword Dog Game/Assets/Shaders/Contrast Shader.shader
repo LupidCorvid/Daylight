@@ -97,59 +97,5 @@ Shader "Custom/Contrast"
             }
         ENDCG
         }
-
-        // // Render the object with the texture generated above, and invert the colors
-        // Pass
-        // {
-        //     CGPROGRAM
-        //     #pragma vertex vert
-        //     #pragma fragment frag
-        //     #include "UnityCG.cginc"
-
-        //     struct vertex_t {
-        //         UNITY_VERTEX_INPUT_INSTANCE_ID
-        //         float4	position		: POSITION;
-        //         float3	normal			: NORMAL;
-        //         fixed4	color			: COLOR;
-        //         float2	texcoord0		: TEXCOORD0;
-        //         float2	texcoord1		: TEXCOORD1;
-		//     };
-
-        //     struct v2f
-        //     {
-        //         fixed4 color : COLOR;
-        //         float4 grabPos : TEXCOORD0;
-        //         float4 pos : SV_POSITION;
-        //     };
-
-        //     v2f vert(vertex_t v) {
-        //         v2f o;
-        //         // use UnityObjectToClipPos from UnityCG.cginc to calculate 
-        //         // the clip-space of the vertex
-        //         o.pos = UnityObjectToClipPos(v.position);
-
-        //         // use ComputeGrabScreenPos function from UnityCG.cginc
-        //         // to get the correct texture coordinate
-        //         o.grabPos = ComputeGrabScreenPos(o.pos);
-        //         o.color = v.color;
-        //         return o;
-        //     }
-
-        //     sampler2D _BackgroundTexture;
-
-        //     half4 frag(v2f i) : SV_Target
-        //     {
-        //         half4 bgcolor = tex2Dproj(_BackgroundTexture, i.grabPos);
-        //         if (bgcolor.x <= 40./255. && bgcolor.y <= 40./255. && bgcolor.z <= 40./255. && bgcolor.w == 1)
-        //         {
-        //             i.color.x = 255.0/255.0 - 11*bgcolor.x;
-        //             // no clue why g/b need to be lower - normal hex code would have been FFDD30 = 255,221,48
-        //             i.color.y = 183.5/255.0 - 8*bgcolor.x;
-        //             i.color.z = 7.5/255.0 - 4*bgcolor.x;
-        //         }
-        //         return i.color;
-        //     }
-        //     ENDCG
-        // }
     }
 }
