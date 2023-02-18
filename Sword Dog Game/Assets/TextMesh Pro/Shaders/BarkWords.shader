@@ -267,11 +267,20 @@ SubShader {
 
 			faceColor.rgb *= input.color.rgb;
 
+            fixed4 bgcolor = tex2Dproj(_BackgroundTexture, input.grabPos);
+            if (bgcolor.x <= 3./255. && bgcolor.y <= 3./255. && bgcolor.z <= 3./255. && bgcolor.w == 1)
+            {
+                faceColor.x = 255.0/255.0;
+                // no clue why g/b need to be lower - normal hex code would have been FFDD30 = 255,221,48
+                faceColor.y = 183.5/255.0;
+                faceColor.z = 7.5/255.0;
+            }
+
 			faceColor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);
 			outlineColor *= tex2D(_OutlineTex, input.textures.zw + float2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.y);
 
 			faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
-
+        
 		#if BEVEL_ON
 			float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
 			float3 n = GetSurfaceNormal(input.atlas, weight, dxy);
@@ -315,15 +324,6 @@ SubShader {
 		#if UNITY_UI_ALPHACLIP
 			clip(faceColor.a - 0.001);
 		#endif
-
-        fixed4 bgcolor = tex2Dproj(_BackgroundTexture, input.grabPos);
-        if (bgcolor.x <= 3./255. && bgcolor.y <= 3./255. && bgcolor.z <= 3./255. && bgcolor.a == 1)
-        {
-            faceColor.x = 255.0/255.0;
-            // no clue why g/b need to be lower - normal hex code would have been FFDD30 = 255,221,48
-            faceColor.y = 183.5/255.0;
-            faceColor.z = 7.5/255.0;
-        }
 
   		faceColor *= input.color.a;
 
