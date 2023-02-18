@@ -270,7 +270,7 @@ SubShader {
             fixed4 bgcolor = tex2Dproj(_BackgroundTexture, input.grabPos);
             if (bgcolor.x <= 40./255. && bgcolor.y <= 40./255. && bgcolor.z <= 40./255. && bgcolor.w == 1)
             {
-                faceColor.x = 255.0/255.0 - 12*bgcolor.x;
+                faceColor.x = 255.0/255.0 - 11*bgcolor.x;
                 // no clue why g/b need to be lower - normal hex code would have been FFDD30 = 255,221,48
                 faceColor.y = 183.5/255.0 - 8*bgcolor.x;
                 faceColor.z = 7.5/255.0 - 4*bgcolor.x;
