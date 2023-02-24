@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class CutsceneController : MonoBehaviour
 
     public static bool cutsceneStopInteractions = false;
     public static bool cutsceneStopMovement = false;
+
+    
 
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
