@@ -77,6 +77,7 @@ public class ShopManager : BaseManager
     public void ShopItemClicked(ShopItemListing item)
     {
         selectItem(item);
+        currentSelectedIndex = CurrentListings.FindIndex((x) => item == x);
     }
 
 
@@ -93,5 +94,30 @@ public class ShopManager : BaseManager
         if (currentSelectedIndex < 0)
             currentSelectedIndex = CurrentListings.Count - 1;
         selectItem(currentSelectedIndex);
+    }
+
+    public void closedButtonClicked()
+    {
+        CloseMenu();
+    }
+
+    public override void CloseMenu()
+    {
+        //Call cutscene to close it out
+        CutsceneController.PlayCutscene("CloseShop");
+        Destroy(gameObject);
+        MenuManager.inMenu = false;
+        //Have shopkeep say bye
+    }
+
+    public void purchaseButtonClicked()
+    {
+        purchaseItem(CurrentListings[currentSelectedIndex].item);
+    }
+
+    public void purchaseItem(ShopItem item)
+    {
+        item.OnPurchase();
+        //Remove cost from player currency count
     }
 }
