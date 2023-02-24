@@ -117,11 +117,11 @@ public class DialogNPC : MonoBehaviour, IInteractable
         closedDialog?.Invoke();
     }
 
-    private void tryShowPrompt()
-    {
-        if (inRange)
-            showPrompt(promptPrefab);
-    }
+    //private void tryShowPrompt()
+    //{
+    //    if (inRange)
+    //        showPrompt(promptPrefab);
+    //}
 
     public void barkEffect()
     {

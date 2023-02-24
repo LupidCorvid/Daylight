@@ -119,6 +119,7 @@ public class ShopkeepBehavior : DialogNPC
     {
         Debug.Log("Attempted to open shop. Shop is not yet implemented!");
         MenuManager.main.openMenu(ShopPrefab);
+        CutsceneController.PlayCutscene("OpenShop");
     }
 
 }

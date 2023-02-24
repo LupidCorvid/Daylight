@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
     public BaseManager menu;
     public static MenuManager main;
 
+    public static bool inMenu = false;
 
     public void Awake()
     {
@@ -17,12 +18,14 @@ public class MenuManager : MonoBehaviour
     public void closeMenu()
     {
         menu.CloseMenu();
+        inMenu = false;
     }
 
     public void openMenu(GameObject menuToAdd)
     {
         GameObject addedMenu = Instantiate(menuToAdd, transform);
         menu = addedMenu.GetComponent<BaseManager>();
+        inMenu = true;
     }
 
     //Handle controller inputs and other general menu interactions here?
