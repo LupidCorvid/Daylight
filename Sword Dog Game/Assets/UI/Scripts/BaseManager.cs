@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseManager : MonoBehaviour
 {
+    public MenuManager manager;
     public virtual void OpenMenu()
     {
 

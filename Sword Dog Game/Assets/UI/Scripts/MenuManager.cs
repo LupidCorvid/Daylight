@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MenuManager : MonoBehaviour
     public static MenuManager main;
 
     public static bool inMenu = false;
+
+    public static Action menuClosed;
 
     public void Awake()
     {
@@ -19,6 +22,7 @@ public class MenuManager : MonoBehaviour
     {
         menu.CloseMenu();
         inMenu = false;
+        menuClosed?.Invoke();
     }
 
     public void openMenu(GameObject menuToAdd)
@@ -26,6 +30,7 @@ public class MenuManager : MonoBehaviour
         GameObject addedMenu = Instantiate(menuToAdd, transform);
         menu = addedMenu.GetComponent<BaseManager>();
         inMenu = true;
+        menu.manager = this;
     }
 
     //Handle controller inputs and other general menu interactions here?

@@ -98,16 +98,15 @@ public class ShopManager : BaseManager
 
     public void closedButtonClicked()
     {
-        CloseMenu();
+        manager.closeMenu();
     }
 
     public override void CloseMenu()
     {
         //Call cutscene to close it out
+        CutsceneController.StopAllCutscenes?.Invoke();
         CutsceneController.PlayCutscene("CloseShop");
         Destroy(gameObject);
-        MenuManager.inMenu = false;
-        //Have shopkeep say bye
     }
 
     public void purchaseButtonClicked()

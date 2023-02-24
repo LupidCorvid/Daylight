@@ -117,9 +117,16 @@ public class ShopkeepBehavior : DialogNPC
 
     public void openShop()
     {
-        Debug.Log("Attempted to open shop. Shop is not yet implemented!");
         MenuManager.main.openMenu(ShopPrefab);
         CutsceneController.PlayCutscene("OpenShop");
+        MenuManager.menuClosed += onShopClose;
+    }
+
+    public void onShopClose()
+    {
+        openDialog();
+        dialogSource.dialog = "[lf,Shopkeep.txt,OnShopExit]";
+        MenuManager.menuClosed -= onShopClose;
     }
 
 }
