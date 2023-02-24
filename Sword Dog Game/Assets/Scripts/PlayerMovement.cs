@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
+    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
 
     public bool facingRight
     {
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     // Positions marking where to check if the player is grounded
     //[SerializeField] public Transform[] groundChecks;
     public CollisionsTracker groundCheck;
+    public CollisionsTracker roofCheck;
 
     // Amount of force added when the player jumps
     [SerializeField] private float jumpForce = 2000f;
@@ -668,6 +669,9 @@ public class PlayerMovement : MonoBehaviour
         bool wasGrounded = isGrounded;
         isGrounded = false;
 
+        bool wasRoofed = isRoofed;
+        isRoofed = false;
+
         bool needsClean = false;
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
@@ -693,9 +697,28 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+
         if (needsClean)
             groundCheck.clean();
 
+        needsClean = false;
+        foreach (Collider2D collision in roofCheck.triggersInContact)
+        {
+            //Debug.Log(LayerMask.GetMask("Terrain"));
+            if (collision == null)
+            {
+                needsClean = true;
+                continue;
+            }
+            if (Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && collision.gameObject.GetComponent<PlatformEffector2D>() == null)
+            {
+                isRoofed = true;
+                break;
+            }
+        }
+        if (needsClean)
+            roofCheck.clean();
+        
         if ((isJumping && jumpTime < 0.1f) || (isFalling && fallTime < 0.1f))
             anim.SetBool("grounded", false);
         else
@@ -729,7 +752,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping)
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isRoofed && !isJumping)
         {
             if (isOnSlope && slopeDownAngle > maxSlopeAngle && cldr != cldr2)
                 return;
