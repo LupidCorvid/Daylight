@@ -16,6 +16,8 @@ public class ShopkeepBehavior : DialogNPC
 
     public CollisionsTracker advertCldr;
 
+    public GameObject ShopPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +118,7 @@ public class ShopkeepBehavior : DialogNPC
     public void openShop()
     {
         Debug.Log("Attempted to open shop. Shop is not yet implemented!");
+        MenuManager.main.openMenu(ShopPrefab);
     }
 
 }

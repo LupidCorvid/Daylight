@@ -5,7 +5,15 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public BaseManager menu;
-    
+    public static MenuManager main;
+
+
+    public void Awake()
+    {
+        if (main == null)
+            main = this;
+    }
+
     public void closeMenu()
     {
         menu.CloseMenu();
@@ -18,4 +26,13 @@ public class MenuManager : MonoBehaviour
     }
 
     //Handle controller inputs and other general menu interactions here?
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+            menu.selectUp();
+        if (Input.GetKeyDown(KeyCode.S))
+            menu.selectDown();
+
+    }
 }

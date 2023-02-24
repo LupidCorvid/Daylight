@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class BaseManager : MonoBehaviour
 {
-    public void OpenMenu()
+    public virtual void OpenMenu()
     {
 
     }
 
-    public void CloseMenu()
+    public virtual void CloseMenu()
     {
 
     }
+
+    public virtual void selectDown()
+    {
+
+    }
+
+    public virtual void selectUp()
+    {
+
+    }
+
+
 }

@@ -8,7 +8,9 @@ public class ShopItemListing : MonoBehaviour
 {
     public ShopManager mainManager;
 
+    [SerializeField]
     Image itemImage;
+    [SerializeField]
     TextMeshProUGUI text;
     private ShopItem _item;
 
@@ -20,12 +22,13 @@ public class ShopItemListing : MonoBehaviour
             _item = value;
             if (_item == null)
                 return;
-            itemImage.sprite = item.image;
+            if(_item.image != null)
+                itemImage.sprite = item.image;
             text.text = item.name;
         }
     }
 
-    public void OnMouseDown()
+    public void OnClick()
     {
         mainManager.ShopItemClicked(this);
     }
