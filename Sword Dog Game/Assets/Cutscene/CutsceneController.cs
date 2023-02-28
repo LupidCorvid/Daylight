@@ -24,8 +24,6 @@ public class CutsceneController : MonoBehaviour
     public static bool cutsceneStopInteractions = false;
     public static bool cutsceneStopMovement = false;
 
-    public static Action StopAllCutscenes;
-
     
 
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
@@ -92,7 +90,7 @@ public class CutsceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
         
         
     }
@@ -157,16 +155,9 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopInteractions = true;
         if (stopMovement)
             cutsceneStopMovement = true;
-        StopAllCutscenes += FinishCutscene;
     }
 
     public void FinishCutscene()
-    {
-        StopAllCutscenes -= StopCutscene;
-        StopCutscene();
-    }
-
-    public void StopCutscene()
     {
         if (playingThisCutscene && cutsceneStopInteractions && stopInteractions)
             cutsceneStopInteractions = false;
