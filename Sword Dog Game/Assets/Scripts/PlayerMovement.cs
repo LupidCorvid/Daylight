@@ -589,7 +589,7 @@ public class PlayerMovement : MonoBehaviour
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
         if (acrossPercent2 - acrossPercent < .0001)//If issues arise get abs value
         {
-            slopeSideAngle = 0; // TODO fix case for branch tip
+            slopeSideAngle = 0;
             if (acrossPercent > .01f)
             {
                 if(right == 1)
