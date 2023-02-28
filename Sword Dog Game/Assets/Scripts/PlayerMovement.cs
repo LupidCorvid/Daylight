@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
     public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
-    public Vector2 bottom;
 
     public bool facingRight
     {
@@ -66,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprintWindUpPercent = 1.0f;
 
     [SerializeField] private Collider2D cldr1, cldr2;
-    public Collider2D cldr;
+    Collider2D cldr;
 
     Vector2 upperLeftCorner;
     Vector2 upperRightCorner;
@@ -134,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
-
         if(groundCheckSpot == default)
             groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
@@ -158,8 +156,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
-
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
 
