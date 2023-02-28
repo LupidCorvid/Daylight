@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding;
+    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
     public Vector2 bottom;
 
     public bool facingRight
@@ -192,7 +192,12 @@ public class PlayerMovement : MonoBehaviour
             }
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
-            anim.SetFloat("time_idle", timeIdle);
+
+            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded && canSkid)
+            {
+                anim.SetTrigger("skidding");
+                isSkidding = true;
+            }
 
             // track stops per second
             if (prevMoveX != 0 && moveX == 0)
@@ -213,8 +218,6 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("trot");
                 trotting = true;
             }
-            if (timeIdle >= 0.4f)
-                anim.ResetTrigger("trot");
 
             // bark code
             if (Input.GetKeyDown(KeyCode.B))
@@ -242,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
             // }
 
             // sprinting
-            if (trotting && !isSprinting && !isSkidding)
+            if (trotting && !isSprinting)
             {
                 if ((Input.GetButton("Sprint") && canResprint && stamina >= minStamina) || Input.GetButtonDown("Sprint"))
                 {
@@ -272,20 +275,24 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("sprinting", isSprinting || timeSinceSprint < 0.1f);
 
-            if (isSprinting && !isSkidding)
+            if (isSprinting)
             {
                 timeSinceSprint = 0;
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
             }
             else
             {
+                if (timeSinceSprint > 0.1f && isSkidding)
+                {
+                    StopSkid();
+                }
+
                 if (timeSinceSprint < 1f)
                     timeSinceSprint += Time.deltaTime;
 
                 sprintWindUpPercent = 1;
-                
-                if (!isSkidding)
-                    sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+                    
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
         }
         else
@@ -314,25 +321,25 @@ public class PlayerMovement : MonoBehaviour
         realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
         lastPosition = transform.position;
 
-        if (isSkidding)
-            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1f, 0.05f);
-
         // calculate speed
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            Flip();
+            if (!isSkidding)
+            {
+                Flip();
+            }
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(PlayerHealth.dead ? 0 : moveX * calculatedSpeed, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(PlayerHealth.dead || isSkidding ? 0 : moveX * calculatedSpeed, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(isSkidding? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target
@@ -810,13 +817,6 @@ public class PlayerMovement : MonoBehaviour
     public void StopSkid()
     {
         isSkidding = false;
-        sprintSpeedMultiplier = 1.0f;
-    }
-
-    public void StartSkid()
-    {
-        sprintSpeedMultiplier = 0;
-        isSprinting = false;
-        isSkidding = true;
+        anim.ResetTrigger("skidding");
     }
 }
