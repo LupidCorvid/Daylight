@@ -37,12 +37,10 @@ public class MenuManager : MonoBehaviour
 
     public void Update()
     {
-        if (inMenu)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                menu.selectUp();
-            if (Input.GetKeyDown(KeyCode.S))
-                menu.selectDown();
-        }
+        if (Input.GetKeyDown(KeyCode.W))
+            menu.selectUp();
+        if (Input.GetKeyDown(KeyCode.S))
+            menu.selectDown();
+
     }
 }
