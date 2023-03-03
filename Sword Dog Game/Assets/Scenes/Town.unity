@@ -3548,7 +3548,7 @@ MonoBehaviour:
   points: []
   target: {fileID: 0}
   freeCameraOnExit: 1
-  freeHudOnExit: 1
+  freeHudOnExit: 0
   useMainCamera: 1
 --- !u!114 &1650152782
 MonoBehaviour:
@@ -3567,8 +3567,9 @@ MonoBehaviour:
   cutsceneNumber: 0
   cutsceneName: CloseShop
   playingThisCutscene: 0
-  stopInteractions: 0
-  stopMovement: 0
+  stopInteractions: 1
+  stopMovement: 1
+  hideUI: 1
 --- !u!4 &1650152783
 Transform:
   m_ObjectHideFlags: 0
@@ -4259,8 +4260,9 @@ MonoBehaviour:
   cutsceneNumber: 0
   cutsceneName: OpenShop
   playingThisCutscene: 0
-  stopInteractions: 0
-  stopMovement: 0
+  stopInteractions: 1
+  stopMovement: 1
+  hideUI: 1
 --- !u!114 &2045204256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4280,7 +4282,7 @@ MonoBehaviour:
     point: {x: 60.25, y: 1}
     letterbox: 0
     transition: 1
-    hideUI: 0
+    hideUI: 1
   target: {fileID: 0}
   freeCameraOnExit: 0
   freeHudOnExit: 0

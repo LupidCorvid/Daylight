@@ -116,7 +116,8 @@ public class DialogController : MonoBehaviour
 
     public void finishClose()
     {
-        CanvasManager.ShowHUD();
+        if (!CutsceneController.cutsceneHideUI)
+            CanvasManager.ShowHUD();
         panel.alpha = 0;
         panel.interactable = false;
         panel.blocksRaycasts = false;
