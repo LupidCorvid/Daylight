@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding;
+    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft;
     public Vector2 bottom;
 
     public bool facingRight
@@ -54,13 +54,14 @@ public class PlayerMovement : MonoBehaviour
 
     // Slope variables
     private Vector2 colliderSize;
+    [SerializeField] private float wallCheckDistance = 0.5f;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private float maxSlopeAngle;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
     private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
-    private bool isOnSlope, canWalkOnSlope;
+    public bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
@@ -181,6 +182,8 @@ public class PlayerMovement : MonoBehaviour
 
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
+            if (wallOnRight && moveX > 0) moveX = 0;
+            if (wallOnLeft && moveX < 0) moveX = 0;
             
             if (moveX == 0 && timeIdle < 1f)
             {
@@ -311,6 +314,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // check if the player is against a wall
+        CheckWall();
+
         realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
         lastPosition = transform.position;
 
@@ -434,7 +440,7 @@ public class PlayerMovement : MonoBehaviour
                 // stop here
                 case 0 or 5 or 6 or 11:
                     if (!isJumping)
-                        anim.SetTrigger("trot");
+                        anim.SetTrigger("exit_trot");
                     trotting = false;
                     stepDirection = 1;
                     break;
@@ -694,6 +700,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CheckWall()
+    {
+        wallOnLeft = wallOnRight = false;
+        Vector2 startPosition = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y / 2);
+        startPosition += facingRight ? upperRightCorner : upperLeftCorner;
+
+        
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        if (isOnSlope)
+        {
+            direction = Quaternion.Euler(0, 0, slopeSideAngle) * direction;
+        }
+        
+        RaycastHit2D wallInfo = Physics2D.Raycast(startPosition, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
+        
+        if (wallInfo.point != Vector2.zero)
+        {
+            Debug.DrawLine(startPosition, wallInfo.point, Color.blue);
+            if (wallInfo.distance <= wallCheckDistance) {
+                if (facingRight) wallOnRight = true;
+                else wallOnLeft = true;
+            }
+        }
+    }
+
     void CheckGround()
     {
         SlopeCheck();
@@ -730,6 +761,13 @@ public class PlayerMovement : MonoBehaviour
                 lastOnLand = 0f;
                 break;
             }
+        }
+
+        if (wallOnLeft || wallOnRight)
+        {
+            cldr = cldr2;
+            cldr2.enabled = true;
+            cldr1.enabled = true;
         }
 
         if (needsClean)
