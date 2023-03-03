@@ -14,6 +14,9 @@ public class ShopItemListing : MonoBehaviour
     TextMeshProUGUI text;
     private ShopItem _item;
 
+    public Button button;
+    public Image backgroundImage;
+
     public ShopItem item
     {
         get { return _item; }
@@ -32,6 +35,16 @@ public class ShopItemListing : MonoBehaviour
     {
         mainManager.ShopItemClicked(this);
     }
+
+    //public void OnSelect()
+    //{
+    //    backgroundImage.sprite = selectedImage;
+    //}
+
+    //public void OnDeselect()
+    //{
+    //    backgroundImage.sprite = unselectedImage;
+    //}
 
 
 
