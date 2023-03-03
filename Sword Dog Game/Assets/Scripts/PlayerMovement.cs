@@ -495,8 +495,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float? returnAngle = null;
 
+        //Prevent infinite recursive runs (should never as long as geometry is fully closed)
         if (runs > 10)
             return null;
+
+        //Get initial raycasts
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
@@ -532,13 +535,13 @@ public class PlayerMovement : MonoBehaviour
 
             if (leftHit.point == Vector2.zero)
             {
-                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel);
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
                 if (leftSide.x == 0)
                     return null;
             }
             if (rightHit.point == Vector2.zero)
             {
-                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel);
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel, Vector2.left);
                 if (rightSide.x == 0)
                     return null;
             }
@@ -600,9 +603,19 @@ public class PlayerMovement : MonoBehaviour
         return returnAngle;
     }
 
-    public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel)
+    /// <summary>
+    /// Does an across raycast just below the player to find any colliders to use to determine slope.
+    /// </summary>
+    /// <param name="upperLeftOrigin">The upperLeft scan bounds point</param>
+    /// <param name="upperRightOrigin">The upperright scan bounds point</param>
+    /// <param name="side">which side it is starting on</param>
+    /// <param name="usedOrigin">which origin to share x-value with</param>
+    /// <param name="yLevel">They y level to scan across at</param>
+    /// <param name="direction">The direction (left or right) to scan in </param>
+    /// <returns></returns>
+    public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel, Vector2 direction)
     {
-        RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), Vector2.left, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
+        RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
 
         Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
         side.x = groundFinder.point.x - transform.position.x;
