@@ -481,14 +481,17 @@ public class PlayerMovement : MonoBehaviour
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
-        SlopeCheckHorizontal(checkPos, upperLeftCorner, upperRightCorner);
+        GetRotation();
+        //SlopeCheckHorizontal(checkPos, upperLeftCorner, upperRightCorner);
         SlopeCheckVertical(checkPos);
     }
 
-    private void SlopeCheckHorizontal(Vector2 checkPos, Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
+    private float? SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
+        float? returnAngle = null;
+
         if (runs > 10)
-            return;
+            return null;
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         
@@ -521,8 +524,8 @@ public class PlayerMovement : MonoBehaviour
       
         if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
         {
-            slopeSideAngle = 0;
-            return;
+            returnAngle = 0;
+            return returnAngle;
         }
 
         if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
@@ -539,7 +542,7 @@ public class PlayerMovement : MonoBehaviour
                 leftSide.x = groundFinder.point.x - transform.position.x;
                 //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
                 if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
-                    return;
+                    return null;
                 
             }
             if (rightHit.point == Vector2.zero)
@@ -550,12 +553,10 @@ public class PlayerMovement : MonoBehaviour
                 rightSide.x = groundFinder.point.x - transform.position.x;
                 //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
                 if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
-                    return;
+                    return null;
             }
-            
-            SlopeCheckHorizontal(checkPos, leftSide, rightSide, runs + 1);
-            
-            return;
+
+            return SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
         }
             
 
@@ -582,46 +583,82 @@ public class PlayerMovement : MonoBehaviour
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
         if (acrossPercent2 - acrossPercent < .0001)//If issues arise get abs value
         {
-            slopeSideAngle = 0; // TODO fix case for branch tip
+            returnAngle = 0; // TODO fix case for branch tip
             if (acrossPercent > .01f)
             {
                 if(right == 1)
-                    SlopeCheckHorizontal(checkPos, new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
+                    SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
                 else
-                    SlopeCheckHorizontal(checkPos, upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
+                    SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
             }
-            //SlopeCheckHorizontal(checkPos, new Vector2(across.point.x, upperLeftCorner.y), new Vector2(across));
             onLedge = true;
             if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded /*|| isGrounded*/))
-                return;
+                return returnAngle;
         }
         if(!float.IsNaN(unsmoothedSlope) && !onLedge)
-            slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+            returnAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
 
-        if (isGrounded)
+        return returnAngle;
+    }
+
+    public float FindSurfaceRotation()
+    {
+        float? angle = SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
+        if (angle != null)
+            return angle.Value;
+        else
+            return slopeSideAngle;
+    }
+
+    /// <summary>
+    /// Does final routing on rotation logic.
+    /// </summary>
+    public void GetRotation()
+    {
+        slopeSideAngle = FindSurfaceRotation();
+        if(isGrounded)
         {
-            lastGroundedSlope = slopeSideAngle;
-
-            if (lastLand + landAnimTime > Time.time)
-            {
-                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
-            }
+            LandInterpolation();
         }
         else
         {
-            const float ROTATION_INTENSITY = 75;
-            int negative = 1;
-            if (!facingRight)
-                negative = -1;
-            float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
-            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
-            slopeSideAngle = lastGroundedSlope + rotationAmount;
-
-            lastMidairVelocity = rb.velocity;
-            lastUngroundedSlope = slopeSideAngle;
+            MidAirRotation();
         }
     }
 
+    /// <summary>
+    /// When landing, interpolate between new surface slope and last midair slope
+    /// </summary>
+    public void LandInterpolation()
+    {
+        lastGroundedSlope = slopeSideAngle;
+
+        if (lastLand + landAnimTime > Time.time)
+        {
+            slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+        }
+    }
+
+    /// <summary>
+    /// Adjusts midair rotation to show velocity
+    /// </summary>
+    public void MidAirRotation()
+    {
+        const float ROTATION_INTENSITY = 75;
+        int negative = 1;
+        if (!facingRight)
+            negative = -1;
+        float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+        rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+        slopeSideAngle = lastGroundedSlope + rotationAmount;
+
+        lastMidairVelocity = rb.velocity;
+        lastUngroundedSlope = slopeSideAngle;
+    }
+    /// <summary>
+    /// Gets if the ground is close and if the angle being walked on is too high
+    /// </summary>
+    /// <param name="checkPos"></param>
     private void SlopeCheckVertical(Vector2 checkPos)
     {
         // anim.SetBool("ground_close", false);
