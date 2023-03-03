@@ -74,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool resetting, invincible;
 
-    public bool onlyRotateWhenGrounded;
     float lastGroundedSlope = 0;
     float lastUngroundedSlope = 0;
     public float landAnimTime = .5f;
@@ -500,22 +499,16 @@ public class PlayerMovement : MonoBehaviour
             return null;
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
-        
-        if (leftHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
-        {
-            leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
-            leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
-        }
-        if (rightHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
-        {
-            rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
-            rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
-        }
 
+
+
+        //Draw vertical raycasts, set ground_close to true if hit is close enough to the collider and also != 0,0
+#region gizmo drawing and ground_close setting
+        
         float minGroundDistance = 2f + colliderSize.y / 2;
         anim.SetBool("ground_close", false);
 
-        if(leftHit.point != Vector2.zero)
+        if (leftHit.point != Vector2.zero)
         {
             Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
             if (leftHit.distance <= minGroundDistance)
@@ -527,13 +520,10 @@ public class PlayerMovement : MonoBehaviour
             if (rightHit.distance <= minGroundDistance)
                 anim.SetBool("ground_close", true);
         }
-      
-        if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
-        {
-            returnAngle = 0;
-            return returnAngle;
-        }
+        #endregion
 
+        //If needing to rotate and there is not enough data from left or right side, test for better position for left or right and run again
+#region retake left and right if one or both are missing
         if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
         {
             Vector2 leftSide = upperLeftCorner;
@@ -542,35 +532,32 @@ public class PlayerMovement : MonoBehaviour
 
             if (leftHit.point == Vector2.zero)
             {
-                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), Vector2.right, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
-                
-                Debug.DrawLine(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
-                leftSide.x = groundFinder.point.x - transform.position.x;
-                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
-                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel);
+                if (leftSide.x == 0)
                     return null;
-                
             }
             if (rightHit.point == Vector2.zero)
             {
-                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperRightCorner.x + transform.position.x, yLevel), Vector2.left, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
-                
-                Debug.DrawLine(new Vector2(upperRightCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
-                rightSide.x = groundFinder.point.x - transform.position.x;
-                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
-                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel);
+                if (rightSide.x == 0)
                     return null;
             }
 
             return SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
         }
-            
+#endregion
 
+
+        //Get the across raycasts and unsmoothed slope
+#region acrossRaycasts
+        //Get which raycast made it farther
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
 
+        //Get which direction the acrosscast needs to be (it should go from larger to smaller side)
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
         
+        //Setup positions of across point origins, then raycast across and drawline gizmo to show it
         Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
         Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2.4f);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot, 
@@ -580,31 +567,50 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
         Debug.DrawLine(across2.point, acrossCheck2, Color.green);
 
+        //angle between left point hit and right point hit
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y)/(rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
+        
+        //Percentage of the distance made across
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
         float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
+#endregion
 
-
+        //Make sure it is not reading the underside of a slope the player is on. Retake with shorter bounds if it is
+#region check for if reading underside
         bool onLedge = false;
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
-        if (acrossPercent2 - acrossPercent < .0001)//If issues arise get abs value
+        if (acrossPercent2 - acrossPercent < .0001)
         {
-            returnAngle = 0; // TODO fix case for branch tip
-            if (acrossPercent > .01f)
+            returnAngle = 0;
+            if (acrossPercent > .0001f)
             {
                 if(right == 1)
-                    SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
+                    return SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
                 else
-                    SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
+                    return SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
             }
             onLedge = true;
-            if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded /*|| isGrounded*/))
-                return returnAngle;
         }
-        if(!float.IsNaN(unsmoothedSlope) && !onLedge)
-            returnAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+#endregion
 
+        //Apply smoothing
+        if (!float.IsNaN(unsmoothedSlope) && !onLedge)
+            returnAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+        
         return returnAngle;
+    }
+
+    public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel)
+    {
+        RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), Vector2.left, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
+
+        Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+        side.x = groundFinder.point.x - transform.position.x;
+        
+        ////Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+        if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+            return Vector2.zero;
+        return side;
     }
 
     public float FindSurfaceRotation()
