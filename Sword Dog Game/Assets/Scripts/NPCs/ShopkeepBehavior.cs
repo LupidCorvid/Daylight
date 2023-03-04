@@ -35,7 +35,7 @@ public class ShopkeepBehavior : DialogNPC
             MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
             bubble.speaker = this;
             bubble.offset = miniBubbleOffset;
-            bubble.setSource(new DialogSource("[ss, .05][IA,<size=75%>]Interested in buying anything?[w, 1] [exit]"));
+            bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
             lastAdvert = Time.time;
         }
     }

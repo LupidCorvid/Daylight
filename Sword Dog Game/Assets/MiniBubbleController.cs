@@ -17,7 +17,7 @@ public class MiniBubbleController : MonoBehaviour
     public DialogSource dialog;
     public TMPro.TextMeshPro textDisplay;
 
-    bool reading = true;
+    bool reading = true, collected = false;
 
     public string textDialog;
 
@@ -37,6 +37,9 @@ public class MiniBubbleController : MonoBehaviour
         if(dialog == null)
             setSource(new DialogSource(textDialog));
         anim = GetComponent<Animator>();
+
+        textDisplay.ForceMeshUpdate();
+        textDisplay.OnPreRenderText += applyTextEffects;
     }
 
     // Update is called once per frame
@@ -44,7 +47,14 @@ public class MiniBubbleController : MonoBehaviour
     {
         if (reading && dialog != null)
         {
-            textDisplay.text = dialog.read();
+            if (!collected)
+            {
+                textDisplay.maxVisibleCharacters = 0;
+                textDisplay.text = dialog.collect();
+                collected = true;
+            }
+            dialog.read(DialogSource.ReadMode.TYPEWRITE);
+            textDisplay.maxVisibleCharacters = dialog.charCount;
             textDisplay.ForceMeshUpdate();
         }
     }
@@ -109,6 +119,7 @@ public class MiniBubbleController : MonoBehaviour
     public void close()
     {
         reading = false;
+        collected = false;
 
         anim.SetTrigger("Close");
         closing = true;
