@@ -49,6 +49,18 @@ public class BaseAI
         }
     }
 
+    public Animator anim
+    {
+        get
+        {
+            return enemyBase.anim;
+        }
+        set
+        {
+            enemyBase.anim = value;
+        }
+    }
+
     public Transform target;
 
     public Rigidbody2D rb;

@@ -16,6 +16,8 @@ public class EnemyBase : MonoBehaviour
 
     public SlopeAdjuster slopeChecker;
 
+    public Animator anim;
+
     public virtual void Start()
     {
         slopeChecker ??= GetComponent<SlopeAdjuster>();
@@ -48,6 +50,6 @@ public class EnemyBase : MonoBehaviour
         health -= amount;
         if (health <= 0)
             die();
-        GetComponent<SimpleFlash>()?.Flash(1f, 3, true);
+        GetComponentInChildren<SimpleFlash>()?.Flash(1f, 3, true);
     }
 }
