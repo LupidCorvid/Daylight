@@ -112,7 +112,7 @@ Transform:
   m_Children:
   - {fileID: 3163985151747751092}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3163985152030941315
 SpriteRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upperRightCorner: {x: 0, y: 0}
   upperLeftCorner: {x: 0, y: 0}
-  slopeCheckDistance: 5
+  slopeCheckDistance: 1.5
   colliderSize: {x: 0, y: 0}
   lastLand: 0
   landAnimTime: 0.75
@@ -304,3 +304,4 @@ MonoBehaviour:
   health: 10
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
+  anim: {fileID: 0}

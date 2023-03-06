@@ -78,7 +78,7 @@ public class BugShroomAI : BaseAI
         state = AIState.attacking;
         anim.SetTrigger("Attacking");
         lastAttack = Time.time;
-
+        //If no existing ideas,
         //Release spore cloud? Or release larger spores above that slowly drift towards the player (this could go well if it had a bite attack when spores are on cooldown)
 
     }
