@@ -21,6 +21,8 @@ public class FlyingAI : BaseAI
     float lastAttack;
     float attackCooldown = 5;
 
+    float attackDistance = 7.5f;
+
     public Vector2 targetPosition
     {
         get
@@ -48,7 +50,7 @@ public class FlyingAI : BaseAI
             case states.pursuit:
                 if (Mathf.Abs(targetPosition.x - transform.position.x) > acceptableRange.x || Mathf.Abs(targetPosition.y - transform.position.y) > acceptableRange.y)
                     Pursuit();
-                if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time)
+                if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time && Vector2.Distance(transform.position, targetPosition) < attackDistance)
                     state = states.telegraphing;
                 break;
             case states.telegraphing:
@@ -58,7 +60,7 @@ public class FlyingAI : BaseAI
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
                 lastAttack = Time.time;
-                rb.velocity = (target.position - transform.position) * 5;
+                rb.velocity = Vector2.ClampMagnitude((target.position - transform.position) * 5, attackDistance * 5);
                 state = states.lungeReturn;
                 break;
             case states.lungeReturn:
