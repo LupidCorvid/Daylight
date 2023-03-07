@@ -13,7 +13,8 @@ public class FlyingAI : BaseAI
         lunging,
         pursuit,
         telegraphing,
-        lungeReturn
+        lungeReturn,
+        lungeFlee
     }
 
     public states state;
@@ -69,12 +70,18 @@ public class FlyingAI : BaseAI
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
                 lastAttack = Time.time;
-                rb.velocity = Vector2.ClampMagnitude((target.position - transform.position) * 5, attackDistance * 5);
+                rb.velocity = Vector2.ClampMagnitude((target.position - transform.position) * 7, attackDistance * 7);
                 state = states.lungeReturn;
                 break;
             case states.lungeReturn:
                 if (Vector2.Distance(transform.position, target.position) <= 1f || rb.velocity.magnitude <= 2f)
+                    state = states.lungeFlee;
+                break;
+            case states.lungeFlee:
+                Flee();
+                if(Vector2.Distance(target.position, transform.position) > 3.5f)
                     state = states.pursuit;
+
                 break;
         }
         
@@ -85,6 +92,11 @@ public class FlyingAI : BaseAI
         Vector2 targetPosition = prefferedOffset + (Vector2)target.transform.position;
 
         ((FlyingMovement)movement).MoveDirection((targetPosition - (Vector2)transform.position).normalized * moveSpeed);
+    }
+
+    public void Flee()
+    {
+        ((FlyingMovement)movement).MoveDirection((-targetPosition + (Vector2)transform.position).normalized.x * Vector2.right * 0 + Vector2.right * (rb.velocity.normalized.x) * 8 + Vector2.up * 8);
     }
 
 }
