@@ -65,6 +65,13 @@ public class BaseAI
 
     public Rigidbody2D rb;
 
+    public static List<Transform> possibleTargets = new List<Transform>();
+
+    public float aggroRange = 10;
+
+    public float FindTargetsWaitTime = .5f;
+    float lastTargetSearch = -100;
+
     public BaseAI(EnemyBase baseScript)
     {
         enemyBase = baseScript;
@@ -80,10 +87,37 @@ public class BaseAI
     // Update is called once per frame
     public virtual void Update()
     {
-        
+        if(target == null && lastTargetSearch + FindTargetsWaitTime < Time.time)
+        {
+            target = GetTarget();
+            lastTargetSearch = Time.time;
+        }
     }
 
     public virtual void FixedUpdate()
+    {
+
+    }
+
+    public virtual Transform GetTarget()
+    {
+        foreach(Transform targetLocation in possibleTargets)
+        {
+            if (targetLocation == null || transform == null)
+                continue;
+            float distance = Vector2.Distance(targetLocation.position, transform.position);
+
+            if(distance <= aggroRange && !Physics2D.Linecast(transform.position, targetLocation.position, LayerMask.GetMask("Terrain")))
+            {
+                FoundTarget(targetLocation);
+                return targetLocation;
+                
+            }
+        }
+        return null;
+    }
+
+    public virtual void FoundTarget(Transform newTarget)
     {
 
     }

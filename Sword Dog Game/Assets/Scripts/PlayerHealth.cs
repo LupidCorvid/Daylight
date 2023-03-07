@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         gettingUp = false;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        BaseAI.possibleTargets.Add(transform);
     }
 
     // Update is called once per frame

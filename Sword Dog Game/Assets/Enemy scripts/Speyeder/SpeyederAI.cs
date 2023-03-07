@@ -46,7 +46,7 @@ public class SpeyederAI : BaseAI
     public override void Start()
     {
         base.Start();
-        target ??= GameObject.Find("Player(Clone)").transform;
+        //target ??= GameObject.Find("Player(Clone)").transform;
         resetPosition = (Vector2)transform.position - web.connectedBody.position;
         state = states.idle;
     }
@@ -57,10 +57,11 @@ public class SpeyederAI : BaseAI
 
         transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(web.connectedBody.transform.position - transform.position, Vector2.up));
 
+
         switch (state)
         {
             case states.idle:
-                if(target.transform.position.y < transform.position.y)
+                if(target != null && target.transform.position.y < transform.position.y)
                 {
                     
                     //Find time it would take to drop to player's height. Might be wrong as it isnt relative height?

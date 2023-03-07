@@ -21,7 +21,7 @@ public class FlyingAI : BaseAI
     float lastAttack;
     float attackCooldown = 5;
 
-    float attackDistance = 7.5f;
+    float attackDistance = 5.5f;
 
     public Vector2 targetPosition
     {
@@ -34,7 +34,14 @@ public class FlyingAI : BaseAI
     public override void Start()
     {
         base.Start();
-        target ??= GameObject.Find("Player(Clone)").transform;
+        state = states.pursuit;
+        //target ??= GameObject.Find("Player(Clone)").transform;
+    }
+
+    public override void FoundTarget(Transform newTarget)
+    {
+        base.FoundTarget(newTarget);
+        lastAttack = Time.time;
     }
 
     public FlyingAI(EnemyBase enemy) : base(enemy)
@@ -45,6 +52,8 @@ public class FlyingAI : BaseAI
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (target == null)
+            return;//Need idle for this case
         switch(state)
         {
             case states.pursuit:
