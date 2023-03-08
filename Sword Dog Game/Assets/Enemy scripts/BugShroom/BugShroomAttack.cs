@@ -11,37 +11,22 @@ public class BugShroomAttack : MonoBehaviour
 
     public bool UseParticleSystem = true;
 
-    public ParticleSystem pSys;
-
     public void Attack()
     {
-        if (!UseParticleSystem)
-        {
-            for (int i = 0; i < numSporeClouds; i++)
-            {
-                GameObject cloud = Instantiate(sporeCloudPrefab, transform.position, transform.rotation, TempObjectsHolder.asTransform);
-                Rigidbody2D cloudPhys = cloud.GetComponent<Rigidbody2D>();
-                float angle = Random.Range(0, SporeCloudAngleRange);
-                Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-                cloudPhys.velocity = direction * Random.Range(.25f, SporeCloudRadius) * cloudPhys.drag;
 
-                //Set speed of cloud
-            }
-        }
-        else
+        GameObject cloud = Instantiate(sporeCloudPrefab, transform.position, transform.rotation, TempObjectsHolder.asTransform);
+        ParticleSystem pSys = cloud.GetComponent<ParticleSystem>();
+        for (int i = 0; i < numSporeClouds; i++)
         {
-            for(int i = 0; i < numSporeClouds; i++)
+            float angle = Random.Range(0, SporeCloudAngleRange);
+            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            ParticleSystem.EmitParams particleParams = new ParticleSystem.EmitParams()
             {
-                float angle = Random.Range(0, SporeCloudAngleRange);
-                Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-                ParticleSystem.EmitParams particleParams = new ParticleSystem.EmitParams()
-                {
-                    velocity = direction * Random.Range(.1f, SporeCloudRadius) * pSys.limitVelocityOverLifetime.drag.constant
-                    
-                };
-                pSys.Emit(particleParams, 1);
+                velocity = direction * Random.Range(.1f, SporeCloudRadius) * pSys.limitVelocityOverLifetime.drag.constant
 
-            }
+            };
+            pSys.Emit(particleParams, 1);
+
         }
     }
 }

@@ -6,7 +6,8 @@ public class SporeCloud : MonoBehaviour
 {
 
     public float SpawnedTime;
-    public float LifeTime = 5f;
+    public float LifeTime = 8f;
+    public ParticleSystem pSys;
 
     // Start is called before the first frame update
     void Start()
