@@ -36,7 +36,7 @@ Transform:
   - {fileID: 8651668783323634294}
   - {fileID: 7332766265255734}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6058493211403701905
 BoxCollider2D:
@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 837278381567755729}
   - component: {fileID: 7422824084510465416}
   - component: {fileID: 6909065272092461519}
+  - component: {fileID: 2247587527204157371}
   m_Layer: 10
   m_Name: Visuals
   m_TagString: Untagged
@@ -342,3 +343,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+--- !u!114 &2247587527204157371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183030202024537686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e180303ce194b54a811d9e53e5ea874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sporeCloudPrefab: {fileID: 6310249204763350111, guid: cb72f048f8c834b43bf7cdccb806bbd9, type: 3}
+  numSporeClouds: 10
+  SporeCloudRadius: 3
+  SporeCloudAngleRange: 360
