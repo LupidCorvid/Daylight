@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   moveSpeed: 3
-  attackSpeed: 0.1
+  attackSpeed: 1
   maxHealth: 10
   health: 10
   movement: {fileID: 6171613311389390137}
@@ -2679,7 +2679,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     multiplierCurve:
       serializedVersion: 2
       minMaxState: 0
@@ -2736,7 +2736,7 @@ ParticleSystem:
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 2048
     influenceList: []
   ClampVelocityModule:
     enabled: 1
@@ -2960,7 +2960,7 @@ ParticleSystem:
     drag:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2

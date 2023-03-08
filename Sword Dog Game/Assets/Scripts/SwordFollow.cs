@@ -27,6 +27,9 @@ public class SwordFollow : MonoBehaviour
     public static Action sceneChange;
     public static Vector3 newPos;
 
+    public ParticleSystemForceField particleFF;
+    public float particlePushScalar = 2.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,11 +65,13 @@ public class SwordFollow : MonoBehaviour
         if (pmScript.attacking)
         {
             AttackMove();
+            particleFF.directionX = -rb.velocity.magnitude * particlePushScalar;
             //Check for contact damage
             return;
         }
         else
         {
+            particleFF.directionX = 0;
             speed = Mathf.Lerp(speed, 100, 0.05f);
         }
         ////Accesses PlayerMovement script ONCE
