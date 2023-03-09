@@ -40,7 +40,7 @@ public class BugShroomAI : BaseAI
         switch(state)
         {
             case AIState.idle:
-                anim.SetFloat("WalkingSpeed", 0);
+                anim.SetFloat("WalkingSpeed", .75f);
                 movement.NotMoving();
                 if (target != null && Vector2.Distance(transform.position, target.position) > stopRange)
                 {
@@ -88,14 +88,20 @@ public class BugShroomAI : BaseAI
     {
         if (target.transform.position.x + stopRange < transform.position.x)
         {
-            movement.MoveLeft(moveSpeed);
-            anim.SetFloat("WalkingSpeed", moveSpeed/3f);
+            float distance = Mathf.Abs(target.transform.position.x + stopRange - transform.position.x);
+            float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            movement.MoveLeft(speed);
+            anim.SetFloat("WalkingSpeed", Mathf.Clamp(speed/3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (target.transform.position.x - stopRange > transform.position.x)
         {
-            movement.MoveRight(moveSpeed);
-            anim.SetFloat("WalkingSpeed", moveSpeed/3f);
+            float distance = Mathf.Abs(target.transform.position.x - stopRange - transform.position.x);
+            float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            movement.MoveRight(speed);
+            //movement.MoveRight(moveSpeed);
+            //anim.SetFloat("WalkingSpeed", moveSpeed/3f);
+            anim.SetFloat("WalkingSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(-1, 1, 1);
         }
         else

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BiterAI : BaseAI
 {
-    public float stopRange = 0.2f;
+    public float stopRange = 0.4f;
 
     public float attackRange = 2;
 
@@ -35,7 +35,7 @@ public class BiterAI : BaseAI
                 }
                 else
                 {
-                    anim.SetFloat("MoveSpeed", 0);
+                    anim.SetFloat("MoveSpeed", .75f);
                     movement.NotMoving();
                 }
                 break;
@@ -44,14 +44,10 @@ public class BiterAI : BaseAI
                 {
                     Attack();
                 }
-                else if (target == null || Mathf.Abs(target.position.x - transform.position.x) <= stopRange)
+                else if (target == null || Mathf.Abs(target.position.x - transform.position.x) <= stopRange || target.position.y > transform.position.y + 7)
                 {
                     state = AIStates.idle;
                 }
-                //else if (Vector2.Distance(target.transform.position, transform.position) <= attackRange && movement.slopeChecker.isGrounded)
-                //{
-                //    Attack();
-                //}
                 else
                 {
                     SeekMovement();
@@ -67,14 +63,18 @@ public class BiterAI : BaseAI
     {
         if (target.transform.position.x + stopRange < transform.position.x)
         {
-            movement.MoveLeft(moveSpeed);
-            anim.SetFloat("MoveSpeed", moveSpeed / 3f);
+            float distance = Mathf.Abs(target.transform.position.x + stopRange - transform.position.x);
+            float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            movement.MoveLeft(speed);
+            anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (target.transform.position.x - stopRange > transform.position.x)
         {
-            movement.MoveRight(moveSpeed);
-            anim.SetFloat("MoveSpeed", moveSpeed / 3f);
+            float distance = Mathf.Abs(target.transform.position.x - stopRange - transform.position.x);
+            float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            movement.MoveRight(speed);
+            anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(-1, 1, 1);
         }
         else
@@ -83,8 +83,15 @@ public class BiterAI : BaseAI
 
     public void Attack()
     {
+        if (attackSpeed == 0)
+            return;
         state = AIStates.attacking;
+        anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetTrigger("Attack");
+        if(target.transform.position.x < transform.position.x)
+            anim.transform.localScale = new Vector3(1, 1, 1);
+        else
+            anim.transform.localScale = new Vector3(-1, 1, 1);
     }
 
     public void Attacking()
