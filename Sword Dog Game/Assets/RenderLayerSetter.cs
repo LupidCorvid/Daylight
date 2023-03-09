@@ -7,6 +7,8 @@ public class RenderLayerSetter : MonoBehaviour
     public int newLayer = -100;
     public Color newColor;
 
+    public bool changeLayer, changeColor, changeParticleColor, ChangeScale = true;
+
     // Start is called before the first frame update
     public void setAllLayers()
     {
@@ -14,8 +16,10 @@ public class RenderLayerSetter : MonoBehaviour
         sprites.AddRange(GetComponentsInChildren<SpriteRenderer>());
         foreach(SpriteRenderer sprite in sprites)
         {
-            sprite.sortingOrder = newLayer;
-            sprite.color = newColor;
+            if(changeLayer)
+                sprite.sortingOrder = newLayer;
+            if(changeColor)
+                sprite.color = newColor;
         }
 
         List<ParticleSystemRenderer> particles = new List<ParticleSystemRenderer>();
@@ -23,8 +27,8 @@ public class RenderLayerSetter : MonoBehaviour
 
         foreach (ParticleSystemRenderer system in particles)
         {
-            system.sortingOrder = newLayer;
-            system.sharedMaterial.color = newColor;
+            if(changeLayer)
+                system.sortingOrder = newLayer;
         }
 
 
@@ -34,7 +38,10 @@ public class RenderLayerSetter : MonoBehaviour
         foreach (ParticleSystem system in pSystems)
         {
             ParticleSystem.MainModule main = system.main;
-            main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+            if(ChangeScale)
+                main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+            if (changeParticleColor)
+                main.startColor = newColor;
         }
     }
 }
