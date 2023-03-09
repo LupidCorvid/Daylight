@@ -11,6 +11,8 @@ public class EnemyBase : MonoBehaviour
     public int maxHealth = 10;
     public int health = 10;
 
+    public float aggroRange = 10;
+
     public BaseAI ai;
     public BaseMovement movement;
 

@@ -67,7 +67,17 @@ public class BaseAI
 
     public static List<Transform> possibleTargets = new List<Transform>();
 
-    public float aggroRange = 10;
+    public float aggroRange
+    {
+        get
+        {
+            return enemyBase.aggroRange;
+        }
+        set
+        {
+            enemyBase.aggroRange = value;
+        }
+    }
 
     public float FindTargetsWaitTime = .5f;
     float lastTargetSearch = -100;

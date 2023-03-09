@@ -33,7 +33,7 @@ public class BugShroomAI : BaseAI
         state = AIState.idle;
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
         base.Update();
 

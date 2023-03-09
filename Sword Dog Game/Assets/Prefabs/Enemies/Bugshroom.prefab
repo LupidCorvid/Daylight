@@ -36,7 +36,7 @@ Transform:
   - {fileID: 8651668783323634294}
   - {fileID: 7332766265255734}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6058493211403701905
 BoxCollider2D:
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 8651668783323634294}
   - component: {fileID: 6778516680465284185}
   - component: {fileID: 8739965475116297149}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,6 @@ MonoBehaviour:
   SporeCloudRadius: 7
   SporeCloudAngleRange: 360
   UseParticleSystem: 1
-  pSys: {fileID: 1521823845427645167}
 --- !u!198 &1521823845427645167
 ParticleSystem:
   m_ObjectHideFlags: 0
