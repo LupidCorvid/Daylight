@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class EnemyBase : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class EnemyBase : MonoBehaviour
     public SlopeAdjuster slopeChecker;
 
     public Animator anim;
+
+    public Action killed;
 
     public virtual void Start()
     {
@@ -44,6 +48,7 @@ public class EnemyBase : MonoBehaviour
 
     public void die()
     {
+        killed?.Invoke();
         Destroy(gameObject);
     }
 

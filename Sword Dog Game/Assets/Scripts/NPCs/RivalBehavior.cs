@@ -7,6 +7,10 @@ public class RivalBehavior : MonoBehaviour
     Animator rivalAnim, swordAnim;
     bool prologueBehaviorActive = true;
     float animWaitTime = 0f; //For waiting for an animation to execute
+    
+    public GameObject monster;
+
+    bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
 
     void Start()
     {
@@ -35,13 +39,16 @@ public class RivalBehavior : MonoBehaviour
     void prologueBehavior()
     {
         
-        bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
+        
 
         //Debug
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             monsterDefeated = true;
         }
+
+        if (monster == null)
+            monsterDefeated = true;
 
         //Rival cowers in front of the monster
         if (!monsterDefeated)
