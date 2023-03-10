@@ -9,7 +9,7 @@ public class ShopkeepBehavior : DialogNPC
     bool talking, finishTalkingSequence = false;
 
     Transform playerPosition;
-    bool foundPlayerPosition = false;
+    // bool foundPlayerPosition = false;
 
     public float advertisingCooldown = 15;
     public float lastAdvert = -15;
@@ -101,7 +101,7 @@ public class ShopkeepBehavior : DialogNPC
 
     IEnumerator finishedTalking()
     {
-        foundPlayerPosition = false;
+        // foundPlayerPosition = false;
         waitToLook = 0;
         if(playerPosition.position.x < transform.position.x) anim.Play("SK_upright_resetHead");
         finishTalkingSequence = true;
