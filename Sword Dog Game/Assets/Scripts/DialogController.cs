@@ -48,6 +48,7 @@ public class DialogController : MonoBehaviour
     public static bool closedAnimator = true;
     public bool openedThisFrame = false;
     public bool gotResponseThisFrame = false;
+    public bool skippedTextThisFrame = false;
 
     public Animator DotAnimator;
 
@@ -66,8 +67,11 @@ public class DialogController : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return)) && source != null)
         {
-            if(!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+            if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+            {
                 source.skippingText = true;
+                skippedTextThisFrame = true;
+            }
             pauseWaitForInputEnd();
         }
         if (reading)
@@ -86,6 +90,7 @@ public class DialogController : MonoBehaviour
         openedThisFrame = false;
         gotResponseThisFrame = false;
         endedWaitThisFrame = false;
+        skippedTextThisFrame = false;
     }
 
     public void finishOpen()

@@ -330,6 +330,7 @@ public class DialogSource
         {
             return;
         }
+        //Whitelist so that typewrite only runs certain commands (ones that collect didn't run)
         if(mode == ReadMode.TYPEWRITE)
         {
             if (input[0] != "w" && input[0] != "c" && input[0] != "exit")
