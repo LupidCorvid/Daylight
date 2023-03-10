@@ -60,7 +60,7 @@ public class SwordFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (SceneHelper.changedSceneThisFrame)
+        if (SceneHelper.changedSceneThisFrame) // TODO this code doesn't run
             return;
         //Find attackMoveTracker if it is null
         pmScript ??= player.GetComponent<PlayerMovement>();

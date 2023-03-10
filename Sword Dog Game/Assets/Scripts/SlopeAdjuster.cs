@@ -30,6 +30,8 @@ public class SlopeAdjuster : MonoBehaviour
 
     private Vector2 groundCheckSpot = new Vector2();
 
+    public float lastSlope;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,9 @@ public class SlopeAdjuster : MonoBehaviour
     void FixedUpdate()
     {
         SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
+        capRotation();
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        lastSlope = slopeSideAngle;
         groundedCheck();
         if (!isGrounded)
         {
@@ -205,6 +209,17 @@ public class SlopeAdjuster : MonoBehaviour
                 isGrounded = true;
                 break;
             }
+        }
+    }
+    public void capRotation()
+    {
+        float angleDifference = Mathf.DeltaAngle(slopeSideAngle, lastSlope);
+        if (Mathf.Abs(angleDifference) > 60 * Time.deltaTime)
+        {
+            if (angleDifference < 0)
+                slopeSideAngle = lastSlope + 60 * Time.deltaTime;
+            else
+                slopeSideAngle = lastSlope + -60 * Time.deltaTime;
         }
     }
 }

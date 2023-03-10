@@ -14,6 +14,7 @@ public class MoveCameraCutscene : CutsceneData
     public bool freeCameraOnExit = true;
     public bool freeHudOnExit = false;
     public bool useMainCamera = true;
+    public float overshoot = 1f;
 
     public enum MovementType
     {
@@ -43,7 +44,7 @@ public class MoveCameraCutscene : CutsceneData
             return;
         }
 
-        if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .05f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .05f)
+        if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)
         {
             curPoint++;
             if (curPoint < points.Count)
@@ -108,12 +109,12 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialZoomChange(CameraTransform transform)
     {
-        target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime;
+        target.orthographicSize -= (target.orthographicSize - transform.zoom) * (Time.deltaTime + overshoot);
     }
 
     public void ExponentialPositionChange(CameraTransform transform)
     {
-        target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime;
+        target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * (Time.deltaTime + overshoot);
     }
 
     public override void finishedSegment()
