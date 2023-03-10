@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
             if (Camera.main.orthographicSize != defaultZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - defaultZoom) * Time.deltaTime;
-                if (Mathf.Abs(Camera.main.orthographicSize - defaultZoom) < .05f)
+                if (Mathf.Abs(Camera.main.orthographicSize - defaultZoom) < .01f)
                     Camera.main.orthographicSize = defaultZoom;
             }
         }
