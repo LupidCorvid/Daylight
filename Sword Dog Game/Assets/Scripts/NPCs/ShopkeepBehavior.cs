@@ -17,6 +17,7 @@ public class ShopkeepBehavior : DialogNPC
     public CollisionsTracker advertCldr;
 
     public GameObject ShopPrefab;
+    private MiniBubbleController bubble;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,7 @@ public class ShopkeepBehavior : DialogNPC
         if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time)
         {
             GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
-            MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
+            bubble = addedObj.GetComponent<MiniBubbleController>();
             bubble.speaker = this;
             bubble.offset = miniBubbleOffset;
             bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
@@ -93,8 +94,11 @@ public class ShopkeepBehavior : DialogNPC
     public override void interact(GameObject user)
     {
         base.interact(user);
+        if (bubble != null && bubble.gameObject != null)
+            bubble.close();
         playerPosition = user.transform;
     }
+
     IEnumerator finishedTalking()
     {
         foundPlayerPosition = false;
