@@ -55,8 +55,9 @@ public class MiniBubbleController : MonoBehaviour
             }
             dialog.read(DialogSource.ReadMode.TYPEWRITE);
             textDisplay.maxVisibleCharacters = dialog.charCount;
-            textDisplay.ForceMeshUpdate();
         }
+        if (collected)
+            textDisplay.ForceMeshUpdate();
     }
 
     private void FixedUpdate()
