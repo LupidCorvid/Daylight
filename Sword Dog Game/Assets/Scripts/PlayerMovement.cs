@@ -100,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 groundCheckSpot = new Vector2();
 
+    public float lastSlope;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -364,8 +366,8 @@ public class PlayerMovement : MonoBehaviour
         // check if player is on ground
         CheckGround();
 
-        // rotate player based on slope
-        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        //// rotate player based on slope
+        //transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
         // hold jump distance extentions
         if (isJumping)
@@ -644,11 +646,25 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded)
         {
             LandInterpolation();
+            if (lastLand + landAnimTime <= Time.time)
+            {
+                float angleDifference = Mathf.DeltaAngle(slopeSideAngle, lastSlope);
+                if (Mathf.Abs(angleDifference) > 60 * Time.deltaTime)
+                {
+                    if (angleDifference < 0)
+                        slopeSideAngle = lastSlope + 60 * Time.deltaTime;
+                    else
+                        slopeSideAngle = lastSlope + -60 * Time.deltaTime;
+                }
+            }
+                
         }
         else
         {
             MidAirRotation();
         }
+        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        lastSlope = slopeSideAngle;
     }
 
     /// <summary>
