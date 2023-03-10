@@ -63,6 +63,7 @@ public class SpeyederAI : BaseAI
         switch (state)
         {
             case states.idle:
+                anim.SetBool("Returning", false);
                 if(target != null && target.transform.position.y < transform.position.y)
                 {
                     
@@ -82,6 +83,10 @@ public class SpeyederAI : BaseAI
                 if(target.position.y < ((Vector2)web.connectedBody.position + resetPosition + Vector2.down * web.distance).y)
                     web.distance = Mathf.Abs((transform.position.y - target.position.y) + preferredHeight);
 
+                if ((transform.position.y - target.position.y) + rb.velocity.y * .15f < 0)
+                {
+                    anim.SetTrigger("Land");
+                }
                 if (Vector2.Distance(transform.position, web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
                 {
                     lastLand = Time.time;
@@ -89,10 +94,17 @@ public class SpeyederAI : BaseAI
                 }
                 break;
             case states.landStop:
+                if ((transform.position.y - target.position.y) + rb.velocity.y * .15f < 0)
+                {
+                    anim.SetTrigger("Land");
+                }
+                //anim.SetTrigger("Land");
                 if (lastLand + returnWaitTime <= Time.time)
                     state = states.returning;
                 break;
             case states.returning:
+                anim.ResetTrigger("Land");
+                anim.SetBool("Returning", true);
                 //Prevents it from swinging too much if hit with knockback (swings get bigger as it gets closer to the resetPosition)
                 rb.drag = 1;
                 web.distance -= 1 * moveSpeed * Time.deltaTime;
