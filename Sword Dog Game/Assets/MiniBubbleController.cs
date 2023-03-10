@@ -24,6 +24,7 @@ public class MiniBubbleController : MonoBehaviour
     public List<TextEffect> textEffects = new List<TextEffect>();
 
     bool closing = false;
+    public bool open = false;
 
     public Animator anim;
 
@@ -45,7 +46,7 @@ public class MiniBubbleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (reading && dialog != null)
+        if (open && reading && dialog != null)
         {
             if (!collected)
             {

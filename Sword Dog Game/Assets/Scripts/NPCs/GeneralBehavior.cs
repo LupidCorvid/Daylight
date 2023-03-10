@@ -46,7 +46,7 @@ public class GeneralBehavior : DialogNPC
     public override void interact(GameObject user)
     {
         base.interact(user);
-        if (bubble.gameObject != null)
+        if (bubble != null && bubble.gameObject != null)
             bubble.close();
     }
 
