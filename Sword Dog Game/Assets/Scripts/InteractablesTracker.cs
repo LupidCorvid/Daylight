@@ -13,24 +13,25 @@ public class InteractablesTracker : MonoBehaviour
     public static KeyCode interactKey = KeyCode.T;
     public static bool alreadyInteracting = false;
 
-
+    private float delay = 0f;
+    private float maxDelay = 0.5f;
 
     private void Awake()
     {
-
     }
 
     private void FixedUpdate()
     {
+        if (delay < maxDelay)
+            delay += Time.fixedDeltaTime;
+
         if ((CutsceneController.cutsceneStopInteractions || MenuManager.inMenu) && nearest != null)
         {
             nearest.hidePrompt();
             nearest = null;
-
         }
         
-
-        if (!alreadyInteracting && !ChangeScene.changingScene && !CutsceneController.cutsceneStopInteractions && !MenuManager.inMenu)
+        if (delay >= maxDelay && !alreadyInteracting && !ChangeScene.changingScene && !CutsceneController.cutsceneStopInteractions && !MenuManager.inMenu)
         {
             IInteractable newNearest = getNearest();
             if (nearest != newNearest)
@@ -52,7 +53,7 @@ public class InteractablesTracker : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(interactKey))
+        if (delay >= maxDelay && Input.GetKeyDown(interactKey))
         {
             nearest?.interact(transform.parent.gameObject);
         }
@@ -103,6 +104,7 @@ public class InteractablesTracker : MonoBehaviour
     private void ClearAll()
     {
         interactables.Clear();
+        delay = 0f;
     }
     /// <summary>
     /// Removes all null variables from the list
