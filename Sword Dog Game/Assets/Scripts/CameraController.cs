@@ -17,6 +17,8 @@ public class CameraController : MonoBehaviour
     public static CameraController main;
 
     public static Camera mainCam;
+    private static bool canMove = true;
+    private static float cantMoveFor = 0.1f, maxDelay = 0.1f;
 
     Rigidbody2D rb;
 
@@ -44,7 +46,6 @@ public class CameraController : MonoBehaviour
         main = this;
         mainCam = GetComponent<Camera>();
         cldr = GetComponent<Collider2D>();
-        //SceneHelper.FinishedChangeScene += Snap;
     }
 
     // Update is called once per frame
@@ -57,8 +58,14 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SceneHelper.changedSceneThisFrame)
-            return;
+        if (!canMove)
+        {
+            cantMoveFor += Time.fixedDeltaTime;
+            if (cantMoveFor < maxDelay)
+                return;
+            canMove = true;
+        }
+
         if (!externalControl)
         {
             transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
@@ -72,13 +79,15 @@ public class CameraController : MonoBehaviour
 
     }
 
-    // private void SceneChange()
-    // {
-    //     Invoke("Snap", 0.1f);
-    // }
+    public static void DisableMovement()
+    {
+        canMove = false;
+        cantMoveFor = 0f;
+    }
 
     private void Snap()
     {
         Camera.main.transform.position = newPos;
+        sceneChange -= Snap;
     }
 }
