@@ -282,7 +282,7 @@ public class DialogSource
             position = endPos + 1;
             if (mode != ReadMode.TYPEWRITE) // TODO this may need to be changed to account for effects that should not run in collect mode
                 processStringEffect(mode, parameters.ToArray());
-            else if (parameters[0] != "TFX") // TODO this may need to be expanded to cover other effects that should not run in typewrite mode
+            else if (parameters[0] != "TFX" && parameters[0] != "/TFX") // TODO this may need to be expanded to cover other effects that should not run in typewrite mode
                 processStringEffect(mode, parameters.ToArray());
         }
         if (position >= dialog.Length)

@@ -120,8 +120,9 @@ public class MiniBubbleController : MonoBehaviour
     {
         reading = false;
         collected = false;
+        textDisplay.maxVisibleCharacters = int.MaxValue;
 
-        anim.SetTrigger("Close");
+        anim?.SetTrigger("Close");
         closing = true;
     }
 
