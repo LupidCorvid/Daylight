@@ -330,6 +330,13 @@ public class DialogSource
         {
             return;
         }
+        if(mode == ReadMode.TYPEWRITE)
+        {
+            if (input[0] != "w" && input[0] != "c" && input[0] != "exit")
+            {
+                return;
+            }
+        }
         switch (input[0])
         {
             case "b":
