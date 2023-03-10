@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1742960867218242365}
   - component: {fileID: 1742960867218242362}
   - component: {fileID: 1742960867218242363}
+  - component: {fileID: 177005933601102982}
   m_Layer: 10
   m_Name: SpeyederEnemy
   m_TagString: Untagged
@@ -186,8 +187,10 @@ MonoBehaviour:
   attackSpeed: 1
   maxHealth: 7
   health: 7
+  aggroRange: 10
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
+  anim: {fileID: 177005933601102982}
   web: {fileID: 1742960867218242366}
 --- !u!50 &1742960867218242367
 Rigidbody2D:
@@ -270,7 +273,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: add81e2419aa1fe49b79b42b09c39775, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fea31005d0743d429f0caae13360985, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -311,7 +314,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.77, y: 2.09}
+    oldSize: {x: 3, y: 2.5}
     newSize: {x: 2.77, y: 2.09}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -320,6 +323,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4099293, y: 1.3158064}
   m_EdgeRadius: 0
+--- !u!95 &177005933601102982
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742960867218242304}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 743fb11a9a33ab54f9a4f9741f10b932, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1742960868033111919
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +375,7 @@ Transform:
   - {fileID: 1742960867218242305}
   - {fileID: 1742960866975940572}
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742960868488570188
 GameObject:
