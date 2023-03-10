@@ -47,7 +47,8 @@ public class FlyingAI : BaseAI
 
     public FlyingAI(EnemyBase enemy) : base(enemy)
     {
-
+        prefferedOffset += new Vector2(Random.Range(-.75f, .75f), Random.Range(-.5f, .5f));
+        acceptableRange *= Random.Range(.9f, 1.1f);
     }
 
     public override void FixedUpdate()
