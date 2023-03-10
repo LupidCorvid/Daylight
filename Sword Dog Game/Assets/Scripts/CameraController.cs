@@ -10,8 +10,6 @@ public class CameraController : MonoBehaviour
 
     public float speed = 5;
     public float defaultZoom = 5;
-
-    public static Action sceneChange;
     public static Vector3 newPos;
 
     public static CameraController main;
@@ -34,15 +32,9 @@ public class CameraController : MonoBehaviour
 
     public bool externalControl = false;
 
-    // void Awake()
-    // {
-    //     transform.position = targetPoint;
-    // }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sceneChange += Snap;
         main = this;
         mainCam = GetComponent<Camera>();
         cldr = GetComponent<Collider2D>();
@@ -76,18 +68,11 @@ public class CameraController : MonoBehaviour
                     Camera.main.orthographicSize = defaultZoom;
             }
         }
-
     }
 
     public static void DisableMovement()
     {
         canMove = false;
         cantMoveFor = 0f;
-    }
-
-    private void Snap()
-    {
-        Camera.main.transform.position = newPos;
-        sceneChange -= Snap;
     }
 }

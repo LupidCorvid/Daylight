@@ -27,10 +27,8 @@ public class SpawnManager : MonoBehaviour
                 player.position = newPos;
                 SwordFollow.newPos = newPos;
                 SwordFollow.sceneChange?.Invoke();
-                CameraController.newPos = newPos;
-                CameraController.sceneChange?.Invoke();
             }
-            transform.position = player.position;
+            transform.position = player.position + new Vector3(0, 2, -10);
         }
         GameSaver.loading = false;
     }
