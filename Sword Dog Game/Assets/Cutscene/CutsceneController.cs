@@ -52,7 +52,7 @@ public class CutsceneController : MonoBehaviour
                 if (AllCutscenes.ContainsKey(SceneHelper.betweenSceneData[i][1]))
                     AllCutscenes[SceneHelper.betweenSceneData[i][1]].StartCutscene();
                 else
-                    Debug.LogError("Couldnt find a cutscene in new scene of name " + SceneHelper.betweenSceneData[i][1]);
+                    Debug.LogError("Couldnt find a cutscene in new scene of name " + SceneHelper.betweenSceneData[i]);
                 SceneHelper.betweenSceneData.RemoveAt(i);
             }
         }

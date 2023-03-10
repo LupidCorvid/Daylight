@@ -40,4 +40,8 @@ public class SpawnManager : MonoBehaviour
     {
 
     }
+    private void LateUpdate()
+    {
+        SceneHelper.changedSceneThisFrame = false;
+    }
 }

@@ -42,6 +42,8 @@ public class SwordFollow : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
 
+        //SceneHelper.FinishedChangeScene += Snap;
+
         // Singleton design pattern
         if (instance != null && instance != this)
         {
@@ -58,6 +60,8 @@ public class SwordFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (SceneHelper.changedSceneThisFrame)
+            return;
         //Find attackMoveTracker if it is null
         pmScript ??= player.GetComponent<PlayerMovement>();
         attackMoveTracker = pmScript.attackMoveTracker;
@@ -205,5 +209,6 @@ public class SwordFollow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
         swordTargetLocation = newPos + offset;
+        sword.transform.position = swordTargetLocation;
     }
 }

@@ -44,6 +44,7 @@ public class CameraController : MonoBehaviour
         main = this;
         mainCam = GetComponent<Camera>();
         cldr = GetComponent<Collider2D>();
+        //SceneHelper.FinishedChangeScene += Snap;
     }
 
     // Update is called once per frame
@@ -56,6 +57,8 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (SceneHelper.changedSceneThisFrame)
+            return;
         if (!externalControl)
         {
             transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
