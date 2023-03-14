@@ -32,6 +32,8 @@ public class FlyingAI : BaseAI
         }
     }
 
+    public Vector2 windUpTarget;
+
     public override void Start()
     {
         base.Start();
@@ -66,16 +68,20 @@ public class FlyingAI : BaseAI
                 break;
             case states.telegraphing:
                 //Play animation that shows it is about to attack. Perhaps can be interrupted if it takes damage while in this state
+                windUpTarget = ((Vector2)target.position);
+                Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
+                if (targetRb != null)
+                    windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, .1f)); //UpperRange time should be length of telegraph anim
                 state = states.lunging;
                 break;
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
                 lastAttack = Time.time;
-                rb.velocity = Vector2.ClampMagnitude((target.position - transform.position) * 7, attackDistance * 7);
+                rb.velocity = Vector2.ClampMagnitude((windUpTarget - (Vector2)transform.position) * 7, attackDistance * 7);
                 state = states.lungeReturn;
                 break;
             case states.lungeReturn:
-                if (Vector2.Distance(transform.position, target.position) <= 1f || rb.velocity.magnitude <= 2f)
+                if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 2f)
                     state = states.lungeFlee;
                 break;
             case states.lungeFlee:
