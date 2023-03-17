@@ -14,7 +14,6 @@ public class MoveCameraCutscene : CutsceneData
     public bool freeCameraOnExit = true;
     public bool freeHudOnExit = false;
     public bool useMainCamera = true;
-    public float overshoot = 1f;
 
     public enum MovementType
     {
@@ -109,12 +108,12 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialZoomChange(CameraTransform transform)
     {
-        target.orthographicSize -= (target.orthographicSize - transform.zoom) * (Time.deltaTime + overshoot);
+        target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime;
     }
 
     public void ExponentialPositionChange(CameraTransform transform)
     {
-        target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * (Time.deltaTime + overshoot);
+        target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime;
     }
 
     public override void finishedSegment()
