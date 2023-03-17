@@ -1628,6 +1628,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   cldr: {fileID: 0}
   groundCheck: {fileID: 0}
+  lastSlope: 0
 --- !u!50 &555738668
 Rigidbody2D:
   serializedVersion: 4
@@ -2392,6 +2393,14 @@ PrefabInstance:
     - target: {fileID: 7483406425282923924, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_Name
       value: RequiredObjects
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.619907
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0402695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -3348,6 +3357,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   cldr: {fileID: 0}
   groundCheck: {fileID: 0}
+  lastSlope: 0
 --- !u!50 &1396726291
 Rigidbody2D:
   serializedVersion: 4

@@ -11,7 +11,7 @@ public class SwordFollow : MonoBehaviour
     Vector3 swordTargetLocation;
     Vector3 swordPreviousLocation;
     public float speed;
-    public float adjustLocationY;
+    public float adjustLocationY, adjustDefaultY;
     public float adjustLocationX, adjustDefaultX;
     SpriteRenderer sr;
     public Rigidbody2D rb;
@@ -29,6 +29,9 @@ public class SwordFollow : MonoBehaviour
 
     public ParticleSystemForceField particleFF;
     public float particlePushScalar = 2.5f;
+    private static bool canMove = true;
+    private static float cantMoveFor = 0.1f, maxDelay = 0.1f;
+    private static bool created;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +39,8 @@ public class SwordFollow : MonoBehaviour
         sceneChange += Snap;
         speed = 100;
         //adjust the adjustLocation variables per sword type
-        adjustLocationY = 1;
-        adjustDefaultX = -.5f;
+        adjustDefaultX = -.2f;
+        adjustDefaultY = 0.7f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
@@ -55,11 +58,29 @@ public class SwordFollow : MonoBehaviour
             instance = gameObject;
             DontDestroyOnLoad(gameObject);
         }
+        if (!created) {
+            adjustLocationX = adjustDefaultX;
+            adjustLocationY = adjustDefaultY;
+            Snap();
+            created = true;
+            sceneChange += Snap;
+        }
     }
     
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+        {
+            cantMoveFor += Time.fixedDeltaTime;
+            if (cantMoveFor < maxDelay)
+                return;
+            canMove = true;
+        }
+
+        sword = this;
+        instance = gameObject;
+
         if (SceneHelper.changedSceneThisFrame) // TODO this code doesn't run
             return;
         //Find attackMoveTracker if it is null
@@ -207,8 +228,15 @@ public class SwordFollow : MonoBehaviour
     private void Snap()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
-        swordTargetLocation = newPos + offset;
+        var offset = player.transform.rotation * new Vector2((player.GetComponent<PlayerMovement>().facingRight ? 1 : -1) * adjustDefaultX, adjustLocationY);
+        swordTargetLocation = player.transform.position + offset;
         sword.transform.position = swordTargetLocation;
+        sceneChange -= Snap;
+    }
+
+    public static void DisableMovement()
+    {
+        canMove = false;
+        cantMoveFor = 0f;
     }
 }

@@ -43,7 +43,10 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetTracker = PlayerMovement.instance.transform;
+        if (PlayerMovement.instance != null) 
+            targetTracker = PlayerMovement.instance.transform;
+        else
+            targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
         rb.velocity = Vector2.zero;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }

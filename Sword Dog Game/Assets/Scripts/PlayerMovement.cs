@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private bool trotting, wasGrounded, holdingJump;
     public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft;
     public Vector2 bottom;
+    private static bool created = false;
+    private float beenLoaded = 0.0f, minLoadTime = 0.1f;
 
     public bool facingRight
     {
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         set
         {
             int neg = 1;
-            if (value)
+            if (value && created)
                 neg *= -1;
 
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * neg, transform.localScale.y, transform.localScale.z);
@@ -121,6 +123,8 @@ public class PlayerMovement : MonoBehaviour
 
         stepDirection = 1;
         facingRight = true;
+        isGrounded = true;
+        created = true;
 
         // Singleton design pattern
         if (instance != null && instance != this)
@@ -160,6 +164,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        instance = gameObject;
+        controller = this;
+        
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -363,8 +370,15 @@ public class PlayerMovement : MonoBehaviour
         // calculate speed multiplier for trot animation
         CalculateSpeedMultiplier();
 
-        // check if player is on ground
-        CheckGround();
+        // handle scene loads
+        if (beenLoaded < minLoadTime)
+            beenLoaded += Time.fixedDeltaTime;
+        else
+        {
+            anim.SetBool("loaded", true);
+            // check if player is on ground
+            CheckGround();
+        }
 
         //// rotate player based on slope
         //transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
