@@ -41,6 +41,8 @@ public class LeavesSway : MonoBehaviour
 
     public bool onExitEmit = true;
 
+    public float lastEmptyParticleDrop;
+
     public void Start()
     {
         lastShakeDrop = Time.time - 1.5f;
@@ -52,6 +54,21 @@ public class LeavesSway : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         if (Group)
             groupMembers.AddRange(transform.parent.GetComponentsInChildren<LeavesSway>());
+    }
+
+    public void Update()
+    {
+        //Done to make sure that the particle bounds always include all particles, as the particle bounds being offset from all particles made it so that particles would disappear while still on screen.
+        if(Time.time >= lastEmptyParticleDrop + .09f)
+        {
+            ParticleSystem.EmitParams velocitySetter = new ParticleSystem.EmitParams()
+            {
+                startLifetime = .1f,
+                position = Vector3.zero
+            };
+            particleHandler.Emit(velocitySetter, 1);
+            lastEmptyParticleDrop = Time.time;
+        }
     }
 
     public void FixedUpdate()
