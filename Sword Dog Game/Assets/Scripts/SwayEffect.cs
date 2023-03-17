@@ -175,6 +175,7 @@ public class SwayEffect : MonoBehaviour
     private void FixedUpdate()
     {
         //Culling
+        player ??= GameObject.FindGameObjectWithTag("Player").transform;
         if ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15)
             return;
 

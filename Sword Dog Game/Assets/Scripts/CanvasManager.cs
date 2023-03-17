@@ -30,6 +30,7 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HUD = myHUD;
         HUD.transform.localScale = Vector3.Lerp(HUD.transform.localScale, new Vector3(HUDscale, HUDscale, HUDscale), 0.05f);
     }
 
