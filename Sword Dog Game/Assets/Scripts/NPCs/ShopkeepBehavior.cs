@@ -124,6 +124,7 @@ public class ShopkeepBehavior : DialogNPC
         MenuManager.main.openMenu(ShopPrefab);
         CutsceneController.PlayCutscene("OpenShop");
         MenuManager.menuClosed += onShopClose;
+        DialogController.main.forceClose();
     }
 
     public void onShopClose()

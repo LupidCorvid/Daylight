@@ -133,6 +133,24 @@ public class DialogController : MonoBehaviour
         InteractablesTracker.alreadyInteracting = false;
     }
 
+    public void forceClose()
+    {
+
+        anim.Play("Idle");
+        textDisplay.alpha = 0;
+        headerDisplay.alpha = 0;
+
+
+        panel.alpha = 0;
+        panel.interactable = false;
+        panel.blocksRaycasts = false;
+        responseController.close();
+        if (readWhenOpen)
+            reading = false;
+        closedAnimator = true;
+        InteractablesTracker.alreadyInteracting = false;
+    }
+
     public void promptSelections(params string[] options)
     {
         responseController.setResponses(options);
