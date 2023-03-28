@@ -1,5 +1,5 @@
 using System.Collections;
-
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleFlash : MonoBehaviour
@@ -10,7 +10,10 @@ public class SimpleFlash : MonoBehaviour
 
     [Tooltip("Material to switch to during the flash.")]
     [SerializeField] private Material flashMaterial;
-
+    [Tooltip("Other flashes to trigger when this one is triggered.")]
+    [SerializeField] private List<SimpleFlash> alsoFlash = new List<SimpleFlash>();
+    [Tooltip("Force using non-solid flash. For when a sprite may have color set to black by default.")]
+    [SerializeField] private bool forceNonSolidFlash = false;
     #endregion
     #region Private Fields
 
@@ -45,8 +48,7 @@ public class SimpleFlash : MonoBehaviour
         originalMaterial = spriteRenderer.material;
 
         originalColor = spriteRenderer.color;
-        newColor = originalColor;
-        newColor.a = 0.5f;
+        newColor = flashMaterial.color;
     }
 
     #endregion
@@ -62,10 +64,18 @@ public class SimpleFlash : MonoBehaviour
         }
 
         // Start the Coroutine, and store the reference for it.
-        if (solid)
+        if (solid && !forceNonSolidFlash)
             flashRoutine = StartCoroutine(SolidFlashRoutine(duration, amount));
         else
             flashRoutine = StartCoroutine(FlashRoutine(duration, amount));
+
+        //Trigger any other flashes that are grouped with this one.
+        foreach(SimpleFlash flash in alsoFlash)
+        {
+            //Prevent infinite loops by only calling flashes that don't loop back to this. An infinite loop is still possible with a 3 way connection
+            if(!flash.alsoFlash.Contains(this))
+                flash.Flash(duration, amount, solid);
+        }
     }
 
     private IEnumerator FlashRoutine(float duration, int amount)
