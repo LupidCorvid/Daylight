@@ -21,8 +21,17 @@ public class Parallax2Editor : Editor
         {
             script.simpleDistance = EditorGUILayout.FloatField("Distance", script.simpleDistance);
 
-            script.distance.x = (script.simpleDistance/5f) * -.05f;
-            script.distance.y = (script.simpleDistance/5f) * .0175f;
+            if (script.simpleDistance >= 0)
+            {
+                script.distance.x = (script.simpleDistance / 5f) * -.05f;
+                script.distance.y = (script.simpleDistance / 5f) * .0175f;
+            }
+            else
+            {
+                script.distance.x = 0.5f / (script.simpleDistance / 30f + 1f) - .5f;
+                script.distance.y = -.0175f / (script.simpleDistance / 30f + 1f) + .0175f;
+            }
+
             script.transform.localScale = new Vector3(1/((script.simpleDistance/30f) + 1), 1/((script.simpleDistance/30f) + 1), 1);
             if (script.simpleDistance > 0)
                 suggestedColor = Color.Lerp(new Color(255f/255, 221f/255, 28f/255), Color.black, 1 / ((script.simpleDistance/10 + 1)));

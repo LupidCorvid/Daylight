@@ -16,13 +16,15 @@ public class AnimatableParallax : MonoBehaviour
 
     public bool changeOnZoom = true;
 
+    public float initDistance;
+
     // Start is called before the first frame update
     void Start()
     {
         cam ??= Camera.main;
         startPos = transform.position;
         spriteRenderer ??= GetComponent<SpriteRenderer>();
-        simpleDistance = Random.Range(0, 10f);
+        simpleDistance = Random.Range(0, 10f) + initDistance;
     }
 
     // Update is called once per frame
@@ -53,9 +55,20 @@ public class AnimatableParallax : MonoBehaviour
     {
         Color suggestedColor;
 
-        distance.x = (simpleDistance / 5f) * -.05f;
-        distance.y = (simpleDistance / 5f) * .0175f;
+        //Do not have simpleDistance < -30 (think of simpleDistance = -30 as where the cam is)
+        if (simpleDistance >= 0)
+        {
+            distance.x = (simpleDistance / 5f) * -.05f;
+            distance.y = (simpleDistance / 5f) * .0175f;
+        }
+        else
+        {
+            distance.x = 0.5f / (simpleDistance/30f + 1f) - .5f;
+            distance.y = -.0175f / (simpleDistance/30f + 1f) + .0175f;
+        }
+        
         transform.localScale = new Vector3(1 / ((simpleDistance / 30f) + 1), 1 / ((simpleDistance / 30f) + 1), 1);
+        
         if (simpleDistance > 0)
             suggestedColor = Color.Lerp(new Color(255f / 255, 221f / 255, 28f / 255), Color.black, 1 / ((simpleDistance / 10 + 1)));
         else
