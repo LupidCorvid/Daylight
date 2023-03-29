@@ -34,7 +34,7 @@ public class Parallax2 : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (cam == null)
             cam = Camera.main;
