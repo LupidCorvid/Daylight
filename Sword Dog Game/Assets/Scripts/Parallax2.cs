@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Parallax2 : MonoBehaviour
 {
+    #region for custom inspector (simplified options stuff)
+    [HideInInspector]
+    public bool simplifiedOptions = false;
+    [HideInInspector]
+    public float simpleDistance;
+    [HideInInspector]
+    public bool autoChangeColor = false;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
+    #endregion
+
     public Vector2 distance = new Vector2(0,0);
     public Camera cam;
     public Vector3 startPos;
