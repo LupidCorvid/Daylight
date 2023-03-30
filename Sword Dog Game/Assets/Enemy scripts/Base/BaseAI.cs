@@ -61,6 +61,18 @@ public class BaseAI
         }
     }
 
+    public int attackDamage
+    {
+        get
+        {
+            return enemyBase.attackDamage;
+        }
+        set
+        {
+            enemyBase.attackDamage = value;
+        }
+    }
+
     public Transform target;
 
     public Rigidbody2D rb;
@@ -132,4 +144,21 @@ public class BaseAI
 
     }
 
+    public virtual void applyAttackDamage()
+    {
+
+    }
+
+    public virtual void DamageBox(Vector2 location, Vector2 range)
+    {
+        Collider2D[] hits;
+        hits = Physics2D.OverlapAreaAll(location - range, location + range, LayerMask.GetMask("Entity"));
+        Debug.DrawLine(location - range, location + range, Color.cyan, .25f);
+        Debug.DrawLine(location - range * new Vector2(-1, 1), location + range * new Vector2(-1, 1), Color.cyan, .25f);
+
+        foreach (Collider2D hit in hits)
+        {
+            hit.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
+        }
+    }
 }

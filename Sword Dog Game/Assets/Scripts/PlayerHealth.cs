@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
+    public bool invincible = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
     // TODO add directional damage parameter for knockback
     public void TakeDamage(int damage, bool bypass = false)
     {
-        if (!dead)
+        if (!dead && !invincible)
         {
             if ((!bypass && Time.time > lastDamaged + iFrameTime) || bypass)
             {

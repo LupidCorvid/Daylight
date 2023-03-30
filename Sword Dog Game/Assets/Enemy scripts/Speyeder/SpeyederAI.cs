@@ -87,10 +87,13 @@ public class SpeyederAI : BaseAI
                 {
                     anim.SetTrigger("Land");
                 }
-                if (Vector2.Distance(transform.position, web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
+                //if (Vector2.Distance(transform.position, web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
+                if(Vector2.Distance(transform.position, web.connectedBody.position + Vector2.down * web.distance) <= .05f)
                 {
                     lastLand = Time.time;
                     state = states.landStop;
+                    //applyAttackDamage();
+                    anim.SetTrigger("Land");
                 }
                 break;
             case states.landStop:
@@ -113,5 +116,12 @@ public class SpeyederAI : BaseAI
                     state = states.idle;
                 break;
         }
+    }
+
+    public override void applyAttackDamage()
+    {
+        Vector2 location = transform.position + Vector3.down * 1.25f;
+        Vector2 range = new Vector2(.75f, 1.25f);
+        DamageBox(location, range);
     }
 }

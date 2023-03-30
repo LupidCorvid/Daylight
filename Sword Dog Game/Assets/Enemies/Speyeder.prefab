@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
   alsoFlash: []
+  forceNonSolidFlash: 1
 --- !u!1 &1742960866975940575
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +263,7 @@ GameObject:
   - component: {fileID: 1742960867218242362}
   - component: {fileID: 1742960867218242363}
   - component: {fileID: 177005933601102982}
+  - component: {fileID: 1971466924259959618}
   m_Layer: 10
   m_Name: SpeyederEnemy
   m_TagString: Untagged
@@ -415,6 +417,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
   alsoFlash:
   - {fileID: 4500755189507649335}
+  forceNonSolidFlash: 0
 --- !u!61 &1742960867218242363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -461,6 +464,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1971466924259959618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742960867218242304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f03e2168a40f04ea16b660832ef390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1742960867218242364}
 --- !u!1 &1742960868033111919
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +509,7 @@ Transform:
   - {fileID: 1742960867218242305}
   - {fileID: 1742960866975940572}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742960868488570188
 GameObject:

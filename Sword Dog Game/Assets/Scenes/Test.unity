@@ -3439,6 +3439,7 @@ MonoBehaviour:
   Group: 0
   sprite: {fileID: 0}
   onExitEmit: 1
+  lastEmptyParticleDrop: 0
 --- !u!95 &270827909
 Animator:
   serializedVersion: 4
@@ -3602,7 +3603,6 @@ MonoBehaviour:
   freeCameraOnExit: 0
   freeHudOnExit: 0
   useMainCamera: 1
-  overshoot: 1
 --- !u!114 &294639849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17673,6 +17673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+  alsoFlash: []
+  forceNonSolidFlash: 0
 --- !u!1 &1027897706
 GameObject:
   m_ObjectHideFlags: 0
@@ -31833,6 +31835,7 @@ MonoBehaviour:
   Group: 0
   sprite: {fileID: 0}
   onExitEmit: 1
+  lastEmptyParticleDrop: 0
 --- !u!95 &1909771759
 Animator:
   serializedVersion: 4

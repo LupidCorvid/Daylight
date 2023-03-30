@@ -80,8 +80,10 @@ public class SlopeAdjuster : MonoBehaviour
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
-        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
-        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+        if(leftHit.point != default)
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+        if(rightHit.point != default)
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
 
         //if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
         //    return;
@@ -138,8 +140,11 @@ public class SlopeAdjuster : MonoBehaviour
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         RaycastHit2D across2 = Physics2D.Raycast(acrossCheck2,
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
-        Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
-        Debug.DrawLine(across2.point, acrossCheck2, Color.green);
+        
+        if(acrossCheckSpot != default)
+            Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
+        if(acrossCheck2 != default)
+            Debug.DrawLine(across2.point, acrossCheck2, Color.green);
 
         
         //Calculate unsmoothed slope. Get how far across each across cast made it

@@ -92,6 +92,14 @@ public class BiterAI : BaseAI
             anim.transform.localScale = new Vector3(1, 1, 1);
         else
             anim.transform.localScale = new Vector3(-1, 1, 1);
+        //applyAttackDamage();
+    }
+
+    public override void applyAttackDamage()
+    {
+        Vector2 location = transform.position + (anim.transform.localScale.x * Vector3.left * 1f);
+        Vector2 range = new Vector2(1, .5f) + Vector2.right * (.25f);
+        DamageBox(location, range);
     }
 
     public void Attacking()
