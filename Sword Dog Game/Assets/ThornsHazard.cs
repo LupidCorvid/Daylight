@@ -34,5 +34,15 @@ public class ThornsHazard : MonoBehaviour
                 lastDamage = Time.time;
             }
         }
+
+        EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
+        if(enemyHit != null)
+        {
+            if (lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
+            {
+                enemyHit.TakeDamage(damage);
+                lastDamage = Time.time;
+            }
+        }
     }
 }
