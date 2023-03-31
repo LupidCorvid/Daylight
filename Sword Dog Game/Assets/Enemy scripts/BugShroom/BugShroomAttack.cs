@@ -8,6 +8,7 @@ public class BugShroomAttack : MonoBehaviour
     public int numSporeClouds = 10;
     public float SporeCloudRadius = 3;
     public float SporeCloudAngleRange = 360;
+    public BugShroom mainEnemy;
 
     public bool UseParticleSystem = true;
 
@@ -15,6 +16,9 @@ public class BugShroomAttack : MonoBehaviour
     {
 
         GameObject cloud = Instantiate(sporeCloudPrefab, transform.position, transform.rotation, TempObjectsHolder.asTransform);
+        SporeCloud cloudObj = cloud.GetComponent<SporeCloud>();
+        cloudObj.mainEnemy= mainEnemy;
+
         ParticleSystem pSys = cloud.GetComponent<ParticleSystem>();
         for (int i = 0; i < numSporeClouds; i++)
         {

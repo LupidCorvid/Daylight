@@ -36,7 +36,7 @@ Transform:
   - {fileID: 8651668783323634294}
   - {fileID: 7332766265255734}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6058493211403701905
 BoxCollider2D:
@@ -90,6 +90,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   cldr: {fileID: 6058493211403701905}
   groundCheck: {fileID: 8739965475116297149}
+  lastSlope: 0
 --- !u!50 &4516523643932583988
 Rigidbody2D:
   serializedVersion: 4
@@ -126,6 +127,7 @@ MonoBehaviour:
   slopeChecker: {fileID: 0}
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  velocity: {x: 0, y: 0, z: 0}
   applyVisualModifications: 0
   movementSmoothing: 0.03
   snappyDirectionChange: 1
@@ -141,11 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a938a1c3d5174d544a8ffb1d4c698816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 50
   moveSpeed: 3
   attackSpeed: 1
   maxHealth: 10
   health: 10
+  aggroRange: 10
   movement: {fileID: 6171613311389390137}
   slopeChecker: {fileID: 218444822182697661}
   anim: {fileID: 7422824084510465416}
@@ -345,6 +348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+  alsoFlash: []
+  forceNonSolidFlash: 0
 --- !u!114 &2247587527204157371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +366,7 @@ MonoBehaviour:
   numSporeClouds: 100
   SporeCloudRadius: 7
   SporeCloudAngleRange: 360
+  mainEnemy: {fileID: 5857104980672801526}
   UseParticleSystem: 1
 --- !u!198 &1521823845427645167
 ParticleSystem:

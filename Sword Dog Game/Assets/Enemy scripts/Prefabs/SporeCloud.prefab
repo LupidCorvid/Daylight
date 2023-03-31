@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2478087786129187122}
   - component: {fileID: 3223245920808147349}
   - component: {fileID: 2459996034618838958}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: SporeCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &6310249204763350080
 CircleCollider2D:
@@ -66,6 +66,8 @@ MonoBehaviour:
   SpawnedTime: 0
   LifeTime: 8
   pSys: {fileID: 2459996034618838958}
+  damage: 1
+  hitThisFrame: []
 --- !u!199 &3223245920808147349
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -3901,11 +3903,11 @@ ParticleSystem:
   TriggerModule:
     enabled: 0
     serializedVersion: 2
-    inside: 1
+    inside: 2
     outside: 0
     enter: 0
     exit: 0
-    colliderQueryMode: 0
+    colliderQueryMode: 1
     radiusScale: 1
     primitives: []
   SubModule:
