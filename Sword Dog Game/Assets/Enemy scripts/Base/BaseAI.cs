@@ -121,6 +121,11 @@ public class BaseAI
 
     }
 
+    public virtual void LateUpdate()
+    {
+
+    }
+
     public virtual Transform GetTarget()
     {
         foreach(Transform targetLocation in possibleTargets)

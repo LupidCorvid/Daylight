@@ -46,6 +46,11 @@ public class EnemyBase : MonoBehaviour
         ai?.FixedUpdate();
     }
 
+    public virtual void LateUpdate()
+    {
+        ai?.LateUpdate();
+    }
+
     public void die()
     {
         killed?.Invoke();

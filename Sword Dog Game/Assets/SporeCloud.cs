@@ -9,6 +9,18 @@ public class SporeCloud : MonoBehaviour
     public float LifeTime = 8f;
     public ParticleSystem pSys;
 
+    public BugShroom mainEnemy;
+    public BugShroomAI ai
+    {
+        get
+        {
+            return (BugShroomAI)(mainEnemy.ai);
+        }
+    }
+
+    public Dictionary<PlayerHealth, float> targetsHit = new Dictionary<PlayerHealth, float>();
+    public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +32,16 @@ public class SporeCloud : MonoBehaviour
     {
         if (SpawnedTime + LifeTime < Time.time)
             Destroy(gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        if (hit == null)
+            return;
+
+        if (!ai.hitThisFrame.Contains(hit))
+            ai.hitThisFrame.Add(hit);
+        
     }
 }

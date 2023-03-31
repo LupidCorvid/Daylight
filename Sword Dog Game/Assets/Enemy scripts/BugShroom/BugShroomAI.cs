@@ -6,6 +6,10 @@ public class BugShroomAI : BaseAI
 {
     public float lastAttack = -100;
 
+    public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
+    public List<hitTarget> hitTargets = new List<hitTarget>();
+
+
     public float attackCooldown
     {
         get
@@ -78,11 +82,44 @@ public class BugShroomAI : BaseAI
         state = AIState.attacking;
         anim.SetTrigger("Attacking");
         lastAttack = Time.time;
-        //If no existing ideas,
-        //Release spore cloud? Or release larger spores above that slowly drift towards the player (this could go well if it had a bite attack when spores are on cooldown)
 
     }
 
+    public override void LateUpdate()
+    {
+        foreach(PlayerHealth hit in hitThisFrame)
+        {
+            int foundIndex = hitTargets.FindIndex((x) => x.target == hit);
+            if (foundIndex == -1)
+            {
+                foundIndex = hitTargets.Count;
+                hitTargets.Add(new hitTarget(hit, 0));
+            }
+
+            hitTargets[foundIndex].damage += attackDamage * Time.fixedDeltaTime;
+            hitTargets[foundIndex].hitThisFrame = true;
+        }
+
+        for(int i = hitTargets.Count - 1; i >= 0; i--)
+        {
+            if (!hitTargets[i].hitThisFrame)
+                hitTargets[i].damage -= attackDamage * Time.fixedDeltaTime;
+            hitTargets[i].hitThisFrame = false;
+
+            if (hitTargets[i].damage >= 1)
+            {
+                hitTargets[i].target.TakeDamage((int)hitTargets[i].damage / 1);
+                hitTargets[i].damage %= 1;
+            }
+
+
+            if (hitTargets[i].damage <= 0)
+                hitTargets.RemoveAt(i);
+
+        }
+
+        hitThisFrame.Clear();
+    }
 
     public void SeekMovement()
     {
@@ -106,5 +143,23 @@ public class BugShroomAI : BaseAI
         }
         else
             movement.NotMoving();
+    }
+
+    public class hitTarget
+    {
+        public PlayerHealth target;
+        public float damage;
+        public bool hitThisFrame = true;
+
+        public static implicit operator PlayerHealth(hitTarget target ) => target;
+
+        public hitTarget(PlayerHealth target, float damage)
+        {
+            this.target = target;
+            this.damage = damage;
+        }
+
+        //public static bool operator ==(PlayerHealth target, hitTarget group) => (group.target == target);
+        //public static bool operator !=(PlayerHealth target, hitTarget group) => (group.target != target);
     }
 }
