@@ -7,6 +7,13 @@ public class FallingRockHazard : MonoBehaviour
     public Rigidbody2D rb;
     public int damage = 3;
     public bool scaleWithSpeed;
+    public SpriteRenderer rend;
+
+
+    public float lastOnScreen;
+    float lifeTimeOffScreen = 2;
+
+    bool dropped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +24,13 @@ public class FallingRockHazard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(rend.isVisible)
+        {
+            lastOnScreen = Time.time;
+        }
+
+        if (Time.time > lastOnScreen + lifeTimeOffScreen && dropped && rb.velocity.magnitude < 1.5f)
+            Destroy(rb.gameObject);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -46,7 +59,7 @@ public class FallingRockHazard : MonoBehaviour
         if (enemyHit != null)
         {
 
-            if (scaleWithSpeed)
+            if (scaleWithSpeed && ((int )rb.velocity.magnitude * damage) > 0)
                 enemyHit.TakeDamage((int)(rb.velocity.magnitude * damage));
             else
                 enemyHit.TakeDamage(damage);
@@ -58,5 +71,6 @@ public class FallingRockHazard : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.down * .01f;
+        dropped = true;
     }
 }
