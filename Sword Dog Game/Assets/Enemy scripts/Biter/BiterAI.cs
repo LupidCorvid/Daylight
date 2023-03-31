@@ -8,6 +8,18 @@ public class BiterAI : BaseAI
 
     public float attackRange = 2;
 
+    public float lastAttack;
+
+    public float attackCooldown
+    {
+        get
+        {
+            if (attackSpeed == 0)
+                return 999999f;
+            return 2f / attackSpeed;
+        }
+    }
+
     public enum AIStates
     {
         idle,
@@ -40,7 +52,7 @@ public class BiterAI : BaseAI
                 }
                 break;
             case AIStates.pursuit:
-                if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && movement.slopeChecker.isGrounded)
+                if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && movement.slopeChecker.isGrounded && lastAttack + attackCooldown < Time.time)
                 {
                     Attack();
                 }
@@ -85,8 +97,9 @@ public class BiterAI : BaseAI
     {
         if (attackSpeed == 0)
             return;
+        lastAttack = Time.time;
         state = AIStates.attacking;
-        anim.SetFloat("AttackSpeed", attackSpeed);
+        //anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetTrigger("Attack");
         if(target.transform.position.x < transform.position.x)
             anim.transform.localScale = new Vector3(1, 1, 1);
