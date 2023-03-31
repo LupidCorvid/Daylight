@@ -12,7 +12,6 @@ public class StalagtiteTrigger : MonoBehaviour
     {
         cldr = GetComponent<BoxCollider2D>();
         Vector2 hitPoint = Physics2D.Raycast(transform.position, Vector2.down, 100, LayerMask.GetMask("Terrain")).point;
-        Debug.Log("Hit point: " + hitPoint);
         cldr.offset = (hitPoint - (Vector2)transform.position)/2;
         cldr.size = new Vector2(2, ((Vector2)transform.position - hitPoint).y);
 

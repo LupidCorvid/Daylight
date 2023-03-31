@@ -22,14 +22,14 @@ public class StalagtiteHazard : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerHealth hit = collision.GetComponent<PlayerHealth>();
-        if(hit != null && rb.velocity.magnitude > .1f)
+        if(hit != null && rb.velocity.magnitude > .01f)
         {
             hit.TakeDamage(damage);
             
         }
 
         EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
-        if(enemyHit != null && rb.velocity.magnitude > .1f)
+        if(enemyHit != null && rb.velocity.magnitude > .01f)
         {
             enemyHit.TakeDamage(damage);
         }
