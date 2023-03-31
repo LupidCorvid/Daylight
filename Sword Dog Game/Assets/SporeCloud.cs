@@ -40,7 +40,7 @@ public class SporeCloud : MonoBehaviour
         if (hit == null)
             return;
 
-        if (!ai.hitThisFrame.Contains(hit))
+        if (ai?.hitThisFrame?.Contains(hit) == false)
             ai.hitThisFrame.Add(hit);
         
     }
