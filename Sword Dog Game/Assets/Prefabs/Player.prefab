@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 6300512340327299632}
   - component: {fileID: 6300512340327299635}
   - component: {fileID: 7713005219475735744}
-  - component: {fileID: 223483409846595020}
   - component: {fileID: 2076971703553780711}
   - component: {fileID: 7333625409189861786}
   - component: {fileID: 3808553446418265509}
@@ -396,7 +395,9 @@ MonoBehaviour:
   isSprinting: 0
   canResprint: 0
   isSkidding: 0
-  canSkid: 0
+  wallOnRight: 0
+  wallOnLeft: 0
+  bottom: {x: 0, y: 0}
   speed: 4
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   mouth: {fileID: 2381358681662667084}
@@ -407,17 +408,20 @@ MonoBehaviour:
   roofCheck: {fileID: 5205619093326231413}
   jumpForce: 500
   movementSmoothing: 0.05
+  wallCheckDistance: 0.5
   slopeCheckDistance: 3
   maxSlopeAngle: 45
+  isOnSlope: 0
+  canWalkOnSlope: 0
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
   calculatedSpeed: 4
   sprintWindUpPercent: 1
   cldr1: {fileID: 974524988010002649}
   cldr2: {fileID: 8004215587823365583}
+  cldr: {fileID: 0}
   resetting: 0
   invincible: 0
-  onlyRotateWhenGrounded: 1
   landAnimTime: 1.25
   stamina: 6
   maxStamina: 6
@@ -431,6 +435,7 @@ MonoBehaviour:
   overrideColliderWidth: 1
   colliderWidth: {x: 2.24, y: 2.123}
   groundCheckSpot: {x: 0, y: -1.7}
+  lastSlope: 0
 --- !u!114 &7713005219475735744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,18 +451,6 @@ MonoBehaviour:
   scene: 
   position: {x: 0, y: 0}
   savedOnce: 0
---- !u!114 &223483409846595020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300512340327299644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df05cb1eef40ca8469b954cc128d4d3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &2076971703553780711
 AudioListener:
   m_ObjectHideFlags: 0
@@ -495,6 +488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+  alsoFlash: []
+  forceNonSolidFlash: 0
 --- !u!114 &675094675918066877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 8
+  invincible: 0
 --- !u!114 &633449435745536244
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,7 +75,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
         PlayerMovement.controller.noFall = true;
-        CameraController.DisableMovement();
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)

@@ -5,12 +5,11 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public static string spawningAt;
-    private Transform player;
+    public Transform player;
 
     private GameObject spawnPointObj;
     private Transform spawnPoint;
 
-    // Start is called before the first frame update
     void OnEnable()
     {
         if (PlayerMovement.instance != null)
@@ -29,15 +28,12 @@ public class SpawnManager : MonoBehaviour
                 SwordFollow.sceneChange?.Invoke();
             }
             transform.position = player.position + new Vector3(0, 2, -10);
+            CameraController.OverrideMovement(player);
+
         }
         GameSaver.loading = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void LateUpdate()
     {
         SceneHelper.changedSceneThisFrame = false;
