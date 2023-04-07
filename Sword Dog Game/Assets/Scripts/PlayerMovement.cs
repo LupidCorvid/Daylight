@@ -145,6 +145,8 @@ public class PlayerMovement : MonoBehaviour
             groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
         groundCheck.triggerEnter += checkIfLanding;
+
+        Camera.main.transform.position = transform.position + new Vector3(0, 2, -10);
     }
 
     public void checkIfLanding(Collider2D collision)
