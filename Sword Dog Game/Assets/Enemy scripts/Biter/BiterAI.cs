@@ -6,9 +6,11 @@ public class BiterAI : BaseAI
 {
     public float stopRange = 0.4f;
 
-    public float attackRange = 2;
+    public float attackRange = 1;
 
     public float lastAttack;
+
+    public float maintainDistance = 6;
 
     public float attackCooldown
     {
@@ -24,7 +26,8 @@ public class BiterAI : BaseAI
     {
         idle,
         pursuit,
-        attacking
+        attacking,
+        keepDistance
     }
 
     public AIStates state;
@@ -52,11 +55,11 @@ public class BiterAI : BaseAI
                 }
                 break;
             case AIStates.pursuit:
-                if (target != null && Vector2.Distance(target.transform.position, transform.position) <= attackRange && movement.slopeChecker.isGrounded && lastAttack + attackCooldown < Time.time)
+                if (target != null && Vector2.Distance(target.transform.position, (Vector2)transform.position + rb.velocity * .5f) <= attackRange && movement.slopeChecker.isGrounded && lastAttack + attackCooldown < Time.time)
                 {
                     Attack();
                 }
-                else if (target == null || Mathf.Abs(target.position.x - transform.position.x) <= stopRange || target.position.y > transform.position.y + 7)
+                else if (target == null || /*Mathf.Abs(target.position.x - transform.position.x) <= stopRange ||*/ target.position.y > transform.position.y + 7)
                 {
                     state = AIStates.idle;
                 }
@@ -68,22 +71,34 @@ public class BiterAI : BaseAI
             case AIStates.attacking:
                 Attacking();
                 break;
+            case AIStates.keepDistance:
+                if(Time.time > lastAttack + attackCooldown)
+                {
+                    state = AIStates.pursuit;
+                }
+                KeepDistanceMovement();
+                break;
         }
     }
 
     public void SeekMovement()
     {
-        if (target.transform.position.x + stopRange < transform.position.x)
+        MoveInDirection(target.transform.position);
+    }
+
+    public void MoveInDirection(Vector2 direction)
+    {
+        if (direction.x + stopRange < transform.position.x)
         {
-            float distance = Mathf.Abs(target.transform.position.x + stopRange - transform.position.x);
+            float distance = Mathf.Abs(direction.x + stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
             movement.MoveLeft(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (target.transform.position.x - stopRange > transform.position.x)
+        else if (direction.x - stopRange > transform.position.x)
         {
-            float distance = Mathf.Abs(target.transform.position.x - stopRange - transform.position.x);
+            float distance = Mathf.Abs(direction.x - stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
             movement.MoveRight(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
@@ -93,12 +108,30 @@ public class BiterAI : BaseAI
             movement.NotMoving();
     }
 
+    public void KeepDistanceMovement()
+    {
+        if(Mathf.Abs(transform.position.x - target.position.x) - maintainDistance >= stopRange || true)
+        {
+            if(transform.position.x > target.transform.position.x)
+            {
+                Vector2 targetPoint = Vector2.right * (target.position.x + maintainDistance);
+                MoveInDirection(targetPoint);
+            }
+            else
+            {
+                Vector2 targetPoint = Vector2.right * (target.position.x - maintainDistance);
+                MoveInDirection(targetPoint);
+            }
+        }
+    }
+
     public void Attack()
     {
         if (attackSpeed == 0)
             return;
         lastAttack = Time.time;
         state = AIStates.attacking;
+        attacking = true;
         //anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetTrigger("Attack");
         if(target.transform.position.x < transform.position.x)
@@ -117,7 +150,8 @@ public class BiterAI : BaseAI
 
     public void Attacking()
     {
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon1_bite"))
-            state = AIStates.idle;
+        if (!attacking)
+            state = AIStates.keepDistance;
+        //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
     }
 }

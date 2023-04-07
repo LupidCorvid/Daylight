@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+  alsoFlash: []
+  forceNonSolidFlash: 0
 --- !u!60 &1242605522
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -764,6 +766,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword: {fileID: 2591983749293105128}
   damage: 1
-  knockback: 25
+  knockback: 250
   sameAttackCollisions: []
   swordAnimator: {fileID: 0}

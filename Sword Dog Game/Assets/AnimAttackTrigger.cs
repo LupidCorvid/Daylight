@@ -10,4 +10,10 @@ public class AnimAttackTrigger : MonoBehaviour
     {
         enemy?.ai?.applyAttackDamage();
     }
+
+    public void endAttack()
+    {
+        if(enemy?.ai != null)
+            enemy.ai.attacking = false;
+    }
 }

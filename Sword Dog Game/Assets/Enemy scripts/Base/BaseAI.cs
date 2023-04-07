@@ -73,6 +73,8 @@ public class BaseAI
         }
     }
 
+    public bool attacking = false;
+
     public Transform target;
 
     public Rigidbody2D rb;
