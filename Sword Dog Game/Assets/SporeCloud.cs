@@ -14,6 +14,8 @@ public class SporeCloud : MonoBehaviour
     {
         get
         {
+            if (mainEnemy == null)
+                return null;
             return (BugShroomAI)(mainEnemy.ai);
         }
     }
@@ -42,6 +44,6 @@ public class SporeCloud : MonoBehaviour
 
         if (ai?.hitThisFrame?.Contains(hit) == false)
             ai.hitThisFrame.Add(hit);
-        
+
     }
 }
