@@ -15,8 +15,9 @@ public class CameraController : MonoBehaviour
     public static CameraController main;
 
     public static Camera mainCam;
-    private static bool canMove = true;
-    private static float cantMoveFor = 0.1f, maxDelay = 0.1f;
+    private static bool overrideMovement = false;
+    private static float overrideFor = 0.5f, maxDelay = 0.5f;
+    private static Transform overrideTracker;
 
     Rigidbody2D rb;
 
@@ -24,7 +25,9 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            return targetTracker.position + offset;
+            if (!overrideMovement)
+                return targetTracker.position + offset;
+            return overrideTracker.position + offset;
         }
     }
 
@@ -52,13 +55,12 @@ public class CameraController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        if (!canMove)
+    {       
+        if (overrideMovement)
         {
-            cantMoveFor += Time.fixedDeltaTime;
-            if (cantMoveFor < maxDelay)
-                return;
-            canMove = true;
+            overrideFor += Time.fixedDeltaTime;
+            if (overrideFor > maxDelay)
+                overrideMovement = false;
         }
 
         if (!externalControl)
@@ -73,9 +75,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public static void DisableMovement()
+    public static void OverrideMovement(Transform player)
     {
-        canMove = false;
-        cantMoveFor = 0f;
+        overrideMovement = true;
+        overrideFor = 0f;
+        overrideTracker = player;
     }
 }
