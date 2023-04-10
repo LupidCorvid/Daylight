@@ -14,8 +14,6 @@ public class WindBurstEffect : MonoBehaviour
 
     float startTime;
 
-    float lastRange;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,14 +35,14 @@ public class WindBurstEffect : MonoBehaviour
         }
 
         particleFF.startRange = range;
-        particleFF.endRange = particleFF.startRange + .5f;
+        particleFF.endRange = particleFF.startRange + .25f;
 
-        particleFF.gravity = curStrength;
+        particleFF.gravity = curStrength * .75f;
 
         foreach(Collider2D collision in collisions.triggersInContact)
         {
             float distance = Vector2.Distance(collision.transform.position, transform.position);
-            if (!(distance > lastRange &&  distance <= range))
+            if (!(distance < range + (Time.deltaTime * lifeTime/radius) &&  distance <= range))
             {
                 continue;
             }
@@ -52,18 +50,18 @@ public class WindBurstEffect : MonoBehaviour
 
             if (swayer != null)
             {
-                swayer.swayVelocity += (swayer.transform.position - transform.position).normalized.x * strength;
+                swayer.swayVelocity += (swayer.transform.position - transform.position).normalized.x * strength * Time.deltaTime * .5f;
+                swayer.swayPosition += ((swayer.transform.position - transform.position).normalized.x * strength * Time.deltaTime * .001f);
             }
 
             VineSegment vine = collision.GetComponent<VineSegment>();
 
             if(vine != null && vine?.rb != null && vine?.transform != null)
             {
-                vine.rb.AddForce(((Vector2)(vine.transform.position - transform.position)).normalized * strength);
+                //vine.rb.AddForce(((Vector2)(vine.transform.position - transform.position)).normalized * strength * Time.deltaTime * 200);
+                vine.rb.velocity += ((Vector2)(vine.transform.position - transform.position)).normalized * strength/vine.rb.mass * Time.deltaTime * 10; 
             }
 
         }
-
-        lastRange = range;
     }
 }
