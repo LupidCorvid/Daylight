@@ -14,6 +14,8 @@ public class WindBurstEffect : MonoBehaviour
 
     float startTime;
 
+    public float particleForceScalar = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class WindBurstEffect : MonoBehaviour
         particleFF.startRange = range;
         particleFF.endRange = particleFF.startRange + .25f;
 
-        particleFF.gravity = curStrength * .75f;
+        particleFF.gravity = curStrength * particleForceScalar;
 
         foreach(Collider2D collision in collisions.triggersInContact)
         {

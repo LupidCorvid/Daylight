@@ -277,7 +277,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4909,6 +4909,18 @@ PrefabInstance:
     - target: {fileID: 4477534061470944697, guid: f97cac9359b1ebd488708820b0bb1235, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477534061470944698, guid: f97cac9359b1ebd488708820b0bb1235, type: 3}
+      propertyPath: lifeTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477534061470944698, guid: f97cac9359b1ebd488708820b0bb1235, type: 3}
+      propertyPath: strength
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477534061470944698, guid: f97cac9359b1ebd488708820b0bb1235, type: 3}
+      propertyPath: particleForceScalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
