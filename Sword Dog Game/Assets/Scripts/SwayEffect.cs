@@ -12,8 +12,8 @@ public class SwayEffect : MonoBehaviour
     MeshFilter meshFilter;
     Mesh.MeshDataArray originalSnapshot;
 
-    private float swayPosition = 1;
-    private float swayVelocity = 0;
+    public float swayPosition = 1;
+    public float swayVelocity = 0;
 
     public float tension = 1;
     public float dampening = 1;
