@@ -23,6 +23,11 @@ public class SwayEffect : MonoBehaviour
     //Lower wind volatility means objects near eachother have similar swaying motion
     public float windVolatility = 0.2f;
 
+    //For use with SceneWindSetter
+    public static float sceneStrengthScalar = 1;
+    public static float sceneSpeedScalar = 1;
+    public static float sceneVolatilityScalar = 1;
+
     //Maximum distance for deformation on the mesh
     public float limit = 1;
 
@@ -180,10 +185,10 @@ public class SwayEffect : MonoBehaviour
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending
-        int windDirection = (windStrength > 0 ? -1 : 1);
+        int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
         float lastVelocity = swayVelocity;
         //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
-        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
+        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
         swayVelocity += windEffect;
         swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
         swayPosition += swayVelocity;

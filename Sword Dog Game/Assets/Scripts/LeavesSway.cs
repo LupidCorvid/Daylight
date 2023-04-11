@@ -8,6 +8,11 @@ public class LeavesSway : MonoBehaviour
     public float swaySpeed = 1;
     public float swayVolatility = .2f;
 
+    //For adjusting numbers with SceneWindSetter
+    public static float sceneIntensityScalar = 1;
+    public static float sceneSpeedScalar = 1;
+    public static float sceneVolatilityScalar = 1;
+
     public float lastRotation = 0;
 
     public float swayVelocity = 0;
@@ -84,11 +89,11 @@ public class LeavesSway : MonoBehaviour
         float newRotation;
         if (useVelocity)
         {
-            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed) + transform.position.x) * swayVolatility, 0) * 2) - 1) * swayIntensity;
+            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
             newRotation = lastRotation + swayVelocity * Time.deltaTime;
         }
         else
-            newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed) + transform.position.x) * swayVolatility, 0) * 2) - 1) * swayIntensity;
+            newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
 
         sprite.transform.rotation = Quaternion.Euler(0, 0, sprite.transform.rotation.eulerAngles.z + (lastRotation - newRotation));
         lastRotation = newRotation;
