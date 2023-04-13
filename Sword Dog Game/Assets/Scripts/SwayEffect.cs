@@ -42,12 +42,13 @@ public class SwayEffect : MonoBehaviour
 
     //Used for sound capping
     public static int windSounds = 0;
-    public static int windSoundCap = 200;
+    public static int windSoundCap = 400;
     public static float windSoundCooldownMax = 0.1f, windSoundCooldown = windSoundCooldownMax;
 
     // Start is called before the first frame update
     void Start()
     {
+        windSounds = 0;
         player ??= GameObject.FindGameObjectWithTag("Player").transform;
         soundPlayer = GetComponent<SoundPlayer>();
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
@@ -210,8 +211,8 @@ public class SwayEffect : MonoBehaviour
                 sway(swayPosition);
         }
 
-        if (windEffect/Time.fixedDeltaTime * 5/windStrength > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
-            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+        if (Mathf.Abs(windEffect)/Time.fixedDeltaTime * 5/Mathf.Abs(windStrength/2) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
+            PlayWindSound(Mathf.Abs(windEffect) / Time.fixedDeltaTime * 0.04f);
 
         if (windSoundCooldown < windSoundCooldownMax)
             windSoundCooldown += Time.fixedDeltaTime;
@@ -234,6 +235,7 @@ public class SwayEffect : MonoBehaviour
 
     private void EndWindSound()
     {
-        windSounds--;
+        if(windSounds > 0)
+            windSounds--;
     }
 }
