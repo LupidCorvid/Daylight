@@ -18,15 +18,26 @@ public class PauseScreen : MonoBehaviour
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            AudioSource[] sources = FindObjectsOfType<AudioSource>();
             if (!paused)
             {
                 paused = true;
                 Time.timeScale = 0;
+                foreach (AudioSource source in sources)
+                {
+                    source.Pause();
+                }
+                Debug.Log("Paused");
             }
             else
             {
                 paused = false;
                 Time.timeScale = 1;
+                foreach (AudioSource source in sources)
+                {
+                    source.UnPause();
+                }
+                Debug.Log("Unpause");
             }
         }
     }
