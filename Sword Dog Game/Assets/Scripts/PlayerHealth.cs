@@ -86,6 +86,11 @@ public class PlayerHealth : MonoBehaviour
         int temp = health;
         for (int i = 0; i < CanvasManager.hearts.Count; i++)
         {
+            if (health <= Heart.MinWobbleHealth)
+                CanvasManager.hearts[i].Wobble();
+            else
+                CanvasManager.hearts[i].wobbling = false;
+            
             CanvasManager.hearts[i].SetSprite(temp);
             temp -= 2;
         }

@@ -18,6 +18,7 @@ public class Heart : MonoBehaviour
     public static float wobbleAmplitude = 3f, wobblePeriod = 0.3f;
     private static bool flipWobble = false;
     private bool wobbledOnce = false;
+    public static int MinWobbleHealth = 2;
 
     private void Start()
     {
@@ -56,10 +57,13 @@ public class Heart : MonoBehaviour
 
     public void Wobble()
     {
-        originalPosition = transform.position;
-        anim.Play(wobble.name);
-        wobbling = true;
-        wobbledOnce = true;
+        if (!wobbling)
+        {
+            originalPosition = transform.position;
+            anim.Play(wobble.name);
+            wobbling = true;
+            wobbledOnce = true;
+        }
     }
 
     public void StopWobble()
