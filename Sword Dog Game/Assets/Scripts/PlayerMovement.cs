@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, lastLandHeight, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -829,6 +829,7 @@ public class PlayerMovement : MonoBehaviour
                 
                 isGrounded = true;
                 lastOnLand = 0f;
+                lastLandHeight = transform.position.y;
                 break;
             }
         }
@@ -927,7 +928,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isRoofed && !isJumping)
+        bool coyoteTime = lastOnLand < 0.2f && transform.position.y < lastLandHeight;
+        
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || coyoteTime) && !isRoofed && !isJumping)
         {
             if (isOnSlope && slopeDownAngle > maxSlopeAngle && cldr != cldr2)
                 return;
