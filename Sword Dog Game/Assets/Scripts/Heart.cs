@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class Heart : MonoBehaviour
 {
-    private Vector3 originalPosition;
     [SerializeField] private Animation anim;
-    public float offset;
     public bool wobbling;
 
     // 0 = empty, 1 = half, 2 = full
@@ -45,7 +43,7 @@ public class Heart : MonoBehaviour
         }
 
         AnimationCurve wobbleCurve = new AnimationCurve(keys);
-        wobble.SetCurve("", typeof(Heart), "offset", wobbleCurve);
+        wobble.SetCurve("", typeof(Transform), "localPosition.y", wobbleCurve);
         wobble.wrapMode = WrapMode.Loop;
         anim.AddClip(wobble, wobble.name);
     }
@@ -59,10 +57,8 @@ public class Heart : MonoBehaviour
     {
         if (!wobbling)
         {
-            originalPosition = transform.position;
             anim.Play(wobble.name);
             wobbling = true;
-            wobbledOnce = true;
         }
     }
 
@@ -70,12 +66,6 @@ public class Heart : MonoBehaviour
     {
         anim.Stop(); // TODO figure out how to make this only stop the one clip
         wobbling = false;
-    }
-
-    public void ForceStopWobble()
-    {
-        StopWobble();
-        offset = 0;
     }
 
     public void CheckStopWobble()
@@ -93,13 +83,9 @@ public class Heart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) Wobble();
         if (Input.GetKeyDown(KeyCode.Y)) wobbling = false;
 
-        if (wobbledOnce)
-            transform.position = new Vector3(originalPosition.x, originalPosition.y + offset);
-
         if (!wobbling)
             anim["Wobble"].speed = Mathf.Lerp(anim["Wobble"].speed, 0.2f, 0.1f);
         else
             anim["Wobble"].speed = 1f;
     }
-
 }
