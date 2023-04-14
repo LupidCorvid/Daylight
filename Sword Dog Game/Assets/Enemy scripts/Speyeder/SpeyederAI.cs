@@ -46,7 +46,7 @@ public class SpeyederAI : BaseAI
     public override void Start()
     {
         base.Start();
-        target ??= GameObject.Find("Player(Clone)").transform;
+        //target ??= GameObject.Find("Player(Clone)").transform;
         resetPosition = (Vector2)transform.position - web.connectedBody.position;
         state = states.idle;
     }
@@ -56,11 +56,15 @@ public class SpeyederAI : BaseAI
         base.FixedUpdate();
 
         transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(web.connectedBody.transform.position - transform.position, Vector2.up));
+        anim.SetFloat("XVel", rb.velocity.x);
+        anim.SetFloat("YVel", rb.velocity.y);
+
 
         switch (state)
         {
             case states.idle:
-                if(target.transform.position.y < transform.position.y)
+                anim.SetBool("Returning", false);
+                if(target != null && target.transform.position.y < transform.position.y)
                 {
                     
                     //Find time it would take to drop to player's height. Might be wrong as it isnt relative height?
@@ -79,17 +83,31 @@ public class SpeyederAI : BaseAI
                 if(target.position.y < ((Vector2)web.connectedBody.position + resetPosition + Vector2.down * web.distance).y)
                     web.distance = Mathf.Abs((transform.position.y - target.position.y) + preferredHeight);
 
-                if (Vector2.Distance(transform.position, web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
+                if ((transform.position.y - target.position.y) + rb.velocity.y * .15f < 0)
+                {
+                    anim.SetTrigger("Land");
+                }
+                //if (Vector2.Distance(transform.position, web.connectedBody.position + resetPosition + Vector2.up * preferredHeight) - web.distance <= .05f)
+                if(Vector2.Distance(transform.position, web.connectedBody.position + Vector2.down * web.distance) <= .05f)
                 {
                     lastLand = Time.time;
                     state = states.landStop;
+                    //applyAttackDamage();
+                    anim.SetTrigger("Land");
                 }
                 break;
             case states.landStop:
+                if ((transform.position.y - target.position.y) + rb.velocity.y * .15f < 0)
+                {
+                    anim.SetTrigger("Land");
+                }
+                //anim.SetTrigger("Land");
                 if (lastLand + returnWaitTime <= Time.time)
                     state = states.returning;
                 break;
             case states.returning:
+                anim.ResetTrigger("Land");
+                anim.SetBool("Returning", true);
                 //Prevents it from swinging too much if hit with knockback (swings get bigger as it gets closer to the resetPosition)
                 rb.drag = 1;
                 web.distance -= 1 * moveSpeed * Time.deltaTime;
@@ -98,5 +116,12 @@ public class SpeyederAI : BaseAI
                     state = states.idle;
                 break;
         }
+    }
+
+    public override void applyAttackDamage()
+    {
+        Vector2 location = transform.position + Vector3.down * 1.25f;
+        Vector2 range = new Vector2(.75f, 1.25f);
+        DamageBox(location, range);
     }
 }

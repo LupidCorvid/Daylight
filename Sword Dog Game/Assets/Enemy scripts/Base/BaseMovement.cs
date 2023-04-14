@@ -10,7 +10,7 @@ public class BaseMovement : MonoBehaviour
     public PhysicsMaterial2D slippery;
     public PhysicsMaterial2D friction;
 
-    protected Vector3 velocity;
+    public Vector3 velocity;
 
     protected Collider2D cldr;
 

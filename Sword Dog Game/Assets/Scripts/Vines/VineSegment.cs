@@ -16,6 +16,11 @@ public class VineSegment : MonoBehaviour
 
     public float reactiveResponseScalar = 1;
 
+    //For use with SceneWindSetter
+    public static float sceneStrengthScalar = 1;
+    public static float sceneSpeedScalar = 1;
+    public static float sceneVolatilityScalar = 1;
+
     private void Awake()
     {
         fillInComponents();        
@@ -38,7 +43,7 @@ public class VineSegment : MonoBehaviour
     public void FixedUpdate()
     {
         //Wind direction makes it so that wind rolls in the same direction as things are bending
-        int windDirection = (windStrength > 0 ? -1 : 1);
-        rb.velocity += (Vector2.right * Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.deltaTime * windStrength)/rb.mass;
+        int windDirection = (windStrength * sceneSpeedScalar > 0 ? -1 : 1);
+        rb.velocity += (Vector2.right * Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.deltaTime * windStrength * sceneStrengthScalar)/rb.mass;
     }
 }

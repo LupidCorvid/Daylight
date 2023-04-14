@@ -9,12 +9,15 @@ public class ShopkeepBehavior : DialogNPC
     bool talking, finishTalkingSequence = false;
 
     Transform playerPosition;
-    bool foundPlayerPosition = false;
+    // bool foundPlayerPosition = false;
 
     public float advertisingCooldown = 15;
     public float lastAdvert = -15;
 
     public CollisionsTracker advertCldr;
+
+    public GameObject ShopPrefab;
+    private MiniBubbleController bubble;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +33,10 @@ public class ShopkeepBehavior : DialogNPC
         if(!alreadyTalking && lastAdvert + advertisingCooldown < Time.time)
         {
             GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
-            MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
+            bubble = addedObj.GetComponent<MiniBubbleController>();
             bubble.speaker = this;
             bubble.offset = miniBubbleOffset;
-            bubble.setSource(new DialogSource("[ss, .05][IA,<size=75%>]Interested in buying anything?[w, 1] [exit]"));
+            bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
             lastAdvert = Time.time;
         }
     }
@@ -91,11 +94,14 @@ public class ShopkeepBehavior : DialogNPC
     public override void interact(GameObject user)
     {
         base.interact(user);
+        if (bubble != null && bubble.gameObject != null)
+            bubble.close();
         playerPosition = user.transform;
     }
+
     IEnumerator finishedTalking()
     {
-        foundPlayerPosition = false;
+        // foundPlayerPosition = false;
         waitToLook = 0;
         if(playerPosition.position.x < transform.position.x) anim.Play("SK_upright_resetHead");
         finishTalkingSequence = true;
@@ -115,7 +121,17 @@ public class ShopkeepBehavior : DialogNPC
 
     public void openShop()
     {
-        Debug.Log("Attempted to open shop. Shop is not yet implemented!");
+        MenuManager.main.openMenu(ShopPrefab);
+        CutsceneController.PlayCutscene("OpenShop");
+        MenuManager.menuClosed += onShopClose;
+        DialogController.main.forceClose();
+    }
+
+    public void onShopClose()
+    {
+        openDialog();
+        dialogSource.dialog = "[lf,Shopkeep.txt,OnShopExit]";
+        MenuManager.menuClosed -= onShopClose;
     }
 
 }

@@ -5,6 +5,10 @@ using UnityEngine;
 public class RenderLayerSetter : MonoBehaviour
 {
     public int newLayer = -100;
+    public Color newColor;
+
+    public bool changeLayer, changeColor, changeParticleColor, ChangeScale = true;
+
     // Start is called before the first frame update
     public void setAllLayers()
     {
@@ -12,7 +16,10 @@ public class RenderLayerSetter : MonoBehaviour
         sprites.AddRange(GetComponentsInChildren<SpriteRenderer>());
         foreach(SpriteRenderer sprite in sprites)
         {
-            sprite.sortingOrder = newLayer;
+            if(changeLayer)
+                sprite.sortingOrder = newLayer;
+            if(changeColor)
+                sprite.color = newColor;
         }
 
         List<ParticleSystemRenderer> particles = new List<ParticleSystemRenderer>();
@@ -20,16 +27,21 @@ public class RenderLayerSetter : MonoBehaviour
 
         foreach (ParticleSystemRenderer system in particles)
         {
-            system.sortingOrder = newLayer;
+            if(changeLayer)
+                system.sortingOrder = newLayer;
         }
 
 
-        //List<ParticleSystem> pSystems = new List<ParticleSystem>();
-        //pSystems.AddRange(GetComponentsInChildren<ParticleSystem>());
+        List<ParticleSystem> pSystems = new List<ParticleSystem>();
+        pSystems.AddRange(GetComponentsInChildren<ParticleSystem>());
 
-        //foreach(ParticleSystem system in pSystems)
-        //{
-        //    system.main.scalingMode = ParticleSystemScalingMode.Hierarchy;
-        //}
+        foreach (ParticleSystem system in pSystems)
+        {
+            ParticleSystem.MainModule main = system.main;
+            if(ChangeScale)
+                main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+            if (changeParticleColor)
+                main.startColor = newColor;
+        }
     }
 }

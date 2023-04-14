@@ -9,7 +9,11 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isJumping, isFalling, isSprinting, canResprint, isSkidding, canSkid;
+    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
+    public Vector2 bottom;
+    private static bool created = false;
+    private float beenLoaded = 0.0f, minLoadTime = 0.1f;
+    private Transform resetPoint;
 
     public bool facingRight
     {
@@ -20,14 +24,14 @@ public class PlayerMovement : MonoBehaviour
         set
         {
             int neg = 1;
-            if (value)
+            if (value && created)
                 neg *= -1;
 
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * neg, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, lastLandHeight, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -42,7 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Positions marking where to check if the player is grounded
     //[SerializeField] public Transform[] groundChecks;
-    public CollisionsTracker groundCheck;
+    public CollisionsTracker groundCheck, behindGroundCheck;
+    public CollisionsTracker roofCheck;
 
     // Amount of force added when the player jumps
     [SerializeField] private float jumpForce = 2000f;
@@ -52,26 +57,26 @@ public class PlayerMovement : MonoBehaviour
 
     // Slope variables
     private Vector2 colliderSize;
+    [SerializeField] private float wallCheckDistance = 0.5f;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private float maxSlopeAngle;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
     private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
-    private bool isOnSlope, canWalkOnSlope;
+    public bool isOnSlope, canWalkOnSlope;
     public PhysicsMaterial2D slippery, friction;
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
 
     [SerializeField] private Collider2D cldr1, cldr2;
-    Collider2D cldr;
+    public Collider2D cldr;
 
     Vector2 upperLeftCorner;
     Vector2 upperRightCorner;
 
     public bool resetting, invincible;
 
-    public bool onlyRotateWhenGrounded;
     float lastGroundedSlope = 0;
     float lastUngroundedSlope = 0;
     public float landAnimTime = .5f;
@@ -98,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 groundCheckSpot = new Vector2();
 
+    public float lastSlope;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -117,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
 
         stepDirection = 1;
         facingRight = true;
+        isGrounded = true;
+        created = true;
 
         // Singleton design pattern
         if (instance != null && instance != this)
@@ -132,10 +141,17 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+
         if(groundCheckSpot == default)
             groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
         groundCheck.triggerEnter += checkIfLanding;
+
+        Camera.main.transform.position = transform.position + new Vector3(0, 2, -10);
+
+        PositionResetPoint rp = GameObject.FindObjectOfType<PositionResetPoint>();
+        if (rp != null)
+            resetPoint = rp.transform;
     }
 
     public void checkIfLanding(Collider2D collision)
@@ -153,8 +169,26 @@ public class PlayerMovement : MonoBehaviour
         stops--;
     }
 
+    public void GoToResetPoint()
+    {
+        if (GetComponent<PlayerHealth>().health > 0)
+        {
+            if (resetting || PlayerHealth.dead)
+                return;
+            
+            // TODO: Add cutscene here. Start death animation, then fade to black, then unfade, then wake up player at reset point position.
+            transform.position = resetPoint.position;
+            transform.rotation = resetPoint.rotation;
+        }
+    }
+
     void Update()
     {
+        instance = gameObject;
+        controller = this;
+        
+        bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
+
         if (timeSinceJumpPressed < 1f)
             timeSinceJumpPressed += Time.deltaTime;
 
@@ -169,13 +203,15 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerHealth.dead) deltaStamina = 0;
         stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
 
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu) // && not paused(?)
         {
             // remember previous movement input
             prevMoveX = moveX;
 
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
+            if (wallOnRight && moveX > 0) moveX = 0;
+            if (wallOnLeft && moveX < 0) moveX = 0;
             
             if (moveX == 0 && timeIdle < 1f)
             {
@@ -187,12 +223,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
-
-            if (prevMoveX != moveX && (isSprinting || timeSinceSprint < 0.1f) && isGrounded && canSkid)
-            {
-                anim.SetTrigger("skidding");
-                isSkidding = true;
-            }
+            anim.SetFloat("time_idle", timeIdle);
 
             // track stops per second
             if (prevMoveX != 0 && moveX == 0)
@@ -213,6 +244,8 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("trot");
                 trotting = true;
             }
+            if (timeIdle >= 0.4f)
+                anim.ResetTrigger("trot");
 
             // bark code
             if (Input.GetKeyDown(KeyCode.B))
@@ -240,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
             // }
 
             // sprinting
-            if (trotting && !isSprinting)
+            if (trotting && !isSprinting && !isSkidding)
             {
                 if ((Input.GetButton("Sprint") && canResprint && stamina >= minStamina) || Input.GetButtonDown("Sprint"))
                 {
@@ -270,24 +303,20 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("sprinting", isSprinting || timeSinceSprint < 0.1f);
 
-            if (isSprinting)
+            if (isSprinting && !isSkidding)
             {
                 timeSinceSprint = 0;
                 sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
             }
             else
             {
-                if (timeSinceSprint > 0.1f && isSkidding)
-                {
-                    StopSkid();
-                }
-
                 if (timeSinceSprint < 1f)
                     timeSinceSprint += Time.deltaTime;
 
                 sprintWindUpPercent = 1;
-                    
-                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+                
+                if (!isSkidding)
+                    sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
         }
         else
@@ -313,8 +342,14 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // check if the player is against a wall
+        CheckWall();
+
         realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
         lastPosition = transform.position;
+
+        if (isSkidding)
+            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1f, 0.05f);
 
         // calculate speed
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
@@ -322,19 +357,16 @@ public class PlayerMovement : MonoBehaviour
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            if (!isSkidding)
-            {
-                Flip();
-            }
+            Flip();
         }
 
         // calculate target velocity
-        Vector3 targetVelocity = new Vector2(PlayerHealth.dead || isSkidding ? 0 : moveX * calculatedSpeed, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(PlayerHealth.dead ? 0 : moveX * calculatedSpeed, rb.velocity.y);
 
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(isSkidding? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target
@@ -358,11 +390,18 @@ public class PlayerMovement : MonoBehaviour
         // calculate speed multiplier for trot animation
         CalculateSpeedMultiplier();
 
-        // check if player is on ground
-        CheckGround();
+        // handle scene loads
+        if (beenLoaded < minLoadTime)
+            beenLoaded += Time.fixedDeltaTime;
+        else
+        {
+            anim.SetBool("loaded", true);
+            // check if player is on ground
+            CheckGround();
+        }
 
-        // rotate player based on slope
-        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        //// rotate player based on slope
+        //transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
 
         // hold jump distance extentions
         if (isJumping)
@@ -436,7 +475,7 @@ public class PlayerMovement : MonoBehaviour
                 // stop here
                 case 0 or 5 or 6 or 11:
                     if (!isJumping)
-                        anim.SetTrigger("trot");
+                        anim.SetTrigger("exit_trot");
                     trotting = false;
                     stepDirection = 1;
                     break;
@@ -483,32 +522,32 @@ public class PlayerMovement : MonoBehaviour
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
-        SlopeCheckHorizontal(checkPos, upperLeftCorner, upperRightCorner);
+        GetRotation();
+        //SlopeCheckHorizontal(checkPos, upperLeftCorner, upperRightCorner);
         SlopeCheckVertical(checkPos);
     }
 
-    private void SlopeCheckHorizontal(Vector2 checkPos, Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
+    private float? SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
+        float? returnAngle = null;
+
+        //Prevent infinite recursive runs (should never as long as geometry is fully closed)
         if (runs > 10)
-            return;
+            return null;
+
+        //Get initial raycasts
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
-        
-        if (leftHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
-        {
-            leftHit.point = upperLeftCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
-            leftHit.distance = (Vector2.Distance(upperLeftCorner + (Vector2)transform.position, leftHit.point));
-        }
-        if (rightHit.point == new Vector2(0, 0) && !onlyRotateWhenGrounded)
-        {
-            rightHit.point = upperRightCorner + (Vector2)transform.position + (Vector2.down * (slopeCheckDistance + colliderSize.y));
-            rightHit.distance = (Vector2.Distance(upperRightCorner + (Vector2)transform.position, rightHit.point));
-        }
 
+
+
+        //Draw vertical raycasts, set ground_close to true if hit is close enough to the collider and also != 0,0
+#region gizmo drawing and ground_close setting
+        
         float minGroundDistance = 2f + colliderSize.y / 2;
         anim.SetBool("ground_close", false);
 
-        if(leftHit.point != Vector2.zero)
+        if (leftHit.point != Vector2.zero)
         {
             Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
             if (leftHit.distance <= minGroundDistance)
@@ -520,13 +559,10 @@ public class PlayerMovement : MonoBehaviour
             if (rightHit.distance <= minGroundDistance)
                 anim.SetBool("ground_close", true);
         }
-      
-        if (leftHit.distance == rightHit.distance && !onlyRotateWhenGrounded)
-        {
-            slopeSideAngle = 0;
-            return;
-        }
+        #endregion
 
+        //If needing to rotate and there is not enough data from left or right side, test for better position for left or right and run again
+#region retake left and right if one or both are missing
         if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
         {
             Vector2 leftSide = upperLeftCorner;
@@ -535,37 +571,32 @@ public class PlayerMovement : MonoBehaviour
 
             if (leftHit.point == Vector2.zero)
             {
-                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), Vector2.right, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
-                
-                Debug.DrawLine(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
-                leftSide.x = groundFinder.point.x - transform.position.x;
-                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
-                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
-                    return;
-                
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
+                if (leftSide.x == 0)
+                    return null;
             }
             if (rightHit.point == Vector2.zero)
             {
-                RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperRightCorner.x + transform.position.x, yLevel), Vector2.left, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
-                
-                Debug.DrawLine(new Vector2(upperRightCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
-                rightSide.x = groundFinder.point.x - transform.position.x;
-                //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
-                if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
-                    return;
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel, Vector2.left);
+                if (rightSide.x == 0)
+                    return null;
             }
-            
-            SlopeCheckHorizontal(checkPos, leftSide, rightSide, runs + 1);
-            
-            return;
-        }
-            
 
+            return SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
+        }
+#endregion
+
+
+        //Get the across raycasts and unsmoothed slope
+#region acrossRaycasts
+        //Get which raycast made it farther
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
 
+        //Get which direction the acrosscast needs to be (it should go from larger to smaller side)
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
         
+        //Setup positions of across point origins, then raycast across and drawline gizmo to show it
         Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
         Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2.4f);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot, 
@@ -575,55 +606,134 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
         Debug.DrawLine(across2.point, acrossCheck2, Color.green);
 
+        //angle between left point hit and right point hit
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y)/(rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
+        
+        //Percentage of the distance made across
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
         float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
+#endregion
 
-
+        //Make sure it is not reading the underside of a slope the player is on. Retake with shorter bounds if it is
+#region check for if reading underside
         bool onLedge = false;
         //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
-        if (acrossPercent2 - acrossPercent < .0001)//If issues arise get abs value
+        if (acrossPercent2 - acrossPercent < .0001)
         {
-            slopeSideAngle = 0;
-            if (acrossPercent > .01f)
+            returnAngle = 0;
+            if (acrossPercent > .0001f)
             {
                 if(right == 1)
-                    SlopeCheckHorizontal(checkPos, new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
+                    return SlopeCheckHorizontal(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
                 else
-                    SlopeCheckHorizontal(checkPos, upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
+                    return SlopeCheckHorizontal(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
             }
-            //SlopeCheckHorizontal(checkPos, new Vector2(across.point.x, upperLeftCorner.y), new Vector2(across));
             onLedge = true;
-            if (acrossPercent != 0 && acrossPercent2 != 0 && (!onlyRotateWhenGrounded /*|| isGrounded*/))
-                return;
         }
-        if(!float.IsNaN(unsmoothedSlope) && !onLedge)
-            slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+#endregion
 
-        if (isGrounded)
+        //Apply smoothing
+        if (!float.IsNaN(unsmoothedSlope) && !onLedge)
+            returnAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent/.5f) - 1)));
+        
+        return returnAngle;
+    }
+
+    /// <summary>
+    /// Does an across raycast just below the player to find any colliders to use to determine slope.
+    /// </summary>
+    /// <param name="upperLeftOrigin">The upperLeft scan bounds point</param>
+    /// <param name="upperRightOrigin">The upperright scan bounds point</param>
+    /// <param name="side">which side it is starting on</param>
+    /// <param name="usedOrigin">which origin to share x-value with</param>
+    /// <param name="yLevel">They y level to scan across at</param>
+    /// <param name="direction">The direction (left or right) to scan in </param>
+    /// <returns></returns>
+    public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel, Vector2 direction)
+    {
+        RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
+
+        Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+        side.x = groundFinder.point.x - transform.position.x;
+        
+        ////Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
+        if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
+            return Vector2.zero;
+        return side;
+    }
+
+    public float FindSurfaceRotation()
+    {
+        float? angle = SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
+        if (angle != null)
+            return angle.Value;
+        else
+            return slopeSideAngle;
+    }
+
+    /// <summary>
+    /// Does final routing on rotation logic.
+    /// </summary>
+    public void GetRotation()
+    {
+        slopeSideAngle = FindSurfaceRotation();
+        if(isGrounded)
         {
-            lastGroundedSlope = slopeSideAngle;
-
-            if (lastLand + landAnimTime > Time.time)
+            LandInterpolation();
+            if (lastLand + landAnimTime <= Time.time)
             {
-                slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+                float angleDifference = Mathf.DeltaAngle(slopeSideAngle, lastSlope);
+                if (Mathf.Abs(angleDifference) > 60 * Time.deltaTime)
+                {
+                    if (angleDifference < 0)
+                        slopeSideAngle = lastSlope + 60 * Time.deltaTime;
+                    else
+                        slopeSideAngle = lastSlope + -60 * Time.deltaTime;
+                }
             }
+                
         }
         else
         {
-            const float ROTATION_INTENSITY = 75;
-            int negative = 1;
-            if (!facingRight)
-                negative = -1;
-            float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
-            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
-            slopeSideAngle = lastGroundedSlope + rotationAmount;
+            MidAirRotation();
+        }
+        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        lastSlope = slopeSideAngle;
+    }
 
-            lastMidairVelocity = rb.velocity;
-            lastUngroundedSlope = slopeSideAngle;
+    /// <summary>
+    /// When landing, interpolate between new surface slope and last midair slope
+    /// </summary>
+    public void LandInterpolation()
+    {
+        lastGroundedSlope = slopeSideAngle;
+
+        if (lastLand + landAnimTime > Time.time)
+        {
+            slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
         }
     }
 
+    /// <summary>
+    /// Adjusts midair rotation to show velocity
+    /// </summary>
+    public void MidAirRotation()
+    {
+        const float ROTATION_INTENSITY = 75;
+        int negative = 1;
+        if (!facingRight)
+            negative = -1;
+        float rotationAmount = (rb.velocity.y * Time.deltaTime * ROTATION_INTENSITY * negative);
+        rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+        slopeSideAngle = lastGroundedSlope + rotationAmount;
+
+        lastMidairVelocity = rb.velocity;
+        lastUngroundedSlope = slopeSideAngle;
+    }
+    /// <summary>
+    /// Gets if the ground is close and if the angle being walked on is too high
+    /// </summary>
+    /// <param name="checkPos"></param>
     private void SlopeCheckVertical(Vector2 checkPos)
     {
         // anim.SetBool("ground_close", false);
@@ -659,6 +769,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CheckWall()
+    {
+        wallOnLeft = wallOnRight = false;
+        Vector2 startPosition = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y / 2);
+        startPosition += facingRight ? upperRightCorner : upperLeftCorner;
+
+        
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        if (isOnSlope)
+        {
+            direction = Quaternion.Euler(0, 0, slopeSideAngle) * direction;
+        }
+        
+        RaycastHit2D wallInfo = Physics2D.Raycast(startPosition, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
+        
+        if (wallInfo.point != Vector2.zero)
+        {
+            Debug.DrawLine(startPosition, wallInfo.point, Color.blue);
+            if (wallInfo.distance <= wallCheckDistance) {
+                if (facingRight) wallOnRight = true;
+                else wallOnLeft = true;
+            }
+        }
+    }
+
     void CheckGround()
     {
         SlopeCheck();
@@ -668,7 +803,11 @@ public class PlayerMovement : MonoBehaviour
         bool wasGrounded = isGrounded;
         isGrounded = false;
 
+        bool wasRoofed = isRoofed;
+        isRoofed = false;
+
         bool needsClean = false;
+
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
             //Debug.Log(LayerMask.GetMask("Terrain"));
@@ -690,12 +829,72 @@ public class PlayerMovement : MonoBehaviour
                 
                 isGrounded = true;
                 lastOnLand = 0f;
+                lastLandHeight = transform.position.y;
+                break;
+            }
+        }
+
+        if (needsClean)
+            groundCheck.clean();
+
+        needsClean = false;
+        behindGrounded = false;
+        foreach (Collider2D collision in behindGroundCheck.triggersInContact)
+        {
+            if (collision == null)
+            {
+                needsClean = true;
+                continue;
+            }
+            if (Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
+            {
+                behindGrounded = true;
+            }
+        }
+        if (needsClean)
+            behindGroundCheck.clean();
+
+        // TODO this may break with the sword - need to check later
+        bool isHazard = rb.IsTouchingLayers(LayerMask.NameToLayer("WorldHazard"));
+        if (!isHazard) {
+            if (isGrounded)
+            {
+                resetPoint.position = transform.position;
+                resetPoint.rotation = transform.rotation;
+            }
+
+            if (behindGrounded)
+            {
+                resetPoint.position = behindGroundCheck.transform.position;
+                resetPoint.rotation = transform.rotation;
+            }
+        }
+
+        if (wallOnLeft || wallOnRight)
+        {
+            cldr = cldr2;
+            cldr2.enabled = true;
+            cldr1.enabled = true;
+        }
+
+        needsClean = false;
+        foreach (Collider2D collision in roofCheck.triggersInContact)
+        {
+            //Debug.Log(LayerMask.GetMask("Terrain"));
+            if (collision == null)
+            {
+                needsClean = true;
+                continue;
+            }
+            if (Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && collision.gameObject.GetComponent<PlatformEffector2D>() == null)
+            {
+                isRoofed = true;
                 break;
             }
         }
         if (needsClean)
-            groundCheck.clean();
-
+            roofCheck.clean();
+        
         if ((isJumping && jumpTime < 0.1f) || (isFalling && fallTime < 0.1f))
             anim.SetBool("grounded", false);
         else
@@ -729,7 +928,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isJumping)
+        float coyoteTimeThreshold = 0.1f;
+        bool coyoteTime = lastOnLand < 0.2f && transform.position.y < lastLandHeight - coyoteTimeThreshold;
+        
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || coyoteTime) && !isRoofed && !isJumping)
         {
             if (isOnSlope && slopeDownAngle > maxSlopeAngle && cldr != cldr2)
                 return;
@@ -790,6 +992,13 @@ public class PlayerMovement : MonoBehaviour
     public void StopSkid()
     {
         isSkidding = false;
-        anim.ResetTrigger("skidding");
+        sprintSpeedMultiplier = 1.0f;
+    }
+
+    public void StartSkid()
+    {
+        sprintSpeedMultiplier = 0;
+        isSprinting = false;
+        isSkidding = true;
     }
 }

@@ -48,6 +48,7 @@ public class DialogController : MonoBehaviour
     public static bool closedAnimator = true;
     public bool openedThisFrame = false;
     public bool gotResponseThisFrame = false;
+    public bool skippedTextThisFrame = false;
 
     public Animator DotAnimator;
 
@@ -66,8 +67,11 @@ public class DialogController : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return)) && source != null)
         {
-            if(!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+            if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+            {
                 source.skippingText = true;
+                skippedTextThisFrame = true;
+            }
             pauseWaitForInputEnd();
         }
         if (reading)
@@ -86,6 +90,7 @@ public class DialogController : MonoBehaviour
         openedThisFrame = false;
         gotResponseThisFrame = false;
         endedWaitThisFrame = false;
+        skippedTextThisFrame = false;
     }
 
     public void finishOpen()
@@ -116,7 +121,26 @@ public class DialogController : MonoBehaviour
 
     public void finishClose()
     {
-        CanvasManager.ShowHUD();
+        if (!CutsceneController.cutsceneHideUI)
+            CanvasManager.ShowHUD();
+        panel.alpha = 0;
+        panel.interactable = false;
+        panel.blocksRaycasts = false;
+        responseController.close();
+        if (readWhenOpen)
+            reading = false;
+        closedAnimator = true;
+        InteractablesTracker.alreadyInteracting = false;
+    }
+
+    public void forceClose()
+    {
+
+        anim.Play("Idle");
+        textDisplay.alpha = 0;
+        headerDisplay.alpha = 0;
+
+
         panel.alpha = 0;
         panel.interactable = false;
         panel.blocksRaycasts = false;

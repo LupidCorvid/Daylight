@@ -43,7 +43,7 @@ public class MoveCameraCutscene : CutsceneData
             return;
         }
 
-        if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .05f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .05f)
+        if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)
         {
             curPoint++;
             if (curPoint < points.Count)

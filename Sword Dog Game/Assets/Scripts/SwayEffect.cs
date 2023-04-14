@@ -12,8 +12,8 @@ public class SwayEffect : MonoBehaviour
     MeshFilter meshFilter;
     Mesh.MeshDataArray originalSnapshot;
 
-    private float swayPosition = 1;
-    private float swayVelocity = 0;
+    public float swayPosition = 1;
+    public float swayVelocity = 0;
 
     public float tension = 1;
     public float dampening = 1;
@@ -22,6 +22,11 @@ public class SwayEffect : MonoBehaviour
     public float windSpeed = 1;
     //Lower wind volatility means objects near eachother have similar swaying motion
     public float windVolatility = 0.2f;
+
+    //For use with SceneWindSetter
+    public static float sceneStrengthScalar = 1;
+    public static float sceneSpeedScalar = 1;
+    public static float sceneVolatilityScalar = 1;
 
     //Maximum distance for deformation on the mesh
     public float limit = 1;
@@ -37,12 +42,13 @@ public class SwayEffect : MonoBehaviour
 
     //Used for sound capping
     public static int windSounds = 0;
-    public static int windSoundCap = 200;
+    public static int windSoundCap = 400;
     public static float windSoundCooldownMax = 0.1f, windSoundCooldown = windSoundCooldownMax;
 
     // Start is called before the first frame update
     void Start()
     {
+        windSounds = 0;
         player ??= GameObject.FindGameObjectWithTag("Player").transform;
         soundPlayer = GetComponent<SoundPlayer>();
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
@@ -175,14 +181,15 @@ public class SwayEffect : MonoBehaviour
     private void FixedUpdate()
     {
         //Culling
+        player ??= GameObject.FindGameObjectWithTag("Player").transform;
         if ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15)
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending
-        int windDirection = (windStrength > 0 ? -1 : 1);
+        int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
         float lastVelocity = swayVelocity;
         //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
-        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection) + (transform.position.x)) * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
+        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
         swayVelocity += windEffect;
         swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
         swayPosition += swayVelocity;
@@ -204,8 +211,8 @@ public class SwayEffect : MonoBehaviour
                 sway(swayPosition);
         }
 
-        if (windEffect/Time.fixedDeltaTime * 5/windStrength > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
-            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+        if (Mathf.Abs(windEffect)/Time.fixedDeltaTime * 5/Mathf.Abs(windStrength/2) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
+            PlayWindSound(Mathf.Abs(windEffect) / Time.fixedDeltaTime * 0.04f);
 
         if (windSoundCooldown < windSoundCooldownMax)
             windSoundCooldown += Time.fixedDeltaTime;
@@ -228,6 +235,7 @@ public class SwayEffect : MonoBehaviour
 
     private void EndWindSound()
     {
-        windSounds--;
+        if(windSounds > 0)
+            windSounds--;
     }
 }

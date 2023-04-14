@@ -42,9 +42,12 @@ public class DialogResponseController : MonoBehaviour
 
     private bool openedLastFrame = false;
 
+    public DialogController mainController;
+
     private void Start()
     {
         optionChosen += DialogController.main.receiveResponse;
+        mainController = DialogController.main;
     }
 
 
@@ -136,7 +139,7 @@ public class DialogResponseController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.T))
         {
-            if(awaitingResponse)
+            if(awaitingResponse && !mainController.skippedTextThisFrame)
                 makeChoice();
         }
     }

@@ -42,7 +42,7 @@ public class RockLobberAI : BaseAI
     {
         if(target != null)
         {
-            GameObject addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation);
+            GameObject addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation, TempObjectsHolder.asTransform);
             Rigidbody2D projectileVelocity = addedProjectile.GetComponent<Rigidbody2D>();
             //arctan((sqrt(c^4 - g(gd^2 + 2yv^2))+c^2)/gd)
             Vector2 relTar = target.position - transform.position;

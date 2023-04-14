@@ -193,7 +193,7 @@ public class AudioManager : MonoBehaviour
         else
             sfxMixer.SetFloat("Reverb", -10000f);
         
-        sfxMixer.SetFloat("Volume", 10 - 2*CameraController.mainCam.orthographicSize);
+        sfxMixer.SetFloat("Volume", 10 - 2*Camera.main.orthographicSize);
     }
 
     public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)

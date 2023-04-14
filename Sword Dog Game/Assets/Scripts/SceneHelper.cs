@@ -9,10 +9,12 @@ public static partial class SceneHelper
     public static Action ImbetweenUnloads;
     public static Action FinishedChangeScene;
     public static List<string[]> betweenSceneData = new List<string[]>();
+    public static bool changedSceneThisFrame;
 
     // @kurtdekker - to load next scene without resetting Input axes
     public static void LoadScene(string SceneNameToLoad)
     {
+        changedSceneThisFrame = true;
         PendingPreviousScene = SceneManager.GetActiveScene().name;
         SceneManager.sceneLoaded += ActivatorAndUnloader;
         SceneManager.LoadScene(SceneNameToLoad, LoadSceneMode.Additive);

@@ -112,15 +112,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
         DialogController.main.reading = false;
         alreadyTalking = false;
         stoppedTalkingThisFrame = true;
-        Invoke("tryShowPrompt", 1.5f);
         interactor = null;
         closedDialog?.Invoke();
-    }
-
-    private void tryShowPrompt()
-    {
-        if (inRange)
-            showPrompt(promptPrefab);
     }
 
     public void barkEffect()

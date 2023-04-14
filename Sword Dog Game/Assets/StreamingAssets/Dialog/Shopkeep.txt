@@ -3,7 +3,10 @@ Default{
 [sh,Shopkeep][abf,6][ss, .05] Hi there![w, .35] Do you want to buy anything? [prompt, Open shop,[llf,OpenShop], Leave, [llf,Exit]] [wi] [exit]
 }
 OpenShop{
-[c][CE,OpenShop] Sorry,[w, 0.15] I'm out of stock on literally everything at the moment.[w, .5] Please come back later though,[w, 0.15] I'll restock soon.[w, .5] [IA,<size=50%>] I hope [IA,</size>][wi] [exit]
+[c][CE,OpenShop][exit]
+}
+OnShopExit{
+[sh,Shopkeep][abf,6][ss, .05]Thank you for your patronage![wi] [exit]
 }
 Exit{
 [c]Goodbye! [w, .5] [exit]

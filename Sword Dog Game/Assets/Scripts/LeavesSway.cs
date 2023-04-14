@@ -8,6 +8,11 @@ public class LeavesSway : MonoBehaviour
     public float swaySpeed = 1;
     public float swayVolatility = .2f;
 
+    //For adjusting numbers with SceneWindSetter
+    public static float sceneIntensityScalar = 1;
+    public static float sceneSpeedScalar = 1;
+    public static float sceneVolatilityScalar = 1;
+
     public float lastRotation = 0;
 
     public float swayVelocity = 0;
@@ -41,6 +46,8 @@ public class LeavesSway : MonoBehaviour
 
     public bool onExitEmit = true;
 
+    public float lastEmptyParticleDrop;
+
     public void Start()
     {
         lastShakeDrop = Time.time - 1.5f;
@@ -52,6 +59,21 @@ public class LeavesSway : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         if (Group)
             groupMembers.AddRange(transform.parent.GetComponentsInChildren<LeavesSway>());
+    }
+
+    public void Update()
+    {
+        //Done to make sure that the particle bounds always include all particles, as the particle bounds being offset from all particles made it so that particles would disappear while still on screen.
+        if(Time.time >= lastEmptyParticleDrop + .09f)
+        {
+            ParticleSystem.EmitParams velocitySetter = new ParticleSystem.EmitParams()
+            {
+                startLifetime = .1f,
+                position = Vector3.zero
+            };
+            particleHandler.Emit(velocitySetter, 1);
+            lastEmptyParticleDrop = Time.time;
+        }
     }
 
     public void FixedUpdate()
@@ -67,11 +89,11 @@ public class LeavesSway : MonoBehaviour
         float newRotation;
         if (useVelocity)
         {
-            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed) + transform.position.x) * swayVolatility, 0) * 2) - 1) * swayIntensity;
+            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
             newRotation = lastRotation + swayVelocity * Time.deltaTime;
         }
         else
-            newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed) + transform.position.x) * swayVolatility, 0) * 2) - 1) * swayIntensity;
+            newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
 
         sprite.transform.rotation = Quaternion.Euler(0, 0, sprite.transform.rotation.eulerAngles.z + (lastRotation - newRotation));
         lastRotation = newRotation;

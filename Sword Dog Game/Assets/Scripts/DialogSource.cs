@@ -10,6 +10,7 @@ public class DialogSource
 
     public string dialog;
     public int position;
+    public int charCount;
 
     //Time to wait between words
     public float speed = 0.075f;
@@ -176,6 +177,7 @@ public class DialogSource
             dialog = loadedText;
         dialogBlocks = blocks;
         position = 0;
+        charCount = 0;
         waiting = false;
     }
 
@@ -192,14 +194,40 @@ public class DialogSource
             Debug.LogError("Couldnt find a block called " + block + ". Make sure you are in the right file!");
     }
 
-    public string read()
+    public enum ReadMode
+    {
+        DEFAULT, COLLECT, TYPEWRITE
+    }
+
+    public string collect()
+    {
+        if ((waiting || waitingForButtonInput || dialog == null))
+            return outString;
+        
+        skippingText = true;
+        while (skippingText)
+        {
+            readDialog(ReadMode.COLLECT);
+
+            if (position == dialog.Length - 1 && speed == 0)
+            {
+                skippingText = false;
+                Debug.LogWarning("Speed was left at 0, this could prevent anything else from running! Always return speed to non-zero once finishing");
+            }
+        }
+        position = 0;
+        charCount = 0;
+        return outString;
+    }
+
+    public string read(ReadMode mode = ReadMode.DEFAULT)
     {
         if ((waiting || waitingForButtonInput || dialog == null))
             return outString;
         while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {
             lastReadTime = Time.time;
-            readDialog();
+            readDialog(mode);
 
             if (position == dialog.Length - 1 && speed == 0)
             {
@@ -226,8 +254,7 @@ public class DialogSource
         return input.Length;
     }
     
-
-    private void readDialog()
+    private void readDialog(ReadMode mode = ReadMode.DEFAULT)
     {
         if ((waiting || waitingForButtonInput))
             return;
@@ -253,7 +280,10 @@ public class DialogSource
                 }
             }
             position = endPos + 1;
-            processStringEffect(parameters.ToArray());
+            if (mode != ReadMode.TYPEWRITE) // TODO this may need to be changed to account for effects that should not run in collect mode
+                processStringEffect(mode, parameters.ToArray());
+            else if (parameters[0] != "TFX" && parameters[0] != "/TFX") // TODO this may need to be expanded to cover other effects that should not run in typewrite mode
+                processStringEffect(mode, parameters.ToArray());
         }
         if (position >= dialog.Length)
             return;
@@ -263,36 +293,50 @@ public class DialogSource
             waitFrameForChar = false;
             return;
         }
-        outString += dialog[position];
+        if (mode != ReadMode.TYPEWRITE)
+            outString += dialog[position];
         position++;
-
+        charCount++;
 
         if (dialog.Length > position && !(dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
         {
-            if (barkCooldown > autoBarkFrequency)
+            if (mode != ReadMode.COLLECT)
             {
-                barkEffect();
-                barkCooldown = 0;
-                if (randBarkRange.x < randBarkRange.y)
+                if (barkCooldown > autoBarkFrequency)
                 {
-                    autoBarkFrequency = (int)UnityEngine.Random.Range(randBarkRange.x, randBarkRange.y);
+                    barkEffect();
+                    barkCooldown = 0;
+                    if (randBarkRange.x < randBarkRange.y)
+                    {
+                        autoBarkFrequency = (int)UnityEngine.Random.Range(randBarkRange.x, randBarkRange.y);
+                    }
                 }
+                barkCooldown++;
             }
-            barkCooldown++;
         }
 
         while (skipSpaceWait && dialog.Length > position && (dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
         {
-            outString += dialog[position];
+            if (mode != ReadMode.TYPEWRITE)
+                outString += dialog[position];
             position++;
+            charCount++;
         }
 
     }
-    public void processStringEffect(params string[] input)
+    public void processStringEffect(ReadMode mode = ReadMode.DEFAULT, params string[] input)
     {
         if (input.Length == 0)
         {
             return;
+        }
+        //Whitelist so that typewrite only runs certain commands (ones that collect didn't run)
+        if(mode == ReadMode.TYPEWRITE)
+        {
+            if (input[0] != "w" && input[0] != "c" && input[0] != "exit")
+            {
+                return;
+            }
         }
         switch (input[0])
         {
@@ -365,7 +409,8 @@ public class DialogSource
                 break;
             case "exit":
                 skippingText = false;
-                exit?.Invoke();
+                if (mode != ReadMode.COLLECT)
+                    exit?.Invoke();
                 break;
             case "sdb":
                 if (input.Length == 5)
@@ -642,6 +687,7 @@ public class DialogSource
         dialog = originalDialog;
         outString = "";
         position = 0;
+        charCount = 0;
         clear?.Invoke();
     }
 

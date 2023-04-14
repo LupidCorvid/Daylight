@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -19,9 +20,15 @@ public class CutsceneController : MonoBehaviour
 
     public bool stopInteractions;
     public bool stopMovement;
+    public bool hideUI;
 
     public static bool cutsceneStopInteractions = false;
     public static bool cutsceneStopMovement = false;
+    public static bool cutsceneHideUI = false;
+
+    public static Action StopAllCutscenes;
+
+    
 
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
@@ -45,7 +52,7 @@ public class CutsceneController : MonoBehaviour
                 if (AllCutscenes.ContainsKey(SceneHelper.betweenSceneData[i][1]))
                     AllCutscenes[SceneHelper.betweenSceneData[i][1]].StartCutscene();
                 else
-                    Debug.LogError("Couldnt find a cutscene in new scene of name " + SceneHelper.betweenSceneData[i][1]);
+                    Debug.LogError("Couldnt find a cutscene in new scene of name " + SceneHelper.betweenSceneData[i]);
                 SceneHelper.betweenSceneData.RemoveAt(i);
             }
         }
@@ -87,7 +94,7 @@ public class CutsceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         
         
     }
@@ -152,15 +159,25 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopInteractions = true;
         if (stopMovement)
             cutsceneStopMovement = true;
+        if (hideUI)
+            cutsceneHideUI = true;
+        StopAllCutscenes += FinishCutscene;
     }
 
     public void FinishCutscene()
+    {
+        StopAllCutscenes -= StopCutscene;
+        StopCutscene();
+    }
+
+    public void StopCutscene()
     {
         if (playingThisCutscene && cutsceneStopInteractions && stopInteractions)
             cutsceneStopInteractions = false;
         if (playingThisCutscene && cutsceneStopMovement && stopMovement)
             cutsceneStopMovement = false;
-
+        if (playingThisCutscene && cutsceneHideUI && hideUI)
+            cutsceneHideUI = false;
 
         inCutscene = false;
         playingThisCutscene = false;

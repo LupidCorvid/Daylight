@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class EnemyBase : MonoBehaviour
+
+public class EnemyBase : Entity
 {
-    public int attackDamage = 1;
-    public float moveSpeed = 1;
-    public float attackSpeed = 1;
 
-    public int maxHealth = 10;
-    public int health = 10;
+    public float aggroRange = 10;
 
     public BaseAI ai;
     public BaseMovement movement;
 
     public SlopeAdjuster slopeChecker;
 
-    public virtual void Start()
+    public Animator anim;
+
+    public Action killed;
+
+    public override void Start()
     {
         slopeChecker ??= GetComponent<SlopeAdjuster>();
         movement ??= GetComponent<BaseMovement>();
@@ -26,9 +28,12 @@ public class EnemyBase : MonoBehaviour
             ai.movement = movement;
 
         ai?.Start();
+
+        allies = Team.Enemy;
+        enemies = Team.Player;
     }
 
-    public virtual void Update()
+    public override void Update()
     {
         ai?.Update();
     }
@@ -38,16 +43,22 @@ public class EnemyBase : MonoBehaviour
         ai?.FixedUpdate();
     }
 
+    public virtual void LateUpdate()
+    {
+        ai?.LateUpdate();
+    }
+
     public void die()
     {
+        killed?.Invoke();
         Destroy(gameObject);
     }
 
-    public virtual void TakeDamage(int amount)
+    public override void TakeDamage(int amount)
     {
         health -= amount;
         if (health <= 0)
             die();
-        GetComponent<SimpleFlash>()?.Flash(1f, 3, true);
+        GetComponentInChildren<SimpleFlash>()?.Flash(1f, 3, true);
     }
 }

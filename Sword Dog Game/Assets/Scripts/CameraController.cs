@@ -10,13 +10,14 @@ public class CameraController : MonoBehaviour
 
     public float speed = 5;
     public float defaultZoom = 5;
-
-    public static Action sceneChange;
     public static Vector3 newPos;
 
     public static CameraController main;
 
     public static Camera mainCam;
+    private static bool overrideMovement = false;
+    private static float overrideFor = 0.5f, maxDelay = 0.5f;
+    private static Transform overrideTracker;
 
     Rigidbody2D rb;
 
@@ -24,7 +25,9 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            return targetTracker.position + offset;
+            if (!overrideMovement)
+                return targetTracker.position + offset;
+            return overrideTracker.position + offset;
         }
     }
 
@@ -32,15 +35,9 @@ public class CameraController : MonoBehaviour
 
     public bool externalControl = false;
 
-    // void Awake()
-    // {
-    //     transform.position = targetPoint;
-    // }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sceneChange += Snap;
         main = this;
         mainCam = GetComponent<Camera>();
         cldr = GetComponent<Collider2D>();
@@ -49,33 +46,39 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetTracker = PlayerMovement.instance.transform;
+        if (PlayerMovement.instance != null) 
+            targetTracker = PlayerMovement.instance.transform;
+        else
+            targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
         rb.velocity = Vector2.zero;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }
 
     private void FixedUpdate()
-    {
+    {       
+        if (overrideMovement)
+        {
+            overrideFor += Time.fixedDeltaTime;
+            if (overrideFor > maxDelay)
+                overrideMovement = false;
+        }
+
         if (!externalControl)
         {
             transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
             if (Camera.main.orthographicSize != defaultZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - defaultZoom) * Time.deltaTime;
-                if (Mathf.Abs(Camera.main.orthographicSize - defaultZoom) < .05f)
+                if (Mathf.Abs(Camera.main.orthographicSize - defaultZoom) < .01f)
                     Camera.main.orthographicSize = defaultZoom;
             }
         }
-
     }
 
-    // private void SceneChange()
-    // {
-    //     Invoke("Snap", 0.1f);
-    // }
-
-    private void Snap()
+    public static void OverrideMovement(Transform player)
     {
-        Camera.main.transform.position = newPos;
+        overrideMovement = true;
+        overrideFor = 0f;
+        overrideTracker = player;
     }
 }

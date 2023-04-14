@@ -30,6 +30,8 @@ public class SlopeAdjuster : MonoBehaviour
 
     private Vector2 groundCheckSpot = new Vector2();
 
+    public float lastSlope;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,9 @@ public class SlopeAdjuster : MonoBehaviour
     void FixedUpdate()
     {
         SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
+        capRotation();
         transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+        lastSlope = slopeSideAngle;
         groundedCheck();
         if (!isGrounded)
         {
@@ -76,41 +80,52 @@ public class SlopeAdjuster : MonoBehaviour
         RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
-        Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
-        Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+        if(leftHit.point != default)
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+        if(rightHit.point != default)
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
 
-        if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
-            return;
+        //if (leftHit.point == Vector2.zero || rightHit.point == Vector2.zero)
+        //    return;
 
 
         Vector2 leftSide = upperLeftCorner;
         Vector2 rightSide = upperRightCorner;
         float yLevel = groundCheckSpot.y + transform.position.y;
 
+        bool needRerun = false;
+
+        //If there is not a hit for left point, scan across just below the bottom of the collider to find one
         if (leftHit.point == Vector2.zero)
         {
             RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), Vector2.right, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
 
             Debug.DrawLine(new Vector2(upperLeftCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
             leftSide.x = groundFinder.point.x - transform.position.x;
+            needRerun = true;
             //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
             if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
                 return;
 
         }
+        //If there is not a hit for right point, scan across just below the bottom of the collider to find one
         if (rightHit.point == Vector2.zero)
         {
             RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(upperRightCorner.x + transform.position.x, yLevel), Vector2.left, upperRightCorner.x - upperLeftCorner.x, whatIsGround);
 
             Debug.DrawLine(new Vector2(upperRightCorner.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
             rightSide.x = groundFinder.point.x - transform.position.x;
+            needRerun = true;
             //Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes
             if (groundFinder.distance > (upperRightCorner.x - upperLeftCorner.x) * .8f)
                 return;
         }
 
-        SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
+        //Recursive call for if edges have changed
+        if(needRerun)
+            SlopeCheckHorizontal(leftSide, rightSide, runs + 1);
 
+        //Determine which hit was closest to the hitbox (highest)
         RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
         RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
 
@@ -118,27 +133,32 @@ public class SlopeAdjuster : MonoBehaviour
 
         int right = leftHit.distance < rightHit.distance ? -1 : 1;
 
+        //Scan across partway between highest and lowest hits to find intermediate
         Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
         Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2.4f);
         RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot,
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
         RaycastHit2D across2 = Physics2D.Raycast(acrossCheck2,
                                                 new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
-        Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
-        Debug.DrawLine(across2.point, acrossCheck2, Color.green);
+        
+        if(acrossCheckSpot != default)
+            Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
+        if(acrossCheck2 != default)
+            Debug.DrawLine(across2.point, acrossCheck2, Color.green);
 
         
-
+        //Calculate unsmoothed slope. Get how far across each across cast made it
         float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y) / (rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
         float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
         float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
 
 
         bool onLedge = false;
-        //Makessure that it is not reading the slope of the underside of a slope by not taking abs val. 
-        if (acrossPercent2 - acrossPercent < .01)//If issues arise get abs value
+        //If slope is negative or almost 0 (reading the underside of something)
+        if (acrossPercent2 - acrossPercent < .01)
         {
             slopeSideAngle = 0;
+            //Reevaluate to the top of what it is ontop of (recursive call)
             if (acrossPercent > .01f)
             {
                 if (right == 1)
@@ -148,9 +168,11 @@ public class SlopeAdjuster : MonoBehaviour
             }
             onLedge = true;
         }
+        //Apply smoothing
         if (!float.IsNaN(unsmoothedSlope) && !onLedge)
             slopeSideAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent / .5f) - 1)));
 
+        //If not grounded, rotate to match vertical velocity
         if (!isGrounded)
         {
             const float ROTATION_INTENSITY = 0;
@@ -162,6 +184,7 @@ public class SlopeAdjuster : MonoBehaviour
             slopeSideAngle = lastGroundedSlope + rotationAmount;
         }
 
+        //Record lastgrounded data
         if (isGrounded)
             lastGroundedSlope = slopeSideAngle;
         else
@@ -169,6 +192,7 @@ public class SlopeAdjuster : MonoBehaviour
             lastMidairVelocity = rb.velocity;
             lastUngroundedSlope = slopeSideAngle;
         }
+        //"Animation" for landing (interpolate between ground's rotation and midair rotation for a few seconds)
         if (isGrounded)
         {
             if (lastLand + landAnimTime > Time.time)
@@ -190,6 +214,17 @@ public class SlopeAdjuster : MonoBehaviour
                 isGrounded = true;
                 break;
             }
+        }
+    }
+    public void capRotation()
+    {
+        float angleDifference = Mathf.DeltaAngle(slopeSideAngle, lastSlope);
+        if (Mathf.Abs(angleDifference) > 60 * Time.deltaTime)
+        {
+            if (angleDifference < 0)
+                slopeSideAngle = lastSlope + 60 * Time.deltaTime;
+            else
+                slopeSideAngle = lastSlope + -60 * Time.deltaTime;
         }
     }
 }

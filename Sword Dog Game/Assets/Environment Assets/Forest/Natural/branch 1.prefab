@@ -135,6 +135,7 @@ MonoBehaviour:
   passingEmmissionSensitivity: 2
   Group: 0
   sprite: {fileID: 0}
+  onExitEmit: 1
 --- !u!1 &4124711675750376824
 GameObject:
   m_ObjectHideFlags: 0
@@ -5022,6 +5023,7 @@ GameObject:
   - component: {fileID: 7553911076716621993}
   - component: {fileID: 7553911076716621991}
   - component: {fileID: 7553911076716621992}
+  - component: {fileID: 7754162294264161948}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Branch
@@ -5123,11 +5125,7 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 2.635, y: 0.02}
-      - {x: 2.635, y: 0.21}
-      - {x: 2.645, y: 0.35999998}
-      - {x: 2.625, y: 0.37}
-      - {x: 2.595, y: 0.37}
-      - {x: 2.445, y: 0.32}
+      - {x: 2.4509165, y: 0.28845268}
       - {x: 2.245, y: 0.26999998}
       - {x: 2.0249999, y: 0.22999999}
       - {x: 1.865, y: 0.28}
@@ -5267,3 +5265,16 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: -30.963663
     m_UpperAngle: 46.576473
+--- !u!114 &7754162294264161948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985268323432003341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3313480796683411609}
