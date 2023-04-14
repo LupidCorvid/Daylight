@@ -23,48 +23,55 @@ public class PoisonIvyHazard : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerHealth hit = collision.GetComponent<PlayerHealth>();
-        if (hit == null)
-            return;
+        //PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        //if (hit == null)
+        //    return;
 
-        if (hitThisFrame?.Contains(hit) == false)
-            hitThisFrame.Add(hit);
+        //if (hitThisFrame?.Contains(hit) == false)
+        //    hitThisFrame.Add(hit);
+
+
+        Entity hit = collision.GetComponent<Entity>();
+        if(hit != null)
+        {
+            hit?.spored?.Inflict();
+        }
     }
 
     public void LateUpdate()
     {
-        foreach (PlayerHealth hit in hitThisFrame)
-        {
-            int foundIndex = hitTargets.FindIndex((x) => x.target == hit);
-            if (foundIndex == -1)
-            {
-                foundIndex = hitTargets.Count;
-                hitTargets.Add(new TargetHit(hit, 0));
-            }
+        //foreach (PlayerHealth hit in hitThisFrame)
+        //{
+        //    int foundIndex = hitTargets.FindIndex((x) => x.target == hit);
+        //    if (foundIndex == -1)
+        //    {
+        //        foundIndex = hitTargets.Count;
+        //        hitTargets.Add(new TargetHit(hit, 0));
+        //    }
 
-            hitTargets[foundIndex].damage += damage * Time.fixedDeltaTime;
-            hitTargets[foundIndex].hitThisFrame = true;
-        }
+        //    hitTargets[foundIndex].damage += damage * Time.fixedDeltaTime;
+        //    hitTargets[foundIndex].hitThisFrame = true;
+        //}
 
-        for (int i = hitTargets.Count - 1; i >= 0; i--)
-        {
-            if (!hitTargets[i].hitThisFrame)
-                hitTargets[i].damage -= damage * Time.fixedDeltaTime;
-            hitTargets[i].hitThisFrame = false;
+        //for (int i = hitTargets.Count - 1; i >= 0; i--)
+        //{
+        //    if (!hitTargets[i].hitThisFrame)
+        //        hitTargets[i].damage -= damage * Time.fixedDeltaTime;
+        //    hitTargets[i].hitThisFrame = false;
 
-            if (hitTargets[i].damage >= 1)
-            {
-                hitTargets[i].target.TakeDamage((int)hitTargets[i].damage / 1);
-                hitTargets[i].damage %= 1;
-            }
+        //    if (hitTargets[i].damage >= 1)
+        //    {
+        //        hitTargets[i].target.TakeDamage((int)hitTargets[i].damage / 1);
+        //        hitTargets[i].damage %= 1;
+        //    }
 
 
-            if (hitTargets[i].damage <= 0)
-                hitTargets.RemoveAt(i);
+        //    if (hitTargets[i].damage <= 0)
+        //        hitTargets.RemoveAt(i);
 
-        }
+        //}
 
-        hitThisFrame.Clear();
+        //hitThisFrame.Clear();
     }
 
 

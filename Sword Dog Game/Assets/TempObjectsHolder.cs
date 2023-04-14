@@ -12,10 +12,16 @@ public class TempObjectsHolder : MonoBehaviour
             return holder.transform;
         }
     }
+
+    public static TempObjectsHolder main;
+    //Loose prefabs that are necessary
+    public GameObject sporedDebuffPrefab;
+
     // Start is called before the first frame update
     void Awake()
     {
         holder = gameObject;
+        main = this;
     }
 
     // Update is called once per frame
