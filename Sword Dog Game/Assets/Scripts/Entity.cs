@@ -24,16 +24,24 @@ public class Entity : MonoBehaviour
     public Team allies;
     public Team enemies;
 
+    #region buffs
+    public SporedDebuff spored;
+
+    #endregion
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        #region buffs
+        spored = new SporedDebuff(this);
+        #endregion
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        
+        #region buffs
+        spored?.Update();
+        #endregion
     }
 
     public virtual void heal()
