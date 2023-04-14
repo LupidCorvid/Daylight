@@ -25,10 +25,17 @@ public class StalagtiteTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlayerHealth>() != null)
+        //if(collision.GetComponent<PlayerHealth>() != null)
+        //{
+        //    hazard.Drop();
+        //    Destroy(this);
+        //}
+        Entity hit = collision.GetComponent<Entity>();
+        if(hit != null && (hit.allies & Entity.Team.Player) > 0)
         {
             hazard.Drop();
             Destroy(this);
         }
+
     }
 }

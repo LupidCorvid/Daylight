@@ -22,13 +22,11 @@ public class PauseScreen : MonoBehaviour
             {
                 paused = true;
                 Time.timeScale = 0;
-                Debug.Log("Paused");
             }
             else
             {
                 paused = false;
                 Time.timeScale = 1;
-                Debug.Log("Unpause");
             }
         }
     }

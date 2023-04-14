@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 633449435745536244}
   - component: {fileID: 974524988010002649}
   - component: {fileID: 8004215587823365583}
+  - component: {fileID: 4232136647909902652}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -516,8 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce84b4c9217370a4bbafd1f7a80b1ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
-  invincible: 0
+  playerBase: {fileID: 0}
 --- !u!114 &633449435745536244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +589,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1733184, y: 2.4096665}
   m_EdgeRadius: 0
+--- !u!114 &4232136647909902652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92ed8366cede0a46884634db7a210a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  moveSpeed: 1
+  attackSpeed: 1
+  maxHealth: 8
+  health: 8
+  invincible: 0
+  allies: 1
+  enemies: 2
+  playerHealth: {fileID: 0}
 --- !u!1 &6676018890620208525
 GameObject:
   m_ObjectHideFlags: 0

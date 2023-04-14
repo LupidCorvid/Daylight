@@ -5,14 +5,49 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int maxHealth = 8;
-    public int health = 8;
+    public Player playerBase;
+
+    private int maxHealth
+    {
+        get
+        {
+            return playerBase.maxHealth;
+        }
+        set
+        {
+            playerBase.maxHealth = value;
+        }
+    }
+
+    public int health
+    {
+        get
+        {
+            return playerBase.health;
+        }
+        set
+        {
+            playerBase.health = value;
+        }
+    }
+
     public static bool dead, gettingUp;
     private float iFrameTime = 1.0f, lastDamaged = 0f;
     private Animator anim;
     private Rigidbody2D rb;
 
-    public bool invincible = false;
+    public bool invincible
+    {
+        get
+        {
+            return playerBase.invincible;
+        }
+
+        set
+        {
+            playerBase.invincible = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +57,9 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         BaseAI.possibleTargets.Add(transform);
+
+        playerBase = GetComponent<Player>();
+        playerBase.playerHealth = this;
     }
 
     // Update is called once per frame

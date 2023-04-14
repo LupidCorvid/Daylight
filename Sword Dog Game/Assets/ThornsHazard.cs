@@ -25,24 +25,36 @@ public class ThornsHazard : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        Entity hit = collision.GetComponent<Entity>();
+
         if(hit != null)
         {
-            if(lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
+            if (lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
             {
                 hit.TakeDamage(damage);
                 lastDamage = Time.time;
             }
         }
 
-        EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
-        if(enemyHit != null)
-        {
-            if (lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
-            {
-                enemyHit.TakeDamage(damage);
-                lastDamage = Time.time;
-            }
-        }
+
+        //PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        //if(hit != null)
+        //{
+        //    if(lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
+        //    {
+        //        hit.TakeDamage(damage);
+        //        lastDamage = Time.time;
+        //    }
+        //}
+
+        //EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
+        //if(enemyHit != null)
+        //{
+        //    if (lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
+        //    {
+        //        enemyHit.TakeDamage(damage);
+        //        lastDamage = Time.time;
+        //    }
+        //}
     }
 }
