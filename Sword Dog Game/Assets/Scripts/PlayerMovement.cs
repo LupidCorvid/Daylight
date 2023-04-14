@@ -928,7 +928,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        bool coyoteTime = lastOnLand < 0.2f && transform.position.y < lastLandHeight;
+        float coyoteTimeThreshold = 0.1f;
+        bool coyoteTime = lastOnLand < 0.2f && transform.position.y < lastLandHeight - coyoteTimeThreshold;
         
         if (timeSinceJumpPressed < 0.2f && (isGrounded || coyoteTime) && !isRoofed && !isJumping)
         {
