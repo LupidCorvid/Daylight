@@ -10,7 +10,7 @@ public class SceneWindSetter : MonoBehaviour
 
     public WindZone windZone;
 
-    public bool linkStrengthSpeedVelo = false;
+    public bool linkStrengthSpeedVelo = true;
     public bool randoOnStart = false;
 
     // Start is called before the first frame update
