@@ -24,7 +24,25 @@ public class MerylBehavior : DialogNPC
         else if (!finishTalkingSequence)
             idle();
     }
+    /*
+    public void questIsAsked()
+    {
+        bool accept;
+        string test = Console.ReadLine();
+        if(test == "yes")
+        {
+            accept = true;
+        }
+        else
+        {
 
+        }
+
+        
+        
+
+
+    }*/
     private void idle()
     {
         anim.Play("MED_idle");
