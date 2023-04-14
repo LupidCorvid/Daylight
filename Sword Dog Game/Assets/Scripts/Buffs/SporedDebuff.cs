@@ -18,8 +18,14 @@ public class SporedDebuff : Buff
 
     public override void Inflict()
     {
+        if(Time.time - startTime > .05f)    
+            lastActivation += (Time.time - startTime) * 2;
+
         IndicatorGameObj = TempObjectsHolder.main.sporedDebuffPrefab;
         base.Inflict();
+
+        
+        //lastActivation = (Time.time - (activationInterval + 2 * (Time.time - startTime)));
 
     }
 
@@ -32,18 +38,28 @@ public class SporedDebuff : Buff
     public void UpdateVisuals()
     {
         if(active && visuals != null)
-            visuals.updateFillAmount((Time.time - (lastActivation + (Time.time - startTime))) / activationInterval);
+            visuals.updateFillAmount((Time.time - (lastActivation + 2 * (Time.time - startTime))) / activationInterval);
+        //Tt - lA + 2(Tt sT) = aI
     }
 
     public override void checkForCycleRun()
     {
         if (!active)
             return;
-        if ((lastActivation + (Time.time - startTime)) + activationInterval <= Time.time)
+        //if ((lastActivation + 2 * (Time.time - startTime)) + activationInterval <= Time.time)
+        if(Time.time - (lastActivation + 2 * (Time.time - startTime)) >= activationInterval)
         {
             lastActivation = Time.time;
             Execute();
         }
+    }
+
+    public override void checkDuration()
+    {
+        if (!active)
+            return;
+        if (Time.time - (lastActivation + 2 * (Time.time - startTime)) < 0 && startTime + duration <= Time.time)
+            Cure();
     }
 
     public override void enableVisuals()

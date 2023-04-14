@@ -38,12 +38,17 @@ public class SporeCloud : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerHealth hit = collision.GetComponent<PlayerHealth>();
-        if (hit == null)
-            return;
+        Entity hit = collision.GetComponent<Entity>();
+        if(hit != null && (hit.allies & Entity.Team.Player) > 0)
+            hit?.spored?.Inflict();
 
-        if (ai?.hitThisFrame?.Contains(hit) == false)
-            ai.hitThisFrame.Add(hit);
+
+        //PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        //if (hit == null)
+        //    return;
+
+        //if (ai?.hitThisFrame?.Contains(hit) == false)
+        //    ai.hitThisFrame.Add(hit);
 
     }
 }

@@ -85,41 +85,41 @@ public class BugShroomAI : BaseAI
 
     }
 
-    public override void LateUpdate()
-    {
-        foreach(PlayerHealth hit in hitThisFrame)
-        {
-            int foundIndex = hitTargets.FindIndex((x) => x.target == hit);
-            if (foundIndex == -1)
-            {
-                foundIndex = hitTargets.Count;
-                hitTargets.Add(new hitTarget(hit, 0));
-            }
+    //public override void LateUpdate()
+    //{
+    //    foreach(PlayerHealth hit in hitThisFrame)
+    //    {
+    //        int foundIndex = hitTargets.FindIndex((x) => x.target == hit);
+    //        if (foundIndex == -1)
+    //        {
+    //            foundIndex = hitTargets.Count;
+    //            hitTargets.Add(new hitTarget(hit, 0));
+    //        }
 
-            hitTargets[foundIndex].damage += attackDamage * Time.fixedDeltaTime;
-            hitTargets[foundIndex].hitThisFrame = true;
-        }
+    //        hitTargets[foundIndex].damage += attackDamage * Time.fixedDeltaTime;
+    //        hitTargets[foundIndex].hitThisFrame = true;
+    //    }
 
-        for(int i = hitTargets.Count - 1; i >= 0; i--)
-        {
-            if (!hitTargets[i].hitThisFrame)
-                hitTargets[i].damage -= attackDamage * Time.fixedDeltaTime;
-            hitTargets[i].hitThisFrame = false;
+    //    for(int i = hitTargets.Count - 1; i >= 0; i--)
+    //    {
+    //        if (!hitTargets[i].hitThisFrame)
+    //            hitTargets[i].damage -= attackDamage * Time.fixedDeltaTime;
+    //        hitTargets[i].hitThisFrame = false;
 
-            if (hitTargets[i].damage >= 1)
-            {
-                hitTargets[i].target.TakeDamage((int)hitTargets[i].damage / 1);
-                hitTargets[i].damage %= 1;
-            }
+    //        if (hitTargets[i].damage >= 1)
+    //        {
+    //            hitTargets[i].target.TakeDamage((int)hitTargets[i].damage / 1);
+    //            hitTargets[i].damage %= 1;
+    //        }
 
 
-            if (hitTargets[i].damage <= 0)
-                hitTargets.RemoveAt(i);
+    //        if (hitTargets[i].damage <= 0)
+    //            hitTargets.RemoveAt(i);
 
-        }
+    //    }
 
-        hitThisFrame.Clear();
-    }
+    //    hitThisFrame.Clear();
+    //}
 
     public void SeekMovement()
     {
