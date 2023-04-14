@@ -4,14 +4,8 @@ using UnityEngine;
 using System;
 
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : Entity
 {
-    public int attackDamage = 1;
-    public float moveSpeed = 1;
-    public float attackSpeed = 1;
-
-    public int maxHealth = 10;
-    public int health = 10;
 
     public float aggroRange = 10;
 
@@ -24,7 +18,7 @@ public class EnemyBase : MonoBehaviour
 
     public Action killed;
 
-    public virtual void Start()
+    public override void Start()
     {
         slopeChecker ??= GetComponent<SlopeAdjuster>();
         movement ??= GetComponent<BaseMovement>();
@@ -34,9 +28,12 @@ public class EnemyBase : MonoBehaviour
             ai.movement = movement;
 
         ai?.Start();
+
+        allies = Team.Enemy;
+        enemies = Team.Player;
     }
 
-    public virtual void Update()
+    public override void Update()
     {
         ai?.Update();
     }
@@ -57,7 +54,7 @@ public class EnemyBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void TakeDamage(int amount)
+    public override void TakeDamage(int amount)
     {
         health -= amount;
         if (health <= 0)

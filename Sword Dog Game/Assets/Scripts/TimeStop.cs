@@ -23,7 +23,10 @@ public class TimeStop : MonoBehaviour
 
     public void Update()
     {
-        if (stopTimeDuration == 0 || stopTimeDuration + lastStopTime < Time.time)
+        if (PauseScreen.paused)
+            return;
+
+        if ((stopTimeDuration == 0 || stopTimeDuration + lastStopTime < Time.time))
             Time.timeScale = regularTimeSpeed;
         else
         {

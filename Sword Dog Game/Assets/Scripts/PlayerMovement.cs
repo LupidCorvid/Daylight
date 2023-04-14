@@ -9,10 +9,11 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft;
+    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
     public Vector2 bottom;
     private static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
+    private Transform resetPoint;
 
     public bool facingRight
     {
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, lastLandHeight, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     [SerializeField] private float speed = 4f;
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Positions marking where to check if the player is grounded
     //[SerializeField] public Transform[] groundChecks;
-    public CollisionsTracker groundCheck;
+    public CollisionsTracker groundCheck, behindGroundCheck;
     public CollisionsTracker roofCheck;
 
     // Amount of force added when the player jumps
@@ -147,6 +148,10 @@ public class PlayerMovement : MonoBehaviour
         groundCheck.triggerEnter += checkIfLanding;
 
         Camera.main.transform.position = transform.position + new Vector3(0, 2, -10);
+
+        PositionResetPoint rp = GameObject.FindObjectOfType<PositionResetPoint>();
+        if (rp != null)
+            resetPoint = rp.transform;
     }
 
     public void checkIfLanding(Collider2D collision)
@@ -162,6 +167,19 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.0f);
         stops--;
+    }
+
+    public void GoToResetPoint()
+    {
+        if (GetComponent<PlayerHealth>().health > 0)
+        {
+            if (resetting || PlayerHealth.dead)
+                return;
+            
+            // TODO: Add cutscene here. Start death animation, then fade to black, then unfade, then wake up player at reset point position.
+            transform.position = resetPoint.position;
+            transform.rotation = resetPoint.rotation;
+        }
     }
 
     void Update()
@@ -789,6 +807,7 @@ public class PlayerMovement : MonoBehaviour
         isRoofed = false;
 
         bool needsClean = false;
+
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
             //Debug.Log(LayerMask.GetMask("Terrain"));
@@ -810,7 +829,44 @@ public class PlayerMovement : MonoBehaviour
                 
                 isGrounded = true;
                 lastOnLand = 0f;
+                lastLandHeight = transform.position.y;
                 break;
+            }
+        }
+
+        if (needsClean)
+            groundCheck.clean();
+
+        needsClean = false;
+        behindGrounded = false;
+        foreach (Collider2D collision in behindGroundCheck.triggersInContact)
+        {
+            if (collision == null)
+            {
+                needsClean = true;
+                continue;
+            }
+            if (Mathf.Pow(2, collision.gameObject.layer) == whatIsGround)
+            {
+                behindGrounded = true;
+            }
+        }
+        if (needsClean)
+            behindGroundCheck.clean();
+
+        // TODO this may break with the sword - need to check later
+        bool isHazard = rb.IsTouchingLayers(LayerMask.NameToLayer("WorldHazard"));
+        if (!isHazard) {
+            if (isGrounded)
+            {
+                resetPoint.position = transform.position;
+                resetPoint.rotation = transform.rotation;
+            }
+
+            if (behindGrounded)
+            {
+                resetPoint.position = behindGroundCheck.transform.position;
+                resetPoint.rotation = transform.rotation;
             }
         }
 
@@ -820,9 +876,6 @@ public class PlayerMovement : MonoBehaviour
             cldr2.enabled = true;
             cldr1.enabled = true;
         }
-
-        if (needsClean)
-            groundCheck.clean();
 
         needsClean = false;
         foreach (Collider2D collision in roofCheck.triggersInContact)
@@ -875,7 +928,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // incorporates coyote time and input buffering
-        if (timeSinceJumpPressed < 0.2f && (isGrounded || lastOnLand < 0.2f) && !isRoofed && !isJumping)
+        float coyoteTimeThreshold = 0.1f;
+        bool coyoteTime = lastOnLand < 0.2f && transform.position.y < lastLandHeight - coyoteTimeThreshold;
+        
+        if (timeSinceJumpPressed < 0.2f && (isGrounded || coyoteTime) && !isRoofed && !isJumping)
         {
             if (isOnSlope && slopeDownAngle > maxSlopeAngle && cldr != cldr2)
                 return;

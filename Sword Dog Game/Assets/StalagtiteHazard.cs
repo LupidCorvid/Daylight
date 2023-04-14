@@ -21,21 +21,30 @@ public class StalagtiteHazard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        Entity hit = collision.GetComponent<Entity>();
         if(hit != null && rb.velocity.magnitude > .01f)
         {
             hit.TakeDamage(damage);
-            
         }
 
-        EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
-        if(enemyHit != null && rb.velocity.magnitude > .01f)
-        {
-            enemyHit.TakeDamage(damage);
-        }
+        //PlayerHealth hit = collision.GetComponent<PlayerHealth>();
+        //if(hit != null && rb.velocity.magnitude > .01f)
+        //{
+        //    hit.TakeDamage(damage);
+
+        //}
+
+        //EnemyBase enemyHit = collision.GetComponent<EnemyBase>();
+        //if(enemyHit != null && rb.velocity.magnitude > .01f)
+        //{
+        //    enemyHit.TakeDamage(damage);
+        //}
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            //Disable collider so that the area is not considered a hazard?
+        }
     }
 
     public void Drop()

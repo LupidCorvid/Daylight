@@ -1,7 +1,7 @@
 -Blocks
 Default{
 [sh,Meryl][abf,10][ss, .05] Hello! [w, .2] What can I do for you? 
-[prompt, Heal, [llf,Heal], Leave, [llf,Exit]] [wi] [exit]
+[prompt, Heal, [llf,Heal], Leave, [llf,Exit], Quest, [llf,Quest]] [wi] [exit]
 }
 
 Heal{
@@ -14,4 +14,12 @@ Exit{
 
 Revive{
 [sh,Meryl][abf,10][ss, .05][c][CE,heal][w, .25] You should be fine to leave now.[w, .15] Be more careful this time. [wi] [exit]
+}
+
+Quest{
+[c]Hey, would you like to accept my quest?[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
+}
+
+Accept{
+[c]Thanks for accepting my quest![wi][exit]
 }

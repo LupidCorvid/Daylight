@@ -46,7 +46,7 @@ public class FallingRockHazard : MonoBehaviour
 
     public void testCollision(Collider2D collision)
     {
-        PlayerHealth hit = collision.transform.GetComponent<PlayerHealth>();
+        Entity hit = collision.transform.GetComponent<Entity>();
         if (hit != null)
         {
             if (scaleWithSpeed)
@@ -54,16 +54,24 @@ public class FallingRockHazard : MonoBehaviour
             else
                 hit.TakeDamage(damage);
         }
+        //PlayerHealth hit = collision.transform.GetComponent<PlayerHealth>();
+        //if (hit != null)
+        //{
+        //    if (scaleWithSpeed)
+        //        hit.TakeDamage((int)(rb.velocity.magnitude * damage));
+        //    else
+        //        hit.TakeDamage(damage);
+        //}
 
-        EnemyBase enemyHit = collision.transform.GetComponent<EnemyBase>();
-        if (enemyHit != null)
-        {
+        //EnemyBase enemyHit = collision.transform.GetComponent<EnemyBase>();
+        //if (enemyHit != null)
+        //{
 
-            if (scaleWithSpeed && ((int )rb.velocity.magnitude * damage) > 0)
-                enemyHit.TakeDamage((int)(rb.velocity.magnitude * damage));
-            else
-                enemyHit.TakeDamage(damage);
-        }
+        //    if (scaleWithSpeed && ((int )rb.velocity.magnitude * damage) > 0)
+        //        enemyHit.TakeDamage((int)(rb.velocity.magnitude * damage));
+        //    else
+        //        enemyHit.TakeDamage(damage);
+        //}
     }
 
 
