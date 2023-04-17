@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 bottom;
     private static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
-    private Transform resetPoint;
+    private Vector3 resetPosition;
+    private Quaternion resetRotation;
 
     public bool facingRight
     {
@@ -148,10 +149,6 @@ public class PlayerMovement : MonoBehaviour
         groundCheck.triggerEnter += checkIfLanding;
 
         Camera.main.transform.position = transform.position + new Vector3(0, 2, -10);
-
-        PositionResetPoint rp = GameObject.FindObjectOfType<PositionResetPoint>();
-        if (rp != null)
-            resetPoint = rp.transform;
     }
 
     public void checkIfLanding(Collider2D collision)
@@ -177,8 +174,8 @@ public class PlayerMovement : MonoBehaviour
                 return;
             
             // TODO: Add cutscene here. Start death animation, then fade to black, then unfade, then wake up player at reset point position.
-            transform.position = resetPoint.position;
-            transform.rotation = resetPoint.rotation;
+            transform.position = resetPosition;
+            transform.rotation = resetRotation;
         }
     }
 
@@ -859,14 +856,14 @@ public class PlayerMovement : MonoBehaviour
         if (!isHazard) {
             if (isGrounded)
             {
-                resetPoint.position = transform.position;
-                resetPoint.rotation = transform.rotation;
+                resetPosition = transform.position;
+                resetRotation = transform.rotation;
             }
 
             if (behindGrounded)
             {
-                resetPoint.position = behindGroundCheck.transform.position;
-                resetPoint.rotation = transform.rotation;
+                resetPosition = behindGroundCheck.transform.position;
+                resetRotation = transform.rotation;
             }
         }
 
