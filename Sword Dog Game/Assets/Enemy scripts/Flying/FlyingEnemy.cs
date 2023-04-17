@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlyingEnemy : EnemyBase
 {
     public float scaleAnimator = 1;
+    public float windupSpeedScalar = 1;
 
     public void Awake()
     {

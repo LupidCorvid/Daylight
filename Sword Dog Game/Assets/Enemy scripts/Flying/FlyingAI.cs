@@ -31,6 +31,16 @@ public class FlyingAI : BaseAI
 
     bool facingLeft = true;
 
+    public float windupSpeedScalar
+    {
+        get
+        {
+            if (enemyBase == null)
+                return 1;
+            return ((FlyingEnemy)enemyBase).windupSpeedScalar;
+        }
+    }
+
     public Vector2 targetPosition
     {
         get
@@ -45,7 +55,8 @@ public class FlyingAI : BaseAI
     {
         base.Start();
         state = states.sitting;
-        //target ??= GameObject.Find("Player(Clone)").transform;
+        if (transform.localScale.x < 0)
+            facingLeft = false;
     }
 
     public override void FoundTarget(Transform newTarget)
@@ -95,16 +106,31 @@ public class FlyingAI : BaseAI
                 break;
 
             case states.pursuit:
+
                 if (Mathf.Abs(targetPosition.x - transform.position.x) > acceptableRange.x || Mathf.Abs(targetPosition.y - transform.position.y) > acceptableRange.y)
                     Pursuit();
+                if (transform.rotation.eulerAngles.z > 0)
+                {
+                    if (facingLeft)
+                        rotateToDirection(Vector2.left);
+                    else
+                        rotateToDirection(Vector2.right);
+                    break;
+                }
                 if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time && Vector2.Distance(transform.position, targetPosition) < attackDistance)
+                {
                     state = states.telegraphing;
+                    perchedPoint = transform.position;
+                    anim.SetTrigger("Telegraph");
+                    anim.SetFloat("WindupSpeed", windupSpeedScalar);
+                    Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
+                    windUpTarget = (Vector2)target.transform.position;
+                    if (targetRb != null)
+                        windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, 1f/windupSpeedScalar)); //UpperRange time should be length of telegraph anim
+                }
 
-                //if((transform.localScale.x > 0 && transform.position.x > targetPosition.x) || (transform.localScale.x < 0 && transform.position.x < targetPosition.x))
                 if ((facingLeft ^ (transform.position.x > targetPosition.x)))
                 {
-                    //facingLeft = (transform.position.x < targetPosition.x);
-                        
                     anim.SetTrigger("Turn");
                     ((FlyingEnemy)enemyBase).scaleAnimator = 1;
                     state = states.turning;
@@ -132,11 +158,20 @@ public class FlyingAI : BaseAI
 
             case states.telegraphing:
                 //Play animation that shows it is about to attack. Perhaps can be interrupted if it takes damage while in this state
-                windUpTarget = ((Vector2)target.position);
-                Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
-                if (targetRb != null)
-                    windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, .1f)); //UpperRange time should be length of telegraph anim
-                state = states.lunging;
+
+                //if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_dive_anticipate"))
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_dive_attack"))
+                {
+                    state = states.lunging;
+                    anim.ResetTrigger("Telegraph");
+                }
+                else
+                {
+                    anim.SetTrigger("Telegraph");
+                    moveToPoint(perchedPoint + (perchedPoint - windUpTarget).normalized * 1, windupSpeedScalar * .5f);
+                    rotateToDirection(windUpTarget - (Vector2)transform.position, windupSpeedScalar);
+                    //windUpTarget = ((Vector2)target.position);
+                }
                 break;
 
             case states.lunging:
@@ -147,13 +182,16 @@ public class FlyingAI : BaseAI
                 break;
 
             case states.lungeReturn:
-                if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 2f)
+                if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 3f)
                     state = states.lungeFlee;
+                rotateToDirection((Vector2)transform.position - windUpTarget);
                 break;
 
             case states.lungeFlee:
                 Flee();
-                if(Vector2.Distance(target.position, transform.position) > 3.5f)
+                //rotateToDirection((Vector2)transform.position - targetPosition);
+                rotateToDirection(Vector2.right * (rb.velocity.normalized.x) * 64 + Vector2.up * 8);
+                if (Vector2.Distance(target.position, transform.position) > 4.5f)
                     state = states.pursuit;
                 break;
         }
@@ -184,9 +222,22 @@ public class FlyingAI : BaseAI
         }
     }
 
-    public void moveToPoint(Vector2 targetPosition)
+    public void moveToPoint(Vector2 targetPosition, float speedScalar = 1)
     {
-        ((FlyingMovement)movement).MoveDirection((targetPosition - (Vector2)transform.position).normalized * moveSpeed);    
+        ((FlyingMovement)movement).MoveDirection((targetPosition - (Vector2)transform.position).normalized * moveSpeed * speedScalar);    
+    }
+
+    public void rotateToDirection(Vector2 direction, float speedScalar = 1)
+    {
+        direction.y *= .5f;
+        if(facingLeft)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Vector2.Angle(Vector2.left, direction)), 1 * speedScalar);
+        }
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -Vector2.Angle(Vector2.left, -direction)), 1 * speedScalar);
+        }
     }
 
     public void Flee()
