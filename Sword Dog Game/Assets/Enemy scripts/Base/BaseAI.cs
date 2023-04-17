@@ -165,7 +165,12 @@ public class BaseAI
 
         foreach (Collider2D hit in hits)
         {
-            hit.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
+            //hit.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
+            Entity hitEntity = hit.GetComponent<Entity>();
+            if(hitEntity?.GetIfEnemies(enemyBase) == true)
+            {
+                hitEntity.TakeDamage(attackDamage);
+            }
         }
     }
 }

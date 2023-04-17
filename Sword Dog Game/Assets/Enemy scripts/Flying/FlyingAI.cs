@@ -232,11 +232,11 @@ public class FlyingAI : BaseAI
         direction.y *= .5f;
         if(facingLeft)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Vector2.Angle(Vector2.left, direction)), 1 * speedScalar);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(Vector2.Angle(Vector2.left, direction), -80, 90)), 1 * speedScalar);
         }
         else
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -Vector2.Angle(Vector2.left, -direction)), 1 * speedScalar);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(-Vector2.Angle(Vector2.left, -direction), -90, 80)), 1 * speedScalar);
         }
     }
 

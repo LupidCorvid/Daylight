@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8550630448077621226
 SpriteRenderer:
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.27974534, y: -0.39753246}
+  m_Offset: {x: -0.27974534, y: -0.1866073}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2970605, y: 2.2749348}
+  m_Size: {x: 2.2970605, y: 1.8530842}
   m_EdgeRadius: 0
 --- !u!50 &8550630448077621204
 Rigidbody2D:
@@ -199,12 +199,14 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
+  allies: 2
+  enemies: 1
   aggroRange: 10
   movement: {fileID: 8550630448077621207}
   slopeChecker: {fileID: 0}
   anim: {fileID: 4909228534901939429}
+  scaleAnimator: 1
+  windupSpeedScalar: 1
 --- !u!114 &8550630448077621201
 MonoBehaviour:
   m_ObjectHideFlags: 0

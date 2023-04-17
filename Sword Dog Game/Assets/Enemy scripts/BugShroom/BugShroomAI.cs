@@ -6,8 +6,8 @@ public class BugShroomAI : BaseAI
 {
     public float lastAttack = -100;
 
-    public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
-    public List<hitTarget> hitTargets = new List<hitTarget>();
+    //public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
+    //public List<hitTarget> hitTargets = new List<hitTarget>();
 
 
     public float attackCooldown
@@ -145,21 +145,21 @@ public class BugShroomAI : BaseAI
             movement.NotMoving();
     }
 
-    public class hitTarget
-    {
-        public PlayerHealth target;
-        public float damage;
-        public bool hitThisFrame = true;
+    //public class hitTarget
+    //{
+    //    public PlayerHealth target;
+    //    public float damage;
+    //    public bool hitThisFrame = true;
 
-        public static implicit operator PlayerHealth(hitTarget target ) => target;
+    //    public static implicit operator PlayerHealth(hitTarget target ) => target;
 
-        public hitTarget(PlayerHealth target, float damage)
-        {
-            this.target = target;
-            this.damage = damage;
-        }
+    //    public hitTarget(PlayerHealth target, float damage)
+    //    {
+    //        this.target = target;
+    //        this.damage = damage;
+    //    }
 
-        //public static bool operator ==(PlayerHealth target, hitTarget group) => (group.target == target);
-        //public static bool operator !=(PlayerHealth target, hitTarget group) => (group.target != target);
-    }
+    //    //public static bool operator ==(PlayerHealth target, hitTarget group) => (group.target == target);
+    //    //public static bool operator !=(PlayerHealth target, hitTarget group) => (group.target != target);
+    //}
 }
