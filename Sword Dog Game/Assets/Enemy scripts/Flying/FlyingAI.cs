@@ -8,13 +8,18 @@ public class FlyingAI : BaseAI
     public Vector2 prefferedOffset = new Vector2(0, 4);
     public Vector2 acceptableRange = new Vector2(5, 1);
 
+    public Vector2 perchedPoint;
+
     public enum states
     {
+        sitting,
+        gettingUp,
         lunging,
         pursuit,
         telegraphing,
         lungeReturn,
-        lungeFlee
+        lungeFlee,
+        turning
     }
 
     public states state;
@@ -23,6 +28,8 @@ public class FlyingAI : BaseAI
     float attackCooldown = 5;
 
     float attackDistance = 5.5f;
+
+    bool facingLeft = true;
 
     public Vector2 targetPosition
     {
@@ -37,7 +44,7 @@ public class FlyingAI : BaseAI
     public override void Start()
     {
         base.Start();
-        state = states.pursuit;
+        state = states.sitting;
         //target ??= GameObject.Find("Player(Clone)").transform;
     }
 
@@ -60,12 +67,69 @@ public class FlyingAI : BaseAI
             return;//Need idle for this case
         switch(state)
         {
+            case states.sitting:
+                perchedPoint = transform.position;
+                if (target != null)
+                {
+                    anim.SetBool("Sitting", false);
+
+                    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_sit"))
+                    {
+                        state = states.gettingUp;
+                    }
+                }
+                break;
+
+            case states.gettingUp:
+                updateFacingDirection();
+                if(Vector2.Distance(target.transform.position, transform.position) <= 3)
+                {
+                    moveToPoint((perchedPoint - (Vector2)target.transform.position ).normalized * 3);
+                }
+                else
+                {
+                    moveToPoint(perchedPoint + Vector2.up * 2);
+                }
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_sitToFly"))
+                    state = states.pursuit;
+                break;
+
             case states.pursuit:
                 if (Mathf.Abs(targetPosition.x - transform.position.x) > acceptableRange.x || Mathf.Abs(targetPosition.y - transform.position.y) > acceptableRange.y)
                     Pursuit();
                 if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time && Vector2.Distance(transform.position, targetPosition) < attackDistance)
                     state = states.telegraphing;
+
+                //if((transform.localScale.x > 0 && transform.position.x > targetPosition.x) || (transform.localScale.x < 0 && transform.position.x < targetPosition.x))
+                if ((facingLeft ^ (transform.position.x > targetPosition.x)))
+                {
+                    //facingLeft = (transform.position.x < targetPosition.x);
+                        
+                    anim.SetTrigger("Turn");
+                    ((FlyingEnemy)enemyBase).scaleAnimator = 1;
+                    state = states.turning;
+                }
+
                 break;
+
+            case states.turning:
+                if (Mathf.Abs(targetPosition.x - transform.position.x) > acceptableRange.x || Mathf.Abs(targetPosition.y - transform.position.y) > acceptableRange.y)
+                    Pursuit();
+                
+
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_turn"))
+                {
+                    updateFacingDirection();
+                    state = states.pursuit;
+                    anim.ResetTrigger("Turn");
+                }
+                else
+                {
+                    transform.localScale = new Vector3((facingLeft ? 1 : -1) * ((FlyingEnemy)enemyBase).scaleAnimator, 1, 1);
+                }
+
+                break;
+
             case states.telegraphing:
                 //Play animation that shows it is about to attack. Perhaps can be interrupted if it takes damage while in this state
                 windUpTarget = ((Vector2)target.position);
@@ -74,21 +138,23 @@ public class FlyingAI : BaseAI
                     windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, .1f)); //UpperRange time should be length of telegraph anim
                 state = states.lunging;
                 break;
+
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
                 lastAttack = Time.time;
                 rb.velocity = Vector2.ClampMagnitude((windUpTarget - (Vector2)transform.position) * 7, attackDistance * 7);
                 state = states.lungeReturn;
                 break;
+
             case states.lungeReturn:
                 if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 2f)
                     state = states.lungeFlee;
                 break;
+
             case states.lungeFlee:
                 Flee();
                 if(Vector2.Distance(target.position, transform.position) > 3.5f)
                     state = states.pursuit;
-
                 break;
         }
         
@@ -99,6 +165,28 @@ public class FlyingAI : BaseAI
         Vector2 targetPosition = prefferedOffset + (Vector2)target.transform.position;
 
         ((FlyingMovement)movement).MoveDirection((targetPosition - (Vector2)transform.position).normalized * moveSpeed);
+    }
+
+    public void updateFacingDirection()
+    {
+        if(target != null)
+        {
+            if (target.transform.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                facingLeft = true;
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                facingLeft = false;
+            }
+        }
+    }
+
+    public void moveToPoint(Vector2 targetPosition)
+    {
+        ((FlyingMovement)movement).MoveDirection((targetPosition - (Vector2)transform.position).normalized * moveSpeed);    
     }
 
     public void Flee()

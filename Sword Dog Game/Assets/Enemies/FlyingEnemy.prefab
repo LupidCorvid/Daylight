@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8550630448077621207}
   - component: {fileID: 8550630448077621206}
   - component: {fileID: 8550630448077621201}
+  - component: {fileID: 4909228534901939429}
   m_Layer: 10
   m_Name: FlyingEnemy
   m_TagString: PassingLeavesBlacklist
@@ -35,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8550630448077621226
 SpriteRenderer:
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ffac8cef5a412fe48bac3d4867dd8dbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7eb2fec9f22ceaf4996937cd679a33e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,6 +100,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -106,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.27, y: 3.07}
+    oldSize: {x: 6, y: 4}
     newSize: {x: 4.27, y: 3.07}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -132,6 +152,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -151,6 +177,7 @@ MonoBehaviour:
   slopeChecker: {fileID: 0}
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  velocity: {x: 0, y: 0, z: 0}
   applyVisualModifications: 0
   movementSmoothing: 0.05
   snappyDirectionChange: 1
@@ -171,8 +198,13 @@ MonoBehaviour:
   attackSpeed: 1
   maxHealth: 10
   health: 10
+  invincible: 0
+  allies: 0
+  enemies: 0
+  aggroRange: 10
   movement: {fileID: 8550630448077621207}
   slopeChecker: {fileID: 0}
+  anim: {fileID: 4909228534901939429}
 --- !u!114 &8550630448077621201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +218,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
+  alsoFlash: []
+  forceNonSolidFlash: 0
+--- !u!95 &4909228534901939429
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550630448077621224}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f1847147df811149b58025cdcc15f70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
