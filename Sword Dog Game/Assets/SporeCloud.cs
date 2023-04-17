@@ -39,7 +39,7 @@ public class SporeCloud : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Entity hit = collision.GetComponent<Entity>();
-        if(hit != null && (hit.allies & Entity.Team.Player) > 0)
+        if(hit != null && mainEnemy.GetIfEnemies(hit) && hit != mainEnemy)
             hit?.spored?.Inflict();
 
 

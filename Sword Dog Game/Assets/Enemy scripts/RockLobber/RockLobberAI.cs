@@ -83,6 +83,8 @@ public class RockLobberAI : BaseAI
     public override void Update()
     {
         base.Update();
+        if (target == null)
+            return;
 
         if (state == AIstate.rangedAttacking)
         {

@@ -20,6 +20,7 @@ public class EnemyBase : Entity
 
     public override void Start()
     {
+        base.Start();
         slopeChecker ??= GetComponent<SlopeAdjuster>();
         movement ??= GetComponent<BaseMovement>();
         if(movement != null)
@@ -35,6 +36,7 @@ public class EnemyBase : Entity
 
     public override void Update()
     {
+        base.Update();
         ai?.Update();
     }
 

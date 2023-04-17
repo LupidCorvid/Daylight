@@ -61,6 +61,6 @@ public class Entity : MonoBehaviour
 
     public bool GetIfEnemies(Entity otherEntity)
     {
-        return (enemies & otherEntity.allies) > 0;
+        return ((enemies & otherEntity.allies) > 0 && otherEntity != this);
     }
 }

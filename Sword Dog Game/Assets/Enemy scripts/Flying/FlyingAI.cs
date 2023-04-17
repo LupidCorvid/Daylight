@@ -59,7 +59,7 @@ public class FlyingAI : BaseAI
             facingLeft = false;
     }
 
-    public override void FoundTarget(Transform newTarget)
+    public override void FoundTarget(Entity newTarget)
     {
         base.FoundTarget(newTarget);
         lastAttack = Time.time;

@@ -16,6 +16,6 @@ public class Lunger : EnemyBase
     public override void Start()
     {
         base.Start();
-        ai.target = GameObject.Find("Player(Clone)").transform;
+        //ai.target = GameObject.Find("Player(Clone)").transform;
     }
 }

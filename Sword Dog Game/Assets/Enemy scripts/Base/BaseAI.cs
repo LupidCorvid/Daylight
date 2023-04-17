@@ -75,7 +75,17 @@ public class BaseAI
 
     public bool attacking = false;
 
-    public Transform target;
+    public Entity targetEntity;
+
+    public Transform target
+    {
+        get
+        {
+            if (targetEntity == null)
+                return null;
+            return targetEntity?.transform;
+        }
+    }
 
     public Rigidbody2D rb;
 
@@ -111,9 +121,9 @@ public class BaseAI
     // Update is called once per frame
     public virtual void Update()
     {
-        if(target == null && lastTargetSearch + FindTargetsWaitTime < Time.time)
+        if(lastTargetSearch + FindTargetsWaitTime < Time.time && (target == null || enemyBase.GetIfEnemies(targetEntity) == false))
         {
-            target = GetTarget();
+            targetEntity = GetTarget();
             lastTargetSearch = Time.time;
         }
     }
@@ -128,27 +138,42 @@ public class BaseAI
 
     }
 
-    public virtual Transform GetTarget()
+    public virtual Entity GetTarget()
     {
-        foreach(Transform targetLocation in possibleTargets)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, aggroRange, LayerMask.GetMask("Entity"));
+        List<Entity> possibleTargets = new List<Entity>();
+        foreach(Collider2D collision in hits)
         {
-            if (targetLocation == null || transform == null)
-                continue;
-            float distance = Vector2.Distance(targetLocation.position, transform.position);
-
-            if(distance <= aggroRange && !Physics2D.Linecast(transform.position, targetLocation.position, LayerMask.GetMask("Terrain")))
+            Entity foundEntity = collision.GetComponent<Entity>();
+            if(foundEntity?.GetIfEnemies(enemyBase) == true)
             {
-                FoundTarget(targetLocation);
-                return targetLocation;
-                
+                possibleTargets.Add(foundEntity);
             }
         }
-        return null;
+
+        Entity nearestTarget = null;
+        float nearestDistance = Mathf.Infinity;
+        foreach(Entity target in possibleTargets)
+        {
+            if (target?.transform == null || transform == null)
+                continue;
+            //float distance = Vector2.Distance(targetLocation.position, transform.position);
+            float distance = Vector2.Distance(transform.position, target.transform.position);
+            if (distance < nearestDistance && !Physics2D.Linecast(transform.position, target.transform.position, LayerMask.GetMask("Terrain")))
+            {
+                nearestDistance = distance;
+                nearestTarget = target;
+            }
+        }
+        if(target != null)
+            FoundTarget(nearestTarget);
+
+        return nearestTarget;
     }
 
-    public virtual void FoundTarget(Transform newTarget)
+    public virtual void FoundTarget(Entity newTarget)
     {
-
+        targetEntity = newTarget;
     }
 
     public virtual void applyAttackDamage()
