@@ -15,7 +15,6 @@ public class Heart : MonoBehaviour
     private AnimationClip wobble, blink;
     public static float wobbleAmplitude = 3f, wobblePeriod = 0.3f;
     private static bool flipWobble = false;
-    private bool wobbledOnce = false;
     public static int MinWobbleHealth = 2;
 
     private void Start()
