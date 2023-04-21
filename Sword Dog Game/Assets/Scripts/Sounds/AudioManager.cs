@@ -196,7 +196,7 @@ public class AudioManager : MonoBehaviour
         sfxMixer.SetFloat("Volume", 10 - 2*Camera.main.orthographicSize);
     }
 
-    public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea)
+    public void ChangeBGM(AudioClip music, int BPM, int timeSignature, int barsLength, GameArea newArea, float fadeDuration = 1f)
     {
         // carry on music if area has not changed
         bool carryOn = newArea == currentArea;
