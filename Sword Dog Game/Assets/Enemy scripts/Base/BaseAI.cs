@@ -123,6 +123,11 @@ public class BaseAI
     {
         if(lastTargetSearch + FindTargetsWaitTime < Time.time && (target == null || enemyBase.GetIfEnemies(targetEntity) == false))
         {
+            if(targetEntity != null && enemyBase.GetIfEnemies(targetEntity) == false)
+            {
+                targetEntity = null;
+            }
+
             targetEntity = GetTarget();
             lastTargetSearch = Time.time;
         }

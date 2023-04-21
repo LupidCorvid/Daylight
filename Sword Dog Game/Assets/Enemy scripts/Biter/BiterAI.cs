@@ -41,6 +41,11 @@ public class BiterAI : BaseAI
     {
         base.FixedUpdate();
 
+        if(target == null)
+        {
+            state = AIStates.idle;
+        }
+
         switch(state)
         {
             case AIStates.idle:
