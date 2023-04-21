@@ -341,12 +341,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: newArea
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: newTrack
       value: 
-      objectReference: {fileID: 8300000, guid: f731442858c527d4db8974f6dd2dcd85, type: 3}
+      objectReference: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: barsLength
       value: 32
@@ -1736,11 +1736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  NewTrack: {fileID: 8300000, guid: f731442858c527d4db8974f6dd2dcd85, type: 3}
-  BPM: 80
-  TimeSignature: 4
-  BarsLength: 32
+  Music: 
   Area: 2
+  FadeDuration: 1
 --- !u!1 &2129134724
 GameObject:
   m_ObjectHideFlags: 0

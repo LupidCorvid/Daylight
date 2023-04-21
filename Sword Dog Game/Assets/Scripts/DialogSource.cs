@@ -37,6 +37,7 @@ public class DialogSource
 
     //public event Action barkDefault;
     public event Action<Vector2, Vector2> bark;
+    public event Action<String, float, bool> ps;
 
     public event Action exit;
 
@@ -112,7 +113,23 @@ public class DialogSource
      * [IA, text] //Instantly adds some text. Meant for use with tmppro styling
      * 
      * [CE, p1, p2, p3, ...] //Calls an event. Only works if the thing running it has a listener to the event. Parameters are parsed by the listener.
+     *
+     * [ps, sound] //Plays sound from a specified sound path as the speaker
+     * [ps, sound, volume] //Plays sound with specified volume
+     * [ps, sound, volume, loop] //Plays sound with specified volume and loopability (true/false)
      * 
+     * [bgm, music] //Plays background music from a specified sound path
+     * [bgm, music, duration] //Plays background music, crossfading over specified duration
+     * [bgm, music, duration, area] //Plays background music, crossfading over specified duration, while setting new music area
+     * [pbgm] //Pauses background music
+     * [upbgm] //Unpauses background music
+     * [fibgm] //Fades background music in
+     * [fibgm, duration] //Fades background music in over specified duration
+     * [fobgm] //Fades background music out
+     * [fobgm, duration] //Fades background music out over specified duration
+     * 
+     * [ame, mixer, effect, value] //Applies effect to audio mixer
+     * [ame, mixer, effect, value, duration] //Applies effect to audio mixer over specified duration
      */
     public DialogSource(string dialog)
     {
@@ -674,6 +691,89 @@ public class DialogSource
                 else
                     Debug.LogWarning("series takes a series after the variable to read!");
                 break;
+
+            case "ps":
+                if (input.Length == 2)
+                {
+                    playSound(input[1]);
+                }
+                else if (input.Length == 3)
+                {
+                    playSound(input[1], float.Parse(input[2]));
+                }
+                else if (input.Length == 4)
+                {
+                    bool loop = false;
+                    if (input[3].Trim().ToLower() == "true" || input[3].Trim().ToLower() == "t")
+                        loop = true;
+                    else if (input[3].Trim().ToLower() == "false" || input[3].Trim().ToLower() == "f")
+                        loop = false;
+                    else
+                        Debug.LogWarning("Invalid format for play sound [ps] loop parameter! Defaulting to false");
+                    playSound(input[1], float.Parse(input[2]), loop);
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for play sound [ps]!");
+                break;
+            
+            case "bgm":
+                if (input.Length == 2)
+                {
+                    setBGM(input[1]);
+                }
+                else if (input.Length == 3)
+                {
+                    setBGM(input[1], float.Parse(input[2]));
+                }
+                else if (input.Length == 4)
+                {
+                    setBGM(input[1], float.Parse(input[2]), input[3]);
+                }
+                else
+                    Debug.LogWarning("Invalid number of parameters for background music [bgm]!");
+                break;
+
+            case "pbgm":
+                if (input.Length == 1)
+                    AudioManager.instance.PauseCurrent();
+                else
+                    Debug.LogError("Invalid number or arguments for pause BGM [pbgm]!");
+                break;
+
+            case "upbgm":
+                if (input.Length == 1)
+                    AudioManager.instance.UnPauseCurrent();
+                else
+                    Debug.LogError("Invalid number or arguments for unpause BGM [upbgm]!");
+                break;
+
+            case "fibgm":
+                if (input.Length == 1)
+                    AudioManager.instance.FadeInCurrent();
+                else if (input.Length == 2)
+                    AudioManager.instance.FadeInCurrent(float.Parse(input[1]));
+                else
+                    Debug.LogError("Invalid number or arguments for fade in BGM [fibgm]!");
+                break;
+
+            case "fobgm":
+                if (input.Length == 1)
+                    AudioManager.instance.FadeOutCurrent();
+                else if (input.Length == 2)
+                    AudioManager.instance.FadeOutCurrent(float.Parse(input[1]));
+                else
+                    Debug.LogError("Invalid number or arguments for fade out BGM [fibgm]!");
+                break;
+            
+            case "ame":
+                if (input.Length == 4)
+                    applyMixerEffect(input[1], input[2], float.Parse(input[3]));
+                else if (input.Length == 5)
+                    applyMixerEffect(input[1], input[2], float.Parse(input[3]), float.Parse(input[4]));
+                else
+                    Debug.LogError("Invalid number or arguments for audio mixer effect [ame]!");
+                break;
+
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call
@@ -703,7 +803,22 @@ public class DialogSource
     {
         bark?.Invoke(new Vector2(velocityX, velocityY), new Vector2(accelerationX, accelerationY));
     }
-
+    public void playSound(String sound, float volume = 1, bool loop = false)
+    {
+        ps?.Invoke(sound, volume, loop);
+    }
+    public void setBGM(String music, float duration = 1)
+    {
+        AudioManager.instance.ChangeBGM(music, duration);
+    }
+    public void setBGM(String music, float duration, String area)
+    {
+        AudioManager.instance.ChangeBGM(music, area, duration);
+    }
+    public void applyMixerEffect(String mixer, String effect, float value, float duration = 0)
+    {
+        AudioManager.instance.ApplyMixerEffect(mixer, effect, value, duration);
+    }
     public void promptResponse(params string[] options)
     {
         if(requestOptionsStart?.Method == null)

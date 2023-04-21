@@ -22,10 +22,12 @@ public class AudioMixerEffectCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        Mixer.SetFloat(Effect, Mathf.Lerp(startValue, Value, (Time.time - startTime) / Duration));
-        if (startTime + Duration <= Time.time) {
+        if (Duration > 0)
+            Mixer.SetFloat(Effect, Mathf.Lerp(startValue, Value, (Time.time - startTime) / Duration));
+        else
+            abort();
+        if (startTime + Duration <= Time.time)
             finishedSegment();
-        }
     }
 
     public override void abort()

@@ -14,7 +14,7 @@ public class SoundPlayer : MonoBehaviour
 
     public void PlaySound(string path, float volume = 1, bool loop = false)
     {
-        PlaySound(AudioManager.instance?.Find(path), volume, loop);
+        PlaySound(AudioManager.instance?.FindSound(path), volume, loop);
     }
     
     public void PlaySound(AudioClip clip, float volume = 1, bool loop = false)

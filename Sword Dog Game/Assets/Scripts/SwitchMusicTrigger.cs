@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class SwitchMusicTrigger : MonoBehaviour
 {
-    public AudioClip newTrack;
-    private AudioClip oldTrack;
-    public int BPM, timeSignature, barsLength;
+    public MusicClip newTrack;
+    private MusicClip oldTrack;
     private AudioManager theAM;
 
     // Start is called before the first frame update
@@ -27,7 +26,7 @@ public class SwitchMusicTrigger : MonoBehaviour
         {
             theAM = FindObjectOfType<AudioManager>();
             oldTrack = theAM.currentSong;
-            theAM.ChangeBGM(newTrack, BPM, timeSignature, barsLength, theAM.currentArea);
+            theAM.ChangeBGM(newTrack, theAM.currentArea);
         }
     }
 
@@ -36,7 +35,7 @@ public class SwitchMusicTrigger : MonoBehaviour
         if (other.CompareTag("Player") && oldTrack != null && !CutsceneController.inCutscene)
         {
             theAM = FindObjectOfType<AudioManager>();
-            theAM.ChangeBGM(oldTrack, BPM, timeSignature, barsLength, theAM.currentArea);
+            theAM.ChangeBGM(oldTrack, theAM.currentArea);
         }
     }
 }
