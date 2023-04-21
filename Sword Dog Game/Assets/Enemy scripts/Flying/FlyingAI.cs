@@ -183,7 +183,10 @@ public class FlyingAI : BaseAI
 
             case states.lungeReturn:
                 if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 3f)
+                {
                     state = states.lungeFlee;
+                    DamageBox(transform.position + transform.rotation * new Vector2(facingLeft ? -1 : 1, 0), Vector2.one);
+                }
                 rotateToDirection((Vector2)transform.position - windUpTarget);
                 break;
 
