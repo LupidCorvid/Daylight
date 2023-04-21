@@ -194,7 +194,7 @@ public class FlyingAI : BaseAI
                 Flee();
                 //rotateToDirection((Vector2)transform.position - targetPosition);
                 rotateToDirection(Vector2.right * (rb.velocity.normalized.x) * 64 + Vector2.up * 8);
-                if (Vector2.Distance(target.position, transform.position) > 4.5f)
+                if (Vector2.Distance(windUpTarget, transform.position) > 4.5f)
                     state = states.pursuit;
                 break;
         }
