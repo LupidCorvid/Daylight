@@ -13,9 +13,11 @@ public class Heart : MonoBehaviour
     public Sprite[] sprites;
 
     private AnimationClip wobble, blink;
-    public static float wobbleAmplitude = 3f, wobblePeriod = 0.3f;
+    public static float wobbleSpeed = 0.3f;
     private static bool flipWobble = false;
-    public static int MinWobbleHealth = 2;
+    public static int MinWobbleHealth = 3;
+    public float offset;
+    private float wobbleIntensity = 0f, targetIntensity = 0f;
 
     private void Start()
     {
@@ -29,20 +31,20 @@ public class Heart : MonoBehaviour
         keys = new Keyframe[5];
         for (int i = 0; i < 5; i++)
         {
-            keys[i] = new Keyframe(wobblePeriod * i/4f, Mathf.Sin(i/2f * Mathf.PI) * wobbleAmplitude * (flipWobble ? -1 : 1));
+            keys[i] = new Keyframe(wobbleSpeed * i/4f, Mathf.Sin(i/2f * Mathf.PI) * (flipWobble ? -1 : 1));
         }
         flipWobble = !flipWobble;
         
         for (int i = 1; i <= 2; i++){
             AnimationEvent stop = new AnimationEvent();
             stop.functionName = "CheckStopWobble";
-            stop.time = wobblePeriod / i;
+            stop.time = wobbleSpeed / i;
             stop.objectReferenceParameter = this;
             wobble.AddEvent(stop);
         }
 
         AnimationCurve wobbleCurve = new AnimationCurve(keys);
-        wobble.SetCurve("", typeof(Transform), "localPosition.y", wobbleCurve);
+        wobble.SetCurve("", typeof(Heart), "offset", wobbleCurve);
         wobble.wrapMode = WrapMode.Loop;
         anim.AddClip(wobble, wobble.name);
     }
@@ -52,12 +54,14 @@ public class Heart : MonoBehaviour
         GetComponent<Image>().sprite = sprites[Mathf.Clamp(type, 0, 2)];
     }
 
-    public void Wobble()
+    public void Wobble(float intensity)
     {
+        targetIntensity = intensity;
         if (!wobbling)
         {
             anim.Play(wobble.name);
             wobbling = true;
+            wobbleIntensity = intensity;
         }
     }
 
@@ -79,12 +83,14 @@ public class Heart : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) Wobble();
+        if (Input.GetKeyDown(KeyCode.G)) Wobble(3f);
         if (Input.GetKeyDown(KeyCode.Y)) wobbling = false;
 
         if (!wobbling)
-            anim["Wobble"].speed = Mathf.Lerp(anim["Wobble"].speed, 0.2f, 0.1f);
-        else
-            anim["Wobble"].speed = 1f;
+            targetIntensity = 0f;
+
+        wobbleIntensity = Mathf.Lerp(wobbleIntensity, targetIntensity, 0.01f);
+        
+        transform.localPosition = new Vector2(transform.localPosition.x, wobbleIntensity * offset);
     }
 }
