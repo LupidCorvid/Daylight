@@ -17,8 +17,7 @@ public class Heart : MonoBehaviour
     private static bool flipWobble = false;
     public static int MinWobbleHealth = 3;
     public float offset;
-    [SerializeField] private float wobbleIntensity = 3f;
-    private float targetIntensity = 0f;
+    private float wobbleIntensity = 0f, targetIntensity = 0f;
 
     private void Start()
     {
@@ -62,6 +61,7 @@ public class Heart : MonoBehaviour
         {
             anim.Play(wobble.name);
             wobbling = true;
+            wobbleIntensity = intensity;
         }
     }
 
@@ -89,7 +89,7 @@ public class Heart : MonoBehaviour
         if (!wobbling)
             targetIntensity = 0f;
 
-        wobbleIntensity = Mathf.Lerp(targetIntensity, 0f, 0.01f);
+        wobbleIntensity = Mathf.Lerp(wobbleIntensity, targetIntensity, 0.01f);
         
         transform.localPosition = new Vector2(transform.localPosition.x, wobbleIntensity * offset);
     }
