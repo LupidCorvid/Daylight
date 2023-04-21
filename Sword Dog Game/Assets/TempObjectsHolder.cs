@@ -17,6 +17,28 @@ public class TempObjectsHolder : MonoBehaviour
     //Loose prefabs that are necessary
     public GameObject sporedDebuffPrefab;
 
+    public GameObject buffIconDisplay;
+
+    [System.Serializable]
+    public class SpriteCollection
+    {
+        public Sprite movementBuff;
+        public Sprite movementDebuff;
+
+        public Sprite attackBuff;
+        public Sprite attackDebuff;
+
+        public Sprite defenseBuff;
+        public Sprite defenseDebuff;
+
+        public Sprite confused;
+        public Sprite poisoned;
+
+        public Sprite spored;
+    }
+
+    public SpriteCollection sprites;
+
     // Start is called before the first frame update
     void Awake()
     {
