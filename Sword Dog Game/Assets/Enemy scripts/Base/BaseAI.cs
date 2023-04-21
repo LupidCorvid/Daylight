@@ -32,7 +32,7 @@ public class BaseAI
         }
         set
         {
-            enemyBase.moveSpeed = value;
+            enemyBase.moveSpeed.baseValue = value;
         }
 
     }
@@ -45,7 +45,7 @@ public class BaseAI
         }
         set
         {
-            enemyBase.attackSpeed = value;
+            enemyBase.attackSpeed.baseValue = value;
         }
     }
 
@@ -69,7 +69,7 @@ public class BaseAI
         }
         set
         {
-            enemyBase.attackDamage = value;
+            enemyBase.attackDamage.baseValue = value;
         }
     }
 

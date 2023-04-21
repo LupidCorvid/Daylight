@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public int attackDamage = 1;
-    public float moveSpeed = 1;
-    public float attackSpeed = 1;
+    public ModifiableValue attackDamage = new ModifiableValue(1);
+    public ModifiableValue moveSpeed = new ModifiableValue(1);
+    public ModifiableValue attackSpeed = new ModifiableValue(1);
 
 
     public int maxHealth = 8;
