@@ -333,30 +333,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void FadeOutCurrent()
+    public void FadeOutCurrent(float duration = 1f)
     {
         if (firstSet)
         {
-            fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, 0.0f, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, 0.0f, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
         else
         {
-            fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, 0.0f, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, 0.0f, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
     }
 
-    public void FadeInCurrent()
+    public void FadeInCurrent(float duration = 1f)
     {
         if (firstSet)
         {
-            fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, volume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, volume, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
         else
         {
-            fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, volume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, volume, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
     }
