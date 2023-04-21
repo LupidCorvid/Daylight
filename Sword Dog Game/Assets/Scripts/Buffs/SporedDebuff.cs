@@ -23,10 +23,6 @@ public class SporedDebuff : Buff
 
         IndicatorGameObj = TempObjectsHolder.main.sporedDebuffPrefab;
         base.Inflict();
-
-        
-        //lastActivation = (Time.time - (activationInterval + 2 * (Time.time - startTime)));
-
     }
 
     public override void Update()

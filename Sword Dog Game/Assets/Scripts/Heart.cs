@@ -18,6 +18,8 @@ public class Heart : MonoBehaviour
     public static int MinWobbleHealth = 3;
     public float offset;
     private float wobbleIntensity = 0f, targetIntensity = 0f;
+    private int type = 2;
+    private Coroutine blinkRoutine;
 
     private void Start()
     {
@@ -49,9 +51,16 @@ public class Heart : MonoBehaviour
         anim.AddClip(wobble, wobble.name);
     }
 
-    public void SetSprite(int type)
+    public void SetSprite(int newType)
     {
-        GetComponent<Image>().sprite = sprites[Mathf.Clamp(type, 0, 2)];
+        int prevType = type;
+        type = Mathf.Clamp(newType, 0, 2);
+        // If we have lost health and this heart was affected, blink
+        if (type < prevType && blinkRoutine == null) {
+            blinkRoutine = StartCoroutine(Blink(1f, 3));
+        } else {
+            GetComponent<Image>().sprite = sprites[type];
+        }
     }
 
     public void Wobble(float intensity)
@@ -67,7 +76,7 @@ public class Heart : MonoBehaviour
 
     public void StopWobble()
     {
-        anim.Stop(); // TODO figure out how to make this only stop the one clip
+        anim.Stop();
         wobbling = false;
     }
 
@@ -77,8 +86,20 @@ public class Heart : MonoBehaviour
             StopWobble();
     }
 
-    public void Blink() {
+    private IEnumerator Blink(float duration, int amount)
+    {
+        Image image = GetComponent<Image>();
+        image.sprite = sprites[type];
+        for (int i = 0; i < amount; i++)
+        {
+            yield return new WaitForSeconds(duration / amount / 2);
+            image.sprite = sprites[type + 1];
+            yield return new WaitForSeconds(duration / amount / 2);
+            image.sprite = sprites[type];
+        }
 
+        // Set the routine to null, signaling that it's finished.
+        blinkRoutine = null;
     }
 
     private void Update()

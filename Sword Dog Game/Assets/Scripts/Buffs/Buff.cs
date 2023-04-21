@@ -19,6 +19,16 @@ public class Buff
 
     public bool active;
 
+    public static int totalBuffs;
+
+    public int buffID;
+
+    public Buff()
+    {
+        buffID = totalBuffs;
+        totalBuffs++;
+    }
+
     public virtual void Inflict()
     {
         if (!active)
@@ -34,6 +44,12 @@ public class Buff
             startTime = Time.time;
         }
     }
+
+    public virtual void Inflict(float strength)
+    {
+        Inflict();
+    }
+
 
     public virtual void Inflict(float duration, float intensity)
     {
@@ -67,6 +83,11 @@ public class Buff
     }
 
     public virtual void disableVisuals()
+    {
+
+    }
+
+    public virtual void updateVisuals()
     {
 
     }

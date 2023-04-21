@@ -41,6 +41,9 @@ public class BugShroomAI : BaseAI
     {
         base.Update();
 
+        if (target == null)
+            state = AIState.idle;
+
         switch(state)
         {
             case AIState.idle:

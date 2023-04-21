@@ -177,13 +177,16 @@ public class FlyingAI : BaseAI
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
                 lastAttack = Time.time;
-                rb.velocity = Vector2.ClampMagnitude((windUpTarget - (Vector2)transform.position) * 7, attackDistance * 7);
+                rb.velocity = Vector2.ClampMagnitude((windUpTarget - (Vector2)transform.position) * 7, attackDistance * 10); //constants were 7s
                 state = states.lungeReturn;
                 break;
 
             case states.lungeReturn:
                 if (Vector2.Distance(transform.position, windUpTarget) <= 1f || rb.velocity.magnitude <= 3f)
+                {
                     state = states.lungeFlee;
+                    DamageBox(transform.position + transform.rotation * new Vector2(facingLeft ? -1 : 1, 0), Vector2.one);
+                }
                 rotateToDirection((Vector2)transform.position - windUpTarget);
                 break;
 
@@ -191,7 +194,7 @@ public class FlyingAI : BaseAI
                 Flee();
                 //rotateToDirection((Vector2)transform.position - targetPosition);
                 rotateToDirection(Vector2.right * (rb.velocity.normalized.x) * 64 + Vector2.up * 8);
-                if (Vector2.Distance(target.position, transform.position) > 4.5f)
+                if (Vector2.Distance(windUpTarget, transform.position) > 4.5f)
                     state = states.pursuit;
                 break;
         }
@@ -242,7 +245,7 @@ public class FlyingAI : BaseAI
 
     public void Flee()
     {
-        ((FlyingMovement)movement).MoveDirection((-targetPosition + (Vector2)transform.position).normalized.x * Vector2.right * 0 + Vector2.right * (rb.velocity.normalized.x) * 8 + Vector2.up * 8);
+        ((FlyingMovement)movement).MoveDirection(Vector2.right * (rb.velocity.normalized.x) * 12 + Vector2.up * 8);
     }
 
 }

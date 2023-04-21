@@ -26,13 +26,14 @@ public class Entity : MonoBehaviour
 
     #region buffs
     public SporedDebuff spored;
-
+    public MoveSpeedBuff moveSpeedBuff;
     #endregion
     // Start is called before the first frame update
     public virtual void Start()
     {
         #region buffs
         spored = new SporedDebuff(this);
+        moveSpeedBuff = new MoveSpeedBuff(this);
         #endregion
     }
 
@@ -47,6 +48,16 @@ public class Entity : MonoBehaviour
     public virtual void heal()
     {
 
+    }
+
+    public virtual GameObject addBuffDisplay(int buffID, GameObject buffObj)
+    {
+        return null;
+    }
+
+    public virtual void removeBufffDisplay(int buffID)
+    {
+        
     }
 
     public virtual void TakeDamage(int damage)

@@ -18,4 +18,14 @@ public class Player : Entity
     {
         playerHealth.TakeDamage(damage);
     }
+
+    public override GameObject addBuffDisplay(int buffID, GameObject buffObj)
+    {
+        return BuffList.main.instantiateAndAddBuffIcon(buffID, buffObj);
+    }
+
+    public override void removeBufffDisplay(int buffID)
+    {
+        BuffList.main.removeBuffIcon(buffID);
+    }
 }

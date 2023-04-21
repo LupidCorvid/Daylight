@@ -23,7 +23,7 @@ public class SwitchMusicTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && newTrack != null)
+        if (other.CompareTag("Player") && newTrack != null && !CutsceneController.inCutscene)
         {
             theAM = FindObjectOfType<AudioManager>();
             oldTrack = theAM.currentSong;
@@ -33,7 +33,7 @@ public class SwitchMusicTrigger : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && oldTrack != null)
+        if (other.CompareTag("Player") && oldTrack != null && !CutsceneController.inCutscene)
         {
             theAM = FindObjectOfType<AudioManager>();
             theAM.ChangeBGM(oldTrack, BPM, timeSignature, barsLength, theAM.currentArea);

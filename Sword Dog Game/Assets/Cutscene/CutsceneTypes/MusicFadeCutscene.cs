@@ -2,29 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenFadeCutscene : CutsceneData
+public class MusicFadeCutscene : CutsceneData
 {
     public bool FadeIn = false;
-
-    private const int fadeTime = 1; //Animations are set to be 1 second long
-
-    float startTime;
+    public float Duration = 1f;
 
     public override void startSegment()
     {
         base.startSegment();
-        startTime = Time.time;
         if (FadeIn)
-            Crossfade.FadeStart?.Invoke();
+            AudioManager.instance.FadeInCurrent(Duration);
         else
-            Crossfade.FadeEnd?.Invoke();
+            AudioManager.instance.FadeOutCurrent(Duration);
     }
 
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if (startTime + fadeTime <= Time.time)
-            finishedSegment();
+        finishedSegment();
     }
 
     public override void abort()
@@ -32,4 +27,6 @@ public class ScreenFadeCutscene : CutsceneData
         base.abort();
         //Snap to fully faded in or out
     }
+
+
 }
