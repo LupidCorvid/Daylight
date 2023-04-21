@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3)
+            if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3 && !PauseScreen.paused)
             {
                 // set attack direction + context
                 if (!isAttacking)

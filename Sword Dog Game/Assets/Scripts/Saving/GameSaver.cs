@@ -9,11 +9,18 @@ public class GameSaver : MonoBehaviour
     public SaveSystem saveSystem;
     public GameObject prefab;
     public static bool loading = false;
+    public static GameSaver main;
+
+    public void Awake()
+    {
+        main = this;
+    }
 
     public void Clear()
     {
         Destroy(PlayerMovement.instance);
         PlayerMovement.instance = null;
+        
     }
 
     public void SaveGame()
