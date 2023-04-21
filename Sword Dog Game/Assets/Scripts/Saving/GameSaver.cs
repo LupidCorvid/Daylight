@@ -48,6 +48,7 @@ public class GameSaver : MonoBehaviour
 
         if (!String.IsNullOrEmpty(dataToLoad))
         {
+            // TODO replace all of this with cutscene
             AudioManager.instance.FadeOutCurrent();
             // GameObject.FindObjectOfType<AudioListener>().enabled = false;
             GameObject.Find("Crossfade").GetComponent<Animator>().SetTrigger("start");
