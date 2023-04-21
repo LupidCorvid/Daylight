@@ -24,7 +24,7 @@ public class AnimatableParallax : MonoBehaviour
         cam ??= Camera.main;
         startPos = transform.position;
         spriteRenderer ??= GetComponent<SpriteRenderer>();
-        simpleDistance = Random.Range(0, 10f) + initDistance;
+        //simpleDistance = Random.Range(0, 10f) + initDistance;
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class AnimatableParallax : MonoBehaviour
             transform.position = new Vector3(startPos.x + ((startPos.x - cam.transform.position.x) * distance.x * 5f / cam.orthographicSize), startPos.y + ((startPos.y - cam.transform.position.y) * distance.y * 5f / cam.orthographicSize), transform.position.z);
         else
             transform.position = new Vector3(startPos.x + ((startPos.x - cam.transform.position.x) * distance.x), startPos.y + ((startPos.y - cam.transform.position.y) * distance.y), transform.position.z);
-        simpleDistance -= (Mathf.Cos(Time.time * 5));
+        //simpleDistance -= (Mathf.Cos(Time.time * 5));
     }
 
 
