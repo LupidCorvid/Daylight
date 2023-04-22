@@ -71,7 +71,7 @@ public class LeavesSway : MonoBehaviour
                 startLifetime = .1f,
                 position = Vector3.zero
             };
-            particleHandler.Emit(velocitySetter, 1);
+            particleHandler?.Emit(velocitySetter, 1);
             lastEmptyParticleDrop = Time.time;
         }
     }
