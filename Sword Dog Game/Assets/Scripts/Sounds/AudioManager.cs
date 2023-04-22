@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixer musicMixer, sfxMixer, globalSfxMixer;
     public AudioMixerGroup musicMixerGroup;
-    public MusicClip currentSong;
+    public MusicClip currentSong = null;
     public GameArea currentArea;
 
     private int activePlayer = 0;
@@ -123,7 +123,8 @@ public class AudioManager : MonoBehaviour
                 BGM2[activePlayer].Stop();
                 BGM2[activePlayer].time = 0;
                 activePlayer = 1 - activePlayer;
-                BGM1[activePlayer].clip = currentSong.GetClip();
+                if (currentSong != null)
+                    BGM1[activePlayer].clip = currentSong.GetClip();
                 BGM1[activePlayer].volume = volume;
                 BGM1[activePlayer].time = 0;
                 BGM1[activePlayer].Play();
@@ -136,7 +137,8 @@ public class AudioManager : MonoBehaviour
                 BGM2[activePlayer].Stop();
                 BGM2[activePlayer].time = 0;
                 activePlayer = 1 - activePlayer;
-                BGM2[activePlayer].clip = currentSong.GetClip();
+                if (currentSong != null)
+                    BGM2[activePlayer].clip = currentSong.GetClip();
                 BGM2[activePlayer].volume = volume;
                 BGM2[activePlayer].time = 0;
                 BGM2[activePlayer].Play();
