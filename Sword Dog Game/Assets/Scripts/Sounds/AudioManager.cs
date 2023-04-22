@@ -553,8 +553,6 @@ public class AudioManager : MonoBehaviour
             Debug.Log(current.name);
             foreach (SoundNode node in ((MusicCategory)current).children)
             {
-
-                Debug.Log(node.name + " " + path[0]);
                 if (path.Count > 0 && node.name.ToLower() == path[0].ToLower())
                 {
                     // Debug.Log("Found " + path[0]);
