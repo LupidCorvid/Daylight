@@ -38,6 +38,7 @@ public class DialogSource
     //public event Action barkDefault;
     public event Action<Vector2, Vector2> bark;
     public event Action<String, float, bool> ps;
+    public event Action<String> es;
 
     public event Action exit;
 
@@ -118,13 +119,19 @@ public class DialogSource
      * [ps, sound, volume] //Plays sound with specified volume
      * [ps, sound, volume, loop] //Plays sound with specified volume and loopability (true/false)
      * 
+     * [es] //Ends all sounds by this speaker
+     * [es, sound] //Ends a particular sound by this speaker
+     *
      * [bgm, music] //Plays background music from a specified sound path
      * [bgm, music, duration] //Plays background music, crossfading over specified duration
      * [bgm, music, duration, area] //Plays background music, crossfading over specified duration, while setting new music area
+     *
      * [pbgm] //Pauses background music
      * [upbgm] //Unpauses background music
+     *
      * [fibgm] //Fades background music in
      * [fibgm, duration] //Fades background music in over specified duration
+     *
      * [fobgm] //Fades background music out
      * [fobgm, duration] //Fades background music out over specified duration
      * 
@@ -715,6 +722,15 @@ public class DialogSource
                 else
                     Debug.LogWarning("Invalid number of parameters for play sound [ps]!");
                 break;
+
+            case "es":
+                if (input.Length == 1)
+                    endSound();
+                else if (input.Length == 2)
+                    endSound(input[1]);
+                else
+                    Debug.LogWarning("Invalid number of parameters for end sound [es]!");
+                break;
             
             case "bgm":
                 if (input.Length == 2)
@@ -803,19 +819,23 @@ public class DialogSource
     {
         bark?.Invoke(new Vector2(velocityX, velocityY), new Vector2(accelerationX, accelerationY));
     }
-    public void playSound(String sound, float volume = 1, bool loop = false)
+    public void playSound(string sound, float volume = 1, bool loop = false)
     {
         ps?.Invoke(sound, volume, loop);
     }
-    public void setBGM(String music, float duration = 1)
+    public void endSound(string sound = null)
+    {
+        es?.Invoke(sound);
+    }
+    public void setBGM(string music, float duration = 1)
     {
         AudioManager.instance.ChangeBGM(music, duration);
     }
-    public void setBGM(String music, float duration, String area)
+    public void setBGM(string music, float duration, string area)
     {
         AudioManager.instance.ChangeBGM(music, area, duration);
     }
-    public void applyMixerEffect(String mixer, String effect, float value, float duration = 0)
+    public void applyMixerEffect(string mixer, string effect, float value, float duration = 0)
     {
         AudioManager.instance.ApplyMixerEffect(mixer, effect, value, duration);
     }

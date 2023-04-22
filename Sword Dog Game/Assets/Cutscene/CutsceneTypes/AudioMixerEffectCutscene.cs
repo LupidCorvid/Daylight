@@ -11,6 +11,7 @@ public class AudioMixerEffectCutscene : CutsceneData
     public float Duration = 0f;
     float startValue;
     float startTime;
+    bool Stall = true;
 
     public override void startSegment()
     {
@@ -22,12 +23,21 @@ public class AudioMixerEffectCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if (Duration > 0)
-            Mixer.SetFloat(Effect, Mathf.Lerp(startValue, Value, (Time.time - startTime) / Duration));
-        else
-            abort();
-        if (startTime + Duration <= Time.time)
+        if (Stall)
+        {
+            if (Duration > 0)
+                Mixer.SetFloat(Effect, Mathf.Lerp(startValue, Value, (Time.time - startTime) / Duration));
+            else
+                abort();
+
+            if (startTime + Duration <= Time.time)
+                finishedSegment();
+        }
+        else // Handle as coroutine and allow other cutscene events to progress
+        {
+            AudioManager.instance?.ApplyMixerEffect(Mixer, Effect, Value, Duration);
             finishedSegment();
+        }
     }
 
     public override void abort()

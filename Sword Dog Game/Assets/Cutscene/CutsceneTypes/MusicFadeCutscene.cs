@@ -6,10 +6,13 @@ public class MusicFadeCutscene : CutsceneData
 {
     public bool FadeIn = false;
     public float Duration = 1f;
+    float startTime;
+    public bool Stall = false;
 
     public override void startSegment()
     {
         base.startSegment();
+        startTime = Time.time;
         if (FadeIn)
             AudioManager.instance.FadeInCurrent(Duration);
         else
@@ -19,7 +22,8 @@ public class MusicFadeCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        finishedSegment();
+        if (startTime + Duration <= Time.time || !Stall)
+            finishedSegment();
     }
 
     public override void abort()
@@ -27,6 +31,4 @@ public class MusicFadeCutscene : CutsceneData
         base.abort();
         //Snap to fully faded in or out
     }
-
-
 }

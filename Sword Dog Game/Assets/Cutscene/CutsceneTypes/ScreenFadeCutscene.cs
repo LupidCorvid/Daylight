@@ -9,6 +9,7 @@ public class ScreenFadeCutscene : CutsceneData
     private const int fadeTime = 1; //Animations are set to be 1 second long
 
     float startTime;
+    public bool Stall = true;
 
     public override void startSegment()
     {
@@ -23,7 +24,7 @@ public class ScreenFadeCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if (startTime + fadeTime <= Time.time)
+        if (startTime + fadeTime <= Time.time || !Stall)
             finishedSegment();
     }
 

@@ -25,7 +25,7 @@ public class SoundPlayer : MonoBehaviour
         {
             if (source.clip == clip && source.isPlaying)
             {
-                if (source.time < 0.2f && source.isPlaying) return;
+                if (source.time < 0.2f) return;
                 else source.Stop();
             }
         }
@@ -38,6 +38,43 @@ public class SoundPlayer : MonoBehaviour
                 sources[index].volume = volume;
                 sources[index].Play();
                 return;
+            }
+        }
+    }
+
+    public void EndSound(string path = null)
+    {
+        if (path == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.Stop();
+                source.clip = null;
+                source.time = 0;
+            }
+            return;
+        }
+        EndSound(AudioManager.instance?.FindSound(path));
+    }
+
+    public void EndSound(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.Stop();
+                source.clip = null;
+                source.time = 0;
+            }
+            return;
+        }
+
+        foreach (AudioSource source in sources)
+        {
+            if (source.clip == clip && source.isPlaying)
+            {
+                source.Stop();
             }
         }
     }

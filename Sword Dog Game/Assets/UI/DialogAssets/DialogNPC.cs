@@ -50,6 +50,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource = new DialogSource("[exit]");
         dialogSource.bark += barkEffect;
         dialogSource.ps += playSound;
+        dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
     }
@@ -93,6 +94,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource.callEvent -= eventCalled;
             dialogSource.bark -= barkEffect;
             dialogSource.ps -= playSound;
+            dialogSource.es -= endSound;
             //dialogSource.barkDefault -= barkEffect;
             dialogSource.exit -= exitDialog;
         }
@@ -100,6 +102,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.callEvent += eventCalled;
         dialogSource.bark += barkEffect;
         dialogSource.ps += playSound;
+        dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
     }
@@ -145,13 +148,22 @@ public class DialogNPC : MonoBehaviour, IInteractable
         addedParticle.startTime = Time.time;
     }
 
-    public void playSound(String sound, float volume = 1, bool loop = false)
+    public void playSound(string sound, float volume = 1, bool loop = false)
     {
         SoundPlayer player = null;
         player ??= GetComponentInChildren<SoundPlayer>();
         if (player == null)
             Debug.LogError("No sound player attached to this NPC");
         player?.PlaySound(sound, volume, loop);
+    }
+
+    public void endSound(string sound = null)
+    {
+        SoundPlayer player = null;
+        player ??= GetComponentInChildren<SoundPlayer>();
+        if (player == null)
+            Debug.LogError("No sound player attached to this NPC");
+        player?.EndSound(sound);
     }
 
     public void hidePrompt()
