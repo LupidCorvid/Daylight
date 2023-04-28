@@ -165,7 +165,7 @@ public class LeavesSway : MonoBehaviour
                     tempSetter.velocity += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                     tempSetter.position = particleSetter.position + (Random.Range(-1.2f, 1.2f) * (collision.transform.rotation * collision.bounds.extents));
                     
-                    particleHandler.Emit(tempSetter, 1);
+                    particleHandler?.Emit(tempSetter, 1);
                 }
 
                 lastDrop = Time.time;

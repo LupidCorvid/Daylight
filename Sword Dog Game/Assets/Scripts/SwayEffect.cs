@@ -49,7 +49,7 @@ public class SwayEffect : MonoBehaviour
     void Start()
     {
         windSounds = 0;
-        player ??= GameObject.FindGameObjectWithTag("Player").transform;
+        player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
         soundPlayer = GetComponent<SoundPlayer>();
         GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
         rend = GetComponent<Renderer>();
@@ -181,8 +181,8 @@ public class SwayEffect : MonoBehaviour
     private void FixedUpdate()
     {
         //Culling
-        player ??= GameObject.FindGameObjectWithTag("Player").transform;
-        if ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15)
+        player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending

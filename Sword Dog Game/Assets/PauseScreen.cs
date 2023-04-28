@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -64,6 +65,13 @@ public class PauseScreen : MonoBehaviour
     {
         GameSaver.main.SaveGame();
         unPause();
-        SceneHelper.LoadScene("Main Menu");
+        //SceneHelper.LoadScene("Main Menu");
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Main Menu"));
+        Destroy(PlayerMovement.controller.gameObject);
+
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        CanvasManager.HideHUD();
+        //SceneManager.UnloadSceneAsync("DontDestroyOnLoad");
+        
     }
 }
