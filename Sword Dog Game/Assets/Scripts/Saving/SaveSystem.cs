@@ -46,7 +46,7 @@ public class SaveSystem : MonoBehaviour
 
     private bool ReadFromFile(string name, out string content)
     {
-        var fullPath = Path.Combine(Application.persistentDataPath, name);
+        var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
         try
         {
             content = File.ReadAllText(fullPath);
