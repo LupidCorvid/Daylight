@@ -85,6 +85,8 @@ public class GameSaver : MonoBehaviour
             
             PlayerMovement.instance = newPlayer;
             PlayerMovement.controller = newPlayer.GetComponent<PlayerMovement>();
+            GameObject.Find("Crossfade").GetComponent<Animator>().SetTrigger("stop");
+            CanvasManager.ShowHUD();
         }
 
         loading = false;

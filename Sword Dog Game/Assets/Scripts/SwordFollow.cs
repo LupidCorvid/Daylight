@@ -106,7 +106,8 @@ public class SwordFollow : MonoBehaviour
         //    pmScript = player.GetComponent<PlayerMovement>();
         //    triggeredPMScript = true;
         //}
-        
+        if (!(PlayerHealth.dead && !PlayerHealth.gettingUp) && player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
         if(player != null && !(PlayerHealth.dead && !PlayerHealth.gettingUp))
         {
             cldr.isTrigger = true;

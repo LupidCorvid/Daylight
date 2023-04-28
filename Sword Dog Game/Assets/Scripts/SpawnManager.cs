@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
             if (spawnPointObj != null)
             {
                 spawnPoint = spawnPointObj.transform;
+                //update saved scene to current scene
                 PlayerMovement.instance.GetComponent<Spawnpoint>().SetSpawnpoint(spawnPointObj);
                 Vector3 newPos = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
                 player.position = newPos;
