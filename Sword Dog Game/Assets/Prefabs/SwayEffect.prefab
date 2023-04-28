@@ -100,6 +100,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -128,7 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09a8758fb07ef744b78ff49f5ae6e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 21300000, guid: ed6c12fc523b2bb45a7502cf335290f3, type: 3}
+  texture: {fileID: 21300000, guid: f8dbc37349b8f534ca6f39bee96d604a, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 1}
+  swayPosition: 1
+  swayVelocity: 0
   tension: 0.1
   dampening: 0.3
   windStrength: 5

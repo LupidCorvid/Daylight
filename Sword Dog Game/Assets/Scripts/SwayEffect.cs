@@ -6,6 +6,7 @@ using Unity.Collections;
 public class SwayEffect : MonoBehaviour
 {
     public Sprite texture;
+    public Color color;
     Renderer rend;
 
     Mesh originalMesh;
@@ -45,13 +46,19 @@ public class SwayEffect : MonoBehaviour
     public static int windSoundCap = 400;
     public static float windSoundCooldownMax = 0.1f, windSoundCooldown = windSoundCooldownMax;
 
+    public MaterialPropertyBlock materialBlock;
+
     // Start is called before the first frame update
     void Start()
     {
         windSounds = 0;
         player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
         soundPlayer = GetComponent<SoundPlayer>();
-        GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
+        //GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
+        materialBlock = new MaterialPropertyBlock();
+        materialBlock.SetTexture("_MainTex", texture.texture);
+        materialBlock.SetColor("_Color", color);
+        GetComponent<MeshRenderer>().SetPropertyBlock(materialBlock);
         rend = GetComponent<Renderer>();
         meshFilter = GetComponent<MeshFilter>();
         originalMesh = meshFilter.sharedMesh;
