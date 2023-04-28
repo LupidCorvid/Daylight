@@ -27,7 +27,7 @@ public class SaveSystem : MonoBehaviour
 
     private bool WriteToFile(string name, string content)
     {
-        var fullPath = Path.Combine(Application.persistentDataPath, name);
+        var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
 
         try
         {

@@ -29,7 +29,7 @@ public class GameSaver : MonoBehaviour
             SaveData data = new SaveData();
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
-            var dataToSave = JsonUtility.ToJson(data);
+            var dataToSave = JsonUtility.ToJson(data, true);
             saveSystem.SaveData(dataToSave);
         }
     }
