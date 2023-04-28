@@ -37,6 +37,7 @@ public class SwordFollow : MonoBehaviour
     void Start()
     {
         sceneChange += Snap;
+        
         speed = 100;
         //adjust the adjustLocation variables per sword type
         adjustDefaultX = -.2f;
@@ -228,6 +229,7 @@ public class SwordFollow : MonoBehaviour
     private void Snap()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        //player ??= GameObject.FindGameObjectWithTag("Player(Clone)");
         var offset = player.transform.rotation * new Vector2((player.GetComponent<PlayerMovement>().facingRight ? 1 : -1) * adjustDefaultX, adjustLocationY);
         swordTargetLocation = player.transform.position + offset;
         sword.transform.position = swordTargetLocation;

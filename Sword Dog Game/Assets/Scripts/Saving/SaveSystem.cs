@@ -28,6 +28,8 @@ public class SaveSystem : MonoBehaviour
     private bool WriteToFile(string name, string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
+        if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
+            Directory.CreateDirectory(Application.persistentDataPath + @"\SaveData");
 
         try
         {
