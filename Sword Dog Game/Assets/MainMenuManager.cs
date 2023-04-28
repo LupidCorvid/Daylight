@@ -32,6 +32,16 @@ public class MainMenuManager : MonoBehaviour
         GameSaver.main.LoadGame();
     }
 
+    public void Quit()
+    {
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     public string GetMostRecentSave()
     {
         string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
