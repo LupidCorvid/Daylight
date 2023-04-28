@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
             if (spawnPointObj != null)
             {
                 spawnPoint = spawnPointObj.transform;
+                PlayerMovement.instance.GetComponent<Spawnpoint>().SetSpawnpoint(spawnPointObj);
                 Vector3 newPos = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
                 player.position = newPos;
                 SwordFollow.newPos = newPos;

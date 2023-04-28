@@ -26,4 +26,11 @@ public class Spawnpoint : MonoBehaviour
         position = location.position;
         savedOnce = true;
     }
+
+    public void SetSpawnpoint(GameObject location)
+    {
+        scene = location.scene.name;
+        position = location.transform.position;
+        savedOnce = true;
+    }
 }

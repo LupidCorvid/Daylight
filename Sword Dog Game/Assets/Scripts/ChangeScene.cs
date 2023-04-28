@@ -60,6 +60,7 @@ public class ChangeScene : MonoBehaviour
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
+        
     }
 
     public static void ChangeSceneMinimal(string scene)
