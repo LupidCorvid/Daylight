@@ -9,6 +9,7 @@ public class StaminaBar : MonoBehaviour
 
     void Update()
     {
-        slider.value = PlayerMovement.controller.stamina / PlayerMovement.controller.maxStamina;
+        if(PlayerMovement.controller != null)
+            slider.value = PlayerMovement.controller.stamina / PlayerMovement.controller.maxStamina;
     }
 }

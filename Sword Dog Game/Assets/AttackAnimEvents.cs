@@ -9,7 +9,7 @@ public class AttackAnimEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sword = GameObject.Find("Tip").GetComponent<SwordTip>();
+        sword = GameObject.Find("Tip")?.GetComponent<SwordTip>();
     }
 
     public void ClearCollisions()

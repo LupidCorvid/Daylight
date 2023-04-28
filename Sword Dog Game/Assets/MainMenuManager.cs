@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
     {
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
-
+        CanvasManager.HideHUD();
     }
 
     public void StartNewSave()
