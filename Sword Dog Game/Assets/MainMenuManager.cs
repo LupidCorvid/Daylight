@@ -7,11 +7,27 @@ using System.IO;
 public class MainMenuManager : MonoBehaviour
 {
     public MenuBackgrounds Backgrounds;
+    public string lastSave;
+
+    public TMPro.TextMeshProUGUI lastSaveDetails;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GetMostRecentSave();
+        lastSave = GetMostRecentSave();
+        lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(lastSave).player.spawnpoint.scene;
+
+    }
+
+    public void StartNewSave()
+    {
+        SceneHelper.LoadScene("prologue area");
+    }
+
+    public void LoadMostRecentSave()
+    {
+        GameSaver.main.LoadGame();
     }
 
     public string GetMostRecentSave()
