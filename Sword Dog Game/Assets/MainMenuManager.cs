@@ -23,6 +23,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartNewSave()
     {
         SceneHelper.LoadScene("prologue area");
+        
     }
 
     public void LoadMostRecentSave()

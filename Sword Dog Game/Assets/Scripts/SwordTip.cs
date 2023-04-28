@@ -39,6 +39,8 @@ public class SwordTip : MonoBehaviour
             sword.Freeze();
             return;
         }
+        if (sword.pmScript == null)
+            sword.pmScript = PlayerMovement.controller;
 
         if (sword?.pmScript?.attacking == false)
             return;
