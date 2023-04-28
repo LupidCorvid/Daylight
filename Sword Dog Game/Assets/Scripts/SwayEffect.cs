@@ -6,7 +6,7 @@ using Unity.Collections;
 public class SwayEffect : MonoBehaviour
 {
     public Sprite texture;
-    public Color color;
+    public Color color = new Color(0,0,0, 1);
     Renderer rend;
 
     Mesh originalMesh;
@@ -68,6 +68,14 @@ public class SwayEffect : MonoBehaviour
         Mesh.ApplyAndDisposeWritableMeshData(tempData, meshFilter.sharedMesh);
         meshFilter.mesh.RecalculateBounds();
         meshFilter.mesh.RecalculateNormals();
+    }
+
+    public void OnValidate()
+    {
+        materialBlock = new MaterialPropertyBlock();
+        materialBlock.SetTexture("_MainTex", texture.texture);
+        materialBlock.SetColor("_Color", color);
+        GetComponent<MeshRenderer>().SetPropertyBlock(materialBlock);
     }
 
     public void sway(float intensity)
