@@ -80,7 +80,6 @@ public class GameSaver : MonoBehaviour
             // data.player.inventory.SetValues(newPlayer);
             // data.player.health.SetValues(newPlayer);
             // data.player.attack.SetValues(newPlayer);
-            data.player.spawnpoint.SetValues(newPlayer);
             data.options.SetValues();
             
             PlayerMovement.instance = newPlayer;

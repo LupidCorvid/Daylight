@@ -40,7 +40,7 @@ public class SwordTip : MonoBehaviour
             return;
         }
 
-        if (!sword.pmScript.attacking)
+        if (sword?.pmScript?.attacking == false)
             return;
 
         if (sameAttackCollisions.Contains(other))
