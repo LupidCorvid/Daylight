@@ -25,8 +25,10 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            if (!overrideMovement)
+            if (!overrideMovement && targetTracker != null)
                 return targetTracker.position + offset;
+            if (overrideTracker == null)
+                return Vector2.zero;
             return overrideTracker.position + offset;
         }
     }

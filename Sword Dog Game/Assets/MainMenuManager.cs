@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         lastSave = GetMostRecentSave();
-        lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(lastSave).player.spawnpoint.scene;
+        lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
 
     }
 
@@ -27,6 +27,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMostRecentSave()
     {
+        //GameSaver.main.LoadGame();
         GameSaver.main.LoadGame();
     }
 

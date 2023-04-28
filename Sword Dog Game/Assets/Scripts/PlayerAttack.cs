@@ -59,6 +59,8 @@ public class PlayerAttack : MonoBehaviour
     {
         attackCombo = 0;
         isAttacking = false;
+        if (anim == null)
+            return;
         // attackCooldown = cooldownLength;
         for (int i = 1; i <= 3; i++)
         {
