@@ -23,12 +23,23 @@ public class MainMenuManager : MonoBehaviour
     public void StartNewSave()
     {
         SceneHelper.LoadScene("prologue area");
+        
     }
 
     public void LoadMostRecentSave()
     {
         //GameSaver.main.LoadGame();
         GameSaver.main.LoadGame();
+    }
+
+    public void Quit()
+    {
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public string GetMostRecentSave()
