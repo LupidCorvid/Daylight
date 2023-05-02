@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 public class PauseScreen : MonoBehaviour
 {
     public static bool paused = false;
+    public static bool canPause = true;
 
     CanvasGroup pauseMenuGroup;
+
+    public UnityEngine.UI.Button resumeButton;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,8 @@ public class PauseScreen : MonoBehaviour
     }
     public void Pause()
     {
+        if (!canPause)
+            return;
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
         paused = true;
         Time.timeScale = 0;
@@ -44,6 +49,7 @@ public class PauseScreen : MonoBehaviour
         pauseMenuGroup.alpha = 1;
         pauseMenuGroup.blocksRaycasts = true;
         pauseMenuGroup.interactable = true;
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
     }
 
     public void unPause()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class MainMenuManager : MonoBehaviour
 
     public TMPro.TextMeshProUGUI lastSaveDetails;
 
+    public UnityEngine.UI.Button newGameButton;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +19,13 @@ public class MainMenuManager : MonoBehaviour
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
         CanvasManager.HideHUD();
+        EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
 
     public void StartNewSave()
     {
         SceneHelper.LoadScene("prologue area");
+        CanvasManager.ShowHUD();
         
     }
 
