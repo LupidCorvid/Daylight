@@ -13,6 +13,8 @@ public class PauseScreen : MonoBehaviour
 
     public UnityEngine.UI.Button resumeButton;
 
+    public CanvasGroup quitPrompt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,9 +76,37 @@ public class PauseScreen : MonoBehaviour
         pauseMenuGroup.interactable = false;
     }
 
+    public void PromptQuit()
+    {
+        quitPrompt.alpha = 1;
+        quitPrompt.blocksRaycasts = true;
+        quitPrompt.interactable = true;
+
+        pauseMenuGroup.alpha = 0;
+        pauseMenuGroup.blocksRaycasts = false;
+        pauseMenuGroup.interactable = false;
+    }
+
+    public void CancelPrompt()
+    {
+        closePrompt();
+
+        pauseMenuGroup.alpha = 1;
+        pauseMenuGroup.blocksRaycasts = true;
+        pauseMenuGroup.interactable = true;
+    }
+
+    public void closePrompt()
+    {
+        quitPrompt.alpha = 0;
+        quitPrompt.blocksRaycasts = false;
+        quitPrompt.interactable = false;
+    }
+
     public void QuitToTitle()
     {
         GameSaver.main.SaveGame();
+        closePrompt();
         unPause();
         //SceneHelper.LoadScene("Main Menu");
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Main Menu"));
@@ -84,6 +114,7 @@ public class PauseScreen : MonoBehaviour
 
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         CanvasManager.HideHUD();
+
         //SceneManager.UnloadSceneAsync("DontDestroyOnLoad");
         
     }
