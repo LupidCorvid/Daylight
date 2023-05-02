@@ -19,7 +19,15 @@ public class MainMenuManager : MonoBehaviour
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
         CanvasManager.HideHUD();
-        EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+        //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+    }
+
+    public void Update()
+    {
+        if((Input.GetAxisRaw("Vertical") != 0) && EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+        }
     }
 
     public void StartNewSave()

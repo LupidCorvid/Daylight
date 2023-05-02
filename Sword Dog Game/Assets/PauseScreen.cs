@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class PauseScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if ((Input.GetAxisRaw("Vertical") != 0) && EventSystem.current.currentSelectedGameObject == null && paused)
+        {
+            EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+        }
+
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (Input.GetKeyDown(KeyCode.Escape))
         {
