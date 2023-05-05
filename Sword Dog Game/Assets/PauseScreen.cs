@@ -21,6 +21,7 @@ public class PauseScreen : MonoBehaviour
     void Start()
     {
         pauseMenuGroup = GetComponent<CanvasGroup>();
+        //Debug.Log(Camera.main.pixelWidth + "  " + Camera.main.pixelHeight);
     }
 
     // Update is called once per frame
@@ -124,6 +125,7 @@ public class PauseScreen : MonoBehaviour
 
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         CanvasManager.HideHUD();
+        CanvasManager.InstantHideHud();
 
         //SceneManager.UnloadSceneAsync("DontDestroyOnLoad");
         
