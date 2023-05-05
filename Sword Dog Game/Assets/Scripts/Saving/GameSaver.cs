@@ -77,8 +77,8 @@ public class GameSaver : MonoBehaviour
 
             CanvasManager.InstantShowHUD();
         }
-
-        loading = false;
+        else 
+            loading = false;
     }
 
     [Serializable]

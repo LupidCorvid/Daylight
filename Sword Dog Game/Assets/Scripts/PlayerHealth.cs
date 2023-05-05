@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public Player playerBase;
 
-    private int maxHealth
+    public int maxHealth
     {
         get
         {
@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         dead = false;
         gettingUp = false;
@@ -60,6 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
         playerBase = GetComponent<Player>();
         playerBase.playerHealth = this;
+        UpdateHealth();
     }
 
     // Update is called once per frame
@@ -73,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
         // TODO remove debug keybinds 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TakeDamage(10);
+            TakeDamage(1);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -81,19 +82,20 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void UpdateHealth()
+    public void UpdateHealth(bool blink = true)
     {
         int temp = health;
         for (int i = 0; i < CanvasManager.hearts.Count; i++)
         {
-            if (health <= Heart.MinWobbleHealth) {
+            if (health <= Heart.MinWobbleHealth)
                 CanvasManager.hearts[i].Wobble(Heart.MinWobbleHealth - health + 2f);
-            }
             else
                 CanvasManager.hearts[i].wobbling = false;
             
             CanvasManager.hearts[i].SetSprite(temp);
             temp -= 2;
+            if (blink && temp <= 0)
+                CanvasManager.hearts[i].Blink();
         }
     }
 
