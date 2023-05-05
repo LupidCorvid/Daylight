@@ -39,6 +39,15 @@ public class PlayerMenuManager : MonoBehaviour
 
     public bool cancelTransition = false;
     public bool skipTransition = false;
+
+    public float offsetAmount
+    {
+        get
+        {
+            return 1000 * Screen.width / 1092;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +74,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         if(transitioning && open)
         {
-            float offsetAmount = 1000;
+            float offsetAmount = this.offsetAmount;
             if (fromLeft)
                 offsetAmount *= -1;
             Vector3 outMoveDist = slideOut.transform.position - new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0);
@@ -131,7 +140,7 @@ public class PlayerMenuManager : MonoBehaviour
             else
             {
                 currentMenu++;
-                if (Mathf.Abs((slideOut.transform.position - new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0)).x) < 250)
+                if (Mathf.Abs((slideOut.transform.position - new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0)).x) < 250 * Screen.width/ 1092)
                     skipTransition = true;
                 else
                     return;
@@ -152,7 +161,7 @@ public class PlayerMenuManager : MonoBehaviour
         slideOut = menus[currentMenu];
         slideIn = menus[(currentMenu + 1) % menus.Count];
         if (!transitioning || skipTransition)
-            slideIn.transform.position = new Vector3(-1000 + Screen.width / 2, Screen.height / 2, 0);
+            slideIn.transform.position = new Vector3(-offsetAmount + Screen.width / 2, Screen.height / 2, 0);
         fromLeft = false;
         transitioning = true;
         skipTransition = false;
@@ -169,7 +178,7 @@ public class PlayerMenuManager : MonoBehaviour
             if (fromLeft)
             {
                 currentMenu--;
-                if (Mathf.Abs((slideOut.transform.position - new Vector3(-1000 + Screen.width / 2, Screen.height / 2, 0)).x) < 250)
+                if (Mathf.Abs((slideOut.transform.position - new Vector3(-offsetAmount + Screen.width / 2, Screen.height / 2, 0)).x) < 250 * Screen.width / 1092)
                     //slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
                     skipTransition = true;
                 else
@@ -193,7 +202,7 @@ public class PlayerMenuManager : MonoBehaviour
         else
             slideIn = menus[^1];
         if (!transitioning || skipTransition)
-            slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
+            slideIn.transform.position = new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0);
         fromLeft = true;
         transitioning = true;
         skipTransition = false;
