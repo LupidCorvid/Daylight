@@ -58,17 +58,15 @@ public class GameSaver : MonoBehaviour
             // TODO replace all of this with cutscene
             AudioManager.instance.FadeOutCurrent();
             // GameObject.FindObjectOfType<AudioListener>().enabled = false;
-            GameObject.Find("Crossfade").GetComponent<Animator>().SetTrigger("start");
+            Crossfade.current.StartFade();
             yield return new WaitForSeconds(0.9f);
             Clear();
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
 
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
-            if (eventSystem != null)
-            {
-                GameObject.Destroy(eventSystem.gameObject);
-            }
+            GameObject.Destroy(eventSystem?.gameObject);
             SceneHelper.LoadScene(data.player.spawnpoint.scene);
+            
             currentAudioListener.enabled = false;
 
             var newPlayer = Instantiate(prefab);
@@ -84,7 +82,7 @@ public class GameSaver : MonoBehaviour
             
             PlayerMovement.instance = newPlayer;
             PlayerMovement.controller = newPlayer.GetComponent<PlayerMovement>();
-            GameObject.Find("Crossfade").GetComponent<Animator>().SetTrigger("stop");
+            Crossfade.current.StopFade();
             CanvasManager.ShowHUD();
         }
 
