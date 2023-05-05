@@ -15,13 +15,13 @@ public class GameSaver : MonoBehaviour
     public void Awake()
     {
         main = this;
+        DontDestroyOnLoad(this);
     }
 
     public void Clear()
     {
         Destroy(PlayerMovement.instance);
         PlayerMovement.instance = null;
-        
     }
 
     public void SaveGame()
@@ -57,7 +57,7 @@ public class GameSaver : MonoBehaviour
         {
             AudioManager.instance.FadeOutCurrent();
             Crossfade.current.StartFade();
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1f);
             Clear();
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
             player = data.player;

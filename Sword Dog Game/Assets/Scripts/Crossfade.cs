@@ -16,7 +16,6 @@ public class Crossfade : MonoBehaviour
 
     void Start()
     {
-        
         current = this;
         changeScene += SceneChange;
         animator = GetComponent<Animator>();

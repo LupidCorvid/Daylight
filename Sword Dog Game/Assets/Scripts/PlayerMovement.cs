@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool trotting, wasGrounded, holdingJump;
     public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
     public Vector2 bottom;
-    private static bool created = false;
+    public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
     private Vector3 resetPosition;
     private Quaternion resetRotation;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             int neg = 1;
             if (value && created)
                 neg *= -1;
-                
+
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * neg, transform.localScale.y, transform.localScale.z);
         }
     }
