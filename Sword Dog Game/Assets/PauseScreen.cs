@@ -122,6 +122,8 @@ public class PauseScreen : MonoBehaviour
     public void QuitToTitle()
     {
         GameSaver.main.SaveGame();
+        PlayerMovement.created = false;
+        SwordFollow.created = false;
         closePrompt();
         unPause();
 
