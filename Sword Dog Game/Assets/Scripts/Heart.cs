@@ -18,8 +18,8 @@ public class Heart : MonoBehaviour
     public static int MinWobbleHealth = 3;
     public float offset;
     private float wobbleIntensity = 0f, targetIntensity = 0f;
-    private int type = 2;
-    private Coroutine blinkRoutine;
+    public int type = 2;
+    private static Coroutine blinkRoutine;
 
     private void Start()
     {
@@ -53,14 +53,8 @@ public class Heart : MonoBehaviour
 
     public void SetSprite(int newType)
     {
-        int prevType = type;
         type = Mathf.Clamp(newType, 0, 2);
-        // If we have lost health and this heart was affected, blink
-        if (type < prevType && blinkRoutine == null) {
-            blinkRoutine = StartCoroutine(Blink(1f, 3));
-        } else {
-            GetComponent<Image>().sprite = sprites[type];
-        }
+        GetComponent<Image>().sprite = sprites[type];
     }
 
     public void Wobble(float intensity)
@@ -84,6 +78,11 @@ public class Heart : MonoBehaviour
     {
         if (!wobbling)
             StopWobble();
+    }
+
+    public void Blink() {
+        if (blinkRoutine == null && type < 2)
+            blinkRoutine = StartCoroutine(Blink(1f, 3));
     }
 
     private IEnumerator Blink(float duration, int amount)

@@ -136,6 +136,7 @@ public class PauseScreen : MonoBehaviour
         SwordFollow.created = false;
         closePrompt();
         unPause();
+        ChangeScene.changingScene = true;
         // CanvasManager.InstantHideHUD();
         AudioManager.instance.FadeOutCurrent();
         Crossfade.current.StartFade();

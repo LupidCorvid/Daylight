@@ -197,14 +197,13 @@ public class AudioManager : MonoBehaviour
             sfxMixer.SetFloat("Reverb", -10000f);
         
         targetSFXVolume = sfxVolume - 2 * Camera.main.orthographicSize;
-        Debug.Log(ChangeScene.changingScene + " " + GameSaver.loading);
         if (ChangeScene.changingScene || GameSaver.loading)
         {
-            actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.2f);
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.3f);
         }
         else
         {
-            actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.3f);
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.2f);
         }
         sfxMixer.SetFloat("Volume", actualSFXVolume);
     }

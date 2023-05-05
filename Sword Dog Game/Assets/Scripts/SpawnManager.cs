@@ -34,7 +34,6 @@ public class SpawnManager : MonoBehaviour
             CameraController.OverrideMovement(player, 0.3f);
             transform.position = player.position + new Vector3(0, 2, -10);
         }
-        GameSaver.loading = false;
     }
 
     private void LateUpdate()
