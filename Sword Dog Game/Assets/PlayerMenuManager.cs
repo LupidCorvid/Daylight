@@ -29,16 +29,38 @@ public class PlayerMenuManager : MonoBehaviour
 
     public float slideSpeed = 5;
 
+    public static bool open = false;
+
+    public CanvasGroup menusGroup;
+
+    public CanvasGroup playerMenusGroup;
+
+    public static PlayerMenuManager main;
     // Start is called before the first frame update
     void Start()
     {
-        
+        main = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transitioning)
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            if (!PauseScreen.paused && PauseScreen.canPause)
+            {
+                if (open)
+                {
+                    closeMenu();
+                }
+                else
+                {
+                    openMenu();
+                }
+            }
+        }
+
+        if(transitioning && open)
         {
             float offsetAmount = 1000;
             if (fromLeft)
@@ -67,10 +89,37 @@ public class PlayerMenuManager : MonoBehaviour
         }
     }
 
+    public void openMenu()
+    {
+        open = true;
+        menusGroup.alpha = 1;
+        menusGroup.interactable = true;
+        menusGroup.blocksRaycasts = true;
+
+        playerMenusGroup.alpha = 1;
+        playerMenusGroup.interactable = true;
+        playerMenusGroup.blocksRaycasts = true;
+       
+    }
+
+    public void closeMenu()
+    {
+        open = false;
+
+        menusGroup.alpha = 0;
+        menusGroup.interactable = false;
+        menusGroup.blocksRaycasts = false;
+
+        playerMenusGroup.alpha = 0;
+        playerMenusGroup.interactable = false;
+        playerMenusGroup.blocksRaycasts = false;
+    }
+
     //Items slide in to the right from the left;
     public void PageLeft()
     {
-
+        if (transitioning)
+            return;
         slideOut = menus[currentMenu];
         slideIn = menus[(currentMenu + 1) % menus.Count];
         //if(!transitioning)
