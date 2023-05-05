@@ -16,7 +16,7 @@ public class EnemyBase : Entity
 
     public Animator anim;
 
-    public Action killed;
+    
 
     public override void Start()
     {

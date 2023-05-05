@@ -6,6 +6,7 @@ public class PrologueManager : RoomManager
 {
     public PrologueAreaState roomState;
 
+    public Entity prologueMonster;
 
     public GameObject looseSword;
 
@@ -41,6 +42,11 @@ public class PrologueManager : RoomManager
             roomState.finishedIntroCutscene = true;
             CutsceneController.PlayCutscene("Intro");
         }
+
+        if (roomState.prologueMonsterKilled)
+            Destroy(prologueMonster.gameObject);
+        else
+            prologueMonster.killed += (() => roomState.prologueMonsterKilled = true);
     }
 
     public void collectSword()

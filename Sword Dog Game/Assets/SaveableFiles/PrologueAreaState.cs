@@ -10,6 +10,8 @@ public class PrologueAreaState
     //Maybe should be a number for progress in it? Could also just prevent leaving until it is done
     public bool finishedIntroCutscene = false;
 
+    public bool prologueMonsterKilled = false;
+
     public PrologueAreaState()
     {
 

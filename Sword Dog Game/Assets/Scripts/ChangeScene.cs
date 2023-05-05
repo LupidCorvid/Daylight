@@ -103,5 +103,6 @@ public class ChangeScene : MonoBehaviour
         //Crossfade.changeScene?.Invoke();
         Crossfade.current.StopFade();
         CanvasManager.InstantShowHUD();
+        ChangeScene.changingScene = false;
     }
 }

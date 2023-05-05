@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Entity : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Entity : MonoBehaviour
     public int health = 8;
 
     public bool invincible = false;
+
+    public Action killed;
 
     [System.Flags]
     public enum Team

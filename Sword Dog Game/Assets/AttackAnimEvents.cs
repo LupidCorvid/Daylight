@@ -14,6 +14,7 @@ public class AttackAnimEvents : MonoBehaviour
 
     public void ClearCollisions()
     {
-        sword?.ClearCollisions();
+        sword ??= GameObject.Find("Tip")?.GetComponent<SwordTip>();
+        sword.ClearCollisions();
     }
 }
