@@ -10,6 +10,7 @@ public class CanvasManager : MonoBehaviour
     public GameObject myHUD;
     private static float HUDscale = 1.0f;
     private static bool instaHide = false;
+    public static CanvasManager main;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class CanvasManager : MonoBehaviour
         else
         {
             instance = gameObject;
+            main = this;
             hearts = myHearts;
             HUD = myHUD;
             DontDestroyOnLoad(gameObject);

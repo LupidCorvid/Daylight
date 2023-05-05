@@ -76,4 +76,34 @@ public class ChangeScene : MonoBehaviour
 
     }
 
+    public static void LoadScene(string scene, string spawn = "")
+    {
+        GameSaver.main.StartCoroutine(LoadSceneEnum(scene, spawn));
+        
+    }
+
+    static IEnumerator LoadSceneEnum(string scene, string spawn)
+    {
+        ChangeScene.changingScene = true;
+        Crossfade.current.StartFade();
+        DialogController.main.closeBox();
+        yield return new WaitForSeconds(1f);
+        if(PlayerMovement.controller != null)
+            PlayerMovement.controller.noFall = true;
+        SwordFollow.DisableMovement();
+        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        if (eventSystem != null)
+        {
+            GameObject.Destroy(eventSystem.gameObject);
+        }
+        SceneHelper.LoadScene(scene);
+        ChangeScene.clearCollisions?.Invoke();
+        ChangeScene.clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
+        DialogController.closedAnimator = true;
+        SpawnManager.spawningAt = spawn;
+        //Crossfade.changeScene?.Invoke();
+        Crossfade.current.StopFade();
+        CanvasManager.ShowHUD();
+    }
 }

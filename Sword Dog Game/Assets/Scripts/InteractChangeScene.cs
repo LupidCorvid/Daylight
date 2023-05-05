@@ -68,6 +68,8 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
             spawnedPrompt.SetTrigger("Close");
     }
 
+    
+
     IEnumerator LoadNextScene()
     {
         ChangeScene.changingScene = true;
@@ -89,4 +91,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
     }
+
+    
 }

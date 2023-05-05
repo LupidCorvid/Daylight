@@ -16,6 +16,7 @@ public class Crossfade : MonoBehaviour
 
     void Start()
     {
+        
         current = this;
         changeScene += SceneChange;
         animator = GetComponent<Animator>();
@@ -31,17 +32,24 @@ public class Crossfade : MonoBehaviour
 
     void EndFade()
     {
-        animator.SetTrigger("stop");
+        animator?.SetTrigger("stop");
         ChangeScene.changingScene = false;
     }
 
     public void StopFade()
     {
-        animator.SetTrigger("stop");
+        animator?.SetTrigger("stop");
     }
     public void StartFade()
     {
-        animator.SetTrigger("start");
+        if(animator == null)
+        {
+            current = GameObject.FindObjectOfType<Crossfade>();
+            if(current != this)
+                current.StartFade();
+        }
+        else
+            animator?.SetTrigger("start");
     }
 
     public void FadeOut()

@@ -43,8 +43,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewSave()
     {
-        SceneHelper.LoadScene("prologue area");
-        CanvasManager.ShowHUD();
+        //SceneHelper.LoadScene("prologue area");
+        ChangeScene.LoadScene("prologue area");
+        //CanvasManager.ShowHUD();
         
     }
 
