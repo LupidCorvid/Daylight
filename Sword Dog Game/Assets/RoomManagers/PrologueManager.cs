@@ -14,6 +14,11 @@ public class PrologueManager : RoomManager
         roomState = GameSaver.currData.roomStates.prologueState;
     }
 
+    public void Start()
+    {
+        buildRoom();
+    }
+
     public override void receivedEvent(string name, params object[] parameters)
     {
         switch (name)
@@ -28,12 +33,16 @@ public class PrologueManager : RoomManager
     {
         if (roomState.swordCollected)
             Destroy(looseSword);
+        else
+            SwordFollow.instance.SetActive(false);
     }
 
     public void collectSword()
     {
         //Giveplayer sword
         roomState.swordCollected = true;
+        SwordFollow.instance.transform.position = looseSword.transform.position;
         Destroy(looseSword);
+        SwordFollow.instance.SetActive(true);
     }
 }

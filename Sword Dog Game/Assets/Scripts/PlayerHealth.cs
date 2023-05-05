@@ -85,6 +85,8 @@ public class PlayerHealth : MonoBehaviour
     public void UpdateHealth(bool blink = true)
     {
         int temp = health;
+        if (CanvasManager.hearts == null)
+            return;
         for (int i = 0; i < CanvasManager.hearts.Count; i++)
         {
             if (health <= Heart.MinWobbleHealth)

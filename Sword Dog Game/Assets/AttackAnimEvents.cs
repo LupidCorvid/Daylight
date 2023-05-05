@@ -14,6 +14,6 @@ public class AttackAnimEvents : MonoBehaviour
 
     public void ClearCollisions()
     {
-        sword.ClearCollisions();
+        sword?.ClearCollisions();
     }
 }
