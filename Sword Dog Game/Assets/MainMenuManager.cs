@@ -29,6 +29,7 @@ public class MainMenuManager : MonoBehaviour
             Destroy(SwordFollow.instance);
         if (PlayerMovement.instance != null)
             Destroy(PlayerMovement.instance);
+        PauseScreen.canPause = false;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
 
@@ -81,7 +82,10 @@ public class MainMenuManager : MonoBehaviour
 
         return mostRecentFile;
     }
-
+    public void OnDestroy()
+    {
+        PauseScreen.canPause = true;
+    }
 
 }
 

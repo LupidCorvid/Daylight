@@ -37,6 +37,11 @@ public class PauseScreen : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             
+            if(quitPrompt.alpha == 1)
+            {
+                closePrompt();
+            }
+
             if (!paused)
             {
                 Pause();
@@ -119,15 +124,9 @@ public class PauseScreen : MonoBehaviour
         GameSaver.main.SaveGame();
         closePrompt();
         unPause();
-        //SceneHelper.LoadScene("Main Menu");
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Main Menu"));
-        //Destroy(PlayerMovement.controller.gameObject);
-        //Destroy(FindObjectOfType<AudioListener>().gameObject);
-        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
-        CanvasManager.HideHUD();
-        CanvasManager.InstantHideHud();
 
-        //SceneManager.UnloadSceneAsync("DontDestroyOnLoad");
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        CanvasManager.InstantHideHud();
         
     }
 }
