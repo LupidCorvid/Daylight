@@ -121,8 +121,8 @@ public class PauseScreen : MonoBehaviour
         unPause();
         //SceneHelper.LoadScene("Main Menu");
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Main Menu"));
-        Destroy(PlayerMovement.controller.gameObject);
-
+        //Destroy(PlayerMovement.controller.gameObject);
+        //Destroy(FindObjectOfType<AudioListener>().gameObject);
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         CanvasManager.HideHUD();
         CanvasManager.InstantHideHud();

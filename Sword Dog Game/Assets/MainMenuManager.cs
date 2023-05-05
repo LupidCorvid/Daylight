@@ -20,6 +20,15 @@ public class MainMenuManager : MonoBehaviour
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
         CanvasManager.HideHUD();
+        //if (SwordFollow.instance?.transform != null)
+        //    SwordFollow.instance.transform.position = new Vector3(100, -100);
+
+        //Destroy(FindObjectOfType<AudioListener>().gameObject);
+        Destroy(PlayerMovement.controller?.gameObject);
+        if (SwordFollow.instance != null)
+            Destroy(SwordFollow.instance);
+        if (PlayerMovement.instance != null)
+            Destroy(PlayerMovement.instance);
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
 
