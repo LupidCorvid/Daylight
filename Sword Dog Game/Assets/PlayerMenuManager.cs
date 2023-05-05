@@ -52,6 +52,10 @@ public class PlayerMenuManager : MonoBehaviour
     void Start()
     {
         main = this;
+        for(int i = 1; i < menus.Count; i++)
+        {
+            menus[i].transform.position += Vector3.right * offsetAmount;
+        }
     }
 
     // Update is called once per frame
