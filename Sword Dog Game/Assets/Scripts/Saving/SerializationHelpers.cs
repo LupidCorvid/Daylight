@@ -142,17 +142,19 @@ public class Vector2Serialization
 public class OptionsSerialization
 {
     public bool musicMute;
-    public float musicVolume;
+    public float musicVolume, sfxVolume;
 
     public OptionsSerialization(AudioManager am)
     {
         musicMute = am.mute;
-        musicVolume = am.volume;
+        musicVolume = am.musicVolume;
+        sfxVolume = am.sfxVolume;
     }
 
     public void SetValues()
     {
         AudioManager.instance.mute = musicMute;
-        AudioManager.instance.volume = musicVolume;
+        AudioManager.instance.musicVolume = musicVolume;
+        AudioManager.instance.sfxVolume = sfxVolume;
     }
 }

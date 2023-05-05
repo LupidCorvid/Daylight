@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     private int activePlayer = 0;
     public AudioSource[] BGM1, BGM2;
     private IEnumerator[] fader = new IEnumerator[2];
-    public float volume = 1.0f;
+    public float musicVolume = 1.0f, sfxVolume = 10.0f, targetSFXVolume= -80.0f, actualSFXVolume = -80.0f;
 
     //Note: If the volumeChangesPerSecond value is higher than the fps, the duration of the fading will be extended!
     private int volumeChangesPerSecond = 15;
@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM1[activePlayer].clip = currentSong.GetClip();
-                BGM1[activePlayer].volume = volume;
+                BGM1[activePlayer].volume = musicVolume;
                 BGM1[activePlayer].time = 0;
                 BGM1[activePlayer].Play();
             }
@@ -139,7 +139,7 @@ public class AudioManager : MonoBehaviour
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM2[activePlayer].clip = currentSong.GetClip();
-                BGM2[activePlayer].volume = volume;
+                BGM2[activePlayer].volume = musicVolume;
                 BGM2[activePlayer].time = 0;
                 BGM2[activePlayer].Play();
             }
@@ -178,14 +178,14 @@ public class AudioManager : MonoBehaviour
             {
                 BGM1[activePlayer].volume = 0;
                 BGM1[activePlayer].timeSamples = 0;
-                fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, volume, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, musicVolume, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
             else
             {
                 BGM2[activePlayer].volume = 0;
                 BGM2[activePlayer].timeSamples = 0;
-                fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, volume, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, musicVolume, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
         }
@@ -196,7 +196,17 @@ public class AudioManager : MonoBehaviour
         else
             sfxMixer.SetFloat("Reverb", -10000f);
         
-        sfxMixer.SetFloat("Volume", 10 - 2*Camera.main.orthographicSize);
+        targetSFXVolume = sfxVolume - 2 * Camera.main.orthographicSize;
+        Debug.Log(ChangeScene.changingScene + " " + GameSaver.loading);
+        if (ChangeScene.changingScene || GameSaver.loading)
+        {
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.2f);
+        }
+        else
+        {
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.3f);
+        }
+        sfxMixer.SetFloat("Volume", actualSFXVolume);
     }
 
     public void ChangeBGM(string musicPath, float fadeDuration = 1f) {
@@ -298,12 +308,12 @@ public class AudioManager : MonoBehaviour
             BGM2[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM2[activePlayer], fadeDuration, volume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM2[activePlayer], fadeDuration, musicVolume, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else
             {
-                BGM2[activePlayer].volume = volume;
+                BGM2[activePlayer].volume = musicVolume;
             }
         }
         else
@@ -329,12 +339,12 @@ public class AudioManager : MonoBehaviour
             BGM1[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM1[activePlayer], fadeDuration, volume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM1[activePlayer], fadeDuration, musicVolume, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else
             {
-                BGM1[activePlayer].volume = volume;
+                BGM1[activePlayer].volume = musicVolume;
             }
         }
 
@@ -408,12 +418,12 @@ public class AudioManager : MonoBehaviour
     {
         if (firstSet)
         {
-            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, volume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, musicVolume, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
         else
         {
-            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, volume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, musicVolume, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
     }
@@ -447,11 +457,14 @@ public class AudioManager : MonoBehaviour
         foreach (AudioSource source in BGM1)
         {
             source.Stop();
+            source.clip = null;
         }
         foreach (AudioSource source in BGM2)
         {
             source.Stop();
+            source.clip = null;
         }
+        currentSong = null;
     }
 
     public void ApplyMixerEffect(string mixer, string effect, float value, float duration = 0)
