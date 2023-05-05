@@ -61,6 +61,9 @@ public class PlayerMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (main == null)
+            main = this;
+
         if(Input.GetKeyDown(KeyCode.U))
         {
             if (!PauseScreen.paused && PauseScreen.canPause)
