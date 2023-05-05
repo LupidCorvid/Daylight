@@ -12,6 +12,8 @@ public class GameSaver : MonoBehaviour
     public static GameSaver main;
     public static PlayerSerialization player;
 
+    public static SaveData currData = new SaveData();
+
     public void Awake()
     {
         main = this;
@@ -27,7 +29,8 @@ public class GameSaver : MonoBehaviour
     public void SaveGame()
     {
         if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
-            SaveData data = new SaveData();
+            //SaveData data = new SaveData();
+            SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
             var dataToSave = JsonUtility.ToJson(data, true);
@@ -83,12 +86,19 @@ public class GameSaver : MonoBehaviour
     {
         public PlayerSerialization player;
         public OptionsSerialization options;
+        public RoomStates roomStates;
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);
         }
         public void SetOptions(AudioManager am) {
             options = new OptionsSerialization(am);
+        }
+
+        public SaveData()
+        {
+            roomStates = new RoomStates();
+
         }
     }
 

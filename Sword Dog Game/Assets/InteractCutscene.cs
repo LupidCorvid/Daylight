@@ -18,6 +18,8 @@ public class InteractCutscene : MonoBehaviour, IInteractable
 
     public int iconType = 2;
 
+    public string cutsceneToTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,7 @@ public class InteractCutscene : MonoBehaviour, IInteractable
 
     public void interact(GameObject user)
     {
-        CutsceneController.PlayCutscene("MountainView");
+        CutsceneController.PlayCutscene(cutsceneToTrigger);
         hidePrompt();
     }
 
