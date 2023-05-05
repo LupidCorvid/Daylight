@@ -43,6 +43,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewSave()
     {
+        // TODO overhaul with transitions
+        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene("prologue area");
         CanvasManager.ShowHUD();
         
