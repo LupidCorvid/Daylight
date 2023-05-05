@@ -65,24 +65,35 @@ public class GameSaver : MonoBehaviour
 
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
+
             SceneHelper.LoadScene(data.player.spawnpoint.scene);
-            
+
             currentAudioListener.enabled = false;
 
             var newPlayer = Instantiate(prefab);
             newPlayer.GetComponent<Rigidbody2D>().simulated = false;
             newPlayer.transform.position = data.player.spawnpoint.position;
 
+            CameraController cam = GameObject.FindObjectOfType<CameraController>();
+            if (cam != null)
+            {
+                cam.transform.position = newPlayer.transform.position + new Vector3(0, 2, -10);
+            }
+            CameraController.OverrideMovement(newPlayer.transform);
+
             // data transfers
             data.player.controller.SetValues(newPlayer);
             // data.player.inventory.SetValues(newPlayer);
             // data.player.health.SetValues(newPlayer);
             // data.player.attack.SetValues(newPlayer);
+            
+            // TODO this should happen upon application start
             data.options.SetValues();
             
             PlayerMovement.instance = newPlayer;
             PlayerMovement.controller = newPlayer.GetComponent<PlayerMovement>();
             Crossfade.current.StopFade();
+            
             CanvasManager.ShowHUD();
         }
 
