@@ -6,6 +6,7 @@ public class PrologueManager : RoomManager
 {
     public PrologueAreaState roomState;
 
+
     public GameObject looseSword;
 
     public override void  Awake()
@@ -35,6 +36,11 @@ public class PrologueManager : RoomManager
             Destroy(looseSword);
         else
             SwordFollow.instance.SetActive(false);
+        if(!roomState.finishedIntroCutscene)
+        {
+            roomState.finishedIntroCutscene = true;
+            CutsceneController.PlayCutscene("Intro");
+        }
     }
 
     public void collectSword()
