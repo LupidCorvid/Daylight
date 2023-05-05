@@ -115,7 +115,8 @@ public class PlayerMenuManager : MonoBehaviour
         playerMenusGroup.alpha = 1;
         playerMenusGroup.interactable = true;
         playerMenusGroup.blocksRaycasts = true;
-       
+
+        CanvasManager.InstantHideHUD();
     }
 
     public void closeMenu()
@@ -129,6 +130,8 @@ public class PlayerMenuManager : MonoBehaviour
         playerMenusGroup.alpha = 0;
         playerMenusGroup.interactable = false;
         playerMenusGroup.blocksRaycasts = false;
+
+        CanvasManager.InstantShowHUD();
     }
 
     //Items slide in to the right from the left;
