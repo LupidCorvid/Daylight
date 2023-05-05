@@ -103,6 +103,6 @@ public class ChangeScene : MonoBehaviour
         SpawnManager.spawningAt = spawn;
         //Crossfade.changeScene?.Invoke();
         Crossfade.current.StopFade();
-        CanvasManager.ShowHUD();
+        CanvasManager.InstantShowHUD();
     }
 }

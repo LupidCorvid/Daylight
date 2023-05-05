@@ -121,14 +121,26 @@ public class PauseScreen : MonoBehaviour
 
     public void QuitToTitle()
     {
+        StartCoroutine(BackToMenu());
+    }
+
+    public IEnumerator BackToMenu() {
         GameSaver.main.SaveGame();
         PlayerMovement.created = false;
         SwordFollow.created = false;
         closePrompt();
         unPause();
-
+        // CanvasManager.InstantHideHUD();
+        AudioManager.instance.FadeOutCurrent();
+        Crossfade.current.StartFade();
+        DialogController.main.closeBox();
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
-        CanvasManager.InstantHideHud();
-        
+        ChangeScene.clearCollisions?.Invoke();
+        ChangeScene.clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
+        DialogController.closedAnimator = true;
+        Crossfade.current.StopFade();
     }
+
 }
