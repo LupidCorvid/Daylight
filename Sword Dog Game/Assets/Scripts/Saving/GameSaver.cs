@@ -71,8 +71,8 @@ public class GameSaver : MonoBehaviour
             data.options.SetValues();
             
             Crossfade.current.StopFade();
-            
-            CanvasManager.ShowHUD();
+
+            CanvasManager.InstantShowHUD();
         }
 
         loading = false;
