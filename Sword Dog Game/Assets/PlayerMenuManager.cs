@@ -36,6 +36,9 @@ public class PlayerMenuManager : MonoBehaviour
     public CanvasGroup playerMenusGroup;
 
     public static PlayerMenuManager main;
+
+    public bool cancelTransition = false;
+    public bool skipTransition = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -119,30 +122,80 @@ public class PlayerMenuManager : MonoBehaviour
     public void PageLeft()
     {
         if (transitioning)
-            return;
+        {
+            if (fromLeft)
+            {
+                currentMenu--;
+                
+            }
+            else
+            {
+                currentMenu++;
+                if (Mathf.Abs((slideOut.transform.position - new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0)).x) < 250)
+                    skipTransition = true;
+                else
+                    return;
+
+            }
+        }
+
+        //if (transitioning)
+        //{
+        //    if (fromLeft)
+        //        currentMenu--;
+        //    else
+        //        currentMenu++;
+        //}
+
+
+
         slideOut = menus[currentMenu];
         slideIn = menus[(currentMenu + 1) % menus.Count];
-        //if(!transitioning)
-        slideIn.transform.position = new Vector3(-1000 + Screen.width / 2, Screen.height / 2, 0);
+        if (!transitioning || skipTransition)
+            slideIn.transform.position = new Vector3(-1000 + Screen.width / 2, Screen.height / 2, 0);
         fromLeft = false;
         transitioning = true;
-        
+        skipTransition = false;
     }
 
     //Items slide in to the left from the right
     public void PageRight()
     {
 
+        //if (transitioning)
+        //    return;
         if (transitioning)
-            return;
+        {
+            if (fromLeft)
+            {
+                currentMenu--;
+                if (Mathf.Abs((slideOut.transform.position - new Vector3(-1000 + Screen.width / 2, Screen.height / 2, 0)).x) < 250)
+                    //slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
+                    skipTransition = true;
+                else
+                    return;
+            }
+            else
+            {
+                currentMenu++;
+                //skipTransition = true;
+
+            }
+        }
+        //else
+        //    skipTransition = false;
+        //if (transitioning && !(skipTransition && Mathf.Abs((slideOut.transform.position - new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0)).x) < 250))
+        //    return;
+
         slideOut = menus[currentMenu];
         if (currentMenu - 1 >= 0)
             slideIn = menus[(currentMenu - 1) % menus.Count];
         else
             slideIn = menus[^1];
-        //if (!transitioning)
-        slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
+        if (!transitioning || skipTransition)
+            slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
         fromLeft = true;
         transitioning = true;
+        skipTransition = false;
     }
 }
