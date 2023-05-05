@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             int neg = 1;
             if (value && created)
                 neg *= -1;
-
+                
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * neg, transform.localScale.y, transform.localScale.z);
         }
     }

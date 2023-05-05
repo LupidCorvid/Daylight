@@ -12,7 +12,6 @@ public class ChangeScene : MonoBehaviour
     public string spawn;
     private Animator crossfade;
     public static bool changingScene = false;
-    public bool noFall = false;
     public static Action clearCollisions, clearInteractables;
 
     public static Action changeScene;

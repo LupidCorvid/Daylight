@@ -10,6 +10,7 @@ public class GameSaver : MonoBehaviour
     public GameObject prefab;
     public static bool loading = false;
     public static GameSaver main;
+    public static PlayerSerialization player;
 
     public void Awake()
     {
@@ -51,47 +52,24 @@ public class GameSaver : MonoBehaviour
         loading = true;
         string dataToLoad = "";
         dataToLoad = saveSystem.LoadData();
-        AudioListener currentAudioListener = GameObject.FindObjectOfType<AudioListener>();
 
         if (!String.IsNullOrEmpty(dataToLoad))
         {
-            // TODO replace all of this with cutscene
             AudioManager.instance.FadeOutCurrent();
-            // GameObject.FindObjectOfType<AudioListener>().enabled = false;
             Crossfade.current.StartFade();
             yield return new WaitForSeconds(0.9f);
             Clear();
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
+            player = data.player;
 
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
 
             SceneHelper.LoadScene(data.player.spawnpoint.scene);
 
-            currentAudioListener.enabled = false;
-
-            var newPlayer = Instantiate(prefab);
-            newPlayer.GetComponent<Rigidbody2D>().simulated = false;
-            newPlayer.transform.position = data.player.spawnpoint.position;
-
-            CameraController cam = GameObject.FindObjectOfType<CameraController>();
-            if (cam != null)
-            {
-                cam.transform.position = newPlayer.transform.position + new Vector3(0, 2, -10);
-            }
-            CameraController.OverrideMovement(newPlayer.transform);
-
-            // data transfers
-            data.player.controller.SetValues(newPlayer);
-            // data.player.inventory.SetValues(newPlayer);
-            // data.player.health.SetValues(newPlayer);
-            // data.player.attack.SetValues(newPlayer);
-            
-            // TODO this should happen upon application start
+            // TODO this needs to happen upon application start!!!
             data.options.SetValues();
             
-            PlayerMovement.instance = newPlayer;
-            PlayerMovement.controller = newPlayer.GetComponent<PlayerMovement>();
             Crossfade.current.StopFade();
             
             CanvasManager.ShowHUD();

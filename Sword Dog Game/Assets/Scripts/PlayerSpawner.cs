@@ -15,8 +15,17 @@ public class PlayerSpawner : MonoBehaviour
         }
         else
         {
-            // get save data here ok
-            Instantiate(player, transform.position, transform.rotation);
+            var newPlayer = Instantiate(player, transform.position, transform.rotation);
+            if (GameSaver.loading && GameSaver.player != null)
+            {
+                newPlayer.transform.position = GameSaver.player.spawnpoint.position;
+                newPlayer.GetComponent<PlayerMovement>().noFall = true;
+                // data transfers
+                GameSaver.player.controller.SetValues(newPlayer);
+                // GameSaver.player.inventory.SetValues(newPlayer);
+                // GameSaver.player.health.SetValues(newPlayer);
+                // GameSaver.player.attack.SetValues(newPlayer);
+            }
         }
     }
 

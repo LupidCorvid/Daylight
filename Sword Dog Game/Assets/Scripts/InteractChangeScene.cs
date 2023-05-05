@@ -11,7 +11,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     public string scene;
     public string spawn;
     private Animator crossfade;
-    public bool noFall = false;
 
     public Animator spawnedPrompt;
 
