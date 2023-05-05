@@ -36,6 +36,12 @@ public class PauseScreen : MonoBehaviour
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+
+            if(PlayerMenuManager.open)
+            {
+                PlayerMenuManager.main.closeMenu();
+                return;
+            }
             
             if(quitPrompt.alpha == 1)
             {
@@ -121,12 +127,29 @@ public class PauseScreen : MonoBehaviour
 
     public void QuitToTitle()
     {
+        StartCoroutine(BackToMenu());
+    }
+
+    public IEnumerator BackToMenu() {
         GameSaver.main.SaveGame();
+        PlayerMovement.created = false;
+        SwordFollow.created = false;
         closePrompt();
         unPause();
-
+        ChangeScene.changingScene = true;
+        // CanvasManager.InstantHideHUD();
+        AudioManager.instance.FadeOutCurrent();
+        Crossfade.current.StartFade();
+        DialogController.main.closeBox();
+        yield return new WaitForSeconds(1f);
+        // TODO remove this and instead play main menu music, once that exists
+        AudioManager.instance.Stop();
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
-        CanvasManager.InstantHideHud();
-        
+        ChangeScene.clearCollisions?.Invoke();
+        ChangeScene.clearInteractables?.Invoke();
+        CutsceneController.ClearCutscenes();
+        DialogController.closedAnimator = true;
+        Crossfade.current.StopFade();
     }
+
 }

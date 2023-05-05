@@ -7,16 +7,16 @@ using UnityEngine;
 public class PlayerSerialization
 {
     public ControllerSerialization controller;
+    public HealthSerialization health;
     // public InventorySerialization inventory;
-    // public HealthSerialization health;
     // public AttackSerialization attack;
     public SpawnpointSerialization spawnpoint;
 
     public PlayerSerialization(GameObject playerObj)
     {
         controller = new ControllerSerialization(playerObj.GetComponent<PlayerMovement>());
+        health = new HealthSerialization(playerObj.GetComponent<PlayerHealth>());
         // inventory = new InventorySerialization(playerObj.GetComponent<Inventory>());
-        // health = new HealthSerialization(playerObj.GetComponent<Health>());
         // attack = new AttackSerialization(playerObj.GetComponent<Attack>());
         spawnpoint = new SpawnpointSerialization(playerObj.GetComponent<Spawnpoint>());
     }
@@ -43,23 +43,31 @@ public class ControllerSerialization
     }
 }
 
-// [Serializable]
-// public class HealthSerialization
-// {
-//     public int playerHealth, numberOfHearts;
+[Serializable]
+public class HealthSerialization
+{
+    public int health, maxHealth;
+    public bool invincible, dead, gettingUp;
 
-//     public HealthSerialization(health health)
-//     {
-//         playerHealth = health.playerHealth;
-//         numberOfHearts = health.numberOfHearts;
-//     }
+    public HealthSerialization(PlayerHealth playerHealth)
+    {
+        health = playerHealth.health;
+        maxHealth = playerHealth.maxHealth;
+        invincible = playerHealth.invincible;
+        // TODO these ones *may* cause issues later
+        dead = PlayerHealth.dead;
+        gettingUp = PlayerHealth.gettingUp;
+    }
 
-//     public void SetValues(GameObject playerObj)
-//     {
-//         playerObj.GetComponent<health>().numberOfHearts = numberOfHearts;
-//         playerObj.GetComponent<health>().playerHealth = numberOfHearts;
-//     }
-// }
+    public void SetValues(GameObject playerObj)
+    {
+        playerObj.GetComponent<PlayerHealth>().health = health;
+        playerObj.GetComponent<PlayerHealth>().maxHealth = maxHealth;
+        playerObj.GetComponent<PlayerHealth>().invincible = invincible;
+        PlayerHealth.dead = dead;
+        PlayerHealth.gettingUp = gettingUp;
+    }
+}
 
 // [Serializable]
 // public class AttackSerialization
@@ -142,17 +150,19 @@ public class Vector2Serialization
 public class OptionsSerialization
 {
     public bool musicMute;
-    public float musicVolume;
+    public float musicVolume, sfxVolume;
 
     public OptionsSerialization(AudioManager am)
     {
         musicMute = am.mute;
-        musicVolume = am.volume;
+        musicVolume = am.musicVolume;
+        sfxVolume = am.sfxVolume;
     }
 
     public void SetValues()
     {
         AudioManager.instance.mute = musicMute;
-        AudioManager.instance.volume = musicVolume;
+        AudioManager.instance.musicVolume = musicVolume;
+        AudioManager.instance.sfxVolume = sfxVolume;
     }
 }

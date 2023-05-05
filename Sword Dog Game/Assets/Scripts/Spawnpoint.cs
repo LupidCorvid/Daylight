@@ -17,7 +17,7 @@ public class Spawnpoint : MonoBehaviour
         {
             //scene = "Test";
             scene = SceneManager.GetActiveScene().name;
-            position = new Vector2(6.62f, -1.350911f);
+            position = new Vector2(6.62f, -2.191553f);
         }
     }
 

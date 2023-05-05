@@ -22,9 +22,11 @@ public class PlayerSpawner : MonoBehaviour
                 newPlayer.GetComponent<PlayerMovement>().noFall = true;
                 // data transfers
                 GameSaver.player.controller.SetValues(newPlayer);
+                GameSaver.player.health.SetValues(newPlayer);
+                newPlayer.GetComponent<PlayerHealth>().UpdateHealth(false);
                 // GameSaver.player.inventory.SetValues(newPlayer);
-                // GameSaver.player.health.SetValues(newPlayer);
                 // GameSaver.player.attack.SetValues(newPlayer);
+                GameSaver.loading = false;
             }
         }
     }

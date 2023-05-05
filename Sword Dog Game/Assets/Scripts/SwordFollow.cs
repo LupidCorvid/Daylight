@@ -31,7 +31,7 @@ public class SwordFollow : MonoBehaviour
     public float particlePushScalar = 2.5f;
     private static bool canMove = true;
     private static float cantMoveFor = 0.1f, maxDelay = 0.1f;
-    private static bool created;
+    public static bool created;
 
     // Start is called before the first frame update
     void Start()

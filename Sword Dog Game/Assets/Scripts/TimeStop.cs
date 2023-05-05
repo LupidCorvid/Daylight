@@ -26,7 +26,7 @@ public class TimeStop : MonoBehaviour
         if (PauseScreen.paused)
             return;
 
-        if ((stopTimeDuration == 0 || stopTimeDuration + lastStopTime < Time.time))
+        if (stopTimeDuration == 0 || stopTimeDuration + lastStopTime < Time.time || ChangeScene.changingScene)
             Time.timeScale = regularTimeSpeed;
         else
         {

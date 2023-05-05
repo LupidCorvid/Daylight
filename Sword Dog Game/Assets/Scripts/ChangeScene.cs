@@ -59,7 +59,6 @@ public class ChangeScene : MonoBehaviour
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
-        
     }
 
     public static void ChangeSceneMinimal(string scene)
@@ -103,6 +102,6 @@ public class ChangeScene : MonoBehaviour
         SpawnManager.spawningAt = spawn;
         //Crossfade.changeScene?.Invoke();
         Crossfade.current.StopFade();
-        CanvasManager.ShowHUD();
+        CanvasManager.InstantShowHUD();
     }
 }

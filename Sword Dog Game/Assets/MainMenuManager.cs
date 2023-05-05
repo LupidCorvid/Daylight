@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
     {
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
-        CanvasManager.HideHUD();
+        CanvasManager.InstantHideHUD();
         //if (SwordFollow.instance?.transform != null)
         //    SwordFollow.instance.transform.position = new Vector3(100, -100);
 

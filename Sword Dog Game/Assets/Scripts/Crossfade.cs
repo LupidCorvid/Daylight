@@ -16,7 +16,6 @@ public class Crossfade : MonoBehaviour
 
     void Start()
     {
-        
         current = this;
         changeScene += SceneChange;
         animator = GetComponent<Animator>();
@@ -33,12 +32,12 @@ public class Crossfade : MonoBehaviour
     void EndFade()
     {
         animator?.SetTrigger("stop");
-        ChangeScene.changingScene = false;
     }
 
     public void StopFade()
     {
         animator?.SetTrigger("stop");
+        ChangeScene.changingScene = false;
     }
     public void StartFade()
     {
