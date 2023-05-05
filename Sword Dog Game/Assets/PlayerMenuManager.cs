@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerMenuManager : MonoBehaviour
 {
@@ -39,6 +41,8 @@ public class PlayerMenuManager : MonoBehaviour
 
     public bool cancelTransition = false;
     public bool skipTransition = false;
+
+    public GameObject defaultButton;
 
     public float offsetAmount
     {
@@ -119,6 +123,7 @@ public class PlayerMenuManager : MonoBehaviour
         playerMenusGroup.interactable = true;
         playerMenusGroup.blocksRaycasts = true;
 
+        EventSystem.current.SetSelectedGameObject(defaultButton);
         CanvasManager.InstantHideHUD();
     }
 
