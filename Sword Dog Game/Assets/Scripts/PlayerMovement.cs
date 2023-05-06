@@ -328,7 +328,7 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
             sprintSpeedMultiplier = 1.0f;
             jumpSpeedMultiplier = 1.0f;
-            if (!CutsceneController.cutsceneStopMovement)
+            if (!CutsceneController.cutsceneStopMovement && !PlayerMenuManager.open && !MenuManager.inMenu)
             {
                 stamina = Mathf.Lerp(stamina, 0, 0.02f);
                 if (stamina <= 0.1f)
