@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class MoveSpeedBuff : Buff
 {
 
@@ -32,6 +31,22 @@ public class MoveSpeedBuff : Buff
         base.disableVisuals();
         affectedEntity.removeBufffDisplay(buffID);
     }
-    
+
+    public override void UpdateSave(Buffs manager)
+    {
+        base.UpdateSave(manager);
+        manager.buffsSave.moveSpeed = new MoveSpeedBuffSave(this);
+    }
+
+    [System.Serializable]
+    public class MoveSpeedBuffSave : SavedBuff 
+    {
+        public MoveSpeedBuffSave(Buff buff) : base(buff)
+        {
+
+        }
+    }
+
+
 
 }

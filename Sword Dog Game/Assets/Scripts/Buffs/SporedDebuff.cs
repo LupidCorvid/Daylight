@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class SporedDebuff : Buff
 {
     public SporeIndicator visuals;
@@ -77,5 +76,20 @@ public class SporedDebuff : Buff
     {
         base.Execute();
         affectedEntity.TakeDamage(1);
+    }
+
+    public override void UpdateSave(Buffs manager)
+    {
+        base.UpdateSave(manager);
+        manager.buffsSave.spored = new SporedDebuffSave(this);
+    }
+
+    [System.Serializable]
+    public class SporedDebuffSave : SavedBuff 
+    {
+        public SporedDebuffSave(Buff buff) : base(buff)
+        {
+
+        }
     }
 }

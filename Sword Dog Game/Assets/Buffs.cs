@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class Buffs
 {
     public SporedDebuff spored;
     public MoveSpeedBuff moveSpeedBuff;
+
+    public SaveBuffs buffsSave;
 
     public Buffs(Entity holder)
     {
@@ -25,11 +26,27 @@ public class Buffs
 
     public void saveBuffs()
     {
-        GameSaver.currData.buffs = this;
+        buffsSave = new SaveBuffs();
+        spored.UpdateSave(this);
+        moveSpeedBuff.UpdateSave(this);
+        GameSaver.currData.buffs = buffsSave;
+    }
+
+    public void loadBuffs(GameSaver.SaveData data)
+    {
+        moveSpeedBuff.LoadSave(data.buffs.moveSpeed);
+        spored.LoadSave(data.buffs.spored);
     }
 
     public void Update()
     {
         spored?.Update();
+    }
+
+    [System.Serializable]
+    public class SaveBuffs
+    {
+        public MoveSpeedBuff.MoveSpeedBuffSave moveSpeed;
+        public SporedDebuff.SporedDebuffSave spored;
     }
 }
