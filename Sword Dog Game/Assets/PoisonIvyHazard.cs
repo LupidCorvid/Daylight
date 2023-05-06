@@ -34,7 +34,7 @@ public class PoisonIvyHazard : MonoBehaviour
         Entity hit = collision.GetComponent<Entity>();
         if(hit != null)
         {
-            hit?.spored?.Inflict();
+            hit?.buffManager?.spored?.Inflict();
         }
     }
 
