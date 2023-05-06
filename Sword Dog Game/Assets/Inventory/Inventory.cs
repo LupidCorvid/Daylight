@@ -3,27 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Inventory : MonoBehaviour
+public class Inventory
 {
-    List<ItemSlot> _contents = new List<ItemSlot>();
-
-    public List<ItemSlot> contents
-    {
-        get
-        {
-            return _contents;
-        }
-    }
+    public List<ItemSlot> contents = new List<ItemSlot>();
 
     public Inventory(int size = 3)
     {
         AddSlots(size);
+        //AddItem(new TeardropAloe());
     }
+
     public void AddSlots(int num = 1)
     {
         for (int i = 0; i < num; i++)
         {
-            _contents.Add(new ItemSlot());
+            contents.Add(new ItemSlot());
         }
     }
 

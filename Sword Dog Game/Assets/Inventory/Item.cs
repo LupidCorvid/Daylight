@@ -8,9 +8,11 @@ public class Item
 
     public int itemId;
     public string name;
+    public string description;
     public int quantity;
     public Sprite sprite;
     public int stackSize;
+    public int sellValue;
 
     /// <returns>The amount remaining in otherItem</returns>
     public int combineStack(Item otherItem)
@@ -25,6 +27,11 @@ public class Item
         else
             otherItem.quantity = 0;
         return otherItem.quantity;
+    }
+
+    public virtual void OnUse()
+    {
+
     }
 
 }

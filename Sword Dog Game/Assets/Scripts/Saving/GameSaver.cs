@@ -72,7 +72,7 @@ public class GameSaver : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
             player = data.player;
             currData = data;
-            
+            InventoryManager.currInventory = data.inventory;
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
 

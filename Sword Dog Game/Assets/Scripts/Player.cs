@@ -16,6 +16,7 @@ public class Player : Entity
 
     public void Awake()
     {
+        //seems like this is added too late
         GameSaver.loadedNewData += loadSavedBuffs;
     }
 
