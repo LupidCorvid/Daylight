@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
+//[JsonDerivedType(typeof(Item), typeDiscriminator: "item")]
+//[JsonDerivedType(typeof(TeardropAloe), typeDiscriminator: "TeardropAloe")]
 public class Item
 {
 
@@ -27,6 +30,7 @@ public class Item
         else
             otherItem.quantity = 0;
         return otherItem.quantity;
+        
     }
 
     public virtual void OnUse()

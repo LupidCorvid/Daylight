@@ -35,7 +35,7 @@ public class GameSaver : MonoBehaviour
         if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
             //SaveData data = new SaveData();
             StartingSave?.Invoke();
-            currData.inventory = InventoryManager.currInventory;
+            currData.inventory = ItemDatabase.main.packInventory(InventoryManager.currInventory);
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
@@ -72,7 +72,13 @@ public class GameSaver : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
             player = data.player;
             currData = data;
-            InventoryManager.currInventory = data.inventory;
+            //InventoryManager.currInventory = data.inventory;
+            InventoryManager.currInventory.contents.Clear();
+            //List<Item> unpackedItems = ItemDatabase.main.unpackInventory(data.inventory);
+            //InventoryManager.currInventory.AddSlots(unpackedItems.Count);
+            //InventoryManager.currInventory.AddItems(unpackedItems);
+            InventoryManager.currInventory = ItemDatabase.main.unpackInventory(data.inventory);
+            InventoryManager.main.refreshInventory();
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
 
@@ -97,7 +103,7 @@ public class GameSaver : MonoBehaviour
         public OptionsSerialization options;
         public RoomStates roomStates;
         public Buffs.SaveBuffs buffs;
-        public Inventory inventory;
+        public ItemDatabase.PackedInventory inventory;
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);

@@ -21,6 +21,11 @@ public class Inventory
         }
     }
 
+    public void AddFilledSlot(ItemSlot slot)
+    {
+        contents.Add(slot);
+    }
+
 
     /// <returns>returns amount of item not added</returns>
     public int AddItem(Item item)
@@ -37,7 +42,55 @@ public class Inventory
             {
                 slot.item.combineStack(item);
             }
+
+            if (item.quantity == 0)
+                return 0;
         }
         return item.quantity;
+    }
+
+    public void AddItems(List<Item> items)
+    {
+        foreach (Item item in items)
+        {
+            if (AddItem(item) > 0)
+                Debug.Log("Couldn't fit " + item.name + " in inventory");
+        }
+    }
+    /// <returns>Returns the number of items that couldnt be removed/didnt exist</returns>
+    public int RemoveItem(Item item, int count)
+    {
+        foreach(ItemSlot slot in contents)
+        {
+            if(slot.item.itemId == item.itemId)
+            {
+                count = slot.RemoveAmount(count);
+
+                if (count == 0)
+                    return 0;
+            }
+        }
+        return 0;
+    }
+
+    public int RemoveItem(Item item)
+    {
+        return RemoveItem(item, item.quantity);
+    }
+
+    public int CountItem(int id)
+    {
+        int total = 0;
+        foreach(ItemSlot slot in contents)
+        {
+            if (slot?.item?.itemId == id)
+                total++;
+        }
+        return total;
+    }
+
+    public int CountItem(Item item)
+    {
+        return CountItem(item.itemId);
     }
 }

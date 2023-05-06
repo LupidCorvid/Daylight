@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject itemListingPrefab;
     public GameObject listingHolder;
     public List<ItemListing> itemListings = new List<ItemListing>();
-
+    public static InventoryManager main;
 
     public void refreshInventory()
     {
@@ -26,10 +26,15 @@ public class InventoryManager : MonoBehaviour
         UpdateItemDisplays();
     }
 
-    public void AddItem(Item item)
+    public int AddItem(Item item)
     {
-        currInventory.AddItem(item);
+        return currInventory.AddItem(item);
         //Update all item counts and sprites
+    }
+
+    public void AddItems(List<Item> items)
+    {
+        currInventory.AddItems(items);
     }
 
     public void UpdateItemDisplays()
@@ -43,13 +48,18 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        main = this;
         refreshInventory();
         GameSaver.loadedNewData += ((e) => refreshInventory());
+        AddItem(new TeardropAloe());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(currInventory.contents.Count < 3)
+        {
+            currInventory.AddSlots(1);
+        }
     }
 }
