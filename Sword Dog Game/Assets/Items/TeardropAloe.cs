@@ -13,6 +13,7 @@ public class TeardropAloe : Item
         description = "Has healing properties";
         sellValue = 2;
         quantity = 1;
+        sprite = "Items.TeardropAloe";
     }
 
     public override void OnUse()

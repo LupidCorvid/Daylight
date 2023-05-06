@@ -11,6 +11,9 @@ public class ItemListing : MonoBehaviour
     //Should be a pointer to an item in inventory
     public Item attachedItem;
 
+    public Sprite backgroundSprite;
+    public Sprite backgroundCountSprite;
+
 
     public void UpdateAttachedItem(Item newItem)
     {
@@ -24,9 +27,9 @@ public class ItemListing : MonoBehaviour
         else
             itemSprite.color = Color.white;
 
-        if(newItem.sprite != null)
-            itemSprite.sprite = newItem.sprite;
-
+        if(newItem?.sprite != "")
+            itemSprite.sprite = TempObjectsHolder.main.FindSprite(newItem.sprite);
+        
         UpdateCount(newItem.quantity);
     }
 
@@ -39,10 +42,12 @@ public class ItemListing : MonoBehaviour
         if (count <= 1)
         {
             countDisplay.text = "";
+            bgSprite.sprite = backgroundSprite;
         }
         else
         {
             countDisplay.text = "" + count;
+            bgSprite.sprite = backgroundCountSprite;
         }
 
     }

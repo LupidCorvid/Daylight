@@ -10,7 +10,7 @@ public class Item
     public string name;
     public string description;
     public int quantity;
-    public Sprite sprite;
+    public string sprite;
     public int stackSize;
     public int sellValue;
 

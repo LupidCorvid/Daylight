@@ -19,25 +19,38 @@ public class TempObjectsHolder : MonoBehaviour
 
     public GameObject buffIconDisplay;
 
-    [System.Serializable]
-    public class SpriteCollection
+    public SpritesRoot sprites;
+
+    public Sprite FindSprite(string soundPath)
     {
-        public Sprite movementBuff;
-        public Sprite movementDebuff;
-
-        public Sprite attackBuff;
-        public Sprite attackDebuff;
-
-        public Sprite defenseBuff;
-        public Sprite defenseDebuff;
-
-        public Sprite confused;
-        public Sprite poisoned;
-
-        public Sprite spored;
+        List<string> path = new List<string>(soundPath.Trim().Split("."));
+        return FindSprite(sprites, path);
     }
 
-    public SpriteCollection sprites;
+    public Sprite FindSprite(SpriteNode current, List<string> path)
+    {
+        if (current is SpriteEntry)
+        {
+            return ((SpriteEntry)current).GetEntry();
+        }
+        else if (current is SpritesRoot)
+        {
+            foreach (SpriteNode node in ((SpritesRoot)current).children)
+            {
+                if (path.Count > 0 && node.name.ToLower() == path[0].ToLower())
+                {
+                    // Debug.Log("Found " + path[0]);
+                    current = node;
+                    path.RemoveAt(0);
+                    return FindSprite(node, path);
+                }
+            }
+            Debug.LogError("Invalid sprite path provided!");
+            return null;
+        }
+        Debug.LogError("Invalid sprite path provided!");
+        return null;
+    }
 
     // Start is called before the first frame update
     void Awake()
