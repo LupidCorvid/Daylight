@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public enum GameArea
     {
-        CURRENT, MENU, FIRST_AREA, FOREST, TOWN, CAVES, MOUNTAIN, DESERT, UNDERGROUND_DESERT, OCEAN
+        CURRENT, MENU, PROLOGUE, FOREST, TOWN, CAVES, MOUNTAIN, DESERT, UNDERGROUND_DESERT, OCEAN
     }
 
     /// <summary>
@@ -223,8 +223,8 @@ public class AudioManager : MonoBehaviour
             case "MENU":
                 theArea = GameArea.MENU;
                 break;
-            case "FIRST_AREA":
-                theArea = GameArea.FIRST_AREA;
+            case "PROLOGUE":
+                theArea = GameArea.PROLOGUE;
                 break;
             case "TOWN":
                 theArea = GameArea.TOWN;
@@ -564,7 +564,6 @@ public class AudioManager : MonoBehaviour
         }
         else if (current is MusicCategory)
         {
-            Debug.Log(current.name);
             foreach (SoundNode node in ((MusicCategory)current).children)
             {
                 if (path.Count > 0 && node.name.ToLower() == path[0].ToLower())

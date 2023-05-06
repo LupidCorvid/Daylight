@@ -142,8 +142,6 @@ public class PauseScreen : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
-        // TODO remove this and instead play main menu music, once that exists
-        AudioManager.instance.Stop();
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();

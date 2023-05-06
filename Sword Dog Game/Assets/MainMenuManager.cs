@@ -45,6 +45,7 @@ public class MainMenuManager : MonoBehaviour
     {
         //SceneHelper.LoadScene("prologue area");
         GameSaver.currData = new GameSaver.SaveData();
+        AudioManager.instance.FadeOutCurrent();
         ChangeScene.LoadScene("prologue area", "", false);
         //CanvasManager.ShowHUD();
         
@@ -53,6 +54,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadMostRecentSave()
     {
         //GameSaver.main.LoadGame();
+        AudioManager.instance.FadeOutCurrent();
         GameSaver.main.LoadGame();
     }
 
