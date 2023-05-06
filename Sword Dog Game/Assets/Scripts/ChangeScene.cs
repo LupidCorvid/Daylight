@@ -75,13 +75,13 @@ public class ChangeScene : MonoBehaviour
 
     }
 
-    public static void LoadScene(string scene, string spawn = "")
+    public static void LoadScene(string scene, string spawn = "", bool showHUD = true)
     {
-        GameSaver.main.StartCoroutine(LoadSceneEnum(scene, spawn));
+        GameSaver.main.StartCoroutine(LoadSceneEnum(scene, spawn, showHUD));
         
     }
 
-    static IEnumerator LoadSceneEnum(string scene, string spawn)
+    static IEnumerator LoadSceneEnum(string scene, string spawn, bool showHUD = true)
     {
         ChangeScene.changingScene = true;
         Crossfade.current.StartFade();
@@ -103,7 +103,8 @@ public class ChangeScene : MonoBehaviour
         SpawnManager.spawningAt = spawn;
         //Crossfade.changeScene?.Invoke();
         Crossfade.current.StopFade();
-        CanvasManager.InstantShowHUD();
+        if (showHUD)
+            CanvasManager.InstantShowHUD();
         ChangeScene.changingScene = false;
     }
 }

@@ -119,5 +119,44 @@ public class Buff
         checkDuration();
     }
 
+    public float GetRemainingTime()
+    {
+        return (duration - (Time.time - startTime));
+    }
+
+    public virtual void UpdateSave(Buffs manager)
+    {
+
+    }
+
+    public virtual void LoadSave(SavedBuff save)
+    {
+        intensity = save.intensity;
+        duration = save.remainingDuration;
+        startTime = Time.time;
+        active = save.active;
+        enableVisuals();
+    }
+
+    [System.Serializable]
+    public class SavedBuff
+    {
+        public float remainingDuration;
+        public float intensity;
+        public bool active;
+
+        public SavedBuff()
+        {
+
+        }
+
+        public SavedBuff(Buff buff)
+        {
+            remainingDuration = buff.GetRemainingTime();
+            active = buff.active;
+            intensity = buff.intensity;
+        }
+    }
+
 
 }

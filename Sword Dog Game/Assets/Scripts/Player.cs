@@ -14,6 +14,12 @@ public class Player : Entity
         enemies = Team.Enemy;
     }
 
+    public void Awake()
+    {
+        //seems like this is added too late
+        GameSaver.loadedNewData += loadSavedBuffs;
+    }
+
     public override void TakeDamage(int damage)
     {
         playerHealth.TakeDamage(damage);
@@ -27,5 +33,10 @@ public class Player : Entity
     public override void removeBufffDisplay(int buffID)
     {
         BuffList.main.removeBuffIcon(buffID);
+    }
+
+    public void loadSavedBuffs(GameSaver.SaveData data)
+    {
+        buffManager.loadBuffs(data);
     }
 }

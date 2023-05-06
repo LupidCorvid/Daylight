@@ -23,7 +23,7 @@ public class MoveSpeedBuff : Buff
     {
         base.enableVisuals();
         GameObject buffIcon = affectedEntity.addBuffDisplay(buffID, TempObjectsHolder.main.buffIconDisplay);
-        buffIcon.GetComponent<Image>().sprite = TempObjectsHolder.main.sprites.movementBuff;
+        buffIcon.GetComponent<Image>().sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
     }
 
     public override void disableVisuals()
@@ -31,6 +31,22 @@ public class MoveSpeedBuff : Buff
         base.disableVisuals();
         affectedEntity.removeBufffDisplay(buffID);
     }
-    
+
+    public override void UpdateSave(Buffs manager)
+    {
+        base.UpdateSave(manager);
+        manager.buffsSave.moveSpeed = new MoveSpeedBuffSave(this);
+    }
+
+    [System.Serializable]
+    public class MoveSpeedBuffSave : SavedBuff 
+    {
+        public MoveSpeedBuffSave(Buff buff) : base(buff)
+        {
+
+        }
+    }
+
+
 
 }

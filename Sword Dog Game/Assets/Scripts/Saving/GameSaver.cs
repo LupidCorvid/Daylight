@@ -14,6 +14,10 @@ public class GameSaver : MonoBehaviour
 
     public static SaveData currData = new SaveData();
 
+    public static Action StartingSave;
+    public static Action<SaveData> loadedNewData;
+    public static Action updateDataToSave;
+
     public void Awake()
     {
         main = this;
@@ -30,6 +34,8 @@ public class GameSaver : MonoBehaviour
     {
         if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
             //SaveData data = new SaveData();
+            StartingSave?.Invoke();
+            currData.inventory = InventoryManager.currInventory;
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
@@ -37,6 +43,7 @@ public class GameSaver : MonoBehaviour
             saveSystem.SaveData(dataToSave);
         }
     }
+
 
     public void LoadGame()
     {
@@ -65,6 +72,7 @@ public class GameSaver : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
             player = data.player;
             currData = data;
+            InventoryManager.currInventory = data.inventory;
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
 
@@ -72,7 +80,8 @@ public class GameSaver : MonoBehaviour
 
             // TODO this needs to happen upon application start!!!
             data.options.SetValues();
-            
+            loadedNewData?.Invoke(data);
+
             Crossfade.current.StopFade();
 
             CanvasManager.InstantShowHUD();
@@ -87,6 +96,8 @@ public class GameSaver : MonoBehaviour
         public PlayerSerialization player;
         public OptionsSerialization options;
         public RoomStates roomStates;
+        public Buffs.SaveBuffs buffs;
+        public Inventory inventory;
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);

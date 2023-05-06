@@ -27,25 +27,30 @@ public class Entity : MonoBehaviour
     public Team allies;
     public Team enemies;
 
-    #region buffs
-    public SporedDebuff spored;
-    public MoveSpeedBuff moveSpeedBuff;
-    #endregion
+    //#region buffs
+    //public SporedDebuff spored;
+    //public MoveSpeedBuff moveSpeedBuff;
+    //#endregion
+
+    public Buffs buffManager;
     // Start is called before the first frame update
     public virtual void Start()
     {
-        #region buffs
-        spored = new SporedDebuff(this);
-        moveSpeedBuff = new MoveSpeedBuff(this);
-        #endregion
+        buffManager = new Buffs(this);
+        //#region buffs
+        //spored = new SporedDebuff(this);
+        //moveSpeedBuff = new MoveSpeedBuff(this);
+        //#endregion
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        #region buffs
-        spored?.Update();
-        #endregion
+        //#region buffs
+        //spored?.Update();
+        //#endregion
+        buffManager.Update();
+        
     }
 
     public virtual void heal()

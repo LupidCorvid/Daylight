@@ -40,7 +40,7 @@ public class SporeCloud : MonoBehaviour
     {
         Entity hit = collision.GetComponent<Entity>();
         if(hit != null && mainEnemy.GetIfEnemies(hit) && hit != mainEnemy)
-            hit?.spored?.Inflict();
+            hit?.buffManager?.spored?.Inflict();
 
 
         //PlayerHealth hit = collision.GetComponent<PlayerHealth>();

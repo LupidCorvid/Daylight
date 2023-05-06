@@ -196,16 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sporedDebuffPrefab: {fileID: 5010510003964700399, guid: be4a92e6fe4d70947af8b05d88624813, type: 3}
   buffIconDisplay: {fileID: 2604402941843465808, guid: 39257e1cec7ef32499dbc8f3c083ee70, type: 3}
-  sprites:
-    movementBuff: {fileID: 0}
-    movementDebuff: {fileID: 0}
-    attackBuff: {fileID: 0}
-    attackDebuff: {fileID: 0}
-    defenseBuff: {fileID: 0}
-    defenseDebuff: {fileID: 0}
-    confused: {fileID: 0}
-    poisoned: {fileID: 0}
-    spored: {fileID: 0}
+  sprites: {fileID: 11400000, guid: 742aa18abe1c2a54480fce9876a563ab, type: 2}
 --- !u!1001 &6383164300042184571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3368989779879764498, guid: 6e75cd177d03b854fa07858b63981989, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.350911
+      value: -2.191553
       objectReference: {fileID: 0}
     - target: {fileID: 3368989779879764498, guid: 6e75cd177d03b854fa07858b63981989, type: 3}
       propertyPath: m_LocalPosition.z
