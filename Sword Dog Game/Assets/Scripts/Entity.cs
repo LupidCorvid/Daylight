@@ -82,26 +82,4 @@ public class Entity : MonoBehaviour
     {
         return ((enemies & otherEntity.allies) > 0 && otherEntity != this);
     }
-
-    public class Buffs
-    {
-        public SporedDebuff spored;
-        public MoveSpeedBuff moveSpeedBuff;
-
-        public Buffs(Entity holder)
-        {
-            initializeBuffs(holder);
-        }
-
-        public void initializeBuffs(Entity holder)
-        {
-            spored = new SporedDebuff(holder);
-            moveSpeedBuff = new MoveSpeedBuff(holder);
-        }
-
-        public void Update()
-        {
-            spored?.Update();
-        }
-    }
 }

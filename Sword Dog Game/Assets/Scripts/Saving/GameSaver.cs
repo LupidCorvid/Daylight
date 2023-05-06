@@ -14,6 +14,8 @@ public class GameSaver : MonoBehaviour
 
     public static SaveData currData = new SaveData();
 
+    public static Action StartingSave;
+
     public void Awake()
     {
         main = this;
@@ -30,6 +32,7 @@ public class GameSaver : MonoBehaviour
     {
         if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
             //SaveData data = new SaveData();
+            StartingSave?.Invoke();
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
@@ -87,6 +90,7 @@ public class GameSaver : MonoBehaviour
         public PlayerSerialization player;
         public OptionsSerialization options;
         public RoomStates roomStates;
+        public Buffs buffs;
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);
