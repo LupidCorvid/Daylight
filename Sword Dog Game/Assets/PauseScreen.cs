@@ -42,6 +42,16 @@ public class PauseScreen : MonoBehaviour
                 PlayerMenuManager.main.closeMenu();
                 return;
             }
+
+            if (ChangeScene.changingScene || GameSaver.loading)
+            {
+                return;
+            }
+
+            if (PlayerMovement.controller != null && PlayerMovement.controller.resetting)
+            {
+                return;
+            }
             
             if(quitPrompt.alpha == 1)
             {
