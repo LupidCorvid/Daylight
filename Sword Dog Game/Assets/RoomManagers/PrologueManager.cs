@@ -54,6 +54,7 @@ public class PrologueManager : RoomManager
         //Giveplayer sword
         roomState.swordCollected = true;
         SwordFollow.instance.transform.position = looseSword.transform.position;
+        SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
     }
