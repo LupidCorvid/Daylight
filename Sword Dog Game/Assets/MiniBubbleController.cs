@@ -7,6 +7,19 @@ public class MiniBubbleController : MonoBehaviour
     public Collider2D mainCamera;
     public DialogNPC speaker;
 
+    public Vector2 setPosition;
+
+    public Vector2 position
+    {
+        get
+        {
+            if (speaker != null)
+                return speaker.transform.position;
+            else
+                return setPosition;
+        }
+    }
+
     public Collider2D cldr;
 
     public float minDistance = 0;
@@ -63,7 +76,7 @@ public class MiniBubbleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 expectedPlace = (Vector2)speaker.transform.position + offset;
+        Vector2 expectedPlace = position + offset;
         if (mainCamera.OverlapPoint(expectedPlace))
         {
             transform.position += ((Vector3)expectedPlace - transform.position) * Time.deltaTime * 10;
@@ -84,7 +97,7 @@ public class MiniBubbleController : MonoBehaviour
         else
             newPosition.y = cameraEdge.y - cldr.bounds.extents.y;
 
-        if (Vector2.Distance(newPosition, speaker.transform.position) > maxDistance)
+        if (Vector2.Distance(newPosition, position) > maxDistance)
         {
             if(!closing)
                 close();//Start exit and deletion

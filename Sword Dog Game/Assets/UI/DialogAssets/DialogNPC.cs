@@ -195,4 +195,13 @@ public class DialogNPC : MonoBehaviour, IInteractable
         }
     }
 
+    public void SpeakMiniBubble()
+    {
+        GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
+        MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
+        bubble.speaker = this;
+        bubble.offset = miniBubbleOffset;
+        bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
+
+    }
 }
