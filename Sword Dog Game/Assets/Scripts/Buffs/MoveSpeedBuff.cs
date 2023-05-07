@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MoveSpeedBuff : Buff
 {
 
+    Image visualsImage;
+
     public MoveSpeedBuff(Entity entity)
     {
         affectedEntity = entity;
@@ -53,8 +55,26 @@ public class MoveSpeedBuff : Buff
     {
         base.enableVisuals();
         GameObject buffIcon = affectedEntity.addBuffDisplay(buffID, TempObjectsHolder.main.buffIconDisplay);
-        if(buffIcon != null)
-            buffIcon.GetComponent<Image>().sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
+        if (buffIcon != null)
+        {
+            visualsImage = buffIcon.GetComponent<Image>();
+            visualsImage.sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
+            visualsImage.fillAmount= (Time.time - startTime)/duration;
+            visualsImage.transform.GetChild(0).GetComponent<Image>().sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
+
+        }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        updateVisuals();
+    }
+
+    public override void updateVisuals()
+    {
+        if(visualsImage != null)
+            visualsImage.fillAmount = GetRemainingTime() / duration;
     }
 
     public override void disableVisuals()
