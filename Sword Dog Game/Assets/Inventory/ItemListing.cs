@@ -14,6 +14,8 @@ public class ItemListing : MonoBehaviour
     public Sprite backgroundSprite;
     public Sprite backgroundCountSprite;
 
+    public TMPro.TextMeshProUGUI NameText;
+    public Image nameBacking;
 
     public void UpdateAttachedItem(Item newItem)
     {
@@ -25,7 +27,11 @@ public class ItemListing : MonoBehaviour
             return;
         }
         else
+        {
             itemSprite.color = Color.white;
+            nameBacking.color = Color.white;
+            NameText.text = newItem.name;
+        }
 
         if(newItem?.sprite != "")
             itemSprite.sprite = TempObjectsHolder.main.FindSprite(newItem.sprite);
@@ -33,10 +39,15 @@ public class ItemListing : MonoBehaviour
         UpdateCount(newItem.quantity);
     }
 
+
     public void UpdateCount(int count)
     {
         if (count <= 0)
+        {
             itemSprite.color = Color.clear;
+            nameBacking.color = Color.clear;
+            NameText.text = "";
+        }
         else
             itemSprite.color = Color.white;
         if (count <= 1)
