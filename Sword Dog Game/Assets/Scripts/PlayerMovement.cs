@@ -35,7 +35,21 @@ public class PlayerMovement : MonoBehaviour
     private float moveX, prevMoveX, beenOnLand, lastOnLand, lastLandHeight, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
-    [SerializeField] private float speed = 4f;
+    public Entity entityBase;
+
+    //[SerializeField] private float speed = 4f;
+    public float speed
+    {
+        get
+        {
+            return entityBase.moveSpeed;
+        }
+        set
+        {
+            entityBase.moveSpeed.baseValue = value;
+        }
+    }
+
     [SerializeField] private GameObject barkFXPrefab;
     [SerializeField] private Transform mouth;
 

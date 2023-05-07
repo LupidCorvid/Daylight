@@ -386,6 +386,7 @@ MonoBehaviour:
   isRoofed: 0
   isJumping: 0
   isFalling: 0
+  trotting: 0
   isSprinting: 0
   canResprint: 0
   isSkidding: 0
@@ -393,7 +394,7 @@ MonoBehaviour:
   wallOnLeft: 0
   behindGrounded: 0
   bottom: {x: 0, y: 0}
-  speed: 4
+  entityBase: {fileID: 4232136647909902652}
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   mouth: {fileID: 2381358681662667084}
   whatIsGround:
@@ -641,7 +642,7 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
   moveSpeed:
-    baseValue: 1
+    baseValue: 4
     multiplier: 1
     additive: 0
     additiveBase: 0

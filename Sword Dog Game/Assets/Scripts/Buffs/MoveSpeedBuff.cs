@@ -11,12 +11,42 @@ public class MoveSpeedBuff : Buff
         affectedEntity = entity;
     }
 
+    public override void Inflict()
+    {
+        Inflict(1);
+    }
+
     public override void Inflict(float strength)
     {
+        
         if (strength > intensity)
+        {
+            if (active)
+                affectedEntity.moveSpeed.multiplier -= strength;
             intensity = strength;
+            affectedEntity.moveSpeed.multiplier += intensity;
+        } else if (!active)
+            affectedEntity.moveSpeed.multiplier += intensity;
 
         base.Inflict();
+    }
+
+    public override void Inflict(float duration, float intensity)
+    {
+
+        Inflict(intensity);
+
+        if (startTime + this.duration <= Time.time + duration)
+        {
+            startTime = Time.time;
+            this.duration = duration;
+        }
+    }
+
+    public override void Cure()
+    {
+        base.Cure();
+        affectedEntity.moveSpeed.multiplier -= intensity;
     }
 
     public override void enableVisuals()
