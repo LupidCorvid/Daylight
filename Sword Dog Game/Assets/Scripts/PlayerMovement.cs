@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement controller;
     public Rigidbody2D rb;
     private Animator anim;
-    private bool trotting, wasGrounded, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
+    private bool wasGrounded, holdingJump;
+    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
     public Vector2 bottom;
     public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
