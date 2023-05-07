@@ -153,6 +153,7 @@ public class PlayerMenuManager : MonoBehaviour
     //Items slide in to the right from the left;
     public void PageLeft()
     {
+        InventoryManager.main.itemInfoPopup.close();
         if (transitioning)
         {
             if (fromLeft)
@@ -196,6 +197,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         //if (transitioning)
         //    return;
+        InventoryManager.main.itemInfoPopup.close();
         if (transitioning)
         {
             if (fromLeft)
