@@ -21,7 +21,7 @@ public class SporedDebuff : Buff
         if(Time.time - startTime > .05f)    
             lastActivation += (Time.time - startTime) * 2;
 
-        IndicatorGameObj = TempObjectsHolder.main.sporedDebuffPrefab;
+        IndicatorGameObj ??= TempObjectsHolder.main.sporedDebuffPrefab;
         base.Inflict();
     }
 

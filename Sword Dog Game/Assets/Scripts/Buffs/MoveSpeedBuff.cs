@@ -23,7 +23,8 @@ public class MoveSpeedBuff : Buff
     {
         base.enableVisuals();
         GameObject buffIcon = affectedEntity.addBuffDisplay(buffID, TempObjectsHolder.main.buffIconDisplay);
-        buffIcon.GetComponent<Image>().sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
+        if(buffIcon != null)
+            buffIcon.GetComponent<Image>().sprite = TempObjectsHolder.main.FindSprite("Buffs.SpeedUp");
     }
 
     public override void disableVisuals()

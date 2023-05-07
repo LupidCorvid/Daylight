@@ -15,6 +15,8 @@ public class BuffList : MonoBehaviour
 
     public GameObject instantiateAndAddBuffIcon(int id, GameObject buffObj)
     {
+        if (this == null || gameObject?.transform == null)
+            return null;
         GameObject newBuff = Instantiate(buffObj, transform);
         buffs.Add(id, newBuff);
         return newBuff;

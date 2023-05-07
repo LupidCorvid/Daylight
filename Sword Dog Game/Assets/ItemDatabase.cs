@@ -31,6 +31,8 @@ public class ItemDatabase : MonoBehaviour
 
     public Item unpackItem(PackedItem item)
     {
+        if (item.itemId == -1)
+            return null;
         Item unpackedItem = getItemFromId(item.itemId);
         unpackedItem.quantity = item.itemCount;
         return unpackedItem;
@@ -84,15 +86,10 @@ public class ItemDatabase : MonoBehaviour
 
         foreach (ItemSlot item in items.contents)
         {
-
-            if (item != null)
-            {
-
-                if (item.item != null)
-                    packedItems.Add(new PackedSlot(new PackedItem(item.item.itemId, item.item.quantity)));
-                else
-                    packedItems.Add(new PackedSlot(null));
-            }
+            if (item?.item != null)
+                packedItems.Add(new PackedSlot(new PackedItem(item.item.itemId, item.item.quantity)));
+            else
+                packedItems.Add(new PackedSlot(null));
         }
         return new PackedInventory(packedItems);
     }
@@ -100,7 +97,7 @@ public class ItemDatabase : MonoBehaviour
     [Serializable]
     public class PackedItem
     {
-        public int itemId;
+        public int itemId = -1;
         public int itemCount;
 
         public PackedItem(int itemId, int itemCount)
@@ -108,6 +105,13 @@ public class ItemDatabase : MonoBehaviour
             this.itemId = itemId;
             this.itemCount = itemCount;
         }
+
+        public PackedItem()
+        {
+            itemId = -1;
+            itemCount = 0;
+        }
+
     }
     [Serializable]
     public class PackedSlot
@@ -128,6 +132,11 @@ public class ItemDatabase : MonoBehaviour
         public PackedInventory(List<PackedSlot> items)
         {
             contents = items;
+        }
+
+        public PackedInventory()
+        {
+            contents = new List<PackedSlot>(3);
         }
     }
 }

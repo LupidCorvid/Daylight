@@ -45,6 +45,9 @@ public class MainMenuManager : MonoBehaviour
     {
         //SceneHelper.LoadScene("prologue area");
         GameSaver.currData = new GameSaver.SaveData();
+        //InventoryManager.currInventory.contents = new List<ItemSlot>(3);
+        InventoryManager.currInventory = new Inventory();
+        InventoryManager.main.refreshInventory();
         AudioManager.instance.FadeOutCurrent();
         ChangeScene.LoadScene("prologue area", "", false);
         //CanvasManager.ShowHUD();

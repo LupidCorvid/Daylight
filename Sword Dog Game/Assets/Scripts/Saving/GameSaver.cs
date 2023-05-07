@@ -115,7 +115,7 @@ public class GameSaver : MonoBehaviour
         public SaveData()
         {
             roomStates = new RoomStates();
-
+            inventory = new ItemDatabase.PackedInventory();
         }
     }
 

@@ -9,7 +9,7 @@ using System;
 public class Item
 {
 
-    public int itemId;
+    public int itemId = -1;
     public string name;
     public string description;
     public int quantity;

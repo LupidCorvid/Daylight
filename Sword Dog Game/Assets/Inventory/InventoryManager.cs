@@ -12,6 +12,9 @@ public class InventoryManager : MonoBehaviour
 
     public void refreshInventory()
     {
+        if (listingHolder == null)
+            return;
+
         for(int i = 0; i < listingHolder.transform.childCount; i++)
         {
             Destroy(listingHolder.transform.GetChild(i).gameObject);
@@ -51,15 +54,15 @@ public class InventoryManager : MonoBehaviour
         main = this;
         refreshInventory();
         GameSaver.loadedNewData += ((e) => refreshInventory());
-        AddItem(new TeardropAloe());
+        //AddItem(new TeardropAloe());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(currInventory.contents.Count < 3)
-        {
-            currInventory.AddSlots(1);
-        }
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if(currInventory.contents.Count < 3)
+    //    {
+    //        currInventory.AddSlots(1);
+    //    }
+    //}
 }
