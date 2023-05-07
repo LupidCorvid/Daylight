@@ -8,6 +8,7 @@ public class SpiderTulipBud : Item
     {
         itemId = 2;
         name = "Spider Tulip Bud";
+        description = "Has energising effects";
         quantity = 1;
         sellValue = 3;
         stackSize = 10;

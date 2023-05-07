@@ -13,12 +13,25 @@ public class MainMenuManager : MonoBehaviour
 
     public UnityEngine.UI.Button newGameButton;
 
+    public UnityEngine.UI.Button continueButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
         lastSave = GetMostRecentSave();
-        lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
+        if (lastSave != "")
+        {
+            lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
+            continueButton.interactable = true;
+        }
+        else
+        {
+            Debug.Log("No most recent save found");
+            continueButton.interactable = false;
+            lastSaveDetails.text = "";
+        }
+        
         CanvasManager.InstantHideHUD();
 
         BuffList.main?.clearBuffIcons();
