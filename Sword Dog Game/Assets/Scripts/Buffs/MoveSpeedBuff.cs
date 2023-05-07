@@ -85,7 +85,21 @@ public class MoveSpeedBuff : Buff
 
     public override void LoadSave(SavedBuff save)
     {
-        Inflict(save.remainingDuration, save.intensity);
+        //Inflict(save.remainingDuration, save.intensity);
+        if (!active && save.active)
+            enableVisuals();
+
+        active = save.active;
+        if (active)
+        {
+            intensity = save.intensity;
+
+            Inflict(save.totalDuration, intensity);
+    
+            duration = save.totalDuration;
+            startTime = Time.time + (save.remainingDuration - save.totalDuration);
+
+        }
     }
 
     public override void UpdateSave(Buffs manager)

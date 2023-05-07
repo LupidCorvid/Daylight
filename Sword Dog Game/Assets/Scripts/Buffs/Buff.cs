@@ -133,18 +133,26 @@ public class Buff
 
     public virtual void LoadSave(SavedBuff save)
     {
-        //Debug.Log("Affected entity " + affectedEntity);
-        intensity = save.intensity;
-        duration = save.remainingDuration;
-        startTime = Time.time;
         active = save.active;
         if (active)
+        {
             Inflict();
+            //enableVisuals();
+        }
+
+        //Debug.Log("Affected entity " + affectedEntity);
+        intensity = save.intensity;
+        //duration = save.remainingDuration;
+        duration = save.totalDuration;
+        startTime = save.remainingDuration - save.totalDuration;
+        //startTime = Time.time;
+        
     }
 
     [System.Serializable]
     public class SavedBuff
     {
+        public float totalDuration;
         public float remainingDuration;
         public float intensity;
         public bool active;
@@ -157,6 +165,7 @@ public class Buff
         public SavedBuff(Buff buff)
         {
             remainingDuration = buff.GetRemainingTime();
+            totalDuration = buff.duration;
             active = buff.active;
             intensity = buff.intensity;
         }
