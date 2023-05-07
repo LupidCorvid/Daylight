@@ -16,6 +16,7 @@ public class EnemyBase : Entity
 
     public Animator anim;
 
+    public int killValue = 5;
     
 
     public override void Start()
@@ -54,6 +55,8 @@ public class EnemyBase : Entity
     {
         killed?.Invoke();
         Destroy(gameObject);
+        Utilities.main.SpawnLooseItem(new Bone(4), transform.position, new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(.5f, 2f)));
+
     }
 
     public override void TakeDamage(int amount)

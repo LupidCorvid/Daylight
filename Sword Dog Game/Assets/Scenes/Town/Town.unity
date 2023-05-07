@@ -1421,6 +1421,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
+  killValue: 5
 --- !u!58 &434909038
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1707,6 +1708,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
+  killValue: 5
   rockPrefab: {fileID: 8666362523932513522, guid: 82ef0a8410ae2ac4391630df02892510, type: 3}
 --- !u!61 &555738666
 BoxCollider2D:
@@ -2573,14 +2575,6 @@ PrefabInstance:
     - target: {fileID: 7483406425282923924, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_Name
       value: RequiredObjects
-      objectReference: {fileID: 0}
-    - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.619907
-      objectReference: {fileID: 0}
-    - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.0402695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3568,6 +3562,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
+  killValue: 5
 --- !u!61 &1396726289
 BoxCollider2D:
   m_ObjectHideFlags: 0
