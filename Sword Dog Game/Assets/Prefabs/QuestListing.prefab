@@ -281,6 +281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2513891694377455794}
+  - component: {fileID: 5725478718079087679}
   m_Layer: 5
   m_Name: QuestListing
   m_TagString: Untagged
@@ -312,6 +313,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 623.3875, y: 117.1602}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5725478718079087679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183243979846314443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12150606b69bbd4c8dcefb8593b20a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questDesc: {fileID: 902965298418913890}
+  questReward: {fileID: 6611406154573617449}
+  questType: {fileID: 6852964980762807033}
+  assigner: {fileID: 7659313812984283250}
+  mainQuestIcon: {fileID: 21300000, guid: ee78a0a083a31b244b83122c3adb3ca5, type: 3}
+  sideQuestIcon: {fileID: 21300000, guid: dfd91d0b38d632b4eb6a63a4e5d0ff18, type: 3}
 --- !u!1 &7010412450531985628
 GameObject:
   m_ObjectHideFlags: 0

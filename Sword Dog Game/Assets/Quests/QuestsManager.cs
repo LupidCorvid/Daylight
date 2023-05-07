@@ -7,6 +7,7 @@ public class QuestsManager : MonoBehaviour
     public GameObject questsHolder;
     public GameObject questListingPrefab;
     public QuestDatabase questsDatabase = new QuestDatabase();
+    public List<QuestListing> questListings = new List<QuestListing>();
 
     public static QuestsManager main;
 
@@ -16,14 +17,41 @@ public class QuestsManager : MonoBehaviour
             main = this;
     }
 
+    public void CreateListing(Quest quest)
+    {
+        GameObject addedObject= Instantiate(questListingPrefab, questsHolder.transform);
+        QuestListing addedListing = addedObject.GetComponent<QuestListing>();
+        addedListing.setQuest(quest);
+        questListings.Add(addedListing);
+    }
+    public void removeListing(Quest quest)
+    {
+        removeListing(quest.questId);
+    }
+
+    public void removeListing(int id)
+    {
+        for (int i = 0; i < questListings.Count; i++)
+        {
+            if (questListings[i].quest.questId == id)
+            {
+                Destroy(questListings[i].gameObject);
+                questListings.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
     public void AssignQuest(int id)
     {
         questsDatabase.AddQuest(id);
+        CreateListing(questsDatabase.findQuest(id));
     }
 
     public void AssignQuest(Quest quest)
     {
         questsDatabase.AddQuest(quest);
+        CreateListing(questsDatabase.findQuest(quest.questId));
     }
 
     public Quest getQuest(int id)
@@ -42,6 +70,9 @@ public class QuestsManager : MonoBehaviour
         gottenQuest.progress = newProgress;
         if (gottenQuest.progress >= gottenQuest.neededProgress)
             gottenQuest.complete();
+        if (checkIfCompleted(id))
+            removeListing(id);
+
     }
 
     public void setQuestProgress(Quest quest, float newProgress)
