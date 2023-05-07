@@ -18,12 +18,18 @@ public class Inventory
 
     public void changedItem(ItemSlot slot)
     {
-        itemChanged?.Invoke(slot);
+        if (InventoryManager.currInventory == this)
+            InventoryManager.main.UpdateItemDisplay(slot);
+        else
+            itemChanged?.Invoke(slot);
     }
 
     public void itemQuantityChanged(ItemSlot slot, int amount)
     {
-        itemCountChanged?.Invoke(slot, amount);
+        if(InventoryManager.currInventory == this)
+            InventoryManager.main.UpdateItemCount(slot, amount);
+        else
+            itemCountChanged?.Invoke(slot, amount);
     }
 
     public void AddSlots(int num = 1)

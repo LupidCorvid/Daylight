@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static Inventory currInventory = new Inventory();
+    private Inventory lastInventory;
     public GameObject itemListingPrefab;
     public GameObject listingHolder;
     public List<ItemListing> itemListings = new List<ItemListing>();
@@ -12,10 +13,13 @@ public class InventoryManager : MonoBehaviour
 
     public void refreshInventory()
     {
-        if (listingHolder == null)
+        if (listingHolder == null && main == this)
+        {
+            Debug.LogError("Something is weird");
             return;
+        }
 
-        for(int i = 0; i < listingHolder.transform.childCount; i++)
+        for(int i = listingHolder.transform.childCount - 1; i >= 0 ; i--)
         {
             Destroy(listingHolder.transform.GetChild(i).gameObject);
         }
@@ -23,7 +27,8 @@ public class InventoryManager : MonoBehaviour
 
         for(int i = 0; i < currInventory.contents.Count; i++)
         {
-            itemListings.Add(Instantiate(itemListingPrefab, listingHolder.transform).GetComponent<ItemListing>());
+            GameObject addedObject = Instantiate(itemListingPrefab, listingHolder.transform);
+            itemListings.Add(addedObject.GetComponent<ItemListing>());
         }
 
         UpdateItemDisplays();
@@ -49,18 +54,22 @@ public class InventoryManager : MonoBehaviour
     }
     public void UpdateItemDisplay(ItemSlot slot)
     {
-        itemListings[currInventory.contents.FindIndex((e) => (e == slot))].UpdateAttachedItem(slot.item);
+        itemListings[currInventory.contents.IndexOf(slot)].UpdateAttachedItem(slot.item);
     }
 
     public void UpdateItemCount(ItemSlot slot, int amount)
     {
-        itemListings[currInventory.contents.FindIndex((e) => (e == slot))].UpdateCount(amount);
+        itemListings[currInventory.contents.IndexOf(slot)].UpdateCount(amount);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        main = this;
+        if (main == null)
+            main = this;
+
+        if (main != this)
+            return;
         refreshInventory();
         GameSaver.loadedNewData += ((e) => refreshInventory());
 
@@ -68,6 +77,21 @@ public class InventoryManager : MonoBehaviour
         currInventory.itemCountChanged += UpdateItemCount;
         //AddItem(new TeardropAloe());
     }
+
+    //public void Update()
+    //{
+    //    if(lastInventory != currInventory)
+    //    {
+    //        currInventory.itemChanged += UpdateItemDisplay;
+    //        currInventory.itemCountChanged += UpdateItemCount;
+    //        if(lastInventory != null)
+    //        {
+    //            currInventory.itemChanged -= UpdateItemDisplay;
+    //            currInventory.itemCountChanged -= UpdateItemCount;
+    //        }
+    //    }
+    //    lastInventory = currInventory;
+    //}
 
     //// Update is called once per frame
     //void Update()

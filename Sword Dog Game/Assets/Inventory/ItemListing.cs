@@ -47,6 +47,7 @@ public class ItemListing : MonoBehaviour
         else
         {
             countDisplay.text = "" + count;
+            //Debug.Log(countDisplay.gameObject);
             bgSprite.sprite = backgroundCountSprite;
         }
 
