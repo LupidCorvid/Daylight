@@ -68,13 +68,13 @@ public class ItemListing : MonoBehaviour
     {
         //if (attachedItem != null && attachedItem.quantity > 0)
         //    attachedItem.OnUse(PlayerMenuManager.main.player);
+        InventoryManager.main.itemInfoPopup.close();
         if (attachedItem == null || attachedItem.quantity <= 0)
         {
-            InventoryManager.main.itemInfoPopup.close();
             return;
         }
         RectTransform rect = GetComponent<RectTransform>();
-        InventoryManager.main.itemInfoPopup.selectItem(attachedItem, transform.position + Vector3.right * rect.sizeDelta.x);
         InventoryManager.main.itemInfoPopup.fromListing = this;
+        InventoryManager.main.itemInfoPopup.selectItem(attachedItem, transform.position + Vector3.right * rect.sizeDelta.x);
     }
 }

@@ -25,8 +25,11 @@ public class ItemSelectPrompt : MonoBehaviour
     public void close()
     {
         transform.position = new Vector3(-5000, -5000, -5000);
+        //if(fromListing?.bgSprite != null)
+        //    fromListing.bgSprite.color = new Color32(195, 149, 14, 255);
         if (fromListing != null)
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(fromListing.gameObject);
+        
     }
 
     public void useItem()
@@ -69,5 +72,6 @@ public class ItemSelectPrompt : MonoBehaviour
         transform.position = position;
         openDefault();
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(useButton);
+        //fromListing.bgSprite.color = Color.white;
     }
 }
