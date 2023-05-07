@@ -57,22 +57,18 @@ public class PlayerMenuManager : MonoBehaviour
     void Start()
     {
         main = this;
-        SceneHelper.FinishedChangeScene += FindPlayer;
-        FindPlayer();
+        //SceneHelper.FinishedChangeScene += FindPlayer;
         for(int i = 1; i < menus.Count; i++)
         {
             menus[i].transform.position += Vector3.right * offsetAmount;
         }
     }
 
-    public void FindPlayer()
-    {
-        player ??= GameObject.FindWithTag("Player")?.GetComponent<Entity>();
-    }
-
     // Update is called once per frame
     void Update()
     {
+        player = PlayerMovement.controller?.entityBase;
+
         if (main == null)
             main = this;
 

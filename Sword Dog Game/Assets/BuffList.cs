@@ -10,7 +10,8 @@ public class BuffList : MonoBehaviour
 
     private void Awake()
     {
-        main = this;
+        if (main == null || main.gameObject?.transform == null)
+            main = this;
     }
 
     public GameObject instantiateAndAddBuffIcon(int id, GameObject buffObj)
