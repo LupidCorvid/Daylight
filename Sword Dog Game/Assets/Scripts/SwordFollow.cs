@@ -71,7 +71,6 @@ public class SwordFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("hi");
         if (!canMove)
         {
             cantMoveFor += Time.fixedDeltaTime;
@@ -144,12 +143,29 @@ public class SwordFollow : MonoBehaviour
             }
 
             //Checks when to flip and adjust sprite
-            
+            if (!pmScript.facingRight)
+            {
+                adjustLocationX = -adjustDefaultX;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                adjustLocationX = adjustDefaultX;
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+
             if (pmScript.isJumping)
             {
-                if (!pmScript.facingRight) adjustLocationX = -adjustDefaultX - .8f;
-                else adjustLocationX = adjustDefaultX + .8f;
-                
+                if (!pmScript.trotting)
+                {
+                    if (!pmScript.facingRight) adjustLocationX -= .2f;
+                    else adjustLocationX += .2f;
+                }
+                else if (!pmScript.isSprinting)
+                {
+                    if (!pmScript.facingRight) adjustLocationX -= .4f;
+                    else adjustLocationX += .4f;
+                }
                 adjustLocationY = 0.8f;
             }
             else
@@ -164,17 +180,6 @@ public class SwordFollow : MonoBehaviour
             else
             {
                 adjustDefaultX = Mathf.Lerp(adjustDefaultX, -0.2f, 0.4f);
-            }
-            
-            if (!pmScript.facingRight)
-            {
-                adjustLocationX = -adjustDefaultX;
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                adjustLocationX = adjustDefaultX;
-                transform.localScale = new Vector3(1, 1, 1);
             }
         }
         else
