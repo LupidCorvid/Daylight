@@ -41,7 +41,7 @@ public class SwordFollow : MonoBehaviour
         speed = 100;
         //adjust the adjustLocation variables per sword type
         adjustDefaultX = -.2f;
-        adjustDefaultY = 0.7f;
+        adjustDefaultY = 0.6f;
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
@@ -71,6 +71,7 @@ public class SwordFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log("hi");
         if (!canMove)
         {
             cantMoveFor += Time.fixedDeltaTime;
@@ -149,11 +150,11 @@ public class SwordFollow : MonoBehaviour
                 if (!pmScript.facingRight) adjustLocationX = -adjustDefaultX - .8f;
                 else adjustLocationX = adjustDefaultX + .8f;
                 
-                adjustLocationY = 0.9f;
+                adjustLocationY = 0.8f;
             }
             else
             {
-                adjustLocationY = 0.7f;
+                adjustLocationY = 0.6f;
             }
 
             if (pmScript.isSprinting)

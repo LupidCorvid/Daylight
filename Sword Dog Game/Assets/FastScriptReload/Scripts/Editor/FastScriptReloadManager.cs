@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,10 +7,8 @@ using System.Threading.Tasks;
 using FastScriptReload.Editor.Compilation;
 using FastScriptReload.Editor.Compilation.ScriptGenerationOverrides;
 using FastScriptReload.Runtime;
-using ImmersiveVRTools.Editor.Common.Utilities;
 using ImmersiveVRTools.Runtime.Common;
 using ImmersiveVrToolsCommon.Runtime.Logging;
-using MonoMod.Utils;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -43,11 +40,6 @@ namespace FastScriptReload.Editor
         {
             [FileWatcherReplacementTokenForApplicationDataPath] = () => DataPath
         };
-        
-        private Dictionary<string, DynamicFileHotReloadState> _lastProcessedDynamicFileHotReloadStatesInSession = new Dictionary<string, DynamicFileHotReloadState>();
-        public IReadOnlyDictionary<string, DynamicFileHotReloadState> LastProcessedDynamicFileHotReloadStatesInSession => _lastProcessedDynamicFileHotReloadStatesInSession;
-        public event Action<List<DynamicFileHotReloadState>> HotReloadFailed;
-        public event Action<List<DynamicFileHotReloadState>> HotReloadSucceeded;
 
         private bool _wasLockReloadAssembliesCalled;
         private PlayModeStateChange _lastPlayModeStateChange;
@@ -57,7 +49,6 @@ namespace FastScriptReload.Editor
         public bool EnableExperimentalThisCallLimitationFix { get; private set; }
 #pragma warning disable 0618
         public AssemblyChangesLoaderEditorOptionsNeededInBuild AssemblyChangesLoaderEditorOptionsNeededInBuild { get; private set; } = new AssemblyChangesLoaderEditorOptionsNeededInBuild();
-
 #pragma warning restore 0618
 
         private List<DynamicFileHotReloadState> _dynamicFileHotReloadStateEntries = new List<DynamicFileHotReloadState>();
@@ -263,7 +254,9 @@ Workaround will search in all folders (under project root) and will use first fo
             var window = FastScriptReloadWelcomeScreen.Init();
             window.OpenExclusionsSection();
         }
-        
+
+
+    
         private static string ResolveRelativeToAssetDirectoryFilePath(UnityEngine.Object obj)
         {
             return AssetDatabase.GetAssetPath(obj.GetInstanceID());
@@ -339,9 +332,8 @@ Workaround will search in all folders (under project root) and will use first fo
 
         public void TriggerReloadForChangedFiles()
         {
-            if (!Application.isPlaying && _hotReloadPerformedCount > _triggerDomainReloadIfOverNDynamicallyLoadedAssembles)
+            if (!Application.isPlaying && _hotReloadPerformedCount > _triggerDomainReloadIfOverNDynamicallyLoadedAssembles) 
             {
-                _hotReloadPerformedCount = 0;
                 LoggerScoped.LogWarning($"Dynamically created assembles reached over: {_triggerDomainReloadIfOverNDynamicallyLoadedAssembles} - triggering full domain reload to clean up. You can adjust that value in settings.");
 #if UNITY_2019_3_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation(); //TODO: add some timer to ensure this does not go into some kind of loop
@@ -351,7 +343,6 @@ Workaround will search in all folders (under project root) and will use first fo
                  var dirtyAllScriptsMethod = editorCompilationInterfaceType.GetMethod("DirtyAllScripts", BindingFlags.Static | BindingFlags.Public);
                  dirtyAllScriptsMethod.Invoke(editorCompilationInterfaceType, null);
 #endif
-                ClearLastProcessedDynamicFileHotReloadStates();
             }
             
             var assemblyChangesLoader = AssemblyChangesLoaderResolver.Instance.Resolve();
@@ -361,11 +352,7 @@ Workaround will search in all folders (under project root) and will use first fo
 
             if (changesAwaitingHotReload.Any())
             {
-                UpdateLastProcessedDynamicFileHotReloadStates(changesAwaitingHotReload);
-                foreach (var c in changesAwaitingHotReload)
-                {
-                    c.IsBeingProcessed = true;
-                }
+                changesAwaitingHotReload.ForEach(c => { c.IsBeingProcessed = true; });
 
                 var unityMainThreadDispatcher = UnityMainThreadDispatcher.Instance.EnsureInitialized(); //need to pass that in, resolving on other than main thread will cause exception
                 Task.Run(() =>
@@ -395,8 +382,6 @@ Workaround will search in all folders (under project root) and will use first fo
                             }); //TODO: technically not all were hot swapped at same time
 
                             _hotReloadPerformedCount++;
-                            
-                            SafeInvoke(HotReloadSucceeded, changesAwaitingHotReload);
                         }
                         else
                         {
@@ -423,63 +408,13 @@ Workaround will search in all folders (under project root) and will use first fo
                     catch (Exception ex)
                     {
                         LoggerScoped.LogError($"Error when updating files: '{(sourceCodeFilesWithUniqueChangesAwaitingHotReload != null ? string.Join(",", sourceCodeFilesWithUniqueChangesAwaitingHotReload.Select(fn => new FileInfo(fn).Name)) : "unknown")}', {ex}");
-                        changesAwaitingHotReload.ForEach(c =>
-                        {
-                            c.ErrorOn = DateTime.UtcNow;
-                            c.ErrorText = ex.Message;
-                            c.SourceCodeCombinedFilePath = (ex as HotReloadCompilationException)?.SourceCodeCombinedFileCreated;
-                        });
-
-                        SafeInvoke(HotReloadFailed, changesAwaitingHotReload);
                     }
                 });
             }
 
             _lastTimeChangeBatchRun = DateTime.UtcNow;
         }
-
-        private void SafeInvoke(Action<List<DynamicFileHotReloadState>> ev, List<DynamicFileHotReloadState> changesAwaitingHotReload)
-        {
-            try
-            {
-                ev?.Invoke(changesAwaitingHotReload);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error when executing event, {e}");
-            }
-        }
-
-        private void AddToLastProcessedDynamicFileHotReloadStates(DynamicFileHotReloadState c)
-        {
-            var assetGuid = AssetDatabaseHelper.AbsolutePathToGUID(c.FullFileName);
-            if (!string.IsNullOrEmpty(assetGuid))
-            {
-                _lastProcessedDynamicFileHotReloadStatesInSession[assetGuid] = c;
-            }
-        }
         
-        private void ClearLastProcessedDynamicFileHotReloadStates()
-        {
-            _lastProcessedDynamicFileHotReloadStatesInSession.Clear();
-        }
-        
-        //Success entries will always be cleared - errors will remain till another change fixes them
-        private void UpdateLastProcessedDynamicFileHotReloadStates(List<DynamicFileHotReloadState> changesToHotReload)
-        {
-            var succeededReloads = _lastProcessedDynamicFileHotReloadStatesInSession
-                .Where(s => s.Value.IsChangeHotSwapped).ToList();
-            foreach (var kv in succeededReloads)
-            {
-                _lastProcessedDynamicFileHotReloadStatesInSession.Remove(kv.Key);
-            }
-
-            foreach (var changeToHotReload in changesToHotReload)
-            {
-                AddToLastProcessedDynamicFileHotReloadStates(changeToHotReload);
-            }
-        }
-
         private void OnEditorApplicationOnplayModeStateChanged(PlayModeStateChange obj)
         {
             Instance._lastPlayModeStateChange = obj;
@@ -543,13 +478,11 @@ Workaround will search in all folders (under project root) and will use first fo
 
         public bool IsAwaitingHotSwap => IsFileCompiled && !HotSwappedOn.HasValue;
         public DateTime? HotSwappedOn { get; set; }
-        public bool IsChangeHotSwapped => HotSwappedOn.HasValue;
+        public bool IsChangeHotSwapped {get; set; }
     
         public string ErrorText { get; set; }
         public DateTime? ErrorOn { get; set; }
-        public bool IsFailed => ErrorOn.HasValue;
         public bool IsBeingProcessed { get; set; }
-        public string SourceCodeCombinedFilePath { get; set; }
 
         public DynamicFileHotReloadState(string fullFileName, DateTime fileChangedOn)
         {

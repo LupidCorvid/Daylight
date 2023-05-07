@@ -39,7 +39,7 @@ namespace FastScriptReload.Runtime
                     .ToDictionary(t => t.FullName, t => t);
                     
 #if ImmersiveVrTools_DebugEnabled
-                ImmersiveVrToolsCommon.Runtime.Logging.LoggerScoped.Log($"Initialized type-lookup dictionary, took: {typeLookupSw.ElapsedMilliseconds}ms - cached");
+                    LoggerScoped.Log($"Initialized type-lookup dictionary, took: {typeLookupSw.ElapsedMilliseconds}ms - cached");
 #endif
             }
         }

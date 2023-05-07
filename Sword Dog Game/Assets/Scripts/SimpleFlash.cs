@@ -18,7 +18,7 @@ public class SimpleFlash : MonoBehaviour
     #region Private Fields
 
     // The SpriteRenderer that should flash.
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     // The material that was in use, when the script started.
     private Material originalMaterial;
@@ -41,7 +41,8 @@ public class SimpleFlash : MonoBehaviour
     {
         // Get the SpriteRenderer to be used,
         // alternatively you could set it from the inspector.
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
         // Get the material that the SpriteRenderer uses, 
         // so we can switch back to it after the flash ended.

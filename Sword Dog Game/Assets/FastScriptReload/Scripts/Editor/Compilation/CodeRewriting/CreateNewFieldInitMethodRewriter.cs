@@ -43,10 +43,6 @@ namespace FastScriptReload.Editor.Compilation.CodeRewriting
 			                                            ?? SyntaxFactory.DefaultExpression(SyntaxFactory.IdentifierName(fieldDeclarationNode.Declaration.Type.ToString()));
 			var withDictionaryFieldNameToInitFieldValue = CreateNewFieldNameToGetObjectFnDictionary(node, newClassFields, getObjectFnSyntax, NewFieldsToCreateValueFnDictionaryFieldName);
 
-			//TODO: slightly odd scenario 'When explicit #nullable enable is used, reference types should be rewritten to typeof(type) for initialization and value types should remain typeof(type?)'
-			// Func<FieldDeclarationSyntax, ExpressionSyntax> getObjectTypeFnSyntax = fieldDeclarationNode => SyntaxFactory.TypeOfExpression(
-			// 	SyntaxFactory.ParseTypeName(fieldDeclarationNode.Declaration.Type.ToFullString().Replace("?", ""))
-			// );
 			Func<FieldDeclarationSyntax, ExpressionSyntax> getObjectTypeFnSyntax = fieldDeclarationNode => SyntaxFactory.TypeOfExpression(fieldDeclarationNode.Declaration.Type);
 			return CreateNewFieldNameToGetObjectFnDictionary(withDictionaryFieldNameToInitFieldValue, newClassFields, getObjectTypeFnSyntax, NewFieldsToGetTypeFnDictionaryFieldName);
 		}
@@ -139,6 +135,7 @@ namespace FastScriptReload.Editor.Compilation.CodeRewriting
 																													.ObjectKeyword))))))
 																		}))))
 													.WithInitializer(dictionaryInitializer))))))
+					.WithTriviaFrom(node)
 					.WithModifiers(
 						SyntaxFactory.TokenList(
 							SyntaxFactory.Token(SyntaxKind.PrivateKeyword),
