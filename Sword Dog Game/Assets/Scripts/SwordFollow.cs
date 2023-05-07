@@ -32,6 +32,7 @@ public class SwordFollow : MonoBehaviour
     private static bool canMove = true;
     private static float cantMoveFor = 0.1f, maxDelay = 0.1f;
     public static bool created;
+    private float xOffset = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -156,26 +157,25 @@ public class SwordFollow : MonoBehaviour
 
             if (pmScript.isJumping)
             {
-                if (!pmScript.trotting)
-                {
-                    if (!pmScript.facingRight) adjustLocationX -= .2f;
-                    else adjustLocationX += .2f;
-                }
-                else if (!pmScript.isSprinting)
-                {
-                    if (!pmScript.facingRight) adjustLocationX -= .4f;
-                    else adjustLocationX += .4f;
-                }
+                xOffset = Mathf.Lerp(xOffset, pmScript.trotting ? 0.2f : 0.4f, 0.1f);
                 adjustLocationY = 0.8f;
             }
             else
             {
+                xOffset = Mathf.Lerp(xOffset, 0, 0.1f);
                 adjustLocationY = 0.6f;
             }
+
+            if (!pmScript.facingRight) adjustLocationX -= xOffset;
+            else adjustLocationX += xOffset;
 
             if (pmScript.isSprinting)
             {
                 adjustDefaultX = Mathf.Lerp(adjustDefaultX, 0.2f, 0.1f);
+                if (pmScript.isJumping)
+                {
+                    adjustDefaultX = 0f;
+                }
             }
             else
             {
