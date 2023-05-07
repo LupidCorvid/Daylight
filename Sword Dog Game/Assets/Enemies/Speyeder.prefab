@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 13
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
   alsoFlash: []
   forceNonSolidFlash: 1
+  spriteRenderer: {fileID: 0}
 --- !u!1 &1742960866975940575
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,9 +301,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030d00f83b3b8534096d7c49cbdd3fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
-  moveSpeed: 1
-  attackSpeed: 1
+  attackDamage:
+    baseValue: 1
+    multiplier: 1
+    additive: 0
+    additiveBase: 0
+  moveSpeed:
+    baseValue: 1
+    multiplier: 1
+    additive: 0
+    additiveBase: 0
+  attackSpeed:
+    baseValue: 1
+    multiplier: 1
+    additive: 0
+    additiveBase: 0
   maxHealth: 7
   health: 7
   invincible: 0
@@ -312,6 +325,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 177005933601102982}
+  killValue: 5
   web: {fileID: 1742960867218242366}
 --- !u!50 &1742960867218242367
 Rigidbody2D:
@@ -400,7 +414,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 1fea31005d0743d429f0caae13360985, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -428,6 +442,7 @@ MonoBehaviour:
   alsoFlash:
   - {fileID: 4500755189507649335}
   forceNonSolidFlash: 0
+  spriteRenderer: {fileID: 0}
 --- !u!61 &1742960867218242363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -538,7 +553,7 @@ Transform:
   - {fileID: 1742960867218242305}
   - {fileID: 1742960866975940572}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742960868488570188
 GameObject:

@@ -242,6 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7936061241470336808}
   - component: {fileID: 1076683163060809001}
+  - component: {fileID: 629131896404810282}
   m_Layer: 5
   m_Name: QuestsMenu
   m_TagString: Untagged
@@ -283,6 +284,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &629131896404810282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482860074037368447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d973e66a6a9d1a447bb0475f95f73881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questsHolder: {fileID: 3566566748420124714}
+  questListingPrefab: {fileID: 6183243979846314443, guid: e84d4a7f24a7a1a4b979699bb8a424f1, type: 3}
 --- !u!1 &566349410987710414
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,7 +3307,7 @@ RectTransform:
   - {fileID: 65099415983911038}
   - {fileID: 2088989887}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

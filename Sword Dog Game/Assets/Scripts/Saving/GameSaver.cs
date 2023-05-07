@@ -106,6 +106,8 @@ public class GameSaver : MonoBehaviour
         public RoomStates roomStates;
         public Buffs.SaveBuffs buffs;
         public ItemDatabase.PackedInventory inventory;
+        public QuestList quests;
+
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);
