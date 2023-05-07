@@ -41,6 +41,7 @@ public class Buffs
     public void Update()
     {
         spored?.Update();
+        moveSpeedBuff?.Update();
     }
 
     [System.Serializable]

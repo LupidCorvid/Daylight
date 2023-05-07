@@ -60,7 +60,7 @@ public class MoveSpeedBuff : Buff
     public override void disableVisuals()
     {
         base.disableVisuals();
-        affectedEntity.removeBufffDisplay(buffID);
+        affectedEntity.removeBuffDisplay(buffID);
     }
 
     public override void UpdateSave(Buffs manager)

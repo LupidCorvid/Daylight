@@ -115,6 +115,8 @@ public class Buff
 
     public virtual void Update()
     {
+        if (!active)
+            return;
         checkForCycleRun();
         checkDuration();
     }
@@ -131,6 +133,7 @@ public class Buff
 
     public virtual void LoadSave(SavedBuff save)
     {
+        //Debug.Log("Affected entity " + affectedEntity);
         intensity = save.intensity;
         duration = save.remainingDuration;
         startTime = Time.time;

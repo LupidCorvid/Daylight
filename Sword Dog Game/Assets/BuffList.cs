@@ -28,4 +28,13 @@ public class BuffList : MonoBehaviour
         Destroy(buffs[id]);
         buffs.Remove(id);
     }
+
+    public void clearBuffIcons()
+    {
+        foreach(KeyValuePair<int, GameObject> pair in buffs)
+        {
+            Destroy(pair.Value);
+        }
+        buffs.Clear();
+    }
 }

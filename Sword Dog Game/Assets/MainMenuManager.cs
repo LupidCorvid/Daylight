@@ -20,6 +20,9 @@ public class MainMenuManager : MonoBehaviour
         lastSave = GetMostRecentSave();
         lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
         CanvasManager.InstantHideHUD();
+
+        BuffList.main?.clearBuffIcons();
+        Buff.totalBuffs = 0;
         //if (SwordFollow.instance?.transform != null)
         //    SwordFollow.instance.transform.position = new Vector3(100, -100);
 

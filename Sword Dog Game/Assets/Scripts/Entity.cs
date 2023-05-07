@@ -38,10 +38,16 @@ public class Entity : MonoBehaviour
     {
         return null;
     }
+
+    public Entity()
+    {
+        buffManager = new Buffs(this);
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
-        buffManager = new Buffs(this);
+        //buffManager = new Buffs(this);
         //#region buffs
         //spored = new SporedDebuff(this);
         //moveSpeedBuff = new MoveSpeedBuff(this);
@@ -79,7 +85,7 @@ public class Entity : MonoBehaviour
         return null;
     }
 
-    public virtual void removeBufffDisplay(int buffID)
+    public virtual void removeBuffDisplay(int buffID)
     {
         
     }
@@ -98,4 +104,10 @@ public class Entity : MonoBehaviour
     {
         return ((enemies & otherEntity.allies) > 0 && otherEntity != this);
     }
+
+    public virtual void OnDestroy()
+    {
+        
+    }
+
 }

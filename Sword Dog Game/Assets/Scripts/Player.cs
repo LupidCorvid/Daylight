@@ -6,18 +6,19 @@ public class Player : Entity
 {
     public PlayerHealth playerHealth;
 
-    Player()
+    Player() : base()
     {
         maxHealth = 8;
         health = 8;
         allies = Team.Player;
         enemies = Team.Enemy;
+        GameSaver.loadedNewData += loadSavedBuffs;
     }
 
     public void Awake()
     {
         //seems like this is added too late
-        GameSaver.loadedNewData += loadSavedBuffs;
+        
     }
 
     public override Inventory getAssociatedInventory()
@@ -40,13 +41,21 @@ public class Player : Entity
         return BuffList.main.instantiateAndAddBuffIcon(buffID, buffObj);
     }
 
-    public override void removeBufffDisplay(int buffID)
+    public override void removeBuffDisplay(int buffID)
     {
         BuffList.main.removeBuffIcon(buffID);
     }
 
+    public override void OnDestroy()
+    {
+        GameSaver.loadedNewData -= loadSavedBuffs;
+    }
+
     public void loadSavedBuffs(GameSaver.SaveData data)
     {
-        buffManager.loadBuffs(data);
+        if (this != null && gameObject != null)
+            buffManager.loadBuffs(data);
+        else
+            GameSaver.loadedNewData -= loadSavedBuffs;
     }
 }
