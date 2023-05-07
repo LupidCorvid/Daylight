@@ -92,7 +92,8 @@ public class Heart : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             yield return new WaitForSeconds(duration / amount / 2);
-            image.sprite = sprites[type + 1];
+            if(type+1 < sprites.Length)
+                image.sprite = sprites[type + 1];
             yield return new WaitForSeconds(duration / amount / 2);
             image.sprite = sprites[type];
         }
