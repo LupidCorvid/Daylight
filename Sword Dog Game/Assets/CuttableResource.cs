@@ -9,7 +9,7 @@ public class CuttableResource : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponentInChildren<SwordFollow>() != null)
+        if(collision.gameObject.GetComponentInChildren<SwordFollow>()?.pmScript?.attacking == true)
         {
             Utilities.main.SpawnLooseItem(ItemDatabase.main.getItemFromId(dropItemId, dropAmount), transform.position, new Vector2(Random.Range(-.5f, .5f), Random.Range(-.25f, .25f)));
             Destroy(gameObject);
