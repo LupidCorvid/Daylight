@@ -22,6 +22,7 @@ public class ItemDatabase : MonoBehaviour
         itemTypes.Clear();
 
         itemTypes.Add(typeof(TeardropAloe));
+        itemTypes.Add(typeof(Bone));
     }
 
     public Item getItemFromId(int id)

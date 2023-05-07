@@ -14,6 +14,7 @@ public class TeardropAloe : Item
         sellValue = 2;
         quantity = 1;
         sprite = "Items.TeardropAloe";
+        stackSize = 10;
     }
 
     public override void OnUse()

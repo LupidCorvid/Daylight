@@ -5,7 +5,6 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static Inventory currInventory = new Inventory();
-    private Inventory lastInventory;
     public GameObject itemListingPrefab;
     public GameObject listingHolder;
     public List<ItemListing> itemListings = new List<ItemListing>();
@@ -77,28 +76,4 @@ public class InventoryManager : MonoBehaviour
         currInventory.itemCountChanged += UpdateItemCount;
         //AddItem(new TeardropAloe());
     }
-
-    //public void Update()
-    //{
-    //    if(lastInventory != currInventory)
-    //    {
-    //        currInventory.itemChanged += UpdateItemDisplay;
-    //        currInventory.itemCountChanged += UpdateItemCount;
-    //        if(lastInventory != null)
-    //        {
-    //            currInventory.itemChanged -= UpdateItemDisplay;
-    //            currInventory.itemCountChanged -= UpdateItemCount;
-    //        }
-    //    }
-    //    lastInventory = currInventory;
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if(currInventory.contents.Count < 3)
-    //    {
-    //        currInventory.AddSlots(1);
-    //    }
-    //}
 }

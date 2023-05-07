@@ -20,6 +20,11 @@ public class Player : Entity
         GameSaver.loadedNewData += loadSavedBuffs;
     }
 
+    public override Inventory getAssociatedInventory()
+    {
+        return InventoryManager.currInventory;
+    }
+
     public override void TakeDamage(int damage)
     {
         playerHealth.TakeDamage(damage);

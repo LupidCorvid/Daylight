@@ -33,6 +33,11 @@ public class Entity : MonoBehaviour
     //#endregion
 
     public Buffs buffManager;
+
+    public virtual Inventory getAssociatedInventory()
+    {
+        return null;
+    }
     // Start is called before the first frame update
     public virtual void Start()
     {

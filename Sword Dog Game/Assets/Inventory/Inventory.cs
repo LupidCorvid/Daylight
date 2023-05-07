@@ -18,6 +18,7 @@ public class Inventory
 
     public void changedItem(ItemSlot slot)
     {
+        //temp fix, might not work on non-player inventories
         if (InventoryManager.currInventory == this)
             InventoryManager.main.UpdateItemDisplay(slot);
         else
@@ -26,7 +27,8 @@ public class Inventory
 
     public void itemQuantityChanged(ItemSlot slot, int amount)
     {
-        if(InventoryManager.currInventory == this)
+        //temp fix, might not work on non-player inventories
+        if (InventoryManager.currInventory == this)
             InventoryManager.main.UpdateItemCount(slot, amount);
         else
             itemCountChanged?.Invoke(slot, amount);
@@ -53,16 +55,25 @@ public class Inventory
     /// <returns>returns amount of item not added</returns>
     public int AddItem(Item item)
     {
+        List<Item> matches = FindAll(item.itemId);
+        while(matches.Count > 0)
+        {
+            for(int i = matches.Count - 1; i >= 0; i--)
+            {
+                matches[i].combineStack(item);
+                if (item.quantity > 0)
+                    matches.RemoveAt(i);
+                else
+                    return 0;
+            }
+        }
+
         foreach(ItemSlot slot in contents)
         {
             if(slot.item == null)
             {
-                slot.item = item;
-                return 0;
-            }
-
-            if(slot.item.itemId == item.itemId)
-            {
+                slot.item = ItemDatabase.main.getItemFromId(item.itemId);
+                slot.item.quantity = 0;
                 slot.item.combineStack(item);
             }
 
@@ -115,5 +126,24 @@ public class Inventory
     public int CountItem(Item item)
     {
         return CountItem(item.itemId);
+    }
+
+    public Item FindItem(int id)
+    {
+        return contents.Find((e) => e.item.itemId == id).item;
+    }
+    public List<Item> FindAll(int id)
+    {
+        List<Item> matches = new List<Item>();
+        
+        foreach(ItemSlot slot in contents)
+        {
+            if(slot?.item?.itemId == id)
+            {
+                matches.Add(slot.item);
+            }
+        }
+
+        return matches;
     }
 }

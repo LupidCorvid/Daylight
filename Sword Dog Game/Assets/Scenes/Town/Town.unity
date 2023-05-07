@@ -220,7 +220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town Medbay
   spawn: FromTown
-  noFall: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
 --- !u!4 &33026566
@@ -1077,6 +1076,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2760605536845670428, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760605536845670428, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760605536845670428, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760605536845670428, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2833611895691887395, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1151,6 +1166,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5614000698960060738, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136656962064593006, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136656962064593006, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136656962064593006, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136656962064593006, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7277294204025221987, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
@@ -2817,7 +2848,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: prologue area
   spawn: From town
-  noFall: 0
 --- !u!61 &1023262327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3931,7 +3961,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Forest 1
   spawn: FromTown
-  noFall: 1
 --- !u!61 &1464030902
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4538,7 +4567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town Dojo
   spawn: FromTown
-  noFall: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 1024801515}
 --- !u!4 &1858836444
