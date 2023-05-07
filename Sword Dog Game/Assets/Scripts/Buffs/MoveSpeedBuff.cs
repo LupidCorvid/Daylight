@@ -63,10 +63,16 @@ public class MoveSpeedBuff : Buff
         affectedEntity.removeBuffDisplay(buffID);
     }
 
+    public override void LoadSave(SavedBuff save)
+    {
+        Inflict(save.remainingDuration, save.intensity);
+    }
+
     public override void UpdateSave(Buffs manager)
     {
         base.UpdateSave(manager);
-        manager.buffsSave.moveSpeed = new MoveSpeedBuffSave(this);
+        if(affectedEntity == PlayerMovement.controller.entityBase)
+            manager.buffsSave.moveSpeed = new MoveSpeedBuffSave(this);
     }
 
     [System.Serializable]

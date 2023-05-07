@@ -138,8 +138,8 @@ public class Buff
         duration = save.remainingDuration;
         startTime = Time.time;
         active = save.active;
-        if(active)
-            enableVisuals();
+        if (active)
+            Inflict();
     }
 
     [System.Serializable]

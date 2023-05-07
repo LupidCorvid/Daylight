@@ -79,6 +79,7 @@ public class GameSaver : MonoBehaviour
             //InventoryManager.currInventory.AddItems(unpackedItems);
             InventoryManager.currInventory = ItemDatabase.main.unpackInventory(data.inventory);
             InventoryManager.main.refreshInventory();
+
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
 
@@ -87,6 +88,7 @@ public class GameSaver : MonoBehaviour
             // TODO this needs to happen upon application start!!!
             data.options.SetValues();
             loadedNewData?.Invoke(data);
+            //PlayerMovement.controller.entityBase.buffManager.loadBuffs(data);
 
             Crossfade.current.StopFade();
 

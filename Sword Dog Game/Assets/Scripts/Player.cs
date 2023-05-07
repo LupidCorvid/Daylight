@@ -12,13 +12,19 @@ public class Player : Entity
         health = 8;
         allies = Team.Player;
         enemies = Team.Enemy;
-        GameSaver.loadedNewData += loadSavedBuffs;
+        //GameSaver.loadedNewData += loadSavedBuffs;
     }
 
     public void Awake()
     {
         //seems like this is added too late
         
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        buffManager.loadBuffs(GameSaver.currData);
     }
 
     public override Inventory getAssociatedInventory()

@@ -81,7 +81,8 @@ public class SporedDebuff : Buff
     public override void UpdateSave(Buffs manager)
     {
         base.UpdateSave(manager);
-        manager.buffsSave.spored = new SporedDebuffSave(this);
+        if (affectedEntity == PlayerMovement.controller.entityBase)
+            manager.buffsSave.spored = new SporedDebuffSave(this);
     }
 
     [System.Serializable]
