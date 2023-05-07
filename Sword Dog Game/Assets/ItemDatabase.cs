@@ -30,6 +30,13 @@ public class ItemDatabase : MonoBehaviour
         return (Item)Activator.CreateInstance(itemTypes[id]);
     }
 
+    public Item getItemFromId(int id, int number)
+    {
+        Item returnItem = (Item)Activator.CreateInstance(itemTypes[id]);
+        returnItem.quantity = number;
+        return returnItem;
+    }
+
     public Item unpackItem(PackedItem item)
     {
         if (item.itemId == -1)

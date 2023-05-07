@@ -56,6 +56,6 @@ public class ItemListing : MonoBehaviour
     public void useItem()
     {
         if (attachedItem != null && attachedItem.quantity > 0)
-            attachedItem.OnUse();
+            attachedItem.OnUse(PlayerMenuManager.main.player);
     }
 }

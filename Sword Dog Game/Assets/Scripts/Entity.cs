@@ -63,6 +63,17 @@ public class Entity : MonoBehaviour
 
     }
 
+    public virtual void heal(int amount)
+    {
+        health += amount;
+
+        if (health <= 0)
+            Die();
+
+        if (health > maxHealth)
+            health = maxHealth;
+    }
+
     public virtual GameObject addBuffDisplay(int buffID, GameObject buffObj)
     {
         return null;

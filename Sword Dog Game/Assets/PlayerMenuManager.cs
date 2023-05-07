@@ -38,6 +38,7 @@ public class PlayerMenuManager : MonoBehaviour
     public CanvasGroup playerMenusGroup;
 
     public static PlayerMenuManager main;
+    public Entity player;
 
     public bool cancelTransition = false;
     public bool skipTransition = false;
@@ -56,6 +57,7 @@ public class PlayerMenuManager : MonoBehaviour
     void Start()
     {
         main = this;
+        player ??= GameObject.FindWithTag("Player").GetComponent<Entity>();
         for(int i = 1; i < menus.Count; i++)
         {
             menus[i].transform.position += Vector3.right * offsetAmount;

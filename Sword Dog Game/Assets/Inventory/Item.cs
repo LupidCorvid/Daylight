@@ -44,7 +44,7 @@ public class Item
         
     }
 
-    public virtual void OnUse()
+    public virtual void OnUse(Entity user)
     {
 
     }

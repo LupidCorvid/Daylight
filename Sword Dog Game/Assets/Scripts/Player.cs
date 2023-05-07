@@ -30,6 +30,11 @@ public class Player : Entity
         playerHealth.TakeDamage(damage);
     }
 
+    public override void heal(int amount)
+    {
+        playerHealth.Heal(amount);
+    }
+
     public override GameObject addBuffDisplay(int buffID, GameObject buffObj)
     {
         return BuffList.main.instantiateAndAddBuffIcon(buffID, buffObj);

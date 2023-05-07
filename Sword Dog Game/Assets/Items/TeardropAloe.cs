@@ -17,9 +17,10 @@ public class TeardropAloe : Item
         stackSize = 10;
     }
 
-    public override void OnUse()
+    public override void OnUse(Entity User)
     {
         quantity--;
-        Debug.Log("Used Aloe!");
+        //Debug.Log("Used Aloe!");
+        User.heal(1);
     }
 }
