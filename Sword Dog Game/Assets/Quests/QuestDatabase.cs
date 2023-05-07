@@ -42,6 +42,7 @@ public partial class QuestDatabase
                 {
                     quest.assigned = true;
                     quest.progress = packedQuest.progress;
+                    quest.completed = packedQuest.completed;
                 }
             }
         }
@@ -84,9 +85,15 @@ public partial class QuestDatabase
         return allQuests.Find((e) => e.questId == id);
     }
 
+    public bool getIfAwaitingCompletion(int id)
+    {
+        Quest foundQuest = findQuest(id);
+        return (foundQuest.progress >= foundQuest.neededProgress && !foundQuest.completed);
+    }
+
     public bool checkIfCompleted(int id)
     {
-        return findQuest(id).progress >= 1;
+        return findQuest(id).completed;
     }
 
     public bool checkIfCompleted(Quest quest)
@@ -110,6 +117,7 @@ public partial class QuestDatabase
         {
             quest.assigned = false;
             quest.progress = 0;
+            quest.completed = false;
         }
     }
 

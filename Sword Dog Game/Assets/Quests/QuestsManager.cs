@@ -38,12 +38,15 @@ public class QuestsManager : MonoBehaviour
 
     public void setQuestProgress(int id, float newProgress)
     {
-        getQuest(id).progress = newProgress;
+        Quest gottenQuest = getQuest(id);
+        gottenQuest.progress = newProgress;
+        if (gottenQuest.progress >= gottenQuest.neededProgress)
+            gottenQuest.complete();
     }
 
     public void setQuestProgress(Quest quest, float newProgress)
     {
-        getQuest(quest).progress = newProgress;
+        setQuestProgress(quest.questId, newProgress);
     }
 
     public bool checkIfCompleted(Quest quest)
