@@ -5,7 +5,32 @@ using UnityEngine;
 [System.Serializable]
 public class ItemSlot
 {
-    public Item item;
+    Item _item;
+    public Item item
+    {
+        get
+        {
+            return _item;
+        }
+        set
+        {
+            itemChanged?.Invoke(this);
+            if(_item != null)
+                _item.amountChanged -= quantityChanged;
+            _item = value;
+            if(_item != null)
+                _item.amountChanged += quantityChanged;
+            itemChanged?.Invoke(this);
+        }
+    }
+
+    public System.Action<ItemSlot> itemChanged;
+    public System.Action<ItemSlot, int> itemAmountChanged;
+
+    public void quantityChanged(int amount)
+    {
+        itemAmountChanged?.Invoke(this, amount);
+    }
 
     public void combineStack(ItemSlot otherItem)
     {

@@ -7,10 +7,23 @@ public class Inventory
 {
     public List<ItemSlot> contents = new List<ItemSlot>();
 
+    public System.Action<ItemSlot> itemChanged;
+    public System.Action<ItemSlot, int> itemCountChanged;
+
     public Inventory(int size = 3)
     {
         AddSlots(size);
         //AddItem(new TeardropAloe());
+    }
+
+    public void changedItem(ItemSlot slot)
+    {
+        itemChanged?.Invoke(slot);
+    }
+
+    public void itemQuantityChanged(ItemSlot slot, int amount)
+    {
+        itemCountChanged?.Invoke(slot, amount);
     }
 
     public void AddSlots(int num = 1)
@@ -18,12 +31,16 @@ public class Inventory
         for (int i = 0; i < num; i++)
         {
             contents.Add(new ItemSlot());
+            contents[i].itemChanged += changedItem;
+            contents[i].itemAmountChanged += itemQuantityChanged;
         }
     }
 
     public void AddFilledSlot(ItemSlot slot)
     {
         contents.Add(slot);
+        contents[^1].itemChanged += changedItem;
+        contents[^1].itemAmountChanged += itemQuantityChanged;
     }
 
 

@@ -19,6 +19,6 @@ public class TeardropAloe : Item
     public override void OnUse()
     {
         quantity--;
-        
+        Debug.Log("Used Aloe!");
     }
 }

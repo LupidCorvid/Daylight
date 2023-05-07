@@ -47,6 +47,15 @@ public class InventoryManager : MonoBehaviour
             itemListings[i].UpdateAttachedItem(currInventory.contents[i].item);
         }
     }
+    public void UpdateItemDisplay(ItemSlot slot)
+    {
+        itemListings[currInventory.contents.FindIndex((e) => (e == slot))].UpdateAttachedItem(slot.item);
+    }
+
+    public void UpdateItemCount(ItemSlot slot, int amount)
+    {
+        itemListings[currInventory.contents.FindIndex((e) => (e == slot))].UpdateCount(amount);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +63,9 @@ public class InventoryManager : MonoBehaviour
         main = this;
         refreshInventory();
         GameSaver.loadedNewData += ((e) => refreshInventory());
+
+        currInventory.itemChanged += UpdateItemDisplay;
+        currInventory.itemCountChanged += UpdateItemCount;
         //AddItem(new TeardropAloe());
     }
 

@@ -12,10 +12,21 @@ public class Item
     public int itemId = -1;
     public string name;
     public string description;
-    public int quantity;
+    public int _quantity;
+    public int quantity
+    {
+        get { return _quantity; }
+        set
+        {
+            amountChanged?.Invoke(value);
+            _quantity = value;
+        }
+    }
     public string sprite;
     public int stackSize;
     public int sellValue;
+
+    public Action<int> amountChanged;
 
     /// <returns>The amount remaining in otherItem</returns>
     public int combineStack(Item otherItem)
