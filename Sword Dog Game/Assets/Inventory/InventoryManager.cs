@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject listingHolder;
     public List<ItemListing> itemListings = new List<ItemListing>();
     public static InventoryManager main;
+    public ItemSelectPrompt itemInfoPopup;
 
     public void refreshInventory()
     {

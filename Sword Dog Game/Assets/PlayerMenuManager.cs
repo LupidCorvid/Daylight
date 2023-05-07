@@ -127,6 +127,7 @@ public class PlayerMenuManager : MonoBehaviour
         playerMenusGroup.interactable = true;
         playerMenusGroup.blocksRaycasts = true;
 
+
         EventSystem.current.SetSelectedGameObject(defaultButton);
         CanvasManager.InstantHideHUD();
     }
@@ -142,6 +143,9 @@ public class PlayerMenuManager : MonoBehaviour
         playerMenusGroup.alpha = 0;
         playerMenusGroup.interactable = false;
         playerMenusGroup.blocksRaycasts = false;
+
+
+        InventoryManager.main.itemInfoPopup.close();
 
         CanvasManager.InstantShowHUD();
     }

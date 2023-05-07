@@ -66,7 +66,15 @@ public class ItemListing : MonoBehaviour
 
     public void useItem()
     {
-        if (attachedItem != null && attachedItem.quantity > 0)
-            attachedItem.OnUse(PlayerMenuManager.main.player);
+        //if (attachedItem != null && attachedItem.quantity > 0)
+        //    attachedItem.OnUse(PlayerMenuManager.main.player);
+        if (attachedItem == null || attachedItem.quantity <= 0)
+        {
+            InventoryManager.main.itemInfoPopup.close();
+            return;
+        }
+        RectTransform rect = GetComponent<RectTransform>();
+        InventoryManager.main.itemInfoPopup.selectItem(attachedItem, transform.position + Vector3.right * rect.sizeDelta.x);
+        InventoryManager.main.itemInfoPopup.fromListing = this;
     }
 }
