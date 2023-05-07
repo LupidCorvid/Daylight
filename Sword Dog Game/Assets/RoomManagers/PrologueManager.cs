@@ -46,8 +46,18 @@ public class PrologueManager : RoomManager
         if (roomState.prologueMonsterKilled)
             Destroy(prologueMonster.gameObject);
         else
-            prologueMonster.killed += (() => roomState.prologueMonsterKilled = true);
+            prologueMonster.killed += savedFriend;
+
+        if (!QuestsManager.main.checkIfAssigned(0))
+            QuestsManager.main.AssignQuest(new GetupQuest());
     }
+
+    public void savedFriend()
+    {
+        roomState.prologueMonsterKilled = true;
+        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
+    }
+    
 
     public void collectSword()
     {

@@ -47,7 +47,7 @@ public partial class QuestDatabase
         }
     }
 
-    public List<SaveableQuest> packQuests()
+    public QuestList packQuests()
     {
         List<SaveableQuest> output = new List<SaveableQuest>();
 
@@ -59,7 +59,7 @@ public partial class QuestDatabase
             }
         }
 
-        return output;
+        return new QuestList(output);
     }
 
     public void AddQuest(int id)
@@ -78,4 +78,39 @@ public partial class QuestDatabase
     {
         AddQuest(quest.questId);
     }
+
+    public Quest findQuest(int id)
+    {
+        return allQuests.Find((e) => e.questId == id);
+    }
+
+    public bool checkIfCompleted(int id)
+    {
+        return findQuest(id).progress >= 1;
+    }
+
+    public bool checkIfCompleted(Quest quest)
+    {
+        return checkIfCompleted(quest.questId);
+    }
+
+    public bool checkIfAssigned(int id)
+    {
+        return findQuest(id).assigned;
+    }
+
+    public bool checkIfAssigned(Quest quest)
+    {
+        return checkIfAssigned(quest.questId);
+    }
+
+    public void ResetAllQuestProgress()
+    {
+        foreach(Quest quest in allQuests)
+        {
+            quest.assigned = false;
+            quest.progress = 0;
+        }
+    }
+
 }

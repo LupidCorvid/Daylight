@@ -17,4 +17,9 @@ public class QuestList
         quests = new List<SaveableQuest>();
     }
 
+    public QuestList(List<SaveableQuest> quests)
+    {
+        this.quests = quests;
+    }
+
 }

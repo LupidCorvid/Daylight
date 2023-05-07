@@ -36,6 +36,8 @@ public class GameSaver : MonoBehaviour
             //SaveData data = new SaveData();
             StartingSave?.Invoke();
             currData.inventory = ItemDatabase.main.packInventory(InventoryManager.currInventory);
+            currData.quests = QuestsManager.main.questsDatabase.packQuests();
+
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             data.SetOptions(AudioManager.instance);
@@ -79,6 +81,7 @@ public class GameSaver : MonoBehaviour
             //InventoryManager.currInventory.AddItems(unpackedItems);
             InventoryManager.currInventory = ItemDatabase.main.unpackInventory(data.inventory);
             InventoryManager.main.refreshInventory();
+            QuestsManager.main.questsDatabase.unpackSavedQuests(currData);
 
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
