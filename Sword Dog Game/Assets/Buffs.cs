@@ -34,6 +34,8 @@ public class Buffs
 
     public void loadBuffs(GameSaver.SaveData data)
     {
+        if (data?.buffs == null)
+            return;
         moveSpeedBuff.LoadSave(data.buffs.moveSpeed);
         spored.LoadSave(data.buffs.spored);
     }

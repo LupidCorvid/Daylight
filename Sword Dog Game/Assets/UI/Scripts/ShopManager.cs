@@ -33,6 +33,8 @@ public class ShopManager : BaseManager
     public Image closeImage;
 
 
+    public TextMeshProUGUI currencyAmount;
+
     public void Awake()
     {
         addNewItem(new ShopItem()
@@ -50,13 +52,14 @@ public class ShopManager : BaseManager
         });
         selectItem(CurrentListings[0]);
         CurrentListings[0].backgroundImage.sprite = selectedImage;
+        currencyAmount.text = "" + InventoryManager.currInventory.CountItem(1);
 
         //purchaseButton.OnSelect += purchaseSelected;
         //purchaseButton.OnDeselect += purchaseDeselected;
 
         //closeButton.OnSelect += closeSelected;
         //closeButton.OnDeselect += closeDeselected;
-        
+
     }
 
 
@@ -161,11 +164,12 @@ public class ShopManager : BaseManager
     public void purchaseButtonClicked()
     {
         purchaseItem(CurrentListings[currentSelectedIndex].item);
+        currencyAmount.text = "" + InventoryManager.currInventory.CountItem(1);
     }
 
     public void CheckIfAffordable()
     {
-        if(CurrentListings[currentSelectedIndex].item.price <= 0)//Get player currency
+        if(CurrentListings[currentSelectedIndex].item.price <= InventoryManager.currInventory.CountItem(1))//Get player currency
         {
             //temp until better method of telling what is selected is found
             purchaseImage.sprite = purchaseSelected;
@@ -178,8 +182,9 @@ public class ShopManager : BaseManager
 
     public void purchaseItem(ShopItem item)
     {
-        if (item.price <= 0)//Get player currency
+        if (item.price <= InventoryManager.currInventory.CountItem(1))//Get player currency
         {
+            InventoryManager.currInventory.RemoveItem(1, item.price);
             item.OnPurchase();
             //Remove cost from player currency count
         }

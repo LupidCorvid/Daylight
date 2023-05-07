@@ -91,12 +91,12 @@ public class Inventory
                 Debug.Log("Couldn't fit " + item.name + " in inventory");
         }
     }
-    /// <returns>Returns the number of items that couldnt be removed/didnt exist</returns>
-    public int RemoveItem(Item item, int count)
+
+    public int RemoveItem(int id, int count)
     {
-        foreach(ItemSlot slot in contents)
+        foreach (ItemSlot slot in contents)
         {
-            if(slot.item.itemId == item.itemId)
+            if (slot.item.itemId == id)
             {
                 count = slot.RemoveAmount(count);
 
@@ -104,7 +104,24 @@ public class Inventory
                     return 0;
             }
         }
-        return 0;
+        return count;
+    }
+
+    /// <returns>Returns the number of items that couldnt be removed/didnt exist</returns>
+    public int RemoveItem(Item item, int count)
+    {
+        //foreach(ItemSlot slot in contents)
+        //{
+        //    if(slot.item.itemId == item.itemId)
+        //    {
+        //        count = slot.RemoveAmount(count);
+
+        //        if (count == 0)
+        //            return 0;
+        //    }
+        //}
+        //return count;
+        return RemoveItem(item.itemId, count);
     }
 
     public int RemoveItem(Item item)
@@ -118,7 +135,7 @@ public class Inventory
         foreach(ItemSlot slot in contents)
         {
             if (slot?.item?.itemId == id)
-                total++;
+                total += slot.item.quantity;
         }
         return total;
     }
