@@ -34,6 +34,8 @@ public class Entity : MonoBehaviour
 
     public Buffs buffManager;
 
+    public Vector2 facingDir;
+
     public virtual Inventory getAssociatedInventory()
     {
         return null;

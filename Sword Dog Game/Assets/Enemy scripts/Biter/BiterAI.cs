@@ -32,6 +32,8 @@ public class BiterAI : BaseAI
 
     public AIStates state;
 
+    bool waitingOnChance = false;
+
     public BiterAI(EnemyBase baseEnemy) : base(baseEnemy)
     {
         state = AIStates.idle;
@@ -71,15 +73,27 @@ public class BiterAI : BaseAI
                 else
                 {
                     SeekMovement();
+
+                    if (Random.Range(0, 1f) <= .15f * Time.deltaTime)
+                        state = AIStates.keepDistance;
                 }
                 break;
             case AIStates.attacking:
                 Attacking();
                 break;
             case AIStates.keepDistance:
-                if(Time.time > lastAttack + attackCooldown)
+                //Facing values aren't implemented yet
+                float facingChanceModifier = Mathf.Lerp(2f, 1f, Vector2.Dot(enemyBase.facingDir, targetEntity.facingDir));
+                float randomChargeChance = Random.Range(0f, 1f) / facingChanceModifier;
+
+                if (randomChargeChance < .90f * Time.deltaTime)
+                    waitingOnChance = false;
+
+                if (Time.time > lastAttack + attackCooldown && !waitingOnChance)
                 {
                     state = AIStates.pursuit;
+                    if(Random.Range(0f, 1f) > .25f)
+                        waitingOnChance = true;
                 }
                 KeepDistanceMovement();
                 break;
@@ -100,6 +114,7 @@ public class BiterAI : BaseAI
             movement.MoveLeft(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
+            enemyBase.facingDir = new Vector2(-1, 0);
         }
         else if (direction.x - stopRange > transform.position.x)
         {
@@ -108,9 +123,23 @@ public class BiterAI : BaseAI
             movement.MoveRight(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(-1, 1, 1);
+            enemyBase.facingDir = new Vector2(1, 0);
         }
         else
+        {
+            if(transform.position.x < direction.x)
+            {
+                anim.transform.localScale = new Vector3(1, 1, 1);
+                enemyBase.facingDir = new Vector2(-1, 0);
+            }
+            else
+            {
+                anim.transform.localScale = new Vector3(-1, 1, 1);
+                enemyBase.facingDir = new Vector2(1, 0);
+            }
+
             movement.NotMoving();
+        }
     }
 
     public void KeepDistanceMovement()
@@ -121,11 +150,24 @@ public class BiterAI : BaseAI
             {
                 Vector2 targetPoint = Vector2.right * (target.position.x + maintainDistance);
                 MoveInDirection(targetPoint);
+
+                if (Mathf.Abs(transform.position.x - targetPoint.x) <= 1.15f)
+                {
+                    anim.transform.localScale = new Vector3(1, 1, 1);
+                    enemyBase.facingDir = new Vector2(-1, 0);
+                }
             }
             else
             {
                 Vector2 targetPoint = Vector2.right * (target.position.x - maintainDistance);
                 MoveInDirection(targetPoint);
+
+                if (Mathf.Abs(transform.position.x - targetPoint.x) <= 1.15f)
+                {
+                    anim.transform.localScale = new Vector3(-1, 1, 1);
+                    enemyBase.facingDir = new Vector2(1, 0);
+                }
+
             }
         }
     }
