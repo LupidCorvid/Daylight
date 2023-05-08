@@ -210,7 +210,8 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeBGM(string musicPath, float duration = 1f)
     {
-        ChangeBGM(FindMusic(musicPath), currentArea, duration);
+        MusicClip music = FindMusic(musicPath);
+        ChangeBGM(music, duration);
     }
 
     public void ChangeBGM(string musicPath, string area, float duration = 1f)

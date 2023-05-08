@@ -15,7 +15,8 @@ public class SwitchMusicOnLoad : MonoBehaviour
         if (newTrack != null && !CutsceneController.inCutscene)
         {
             theAM = FindObjectOfType<AudioManager>();
-            // TODO this in the future theAM.ChangeBGM(newTrack);
+            // TODO this in the future
+            // theAM.ChangeBGM(newTrack);
             theAM.ChangeBGM(newTrack, newArea);
         }
     }

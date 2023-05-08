@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicChangeCutscene : CutsceneData
 {
     public string Music;
+    // TODO deprecate
     public AudioManager.GameArea Area;
     public float FadeDuration = 1f;
     float startTime;
@@ -15,6 +16,9 @@ public class MusicChangeCutscene : CutsceneData
         base.startSegment();
         startTime = Time.time;
         // Automatically crossfades/unpauses
+        
+        // TODO this in the future
+        // AudioManager.instance.ChangeBGM(Music, FadeDuration);
         AudioManager.instance.ChangeBGM(Music, Area, FadeDuration);
     }
 
