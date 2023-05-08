@@ -14,11 +14,13 @@ public class MainMenuManager : MonoBehaviour
     public UnityEngine.UI.Button newGameButton;
 
     public UnityEngine.UI.Button continueButton;
+    public static bool inMainMenu;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        inMainMenu = true;
         lastSave = GetMostRecentSave();
         if (lastSave != "")
         {

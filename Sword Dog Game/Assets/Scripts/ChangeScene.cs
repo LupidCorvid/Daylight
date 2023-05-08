@@ -49,6 +49,7 @@ public class ChangeScene : MonoBehaviour
         crossfade.SetTrigger("start");
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
+        DisableMenuMusic();
         PlayerMovement.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
@@ -67,6 +68,7 @@ public class ChangeScene : MonoBehaviour
         changingScene = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
+        DisableMenuMusic();
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
@@ -87,6 +89,7 @@ public class ChangeScene : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
+        DisableMenuMusic();
         if(PlayerMovement.controller != null)
             PlayerMovement.controller.noFall = true;
         SwordFollow.DisableMovement();
@@ -106,5 +109,19 @@ public class ChangeScene : MonoBehaviour
         if (showHUD)
             CanvasManager.InstantShowHUD();
         ChangeScene.changingScene = false;
+    }
+
+    public static void DisableMenuMusic()
+    {
+        bool wasInMenu = false;
+        if (MainMenuManager.inMainMenu)
+        {
+            wasInMenu = true;
+            MainMenuManager.inMainMenu = false;
+        }
+        if (wasInMenu)
+        {
+            AudioManager.instance.Stop();
+        }
     }
 }
