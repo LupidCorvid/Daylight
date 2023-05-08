@@ -208,8 +208,9 @@ public class AudioManager : MonoBehaviour
         sfxMixer.SetFloat("Volume", actualSFXVolume);
     }
 
-    public void ChangeBGM(string musicPath, float fadeDuration = 1f) {
-        ChangeBGM(FindMusic(musicPath), currentArea, fadeDuration);
+    public void ChangeBGM(string musicPath, float duration = 1f)
+    {
+        ChangeBGM(FindMusic(musicPath), currentArea, duration);
     }
 
     public void ChangeBGM(string musicPath, string area, float duration = 1f)
@@ -252,14 +253,20 @@ public class AudioManager : MonoBehaviour
                 theArea = currentArea;
                 break;
         }
-        ChangeBGM(FindMusic(musicPath), theArea, fadeDuration);
+        ChangeBGM(FindMusic(musicPath), theArea, duration);
     }
 
-    public void ChangeBGM(string musicPath, GameArea area, float duration = 1f) {
-        ChangeBGM(FindMusic(musicPath), area, fadeDuration);
+    public void ChangeBGM(string musicPath, GameArea area, float duration = 1f)
+    {
+        ChangeBGM(FindMusic(musicPath), area, duration);
     }
 
-    public void ChangeBGM(MusicClip music, GameArea newArea, float fadeDuration = 1f)
+    public void ChangeBGM(MusicClip music, float duration = 1f)
+    {
+        ChangeBGM(music, music.area, duration);
+    }
+
+    public void ChangeBGM(MusicClip music, GameArea newArea, float duration = 1f)
     {
         // support cutscenes keeping music area
         if (newArea == GameArea.CURRENT) newArea = currentArea;
@@ -289,7 +296,7 @@ public class AudioManager : MonoBehaviour
             //Fade-out the active play, if it is not silent (eg: first start)
             if (BGM1[activePlayer].volume > 0)
             {
-                fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, 0.0f, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM1[activePlayer], duration, 0.0f, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
             BGM1[1 - activePlayer].Stop();
@@ -307,7 +314,7 @@ public class AudioManager : MonoBehaviour
             BGM2[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM2[activePlayer], fadeDuration, musicVolume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM2[activePlayer], duration, musicVolume, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else
@@ -320,7 +327,7 @@ public class AudioManager : MonoBehaviour
             //Fade-out the active play, if it is not silent (eg: first start)
             if (BGM2[activePlayer].volume > 0)
             {
-                fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, 0.0f, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM2[activePlayer], duration, 0.0f, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
             BGM2[1 - activePlayer].Stop();
@@ -338,7 +345,7 @@ public class AudioManager : MonoBehaviour
             BGM1[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM1[activePlayer], fadeDuration, musicVolume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM1[activePlayer], duration, musicVolume, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else

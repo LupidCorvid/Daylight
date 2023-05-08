@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwitchMusicOnLoad : MonoBehaviour
 {
     public MusicClip newTrack;
+    // TODO deprecate
     public AudioManager.GameArea newArea;
     private AudioManager theAM;
 
@@ -14,6 +15,7 @@ public class SwitchMusicOnLoad : MonoBehaviour
         if (newTrack != null && !CutsceneController.inCutscene)
         {
             theAM = FindObjectOfType<AudioManager>();
+            // TODO this in the future theAM.ChangeBGM(newTrack);
             theAM.ChangeBGM(newTrack, newArea);
         }
     }
