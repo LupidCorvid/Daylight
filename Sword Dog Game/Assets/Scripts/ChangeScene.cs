@@ -113,15 +113,10 @@ public class ChangeScene : MonoBehaviour
 
     public static void DisableMenuMusic()
     {
-        bool wasInMenu = false;
         if (MainMenuManager.inMainMenu)
         {
-            wasInMenu = true;
-            MainMenuManager.inMainMenu = false;
-        }
-        if (wasInMenu)
-        {
             AudioManager.instance.Stop();
+            MainMenuManager.inMainMenu = false;
         }
     }
 }
