@@ -199,11 +199,11 @@ public class AudioManager : MonoBehaviour
         targetSFXVolume = sfxVolume - 2 * Camera.main.orthographicSize;
         if (ChangeScene.changingScene || GameSaver.loading)
         {
-            actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.3f);
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.1f);
         }
         else
         {
-            actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.2f);
+            actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.1f);
         }
         sfxMixer.SetFloat("Volume", actualSFXVolume);
     }
