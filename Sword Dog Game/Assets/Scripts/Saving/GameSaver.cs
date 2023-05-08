@@ -70,6 +70,7 @@ public class GameSaver : MonoBehaviour
             AudioManager.instance.FadeOutCurrent();
             Crossfade.current.StartFade();
             yield return new WaitForSeconds(1f);
+            ChangeScene.DisableMenuMusic();
             Clear();
             SaveData data = JsonUtility.FromJson<SaveData>(dataToLoad);
             player = data.player;
