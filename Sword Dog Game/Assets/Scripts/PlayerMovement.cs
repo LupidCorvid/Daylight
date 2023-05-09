@@ -171,7 +171,9 @@ public class PlayerMovement : MonoBehaviour
         if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene)
         {
             lastLand = Time.time;
-            soundPlayer.PlaySound("Impacts.Landing");
+            if (!noFall)
+                soundPlayer.PlaySound("Impacts.Landing");
+            noFall = false;
         }
     }
 
@@ -434,12 +436,8 @@ public class PlayerMovement : MonoBehaviour
         // fall detection
         if (beenOnLand >= 0.1f && !isJumping && !isGrounded && !isFalling)
         {
-            if (!noFall)
-            {
-                anim.SetTrigger("fall");
-                isFalling = true;
-            }
-            noFall = false;
+            anim.SetTrigger("fall");
+            isFalling = true;
         }
         if (isFalling)
         {
