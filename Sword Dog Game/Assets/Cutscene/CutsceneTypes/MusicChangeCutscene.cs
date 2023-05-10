@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicChangeCutscene : CutsceneData
 {
-    public string Music;
+    public MusicClip Music;
     // TODO deprecate
     public AudioManager.GameArea Area;
     public float FadeDuration = 1f;

@@ -1248,7 +1248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town
   spawn: MedbayExit
-  noFall: 1
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 316612883}
 --- !u!61 &1479494815
@@ -1644,6 +1643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   FadeIn: 0
+  Stall: 1
 --- !u!114 &1878034666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,9 +1736,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: 
-  Area: 2
+  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
+  Area: 4
   FadeDuration: 1
+  Stall: 0
 --- !u!1 &2129134724
 GameObject:
   m_ObjectHideFlags: 0
