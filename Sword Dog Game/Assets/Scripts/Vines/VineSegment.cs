@@ -43,7 +43,8 @@ public class VineSegment : MonoBehaviour
     public void FixedUpdate()
     {
         //Wind direction makes it so that wind rolls in the same direction as things are bending
-        int windDirection = (windStrength * sceneSpeedScalar > 0 ? -1 : 1);
-        rb.velocity += (Vector2.right * Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.deltaTime * windStrength * sceneStrengthScalar)/rb.mass;
+        //int windDirection = (windStrength * sceneSpeedScalar > 0 ? -1 : 1);
+        //rb.velocity += (Vector2.right * Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.deltaTime * windStrength * sceneStrengthScalar)/rb.mass;
+        rb.velocity += (Vector2.right * SwayEffect.getWindEffect(transform.position.x,windSpeed,windVolatility,windStrength)) / rb.mass;
     }
 }

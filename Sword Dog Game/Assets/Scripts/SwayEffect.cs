@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
+using Unity.Mathematics;
+using Unity.Burst;
 
 [Unity.Burst.BurstCompile] //Bursts don't seem to do anything, but leaving them in since they don't seem to hurt
 public class SwayEffect : MonoBehaviour
@@ -112,6 +114,9 @@ public class SwayEffect : MonoBehaviour
 
         meshFilter.sharedMesh.SetVertices(newVertices);
     }
+
+    
+
     public void OnDestroy()
     {
         try
@@ -201,6 +206,18 @@ public class SwayEffect : MonoBehaviour
     }
 
     [Unity.Burst.BurstCompile]
+    public static float getWindEffect(float xPos, float windSpeed, float windVolatility, float windStrength)
+    {
+        //return Mathf.PerlinNoise(Time.time * windSpeed * (windStrength > 0 ? -1 : 1) + xPos * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
+        //THIS IS THE ONE THAT COMPILES, but does not improve performance much
+        //return noise.cnoise(new float2(Time.time * windSpeed * (windStrength > 0 ? -1 : 1) + xPos * windVolatility, 0)) * Time.fixedDeltaTime * windStrength;
+        //Doesn't work, scalars must be read only
+        // return noise.cnoise(new float2(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + xPos) * windVolatility * sceneVolatilityScalar, 0)) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+        //This DOES NOT work with burst compile, but its what works/looks good for now
+        return Mathf.PerlinNoise(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+    }
+
+    [Unity.Burst.BurstCompile]
     private void FixedUpdate()
     {
         //Culling
@@ -214,7 +231,9 @@ public class SwayEffect : MonoBehaviour
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
         //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
-        float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+
+        //float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+        float windEffect = getWindEffect(transform.position.x, windSpeed, windVolatility, windStrength);
         swayVelocity += windEffect;
         swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
         swayPosition += swayVelocity;

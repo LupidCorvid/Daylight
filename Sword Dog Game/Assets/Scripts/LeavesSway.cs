@@ -48,6 +48,8 @@ public class LeavesSway : MonoBehaviour
 
     public float lastEmptyParticleDrop;
 
+    public bool disableLeaves;
+
     public void Start()
     {
         lastShakeDrop = Time.time - 1.5f;
@@ -59,6 +61,13 @@ public class LeavesSway : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         if (Group)
             groupMembers.AddRange(transform.parent.GetComponentsInChildren<LeavesSway>());
+        if (disableLeaves)
+        {
+            ParticleSystem.EmissionModule tester = particleHandler.emission;
+            tester.rateOverTime = 0;
+        }
+            
+
     }
 
     public void Update()
@@ -92,11 +101,12 @@ public class LeavesSway : MonoBehaviour
         float newRotation;
         if (useVelocity)
         {
-            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
+            //float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
+            float swayVelocity = ((SwayEffect.getWindEffect(transform.position.x,swaySpeed,swayVolatility, swayIntensity) * 2) - 1);
             newRotation = lastRotation + swayVelocity * Time.deltaTime;
         }
         else
-            newRotation = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
+            newRotation = ((SwayEffect.getWindEffect(transform.position.x, swaySpeed, swayVolatility, swayIntensity) * 2) - 1);
 
         sprite.transform.rotation = Quaternion.Euler(0, 0, sprite.transform.rotation.eulerAngles.z + (lastRotation - newRotation));
         lastRotation = newRotation;
