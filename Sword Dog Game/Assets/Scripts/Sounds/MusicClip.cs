@@ -12,4 +12,8 @@ public class MusicClip : SoundPlayable
     {
         return clip;
     }
+    public float length()
+    {
+        return clip.length;
+    }
 }

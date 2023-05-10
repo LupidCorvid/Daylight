@@ -37,6 +37,7 @@ public class SwayEffect : MonoBehaviour
     public Dictionary<Rigidbody2D, Vector2> objectsWithVelocity = new Dictionary<Rigidbody2D, Vector2>();
 
     public SoundPlayer soundPlayer;
+    public SoundSet rustleFX;
 
     //Used for culling
     public static Transform player;
@@ -53,7 +54,8 @@ public class SwayEffect : MonoBehaviour
     {
         windSounds = 0;
         player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
-        soundPlayer = GetComponent<SoundPlayer>();
+        if (soundPlayer == null)
+            soundPlayer = GetComponent<SoundPlayer>();
         //GetComponent<MeshRenderer>().material.mainTexture = texture.texture;
         materialBlock = new MaterialPropertyBlock();
         materialBlock.SetTexture("_MainTex", texture.texture);
@@ -229,7 +231,7 @@ public class SwayEffect : MonoBehaviour
                 sway(swayPosition);
         }
 
-        //Needs optimization. Mostly need to save the audio file to this file and not have to find it every call
+        //Needs optimization
         if (Mathf.Abs(windEffect)/Time.fixedDeltaTime * 5/Mathf.Abs(windStrength/2) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
             PlayWindSound(Mathf.Abs(windEffect) / Time.fixedDeltaTime * 0.04f);
 
@@ -241,13 +243,12 @@ public class SwayEffect : MonoBehaviour
     {
         if (soundPlayer == null)
             return;
-
-        AudioClip rustleFX = AudioManager.instance?.FindSound("Ambience.GrassRustle");
+        
         if (rustleFX != null)
         {
             soundPlayer.PlaySound(rustleFX, volume);
             windSounds++;
-            Invoke("EndWindSound", rustleFX.length);
+            Invoke("EndWindSound", rustleFX.length());
             windSoundCooldown = 0.0f;
         }
     }

@@ -10,4 +10,8 @@ public class SoundClip : SoundPlayable
     {
         return clip;
     }
+    public float length()
+    {
+        return clip.length;
+    }
 }

@@ -110,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool attacking = false;
     [SerializeField] private SoundPlayer soundPlayer;
+    [SerializeField] private SoundClip landSound;
     public Ground.Type currentGround;
 
     private float realVelocity;
@@ -172,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastLand = Time.time;
             if (!noFall)
-                soundPlayer.PlaySound("Impacts.Landing");
+                soundPlayer.PlaySound(landSound);
             noFall = false;
         }
     }

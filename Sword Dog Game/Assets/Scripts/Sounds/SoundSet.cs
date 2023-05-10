@@ -6,9 +6,14 @@ using UnityEngine;
 public class SoundSet : SoundPlayable
 {
     public List<AudioClip> clips;
-
+    private int lastClip;
     public override AudioClip GetClip()
     {
-        return clips[Random.Range(0, clips.Count)];
+        lastClip = Random.Range(0, clips.Count);
+        return clips[lastClip];
+    }
+    public float length()
+    {
+        return clips[lastClip].length;
     }
 }
