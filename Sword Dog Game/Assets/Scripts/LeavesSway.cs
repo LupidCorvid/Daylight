@@ -83,7 +83,7 @@ public class LeavesSway : MonoBehaviour
     }
 
     ///Maybe add triggers so that it knows when something is falling through the leaves, and spawns leaves around them at their speed as they fall (so that they look like they broke through the canopy)
-
+    [Unity.Burst.BurstCompile]
     public void updateRotations()
     {
         if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25)
@@ -104,7 +104,7 @@ public class LeavesSway : MonoBehaviour
 
     public void checkSpawnParticles()
     {
-        if ((transform.position - lastPosition).magnitude > leavesDropSensitivity * Time.deltaTime && lastShakeDrop + ShakenDropCooldown <= Time.time)
+        if (lastShakeDrop + ShakenDropCooldown <= Time.time && (transform.position - lastPosition).magnitude > leavesDropSensitivity * Time.deltaTime)
         {
             //particleHandler.Emit(Mathf.Clamp((int)(Random.Range(15, 30) * (transform.position - lastPosition).magnitude), 1, 30));
             ParticleSystem.EmitParams velocitySetter = new ParticleSystem.EmitParams();

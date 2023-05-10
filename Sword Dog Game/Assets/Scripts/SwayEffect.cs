@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
 
+[Unity.Burst.BurstCompile] //Bursts don't seem to do anything, but leaving them in since they don't seem to hurt
 public class SwayEffect : MonoBehaviour
 {
     public Sprite texture;
@@ -81,6 +82,7 @@ public class SwayEffect : MonoBehaviour
         GetComponent<MeshRenderer>().SetPropertyBlock(materialBlock);
     }
 
+    [Unity.Burst.BurstCompile]
     public void sway(float intensity)
     {
         NativeArray<Vector3> vertices = new NativeArray<Vector3>(originalSnapshot[0].vertexCount, Allocator.Temp);
@@ -93,6 +95,8 @@ public class SwayEffect : MonoBehaviour
         }
         meshFilter.sharedMesh.SetVertices(newVertices);
     }
+
+    [Unity.Burst.BurstCompile]
     public void swayRotate(float intensity)
     {
         NativeArray<Vector3> vertices = new NativeArray<Vector3>(originalSnapshot[0].vertexCount, Allocator.Temp);
@@ -196,6 +200,7 @@ public class SwayEffect : MonoBehaviour
         }
     }
 
+    [Unity.Burst.BurstCompile]
     private void FixedUpdate()
     {
         //Culling
@@ -244,11 +249,6 @@ public class SwayEffect : MonoBehaviour
         //    windSoundCooldown += Time.fixedDeltaTime;
     }
 
-    public void applyWindForce()
-    {
-
-    }
-    
     private void PlayWindSound(float volume)
     {
         if (soundPlayer == null)
