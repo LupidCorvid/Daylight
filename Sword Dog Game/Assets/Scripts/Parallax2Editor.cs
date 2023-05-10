@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-#if UNITY_EDITOR
+//Disabled for now
+#if false //Replace with UNITY_EDITOR to get it back
 using UnityEditor;
 [CustomEditor(typeof(Parallax2))]
 

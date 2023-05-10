@@ -205,7 +205,7 @@ public class SwayEffect : MonoBehaviour
         }
     }
 
-    [Unity.Burst.BurstCompile]
+    //[Unity.Burst.BurstCompile]
     public static float getWindEffect(float xPos, float windSpeed, float windVolatility, float windStrength)
     {
         //return Mathf.PerlinNoise(Time.time * windSpeed * (windStrength > 0 ? -1 : 1) + xPos * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
