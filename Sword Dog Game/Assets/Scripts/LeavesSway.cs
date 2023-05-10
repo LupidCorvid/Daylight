@@ -86,6 +86,9 @@ public class LeavesSway : MonoBehaviour
 
     public void updateRotations()
     {
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25)
+            return;
+
         float newRotation;
         if (useVelocity)
         {

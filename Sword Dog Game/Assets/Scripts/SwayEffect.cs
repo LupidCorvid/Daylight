@@ -196,8 +196,11 @@ public class SwayEffect : MonoBehaviour
     private void FixedUpdate()
     {
         //Culling
-        player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
-        if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
+        //player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
+        //if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
+        //    return;
+        //New culling
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25)
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending
@@ -226,6 +229,7 @@ public class SwayEffect : MonoBehaviour
                 sway(swayPosition);
         }
 
+        //Needs optimization. Mostly need to save the audio file to this file and not have to find it every call
         if (Mathf.Abs(windEffect)/Time.fixedDeltaTime * 5/Mathf.Abs(windStrength/2) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
             PlayWindSound(Mathf.Abs(windEffect) / Time.fixedDeltaTime * 0.04f);
 
