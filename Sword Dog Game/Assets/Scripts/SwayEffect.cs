@@ -45,7 +45,8 @@ public class SwayEffect : MonoBehaviour
     //Used for sound capping
     public static int windSounds = 0;
     public static int windSoundCap = 400;
-    public static float windSoundCooldownMax = 0.1f, windSoundCooldown = windSoundCooldownMax;
+    public float lastWindTime = 0;
+    public static float windSoundCooldown = .1f;
 
     public MaterialPropertyBlock materialBlock;
 
@@ -202,12 +203,11 @@ public class SwayEffect : MonoBehaviour
         //if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
         //    return;
         //New culling
-        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25)
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize/6)
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
-        float lastVelocity = swayVelocity;
         //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
         float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
         swayVelocity += windEffect;
@@ -232,11 +232,21 @@ public class SwayEffect : MonoBehaviour
         }
 
         //Needs optimization
-        if (Mathf.Abs(windEffect)/Time.fixedDeltaTime * 5/Mathf.Abs(windStrength/2) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
-            PlayWindSound(Mathf.Abs(windEffect) / Time.fixedDeltaTime * 0.04f);
+        //if (windEffect/Time.fixedDeltaTime * 10/Mathf.Abs(windStrength) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
+        //    PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+        if (Mathf.Abs(windEffect) / Time.fixedDeltaTime > 1.5f && windSoundCooldown + lastWindTime <= Time.time && windSounds < windSoundCap)
+        {
+            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+            lastWindTime = Time.time;
+        }
 
-        if (windSoundCooldown < windSoundCooldownMax)
-            windSoundCooldown += Time.fixedDeltaTime;
+        //if (windSoundCooldown < windSoundCooldownMax)
+        //    windSoundCooldown += Time.fixedDeltaTime;
+    }
+
+    public void applyWindForce()
+    {
+
     }
     
     private void PlayWindSound(float volume)
