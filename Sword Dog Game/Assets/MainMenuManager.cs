@@ -48,6 +48,8 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerMovement.instance != null)
             Destroy(PlayerMovement.instance);
         PauseScreen.canPause = false;
+
+        Cursor.visible = true;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
 
@@ -112,6 +114,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnDestroy()
     {
         PauseScreen.canPause = true;
+        Cursor.visible = false;
     }
 
 }

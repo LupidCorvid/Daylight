@@ -130,6 +130,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(defaultButton);
         CanvasManager.InstantHideHUD();
+        Cursor.visible = true;
     }
 
     public void closeMenu()
@@ -148,6 +149,7 @@ public class PlayerMenuManager : MonoBehaviour
         InventoryManager.main.itemInfoPopup.close();
 
         CanvasManager.InstantShowHUD();
+        Cursor.visible = false;
     }
 
     //Items slide in to the right from the left;

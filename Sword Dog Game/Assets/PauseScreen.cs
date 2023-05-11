@@ -87,6 +87,8 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.alpha = 1;
         pauseContainerGroup.blocksRaycasts = true;
         pauseContainerGroup.interactable = true;
+
+        Cursor.visible = true;
     }
 
     public void unPause()
@@ -106,6 +108,7 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.alpha = 0;
         pauseContainerGroup.blocksRaycasts = false;
         pauseContainerGroup.interactable = false;
+        Cursor.visible = false;
     }
 
     public void PromptQuit()
