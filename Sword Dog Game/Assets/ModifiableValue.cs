@@ -7,17 +7,21 @@ public class ModifiableValue
 {
     public float baseValue = 1;
 
-    public float multiplier = 1;
+    //Only add or subtract to this
+    public float baseMultiplier = 1;
 
     public float additive = 0;
 
     public float additiveBase = 0;
 
+    //Only multiply or divide this
+    public float multiplier = 1;
+
     public float finalValue
     {
         get
         {
-            return (baseValue + additiveBase) * multiplier + additive;
+            return (baseValue + additiveBase) * baseMultiplier * multiplier + additive;
         }
     }
 
@@ -45,9 +49,10 @@ public class ModifiableValue
 
     public void resetModifiers()
     {
-        multiplier = 1;
+        baseMultiplier = 1;
         additive = 0;
         additiveBase = 0;
+        multiplier = 1;
     }
 
 }

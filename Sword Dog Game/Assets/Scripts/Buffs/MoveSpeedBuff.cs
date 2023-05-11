@@ -24,11 +24,11 @@ public class MoveSpeedBuff : Buff
         if (strength > intensity)
         {
             if (active)
-                affectedEntity.moveSpeed.multiplier -= strength;
+                affectedEntity.moveSpeed.baseMultiplier -= strength;
             intensity = strength;
-            affectedEntity.moveSpeed.multiplier += intensity;
+            affectedEntity.moveSpeed.baseMultiplier += intensity;
         } else if (!active)
-            affectedEntity.moveSpeed.multiplier += intensity;
+            affectedEntity.moveSpeed.baseMultiplier += intensity;
 
         base.Inflict();
     }
@@ -48,7 +48,7 @@ public class MoveSpeedBuff : Buff
     public override void Cure()
     {
         base.Cure();
-        affectedEntity.moveSpeed.multiplier -= intensity;
+        affectedEntity.moveSpeed.baseMultiplier -= intensity;
     }
 
     public override void enableVisuals()

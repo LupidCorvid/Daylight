@@ -34,6 +34,8 @@ public class BiterAI : BaseAI
 
     bool waitingOnChance = false;
 
+    bool turning = false;
+
     public BiterAI(EnemyBase baseEnemy) : base(baseEnemy)
     {
         state = AIStates.idle;
@@ -42,6 +44,8 @@ public class BiterAI : BaseAI
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(turning)
+            TurnAnim();
 
         if(target == null)
         {
@@ -105,7 +109,24 @@ public class BiterAI : BaseAI
         MoveInDirection(target.transform.position);
     }
 
-    public void MoveInDirection(Vector2 direction)
+    public void TurnAnim()
+    {
+        if(!turning)
+        {
+            turning = true;
+            enemyBase.moveSpeed.multiplier /= 2;
+            anim.Play("mon1_turn");
+        }
+        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon1_turn"))
+        {
+            turning = false;
+            //anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
+            enemyBase.facingDir = Vector2.right * (anim.transform.localScale.z > 0 ? -1 : 1);
+            enemyBase.moveSpeed.multiplier *= 2;
+        }
+    }
+
+    public void MoveInDirection(Vector2 direction , bool controlDirection = true)
     {
         if (direction.x + stopRange < transform.position.x)
         {
@@ -113,8 +134,10 @@ public class BiterAI : BaseAI
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
             movement.MoveLeft(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
-            anim.transform.localScale = new Vector3(1, 1, 1);
-            enemyBase.facingDir = new Vector2(-1, 0);
+            if (anim.transform.localScale.x < 0 && !turning && controlDirection)
+                TurnAnim();
+            //anim.transform.localScale = new Vector3(1, 1, 1);
+            //enemyBase.facingDir = new Vector2(-1, 0);
         }
         else if (direction.x - stopRange > transform.position.x)
         {
@@ -122,20 +145,29 @@ public class BiterAI : BaseAI
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
             movement.MoveRight(speed);
             anim.SetFloat("MoveSpeed", Mathf.Clamp(speed / 3f, .75f, 9999999f));
-            anim.transform.localScale = new Vector3(-1, 1, 1);
-            enemyBase.facingDir = new Vector2(1, 0);
+            if (anim.transform.localScale.x > 0 && !turning && controlDirection)
+                TurnAnim();
+            //anim.transform.localScale = new Vector3(-1, 1, 1);
+            //enemyBase.facingDir = new Vector2(1, 0);
         }
         else
         {
-            if(transform.position.x < direction.x)
+            if (controlDirection)
             {
-                anim.transform.localScale = new Vector3(1, 1, 1);
-                enemyBase.facingDir = new Vector2(-1, 0);
-            }
-            else
-            {
-                anim.transform.localScale = new Vector3(-1, 1, 1);
-                enemyBase.facingDir = new Vector2(1, 0);
+                if (transform.position.x < direction.x)
+                {
+                    if (anim.transform.localScale.x < 0 && !turning)
+                        TurnAnim();
+                    //anim.transform.localScale = new Vector3(1, 1, 1);
+                    //enemyBase.facingDir = new Vector2(-1, 0);
+                }
+                else
+                {
+                    //anim.transform.localScale = new Vector3(-1, 1, 1);
+                    //enemyBase.facingDir = new Vector2(1, 0);
+                    if (anim.transform.localScale.x > 0 && !turning)
+                        TurnAnim();
+                }
             }
 
             movement.NotMoving();
@@ -149,23 +181,27 @@ public class BiterAI : BaseAI
             if(transform.position.x > target.transform.position.x)
             {
                 Vector2 targetPoint = Vector2.right * (target.position.x + maintainDistance);
-                MoveInDirection(targetPoint);
+                MoveInDirection(targetPoint, false);
 
                 if (Mathf.Abs(transform.position.x - targetPoint.x) <= 1.15f)
                 {
-                    anim.transform.localScale = new Vector3(1, 1, 1);
-                    enemyBase.facingDir = new Vector2(-1, 0);
+                    //anim.transform.localScale = new Vector3(1, 1, 1);
+                    //enemyBase.facingDir = new Vector2(-1, 0);
+                    if (anim.transform.localScale.x < 0 && !turning)
+                        TurnAnim();
                 }
             }
             else
             {
                 Vector2 targetPoint = Vector2.right * (target.position.x - maintainDistance);
-                MoveInDirection(targetPoint);
+                MoveInDirection(targetPoint, false);
 
                 if (Mathf.Abs(transform.position.x - targetPoint.x) <= 1.15f)
                 {
-                    anim.transform.localScale = new Vector3(-1, 1, 1);
-                    enemyBase.facingDir = new Vector2(1, 0);
+                    //anim.transform.localScale = new Vector3(-1, 1, 1);
+                    //enemyBase.facingDir = new Vector2(1, 0);
+                    if (anim.transform.localScale.x > 0 && !turning)
+                        TurnAnim();
                 }
 
             }
@@ -181,10 +217,10 @@ public class BiterAI : BaseAI
         attacking = true;
         //anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetTrigger("Attack");
-        if(target.transform.position.x < transform.position.x)
-            anim.transform.localScale = new Vector3(1, 1, 1);
-        else
-            anim.transform.localScale = new Vector3(-1, 1, 1);
+        //if(target.transform.position.x < transform.position.x)
+        //    anim.transform.localScale = new Vector3(1, 1, 1);
+        //else
+        //    anim.transform.localScale = new Vector3(-1, 1, 1);
         //applyAttackDamage();
     }
 
