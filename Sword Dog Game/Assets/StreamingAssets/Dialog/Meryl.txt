@@ -17,9 +17,13 @@ Revive{
 }
 
 Quest{
-[c]Hey, would you like to accept my quest?[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
+[c]Hey,[w,.05] I was running low on one of my main healing ingredients,[w,.05] teardrop aloe.[w,.05] Could you get 2 for me?[w,.1] I will pay you for your time.[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
+}
+
+QuestFinish{
+[c]Thank you![w,.1] These will be a great help.[w,.5] Here is your payment[CE,AloePayment][wi] [exit]
 }
 
 Accept{
-[c]Thanks for accepting my quest![wi][exit]
+[c][CE,AloeQuestAssign]Thank you![wi][exit]
 }

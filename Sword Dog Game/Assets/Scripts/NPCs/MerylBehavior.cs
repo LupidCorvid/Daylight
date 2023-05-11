@@ -107,6 +107,9 @@ public class MerylBehavior : DialogNPC
             case "heal":
                 healUser();
                 break;
+            case "AloeQuestAssign":
+                QuestsManager.main.AssignQuest(new MerylAloeQuest());
+                break;
         }
     }
     public void healUser()
