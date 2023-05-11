@@ -65,6 +65,7 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+        musicMixer.GetFloat("Volume", out musicVolume);
 
         if (FindObjectsOfType<AudioManager>().Length > 1)
         {
@@ -125,7 +126,7 @@ public class AudioManager : MonoBehaviour
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM1[activePlayer].clip = currentSong.GetClip();
-                BGM1[activePlayer].volume = musicVolume;
+                BGM1[activePlayer].volume = 1.0f;
                 BGM1[activePlayer].time = 0;
                 BGM1[activePlayer].Play();
             }
@@ -139,7 +140,7 @@ public class AudioManager : MonoBehaviour
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM2[activePlayer].clip = currentSong.GetClip();
-                BGM2[activePlayer].volume = musicVolume;
+                BGM2[activePlayer].volume = 1.0f;
                 BGM2[activePlayer].time = 0;
                 BGM2[activePlayer].Play();
             }
@@ -152,21 +153,19 @@ public class AudioManager : MonoBehaviour
         }
 
         // Volume controls (hold down + or -)
-        float vol;
-        musicMixer.GetFloat("Volume", out vol);
+        musicMixer.SetFloat("Volume", musicVolume);
+        musicMixer.GetFloat("Volume", out musicVolume);
 
         if (Input.GetKey("="))
         {
-            if (vol < 0f)
-                vol += 0.1f;
-            musicMixer.SetFloat("Volume", vol);
+            if (musicVolume < 0f)
+                musicVolume += 0.1f;
         }
 
         if (Input.GetKey("-"))
         {
-            if (vol > -80f)
-                vol -= 0.1f;
-            musicMixer.SetFloat("Volume", vol);
+            if (musicVolume > -80f)
+                musicVolume -= 0.1f;
         }
 
         float pitch;
@@ -178,14 +177,14 @@ public class AudioManager : MonoBehaviour
             {
                 BGM1[activePlayer].volume = 0;
                 BGM1[activePlayer].timeSamples = 0;
-                fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, musicVolume, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM1[activePlayer], fadeDuration, 1.0f, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
             else
             {
                 BGM2[activePlayer].volume = 0;
                 BGM2[activePlayer].timeSamples = 0;
-                fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, musicVolume, () => { fader[0] = null; });
+                fader[0] = FadeAudioSource(BGM2[activePlayer], fadeDuration, 1.0f, () => { fader[0] = null; });
                 StartCoroutine(fader[0]);
             }
         }
@@ -315,12 +314,12 @@ public class AudioManager : MonoBehaviour
             BGM2[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM2[activePlayer], duration, musicVolume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM2[activePlayer], duration, 1.0f, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else
             {
-                BGM2[activePlayer].volume = musicVolume;
+                BGM2[activePlayer].volume = 1.0f;
             }
         }
         else
@@ -346,12 +345,12 @@ public class AudioManager : MonoBehaviour
             BGM1[activePlayer].Play();
             if (firstSongPlayed)
             {
-                fader[1] = FadeAudioSource(BGM1[activePlayer], duration, musicVolume, () => { fader[1] = null; });
+                fader[1] = FadeAudioSource(BGM1[activePlayer], duration, 1.0f, () => { fader[1] = null; });
                 StartCoroutine(fader[1]);
             }
             else
             {
-                BGM1[activePlayer].volume = musicVolume;
+                BGM1[activePlayer].volume = 1.0f;
             }
         }
 
@@ -425,12 +424,12 @@ public class AudioManager : MonoBehaviour
     {
         if (firstSet)
         {
-            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, musicVolume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM1[activePlayer], duration, 1.0f, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
         else
         {
-            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, musicVolume, () => { fader[0] = null; });
+            fader[0] = FadeAudioSource(BGM2[activePlayer], duration, 1.0f, () => { fader[0] = null; });
             StartCoroutine(fader[0]);
         }
     }
