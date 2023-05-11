@@ -112,9 +112,9 @@ public class FlyingAI : BaseAI
                 if (transform.rotation.eulerAngles.z > 0)
                 {
                     if (facingLeft)
-                        rotateToDirection(Vector2.left);
+                        rotateToDirection(Vector2.left, moveSpeed);
                     else
-                        rotateToDirection(Vector2.right);
+                        rotateToDirection(Vector2.right, moveSpeed);
                     break;
                 }
                 if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time && Vector2.Distance(transform.position, targetPosition) < attackDistance)
@@ -187,7 +187,8 @@ public class FlyingAI : BaseAI
                     state = states.lungeFlee;
                     DamageBox(transform.position + transform.rotation * new Vector2(facingLeft ? -1 : 1, 0), Vector2.one);
                 }
-                rotateToDirection((Vector2)transform.position - windUpTarget);
+                //rotateToDirection((Vector2)transform.position - windUpTarget);
+                rotateToDirection(rb.velocity);
                 break;
 
             case states.lungeFlee:
@@ -235,11 +236,11 @@ public class FlyingAI : BaseAI
         direction.y *= .5f;
         if(facingLeft)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(Vector2.Angle(Vector2.left, direction), -75, 90)), 1 * speedScalar);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(Vector2.Angle(Vector2.left, direction) * speedScalar, -75, 90)), 180 * Time.deltaTime);
         }
         else
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(-Vector2.Angle(Vector2.left, -direction), -90, 75)), 1 * speedScalar);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, Mathf.Clamp(-Vector2.Angle(Vector2.left, -direction) * speedScalar, -90, 75)), 180 * Time.deltaTime);
         }
     }
 
