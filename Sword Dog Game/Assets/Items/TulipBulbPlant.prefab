@@ -39,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7973501914056177778
 MeshFilter:
@@ -150,16 +150,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 21300000, guid: b7df0b15d38f984418d93b46433c9227, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  swayPosition: 1
-  swayVelocity: 0
-  tension: 0.9
+  swayPosition: 0.08667314
+  swayVelocity: 0.00085293764
+  tension: 0.15
   dampening: 0.3
   windStrength: 3
   windSpeed: 2
   windVolatility: 0.2
-  limit: 1
+  limit: 2
   rotate: 0
   soundPlayer: {fileID: 0}
+  rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!114 &7603473942021640752
 MonoBehaviour:
   m_ObjectHideFlags: 0
