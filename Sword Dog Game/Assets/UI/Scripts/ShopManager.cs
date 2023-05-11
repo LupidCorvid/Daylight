@@ -37,19 +37,20 @@ public class ShopManager : BaseManager
 
     public void Awake()
     {
-        addNewItem(new ShopItem()
-        {
-            name = "Tester1",
-            description = "This is a tester",
-            price = 0
+        //addNewItem(new ShopItem()
+        //{
+        //    name = "Tester1",
+        //    description = "This is a tester",
+        //    price = 0
 
-        });
-        addNewItem(new ShopItem()
-        {
-            name = "Tester2",
-            description = "This is a tester (again)",
-            price = 4
-        });
+        //});
+        //addNewItem(new ShopItem()
+        //{
+        //    name = "Tester2",
+        //    description = "This is a tester (again)",
+        //    price = 4
+        //});
+        addNewItem(new SpiderTulipBulbShopListing());
         selectItem(CurrentListings[0]);
         CurrentListings[0].backgroundImage.sprite = selectedImage;
         currencyAmount.text = "" + InventoryManager.currInventory.CountItem(1);
@@ -150,6 +151,7 @@ public class ShopManager : BaseManager
 
     public void closedButtonClicked()
     {
+        base.CloseMenu();
         manager.closeMenu();
     }
 
@@ -185,7 +187,7 @@ public class ShopManager : BaseManager
         if (item.price <= InventoryManager.currInventory.CountItem(1))//Get player currency
         {
             InventoryManager.currInventory.RemoveItem(1, item.price);
-            item.OnPurchase();
+            item.OnPurchase(PlayerMenuManager.main.player);
             //Remove cost from player currency count
         }
         CheckIfAffordable();

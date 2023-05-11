@@ -71,10 +71,13 @@ public class PlayerMenuManager : MonoBehaviour
 
         if (main == null)
             main = this;
+        //Problem is that slideIn != menus[currentMenu]
+        if (!transitioning &&  slideIn != null && (slideIn != menus[currentMenu] || slideIn == slideOut))
+            Debug.Log("EERRORRR" + (slideIn == slideOut) + " <- in == out, curr != in ->" + (slideIn != menus[currentMenu]));
 
         if(Input.GetKeyDown(KeyCode.U))
         {
-            if (!PauseScreen.paused && PauseScreen.canPause)
+            if (!PauseScreen.paused && PauseScreen.canPause && !MenuManager.inMenu)
             {
                 if (open)
                 {

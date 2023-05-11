@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
         menu = addedMenu.GetComponent<BaseManager>();
         inMenu = true;
         menu.manager = this;
+        Cursor.visible = true;
     }
 
     //Handle controller inputs and other general menu interactions here?

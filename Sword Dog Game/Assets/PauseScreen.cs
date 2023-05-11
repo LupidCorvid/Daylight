@@ -43,6 +43,12 @@ public class PauseScreen : MonoBehaviour
                 return;
             }
 
+            if(MenuManager.inMenu)
+            {
+                MenuManager.main.closeMenu();
+                return;
+            }
+
             if (ChangeScene.changingScene || GameSaver.loading)
             {
                 return;

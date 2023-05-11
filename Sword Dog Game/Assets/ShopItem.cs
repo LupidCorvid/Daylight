@@ -9,7 +9,7 @@ public class ShopItem
     public Sprite image;
     public int price;
 
-    public void OnPurchase()
+    public virtual void OnPurchase(Entity purchaser)
     {
 
     }
