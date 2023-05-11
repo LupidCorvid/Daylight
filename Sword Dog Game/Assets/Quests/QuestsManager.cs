@@ -92,7 +92,7 @@ public class QuestsManager : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log(questsDatabase.allQuests.Count);
+        //Debug.Log(questsDatabase.allQuests.Count);
     }
 
     public bool checkIfAssigned(int id)

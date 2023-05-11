@@ -55,7 +55,7 @@ public class EnemyBase : Entity
     {
         killed?.Invoke();
         Destroy(gameObject);
-        Utilities.main.SpawnLooseItem(new Bone(4), transform.position, new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(.5f, 2f)));
+        Utilities.main.SpawnLooseItem(new Bone(killValue), transform.position, new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(1f, 3f)));
 
     }
 
