@@ -37,8 +37,11 @@ public class LooseItem : MonoBehaviour
         {
             hitEntity?.getAssociatedInventory().AddItem(item);
             if (item.quantity <= 0)
+            {
                 //Destroy(transform.parent.gameObject);
                 collected = true;
+                //Disable rb?
+            }
         }
     }
 }

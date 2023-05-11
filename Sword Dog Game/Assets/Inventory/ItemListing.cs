@@ -28,9 +28,9 @@ public class ItemListing : MonoBehaviour
         }
         else
         {
-            itemSprite.color = Color.white;
-            nameBacking.color = Color.white;
-            NameText.text = newItem.name;
+            //itemSprite.color = Color.white;
+            //nameBacking.color = Color.white;
+            //NameText.text = newItem.name;
         }
 
         if(newItem?.sprite != "")
@@ -49,7 +49,12 @@ public class ItemListing : MonoBehaviour
             NameText.text = "";
         }
         else
+        {
             itemSprite.color = Color.white;
+            nameBacking.color = Color.white;
+            NameText.text = attachedItem.name;
+        }
+
         if (count <= 1)
         {
             countDisplay.text = "";
