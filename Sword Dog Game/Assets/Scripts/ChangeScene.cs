@@ -69,6 +69,7 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
+        PlayerMovement.controller.noFall = true;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
