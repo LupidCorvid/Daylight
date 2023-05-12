@@ -63,24 +63,30 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewSave()
     {
-        //SceneHelper.LoadScene("prologue area");
-        GameSaver.currData = new GameSaver.SaveData();
-        //InventoryManager.currInventory.contents = new List<ItemSlot>(3);
-        InventoryManager.currInventory = new Inventory();
-        QuestsManager.main.questsDatabase.ResetAllQuestProgress();
+        if (!ChangeScene.changingScene && !GameSaver.loading && Crossfade.over)
+        {
+            //SceneHelper.LoadScene("prologue area");
+            GameSaver.currData = new GameSaver.SaveData();
+            //InventoryManager.currInventory.contents = new List<ItemSlot>(3);
+            InventoryManager.currInventory = new Inventory();
+            QuestsManager.main.questsDatabase.ResetAllQuestProgress();
 
-        InventoryManager.main.refreshInventory();
-        AudioManager.instance.FadeOutCurrent();
-        ChangeScene.LoadScene("prologue area", "", false);
-        //CanvasManager.ShowHUD();
-        
+            InventoryManager.main.refreshInventory();
+            AudioManager.instance.FadeOutCurrent();
+            ChangeScene.LoadScene("prologue area", "", false);
+            //CanvasManager.ShowHUD();
+        }
     }
 
     public void LoadMostRecentSave()
     {
-        //GameSaver.main.LoadGame();
-        AudioManager.instance.FadeOutCurrent();
-        GameSaver.main.LoadGame();
+        if (!ChangeScene.changingScene && !GameSaver.loading && Crossfade.over)
+        {
+            //GameSaver.main.LoadGame();
+            AudioManager.instance.FadeOutCurrent();
+            GameSaver.main.LoadGame();
+        }
+        
     }
 
     public void Quit()
