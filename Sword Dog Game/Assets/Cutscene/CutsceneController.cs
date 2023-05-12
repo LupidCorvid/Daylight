@@ -21,12 +21,12 @@ public class CutsceneController : MonoBehaviour
     public bool stopInteractions;
     public bool stopMovement;
     public bool hideUI;
-    public bool stopMusic;
+    public bool controlMusic;
 
     public static bool cutsceneStopInteractions = false;
     public static bool cutsceneStopMovement = false;
     public static bool cutsceneHideUI = false;
-    public static bool cutsceneStopMusic = false;
+    public static bool cutsceneControlMusic = false;
 
     public static Action StopAllCutscenes;
 
@@ -163,8 +163,8 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopMovement = true;
         if (hideUI)
             cutsceneHideUI = true;
-        if (stopMusic)
-            cutsceneStopMusic = true;
+        if (controlMusic)
+            cutsceneControlMusic = true;
         StopAllCutscenes += FinishCutscene;
     }
 
@@ -182,8 +182,8 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopMovement = false;
         if (playingThisCutscene && cutsceneHideUI && hideUI)
             cutsceneHideUI = false;
-        if (playingThisCutscene && cutsceneStopMusic && stopMusic)
-            cutsceneStopMusic = false;
+        if (playingThisCutscene && cutsceneControlMusic && controlMusic)
+            cutsceneControlMusic = false;
 
         inCutscene = false;
         playingThisCutscene = false;
