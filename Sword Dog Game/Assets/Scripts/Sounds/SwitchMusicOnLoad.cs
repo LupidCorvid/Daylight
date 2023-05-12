@@ -18,7 +18,7 @@ public class SwitchMusicOnLoad : MonoBehaviour
             // TODO this in the future
             // theAM.ChangeBGM(newTrack);
             theAM.ChangeBGM(newTrack, newArea);
-            if (CutsceneController.inCutscene && CutsceneController.cutsceneStopMusic)
+            if (CutsceneController.inCutscene && CutsceneController.cutsceneControlMusic)
             {
                 theAM.PauseCurrent();
             }
