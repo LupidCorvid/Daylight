@@ -1600,7 +1600,8 @@ GameObject:
   - component: {fileID: 1878034666}
   - component: {fileID: 1878034669}
   - component: {fileID: 1878034665}
-  - component: {fileID: 1878034673}
+  - component: {fileID: 1878034671}
+  - component: {fileID: 1878034670}
   - component: {fileID: 1878034664}
   m_Layer: 0
   m_Name: RevivedCutscene
@@ -1661,7 +1662,7 @@ MonoBehaviour:
   - objectToMove: {fileID: 0}
     getFromName: 1
     transformName: Player(Clone)
-    newLocation: {x: 7, y: -1, z: 0}
+    newLocation: {x: 7, y: -1.336309, z: 0}
     newScale: {x: -1, y: 1, z: 1}
     newRotation: 0
   - objectToMove: {fileID: 324237321}
@@ -1686,7 +1687,8 @@ MonoBehaviour:
   - {fileID: 1878034666}
   - {fileID: 1878034669}
   - {fileID: 1878034665}
-  - {fileID: 1878034673}
+  - {fileID: 1878034671}
+  - {fileID: 1878034670}
   - {fileID: 1878034664}
   cutsceneNumber: 0
   cutsceneName: Revived
@@ -1723,7 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   waitTime: 1.5
---- !u!114 &1878034673
+--- !u!114 &1878034670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1732,14 +1734,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1878034663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
-  Area: 4
-  FadeDuration: 1
+  FadeIn: 1
+  Duration: 1
   Stall: 0
+--- !u!114 &1878034671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878034663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b671a2e956d18af49aa5c6bc0997db04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Pause: 0
 --- !u!1 &2129134724
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public GameObject miniBubblePrefab;
     public GameObject emotePrefab;
 
-
     public Vector2 miniBubbleOffset = new Vector2(0, 2);
 
     public DialogSource dialogSource;
@@ -84,6 +83,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.resetDialog();
         DialogController.main.openedThisFrame = true;
         DialogController.main.setSource(dialogSource);
+        DialogController.main.setSpeaker(this);
         DialogController.main.openBox();
         DialogController.main.readWhenOpen = true;
         numInteractions++;
@@ -241,7 +241,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void pauseSpeak()
     {
-        if (speaking && !pausedSpeak)
+        if (speaking)
         {
             soundPlayer?.PauseSound(speechLoop);
             pausedSpeak = true;

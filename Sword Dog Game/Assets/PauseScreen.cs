@@ -106,10 +106,17 @@ public class PauseScreen : MonoBehaviour
         {
             source.UnPause();
         }
-        // TODO super sloppy but re-pauses music
+        // TODO super sloppy but re-pauses music + dialog speakers
         if (AudioManager.instance.paused)
             AudioManager.instance.PauseCurrent();
-
+        if (DialogController.dialogOpen)
+        {
+            if (DialogController.speaker.pausedSpeak)
+                DialogController.speaker.pauseSpeak();
+            else if (!DialogController.speaker.speaking)
+                DialogController.speaker.stopSpeak();
+        }
+            
         pauseMenuGroup.alpha = 0;
         pauseMenuGroup.blocksRaycasts = false;
         pauseMenuGroup.interactable = false;
