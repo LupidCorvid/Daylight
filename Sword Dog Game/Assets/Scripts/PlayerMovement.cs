@@ -782,22 +782,35 @@ public class PlayerMovement : MonoBehaviour
     void CheckWall()
     {
         wallOnLeft = wallOnRight = false;
-        Vector2 startPosition = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y / 2);
-        startPosition += facingRight ? upperRightCorner : upperLeftCorner;
+        Vector2 startPosition1 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.6f);
+        Vector2 startPosition2 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.8f);
+        startPosition1 += facingRight ? upperRightCorner : upperLeftCorner;
+        startPosition2 += facingRight ? upperRightCorner : upperLeftCorner;
 
-        
         Vector2 direction = facingRight ? Vector2.right : Vector2.left;
         if (isOnSlope)
         {
             direction = Quaternion.Euler(0, 0, slopeSideAngle) * direction;
         }
         
-        RaycastHit2D wallInfo = Physics2D.Raycast(startPosition, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
-        
+        RaycastHit2D wallInfo = Physics2D.Raycast(startPosition1, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
+
         if (wallInfo.point != Vector2.zero)
         {
-            Debug.DrawLine(startPosition, wallInfo.point, Color.blue);
+            Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
             if (wallInfo.distance <= wallCheckDistance) {
+                if (facingRight) wallOnRight = true;
+                else wallOnLeft = true;
+            }
+        }
+
+        wallInfo = Physics2D.Raycast(startPosition2, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
+
+        if (wallInfo.point != Vector2.zero)
+        {
+            Debug.DrawLine(startPosition2, wallInfo.point, Color.blue);
+            if (wallInfo.distance <= wallCheckDistance)
+            {
                 if (facingRight) wallOnRight = true;
                 else wallOnLeft = true;
             }
