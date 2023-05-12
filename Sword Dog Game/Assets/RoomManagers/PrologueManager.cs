@@ -31,9 +31,15 @@ public class PrologueManager : RoomManager
             case "ApproachedRival":
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
                 {
-                    CutsceneController.PlayCutscene("SavedFromMonster");
+                    CutsceneController.PlayCutscene("RivalApproached");
                 }
                 break;
+            //case "MonsterKilled":
+            //    if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+            //    {
+            //        CutsceneController.PlayCutscene("SavedFromMonster");
+            //    }
+            //    break;
         }
     }
 
@@ -62,8 +68,13 @@ public class PrologueManager : RoomManager
     {
         roomState.prologueMonsterKilled = true;
         QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
+
+        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        {
+            CutsceneController.PlayCutscene("SavedFromMonster");
+        }
     }
-    
+
 
     public void collectSword()
     {
