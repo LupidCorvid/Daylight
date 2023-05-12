@@ -823,7 +823,7 @@ public class DialogSource
                 if (input.Length == 3 || input.Length == 4 )
                 {
                     Quest gottenQuest = QuestsManager.main.getQuest(int.Parse(input[1]));
-                    if (gottenQuest.progress > gottenQuest.neededProgress)
+                    if (gottenQuest.progress >= gottenQuest.neededProgress)
                     {
                         dialog = dialog.Insert(position, input[2]);
                     }

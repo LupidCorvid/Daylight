@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4768335168809639864}
   - component: {fileID: 4955960869718271737}
   - component: {fileID: -3957537727405579016}
+  - component: {fileID: 2129554595173579837}
   m_Layer: 0
   m_Name: generalEmote
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4768335168809639864
 SpriteRenderer:
@@ -119,3 +120,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4955960869718271737}
+  lifeTime: 1
+  startTime: 0
+  type: 0
+  followScript: {fileID: 2129554595173579837}
+--- !u!114 &2129554595173579837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940022028847480465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597a88cffc4734d4ea535b253767079b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  copyScale: 1
+  absScale: 1

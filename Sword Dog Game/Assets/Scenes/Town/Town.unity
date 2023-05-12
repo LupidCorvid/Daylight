@@ -1415,6 +1415,7 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
@@ -1426,6 +1427,8 @@ MonoBehaviour:
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
   killValue: 5
+  soundPlayer: {fileID: 0}
+  crySound: {fileID: 0}
 --- !u!58 &434909038
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1706,6 +1709,7 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
@@ -1717,6 +1721,8 @@ MonoBehaviour:
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
   killValue: 5
+  soundPlayer: {fileID: 0}
+  crySound: {fileID: 0}
   rockPrefab: {fileID: 8666362523932513522, guid: 82ef0a8410ae2ac4391630df02892510, type: 3}
 --- !u!61 &555738666
 BoxCollider2D:
@@ -3564,6 +3570,7 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
@@ -3575,6 +3582,8 @@ MonoBehaviour:
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
   killValue: 5
+  soundPlayer: {fileID: 0}
+  crySound: {fileID: 0}
 --- !u!61 &1396726289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4474,7 +4483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: newArea
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: newTrack

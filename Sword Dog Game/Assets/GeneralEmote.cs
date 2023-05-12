@@ -8,6 +8,7 @@ public class GeneralEmote : MonoBehaviour
     public float lifeTime = 1;
     public float startTime;
     public int type;
+    public CopyTransformPoint followScript;
 
     private void Start()
     {

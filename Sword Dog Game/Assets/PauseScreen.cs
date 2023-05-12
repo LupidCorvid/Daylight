@@ -8,6 +8,7 @@ public class PauseScreen : MonoBehaviour
 {
     public static bool paused = false;
     public static bool canPause = true;
+    public static bool quit = true;
 
     CanvasGroup pauseMenuGroup;
 
@@ -159,6 +160,7 @@ public class PauseScreen : MonoBehaviour
     }
 
     public IEnumerator BackToMenu() {
+        quit = true;
         GameSaver.main.SaveGame();
         PlayerMovement.created = false;
         SwordFollow.created = false;
@@ -177,6 +179,7 @@ public class PauseScreen : MonoBehaviour
         CutsceneController.ClearCutscenes();
         DialogController.closedAnimator = true;
         Crossfade.current.StopFade();
+        quit = false;
     }
 
 }

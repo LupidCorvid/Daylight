@@ -71,15 +71,14 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         }
 
-        // TODO remove debug keybinds 
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Heal(10);
-        }
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     TakeDamage(1);
+        // }
+        // if (Input.GetKeyDown(KeyCode.H))
+        // {
+        //     Heal(10);
+        // }
     }
 
     public void UpdateHealth(bool blink = true)
@@ -115,7 +114,8 @@ public class PlayerHealth : MonoBehaviour
                     Die();
                 }
 
-                SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
+                if (SwordFollow.instance.activeSelf)
+                    SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<TimeStop>().StopTime();
                 StartCoroutine(AudioManager.instance.Muffle());

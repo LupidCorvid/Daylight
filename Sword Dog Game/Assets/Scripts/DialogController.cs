@@ -122,7 +122,7 @@ public class DialogController : MonoBehaviour
 
     public void finishClose()
     {
-        if (!CutsceneController.cutsceneHideUI)
+        if (!CutsceneController.cutsceneHideUI && !PauseScreen.quit)
             CanvasManager.ShowHUD();
         panel.alpha = 0;
         panel.interactable = false;
