@@ -55,4 +55,24 @@ public class BlacksmithBehavior : DialogNPC
         if (bubble != null && bubble.gameObject != null)
             bubble.close();
     }
+    public override void exitDialog()
+    {
+        base.exitDialog();
+        StartCoroutine(finishedTalking());
+
+    }
+    IEnumerator finishedTalking()
+    {
+        foundPlayerPosition = false;
+        //waitToLook = 0;
+        //if ((playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
+        //        || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
+        //{
+        //    anim.Play("GEN_resetHead");
+        //}
+
+        yield return new WaitForSeconds(2);
+
+        finishTalkingSequence = false;
+    }
 }
