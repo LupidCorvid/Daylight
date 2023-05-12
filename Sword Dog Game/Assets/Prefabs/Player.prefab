@@ -640,19 +640,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   moveSpeed:
     baseValue: 4
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   maxHealth: 8
   health: 8
   invincible: 0
@@ -918,6 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactPrompt: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
+  attachedEntity: {fileID: 4232136647909902652}
 --- !u!1 &8292983615214319970
 GameObject:
   m_ObjectHideFlags: 0

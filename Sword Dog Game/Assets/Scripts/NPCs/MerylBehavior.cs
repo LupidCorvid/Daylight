@@ -98,6 +98,11 @@ public class MerylBehavior : DialogNPC
 
         finishTalkingSequence = false;
     }
+    public override void interact(Entity user)
+    {
+        base.interact(user);
+        QuestsManager.main.setQuestProgress(new MerylAloeQuest(), user.getAssociatedInventory().CountItem(new TeardropAloe()));
+    }
 
     public override void eventCalled(params string[] input)
     {
@@ -109,6 +114,11 @@ public class MerylBehavior : DialogNPC
                 break;
             case "AloeQuestAssign":
                 QuestsManager.main.AssignQuest(new MerylAloeQuest());
+                break;
+            case "AloePayment":
+                Utilities.main.SpawnLooseItem(new Bone(10), interactor.transform.position);
+                interactor.getAssociatedInventory().RemoveItem(new TeardropAloe(), 2);
+                QuestsManager.main.setQuestCompletion(1, true);
                 break;
         }
     }

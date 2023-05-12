@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void interact(GameObject user);
+    public void interact(Entity user);
 
     public GameObject gameObject
     {

@@ -1,7 +1,7 @@
 -Blocks
 Default{
 [sh,Meryl][abf,10][ss, .05] Hello! [w, .2] What can I do for you? 
-[prompt, Heal, [llf,Heal], Leave, [llf,Exit], Quest, [llf,Quest]] [wi] [exit]
+[GQC,1,[prompt, Heal, [llf,Heal], Leave, [llf,Exit]],[prompt, Heal, [llf,Heal], Leave, [llf,Exit], Quest, [llf,Quest]]] [wi] [exit]
 }
 
 Heal{
@@ -17,7 +17,11 @@ Revive{
 }
 
 Quest{
-[c]Hey,[w,.05] I was running low on one of my main healing ingredients,[w,.05] teardrop aloe.[w,.05] Could you get 2 for me?[w,.1] I will pay you for your time.[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
+[c][GQA,1,[GQP,1,[llf,QuestFinish]],[llf,QuestPrompt]]Let me know once you have gotten the 2 teardrop aloe. [wi] [exit]
+}
+
+QuestPrompt{
+Hey,[w,.05] I was running low on one of my main healing ingredients,[w,.05] teardrop aloe.[w,.05] Could you get 2 for me?[w,.1] I will pay you for your time.[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
 }
 
 QuestFinish{

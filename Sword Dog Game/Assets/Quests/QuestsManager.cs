@@ -15,6 +15,15 @@ public class QuestsManager : MonoBehaviour
     {
         if (main == null || main.gameObject == null)
             main = this;
+        
+    }
+
+    public void Start()
+    {
+        if (main == this)
+        {
+            GameSaver.loadedNewData += ((e) => RefreshListings());
+        }
     }
 
     public void CreateListing(Quest quest)
@@ -24,6 +33,17 @@ public class QuestsManager : MonoBehaviour
         addedListing.setQuest(quest);
         questListings.Add(addedListing);
     }
+
+    public void RefreshListings()
+    {
+        clearListings();
+        for (int i = 0; i < questsDatabase.allQuests.Count; i++)
+        {
+            if (questsDatabase.allQuests[i].assigned && !questsDatabase.allQuests[i].completed)
+                CreateListing(questsDatabase.allQuests[i]);
+        }
+    }
+
     public void removeListing(Quest quest)
     {
         removeListing(quest.questId);
@@ -41,6 +61,15 @@ public class QuestsManager : MonoBehaviour
             }
         }
     }
+
+    public void clearListings()
+    {
+        for(int i = questListings.Count - 1; i >= 0; i--)
+        {
+            Destroy(questListings[i].gameObject);
+            questListings.RemoveAt(i);
+        }
+    }    
 
     public void AssignQuest(int id)
     {
@@ -90,10 +119,17 @@ public class QuestsManager : MonoBehaviour
         return questsDatabase.checkIfCompleted(id);
     }
 
-    public void Start()
+    public void setQuestCompletion(int id, bool completion)
     {
-        //Debug.Log(questsDatabase.allQuests.Count);
+        questsDatabase.setQuestCompletion(id, completion);
     }
+
+    public void setQuestCompletion(Quest quest, bool completion)
+    {
+        questsDatabase.setQuestCompletion(quest, completion);
+    }
+
+
 
     public bool checkIfAssigned(int id)
     {

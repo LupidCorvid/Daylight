@@ -70,6 +70,7 @@ public partial class QuestDatabase
             if(quest.questId == id)
             {
                 quest.assigned = true;
+                quest.onAssign();
                 //NEED to look at making this use a different variable thing. Just needs a different system altogether
                 //DialogSource.counterVariables.Add("Quest" + quest.questId + "Prog", (int)quest.progress);
                 return;
@@ -121,6 +122,16 @@ public partial class QuestDatabase
             quest.progress = 0;
             quest.completed = false;
         }
+    }
+
+    public void setQuestCompletion(int id, bool completion)
+    {
+        findQuest(id).completed = completion;
+    }
+
+    public void setQuestCompletion(Quest quest, bool completion)
+    {
+        findQuest(quest.questId).completed = completion;
     }
 
 }

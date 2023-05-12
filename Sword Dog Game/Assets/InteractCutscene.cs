@@ -32,7 +32,7 @@ public class InteractCutscene : MonoBehaviour, IInteractable
         
     }
 
-    public void interact(GameObject user)
+    public void interact(Entity user)
     {
         CutsceneController.PlayCutscene(cutsceneToTrigger);
         hidePrompt();

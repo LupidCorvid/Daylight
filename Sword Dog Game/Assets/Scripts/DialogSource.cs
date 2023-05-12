@@ -137,6 +137,10 @@ public class DialogSource
      * 
      * [ame, mixer, effect, value] //Applies effect to audio mixer
      * [ame, mixer, effect, value, duration] //Applies effect to audio mixer over specified duration
+     * 
+     * [GQC,id, true, false] //Gets if quest with id was completed or not. Outputs string in true or false section depending on it
+     * [GQP,id, true, false] //Gets if quest with id has needed progression to complete or not. Outputs string in true or false section depending on it
+     * [GQA,id, true, false] //Gets if quest with id was assigned or not. Outputs string in true or false section depending on it
      */
     public DialogSource(string dialog)
     {
@@ -636,7 +640,7 @@ public class DialogSource
                             case ">=":
                                 output = counterVariables[input[1]] >= int.Parse(input[3]);
                                 break;
-                            case "=":
+                            case "=" or "==":
                                 output = counterVariables[input[1]] == int.Parse(input[3]);
                                 break;
                             case "!=":
@@ -788,6 +792,48 @@ public class DialogSource
                     applyMixerEffect(input[1], input[2], float.Parse(input[3]), float.Parse(input[4]));
                 else
                     Debug.LogError("Invalid number or arguments for audio mixer effect [ame]!");
+                break;
+            case "GQA": //If quest is assigned, output different dialog
+                if (input.Length == 3 || input.Length == 4)
+                {
+                    Quest gottenQuest = QuestsManager.main.getQuest(int.Parse(input[1]));
+                    if (gottenQuest.assigned)
+                    {
+                        dialog = dialog.Insert(position, input[2]);
+                    }
+                    else if (input.Length == 4)
+                        dialog = dialog.Insert(position, input[3]);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for Get Quest Progress (GQA)!");
+                break;
+            case "GQP": //If quest progress req is met, output different dialog
+                if (input.Length == 3 || input.Length == 4 )
+                {
+                    Quest gottenQuest = QuestsManager.main.getQuest(int.Parse(input[1]));
+                    if (gottenQuest.progress > gottenQuest.neededProgress)
+                    {
+                        dialog = dialog.Insert(position, input[2]);
+                    }
+                    else if (input.Length == 4)
+                        dialog = dialog.Insert(position, input[3]);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for Get Quest Progress (GQP)!");
+                break;
+            case "GQC": //If quest is completed, output different dialog
+                if (input.Length == 3 || input.Length == 4)
+                {
+                    Quest gottenQuest = QuestsManager.main.getQuest(int.Parse(input[1]));
+                    if (gottenQuest.completed)
+                    {
+                        dialog = dialog.Insert(position, input[2]);
+                    }
+                    else if (input.Length == 4)
+                        dialog = dialog.Insert(position, input[3]);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for Get Quest Completed (GQC)!");
                 break;
 
             default:

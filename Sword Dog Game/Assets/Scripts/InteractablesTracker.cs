@@ -12,6 +12,7 @@ public class InteractablesTracker : MonoBehaviour
     public GameObject interactPrompt;
     public static KeyCode interactKey = KeyCode.T;
     public static bool alreadyInteracting = false;
+    public Entity attachedEntity;
 
     private float delay = 0f;
     private float maxDelay = 0.5f;
@@ -55,7 +56,8 @@ public class InteractablesTracker : MonoBehaviour
     {
         if (delay >= maxDelay && Input.GetKeyDown(interactKey))
         {
-            nearest?.interact(transform.parent.gameObject);
+            //nearest?.interact(transform.parent.gameObject);
+            nearest?.interact(attachedEntity);
         }
     }
 

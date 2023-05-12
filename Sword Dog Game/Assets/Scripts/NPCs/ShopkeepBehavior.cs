@@ -91,7 +91,7 @@ public class ShopkeepBehavior : DialogNPC
         
     }
 
-    public override void interact(GameObject user)
+    public override void interact(Entity user)
     {
         base.interact(user);
         if (bubble != null && bubble.gameObject != null)

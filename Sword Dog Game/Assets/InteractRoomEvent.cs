@@ -19,7 +19,7 @@ public class InteractRoomEvent : MonoBehaviour, IInteractable
 
     public string eventName;
 
-    public void interact(GameObject user)
+    public void interact(Entity user)
     {
         RoomManager.currentRoom.callRoomEvent(eventName);
         hidePrompt();

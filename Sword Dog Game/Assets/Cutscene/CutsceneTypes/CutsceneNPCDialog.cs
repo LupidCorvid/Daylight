@@ -7,7 +7,7 @@ public class CutsceneNPCDialog : CutsceneData
 {
     [SerializeField]
     public DialogNPC npc;
-    public GameObject interactor;
+    public Entity interactor;
     public bool getInteractorByName;
     public string interactorName;
 
@@ -19,7 +19,7 @@ public class CutsceneNPCDialog : CutsceneData
 
     private DialogSource priorDialog;
 
-    public CutsceneNPCDialog(DialogNPC npc, GameObject user, string dialog)
+    public CutsceneNPCDialog(DialogNPC npc, Entity user, string dialog)
     {
         this.npc = npc;
         interactor = user;
@@ -40,7 +40,7 @@ public class CutsceneNPCDialog : CutsceneData
         base.startSegment();
         npc.closedDialog += finishedSegment;
         if (getInteractorByName)
-            interactor = GameObject.Find(interactorName);
+            interactor = GameObject.Find(interactorName).GetComponent<Entity>();
 
         npc.interactor = interactor;
         if (overrideDialog)

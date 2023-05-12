@@ -34,7 +34,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     }
 
-    public void interact(GameObject user)
+    public void interact(Entity user)
     {
         if(!ChangeScene.changingScene)
             StartCoroutine(LoadNextScene());

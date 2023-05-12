@@ -38,7 +38,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         set { _inRange = value; }
     }
 
-    public GameObject interactor;
+    public Entity interactor;
 
     public Action closedDialog;
 
@@ -54,7 +54,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
     }
-    public virtual void interact(GameObject user)
+    public virtual void interact(Entity user)
     {
         if (!alreadyTalking && !stoppedTalkingThisFrame && !DialogController.dialogOpen && DialogController.closedAnimator)
         {

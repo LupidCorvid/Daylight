@@ -24,5 +24,16 @@ public class Quest
     {
         //If you don't want rewards to be completed as soon as finished, override without calling base
         completed = true;
+        finalizeCompletion();
+    }
+
+    public virtual void finalizeCompletion()
+    {
+
+    }
+
+    public virtual void onAssign()
+    {
+
     }
 }

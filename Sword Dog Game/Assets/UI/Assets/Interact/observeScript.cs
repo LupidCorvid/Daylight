@@ -31,7 +31,7 @@ public class observeScript : MonoBehaviour, IInteractable
     {
     }
 
-    public void interact(GameObject user)
+    public void interact(Entity user)
     {
         //Make text bubble appear
         isInteracting = true;
