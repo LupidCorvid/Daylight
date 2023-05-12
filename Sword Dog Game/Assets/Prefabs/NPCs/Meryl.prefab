@@ -36,7 +36,7 @@ Transform:
   - {fileID: 2911059417930413013}
   - {fileID: 1491214156947781031}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &97294771630012862
 SpriteRenderer:
@@ -134,6 +134,10 @@ MonoBehaviour:
   promptPrefab: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 2911059417930413013}
+  speechLoop: {fileID: 11400000, guid: 5f74a235a45936a459ad22eb0f151ff2, type: 2}
+  soundPlayer: {fileID: 1198940427978257586}
+  speaking: 0
+  pausedSpeak: 0
   interactor: {fileID: 0}
 --- !u!61 &778543161403757834
 BoxCollider2D:
@@ -303,6 +307,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
+--- !u!114 &1198940427978257586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 886362805277679126, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
+  m_PrefabInstance: {fileID: 2085029952936110756}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1491214156947781031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 603017179443076867, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}

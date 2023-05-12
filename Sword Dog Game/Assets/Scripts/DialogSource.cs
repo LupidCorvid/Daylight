@@ -41,6 +41,7 @@ public class DialogSource
     public event Action<String> es;
 
     public event Action exit;
+    public event Action speak, pauseSpeak, stopSpeak;
 
     public event Action<string[]> requestOptionsStart;
 
@@ -64,7 +65,6 @@ public class DialogSource
     public List<string> responseOutputsNumeric = new List<string>();
 
     public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
-
 
     public const string BLOCKS_SIGNATURE = "-Blocks";
 
@@ -229,7 +229,7 @@ public class DialogSource
 
     public string collect()
     {
-        if ((waiting || waitingForButtonInput || dialog == null))
+        if (waiting || waitingForButtonInput || dialog == null)
             return outString;
         
         skippingText = true;
@@ -250,10 +250,14 @@ public class DialogSource
 
     public string read(ReadMode mode = ReadMode.DEFAULT)
     {
-        if ((waiting || waitingForButtonInput || dialog == null))
+        if (waiting || waitingForButtonInput || dialog == null)
+        {
+            pauseSpeak?.Invoke();
             return outString;
+        }
         while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {
+            speak?.Invoke();
             lastReadTime = Time.time;
             readDialog(mode);
 
@@ -284,7 +288,7 @@ public class DialogSource
     
     private void readDialog(ReadMode mode = ReadMode.DEFAULT)
     {
-        if ((waiting || waitingForButtonInput))
+        if (waiting || waitingForButtonInput)
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')
@@ -401,6 +405,7 @@ public class DialogSource
                     {
                         waitTime = float.Parse(input[1]);
                         waitStart = Time.time;
+                        pauseSpeak?.Invoke();
                     }
                 }
                 else
@@ -438,7 +443,10 @@ public class DialogSource
             case "exit":
                 skippingText = false;
                 if (mode != ReadMode.COLLECT)
+                {
+                    stopSpeak?.Invoke();
                     exit?.Invoke();
+                }
                 break;
             case "sdb":
                 if (input.Length == 5)
@@ -506,6 +514,7 @@ public class DialogSource
                 if (input.Length == 1)
                 {
                     waitingForButtonInput = true;
+                    pauseSpeak?.Invoke();
                     startWaitingForInput?.Invoke();
                     skippingText = false;
                 }

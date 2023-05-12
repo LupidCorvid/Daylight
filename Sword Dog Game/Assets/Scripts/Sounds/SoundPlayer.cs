@@ -62,7 +62,12 @@ public class SoundPlayer : MonoBehaviour
         EndSound(AudioManager.instance?.FindSound(path));
     }
 
-    public void EndSound(AudioClip clip)
+    public void EndSound(SoundClip clip) // TODO does not support SoundSet
+    {
+        EndSound(clip?.GetClip());
+    }
+
+    public void EndSound(AudioClip clip = null)
     {
         if (clip == null)
         {
@@ -80,6 +85,82 @@ public class SoundPlayer : MonoBehaviour
             if (source.clip == clip && source.isPlaying)
             {
                 source.Stop();
+            }
+        }
+    }
+
+    public void PauseSound(string path = null)
+    {
+        if (path == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.Pause();
+            }
+            return;
+        }
+        PauseSound(AudioManager.instance?.FindSound(path));
+    }
+
+    public void PauseSound(SoundClip clip) // TODO does not support SoundSet
+    {
+        PauseSound(clip?.GetClip());
+    }
+
+    public void PauseSound(AudioClip clip = null)
+    {
+        if (clip == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.Pause();
+            }
+            return;
+        }
+
+        foreach (AudioSource source in sources)
+        {
+            if (source.clip == clip && source.isPlaying)
+            {
+                source.Pause();
+            }
+        }
+    }
+
+    public void UnPauseSound(string path = null)
+    {
+        if (path == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.UnPause();
+            }
+            return;
+        }
+        UnPauseSound(AudioManager.instance?.FindSound(path));
+    }
+
+    public void UnPauseSound(SoundClip clip) // TODO does not support SoundSet
+    {
+        UnPauseSound(clip?.GetClip());
+    }
+
+    public void UnPauseSound(AudioClip clip = null)
+    {
+        if (clip == null)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.UnPause();
+            }
+            return;
+        }
+
+        foreach (AudioSource source in sources)
+        {
+            if (source.clip == clip)
+            {
+                source.UnPause();
             }
         }
     }

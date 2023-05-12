@@ -30,6 +30,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
+    public SoundClip speechLoop;
+    public SoundPlayer soundPlayer;
+    public bool speaking, pausedSpeak;
 
     private bool _inRange = false;
     public bool inRange
@@ -53,6 +56,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
+        dialogSource.speak += speakVoice;
+        dialogSource.pauseSpeak += pauseSpeak;
+        dialogSource.stopSpeak += stopSpeak;
     }
     public virtual void interact(Entity user)
     {
@@ -97,6 +103,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource.es -= endSound;
             //dialogSource.barkDefault -= barkEffect;
             dialogSource.exit -= exitDialog;
+            dialogSource.speak -= speakVoice;
+            dialogSource.pauseSpeak -= pauseSpeak;
+            dialogSource.stopSpeak -= stopSpeak;
         }
         dialogSource = newSource;
         dialogSource.callEvent += eventCalled;
@@ -105,6 +114,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
+        dialogSource.speak += speakVoice;
+        dialogSource.pauseSpeak += pauseSpeak;
+        dialogSource.stopSpeak += stopSpeak;
     }
 
     public virtual void eventCalled(params string[] input)
@@ -150,20 +162,18 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void playSound(string sound, float volume = 1, bool loop = false)
     {
-        SoundPlayer player = null;
-        player ??= GetComponentInChildren<SoundPlayer>();
-        if (player == null)
+        soundPlayer ??= GetComponentInChildren<SoundPlayer>();
+        if (soundPlayer == null)
             Debug.LogError("No sound player attached to this NPC");
-        player?.PlaySound(sound, volume, loop);
+        soundPlayer?.PlaySound(sound, volume, loop);
     }
 
     public void endSound(string sound = null)
     {
-        SoundPlayer player = null;
-        player ??= GetComponentInChildren<SoundPlayer>();
-        if (player == null)
+        soundPlayer ??= GetComponentInChildren<SoundPlayer>();
+        if (soundPlayer == null)
             Debug.LogError("No sound player attached to this NPC");
-        player?.EndSound(sound);
+        soundPlayer?.EndSound(sound);
     }
 
     public void hidePrompt()
@@ -203,5 +213,38 @@ public class DialogNPC : MonoBehaviour, IInteractable
         bubble.offset = miniBubbleOffset;
         bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
 
+    }
+
+    public void speakVoice()
+    {
+        if (!speaking)
+        {
+            soundPlayer?.PlaySound(speechLoop, 0.5f, true);
+            speaking = true;
+        }
+        else if (pausedSpeak)
+        {
+            soundPlayer?.UnPauseSound(speechLoop);
+            pausedSpeak = false;
+        }
+    }
+
+    public void pauseSpeak()
+    {
+        if (speaking && !pausedSpeak)
+        {
+            soundPlayer?.PauseSound(speechLoop);
+            pausedSpeak = true;
+        }
+    }
+
+    public void stopSpeak()
+    {
+        if (speaking)
+        {
+            soundPlayer?.EndSound(speechLoop);
+            pausedSpeak = false;
+            speaking = false;
+        }
     }
 }
