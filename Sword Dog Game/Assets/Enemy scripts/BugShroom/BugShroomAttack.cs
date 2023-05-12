@@ -14,7 +14,7 @@ public class BugShroomAttack : MonoBehaviour
 
     public void Attack()
     {
-
+        mainEnemy.cry();
         GameObject cloud = Instantiate(sporeCloudPrefab, transform.position, transform.rotation, TempObjectsHolder.asTransform);
         SporeCloud cloudObj = cloud.GetComponent<SporeCloud>();
         cloudObj.mainEnemy= mainEnemy;

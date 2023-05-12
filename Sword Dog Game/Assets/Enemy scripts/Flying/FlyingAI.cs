@@ -176,6 +176,7 @@ public class FlyingAI : BaseAI
 
             case states.lunging:
                 //Lunge attack stuff, then return to pursuit. Use just setting velocity for now
+                enemyBase.cry();
                 lastAttack = Time.time;
                 rb.velocity = Vector2.ClampMagnitude((windUpTarget - (Vector2)transform.position) * 7, attackDistance * 10); //constants were 7s
                 state = states.lungeReturn;

@@ -42,6 +42,7 @@ public class RockLobberAI : BaseAI
     {
         if(target != null)
         {
+            enemyBase.cry();
             GameObject addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation, TempObjectsHolder.asTransform);
             Rigidbody2D projectileVelocity = addedProjectile.GetComponent<Rigidbody2D>();
             //arctan((sqrt(c^4 - g(gd^2 + 2yv^2))+c^2)/gd)
@@ -61,6 +62,7 @@ public class RockLobberAI : BaseAI
     }
     public void attack(float angle)
     {
+        enemyBase.cry();
         GameObject addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation);
         Rigidbody2D projectileVelocity = addedProjectile.GetComponent<Rigidbody2D>();
         projectileVelocity.velocity = new Vector2(projectileSpeed * Mathf.Cos(angle), projectileSpeed * Mathf.Sin(angle));

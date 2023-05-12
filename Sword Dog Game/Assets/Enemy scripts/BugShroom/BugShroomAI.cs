@@ -85,7 +85,6 @@ public class BugShroomAI : BaseAI
         state = AIState.attacking;
         anim.SetTrigger("Attacking");
         lastAttack = Time.time;
-
     }
 
     //public override void LateUpdate()

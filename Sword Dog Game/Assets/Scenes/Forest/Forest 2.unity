@@ -6849,6 +6849,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &63711735
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7324,6 +7325,7 @@ GameObject:
   - component: {fileID: 88866164}
   - component: {fileID: 88866166}
   - component: {fileID: 88866165}
+  - component: {fileID: 88866167}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -7425,6 +7427,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &88866167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88866163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &89093597
 GameObject:
   m_ObjectHideFlags: 0
@@ -10076,6 +10091,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &158422925
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10137,6 +10153,7 @@ GameObject:
   - component: {fileID: 159022287}
   - component: {fileID: 159022289}
   - component: {fileID: 159022288}
+  - component: {fileID: 159022290}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -10238,6 +10255,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &159022290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159022286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &165110715
 GameObject:
   m_ObjectHideFlags: 0
@@ -21640,6 +21670,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &202640082
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21700,6 +21731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207867220}
   - component: {fileID: 207867221}
+  - component: {fileID: 207867222}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -21775,6 +21807,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &207867222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207867219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1001 &209169298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21930,6 +21975,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &209327034
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28969,6 +29015,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &262919256
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29029,6 +29076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 267526914}
   - component: {fileID: 267526915}
+  - component: {fileID: 267526916}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -29104,6 +29152,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &267526916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267526913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &270562687
 GameObject:
   m_ObjectHideFlags: 0
@@ -29198,6 +29259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271028213}
   - component: {fileID: 271028214}
+  - component: {fileID: 271028215}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -29274,6 +29336,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &271028215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271028212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &272867386
 GameObject:
   m_ObjectHideFlags: 0
@@ -29347,6 +29422,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &272867395
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30920,6 +30996,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &323173556
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31488,6 +31565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353280380}
   - component: {fileID: 353280381}
+  - component: {fileID: 353280382}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -31563,6 +31641,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &353280382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353280379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &354371996
 GameObject:
   m_ObjectHideFlags: 0
@@ -32117,6 +32208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360555294}
   - component: {fileID: 360555295}
+  - component: {fileID: 360555296}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -32192,6 +32284,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &360555296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360555293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &368019853
 GameObject:
   m_ObjectHideFlags: 0
@@ -32265,6 +32370,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &368019862
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33360,6 +33466,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &416707027
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33809,6 +33916,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &435269228
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34178,6 +34286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451314942}
   - component: {fileID: 451314943}
+  - component: {fileID: 451314944}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -34253,6 +34362,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &451314944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451314941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &460135827
 GameObject:
   m_ObjectHideFlags: 0
@@ -34326,6 +34448,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &460135836
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34440,6 +34563,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &462009705
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34891,6 +35015,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &473699516
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35292,6 +35417,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &483059799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35523,6 +35649,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &495416298
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36333,6 +36460,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &501472240
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -37087,6 +37215,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &512237334
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -37559,6 +37688,7 @@ GameObject:
   - component: {fileID: 530537813}
   - component: {fileID: 530537812}
   - component: {fileID: 530537818}
+  - component: {fileID: 530537819}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Branch
@@ -37806,6 +37936,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 530537817}
+--- !u!114 &530537819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530537810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &536876907
 GameObject:
   m_ObjectHideFlags: 0
@@ -38290,6 +38433,7 @@ GameObject:
   - component: {fileID: 541156979}
   - component: {fileID: 541156981}
   - component: {fileID: 541156980}
+  - component: {fileID: 541156982}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -38391,6 +38535,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &541156982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541156978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &543045651
 GameObject:
   m_ObjectHideFlags: 0
@@ -39537,6 +39694,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &573119934
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40032,6 +40190,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &587082681
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40661,6 +40820,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &603459155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41602,6 +41762,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &641980065
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -41949,6 +42110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647006467}
   - component: {fileID: 647006468}
+  - component: {fileID: 647006469}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -42024,6 +42186,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &647006469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647006466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &651765844
 GameObject:
   m_ObjectHideFlags: 0
@@ -49293,6 +49468,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &714127377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -49877,6 +50053,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &739248473
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -55286,6 +55463,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &741573793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -55409,6 +55587,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &741828125
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -55932,6 +56111,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &744949296
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -56859,6 +57039,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &775267507
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -57587,6 +57768,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &781683441
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -57648,6 +57830,7 @@ GameObject:
   - component: {fileID: 783368985}
   - component: {fileID: 783368989}
   - component: {fileID: 783368988}
+  - component: {fileID: 783368990}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -57749,6 +57932,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &783368990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783368984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1001 &785392423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57924,6 +58120,7 @@ GameObject:
   - component: {fileID: 802648122}
   - component: {fileID: 802648124}
   - component: {fileID: 802648123}
+  - component: {fileID: 802648125}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -58025,6 +58222,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &802648125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802648121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &807546405
 GameObject:
   m_ObjectHideFlags: 0
@@ -63995,6 +64205,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &861726890
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66207,6 +66418,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &923849410
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66321,6 +66533,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &924470858
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -67443,6 +67656,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &967201978
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67653,6 +67867,7 @@ GameObject:
   - component: {fileID: 973016553}
   - component: {fileID: 973016555}
   - component: {fileID: 973016554}
+  - component: {fileID: 973016556}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -67754,6 +67969,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &973016556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973016552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &979574548
 GameObject:
   m_ObjectHideFlags: 0
@@ -68431,6 +68659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989351182}
   - component: {fileID: 989351183}
+  - component: {fileID: 989351184}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -68506,6 +68735,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &989351184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989351181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &991344464
 GameObject:
   m_ObjectHideFlags: 0
@@ -69228,6 +69470,7 @@ GameObject:
   - component: {fileID: 1011532415}
   - component: {fileID: 1011532414}
   - component: {fileID: 1011532420}
+  - component: {fileID: 1011532421}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Branch
@@ -69509,6 +69752,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1011532419}
+--- !u!114 &1011532421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011532412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1012889465
 GameObject:
   m_ObjectHideFlags: 0
@@ -70078,6 +70334,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1028421355
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -70781,6 +71038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1051146594}
   - component: {fileID: 1051146595}
+  - component: {fileID: 1051146596}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -70856,6 +71114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1051146596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051146593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1054622188
 GameObject:
   m_ObjectHideFlags: 0
@@ -71435,6 +71706,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1054968175
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71970,6 +72242,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &1082894470
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -72204,6 +72477,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1086934764
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -72327,6 +72601,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1091126145
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -74736,6 +75011,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1160619005
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -75417,6 +75693,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!95 &1177029540
 Animator:
   serializedVersion: 5
@@ -75553,6 +75830,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &1177215585
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75833,6 +76111,7 @@ GameObject:
   - component: {fileID: 1191112495}
   - component: {fileID: 1191112497}
   - component: {fileID: 1191112496}
+  - component: {fileID: 1191112498}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -75934,6 +76213,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1191112498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191112494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1193475935
 GameObject:
   m_ObjectHideFlags: 0
@@ -76232,6 +76524,7 @@ GameObject:
   - component: {fileID: 1196724072}
   - component: {fileID: 1196724074}
   - component: {fileID: 1196724073}
+  - component: {fileID: 1196724075}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -76333,6 +76626,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1196724075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196724071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1197404506
 GameObject:
   m_ObjectHideFlags: 0
@@ -77469,6 +77775,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1261493047
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -78756,6 +79063,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1355288989
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85453,6 +85761,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1416586125
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87140,6 +87449,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1479437046
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87206,6 +87516,7 @@ GameObject:
   - component: {fileID: 1485398072}
   - component: {fileID: 1485398071}
   - component: {fileID: 1485398077}
+  - component: {fileID: 1485398078}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Branch
@@ -87455,6 +87766,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1485398076}
+--- !u!114 &1485398078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485398069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1001 &1487490230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94018,6 +94342,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1534420598
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -94347,6 +94672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1544313835}
   - component: {fileID: 1544313836}
+  - component: {fileID: 1544313837}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Untagged
@@ -94422,6 +94748,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1544313837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544313834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1545850050
 GameObject:
   m_ObjectHideFlags: 0
@@ -94433,6 +94772,7 @@ GameObject:
   - component: {fileID: 1545850051}
   - component: {fileID: 1545850053}
   - component: {fileID: 1545850052}
+  - component: {fileID: 1545850054}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -94534,6 +94874,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1545850054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545850050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1001 &1546907032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95471,6 +95824,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1568606114
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96055,6 +96409,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &1597572902
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96714,6 +97069,7 @@ GameObject:
   - component: {fileID: 1630833682}
   - component: {fileID: 1630833684}
   - component: {fileID: 1630833683}
+  - component: {fileID: 1630833685}
   m_Layer: 7
   m_Name: branch 2 (1)
   m_TagString: Untagged
@@ -96815,6 +97171,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1630833685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630833681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1637038243
 GameObject:
   m_ObjectHideFlags: 0
@@ -98491,6 +98860,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1709393459
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -98848,6 +99218,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1729449014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -99152,6 +99523,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!212 &1749555589
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100097,6 +100469,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1779056580
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -100422,6 +100795,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1817391673
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -108290,6 +108664,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1879264516
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -108813,6 +109188,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1879441807
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111039,6 +111415,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &1954276967
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -118033,6 +118410,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &2006678929
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -118156,6 +118534,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &2008103321
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -119119,6 +119498,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &2054077536
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -120171,6 +120551,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!23 &2108585432
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -121940,6 +122321,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &187462567015610891
 Transform:
   m_ObjectHideFlags: 0
@@ -122386,6 +122768,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &456918076434997083
 Transform:
   m_ObjectHideFlags: 0
@@ -122795,6 +123178,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &716320043577438897
 Transform:
   m_ObjectHideFlags: 0
@@ -122835,6 +123219,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!1 &716320043577438901
 GameObject:
   m_ObjectHideFlags: 0
@@ -123154,6 +123539,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!1 &1009952850224636885
 GameObject:
   m_ObjectHideFlags: 0
@@ -123437,6 +123823,7 @@ GameObject:
   - component: {fileID: 5135018090807499556}
   - component: {fileID: 5135018090807499557}
   - component: {fileID: 5135018090807499558}
+  - component: {fileID: 5135018090807499559}
   m_Layer: 7
   m_Name: branch 2
   m_TagString: Branch
@@ -124172,6 +124559,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &1632867692824847758
 Transform:
   m_ObjectHideFlags: 0
@@ -124383,6 +124771,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &1684172322446099023
 Transform:
   m_ObjectHideFlags: 0
@@ -124776,6 +125165,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!82 &1994585761153160085
 AudioSource:
   m_ObjectHideFlags: 0
@@ -126027,6 +126417,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 11400000, guid: a67aa5b6a81c89c4cad95741b1ecfcdc, type: 2}
+  lastWindTime: 0
 --- !u!4 &2835739991370223721
 Transform:
   m_ObjectHideFlags: 0
@@ -135761,6 +136152,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &2970529074643487395
 Transform:
   m_ObjectHideFlags: 0
@@ -136413,6 +136805,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!82 &3157334245016448335
 AudioSource:
   m_ObjectHideFlags: 0
@@ -137622,6 +138015,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!1 &3902482856129814917
 GameObject:
   m_ObjectHideFlags: 0
@@ -137941,6 +138335,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &4218889056928221390
 Transform:
   m_ObjectHideFlags: 0
@@ -143176,6 +143571,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!1 &4350457065023745820
 GameObject:
   m_ObjectHideFlags: 0
@@ -143752,6 +144148,7 @@ GameObject:
   - component: {fileID: 7553911076384089366}
   - component: {fileID: 7553911076384089369}
   - component: {fileID: 7553911076384089370}
+  - component: {fileID: 7553911076384089371}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Branch
@@ -143775,6 +144172,7 @@ GameObject:
   - component: {fileID: 7553911077270206540}
   - component: {fileID: 7553911077270206531}
   - component: {fileID: 7553911077270206541}
+  - component: {fileID: 7553911077270206542}
   m_Layer: 7
   m_Name: branch 1
   m_TagString: Branch
@@ -144026,6 +144424,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!1 &5067767063908026781
 GameObject:
   m_ObjectHideFlags: 0
@@ -144283,6 +144682,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1891583147822417665}
+--- !u!114 &5135018090807499559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099111986017095197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &5189249821511048677
 GameObject:
   m_ObjectHideFlags: 0
@@ -144299,6 +144711,7 @@ GameObject:
   - component: {fileID: 1657374940}
   - component: {fileID: 1657374941}
   - component: {fileID: 8958876185984958659}
+  - component: {fileID: 8958876185984958660}
   m_Layer: 7
   m_Name: branch 2
   m_TagString: Branch
@@ -144406,6 +144819,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &5218709829691701711
 Transform:
   m_ObjectHideFlags: 0
@@ -144631,6 +145045,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!114 &5388364505142119201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144661,6 +145076,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!23 &5433140065821773088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -144761,6 +145177,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &5433140065821773094
 Transform:
   m_ObjectHideFlags: 0
@@ -145126,6 +145543,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!82 &5839819005087751378
 AudioSource:
   m_ObjectHideFlags: 0
@@ -146674,6 +147092,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &6969724552232178678
 Transform:
   m_ObjectHideFlags: 0
@@ -147075,6 +147494,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3313480797149902120}
+--- !u!114 &7553911076384089371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985268323638698684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!50 &7553911077270206530
 Rigidbody2D:
   serializedVersion: 4
@@ -147161,6 +147593,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3313480796163385458}
+--- !u!114 &7553911077270206542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985268323985588198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!114 &7673769034208857463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147955,6 +148400,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &8102649946661776114
 Transform:
   m_ObjectHideFlags: 0
@@ -148070,6 +148516,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &8304189628819588722
 Transform:
   m_ObjectHideFlags: 0
@@ -148509,6 +148956,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 0}
   rustleFX: {fileID: 0}
+  lastWindTime: 0
 --- !u!4 &8578426522556247875
 Transform:
   m_ObjectHideFlags: 0
@@ -149000,6 +149448,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6702340750649234681}
+--- !u!114 &8958876185984958660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189249821511048677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d5649aa59c461488e9c47a51b8d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!114 &9064455988332360130
 MonoBehaviour:
   m_ObjectHideFlags: 0
