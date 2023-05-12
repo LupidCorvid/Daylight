@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     private float loopPointSeconds;
     private bool firstSet = true;
     private bool firstSongPlayed = false;
+    public bool paused = false;
 
     public AudioMixerSnapshot normal, hurt;
     public SoundCategory soundDatabase;
@@ -195,7 +196,7 @@ public class AudioManager : MonoBehaviour
         else
             sfxMixer.SetFloat("Reverb", -10000f);
         
-        targetSFXVolume = sfxVolume - 2 * Camera.main.orthographicSize;
+        targetSFXVolume = sfxVolume - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
         if (ChangeScene.changingScene || GameSaver.loading)
         {
             actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.1f);
@@ -444,6 +445,7 @@ public class AudioManager : MonoBehaviour
         {
             BGM2[activePlayer].Pause();
         }
+        paused = true;
     }
 
     public void UnPauseCurrent()
@@ -456,6 +458,7 @@ public class AudioManager : MonoBehaviour
         {
             BGM2[activePlayer].UnPause();
         }
+        paused = false;
     }
 
     public void Stop()
@@ -471,6 +474,7 @@ public class AudioManager : MonoBehaviour
             source.clip = null;
         }
         currentSong = null;
+        paused = false;
     }
 
     public void ApplyMixerEffect(string mixer, string effect, float value, float duration = 0)

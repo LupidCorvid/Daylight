@@ -260,7 +260,8 @@ public class SwayEffect : MonoBehaviour
         //    PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
         if (Mathf.Abs(windEffect) / Time.fixedDeltaTime > 1.5f && windSoundCooldown + lastWindTime <= Time.time && windSounds < windSoundCap)
         {
-            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+            float dampen = MainMenuManager.inMainMenu ? 0.25f : 1f;
+            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f * dampen);
             lastWindTime = Time.time;
         }
 

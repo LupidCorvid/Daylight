@@ -106,6 +106,9 @@ public class PauseScreen : MonoBehaviour
         {
             source.UnPause();
         }
+        // TODO super sloppy but re-pauses music
+        if (AudioManager.instance.paused)
+            AudioManager.instance.PauseCurrent();
 
         pauseMenuGroup.alpha = 0;
         pauseMenuGroup.blocksRaycasts = false;
