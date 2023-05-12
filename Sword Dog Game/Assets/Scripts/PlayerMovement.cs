@@ -984,16 +984,19 @@ public class PlayerMovement : MonoBehaviour
             switch (currentGround)
             {
                 case Ground.Type.ROCK:
-                    path = "Impacts.Steps.MediumStep";
+                    path = "Impacts.Steps.Stone";
                     break;
                 case Ground.Type.WOOD:
-                    path = "Impacts.Steps.WoodenStep";
+                    path = "Impacts.Steps.Wood";
                     break;
                 case Ground.Type.SAND:
                     path = "Impacts.Steps.RoughStep";
                     break;
                 case Ground.Type.GRASS:
                     path = "Impacts.Steps.SoftStep";
+                    break;
+                case Ground.Type.GRAVEL:
+                    path = "Impacts.Steps.Gravel";
                     break;
             }
             soundPlayer.PlaySound(path);
