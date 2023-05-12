@@ -32,6 +32,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
+
+    public Transform emoteSpawnLocation;
+
     public SoundClip speechLoop;
     public SoundPlayer soundPlayer;
     public bool speaking, pausedSpeak;
@@ -257,7 +260,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void spawnEmote(int type, float lifeTime)
     {
-        GameObject addedObj = Instantiate(emotePrefab, barkSpawnLocation.transform.position, barkSpawnLocation.transform.rotation, TempObjectsHolder.asTransform);
+        GameObject addedObj = Instantiate(emotePrefab, emoteSpawnLocation.transform.position, emoteSpawnLocation.transform.rotation, TempObjectsHolder.asTransform);
         GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
         spawnedEmote.type = type;
         spawnedEmote.lifeTime = lifeTime;

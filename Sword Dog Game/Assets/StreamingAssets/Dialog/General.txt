@@ -10,13 +10,13 @@ Left2{
 Why do I bother talking to you if you are going to keep leaving?[w, .35] Don't leave this time. [wi] [c]}
 
 Fear{
-[ss, .025][IA,<size=200%>][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
+[ss, .025][IA,<size=200%>][emote,4][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
 }
 Joy{
-[ss, .05][TFX, Wave, 5, 5, 50]Yaaaaay![/TFX,Wave]
+[ss, .05][emote,2][TFX, Wave, 5, 5, 50]Yaaaaay![/TFX,Wave]
 }
 Wobbly{
-[ss, 0.05][IA,<size=125%>][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>]
+[ss, 0.05][IA,<size=125%>][emote,1][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>]
 }
 Interrupted{
 [ss,.05][mcount,LeftGeneral,+,1] [series,LeftGeneral, ,I was talking to you! [w, 3], Really?[w, .45] Again? [w, 3], I give up. [w, 2], [ss, .2]...] [exit]

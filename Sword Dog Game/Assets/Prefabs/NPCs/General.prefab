@@ -98,8 +98,9 @@ Transform:
   - {fileID: 6106341815000964578}
   - {fileID: 4320902303548221474}
   - {fileID: 2865602611568729390}
+  - {fileID: 5820336739538321031}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7962026614516624370
 SpriteRenderer:
@@ -187,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   miniBubblePrefab: {fileID: 1205727677339176266, guid: eb701a2c574c6f74998bfdc411266504, type: 3}
+  emotePrefab: {fileID: 4940022028847480465, guid: f753fbb75cb933a44a5637f9edcff42d, type: 3}
   miniBubbleOffset: {x: 0, y: 2}
   dialog:
   - '[lf,General.txt]'
@@ -197,6 +199,7 @@ MonoBehaviour:
   promptPrefab: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 4320902303548221474}
+  emoteSpawnLocation: {fileID: 5820336739538321031}
   speechLoop: {fileID: 11400000, guid: 899469f4beb675040a2f476620014c23, type: 2}
   soundPlayer: {fileID: 2582265510706289723}
   speaking: 0
@@ -249,6 +252,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.062335, y: 3.2788653}
   m_EdgeRadius: 0
+--- !u!1 &8115718842286785264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5820336739538321031}
+  m_Layer: 0
+  m_Name: EmoteSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5820336739538321031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115718842286785264}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.27, y: 1.38, z: -0.17306586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7962026614516624373}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8801826253041960971
 GameObject:
   m_ObjectHideFlags: 0

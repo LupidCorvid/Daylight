@@ -1399,19 +1399,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   moveSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   maxHealth: 10
   health: 10
   invincible: 0
@@ -1687,19 +1690,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   moveSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   maxHealth: 10
   health: 10
   invincible: 0
@@ -3542,19 +3548,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   moveSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   maxHealth: 10
   health: 10
   invincible: 0
@@ -4734,6 +4743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   miniBubblePrefab: {fileID: 0}
+  emotePrefab: {fileID: 0}
   miniBubbleOffset: {x: 0, y: 2}
   dialog:
   - '[lf,TesterDialog2.txt]'
@@ -4747,6 +4757,11 @@ MonoBehaviour:
   promptPrefab: {fileID: 0}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  emoteSpawnLocation: {fileID: 0}
+  speechLoop: {fileID: 0}
+  soundPlayer: {fileID: 0}
+  speaking: 0
+  pausedSpeak: 0
   interactor: {fileID: 0}
 --- !u!212 &1896472689
 SpriteRenderer:
