@@ -297,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting))
+            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f)))
             {
                 // bad code
                 // if (isSprinting)
@@ -783,9 +783,7 @@ public class PlayerMovement : MonoBehaviour
     {
         wallOnLeft = wallOnRight = false;
         Vector2 startPosition1 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.6f);
-        Vector2 startPosition2 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.7f);
         startPosition1 += facingRight ? upperRightCorner : upperLeftCorner;
-        startPosition2 += facingRight ? upperRightCorner : upperLeftCorner;
 
         Vector2 direction = facingRight ? Vector2.right : Vector2.left;
         if (isOnSlope)
@@ -799,18 +797,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
             if (wallInfo.distance <= wallCheckDistance) {
-                if (facingRight) wallOnRight = true;
-                else wallOnLeft = true;
-            }
-        }
-
-        wallInfo = Physics2D.Raycast(startPosition2, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
-
-        if (wallInfo.point != Vector2.zero)
-        {
-            Debug.DrawLine(startPosition2, wallInfo.point, Color.blue);
-            if (wallInfo.distance <= wallCheckDistance)
-            {
                 if (facingRight) wallOnRight = true;
                 else wallOnLeft = true;
             }
