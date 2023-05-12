@@ -71,7 +71,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         if (main == null)
             main = this;
-        //Problem is that slideIn != menus[currentMenu]
+        //Problem is that slideIn != menus[currentMenu]. No longer hit because it avoids that only when things settle (which is when this is checked)
         if (!transitioning &&  slideIn != null && (slideIn != menus[currentMenu] || slideIn == slideOut))
             Debug.Log("EERRORRR" + (slideIn == slideOut) + " <- in == out, curr != in ->" + (slideIn != menus[currentMenu]));
 
@@ -104,6 +104,7 @@ public class PlayerMenuManager : MonoBehaviour
             if (inMoveDist.magnitude <= 1)
                 inMoveDist = outMoveDist * 1;
 
+
             slideIn.transform.position -= inMoveDist * Time.deltaTime * slideSpeed;
 
             if(Mathf.Abs((slideIn.transform.position - new Vector3(Screen.width / 2, Screen.height / 2, 0)).x) < 1)
@@ -111,10 +112,8 @@ public class PlayerMenuManager : MonoBehaviour
                 slideIn.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
                 slideOut.transform.position = new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0);
                 transitioning = false;
-                if (fromLeft)
-                    currentMenu++;
-                else
-                    currentMenu--;
+                //Fix for menu changing pages to itself, bug shows symptom of over thing to leaving for testing
+                currentMenu = menus.IndexOf(slideIn);
             }
         }
     }
@@ -168,11 +167,16 @@ public class PlayerMenuManager : MonoBehaviour
             }
             else
             {
+                //if (menus[(currentMenu + 1) % menus.Count] == slideOut)
+                //    return;
                 currentMenu++;
                 if (Mathf.Abs((slideOut.transform.position - new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0)).x) < 250 * Screen.width/ 1092)
                     skipTransition = true;
                 else
+                {
+                    currentMenu++;
                     return;
+                }
 
             }
         }
@@ -212,7 +216,10 @@ public class PlayerMenuManager : MonoBehaviour
                     //slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
                     skipTransition = true;
                 else
+                {
+                    currentMenu++;
                     return;
+                }
             }
             else
             {

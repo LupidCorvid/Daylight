@@ -7,6 +7,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 {
     public GameObject barkFXPrefab;
     public GameObject miniBubblePrefab;
+    public GameObject emotePrefab;
+
 
     public Vector2 miniBubbleOffset = new Vector2(0, 2);
 
@@ -106,6 +108,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource.speak -= speakVoice;
             dialogSource.pauseSpeak -= pauseSpeak;
             dialogSource.stopSpeak -= stopSpeak;
+            dialogSource.emote -= spawnEmote;
+            dialogSource.reemote -= spawnReEmote;
         }
         dialogSource = newSource;
         dialogSource.callEvent += eventCalled;
@@ -117,6 +121,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.speak += speakVoice;
         dialogSource.pauseSpeak += pauseSpeak;
         dialogSource.stopSpeak += stopSpeak;
+        dialogSource.emote += spawnEmote;
+        dialogSource.reemote += spawnReEmote;
+        
     }
 
     public virtual void eventCalled(params string[] input)
@@ -246,5 +253,22 @@ public class DialogNPC : MonoBehaviour, IInteractable
             pausedSpeak = false;
             speaking = false;
         }
+    }
+
+    public void spawnEmote(int type, float lifeTime)
+    {
+        GameObject addedObj = Instantiate(emotePrefab, barkSpawnLocation.transform.position, barkSpawnLocation.transform.rotation, TempObjectsHolder.asTransform);
+        GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
+        spawnedEmote.type = type;
+        spawnedEmote.lifeTime = lifeTime;
+    }
+
+
+    public void spawnReEmote(int type, float lifeTime)
+    {
+        GameObject addedObj = Instantiate(emotePrefab, interactor.transform.position, interactor.transform.rotation, TempObjectsHolder.asTransform);
+        GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
+        spawnedEmote.type = type;
+        spawnedEmote.lifeTime = lifeTime;
     }
 }

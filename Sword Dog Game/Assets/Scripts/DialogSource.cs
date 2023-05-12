@@ -58,6 +58,9 @@ public class DialogSource
     //Is just used for things like DialogNpc to have reactions to certain events
     public event Action<string[]> callEvent;
 
+    public event Action<int, float> emote;
+    public event Action<int, float> reemote;
+
     public bool waiting = false;
     public bool waitingForButtonInput = false;
 
@@ -843,6 +846,28 @@ public class DialogSource
                 }
                 else
                     Debug.LogError("Invalid number of arguments for Get Quest Completed (GQC)!");
+                break;
+            case "emote":
+                if (input.Length == 2 || input.Length == 3)
+                {
+                    if(input.Length == 3)
+                        emote?.Invoke(int.Parse(input[1]), float.Parse(input[2]));
+                    else
+                        emote?.Invoke(int.Parse(input[1]), 1);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for emote!");
+                break;
+            case "reemote":
+                if (input.Length == 2 || input.Length == 3)
+                {
+                    if (input.Length == 3)
+                        reemote?.Invoke(int.Parse(input[1]), float.Parse(input[2]));
+                    else
+                        reemote?.Invoke(int.Parse(input[1]), 1);
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for reemote!");
                 break;
 
             default:
