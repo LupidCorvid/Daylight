@@ -173,7 +173,10 @@ public class PlayerMenuManager : MonoBehaviour
                 if (Mathf.Abs((slideOut.transform.position - new Vector3(offsetAmount + Screen.width / 2, Screen.height / 2, 0)).x) < 250 * Screen.width/ 1092)
                     skipTransition = true;
                 else
+                {
+                    currentMenu++;
                     return;
+                }
 
             }
         }
@@ -213,7 +216,10 @@ public class PlayerMenuManager : MonoBehaviour
                     //slideIn.transform.position = new Vector3(1000 + Screen.width / 2, Screen.height / 2, 0);
                     skipTransition = true;
                 else
+                {
+                    currentMenu++;
                     return;
+                }
             }
             else
             {
