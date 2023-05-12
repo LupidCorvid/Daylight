@@ -36,7 +36,6 @@ public class PauseScreen : MonoBehaviour
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
             if(PlayerMenuManager.open)
             {
                 PlayerMenuManager.main.closeMenu();
@@ -49,7 +48,7 @@ public class PauseScreen : MonoBehaviour
                 return;
             }
 
-            if (ChangeScene.changingScene || GameSaver.loading)
+            if (ChangeScene.changingScene || GameSaver.loading || !Crossfade.over)
             {
                 return;
             }
