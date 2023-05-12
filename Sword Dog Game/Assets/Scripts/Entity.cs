@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public ModifiableValue moveSpeed = new ModifiableValue(1);
     public ModifiableValue attackSpeed = new ModifiableValue(1);
 
+    public Transform emotePosition;
 
     public int maxHealth = 8;
     public int health = 8;

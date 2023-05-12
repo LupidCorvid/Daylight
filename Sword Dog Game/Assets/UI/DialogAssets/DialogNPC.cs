@@ -260,7 +260,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void spawnEmote(int type, float lifeTime)
     {
-        GameObject addedObj = Instantiate(emotePrefab, emoteSpawnLocation.transform.position, emoteSpawnLocation.transform.rotation, TempObjectsHolder.asTransform);
+        GameObject addedObj = Instantiate(emotePrefab, emoteSpawnLocation.transform.position, emoteSpawnLocation.transform.rotation, emoteSpawnLocation.transform);
         GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
         spawnedEmote.type = type;
         spawnedEmote.lifeTime = lifeTime;
@@ -269,7 +269,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void spawnReEmote(int type, float lifeTime)
     {
-        GameObject addedObj = Instantiate(emotePrefab, interactor.transform.position, interactor.transform.rotation, TempObjectsHolder.asTransform);
+        GameObject addedObj = Instantiate(emotePrefab, interactor.emotePosition.position, interactor.emotePosition.rotation, interactor.emotePosition);
         GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
         spawnedEmote.type = type;
         spawnedEmote.lifeTime = lifeTime;
