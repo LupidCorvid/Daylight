@@ -19,6 +19,7 @@ public class observeScript : MonoBehaviour, IInteractable
         set { _inRange = value; }
     }
 
+    public string content;
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +34,13 @@ public class observeScript : MonoBehaviour, IInteractable
 
     public void interact(Entity user)
     {
+        if (bubble != null)
+            return;
         //Make text bubble appear
         isInteracting = true;
         hidePrompt();
         print("A mini bubble should open");
+        SpeakMiniBubble();
     }
 
     //When the user is done looking at the sign OR user walks away
@@ -70,5 +74,15 @@ public class observeScript : MonoBehaviour, IInteractable
     {
         if (spawnedPrompt != null)
             spawnedPrompt.SetTrigger("Close");
+    }
+
+    public void SpeakMiniBubble()
+    {
+        GameObject addedObj = Instantiate(miniBubblePrefab, promptSpawnLocation.position, Quaternion.identity, TempObjectsHolder.asTransform);
+        bubble = addedObj.GetComponent<MiniBubbleController>();
+        bubble.setPosition = promptSpawnLocation.position;
+        bubble.setSource(new DialogSource(content));
+        //bubble.open = true;
+
     }
 }
