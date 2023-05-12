@@ -22,8 +22,6 @@ public class RivalBehavior : MonoBehaviour
     {
         if(prologueBehaviorActive)
             prologueBehavior();
-        
-
     }
 
     void speak()
@@ -38,9 +36,6 @@ public class RivalBehavior : MonoBehaviour
     bool monsterDefeated = false;
     void prologueBehavior()
     {
-        
-        
-
         //Debug
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -71,9 +66,27 @@ public class RivalBehavior : MonoBehaviour
                 print("animWaitTime Done");
             } 
         }
+    }
 
-        //Talking to player
+    //Dialog Events Below
 
-        //Leaving for the town
+    public void turnAnimRival()
+    {
+
+    }
+
+    public void enterPlayerName()
+    {
+
+    }
+
+    public void flashRed()
+    {
+
+    }
+
+    public void followPlayerToTown()
+    {
+
     }
 }
