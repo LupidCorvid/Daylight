@@ -65,7 +65,6 @@ public class DialogSource
 
     public Dictionary<string, string> dialogBlocks = new Dictionary<string, string>();
 
-
     public const string BLOCKS_SIGNATURE = "-Blocks";
 
     public bool skippingText = false;
@@ -225,7 +224,7 @@ public class DialogSource
 
     public string collect()
     {
-        if ((waiting || waitingForButtonInput || dialog == null))
+        if (waiting || waitingForButtonInput || dialog == null)
             return outString;
         
         skippingText = true;
@@ -246,7 +245,7 @@ public class DialogSource
 
     public string read(ReadMode mode = ReadMode.DEFAULT)
     {
-        if ((waiting || waitingForButtonInput || dialog == null))
+        if (waiting || waitingForButtonInput || dialog == null)
             return outString;
         while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {
@@ -280,7 +279,7 @@ public class DialogSource
     
     private void readDialog(ReadMode mode = ReadMode.DEFAULT)
     {
-        if ((waiting || waitingForButtonInput))
+        if (waiting || waitingForButtonInput)
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         while (position < dialog.Length && dialog[position] == '[')

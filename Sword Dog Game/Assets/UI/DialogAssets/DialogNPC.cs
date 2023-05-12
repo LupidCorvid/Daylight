@@ -30,6 +30,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public Transform promptSpawnLocation;
+    public SoundClip speechLoop;
+    public SoundPlayer soundPlayer;
 
     private bool _inRange = false;
     public bool inRange
@@ -53,6 +55,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
+        dialogSource.speak += speakVoice;
+        dialogSource.stopSpeak += stopSpeak;
     }
     public virtual void interact(GameObject user)
     {
@@ -150,20 +154,18 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void playSound(string sound, float volume = 1, bool loop = false)
     {
-        SoundPlayer player = null;
-        player ??= GetComponentInChildren<SoundPlayer>();
-        if (player == null)
+        soundPlayer ??= GetComponentInChildren<SoundPlayer>();
+        if (soundPlayer == null)
             Debug.LogError("No sound player attached to this NPC");
-        player?.PlaySound(sound, volume, loop);
+        soundPlayer?.PlaySound(sound, volume, loop);
     }
 
     public void endSound(string sound = null)
     {
-        SoundPlayer player = null;
-        player ??= GetComponentInChildren<SoundPlayer>();
-        if (player == null)
+        soundPlayer ??= GetComponentInChildren<SoundPlayer>();
+        if (soundPlayer == null)
             Debug.LogError("No sound player attached to this NPC");
-        player?.EndSound(sound);
+        soundPlayer?.EndSound(sound);
     }
 
     public void hidePrompt()
@@ -202,6 +204,16 @@ public class DialogNPC : MonoBehaviour, IInteractable
         bubble.speaker = this;
         bubble.offset = miniBubbleOffset;
         bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
+
+    }
+
+    public void speakVoice()
+    {
+        soundPlayer?.PlaySound(speechLoop, 0.5, true);
+    }
+
+    public void stopSpeak()
+    {
 
     }
 }
