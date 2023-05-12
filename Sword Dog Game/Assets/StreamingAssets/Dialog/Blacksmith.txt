@@ -1,7 +1,7 @@
 -Blocks
 Default{
-[sh, Blacksmith][abf,5][ss,.025] Hello, rookie. [w, .1] ...[w, .05]Is there anything I can do for you?
-[prompt, Quest, [llf,Quest], Improve weapon, [llf,ImproveWeapon], Leave, [llf,Leave]][wi][exit]
+[sh, Blacksmith][abf,15][ss,.05] Hello, rookie. [w, .1] ...[w, .05]Is there anything I can do for you?
+[prompt, Quest, [llf,Quest], Improve weapon, [llf,ImproveWeapon], Leave, [llf,Leave]][wi]
 }
 
 Quest{
@@ -9,17 +9,17 @@ Quest{
 }
 
 QuestDetails{
-[c]You're wondering where to find the things I asked for? What do they teach you rookies these days...[w, .2] You can find cave powder along the walls of underground, cave-like passages. [w, .2] Scrap metal can be found among piles of rocks. [wi][c] ...If you're worried about the general catching you out in the east woods, tell him I sent you.[w, .2] That guy can be quite a hot headed fellow, don't mind him. [wi][exit]
+[c]You're wondering where to find the things I asked for? What do they teach you rookies these days...[w, .2] You can find cave powder along the walls of underground, cave-like passages. [w, .2] Scrap metal can be found among piles of rocks. [wi][c] ...If you're worried about the general catching you out in the east woods, tell him I sent you.[w, .2] That guy can be quite a hot headed fellow, don't mind him. [wi] [exit]
 }
 
 QuestFulfilled{
-[c]Ah, so you've returned with what I asked for. I greatly appreciate the help. Here, I'll give you a bomb as a token of thanks. [wi][exit]
+[c]Ah, so you've returned with what I asked for. I greatly appreciate the help. Here, I'll give you a bomb as a token of thanks. [wi] [exit]
 }
 
 ImproveWeapon{
-[c]I cannot improve your weapon yet, I have too much to do.[wi][exit]
+[c]I cannot improve your weapon yet, I have too much to do.[wi] [exit]
 }
 
 Leave{
-[c]...Alright then.[w, .1] Be on your way.[wi][exit]
+[c]...Alright then.[w, .1] Be on your way.[wi] [exit]
 }

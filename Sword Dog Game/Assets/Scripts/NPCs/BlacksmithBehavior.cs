@@ -25,28 +25,38 @@ public class BlacksmithBehavior : DialogNPC
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (alreadyTalking)
-        //    talkingToPlayer();
-        //else if (!finishTalkingSequence)
-        //    idle();
-
         if (alreadyTalking)
-        {
-            if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
-            {
-                exitDialog();
-                GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
-                bubble = addedObj.GetComponent<MiniBubbleController>();
-                bubble.speaker = this;
-                bubble.offset = miniBubbleOffset;
-                bubble.setSource(new DialogSource(interruptDialog));
-            }
-        }
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            idle();
+
+        //if (alreadyTalking)
+        //{
+        //    if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
+        //    {
+        //        exitDialog();
+        //        GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
+        //        bubble = addedObj.GetComponent<MiniBubbleController>();
+        //        bubble.speaker = this;
+        //        bubble.offset = miniBubbleOffset;
+        //        bubble.setSource(new DialogSource(interruptDialog));
+        //    }
+        //}
     }
 
     private void idle()
     {
+        anim.Play("bsIdle");
+    }
 
+    private void talkingToPlayer()
+    {
+        //Find the side the player is on
+        if (!foundPlayerPosition)
+        {
+            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position; //Edit for possible null reference
+            foundPlayerPosition = true;
+        }
     }
 
     public override void interact(Entity user)
