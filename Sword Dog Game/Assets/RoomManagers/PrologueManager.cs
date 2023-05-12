@@ -10,6 +10,8 @@ public class PrologueManager : RoomManager
 
     public GameObject looseSword;
 
+    bool attemptedLeave = false;
+
     public override void  Awake()
     {
         base.Awake();
@@ -32,6 +34,13 @@ public class PrologueManager : RoomManager
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
                 {
                     CutsceneController.PlayCutscene("RivalApproached");
+                }
+                break;
+            case "AttemptedLeave":
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && roomState.prologueMonsterKilled && !attemptedLeave)
+                {
+                    CutsceneController.PlayCutscene("AttemptedLeave");
+                    attemptedLeave = true;
                 }
                 break;
             //case "MonsterKilled":
