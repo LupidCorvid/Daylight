@@ -114,7 +114,8 @@ public class PlayerHealth : MonoBehaviour
                     Die();
                 }
 
-                SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
+                if (SwordFollow.instance.activeSelf)
+                    SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<SimpleFlash>().Flash(1f, 3, true);
                 GetComponent<TimeStop>().StopTime();
                 StartCoroutine(AudioManager.instance.Muffle());
