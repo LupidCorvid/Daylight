@@ -17,6 +17,8 @@ public class EnemyBase : Entity
     public Animator anim;
 
     public int killValue = 5;
+    public SoundPlayer soundPlayer;
+    public SoundClip crySound;
     
 
     public override void Start()
@@ -65,5 +67,10 @@ public class EnemyBase : Entity
         if (health <= 0)
             die();
         GetComponentInChildren<SimpleFlash>()?.Flash(1f, 3, true);
+    }
+
+    public void cry()
+    {
+        soundPlayer?.PlaySound(crySound, 0.5f);
     }
 }

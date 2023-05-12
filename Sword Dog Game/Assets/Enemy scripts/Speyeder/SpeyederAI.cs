@@ -120,6 +120,7 @@ public class SpeyederAI : BaseAI
 
     public override void applyAttackDamage()
     {
+        enemyBase.cry();
         Vector2 location = transform.position + Vector3.down * 1.25f;
         Vector2 range = new Vector2(.75f, 1.25f);
         DamageBox(location, range);

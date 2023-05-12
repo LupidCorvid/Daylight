@@ -215,6 +215,7 @@ public class BiterAI : BaseAI
         lastAttack = Time.time;
         state = AIStates.attacking;
         attacking = true;
+        enemyBase.cry(); // TODO position this better/more responsively
         //anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetTrigger("Attack");
         //if(target.transform.position.x < transform.position.x)
