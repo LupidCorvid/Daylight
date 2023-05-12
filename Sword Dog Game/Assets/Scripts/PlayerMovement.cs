@@ -783,7 +783,7 @@ public class PlayerMovement : MonoBehaviour
     {
         wallOnLeft = wallOnRight = false;
         Vector2 startPosition1 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.6f);
-        Vector2 startPosition2 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.8f);
+        Vector2 startPosition2 = (Vector2)transform.position - new Vector2(0, cldr.bounds.size.y * 0.7f);
         startPosition1 += facingRight ? upperRightCorner : upperLeftCorner;
         startPosition2 += facingRight ? upperRightCorner : upperLeftCorner;
 
@@ -795,9 +795,9 @@ public class PlayerMovement : MonoBehaviour
         
         RaycastHit2D wallInfo = Physics2D.Raycast(startPosition1, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
 
+            Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
         if (wallInfo.point != Vector2.zero)
         {
-            Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
             if (wallInfo.distance <= wallCheckDistance) {
                 if (facingRight) wallOnRight = true;
                 else wallOnLeft = true;
@@ -806,9 +806,9 @@ public class PlayerMovement : MonoBehaviour
 
         wallInfo = Physics2D.Raycast(startPosition2, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
 
+            Debug.DrawLine(startPosition2, wallInfo.point, Color.blue);
         if (wallInfo.point != Vector2.zero)
         {
-            Debug.DrawLine(startPosition2, wallInfo.point, Color.blue);
             if (wallInfo.distance <= wallCheckDistance)
             {
                 if (facingRight) wallOnRight = true;
