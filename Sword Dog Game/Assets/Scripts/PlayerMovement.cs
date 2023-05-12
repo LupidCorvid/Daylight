@@ -277,7 +277,6 @@ public class PlayerMovement : MonoBehaviour
                 holdingJump = false;
             }
 
-            // // TODO REMOVE - debug cinematic bars keybind
             // if (Input.GetKeyDown(KeyCode.V))
             // {
             //     FindObjectOfType<CinematicBars>().Show(200, .3f);

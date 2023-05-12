@@ -71,15 +71,14 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         }
 
-        // TODO remove debug keybinds 
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Heal(10);
-        }
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     TakeDamage(1);
+        // }
+        // if (Input.GetKeyDown(KeyCode.H))
+        // {
+        //     Heal(10);
+        // }
     }
 
     public void UpdateHealth(bool blink = true)
