@@ -12,6 +12,7 @@ public class Crossfade : MonoBehaviour
 
     public static Action FadeStart;
     public static Action FadeEnd;
+    public static bool over = true;
 
 
     void Start()
@@ -49,6 +50,7 @@ public class Crossfade : MonoBehaviour
         }
         else
             animator?.SetTrigger("start");
+        over = false;
     }
 
     public void FadeOut()
@@ -61,6 +63,11 @@ public class Crossfade : MonoBehaviour
     {
         if (this != null)
             EndFade();
+    }
+
+    public void Finished()
+    {
+        over = true;
     }
 
 }

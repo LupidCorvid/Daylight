@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &205241703414158510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5677455161103524441}
+  m_Layer: 0
+  m_Name: BarkSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5677455161103524441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205241703414158510}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.57, y: 0.44, z: -0.33829585}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3703650061167044128}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1201838014051010203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3260499189240472252}
+  m_Layer: 0
+  m_Name: EmoteSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3260499189240472252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201838014051010203}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.19, y: 1.65, z: -0.20901255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3703650061167044128}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3703650060970454080
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +200,8 @@ Transform:
   m_Children:
   - {fileID: 3703650060970454083}
   - {fileID: 5745646115524858263}
+  - {fileID: 5677455161103524441}
+  - {fileID: 3260499189240472252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,6 +289,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00a390ed3f4d4b44aa528500f69ce8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
+  miniBubblePrefab: {fileID: 0}
+  emotePrefab: {fileID: 4940022028847480465, guid: f753fbb75cb933a44a5637f9edcff42d, type: 3}
+  miniBubbleOffset: {x: 0, y: 2}
+  dialog: []
+  numInteractions: 0
+  loopInteractions: 0
+  alreadyTalking: 0
+  barkSpawnLocation: {fileID: 205241703414158510}
+  promptPrefab: {fileID: 0}
+  spawnedPrompt: {fileID: 0}
+  promptSpawnLocation: {fileID: 0}
+  emoteSpawnLocation: {fileID: 3260499189240472252}
+  speechLoop: {fileID: 11400000, guid: c59387a1a4ec25a4aae6b61b47561ca7, type: 2}
+  soundPlayer: {fileID: 5453300713749614722}
+  speaking: 0
+  pausedSpeak: 0
+  interactor: {fileID: 0}
   monster: {fileID: 0}
 --- !u!1001 &5179977800091684500
 PrefabInstance:
@@ -287,6 +369,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
+--- !u!114 &5453300713749614722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 886362805277679126, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}
+  m_PrefabInstance: {fileID: 5179977800091684500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5745646115524858263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 603017179443076867, guid: 31f61b2904bb9a741aa14e2b2976413a, type: 3}

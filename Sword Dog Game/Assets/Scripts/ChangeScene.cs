@@ -60,7 +60,7 @@ public class ChangeScene : MonoBehaviour
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
-        ChangeScene.changingScene = false;
+        changingScene = false;
     }
 
     public static void ChangeSceneMinimal(string scene)
@@ -69,12 +69,13 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
+        PlayerMovement.controller.noFall = true;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
         CutsceneController.ClearCutscenes();
         //DialogController.closedAnimator = true;
-
+        changingScene = false;
     }
 
     public static void LoadScene(string scene, string spawn = "", bool showHUD = true)
@@ -85,7 +86,7 @@ public class ChangeScene : MonoBehaviour
 
     static IEnumerator LoadSceneEnum(string scene, string spawn, bool showHUD = true)
     {
-        ChangeScene.changingScene = true;
+        changingScene = true;
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
@@ -99,8 +100,8 @@ public class ChangeScene : MonoBehaviour
             GameObject.Destroy(eventSystem.gameObject);
         }
         SceneHelper.LoadScene(scene);
-        ChangeScene.clearCollisions?.Invoke();
-        ChangeScene.clearInteractables?.Invoke();
+        clearCollisions?.Invoke();
+        clearInteractables?.Invoke();
         CutsceneController.ClearCutscenes();
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
@@ -108,7 +109,7 @@ public class ChangeScene : MonoBehaviour
         Crossfade.current.StopFade();
         if (showHUD)
             CanvasManager.InstantShowHUD();
-        ChangeScene.changingScene = false;
+        changingScene = false;
     }
 
     public static void DisableMenuMusic()

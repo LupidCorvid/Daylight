@@ -36,7 +36,6 @@ public class PauseScreen : MonoBehaviour
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
             if(PlayerMenuManager.open)
             {
                 PlayerMenuManager.main.closeMenu();
@@ -49,7 +48,7 @@ public class PauseScreen : MonoBehaviour
                 return;
             }
 
-            if (ChangeScene.changingScene || GameSaver.loading)
+            if (ChangeScene.changingScene || GameSaver.loading || !Crossfade.over)
             {
                 return;
             }
@@ -106,7 +105,17 @@ public class PauseScreen : MonoBehaviour
         {
             source.UnPause();
         }
-
+        // TODO super sloppy but re-pauses music + dialog speakers
+        if (AudioManager.instance.paused)
+            AudioManager.instance.PauseCurrent();
+        if (DialogController.dialogOpen)
+        {
+            if (DialogController.speaker.pausedSpeak)
+                DialogController.speaker.pauseSpeak();
+            else if (!DialogController.speaker.speaking)
+                DialogController.speaker.stopSpeak();
+        }
+            
         pauseMenuGroup.alpha = 0;
         pauseMenuGroup.blocksRaycasts = false;
         pauseMenuGroup.interactable = false;
@@ -161,6 +170,7 @@ public class PauseScreen : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
+        CutsceneController.inCutscene = false;
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();

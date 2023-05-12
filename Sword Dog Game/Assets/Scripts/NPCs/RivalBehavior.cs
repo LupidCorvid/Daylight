@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RivalBehavior : MonoBehaviour
+public class RivalBehavior : DialogNPC
 {
     Animator rivalAnim, swordAnim;
     bool prologueBehaviorActive = true;
     float animWaitTime = 0f; //For waiting for an animation to execute
     
-    public GameObject monster;
+    public Entity monster;
 
     bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
 
@@ -16,6 +16,8 @@ public class RivalBehavior : MonoBehaviour
     {
         rivalAnim = gameObject.GetComponent<Animator>();
         swordAnim = GameObject.Find("rival sword").GetComponent<Animator>();
+        if (monster != null)
+            monster.killed += monsterKilled;
     }
     
     void Update()
@@ -34,6 +36,7 @@ public class RivalBehavior : MonoBehaviour
         rivalAnim.Play("rival_walk");
     }
     bool monsterDefeated = false;
+
     void prologueBehavior()
     {
         //Debug
@@ -83,6 +86,15 @@ public class RivalBehavior : MonoBehaviour
     public void flashRed()
     {
 
+    }
+
+    public void monsterKilled()
+    {
+        //if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        //{
+        //    monsterDefeated = true;
+        //    CutsceneController.PlayCutscene("SavedFromMonster");
+        //}
     }
 
     public void followPlayerToTown()

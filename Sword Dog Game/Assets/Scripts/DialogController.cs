@@ -6,6 +6,7 @@ using TMPro;
 public class DialogController : MonoBehaviour
 {
     public static DialogController main;
+    public static DialogNPC speaker;
 
     public CanvasGroup panel;
     public int panelAlpha = 255;
@@ -185,6 +186,11 @@ public class DialogController : MonoBehaviour
         newSource.addEffect += AddEffect;
         newSource.removeEffect += RemoveEffect;
 
+    }
+
+    public void setSpeaker(DialogNPC speaker)
+    {
+        DialogController.speaker = speaker;
     }
 
     public void setHeaderName(string newName)
