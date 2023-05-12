@@ -171,6 +171,7 @@ public class PauseScreen : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
+        CutsceneController.inCutscene = false;
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();
