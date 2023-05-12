@@ -90,11 +90,11 @@ public class RivalBehavior : DialogNPC
 
     public void monsterKilled()
     {
-        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
-        {
-            monsterDefeated = true;
-            CutsceneController.PlayCutscene("SavedFromMonster");
-        }
+        //if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        //{
+        //    monsterDefeated = true;
+        //    CutsceneController.PlayCutscene("SavedFromMonster");
+        //}
     }
 
     public void followPlayerToTown()

@@ -28,6 +28,12 @@ public class PrologueManager : RoomManager
             case "GetSword":
                 collectSword();
                 break;
+            case "ApproachedRival":
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+                {
+                    CutsceneController.PlayCutscene("SavedFromMonster");
+                }
+                break;
         }
     }
 
@@ -39,7 +45,7 @@ public class PrologueManager : RoomManager
             SwordFollow.instance.SetActive(false);
         if(!roomState.finishedIntroCutscene)
         {
-            roomState.finishedIntroCutscene = true;
+            //roomState.finishedIntroCutscene = true;
             CutsceneController.PlayCutscene("Intro");
         }
 
@@ -67,5 +73,10 @@ public class PrologueManager : RoomManager
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        roomState.finishedIntroCutscene = true;
     }
 }

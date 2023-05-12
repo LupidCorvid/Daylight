@@ -4,13 +4,13 @@ Default{
 }
 
 Scene1{
-[sh, Rival][abf,10][ss, .025] Oh thankgoodness![w,.2][ss, .05] I thought I was about to get put down! [wi][abf,2][sh] Wait a second[ss,.08]... [wi] [abf,15][emote, 0][CE, turnAnimRival] Hey! Where were you, rookie?! I was left to take on... another dozen or so, no, hundreds of those monsters while you were snoozing! [wi][abf,10][sh][reemote, 3] What?! You don’t believe me? Where’s your faith in your superior- [w, .5][sh][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH! Quickly! Finish it off! [/TFX,Shake][w, .2][exit]
+[sh, Rival][abf,10][ss,.025] Oh thankgoodness![w,.6][ss, .05] I thought I was about to get put down![wi] [c][abf,2] Wait a second[ss,.15]...[wi] [c][abf,15][emote, 0][ss,.05][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![w,.4] I was left to take on[ss,.033]...[ss,.05][w,.15] another dozen or so,[w,.3] no,[w,.3] hundreds of those monsters while you were snoozing! [wi] [c][abf,10][reemote, 3] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH![w,.2] Quickly![w,.3] Finish it off! [/TFX,Shake][w, 2] [exit]
 }
 
 Scene1.2{
-[sh, Rival][abf,10][ss, .05][TFX, Wave, 5, 5, 50] Waaaait, PLAYER! [/TFX,Wave][wi][CE, flashRed][reemote, 4][abf,5][ss, .08] Oh, what’s this? [w, .1] Hehe... well actually... [w, .1] I wasn’t lying about more of them showing up after you got knocked out... [w, .1] I trounced what I could, but one still escaped… [w, .1] And I couldn’t give chase because- [w, .1][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg... [wi][sh] Ye-yeah, let’s get back to town...  [w, .2] ...And thanks... for the help, [w, .1][IA,<size=80%>] friend... [IA,</size>][w, .2] I-I-I mean rookie! [wi][exit]
+[sh, Rival][abf,10][ss, .05][TFX, Wave, 5, 5, 50] Waaaait, PLAYER! [/TFX,Wave][wi][CE, flashRed][reemote, 4][abf,5][ss, .08] Oh, what's this? [w, .1] Hehe... well actually... [w, .1] I wasn't lying about more of them showing up after you got knocked out... [w, .1] I trounced what I could, but one still escaped… [w, .1] And I couldn't give chase because- [w, .1][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg... [wi][sh] Ye-yeah, let's get back to town...  [w, .2] ...And thanks... for the help, [w, .1][IA,<size=80%>] friend... [IA,</size>][w, .2] I-I-I mean rookie! [wi][exit]
 }
 
 Scene1.1{
-[sh, Rival][abf,10][ss, .08] Wow… Nice swingin’, rookie! [wi][sh][reemote, 3] Hey! I'm no rookie, I’m your senior by one, no, two months! Maybe one day you'll catch up to MY skill level and complete a mission without snoozing, err, what was your name again? [wi][CE, enterPlayerName] PLAYER! That's right, you better square up to these monsters if you ever want to get to my level! [wi][sh][exit]
+[sh, Rival][abf,10][ss, .08] Wow… Nice swingin', rookie! [wi][sh][reemote, 3] Hey! I'm no rookie, I'm your senior by one, no, two months! Maybe one day you'll catch up to MY skill level and complete a mission without snoozing, err, what was your name again? [wi][CE, enterPlayerName] PLAYER! That's right, you better square up to these monsters if you ever want to get to my level! [wi][sh][exit]
 }
