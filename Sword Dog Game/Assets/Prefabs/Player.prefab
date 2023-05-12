@@ -428,7 +428,7 @@ MonoBehaviour:
   attackMoveTracker: {fileID: 2170697637293356661}
   sprintDust: {fileID: 37055940391111458, guid: e59d02c40c13c9d4b969fe319802b4b1, type: 3}
   attacking: 0
-  soundPlayer: {fileID: 2397985649499789958}
+  soundPlayer: {fileID: 5880174822507758948}
   landSound: {fileID: 11400000, guid: 2dea572506e4da841bd60166f12677db, type: 2}
   currentGround: 0
   overrideColliderWidth: 1
@@ -640,19 +640,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   moveSpeed:
     baseValue: 4
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
   maxHealth: 8
   health: 8
   invincible: 0

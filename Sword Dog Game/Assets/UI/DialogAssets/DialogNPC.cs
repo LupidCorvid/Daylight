@@ -32,6 +32,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public Transform promptSpawnLocation;
     public SoundClip speechLoop;
     public SoundPlayer soundPlayer;
+    public bool speaking, pausedSpeak;
 
     private bool _inRange = false;
     public bool inRange
@@ -56,6 +57,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
         dialogSource.speak += speakVoice;
+        dialogSource.pauseSpeak += pauseSpeak;
         dialogSource.stopSpeak += stopSpeak;
     }
     public virtual void interact(GameObject user)
@@ -101,6 +103,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
             dialogSource.es -= endSound;
             //dialogSource.barkDefault -= barkEffect;
             dialogSource.exit -= exitDialog;
+            dialogSource.speak -= speakVoice;
+            dialogSource.pauseSpeak -= pauseSpeak;
+            dialogSource.stopSpeak -= stopSpeak;
         }
         dialogSource = newSource;
         dialogSource.callEvent += eventCalled;
@@ -109,6 +114,9 @@ public class DialogNPC : MonoBehaviour, IInteractable
         dialogSource.es += endSound;
         //dialogSource.barkDefault += barkEffect;
         dialogSource.exit += exitDialog;
+        dialogSource.speak += speakVoice;
+        dialogSource.pauseSpeak += pauseSpeak;
+        dialogSource.stopSpeak += stopSpeak;
     }
 
     public virtual void eventCalled(params string[] input)
@@ -209,11 +217,34 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void speakVoice()
     {
-        soundPlayer?.PlaySound(speechLoop, 0.5, true);
+        if (!speaking)
+        {
+            soundPlayer?.PlaySound(speechLoop, 0.5f, true);
+            speaking = true;
+        }
+        else if (pausedSpeak)
+        {
+            soundPlayer?.UnPauseSound(speechLoop);
+            pausedSpeak = false;
+        }
+    }
+
+    public void pauseSpeak()
+    {
+        if (speaking && !pausedSpeak)
+        {
+            soundPlayer?.PauseSound(speechLoop);
+            pausedSpeak = true;
+        }
     }
 
     public void stopSpeak()
     {
-
+        if (speaking)
+        {
+            soundPlayer?.EndSound(speechLoop);
+            pausedSpeak = false;
+            speaking = false;
+        }
     }
 }
