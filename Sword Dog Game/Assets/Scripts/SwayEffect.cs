@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Burst;
+using Unity.Jobs;
+
 
 [Unity.Burst.BurstCompile] //Bursts don't seem to do anything, but leaving them in since they don't seem to hurt
 public class SwayEffect : MonoBehaviour
@@ -16,7 +18,7 @@ public class SwayEffect : MonoBehaviour
     MeshFilter meshFilter;
     Mesh.MeshDataArray originalSnapshot;
 
-    public float swayPosition = 1;
+    public float swayPosition = 0;
     public float swayVelocity = 0;
 
     public float tension = 1;
@@ -52,6 +54,10 @@ public class SwayEffect : MonoBehaviour
     public static float windSoundCooldown = .1f;
 
     public MaterialPropertyBlock materialBlock;
+
+    WindEffectsJob windJob;
+    JobHandle windJobHandle;
+    bool ranJob = false;
 
     // Start is called before the first frame update
     void Start()
@@ -217,56 +223,84 @@ public class SwayEffect : MonoBehaviour
         return Mathf.PerlinNoise(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
     }
 
-    [Unity.Burst.BurstCompile]
-    private void FixedUpdate()
+    //[Unity.Burst.BurstCompile]
+    //private void FixedUpdate()
+    //{
+    //    //Culling
+    //    //player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
+    //    //if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
+    //    //    return;
+    //    //New culling
+    //    if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize/6)
+    //        return;
+
+    //    //Wind direction makes it so that wind rolls in the same direction as things are bending
+    //    int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
+    //    //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
+
+    //    //float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+    //    float windEffect = getWindEffect(transform.position.x, windSpeed, windVolatility, windStrength);
+    //    swayVelocity += windEffect;
+    //    swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
+    //    swayPosition += swayVelocity;
+
+    //    if(Mathf.Abs(swayPosition) > limit)
+    //    {
+    //        if (swayPosition > 0)
+    //            swayPosition = limit;
+    //        else
+    //            swayPosition = -limit;
+
+    //        //swayVelocity /= limit;
+    //    }
+    //    if (rend.isVisible)
+    //    {
+    //        if (rotate)
+    //            swayRotate(swayPosition);
+    //        else
+    //            sway(swayPosition);
+    //    }
+
+    //    //Needs optimization
+    //    //if (windEffect/Time.fixedDeltaTime * 10/Mathf.Abs(windStrength) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
+    //    //    PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
+    //    if (Mathf.Abs(windEffect) / Time.fixedDeltaTime > 1.5f && windSoundCooldown + lastWindTime <= Time.time && windSounds < windSoundCap)
+    //    {
+    //        float dampen = MainMenuManager.inMainMenu ? 0.25f : 1f;
+    //        PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f * dampen);
+    //        lastWindTime = Time.time;
+    //    }
+
+    //    //if (windSoundCooldown < windSoundCooldownMax)
+    //    //    windSoundCooldown += Time.fixedDeltaTime;
+    //}
+
+    public void Update()
     {
-        //Culling
-        //player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
-        //if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
-        //    return;
-        //New culling
-        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize/6)
+        
+        player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
             return;
+        windJob = new WindEffectsJob(windStrength, windSpeed, windVolatility, transform.position.x, originalSnapshot, originalMesh.bounds.size.y, originalMesh.bounds.min.y, tension, dampening, limit, swayPosition, swayVelocity, Time.time, Time.deltaTime, rotate);
+        //windJob.Execute();
+        windJobHandle = windJob.Schedule();
+        ranJob = true;
+        
+    }
 
-        //Wind direction makes it so that wind rolls in the same direction as things are bending
-        int windDirection = (windStrength * sceneStrengthScalar > 0 ? -1 : 1);
-        //Changed Time.deltaTime to Time.fixedTime to reflect that this is in FixedUpdate
+    public void LateUpdate()
+    {
+        if(!ranJob)
+            return;
+        windJobHandle.Complete();
+        swayPosition = windJob.swayPosition;
+        swayVelocity = windJob.swayVelocity;
+        //meshFilter.sharedMesh.MarkDynamic();
+        meshFilter.sharedMesh.SetVertices(windJob.vertices);
 
-        //float windEffect = Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
-        float windEffect = getWindEffect(transform.position.x, windSpeed, windVolatility, windStrength);
-        swayVelocity += windEffect;
-        swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
-        swayPosition += swayVelocity;
-
-        if(Mathf.Abs(swayPosition) > limit)
-        {
-            if (swayPosition > 0)
-                swayPosition = limit;
-            else
-                swayPosition = -limit;
-            
-            //swayVelocity /= limit;
-        }
-        if (rend.isVisible)
-        {
-            if (rotate)
-                swayRotate(swayPosition);
-            else
-                sway(swayPosition);
-        }
-
-        //Needs optimization
-        //if (windEffect/Time.fixedDeltaTime * 10/Mathf.Abs(windStrength) > 3 && windSoundCooldown >= windSoundCooldownMax && windSounds < windSoundCap)
-        //    PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f);
-        if (Mathf.Abs(windEffect) / Time.fixedDeltaTime > 1.5f && windSoundCooldown + lastWindTime <= Time.time && windSounds < windSoundCap)
-        {
-            float dampen = MainMenuManager.inMainMenu ? 0.25f : 1f;
-            PlayWindSound(windEffect / Time.fixedDeltaTime * 0.04f * dampen);
-            lastWindTime = Time.time;
-        }
-
-        //if (windSoundCooldown < windSoundCooldownMax)
-        //    windSoundCooldown += Time.fixedDeltaTime;
+        windJob.vertices.Dispose();
+        ranJob = false;
+        
     }
 
     private void PlayWindSound(float volume)
@@ -287,5 +321,122 @@ public class SwayEffect : MonoBehaviour
     {
         if(windSounds > 0)
             windSounds--;
+    }
+
+
+
+    public struct WindEffectsJob : IJob
+    {
+        [ReadOnly]
+        public float strength;
+        [ReadOnly]
+        public float speed;
+        [ReadOnly]
+        public float volatility;
+        [ReadOnly]
+        public float xPos;
+        [ReadOnly]
+        public float limit;
+
+        public float swayPosition;
+        public float swayVelocity;
+        [ReadOnly]
+        public float tension;
+        [ReadOnly]
+        public float dampening;
+
+        [ReadOnly]
+        public Mesh.MeshDataArray originalMeshData;
+        [ReadOnly]
+        public float meshHeight;
+        [ReadOnly]
+        public float meshMinHeight;
+        
+        public NativeArray<Vector3> vertices;
+        [ReadOnly]
+        public bool swayRotate;
+
+        [ReadOnly]
+        public float time;
+        [ReadOnly]
+        public float deltaTime;
+
+
+
+        public WindEffectsJob(float windStrength, float windSpeed, float windVolatility, float xPosition, Mesh.MeshDataArray meshData, float meshMaxHeight, float meshMinHeight, float tension, float dampening, float limit, float swayPosition, float swayVelocity, float time, float deltaTime, bool swayRotate = false)
+        {
+            strength = windStrength;
+            speed = windSpeed;
+            volatility = windVolatility;
+            xPos = xPosition;
+            originalMeshData = meshData;
+            meshHeight = meshMaxHeight;
+            this.meshMinHeight = meshMinHeight;
+            this.tension = tension;
+            this.dampening = dampening;
+            this.swayPosition = swayPosition;
+            this.swayVelocity = swayVelocity;
+            this.limit = limit;
+            this.swayRotate = swayRotate;
+            vertices = new NativeArray<Vector3>(originalMeshData[0].vertexCount, Allocator.TempJob);
+            this.time = time;
+            this.deltaTime = deltaTime;
+        }
+
+        public void Execute()
+        {
+            float windEffect = Mathf.PerlinNoise(((time * speed * (strength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * volatility * sceneVolatilityScalar, 0) * deltaTime * strength * sceneStrengthScalar;
+            swayVelocity += windEffect;
+            swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
+            swayPosition += swayVelocity;
+
+            if (Mathf.Abs(swayPosition) > limit)
+            {
+                if (swayPosition > 0)
+                    swayPosition = limit;
+                else
+                    swayPosition = -limit;
+
+                //swayVelocity /= limit;
+            }
+
+            if (swayRotate)
+            {
+                SwayRotate(swayPosition);
+            }
+            else
+            {
+                Sway(swayPosition);
+            }
+        }
+
+        public void Sway(float intensity)
+        {
+            
+            originalMeshData[0].GetVertices(vertices);
+            //Vector3[] newVertices = new Vector3[vertices.Length];
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                float height = (vertices[i].y - meshMinHeight) / meshHeight;
+                vertices[i] = new Vector3((Mathf.Lerp(0, meshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
+
+            }
+            //meshFilter.sharedMesh.SetVertices(newVertices);
+        }
+
+        public void SwayRotate(float intensity)
+        {
+            
+            originalMeshData[0].GetVertices(vertices);
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                float height = (vertices[i].y - meshMinHeight) / meshHeight;
+                vertices[i] = new Vector3((Mathf.Lerp(0, meshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
+                float angle = Mathf.Atan2(vertices[i].y, vertices[i].x);
+                //newVertices[i].y = Mathf.Sin(angle);
+                vertices[i] = new Vector3(vertices[i].x, Mathf.Sin(angle), vertices[i].z);
+            }
+        }
+
     }
 }
