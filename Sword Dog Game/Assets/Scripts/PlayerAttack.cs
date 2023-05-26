@@ -51,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
                 attackCombo++;
                 anim.SetTrigger("attack" + attackCombo);
             }
+            //Parry input
             if(Input.GetMouseButton(1) && !Input.GetMouseButtonDown(1))
             {
                 if (!isParrying)
@@ -59,9 +60,23 @@ public class PlayerAttack : MonoBehaviour
                 Vector2 inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 float angle = Mathf.Atan2(inputVector.y, inputVector.x);
                 Debug.DrawLine(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, default);
-                parryTrackerLocation.localPosition = new Vector3(1.5f * Mathf.Cos(angle), Mathf.Sin(angle), 0) * 1.5f;
+                int neg = (pMovement.facingRight) ? 1 : -1;
+                //angle = Mathf.Clamp(angle, -Mathf.PI/2, Mathf.PI/2));
+                if (neg == 1)
+                    angle = Mathf.Clamp(angle, -Mathf.PI / 2, Mathf.PI / 2);
+                else
+                {
+                    if (angle < Mathf.PI / 2 && angle > 0)
+                        angle = Mathf.PI / 2;
+                    if (angle > -Mathf.PI / 2 && angle < 0)
+                        angle = -Mathf.PI / 2;
+                }
+                parryTrackerLocation.localPosition = new Vector3(1.5f * Mathf.Cos(angle) * neg, Mathf.Sin(angle), 0) * 1.5f;
+                parryTrackerLocation.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg + 90);
 
                 isParrying = true;
+                pMovement.canTurn = false;
+                pMovement.canSprint = false;
                 
             }
             else
@@ -69,6 +84,8 @@ public class PlayerAttack : MonoBehaviour
                 if (isParrying)
                     pMovement.entityBase.moveSpeed.multiplier /= .5f;
                 isParrying = false;
+                pMovement.canTurn = true;
+                pMovement.canSprint = true;
             }
             
             // perhaps useful in the future for preventing sprint/jump from interrupting attack

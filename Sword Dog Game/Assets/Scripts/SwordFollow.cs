@@ -96,6 +96,12 @@ public class SwordFollow : MonoBehaviour
             //Check for contact damage
             return;
         }
+        else if (pmScript.pAttack.isParrying)
+        {
+            parryMove();
+            particleFF.directionX = -rb.velocity.magnitude;
+            return;
+        }
         else
         {
             particleFF.directionX = 0;
@@ -213,6 +219,25 @@ public class SwordFollow : MonoBehaviour
         ////Multiplied by 60 to match the time of the frame in the animation
         rb.angularVelocity = getAngleDirection(transform.rotation, attackMoveTracker.transform.rotation) * 60;
 
+    }
+
+    public void parryMove()
+    {
+        if (!pmScript.facingRight)
+        {
+            adjustLocationX = -adjustDefaultX;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            adjustLocationX = adjustDefaultX;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        rb.velocity = (pmScript.pAttack.parryTrackerLocation.transform.position - transform.position) * 60 / 3;
+
+        ////Multiplied by 60 to match the time of the frame in the animation
+        rb.angularVelocity = getAngleDirection(transform.rotation, pmScript.pAttack.parryTrackerLocation.transform.rotation) * 60 / 3;
     }
 
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)

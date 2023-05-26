@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
     private Vector3 resetPosition;
     private Quaternion resetRotation;
+    public bool canTurn = true;
+    public bool canSprint = true;
+    public PlayerAttack pAttack;
 
     public bool facingRight
     {
@@ -287,7 +290,7 @@ public class PlayerMovement : MonoBehaviour
             // }
 
             // sprinting
-            if (trotting && !isSprinting && !isSkidding)
+            if (trotting && !isSprinting && !isSkidding && canSprint)
             {
                 if ((Input.GetButton("Sprint") && canResprint && stamina >= minStamina) || Input.GetButtonDown("Sprint"))
                 {
@@ -297,7 +300,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f)))
+            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f) || !canSprint))
             {
                 // bad code
                 // if (isSprinting)
@@ -470,6 +473,8 @@ public class PlayerMovement : MonoBehaviour
     // flips sprite when player changes movement direction
     void Flip()
     {
+        if (!canTurn)
+            return;
         facingRight = !facingRight;
         transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 1);
     }
