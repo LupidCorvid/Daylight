@@ -8,15 +8,57 @@ using Unity.Jobs;
 
 
 [Unity.Burst.BurstCompile] //Bursts don't seem to do anything, but leaving them in since they don't seem to hurt
-public class SwayEffect : MonoBehaviour
+public unsafe class SwayEffect : MonoBehaviour
 {
     public Sprite texture;
-    public Color color = new Color(0,0,0, 1);
+    public Color color = new Color(0, 0, 0, 1);
     Renderer rend;
 
     Mesh originalMesh;
     MeshFilter meshFilter;
     Mesh.MeshDataArray originalSnapshot;
+
+    public struct swaySettings
+    {
+        public float swayPosition;
+        public float swayVelocity;
+
+        public float tension;
+        public float dampening;
+
+        public float windStrength;
+        public float windSpeed;
+        //Lower wind volatility means objects near eachother have similar swaying motion
+        public float windVolatility;
+
+        public float limit;
+
+        public bool rotate;
+
+        public float minMeshHeight;
+        public float maxMeshHeight;
+
+        public Mesh.MeshDataArray originalSnapshot;
+
+        public swaySettings(SwayEffect main)
+        {
+            swayPosition = main.swayPosition;
+            swayVelocity = main.swayVelocity;
+            tension = main.tension;
+            dampening = main.dampening;
+            windStrength = main.windStrength;
+            windSpeed = main.windSpeed;
+            windVolatility = main.windVolatility;
+            limit = main.limit;
+            rotate = main.rotate;
+            minMeshHeight = main.minMeshHeight;
+            maxMeshHeight = main.maxMeshHeight;
+            originalSnapshot = main.originalSnapshot;
+
+        }
+    }
+
+    public swaySettings settings;
 
     public float swayPosition = 0;
     public float swayVelocity = 0;
@@ -29,15 +71,17 @@ public class SwayEffect : MonoBehaviour
     //Lower wind volatility means objects near eachother have similar swaying motion
     public float windVolatility = 0.2f;
 
+    public float limit = 1;
+
+    public bool rotate = false;
+
     //For use with SceneWindSetter
     public static float sceneStrengthScalar = 1;
     public static float sceneSpeedScalar = 1;
     public static float sceneVolatilityScalar = 1;
 
     //Maximum distance for deformation on the mesh
-    public float limit = 1;
-
-    public bool rotate = false;
+    
 
     public Dictionary<Rigidbody2D, Vector2> objectsWithVelocity = new Dictionary<Rigidbody2D, Vector2>();
 
@@ -58,6 +102,9 @@ public class SwayEffect : MonoBehaviour
     WindEffectsJob windJob;
     JobHandle windJobHandle;
     bool ranJob = false;
+
+    public float minMeshHeight;
+    public float maxMeshHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +127,9 @@ public class SwayEffect : MonoBehaviour
         Mesh.ApplyAndDisposeWritableMeshData(tempData, meshFilter.sharedMesh);
         meshFilter.mesh.RecalculateBounds();
         meshFilter.mesh.RecalculateNormals();
+        minMeshHeight = originalMesh.bounds.min.y;
+        maxMeshHeight = originalMesh.bounds.size.y;
+        settings = new swaySettings(this);
     }
 
     public void OnValidate()
@@ -121,7 +171,7 @@ public class SwayEffect : MonoBehaviour
         meshFilter.sharedMesh.SetVertices(newVertices);
     }
 
-    
+
 
     public void OnDestroy()
     {
@@ -155,41 +205,41 @@ public class SwayEffect : MonoBehaviour
         if (((int)Mathf.Pow(2, collision.gameObject.layer) & LayerMask.GetMask("TerrainFX", "Utility")) == 0)
         {
             float distanceModifier = 1;
-            distanceModifier = Mathf.Abs((transform.position.x - collision.transform.position.x)/collision.bounds.extents.x);
+            distanceModifier = Mathf.Abs((transform.position.x - collision.transform.position.x) / collision.bounds.extents.x);
             distanceModifier = Mathf.Clamp(distanceModifier, 0, 1);
             distanceModifier = 1 - distanceModifier;
             int neg = transform.localScale.x > 0 ? 1 : -1;
             float physicsVelocity = ((collision.attachedRigidbody.velocity.x) * Time.deltaTime * neg) * distanceModifier;
-            
-            if(collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
+
+            if (collision.attachedRigidbody != null && objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
             {
                 //Affects additional force applied to grass behind the launching object
                 const float PUSH_BACK_STRENGTH = 1.0f / 130;
                 //Affects all grass around the launching or landing object
                 const float PUSH_AWAY_STRENGTH = 1.0f / 115;
 
-                distanceModifier = (transform.position.x - collision.transform.position.x)/collision.bounds.extents.x;
+                distanceModifier = (transform.position.x - collision.transform.position.x) / collision.bounds.extents.x;
                 distanceModifier = Mathf.Clamp(distanceModifier, -1, 1);
                 distanceModifier += distanceModifier > 0 ? -1 : 1;
                 distanceModifier *= -1;
                 physicsVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_AWAY_STRENGTH * distanceModifier;
 
                 //For pushing grass behind something being launched
-                if(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y > .25f)
+                if (collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y > .25f)
                 {
-                    if(transform.position.x - collision.transform.position.x < 0 && collision.attachedRigidbody.velocity.x > 0
+                    if (transform.position.x - collision.transform.position.x < 0 && collision.attachedRigidbody.velocity.x > 0
                         || transform.position.x - collision.transform.position.x > 0 && collision.attachedRigidbody.velocity.x < 0)
                     {
-                        physicsVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_BACK_STRENGTH * distanceModifier 
+                        physicsVelocity += Mathf.Abs(collision.attachedRigidbody.velocity.y - objectsWithVelocity[collision.attachedRigidbody].y) * PUSH_BACK_STRENGTH * distanceModifier
                                         * Mathf.Abs(collision.attachedRigidbody.velocity.x);
 
                     }
                 }
-                
+
                 objectsWithVelocity[collision.attachedRigidbody] = collision.attachedRigidbody.velocity;
             }
             swayVelocity += physicsVelocity;
-            if(Mathf.Abs(physicsVelocity) > 0.01f)
+            if (Mathf.Abs(physicsVelocity) > 0.01f)
             {
                 PlayWindSound(Mathf.Abs(physicsVelocity / Time.fixedDeltaTime * 0.075f * 13f / 3 * .5f));
             }
@@ -197,7 +247,7 @@ public class SwayEffect : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null && !objectsWithVelocity.ContainsKey(collision.attachedRigidbody)) 
+        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null && !objectsWithVelocity.ContainsKey(collision.attachedRigidbody))
         {
             objectsWithVelocity.Add(collision.attachedRigidbody, collision.attachedRigidbody.velocity);
         }
@@ -277,20 +327,24 @@ public class SwayEffect : MonoBehaviour
 
     public void Update()
     {
-        
+
         player ??= GameObject.FindGameObjectWithTag("Player")?.transform;
         if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
             return;
-        windJob = new WindEffectsJob(windStrength, windSpeed, windVolatility, transform.position.x, originalSnapshot, originalMesh.bounds.size.y, originalMesh.bounds.min.y, tension, dampening, limit, swayPosition, swayVelocity, Time.time, Time.deltaTime, rotate);
+        //windJob = new WindEffectsJob(windStrength, windSpeed, windVolatility, transform.position.x, originalSnapshot, maxMeshHeight, minMeshHeight, tension, dampening, limit, swayPosition, swayVelocity, Time.time, Time.deltaTime, rotate);
+        unsafe
+        {
+            windJob = new WindEffectsJob(settings, Time.time, Time.deltaTime, transform.position.x);
+        }
         //windJob.Execute();
         windJobHandle = windJob.Schedule();
         ranJob = true;
-        
+
     }
 
     public void LateUpdate()
     {
-        if(!ranJob)
+        if (!ranJob)
             return;
         windJobHandle.Complete();
         swayPosition = windJob.swayPosition;
@@ -300,14 +354,14 @@ public class SwayEffect : MonoBehaviour
 
         windJob.vertices.Dispose();
         ranJob = false;
-        
+
     }
 
     private void PlayWindSound(float volume)
     {
         if (soundPlayer == null)
             return;
-        
+
         if (rustleFX != null)
         {
             soundPlayer.PlaySound(rustleFX, volume);
@@ -319,88 +373,110 @@ public class SwayEffect : MonoBehaviour
 
     private void EndWindSound()
     {
-        if(windSounds > 0)
+        if (windSounds > 0)
             windSounds--;
     }
 
 
-
-    public struct WindEffectsJob : IJob
+    public unsafe struct WindEffectsJob : IJob
     {
-        [ReadOnly]
-        public float strength;
-        [ReadOnly]
-        public float speed;
-        [ReadOnly]
-        public float volatility;
-        [ReadOnly]
-        public float xPos;
-        [ReadOnly]
-        public float limit;
-
-        public float swayPosition;
-        public float swayVelocity;
-        [ReadOnly]
-        public float tension;
-        [ReadOnly]
-        public float dampening;
-
-        [ReadOnly]
-        public Mesh.MeshDataArray originalMeshData;
-        [ReadOnly]
-        public float meshHeight;
-        [ReadOnly]
-        public float meshMinHeight;
         
+        //[ReadOnly]
+        //public float strength;
+        //[ReadOnly]
+        //public float speed;
+        //[ReadOnly]
+        //public float volatility;
+
+        //[ReadOnly]
+        //public float limit;
+
+        
+        //[ReadOnly]
+        //public float tension;
+        //[ReadOnly]
+        //public float dampening;
+
+        //[ReadOnly]
+        //public Mesh.MeshDataArray originalMeshData;
+        //[ReadOnly]
+        //public float meshHeight;
+        //[ReadOnly]
+        //public float meshMinHeight;
+
+        //[ReadOnly]
+        //public bool swayRotate;
+
+        [Unity.Collections.LowLevel.Unsafe.NativeDisableUnsafePtrRestriction]
+        public swaySettings *main;
+
+
         public NativeArray<Vector3> vertices;
-        [ReadOnly]
-        public bool swayRotate;
+        
 
         [ReadOnly]
         public float time;
         [ReadOnly]
         public float deltaTime;
 
+        [ReadOnly]
+        public float xPos;
+
+        public float swayPosition;
+        public float swayVelocity;
 
 
-        public WindEffectsJob(float windStrength, float windSpeed, float windVolatility, float xPosition, Mesh.MeshDataArray meshData, float meshMaxHeight, float meshMinHeight, float tension, float dampening, float limit, float swayPosition, float swayVelocity, float time, float deltaTime, bool swayRotate = false)
+        //public WindEffectsJob(float windStrength, float windSpeed, float windVolatility, float xPosition, Mesh.MeshDataArray meshData, float meshMaxHeight, float meshMinHeight, float tension, float dampening, float limit, float swayPosition, float swayVelocity, float time, float deltaTime, bool swayRotate = false)
+        //{
+        //    strength = windStrength;
+        //    speed = windSpeed;
+        //    volatility = windVolatility;
+        //    xPos = xPosition;
+        //    originalMeshData = meshData;
+        //    meshHeight = meshMaxHeight;
+        //    this.meshMinHeight = meshMinHeight;
+        //    this.tension = tension;
+        //    this.dampening = dampening;
+        //    this.swayPosition = swayPosition;
+        //    this.swayVelocity = swayVelocity;
+        //    this.limit = limit;
+        //    this.swayRotate = swayRotate;
+        //    vertices = new NativeArray<Vector3>(originalMeshData[0].vertexCount, Allocator.TempJob);
+        //    this.time = time;
+        //    this.deltaTime = deltaTime;
+        //}
+
+        public WindEffectsJob(swaySettings* main, float Time, float deltaTime, float xPos)
         {
-            strength = windStrength;
-            speed = windSpeed;
-            volatility = windVolatility;
-            xPos = xPosition;
-            originalMeshData = meshData;
-            meshHeight = meshMaxHeight;
-            this.meshMinHeight = meshMinHeight;
-            this.tension = tension;
-            this.dampening = dampening;
-            this.swayPosition = swayPosition;
-            this.swayVelocity = swayVelocity;
-            this.limit = limit;
-            this.swayRotate = swayRotate;
-            vertices = new NativeArray<Vector3>(originalMeshData[0].vertexCount, Allocator.TempJob);
-            this.time = time;
+            this.main = main;
+            this.time = Time;
             this.deltaTime = deltaTime;
+            this.xPos = xPos;
+
+            swayPosition = (*main).swayPosition;
+            swayVelocity = (*main).swayVelocity;
+
+            vertices = new NativeArray<Vector3>((*main).originalSnapshot[0].vertexCount, Allocator.TempJob);
         }
 
         public void Execute()
         {
-            float windEffect = Mathf.PerlinNoise(((time * speed * (strength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * volatility * sceneVolatilityScalar, 0) * deltaTime * strength * sceneStrengthScalar;
+            float windEffect = Mathf.PerlinNoise(((time * (*main).windSpeed * ((*main).windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * (*main).windVolatility * sceneVolatilityScalar, 0) * deltaTime * main.windStrength * sceneStrengthScalar;
             swayVelocity += windEffect;
-            swayVelocity += tension * (-swayPosition) - swayVelocity * dampening;
+            swayVelocity += (*main).tension * (-swayPosition) - swayVelocity * (*main).dampening;
             swayPosition += swayVelocity;
 
-            if (Mathf.Abs(swayPosition) > limit)
+            if (Mathf.Abs(swayPosition) > (*main).limit)
             {
                 if (swayPosition > 0)
-                    swayPosition = limit;
+                    swayPosition = (*main).limit;
                 else
-                    swayPosition = -limit;
+                    swayPosition = -(*main).limit;
 
                 //swayVelocity /= limit;
             }
 
-            if (swayRotate)
+            if ((*main).rotate)
             {
                 SwayRotate(swayPosition);
             }
@@ -412,13 +488,13 @@ public class SwayEffect : MonoBehaviour
 
         public void Sway(float intensity)
         {
-            
-            originalMeshData[0].GetVertices(vertices);
+
+            (*main).originalSnapshot[0].GetVertices(vertices);
             //Vector3[] newVertices = new Vector3[vertices.Length];
             for (int i = 0; i < vertices.Length; i++)
             {
-                float height = (vertices[i].y - meshMinHeight) / meshHeight;
-                vertices[i] = new Vector3((Mathf.Lerp(0, meshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
+                float height = (vertices[i].y - (*main).minMeshHeight) / (*main).maxMeshHeight;
+                vertices[i] = new Vector3((Mathf.Lerp(0, (*main).maxMeshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
 
             }
             //meshFilter.sharedMesh.SetVertices(newVertices);
@@ -426,12 +502,12 @@ public class SwayEffect : MonoBehaviour
 
         public void SwayRotate(float intensity)
         {
-            
-            originalMeshData[0].GetVertices(vertices);
+
+            (*main).originalSnapshot[0].GetVertices(vertices);
             for (int i = 0; i < vertices.Length; i++)
             {
-                float height = (vertices[i].y - meshMinHeight) / meshHeight;
-                vertices[i] = new Vector3((Mathf.Lerp(0, meshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
+                float height = (vertices[i].y - (*main).minMeshHeight) / (*main).maxMeshHeight;
+                vertices[i] = new Vector3((Mathf.Lerp(0, (*main).maxMeshHeight, height) * intensity) + vertices[i].x, vertices[i].y, vertices[i].z);
                 float angle = Mathf.Atan2(vertices[i].y, vertices[i].x);
                 //newVertices[i].y = Mathf.Sin(angle);
                 vertices[i] = new Vector3(vertices[i].x, Mathf.Sin(angle), vertices[i].z);
