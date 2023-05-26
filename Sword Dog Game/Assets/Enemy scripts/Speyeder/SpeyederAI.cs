@@ -55,6 +55,9 @@ public class SpeyederAI : BaseAI
     {
         base.FixedUpdate();
 
+        if (enemyBase.stunned)
+            return;
+
         transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(web.connectedBody.transform.position - transform.position, Vector2.up));
         anim.SetFloat("XVel", rb.velocity.x);
         anim.SetFloat("YVel", rb.velocity.y);

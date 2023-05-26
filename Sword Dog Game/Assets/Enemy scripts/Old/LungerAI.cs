@@ -45,6 +45,10 @@ public class LungerAI : BaseAI
     public override void Update()
     {
         base.Update();
+
+        if (enemyBase.stunned)
+            return;
+
         if(state == AIStates.moving)
         {
             cldr.sharedMaterial = ((Lunger)enemyBase).slippery;

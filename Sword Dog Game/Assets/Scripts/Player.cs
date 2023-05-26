@@ -32,8 +32,9 @@ public class Player : Entity
         return InventoryManager.currInventory;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Entity source)
     {
+        base.TakeDamage(damage, source);
         playerHealth.TakeDamage(damage);
     }
 

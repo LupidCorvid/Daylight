@@ -85,6 +85,10 @@ public class RockLobberAI : BaseAI
     public override void Update()
     {
         base.Update();
+
+        if (enemyBase.stunned)
+            return;
+
         if (target == null)
             return;
 

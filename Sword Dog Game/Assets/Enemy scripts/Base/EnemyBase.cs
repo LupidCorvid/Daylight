@@ -61,8 +61,9 @@ public class EnemyBase : Entity
 
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(int amount, Entity source)
     {
+        base.TakeDamage(amount, source);
         health -= amount;
         if (health <= 0)
             die();

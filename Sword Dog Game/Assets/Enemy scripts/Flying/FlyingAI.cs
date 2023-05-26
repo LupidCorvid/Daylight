@@ -74,6 +74,10 @@ public class FlyingAI : BaseAI
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        if (enemyBase.stunned)
+            return;
+
         if (target == null)
             return;//Need idle for this case
         switch(state)

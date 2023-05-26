@@ -41,6 +41,9 @@ public class BugShroomAI : BaseAI
     {
         base.Update();
 
+        if (enemyBase.stunned)
+            return;
+
         if (target == null)
             state = AIState.idle;
 

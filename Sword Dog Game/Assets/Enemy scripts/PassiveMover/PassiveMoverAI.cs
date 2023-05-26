@@ -38,6 +38,10 @@ public class PassiveMoverAI : BaseAI
     public override void Update()
     {
         base.Update();
+
+        if (enemyBase.stunned)
+            return;
+
         if (MovingRight)
             movement.MoveRight(moveSpeed);
         else

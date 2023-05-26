@@ -233,11 +233,11 @@ public class SwordFollow : MonoBehaviour
             adjustLocationX = adjustDefaultX;
             transform.localScale = new Vector3(1, 1, 1);
         }
+        
+        rb.velocity = (pmScript.pAttack.parryTrackerLocation.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
 
-        rb.velocity = (pmScript.pAttack.parryTrackerLocation.transform.position - transform.position) * 60 / 3;
-
-        ////Multiplied by 60 to match the time of the frame in the animation
-        rb.angularVelocity = getAngleDirection(transform.rotation, pmScript.pAttack.parryTrackerLocation.transform.rotation) * 60 / 3;
+        //Might need to be multiplied by some form of Time.deltaTime
+        rb.angularVelocity = getAngleDirection(transform.rotation, pmScript.pAttack.parryTrackerLocation.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
     }
 
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)

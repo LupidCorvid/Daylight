@@ -121,6 +121,9 @@ public class BaseAI
     // Update is called once per frame
     public virtual void Update()
     {
+        if (enemyBase.stunned)
+            return;
+
         if(lastTargetSearch + FindTargetsWaitTime < Time.time && (target == null || enemyBase.GetIfEnemies(targetEntity) == false))
         {
             if(targetEntity != null && enemyBase.GetIfEnemies(targetEntity) == false)
@@ -199,7 +202,7 @@ public class BaseAI
             Entity hitEntity = hit.GetComponent<Entity>();
             if(hitEntity?.GetIfEnemies(enemyBase) == true)
             {
-                hitEntity.TakeDamage(attackDamage);
+                hitEntity.TakeDamage(attackDamage, enemyBase);
             }
         }
     }

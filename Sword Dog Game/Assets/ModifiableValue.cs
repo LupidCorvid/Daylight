@@ -21,9 +21,15 @@ public class ModifiableValue
     {
         get
         {
-            return (baseValue + additiveBase) * baseMultiplier * multiplier + additive;
+            if (setZeroSources == 0)
+                return (baseValue + additiveBase) * baseMultiplier * multiplier + additive;
+            else
+                return 0;
         }
     }
+
+    //Since you cannot undo * 0, increment this if you want to effectively multiply it by 0 and be able to undo it
+    public int setZeroSources = 0;
 
     public int finalIntValue
     {

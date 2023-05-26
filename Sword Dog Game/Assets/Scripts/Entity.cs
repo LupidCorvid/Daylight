@@ -17,6 +17,22 @@ public class Entity : MonoBehaviour
     public bool invincible = false;
 
     public Action killed;
+    public Action<Entity> damaged;
+
+    private bool _stunned = false;
+
+    public virtual bool stunned
+    {
+        get
+        {
+            return _stunned;
+        }
+
+        set
+        {
+            _stunned = value;
+        }
+    }
 
     [System.Flags]
     public enum Team
@@ -93,9 +109,9 @@ public class Entity : MonoBehaviour
         
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Entity source)
     {
-
+        damaged?.Invoke(source);
     }
 
     public virtual void Die()

@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (Input.GetMouseButtonDown(0) && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (Input.GetMouseButtonDown(0) && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("attack" + attackCombo);
             }
             //Parry input
-            if(Input.GetMouseButton(1) && !Input.GetMouseButtonDown(1))
+            if(Input.GetMouseButton(1) && !isAttacking)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;

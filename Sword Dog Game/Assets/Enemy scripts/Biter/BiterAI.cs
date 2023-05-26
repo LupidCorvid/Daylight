@@ -47,6 +47,9 @@ public class BiterAI : BaseAI
         if(turning)
             TurnAnim();
 
+        if (enemyBase.stunned)
+            return;
+
         if(target == null)
         {
             state = AIStates.idle;
