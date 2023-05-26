@@ -7,7 +7,10 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     public int attackCombo = 0;
     public bool isAttacking = false, canAttack = true;
+    public bool isParrying = false;
     public float attackCooldown = 0.0f;
+    public PlayerMovement pMovement;
+    public Transform parryTrackerLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,25 @@ public class PlayerAttack : MonoBehaviour
                 isAttacking = true;
                 attackCombo++;
                 anim.SetTrigger("attack" + attackCombo);
+            }
+            if(Input.GetMouseButton(1) && !Input.GetMouseButtonDown(1))
+            {
+                if (!isParrying)
+                    pMovement.entityBase.moveSpeed.multiplier *= .5f;
+                //float angle = (Vector3.Angle(Vector3.right, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position)) * Mathf.Deg2Rad;
+                Vector2 inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                float angle = Mathf.Atan2(inputVector.y, inputVector.x);
+                Debug.DrawLine(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, default);
+                parryTrackerLocation.localPosition = new Vector3(1.5f * Mathf.Cos(angle), Mathf.Sin(angle), 0) * 1.5f;
+
+                isParrying = true;
+                
+            }
+            else
+            {
+                if (isParrying)
+                    pMovement.entityBase.moveSpeed.multiplier /= .5f;
+                isParrying = false;
             }
             
             // perhaps useful in the future for preventing sprint/jump from interrupting attack

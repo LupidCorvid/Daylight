@@ -177,6 +177,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4518454536749614193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1192961463152503506}
+  m_Layer: 10
+  m_Name: ParryTrackerLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1192961463152503506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518454536749614193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6300512340327299633}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6216388357336989519
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +351,7 @@ Transform:
   - {fileID: 2381358681662667084}
   - {fileID: 4953826574978666498}
   - {fileID: 9005942054445741226}
+  - {fileID: 1192961463152503506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -473,7 +505,10 @@ MonoBehaviour:
   attackCombo: 0
   isAttacking: 0
   canAttack: 1
+  isParrying: 0
   attackCooldown: 0
+  pMovement: {fileID: 6300512340327299635}
+  parryTrackerLocation: {fileID: 1192961463152503506}
 --- !u!114 &3808553446418265509
 MonoBehaviour:
   m_ObjectHideFlags: 0
