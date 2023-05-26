@@ -119,14 +119,25 @@ public class FlyingAI : BaseAI
                 }
                 if (attackSpeed != 0 && lastAttack + (attackCooldown / attackSpeed) <= Time.time && Vector2.Distance(transform.position, targetPosition) < attackDistance)
                 {
-                    state = states.telegraphing;
-                    perchedPoint = transform.position;
-                    anim.SetTrigger("Telegraph");
-                    anim.SetFloat("WindupSpeed", windupSpeedScalar);
+                    //state = states.telegraphing;
+                    //perchedPoint = transform.position;
+                    //anim.SetTrigger("Telegraph");
+                    //anim.SetFloat("WindupSpeed", windupSpeedScalar);
                     Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
                     windUpTarget = (Vector2)target.transform.position;
                     if (targetRb != null)
                         windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, 1f/windupSpeedScalar)); //UpperRange time should be length of telegraph anim
+                    if ((!facingLeft && windUpTarget.x - transform.position.x <= 3) || (facingLeft && windUpTarget.x - transform.position.x >= -3))
+                    {
+                        state = states.pursuit;
+                    }
+                    else
+                    {
+                        state = states.telegraphing;
+                        perchedPoint = transform.position;
+                        anim.SetTrigger("Telegraph");
+                        anim.SetFloat("WindupSpeed", windupSpeedScalar);
+                    }
                 }
 
                 if ((facingLeft ^ (transform.position.x > targetPosition.x)))
