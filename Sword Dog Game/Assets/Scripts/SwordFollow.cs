@@ -17,6 +17,8 @@ public class SwordFollow : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D cldr;
 
+    public Animator swordParryAnimator;
+
     public PlayerMovement pmScript;
     public GameObject tip;
 
@@ -86,8 +88,13 @@ public class SwordFollow : MonoBehaviour
         if (SceneHelper.changedSceneThisFrame) // TODO this code doesn't run
             return;
         //Find attackMoveTracker if it is null
-        pmScript ??= player.GetComponent<PlayerMovement>();
-        attackMoveTracker = pmScript.attackMoveTracker;
+        if (pmScript == null)
+        {
+            pmScript = player.GetComponent<PlayerMovement>();
+            attackMoveTracker = pmScript.attackMoveTracker;
+            swordParryAnimator = pmScript.pAttack.parryTrackerLocation.GetComponentInChildren<Animator>();
+        }
+        
 
         if (pmScript.attacking)
         {
@@ -234,10 +241,10 @@ public class SwordFollow : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
         
-        rb.velocity = (pmScript.pAttack.parryTrackerLocation.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
+        rb.velocity = (swordParryAnimator.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
 
         //Might need to be multiplied by some form of Time.deltaTime
-        rb.angularVelocity = getAngleDirection(transform.rotation, pmScript.pAttack.parryTrackerLocation.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
+        rb.angularVelocity = getAngleDirection(transform.rotation, swordParryAnimator.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
     }
 
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)
@@ -257,6 +264,7 @@ public class SwordFollow : MonoBehaviour
                 collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
             }
             collision?.GetComponent<Entity>()?.Blocked();
+            swordParryAnimator.Play("ParryBlock");
             //IF player parried in correct window
             //collision.GetComponent<Entity>().Parried();
         }
