@@ -95,6 +95,7 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.interactable = true;
 
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void unPause()
@@ -125,6 +126,7 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.blocksRaycasts = false;
         pauseContainerGroup.interactable = false;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void PromptQuit()

@@ -8,11 +8,13 @@ public class BaseManager : MonoBehaviour
     public virtual void OpenMenu()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public virtual void CloseMenu()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public virtual void selectDown()

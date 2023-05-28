@@ -133,6 +133,7 @@ public class PlayerMenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(defaultButton);
         CanvasManager.InstantHideHUD();
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void closeMenu()
@@ -152,6 +153,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         CanvasManager.InstantShowHUD();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     //Items slide in to the right from the left;

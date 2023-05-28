@@ -50,6 +50,7 @@ public class MainMenuManager : MonoBehaviour
         PauseScreen.canPause = false;
 
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
 
@@ -121,6 +122,7 @@ public class MainMenuManager : MonoBehaviour
     {
         PauseScreen.canPause = true;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
 }

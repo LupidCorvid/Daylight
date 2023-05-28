@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
         inMenu = true;
         menu.manager = this;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     //Handle controller inputs and other general menu interactions here?
