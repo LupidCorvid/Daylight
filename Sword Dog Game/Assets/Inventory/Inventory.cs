@@ -70,7 +70,7 @@ public class Inventory
 
         foreach(ItemSlot slot in contents)
         {
-            if(slot.item == null)
+            if(slot.item == null || slot.item.quantity <= 0)
             {
                 slot.item = ItemDatabase.main.getItemFromId(item.itemId);
                 slot.item.quantity = 0;
