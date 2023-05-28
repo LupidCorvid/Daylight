@@ -129,4 +129,15 @@ public class Entity : MonoBehaviour
         
     }
 
+    public virtual void Parried()
+    {
+        
+
+    }
+
+    public virtual void Blocked()
+    {
+
+    }
+
 }

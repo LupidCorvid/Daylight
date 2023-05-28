@@ -202,7 +202,17 @@ public class BaseAI
             Entity hitEntity = hit.GetComponent<Entity>();
             if(hitEntity?.GetIfEnemies(enemyBase) == true)
             {
-                hitEntity.TakeDamage(attackDamage, enemyBase);
+                RaycastHit2D parryDetect = Physics2D.Linecast(hit.transform.position, location, LayerMask.GetMask("DamageArea"));
+                Debug.DrawLine(hit.transform.position, location);
+                SwordFollow parryingSword = parryDetect.collider?.GetComponent<SwordFollow>();
+                if (parryingSword == null)
+                    hitEntity.TakeDamage(attackDamage, enemyBase);
+                else if (parryingSword.pmScript.pAttack.isParrying)
+                {
+                    //Sword was parried
+                    //enemyBase.buffManager.stunned.Inflict(1, 1);
+                    enemyBase.Parried();
+                }
             }
         }
     }

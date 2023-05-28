@@ -23,6 +23,7 @@ public class Buffs
     {
         spored = new SporedDebuff(holder);
         moveSpeedBuff = new MoveSpeedBuff(holder);
+        stunned = new StunDebuff(holder);
     }
 
     public void saveBuffs()

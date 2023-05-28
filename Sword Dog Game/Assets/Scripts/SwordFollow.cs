@@ -247,6 +247,20 @@ public class SwordFollow : MonoBehaviour
         return (Quaternion.Angle(rotation2, rotation1)) * neg;
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject)
+        {
+            if (collision?.attachedRigidbody != null)
+            {
+                collision.attachedRigidbody.velocity = (collision.transform.position - pmScript.transform.position).normalized;
+                collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
+            }
+            collision?.GetComponent<Entity>()?.Blocked();
+            //IF player parried in correct window
+            //collision.GetComponent<Entity>().Parried();
+        }
+    }
 
     public void Freeze()
     {
