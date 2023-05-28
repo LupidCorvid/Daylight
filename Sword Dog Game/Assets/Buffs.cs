@@ -41,12 +41,14 @@ public class Buffs
             return;
         moveSpeedBuff.LoadSave(data.buffs.moveSpeed);
         spored.LoadSave(data.buffs.spored);
+        stunned.LoadSave(data.buffs.stunned);
     }
 
     public void Update()
     {
         spored?.Update();
         moveSpeedBuff?.Update();
+        stunned?.Update();
     }
 
     [System.Serializable]

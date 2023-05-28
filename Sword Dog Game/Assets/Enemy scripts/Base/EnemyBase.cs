@@ -75,9 +75,9 @@ public class EnemyBase : Entity
         soundPlayer?.PlaySound(crySound, 0.5f);
     }
 
-    public override void Parried()
+    public override void Parried(SwordFollow by)
     {
-        base.Parried();
+        base.Parried(by);
         buffManager.stunned.Inflict(2, 1);
     }
 }

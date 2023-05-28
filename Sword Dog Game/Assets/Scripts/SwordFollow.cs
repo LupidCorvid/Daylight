@@ -36,6 +36,8 @@ public class SwordFollow : MonoBehaviour
     public static bool created;
     private float xOffset = 0.0f;
 
+    public Entity lastParriedEntity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -254,17 +256,32 @@ public class SwordFollow : MonoBehaviour
         return (Quaternion.Angle(rotation2, rotation1)) * neg;
     }
 
+    private void Update()
+    {
+        if(pmScript.pAttack.isParrying && swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryBlock"))
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                swordParryAnimator.Play("ParryParry");
+                lastParriedEntity?.Parried(this);
+            }
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject)
         {
-            if (collision?.attachedRigidbody != null)
-            {
-                collision.attachedRigidbody.velocity = (collision.transform.position - pmScript.transform.position).normalized;
-                collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
-            }
-            collision?.GetComponent<Entity>()?.Blocked();
-            swordParryAnimator.Play("ParryBlock");
+            //if (collision?.attachedRigidbody != null)
+            //{
+            //    collision.attachedRigidbody.velocity = (collision.transform.position - pmScript.transform.position).normalized;
+            //    collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
+            //}
+            lastParriedEntity = collision?.GetComponent<Entity>();
+            lastParriedEntity?.Blocked(this);
+            //collision?.GetComponent<Entity>()?.Blocked();
+            if(!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
+                swordParryAnimator.Play("ParryBlock");
             //IF player parried in correct window
             //collision.GetComponent<Entity>().Parried();
         }

@@ -129,13 +129,13 @@ public class Entity : MonoBehaviour
         
     }
 
-    public virtual void Parried()
+    public virtual void Parried(SwordFollow parriedBy)
     {
         
 
     }
 
-    public virtual void Blocked()
+    public virtual void Blocked(SwordFollow parriedBy)
     {
 
     }

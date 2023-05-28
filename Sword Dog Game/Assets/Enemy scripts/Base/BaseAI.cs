@@ -211,7 +211,7 @@ public class BaseAI
                 {
                     //Sword was parried
                     //enemyBase.buffManager.stunned.Inflict(1, 1);
-                    enemyBase.Parried();
+                    enemyBase.Blocked(parryingSword);
                 }
             }
         }
