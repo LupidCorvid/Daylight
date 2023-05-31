@@ -38,6 +38,8 @@ public class SwordFollow : MonoBehaviour
 
     public Entity lastParriedEntity;
 
+    public SoundPlayer audioPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +52,7 @@ public class SwordFollow : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
+        audioPlayer ??= GetComponent<SoundPlayer>();
 
         //SceneHelper.FinishedChangeScene += Snap;
 
@@ -279,6 +282,7 @@ public class SwordFollow : MonoBehaviour
             //}
             lastParriedEntity = collision?.GetComponent<Entity>();
             lastParriedEntity?.Blocked(this);
+            audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
             //collision?.GetComponent<Entity>()?.Blocked();
             if(!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
                 swordParryAnimator.Play("ParryBlock");
