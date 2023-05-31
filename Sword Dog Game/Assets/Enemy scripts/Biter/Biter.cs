@@ -13,9 +13,15 @@ public class Biter : EnemyBase
         {
             ((BiterAI)ai).state = BiterAI.AIStates.keepDistance;
             if (value)
+            {
                 anim.speed = 0;
+                GetComponent<Rigidbody2D>().drag = 5;
+            }
             else
+            {
                 anim.speed = 1;
+                GetComponent<Rigidbody2D>().drag = 0;
+            }
 
             base.stunned = value;
         }
