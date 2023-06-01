@@ -50,6 +50,7 @@ public class Speyeder : EnemyBase
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = (transform.position - by.pmScript.transform.position).normalized * 1.25f;
         rb.AddForce((transform.position - by.pmScript.transform.position).normalized * 1000);
+        ((SpeyederAI)ai).preventNextDamage = true;
     }
 
     public override void Blocked(SwordFollow by)

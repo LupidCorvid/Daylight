@@ -26,6 +26,8 @@ public class SpeyederAI : BaseAI
     public float lastLand;
     public float returnWaitTime = 1.25f;
 
+    public bool preventNextDamage = false;
+
 
     public enum states
     {
@@ -126,6 +128,11 @@ public class SpeyederAI : BaseAI
 
     public override void applyAttackDamage()
     {
+        if(preventNextDamage)
+        {
+            preventNextDamage = false;
+            return;
+        }
         enemyBase.cry();
         Vector2 location = transform.position + Vector3.down * 1.25f;
         Vector2 range = new Vector2(.75f, 1.25f);
