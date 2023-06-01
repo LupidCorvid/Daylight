@@ -40,6 +40,11 @@ public class SwordFollow : MonoBehaviour
 
     public SoundPlayer audioPlayer;
 
+    public CanParryTracker canParryCheck;
+
+    public float parryFailCooldown = 1.5f;
+    public float lastParryFail = -100f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +103,7 @@ public class SwordFollow : MonoBehaviour
             pmScript = player.GetComponent<PlayerMovement>();
             attackMoveTracker = pmScript.attackMoveTracker;
             swordParryAnimator = pmScript.pAttack.parryTrackerLocation.GetComponentInChildren<Animator>();
+            canParryCheck = swordParryAnimator.GetComponent<CanParryTracker>();
         }
         
 
@@ -261,19 +267,22 @@ public class SwordFollow : MonoBehaviour
 
     private void Update()
     {
-        if(pmScript.pAttack.isParrying && swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryBlock"))
+        if(pmScript.pAttack.isParrying)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && lastParryFail + parryFailCooldown < Time.time)
             {
                 swordParryAnimator.Play("ParryParry");
-                lastParriedEntity?.Parried(this);
+                if (canParryCheck.canParry)
+                    lastParriedEntity?.Parried(this);
+                else
+                    lastParryFail = Time.time;
             }
         }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject)
+        if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject && canParryCheck.isBlocking)
         {
             //if (collision?.attachedRigidbody != null)
             //{
@@ -286,8 +295,10 @@ public class SwordFollow : MonoBehaviour
             lastParriedEntity?.Blocked(this);
             audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
             //collision?.GetComponent<Entity>()?.Blocked();
-            if(!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
+            if (!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
                 swordParryAnimator.Play("ParryBlock");
+            else
+                lastParriedEntity?.Parried(this);
             //IF player parried in correct window
             //collision.GetComponent<Entity>().Parried();
         }

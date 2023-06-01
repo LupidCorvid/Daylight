@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 746085033095375073}
   - component: {fileID: 7981342556999068686}
   - component: {fileID: 8958092804754477085}
+  - component: {fileID: 6208474067931085359}
   m_Layer: 10
   m_Name: AnimatedParry
   m_TagString: Untagged
@@ -105,6 +106,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6208474067931085359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747217688921648054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c70d67a6d1c1343b64c0b6c73a8452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canParry: 0
 --- !u!1 &937992885873447133
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +825,7 @@ MonoBehaviour:
   enemies: 2
   facingDir: {x: 0, y: 0}
   playerHealth: {fileID: 0}
+  pAttack: {fileID: 0}
 --- !u!212 &2603996948611409079
 SpriteRenderer:
   m_ObjectHideFlags: 0

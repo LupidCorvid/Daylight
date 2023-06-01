@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 1913531055348685182}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2591983749293105047
 SpriteRenderer:
@@ -120,6 +120,9 @@ MonoBehaviour:
   particlePushScalar: 1
   lastParriedEntity: {fileID: 0}
   audioPlayer: {fileID: 4600268384154661545}
+  canParryCheck: {fileID: 0}
+  parryFailCooldown: 1.5
+  lastParryFail: -100
 --- !u!50 &2591983749293105045
 Rigidbody2D:
   serializedVersion: 4
