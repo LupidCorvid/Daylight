@@ -296,7 +296,10 @@ public class SwordFollow : MonoBehaviour
             audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
             //collision?.GetComponent<Entity>()?.Blocked();
             if (!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
+            {
                 swordParryAnimator.Play("ParryBlock");
+                pmScript.stamina -= .75f;
+            }
             else
                 lastParriedEntity?.Parried(this);
             //IF player parried in correct window

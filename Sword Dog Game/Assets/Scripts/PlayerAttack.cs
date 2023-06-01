@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("attack" + attackCombo);
             }
             //Parry input
-            if(Input.GetMouseButton(1) && !isAttacking)
+            if(Input.GetMouseButton(1) && !isAttacking && pMovement.stamina >= .75f)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
@@ -77,7 +77,8 @@ public class PlayerAttack : MonoBehaviour
                 isParrying = true;
                 pMovement.canTurn = false;
                 pMovement.canSprint = false;
-                
+                pMovement.stopStaminaRefill = true;
+
             }
             else
             {
@@ -86,6 +87,7 @@ public class PlayerAttack : MonoBehaviour
                 isParrying = false;
                 pMovement.canTurn = true;
                 pMovement.canSprint = true;
+                pMovement.stopStaminaRefill = false;
             }
             
             // perhaps useful in the future for preventing sprint/jump from interrupting attack

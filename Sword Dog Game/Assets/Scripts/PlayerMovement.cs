@@ -125,6 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float lastSlope;
 
+    public bool stopStaminaRefill = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -219,7 +221,8 @@ public class PlayerMovement : MonoBehaviour
         else if (timeSinceSprint > 0.1f)
             deltaStamina += Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
-        stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
+        if(!stopStaminaRefill)
+            stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
 
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
