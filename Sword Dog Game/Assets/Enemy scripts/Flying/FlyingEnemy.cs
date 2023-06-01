@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class FlyingEnemy : EnemyBase
 {
+
+    public override bool attacking
+    {
+        get
+        {
+            return ((((FlyingAI)ai).state == (FlyingAI.states.lunging)) || ((FlyingAI)ai).state == (FlyingAI.states.lungeReturn));
+        }
+        set
+        {
+            //Read only for this case
+        }
+    }
+
     public float scaleAnimator = 1;
     public float windupSpeedScalar = 1;
     public Rigidbody2D rb;

@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Biter : EnemyBase
 {
+    public override bool attacking
+    {
+        get
+        {
+            return (((BiterAI)ai).state == BiterAI.AIStates.attacking || ((BiterAI)ai).state == BiterAI.AIStates.pursuit);
+        }
+        set
+        { 
+            //Read only for this case
+        }
+    }
+
 
     public override bool stunned
     {

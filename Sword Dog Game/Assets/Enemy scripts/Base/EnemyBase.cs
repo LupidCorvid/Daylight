@@ -19,7 +19,19 @@ public class EnemyBase : Entity
     public int killValue = 5;
     public SoundPlayer soundPlayer;
     public SoundClip crySound;
-    
+
+    public override bool attacking 
+    {
+        get
+        {
+            return ai.attacking;
+        }
+        set
+        {
+            ai.attacking = value;
+        }
+    }
+
 
     public override void Start()
     {

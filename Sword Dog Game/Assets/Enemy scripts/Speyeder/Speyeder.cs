@@ -7,6 +7,19 @@ public class Speyeder : EnemyBase
     public DistanceJoint2D web;
     public SpeyederEye eye;
 
+    public override bool attacking
+    {
+        get
+        {
+            return (((SpeyederAI)ai).state == SpeyederAI.states.dropping || ((SpeyederAI)ai).state == SpeyederAI.states.landStop);
+        }
+        set
+        {
+            //Read only for this case
+        }
+    }
+
+
     public override bool stunned 
     { 
         get => base.stunned; 

@@ -34,6 +34,19 @@ public class Entity : MonoBehaviour
         }
     }
 
+    private bool _attacking = false;
+    public virtual bool attacking
+    {
+        get
+        {
+            return _attacking;
+        }
+        set
+        {
+            _attacking = value;
+        }
+    }
+
     [System.Flags]
     public enum Team
     {

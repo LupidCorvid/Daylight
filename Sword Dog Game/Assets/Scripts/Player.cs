@@ -5,6 +5,21 @@ using UnityEngine;
 public class Player : Entity
 {
     public PlayerHealth playerHealth;
+    public PlayerAttack pAttack;
+
+    public override bool attacking
+    {
+        get
+        {
+            return pAttack.isAttacking;
+        }
+
+        set
+        {
+            pAttack.isAttacking = value;
+        }
+    }
+
 
     Player() : base()
     {

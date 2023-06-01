@@ -281,6 +281,8 @@ public class SwordFollow : MonoBehaviour
             //    collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
             //}
             lastParriedEntity = collision?.GetComponent<Entity>();
+            if (lastParriedEntity?.attacking != true)
+                return;
             lastParriedEntity?.Blocked(this);
             audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
             //collision?.GetComponent<Entity>()?.Blocked();
