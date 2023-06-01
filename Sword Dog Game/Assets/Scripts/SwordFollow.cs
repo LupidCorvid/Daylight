@@ -36,7 +36,7 @@ public class SwordFollow : MonoBehaviour
     public static bool created;
     private float xOffset = 0.0f;
 
-    public Entity lastParriedEntity;
+    public IParryable lastParriedEntity;
 
     public SoundPlayer audioPlayer;
 
@@ -284,13 +284,19 @@ public class SwordFollow : MonoBehaviour
     {
         if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject && canParryCheck.isBlocking)
         {
+            ITeam team = collision.GetComponent<ITeam>();
+
+            if (team?.GetIfEnemies(pmScript.entityBase) != true)
+                return;
+
             //if (collision?.attachedRigidbody != null)
             //{
             //    collision.attachedRigidbody.velocity = (collision.transform.position - pmScript.transform.position).normalized;
             //    collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
             //}
-            lastParriedEntity = collision?.GetComponent<Entity>();
-            if (lastParriedEntity?.attacking != true)
+            lastParriedEntity = collision?.GetComponent<IParryable>();
+
+            if (lastParriedEntity?.canBeParried != true)
                 return;
             lastParriedEntity?.Blocked(this);
             audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
@@ -298,7 +304,7 @@ public class SwordFollow : MonoBehaviour
             if (!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
             {
                 swordParryAnimator.Play("ParryBlock");
-                pmScript.stamina -= .75f;
+                pmScript.stamina -= pmScript.pAttack.parryStaminaCost;
             }
             else
                 lastParriedEntity?.Parried(this);

@@ -45,8 +45,8 @@ public class EnemyBase : Entity
 
         ai?.Start();
 
-        allies = Team.Enemy;
-        enemies = Team.Player;
+        allies = ITeam.Team.Enemy;
+        enemies = ITeam.Team.Player;
     }
 
     public override void Update()

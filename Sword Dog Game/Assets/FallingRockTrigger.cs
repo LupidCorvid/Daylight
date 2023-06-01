@@ -25,7 +25,7 @@ public class FallingRockTrigger : MonoBehaviour
         //    hazard.Drop();
         //}
         Entity hit = collision.GetComponent<Entity>();
-        if(hit != null && (hit.allies & Entity.Team.Player) > 0)
+        if(hit != null && (hit.allies & ITeam.Team.Player) > 0)
         {
             hazard.Drop();
         }

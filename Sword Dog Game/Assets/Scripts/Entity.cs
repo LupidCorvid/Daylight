@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IParryable, ITeam
 {
     public ModifiableValue attackDamage = new ModifiableValue(1);
     public ModifiableValue moveSpeed = new ModifiableValue(1);
@@ -47,15 +47,33 @@ public class Entity : MonoBehaviour
         }
     }
 
-    [System.Flags]
-    public enum Team
+    public bool canBeParried
     {
-        Player = 0b_01,
-        Enemy = 0b_10
+        get { return attacking; }
+        set { attacking = value; }
     }
 
-    public Team allies;
-    public Team enemies;
+    //[System.Flags]
+    //public enum Team
+    //{
+    //    Player = 0b_01,
+    //    Enemy = 0b_10
+    //}
+
+    private ITeam.Team _allies;
+    private ITeam.Team _enemies;
+
+    public ITeam.Team allies
+    {
+        get { return _allies; }
+        set { _allies = value; }
+    }
+
+    public ITeam.Team enemies
+    {
+        get { return _enemies; }
+        set { _enemies = value; }
+    }
 
     //#region buffs
     //public SporedDebuff spored;

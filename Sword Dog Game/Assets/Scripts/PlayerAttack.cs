@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 0.0f;
     public PlayerMovement pMovement;
     public Transform parryTrackerLocation;
+    public float parryStaminaCost = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("attack" + attackCombo);
             }
             //Parry input
-            if(Input.GetMouseButton(1) && !isAttacking && pMovement.stamina >= .75f)
+            if(Input.GetMouseButton(1) && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;

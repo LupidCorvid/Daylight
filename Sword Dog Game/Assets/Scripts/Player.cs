@@ -25,8 +25,8 @@ public class Player : Entity
     {
         maxHealth = 8;
         health = 8;
-        allies = Team.Player;
-        enemies = Team.Enemy;
+        allies = ITeam.Team.Player;
+        enemies = ITeam.Team.Enemy;
         //GameSaver.loadedNewData += loadSavedBuffs;
     }
 
