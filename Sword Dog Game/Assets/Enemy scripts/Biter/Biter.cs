@@ -8,7 +8,7 @@ public class Biter : EnemyBase
     {
         get
         {
-            return (((BiterAI)ai).state == BiterAI.AIStates.attacking || ((BiterAI)ai).state == BiterAI.AIStates.pursuit);
+            return (((BiterAI)ai).state == BiterAI.AIStates.attacking || ((BiterAI)ai).state == BiterAI.AIStates.pursuit || ai.attacking);
         }
         set
         { 
