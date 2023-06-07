@@ -47,6 +47,9 @@ public class BiterAI : BaseAI
         if(turning)
             TurnAnim();
 
+        if (enemyBase.stunned)
+            return;
+
         if(target == null)
         {
             state = AIStates.idle;
@@ -86,7 +89,6 @@ public class BiterAI : BaseAI
                 Attacking();
                 break;
             case AIStates.keepDistance:
-                //Facing values aren't implemented yet
                 float facingChanceModifier = Mathf.Lerp(2f, 1f, Vector2.Dot(enemyBase.facingDir, targetEntity.facingDir));
                 float randomChargeChance = Random.Range(0f, 1f) / facingChanceModifier;
 

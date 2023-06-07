@@ -75,7 +75,7 @@ public class SporedDebuff : Buff
     public override void Execute()
     {
         base.Execute();
-        affectedEntity.TakeDamage(1);
+        affectedEntity.TakeDamage(1, null);
     }
 
     public override void UpdateSave(Buffs manager)

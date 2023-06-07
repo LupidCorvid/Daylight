@@ -101,6 +101,7 @@ MonoBehaviour:
   anchorPosition: {x: 0.037, y: -0.106}
   holder: {fileID: 1742960867218242364}
   eyeRadius: 0.2
+  paused: 0
 --- !u!114 &4500755189507649335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,18 +309,22 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
+  emotePosition: {fileID: 0}
   maxHealth: 7
   health: 7
   invincible: 0
@@ -334,6 +339,7 @@ MonoBehaviour:
   soundPlayer: {fileID: 7405427114284245913}
   crySound: {fileID: 11400000, guid: 9aeab5343fda14044994e327401dac94, type: 2}
   web: {fileID: 1742960867218242366}
+  eye: {fileID: 1378122194}
 --- !u!50 &1742960867218242367
 Rigidbody2D:
   serializedVersion: 4

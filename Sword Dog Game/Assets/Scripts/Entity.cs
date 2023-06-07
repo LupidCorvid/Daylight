@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IParryable, ITeam
 {
     public ModifiableValue attackDamage = new ModifiableValue(1);
     public ModifiableValue moveSpeed = new ModifiableValue(1);
@@ -17,16 +17,63 @@ public class Entity : MonoBehaviour
     public bool invincible = false;
 
     public Action killed;
+    public Action<Entity> damaged;
 
-    [System.Flags]
-    public enum Team
+    private bool _stunned = false;
+
+    public virtual bool stunned
     {
-        Player = 0b_01,
-        Enemy = 0b_10
+        get
+        {
+            return _stunned;
+        }
+
+        set
+        {
+            _stunned = value;
+        }
     }
 
-    public Team allies;
-    public Team enemies;
+    private bool _attacking = false;
+    public virtual bool attacking
+    {
+        get
+        {
+            return _attacking;
+        }
+        set
+        {
+            _attacking = value;
+        }
+    }
+
+    public bool canBeParried
+    {
+        get { return attacking; }
+        set { attacking = value; }
+    }
+
+    //[System.Flags]
+    //public enum Team
+    //{
+    //    Player = 0b_01,
+    //    Enemy = 0b_10
+    //}
+
+    private ITeam.Team _allies;
+    private ITeam.Team _enemies;
+
+    public ITeam.Team allies
+    {
+        get { return _allies; }
+        set { _allies = value; }
+    }
+
+    public ITeam.Team enemies
+    {
+        get { return _enemies; }
+        set { _enemies = value; }
+    }
 
     //#region buffs
     //public SporedDebuff spored;
@@ -93,9 +140,9 @@ public class Entity : MonoBehaviour
         
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Entity source)
     {
-
+        damaged?.Invoke(source);
     }
 
     public virtual void Die()
@@ -111,6 +158,17 @@ public class Entity : MonoBehaviour
     public virtual void OnDestroy()
     {
         
+    }
+
+    public virtual void Parried(SwordFollow parriedBy)
+    {
+        
+
+    }
+
+    public virtual void Blocked(SwordFollow parriedBy)
+    {
+
     }
 
 }

@@ -25,6 +25,9 @@ public class BasicMoverAI : BaseAI
     {
         base.Update();
 
+        if (enemyBase.stunned)
+            return;
+
         testForLedge(rb.velocity.x > 0);
         moveInDirection(target.position);
     }

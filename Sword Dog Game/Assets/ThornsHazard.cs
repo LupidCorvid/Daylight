@@ -31,7 +31,7 @@ public class ThornsHazard : MonoBehaviour
         {
             if (lastDamage + damageCooldown < Time.time && (!requireMovement || (collision.GetComponent<Rigidbody2D>().velocity.magnitude > .1f)))
             {
-                hit.TakeDamage(damage);
+                hit.TakeDamage(damage, null);
                 lastDamage = Time.time;
             }
         }

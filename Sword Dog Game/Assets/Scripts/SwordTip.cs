@@ -14,6 +14,8 @@ public class SwordTip : MonoBehaviour
 
     public Animator swordAnimator;
 
+    public Entity user;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +55,7 @@ public class SwordTip : MonoBehaviour
         EnemyBase enemy = other.GetComponent<EnemyBase>();
         Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
 
-        enemy?.TakeDamage(damage);
+        enemy?.TakeDamage(damage, user);
 
         if(otherRb != null)
         {

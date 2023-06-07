@@ -50,9 +50,9 @@ public class FallingRockHazard : MonoBehaviour
         if (hit != null)
         {
             if (scaleWithSpeed)
-                hit.TakeDamage((int)(rb.velocity.magnitude * damage));
+                hit.TakeDamage((int)(rb.velocity.magnitude * damage), null);
             else
-                hit.TakeDamage(damage);
+                hit.TakeDamage(damage, null);
         }
         //PlayerHealth hit = collision.transform.GetComponent<PlayerHealth>();
         //if (hit != null)

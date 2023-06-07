@@ -24,7 +24,7 @@ public class StalagtiteHazard : MonoBehaviour
         Entity hit = collision.GetComponent<Entity>();
         if(hit != null && rb.velocity.magnitude > .01f)
         {
-            hit.TakeDamage(damage);
+            hit.TakeDamage(damage, null);
         }
 
         //PlayerHealth hit = collision.GetComponent<PlayerHealth>();

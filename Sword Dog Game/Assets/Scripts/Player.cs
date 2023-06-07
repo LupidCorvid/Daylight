@@ -5,13 +5,28 @@ using UnityEngine;
 public class Player : Entity
 {
     public PlayerHealth playerHealth;
+    public PlayerAttack pAttack;
+
+    public override bool attacking
+    {
+        get
+        {
+            return pAttack.isAttacking;
+        }
+
+        set
+        {
+            pAttack.isAttacking = value;
+        }
+    }
+
 
     Player() : base()
     {
         maxHealth = 8;
         health = 8;
-        allies = Team.Player;
-        enemies = Team.Enemy;
+        allies = ITeam.Team.Player;
+        enemies = ITeam.Team.Enemy;
         //GameSaver.loadedNewData += loadSavedBuffs;
     }
 
@@ -32,8 +47,9 @@ public class Player : Entity
         return InventoryManager.currInventory;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Entity source)
     {
+        base.TakeDamage(damage, source);
         playerHealth.TakeDamage(damage);
     }
 

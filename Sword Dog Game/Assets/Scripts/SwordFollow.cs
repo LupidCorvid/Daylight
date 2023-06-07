@@ -17,6 +17,8 @@ public class SwordFollow : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D cldr;
 
+    public Animator swordParryAnimator;
+
     public PlayerMovement pmScript;
     public GameObject tip;
 
@@ -34,6 +36,15 @@ public class SwordFollow : MonoBehaviour
     public static bool created;
     private float xOffset = 0.0f;
 
+    public IParryable lastParriedEntity;
+
+    public SoundPlayer audioPlayer;
+
+    public CanParryTracker canParryCheck;
+
+    public float parryFailCooldown = 1.5f;
+    public float lastParryFail = -100f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +57,7 @@ public class SwordFollow : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<Collider2D>();
+        audioPlayer ??= GetComponent<SoundPlayer>();
 
         //SceneHelper.FinishedChangeScene += Snap;
 
@@ -86,14 +98,26 @@ public class SwordFollow : MonoBehaviour
         if (SceneHelper.changedSceneThisFrame) // TODO this code doesn't run
             return;
         //Find attackMoveTracker if it is null
-        pmScript ??= player.GetComponent<PlayerMovement>();
-        attackMoveTracker = pmScript.attackMoveTracker;
+        if (pmScript == null)
+        {
+            pmScript = player.GetComponent<PlayerMovement>();
+            attackMoveTracker = pmScript.attackMoveTracker;
+            swordParryAnimator = pmScript.pAttack.parryTrackerLocation.GetComponentInChildren<Animator>();
+            canParryCheck = swordParryAnimator.GetComponent<CanParryTracker>();
+        }
+        
 
         if (pmScript.attacking)
         {
             AttackMove();
             particleFF.directionX = -rb.velocity.magnitude * particlePushScalar;
             //Check for contact damage
+            return;
+        }
+        else if (pmScript.pAttack.isParrying)
+        {
+            parryMove();
+            particleFF.directionX = -rb.velocity.magnitude;
             return;
         }
         else
@@ -215,6 +239,25 @@ public class SwordFollow : MonoBehaviour
 
     }
 
+    public void parryMove()
+    {
+        if (!pmScript.facingRight)
+        {
+            adjustLocationX = -adjustDefaultX;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            adjustLocationX = adjustDefaultX;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        
+        rb.velocity = (swordParryAnimator.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
+
+        //Might need to be multiplied by some form of Time.deltaTime
+        rb.angularVelocity = getAngleDirection(transform.rotation, swordParryAnimator.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
+    }
+
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)
     {
         int neg = (Vector3.Cross(rotation1 * Vector3.right, rotation2 * Vector3.right).z) < 0 ? -1 : 1;
@@ -222,6 +265,53 @@ public class SwordFollow : MonoBehaviour
         return (Quaternion.Angle(rotation2, rotation1)) * neg;
     }
 
+    private void Update()
+    {
+        if(pmScript.pAttack.isParrying)
+        {
+            if(Input.GetMouseButtonDown(0) && lastParryFail + parryFailCooldown < Time.time)
+            {
+                swordParryAnimator.Play("ParryParry");
+                if (canParryCheck.canParry)
+                    lastParriedEntity?.Parried(this);
+                else
+                    lastParryFail = Time.time;
+            }
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject && canParryCheck.isBlocking)
+        {
+            ITeam team = collision.GetComponent<ITeam>();
+
+            if (team?.GetIfEnemies(pmScript.entityBase) != true)
+                return;
+
+            //if (collision?.attachedRigidbody != null)
+            //{
+            //    collision.attachedRigidbody.velocity = (collision.transform.position - pmScript.transform.position).normalized;
+            //    collision.attachedRigidbody.AddForce((collision.transform.position - pmScript.transform.position).normalized * 500);
+            //}
+            lastParriedEntity = collision?.GetComponent<IParryable>();
+
+            if (lastParriedEntity?.canBeParried != true)
+                return;
+            lastParriedEntity?.Blocked(this);
+            audioPlayer.PlaySound("Impacts.Sword.SwordSlash");
+            //collision?.GetComponent<Entity>()?.Blocked();
+            if (!swordParryAnimator.GetCurrentAnimatorStateInfo(0).IsName("ParryParry"))
+            {
+                swordParryAnimator.Play("ParryBlock");
+                pmScript.stamina -= pmScript.pAttack.parryStaminaCost;
+            }
+            else
+                lastParriedEntity?.Parried(this);
+            //IF player parried in correct window
+            //collision.GetComponent<Entity>().Parried();
+        }
+    }
 
     public void Freeze()
     {

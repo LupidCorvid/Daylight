@@ -26,6 +26,8 @@ public class SpeyederAI : BaseAI
     public float lastLand;
     public float returnWaitTime = 1.25f;
 
+    public bool preventNextDamage = false;
+
 
     public enum states
     {
@@ -55,7 +57,13 @@ public class SpeyederAI : BaseAI
     {
         base.FixedUpdate();
 
+        
+
         transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(web.connectedBody.transform.position - transform.position, Vector2.up));
+
+        if (enemyBase.stunned)
+            return;
+
         anim.SetFloat("XVel", rb.velocity.x);
         anim.SetFloat("YVel", rb.velocity.y);
 
@@ -120,6 +128,11 @@ public class SpeyederAI : BaseAI
 
     public override void applyAttackDamage()
     {
+        if(preventNextDamage)
+        {
+            preventNextDamage = false;
+            return;
+        }
         enemyBase.cry();
         Vector2 location = transform.position + Vector3.down * 1.25f;
         Vector2 range = new Vector2(.75f, 1.25f);

@@ -7,6 +7,7 @@ public class SpeyederEye : MonoBehaviour
     public Vector2 anchorPosition;
     public Speyeder holder;
     public float eyeRadius = .2f;
+    public bool paused = false;
 
     public void Awake()
     {
@@ -15,6 +16,9 @@ public class SpeyederEye : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (paused)
+            return;
+
         if (holder.ai.target != null)
             LookAtPoint(holder.ai.target.position);
         else

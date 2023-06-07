@@ -200,18 +200,22 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 8
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
@@ -227,6 +231,7 @@ MonoBehaviour:
   crySound: {fileID: 11400000, guid: b515495a180970940b2bf7e0b18d43b0, type: 2}
   scaleAnimator: 1
   windupSpeedScalar: 1.33
+  rb: {fileID: 8550630448077621204}
 --- !u!114 &8550630448077621201
 MonoBehaviour:
   m_ObjectHideFlags: 0

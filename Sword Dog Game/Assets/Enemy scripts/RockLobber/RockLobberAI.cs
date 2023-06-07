@@ -43,8 +43,11 @@ public class RockLobberAI : BaseAI
         if(target != null)
         {
             enemyBase.cry();
-            GameObject addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation, TempObjectsHolder.asTransform);
+            Projectile addedProjectile = EnemyBase.Instantiate(rockProjectile, transform.position, transform.rotation, TempObjectsHolder.asTransform).GetComponent<Projectile>();
             Rigidbody2D projectileVelocity = addedProjectile.GetComponent<Rigidbody2D>();
+            addedProjectile.allies = enemyBase.allies;
+            addedProjectile.enemies = enemyBase.enemies;
+
             //arctan((sqrt(c^4 - g(gd^2 + 2yv^2))+c^2)/gd)
             Vector2 relTar = target.position - transform.position;
             float projSpeed = projectileSpeed;
@@ -85,6 +88,10 @@ public class RockLobberAI : BaseAI
     public override void Update()
     {
         base.Update();
+
+        if (enemyBase.stunned)
+            return;
+
         if (target == null)
             return;
 

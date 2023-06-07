@@ -19,7 +19,19 @@ public class EnemyBase : Entity
     public int killValue = 5;
     public SoundPlayer soundPlayer;
     public SoundClip crySound;
-    
+
+    public override bool attacking 
+    {
+        get
+        {
+            return ai.attacking;
+        }
+        set
+        {
+            ai.attacking = value;
+        }
+    }
+
 
     public override void Start()
     {
@@ -33,8 +45,8 @@ public class EnemyBase : Entity
 
         ai?.Start();
 
-        allies = Team.Enemy;
-        enemies = Team.Player;
+        allies = ITeam.Team.Enemy;
+        enemies = ITeam.Team.Player;
     }
 
     public override void Update()
@@ -61,8 +73,9 @@ public class EnemyBase : Entity
 
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(int amount, Entity source)
     {
+        base.TakeDamage(amount, source);
         health -= amount;
         if (health <= 0)
             die();
@@ -72,5 +85,11 @@ public class EnemyBase : Entity
     public void cry()
     {
         soundPlayer?.PlaySound(crySound, 0.5f);
+    }
+
+    public override void Parried(SwordFollow by)
+    {
+        base.Parried(by);
+        buffManager.stunned.Inflict(2, 1);
     }
 }

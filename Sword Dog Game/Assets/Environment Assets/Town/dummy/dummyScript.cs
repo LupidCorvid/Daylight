@@ -34,8 +34,9 @@ public class dummyScript : EnemyBase
         //flag = false;
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(int amount, Entity source)
     {
+        base.TakeDamage(amount, source);
         if (dummyHitAnim.GetCurrentAnimatorStateInfo(0).IsName("dummyStill 0"))
             dummyHitAnim.Play("dummyHit 0");
     }
