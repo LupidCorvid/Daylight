@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField]
     private Animator anim;
     public int attackCombo = 0;
     public bool isAttacking = false, canAttack = true;

@@ -4,17 +4,25 @@ Default{
 }
 
 Scene1{
-[sh, Rival][abf,10][ss,.025] Oh thank goodness![w,.6][ss, .05] I thought I was about to get put down![wi] [c][abf,2] Wait a second[ss,.15]...[wi] [c][abf,15][emote, 0][ss,.05][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![w,.4] I was left to take on[ss,.033]...[ss,.05][w,.15] another dozen or so,[w,.3] no,[w,.3] hundreds of those monsters while you were snoozing! [wi] [c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH![w,.2] Quickly![w,.3] Finish it off! [/TFX,Shake][w, 2] [exit]
+[sh, Rival][abf,10][ss,.025] Oh thank goodness![w,.6][ss, .05] I thought I was about to get put down![wi] [c][abf,2] Wait a second[ss,.15]...[wi] 
+[c][abf,15][emote, 0][ss,.05][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![w,.4] I was left to take on[ss,.033]...[ss,.05][w,.15] another dozen or so,[w,.3] no,[w,.3] hundreds of those monsters while you were snoozing! [wi] 
+[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH![w,.2] Quickly![w,.3] Finish it off! [/TFX,Shake][w, 2] [exit]
 }
 
 Scene1.1{
-[sh, Rival][abf,10][ss, .05] Wow[ss,.15]...[ss,.05] Nice swingin',[w,.2] rookie![wi] [c][reemote, 3][w,.7] Hey![w,.2] I'm no rookie,[w,.3] I'm your senior by one,[w,.3] no,[w,.3] two months![w,.4] Maybe one day you'll catch up to MY skill level and complete a mission without snoozing,[w,.3] err,[w,.3] what was your name again?[wi] [c][CE,enterPlayerName] PLAYER![w,.4] That's right,[w,.2] you better square up to these monsters if you ever want to get to my level![wi] [c][exit]
+[sh, Rival][abf,10][ss, .05] Wow[ss,.15]...[ss,.05] Nice swingin',[w,.2] rookie![wi] 
+[c][reemote, 3][w,.7] Hey![w,.2] I'm no rookie,[w,.3] I'm your senior by one,[w,.3] no,[w,.3] two months![w,.4] Maybe one day you'll catch up to MY skill level and complete a mission without snoozing,[w,.3] err,[w,.3] what was your name again?[wi] 
+[c][CE,enterPlayerName] PLAYER![w,.4] That's right,[w,.2] you better square up to these monsters if you ever want to get to my level![wi] [c][exit]
 }
 
 Scene1.2{
-[sh, Rival][abf,10][ss, .033][TFX, Wave, 5, 5, 50] Waaaait,[w,.2] PLAYER! [/TFX,Wave][wi] [c][CE, flashRed][reemote, 4][abf,5][ss, .05][w,.5] Oh,[w,.2] what's this? [w, .3] Hehe[ss,.15]...[ss,.05] well, actually[ss,.15]...[ss,.05] [w, .2] I wasn't lying about more of them showing up after you got knocked out[ss,.15]...[ss,.05] [w, .1] I trounced what I could,[w,.2] but one still escaped[ss,.15]...[ss,.05] [w, .2] And I couldn't give chase because- [w, .2][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg[ss,.15]...[ss,.05][wi] [c] Ye-[w,.3] yeah,[w,.2] let's get back to town[ss,.1]...[w, .2] ...[ss,.05]And thanks[ss,.1]... [ss,.05]for the help, [w, .2][IA,<size=80%>] [ss,.075]friend[ss,.1]...[ss,.05] [IA,</size>][w, .2] I[w,.1]-I[w,.1]-I mean rookie! [wi] [exit]
+[sh, Rival][abf,10][ss, .033][TFX, Wave, 5, 5, 50] Waaaait,[w,.2] PLAYER! [/TFX,Wave][wi] 
+[c][CE, flashRed][reemote, 4][abf,5][ss, .05][w,.5] Oh,[w,.2] what's this? [w, .3] Hehe[ss,.15]...[ss,.05] well, actually[ss,.15]...[ss,.05] [w, .2] I wasn't lying about more of them showing up after you got knocked out[ss,.15]...[ss,.05] [w, .1] I trounced what I could,[w,.2] but one still escaped[ss,.15]...[ss,.05] [w, .2] And I couldn't give chase because- [w, .2][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg[ss,.15]...[ss,.05][wi] 
+[c] Ye-[w,.3] yeah,[w,.2] let's get back to town[ss,.1]...[w, .2] ...[ss,.05]And thanks[ss,.1]... [ss,.05]for the help, [w, .2][IA,<size=80%>] [ss,.075]friend[ss,.1]...[ss,.05] [IA,</size>][w, .2] I[w,.1]-I[w,.1]-I mean rookie! [wi] [exit]
 }
 
 Scene2.1{
-[sh, Rival][abf,10][ss, .05][TFX, Wave, 5, 5, 50] Woohoo![/TFX,Wave] We made it back.[wi][c][reemote, 5] Hm?[w, .1] Yeah...[w, .1] you’re right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away and dangerously close to town, at that... [wi][c] But![w, .2] Reporting and braving the General’s wrath sounds like your problem. I haveta get my leg checked! Make sure to let the General know about how great of a job I did at safekeeping the town! [wi][c]
+[sh, Rival][abf,10][ss, .05][TFX, Wave, 5, 5, 50] Woohoo![/TFX,Wave] We made it back.[wi]
+[c][reemote, 5] Hm?[w, .1] Yeah...[w, .1] you’re right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away and dangerously close to town, at that... [wi]
+[c] But![w, .2] Reporting and braving the General’s wrath sounds like your problem. I haveta get my leg checked! Make sure to let the General know about how great of a job I did at safekeeping the town! [wi][c]
 }

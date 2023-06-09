@@ -105,6 +105,9 @@ public class SwordFollow : MonoBehaviour
             swordParryAnimator = pmScript.pAttack.parryTrackerLocation.GetComponentInChildren<Animator>();
             canParryCheck = swordParryAnimator.GetComponent<CanParryTracker>();
         }
+
+        if (attackMoveTracker == null)
+            attackMoveTracker = pmScript.attackMoveTracker;
         
 
         if (pmScript.attacking)
@@ -251,8 +254,15 @@ public class SwordFollow : MonoBehaviour
             adjustLocationX = adjustDefaultX;
             transform.localScale = new Vector3(1, 1, 1);
         }
-        
-        rb.velocity = (swordParryAnimator.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
+
+        if (swordParryAnimator == null || canParryCheck == null)
+        {
+            canParryCheck = pmScript?.GetComponentInChildren<CanParryTracker>();
+            swordParryAnimator = canParryCheck.GetComponent<Animator>();
+        }
+
+        if(swordParryAnimator != null)
+            rb.velocity = (swordParryAnimator.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
 
         //Might need to be multiplied by some form of Time.deltaTime
         rb.angularVelocity = getAngleDirection(transform.rotation, swordParryAnimator.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
@@ -267,7 +277,7 @@ public class SwordFollow : MonoBehaviour
 
     private void Update()
     {
-        if(pmScript.pAttack.isParrying)
+        if(pmScript?.pAttack?.isParrying == true)
         {
             if(Input.GetMouseButtonDown(0) && lastParryFail + parryFailCooldown < Time.time)
             {
@@ -282,7 +292,7 @@ public class SwordFollow : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(pmScript.pAttack.isParrying && collision.gameObject != pmScript.gameObject && canParryCheck.isBlocking)
+        if(pmScript?.pAttack?.isParrying  == true && collision.gameObject != pmScript.gameObject && canParryCheck.isBlocking)
         {
             ITeam team = collision.GetComponent<ITeam>();
 
