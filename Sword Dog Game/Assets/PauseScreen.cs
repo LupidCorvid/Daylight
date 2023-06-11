@@ -35,7 +35,7 @@ public class PauseScreen : MonoBehaviour
         }
 
         //Temp implementation. Should work to escape menus and check if not in menus first
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(SettingsManager.currentSettings.pauseKey))
         {
             if(PlayerMenuManager.open)
             {
