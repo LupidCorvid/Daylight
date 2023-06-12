@@ -66,7 +66,15 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
-        musicMixer.GetFloat("Volume", out musicVolume);
+        if (SettingsManager.currentSettings != null)
+        {
+            musicVolume = SettingsManager.currentSettings.musicVolume;
+            mute = SettingsManager.currentSettings.musicMute;
+        }
+        else
+        {
+            musicMixer.GetFloat("Volume", out musicVolume);
+        }
 
         if (FindObjectsOfType<AudioManager>().Length > 1)
         {
@@ -152,6 +160,7 @@ public class AudioManager : MonoBehaviour
         {
             mute = !mute;
         }
+        SettingsManager.currentSettings.musicMute = mute;
 
         // Volume controls (hold down + or -)
         musicMixer.SetFloat("Volume", musicVolume);
@@ -168,6 +177,7 @@ public class AudioManager : MonoBehaviour
             if (musicVolume > -80f)
                 musicVolume -= 0.1f;
         }
+        SettingsManager.currentSettings.musicVolume = musicVolume;
 
         float pitch;
         musicMixer.GetFloat("Pitch", out pitch);
@@ -196,7 +206,8 @@ public class AudioManager : MonoBehaviour
         else
             sfxMixer.SetFloat("Reverb", -10000f);
         
-        targetSFXVolume = sfxVolume - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
+        // sfxVolume is a float from 0.0-1.0 but we'd want 1.0 to correspond to 10dB => *10f
+        targetSFXVolume = (SettingsManager.currentSettings.sfxVolume)*10f - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
         if (ChangeScene.changingScene || GameSaver.loading)
         {
             actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.1f);

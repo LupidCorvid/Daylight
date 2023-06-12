@@ -40,7 +40,6 @@ public class GameSaver : MonoBehaviour
 
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
-            data.SetOptions(AudioManager.instance);
             var dataToSave = JsonUtility.ToJson(data, true);
             saveSystem.SaveData(dataToSave);
         }
@@ -89,8 +88,6 @@ public class GameSaver : MonoBehaviour
 
             SceneHelper.LoadScene(data.player.spawnpoint.scene);
 
-            // TODO this needs to happen upon application start!!!
-            data.options.SetValues();
             loadedNewData?.Invoke(data);
             //PlayerMovement.controller.entityBase.buffManager.loadBuffs(data);
 
@@ -106,7 +103,6 @@ public class GameSaver : MonoBehaviour
     public class SaveData
     {
         public PlayerSerialization player;
-        public OptionsSerialization options;
         public RoomStates roomStates;
         public Buffs.SaveBuffs buffs;
         public ItemDatabase.PackedInventory inventory;
@@ -115,9 +111,6 @@ public class GameSaver : MonoBehaviour
 
         public void SetPlayer(GameObject playerObj) {
             player = new PlayerSerialization(playerObj);
-        }
-        public void SetOptions(AudioManager am) {
-            options = new OptionsSerialization(am);
         }
 
         public SaveData()

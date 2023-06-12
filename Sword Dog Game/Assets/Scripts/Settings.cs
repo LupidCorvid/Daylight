@@ -17,9 +17,13 @@ public class Settings
 
 
 
-    public float sfxVolume = 100;
+    public float sfxVolume = 1f;
 
-    public float musicVolume = 100;
+    public float musicVolume = 1f;
+
+    public bool musicMute = false;
+
+    public bool sfxMute = false;
 
     public bool fullScreen = true;
 }

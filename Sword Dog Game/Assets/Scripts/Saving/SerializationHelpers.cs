@@ -145,24 +145,3 @@ public class Vector2Serialization
         return new Vector2(x, y);
     }
 }
-
-[Serializable]
-public class OptionsSerialization
-{
-    public bool musicMute;
-    public float musicVolume, sfxVolume;
-
-    public OptionsSerialization(AudioManager am)
-    {
-        musicMute = am.mute;
-        musicVolume = am.musicVolume;
-        sfxVolume = am.sfxVolume;
-    }
-
-    public void SetValues()
-    {
-        AudioManager.instance.mute = musicMute;
-        AudioManager.instance.musicVolume = musicVolume;
-        AudioManager.instance.sfxVolume = sfxVolume;
-    }
-}
