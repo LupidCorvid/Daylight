@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
 
     public UnityEngine.UI.Button continueButton;
     public static bool inMainMenu;
+    private bool quit = false;
 
 
     // Start is called before the first frame update
@@ -92,6 +93,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
+        quit = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -120,9 +124,12 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnDestroy()
     {
-        PauseScreen.canPause = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        if (!quit)
+        {
+            PauseScreen.canPause = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
     }
 
 }
