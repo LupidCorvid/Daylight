@@ -216,6 +216,7 @@ public class AudioManager : MonoBehaviour
         {
             actualSFXVolume = Mathf.Lerp(actualSFXVolume, targetSFXVolume, 0.1f);
         }
+        actualSFXVolume = Mathf.Clamp(actualSFXVolume, 0, 5);
         sfxMixer.SetFloat("Volume", actualSFXVolume);
     }
 
