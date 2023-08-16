@@ -8,7 +8,7 @@ public class PauseScreen : MonoBehaviour
 {
     public static bool paused = false;
     public static bool canPause = true;
-    public static bool quit = true;
+    public static bool quit = false;
 
     CanvasGroup pauseMenuGroup;
 
