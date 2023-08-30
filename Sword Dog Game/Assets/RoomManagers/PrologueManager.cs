@@ -9,6 +9,7 @@ public class PrologueManager : RoomManager
     public Entity prologueMonster;
 
     public GameObject looseSword;
+    public GameObject NoSwordBlock;
 
     bool attemptedLeave = false;
 
@@ -31,7 +32,7 @@ public class PrologueManager : RoomManager
                 collectSword();
                 break;
             case "ApproachedRival":
-                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !DialogSource.stringVariables.ContainsKey("ListenedWithSword") && !DialogController.dialogOpen)
                 {
                     CutsceneController.PlayCutscene("RivalApproached");
                 }
@@ -57,7 +58,10 @@ public class PrologueManager : RoomManager
         if (roomState.swordCollected)
             Destroy(looseSword);
         else
+        {
             SwordFollow.instance.SetActive(false);
+            NoSwordBlock.SetActive(true);
+        }
         if(!roomState.finishedIntroCutscene)
         {
             //roomState.finishedIntroCutscene = true;
@@ -89,10 +93,12 @@ public class PrologueManager : RoomManager
     {
         //Giveplayer sword
         roomState.swordCollected = true;
+        DialogSource.stringVariables.Add("HasGottenSword", "True");
         SwordFollow.instance.transform.position = looseSword.transform.position;
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
+        NoSwordBlock.SetActive(false);
     }
 
     private void OnDestroy()
