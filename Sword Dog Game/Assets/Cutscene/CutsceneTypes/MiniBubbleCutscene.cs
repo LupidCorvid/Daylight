@@ -12,6 +12,8 @@ public class MiniBubbleCutscene : CutsceneData
     GameObject addedBubble;
 
     public bool speakVoice;
+    public float voiceVol = .5f;
+
     public bool barkEffect;
     public bool ignoreSpeakerPos = true;
 
@@ -40,6 +42,7 @@ public class MiniBubbleCutscene : CutsceneData
         bubble.setPosition = position;
         bubble.speaker = speaker;
         bubble.ignoreSpeakerPos = ignoreSpeakerPos;
+        bubble.voiceVol = voiceVol;
         bubble.setSource(new DialogSource(dialog));
 
     }

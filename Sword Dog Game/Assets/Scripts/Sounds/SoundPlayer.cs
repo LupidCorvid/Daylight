@@ -178,4 +178,12 @@ public class SoundPlayer : MonoBehaviour
         }
     }
 
+    public void SetVolume(float newVolume)
+    {
+        foreach(AudioSource source in sources)
+        {
+            source.volume = newVolume;
+        }
+    }
+
 }

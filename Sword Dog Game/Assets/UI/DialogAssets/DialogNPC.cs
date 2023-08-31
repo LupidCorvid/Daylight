@@ -227,15 +227,25 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
     public void speakVoice()
     {
+        speakVoice(.5f);
+    }
+
+    public void speakVoice(float volume)
+    {
         if (!speaking)
         {
-            soundPlayer?.PlaySound(speechLoop, 0.5f, true);
+            soundPlayer?.PlaySound(speechLoop, volume, true);
             speaking = true;
         }
         else if (pausedSpeak)
         {
             soundPlayer?.UnPauseSound(speechLoop);
             pausedSpeak = false;
+            soundPlayer?.SetVolume(volume);
+        }
+        else
+        {
+            soundPlayer?.SetVolume(volume);
         }
     }
 

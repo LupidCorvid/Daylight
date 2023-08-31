@@ -45,6 +45,7 @@ public class MiniBubbleController : MonoBehaviour
 
     public bool enableBarks = false;
     public bool enableVoice = false;
+    public float voiceVol;
 
     // Start is called before the first frame update
     void Start()
@@ -219,8 +220,9 @@ public class MiniBubbleController : MonoBehaviour
 
     public void SpeakVoice()
     {
+        //Maybe make it quieter when it speaks this way?
         if(enableVoice)
-            speaker?.speakVoice();
+            speaker?.speakVoice(voiceVol);
     }
 
     public void PauseSpeak()
