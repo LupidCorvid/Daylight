@@ -11,6 +11,12 @@ public class MiniBubbleCutscene : CutsceneData
 
     GameObject addedBubble;
 
+    public bool speakVoice;
+    public bool barkEffect;
+    public bool ignoreSpeakerPos = true;
+
+    public DialogNPC speaker;
+
     public override void startSegment()
     {
         base.startSegment();
@@ -29,7 +35,11 @@ public class MiniBubbleCutscene : CutsceneData
     {
         GameObject addedObj = Instantiate(bubblePrefab, position, Quaternion.identity, TempObjectsHolder.asTransform);
         MiniBubbleController bubble = addedObj.GetComponent<MiniBubbleController>();
+        bubble.enableVoice = speakVoice;
+        bubble.enableBarks = barkEffect;
         bubble.setPosition = position;
+        bubble.speaker = speaker;
+        bubble.ignoreSpeakerPos = ignoreSpeakerPos;
         bubble.setSource(new DialogSource(dialog));
 
     }

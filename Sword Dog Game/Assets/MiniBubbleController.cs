@@ -13,12 +13,14 @@ public class MiniBubbleController : MonoBehaviour
     {
         get
         {
-            if (speaker != null)
+            if (speaker != null && !ignoreSpeakerPos)
                 return speaker.transform.position;
             else
                 return setPosition;
         }
     }
+
+    public bool ignoreSpeakerPos;
 
     public Collider2D cldr;
 
@@ -40,6 +42,9 @@ public class MiniBubbleController : MonoBehaviour
     public bool open = false;
 
     public Animator anim;
+
+    public bool enableBarks = false;
+    public bool enableVoice = false;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +122,10 @@ public class MiniBubbleController : MonoBehaviour
             dialog.addEffect -= AddEffect;
             dialog.removeEffect -= RemoveEffect;
             dialog.exit -= close;
+            dialog.bark -= Bark;
+            dialog.speak -= SpeakVoice;
+            dialog.pauseSpeak -= PauseSpeak;
+            dialog.stopSpeak -= StopSpeak;
         }
         dialog = newSource;
         if(textDisplay != null)
@@ -129,6 +138,10 @@ public class MiniBubbleController : MonoBehaviour
         newSource.addEffect += AddEffect;
         newSource.removeEffect += RemoveEffect;
         newSource.exit += close;
+        newSource.bark += Bark;
+        dialog.speak += SpeakVoice;
+        dialog.pauseSpeak += PauseSpeak;
+        dialog.stopSpeak += StopSpeak;
     }
 
     public void close()
@@ -196,5 +209,28 @@ public class MiniBubbleController : MonoBehaviour
     public void OutputCleared()
     {
         textEffects.Clear();
+    }
+
+    public void Bark(Vector2 vel, Vector2 acc)
+    {
+        if (enableBarks)
+            speaker?.barkEffect(vel, acc);
+    }
+
+    public void SpeakVoice()
+    {
+        if(enableVoice)
+            speaker?.speakVoice();
+    }
+
+    public void PauseSpeak()
+    {
+        if (enableVoice)
+            speaker?.pauseSpeak();
+    }
+
+    public void StopSpeak()
+    {
+        speaker?.stopSpeak();
     }
 }
