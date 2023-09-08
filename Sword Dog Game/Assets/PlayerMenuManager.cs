@@ -132,7 +132,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(defaultButton);
         CanvasManager.InstantHideHUD();
-        Cursor.visible = true;
+        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -152,7 +152,7 @@ public class PlayerMenuManager : MonoBehaviour
         InventoryManager.main.itemInfoPopup.close();
 
         CanvasManager.InstantShowHUD();
-        Cursor.visible = false;
+        //Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 

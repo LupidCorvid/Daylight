@@ -50,7 +50,7 @@ public class MainMenuManager : MonoBehaviour
             Destroy(PlayerMovement.instance);
         PauseScreen.canPause = false;
 
-        Cursor.visible = true;
+        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
     }
@@ -94,7 +94,7 @@ public class MainMenuManager : MonoBehaviour
     public void Quit()
     {
         quit = true;
-        Cursor.visible = true;
+        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         
 #if UNITY_EDITOR
@@ -127,7 +127,7 @@ public class MainMenuManager : MonoBehaviour
         if (!quit)
         {
             PauseScreen.canPause = true;
-            Cursor.visible = false;
+            //Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
         }
     }

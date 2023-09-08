@@ -94,7 +94,7 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.blocksRaycasts = true;
         pauseContainerGroup.interactable = true;
 
-        Cursor.visible = true;
+        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -125,7 +125,7 @@ public class PauseScreen : MonoBehaviour
         pauseContainerGroup.alpha = 0;
         pauseContainerGroup.blocksRaycasts = false;
         pauseContainerGroup.interactable = false;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
