@@ -988,6 +988,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2513541694159346312, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 2686455128359140146, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1403,24 +1407,25 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
   facingDir: {x: 0, y: 0}
   aggroRange: 10
   movement: {fileID: 0}
@@ -1697,24 +1702,25 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
   facingDir: {x: 0, y: 0}
   aggroRange: 10
   movement: {fileID: 0}
@@ -3558,24 +3564,25 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
   facingDir: {x: 0, y: 0}
   aggroRange: 10
   movement: {fileID: 0}
@@ -4093,6 +4100,7 @@ MonoBehaviour:
   stopInteractions: 1
   stopMovement: 1
   hideUI: 1
+  controlMusic: 0
 --- !u!4 &1650152783
 Transform:
   m_ObjectHideFlags: 0
@@ -4892,6 +4900,7 @@ MonoBehaviour:
   stopInteractions: 1
   stopMovement: 1
   hideUI: 1
+  controlMusic: 0
 --- !u!114 &2045204256
 MonoBehaviour:
   m_ObjectHideFlags: 0

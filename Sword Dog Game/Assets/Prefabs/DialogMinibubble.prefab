@@ -51,6 +51,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   speaker: {fileID: 0}
   setPosition: {x: 0, y: 0}
+  ignoreSpeakerPos: 0
   cldr: {fileID: 0}
   minDistance: 0
   maxDistance: 15
@@ -59,6 +60,9 @@ MonoBehaviour:
   textDialog: '[ss,.05]E I was talking to you! [w, 3] [exit]'
   open: 0
   anim: {fileID: 0}
+  enableBarks: 0
+  enableVoice: 0
+  voiceVol: 0
 --- !u!61 &1205727677339176264
 BoxCollider2D:
   m_ObjectHideFlags: 0

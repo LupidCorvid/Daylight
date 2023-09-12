@@ -3793,6 +3793,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!95 &270827909
 Animator:
   serializedVersion: 5
@@ -4002,6 +4003,7 @@ MonoBehaviour:
   stopInteractions: 0
   stopMovement: 0
   hideUI: 0
+  controlMusic: 0
 --- !u!4 &294639850
 Transform:
   m_ObjectHideFlags: 0
@@ -18465,28 +18467,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
+  facingDir: {x: 0, y: 0}
   aggroRange: 10
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
+  killValue: 5
+  soundPlayer: {fileID: 0}
+  crySound: {fileID: 0}
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
   stopping: {fileID: 6200000, guid: 7cffa87dc3f7aa441bf281e634fe1ea8, type: 2}
@@ -18609,7 +18620,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18672,6 +18683,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
   alsoFlash: []
   forceNonSolidFlash: 0
+  spriteRenderer: {fileID: 0}
 --- !u!1 &1027897706
 GameObject:
   m_ObjectHideFlags: 0
@@ -30170,7 +30182,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30231,6 +30243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   miniBubblePrefab: {fileID: 0}
+  emotePrefab: {fileID: 0}
   miniBubbleOffset: {x: 0, y: 2}
   dialog:
   - '[lf,TesterDialog2.txt]'
@@ -30245,6 +30258,11 @@ MonoBehaviour:
   promptPrefab: {fileID: 0}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  emoteSpawnLocation: {fileID: 0}
+  speechLoop: {fileID: 0}
+  soundPlayer: {fileID: 0}
+  speaking: 0
+  pausedSpeak: 0
   interactor: {fileID: 0}
 --- !u!61 &1578129669
 BoxCollider2D:
@@ -34122,6 +34140,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   onExitEmit: 1
   lastEmptyParticleDrop: 0
+  disableLeaves: 0
 --- !u!95 &1909771759
 Animator:
   serializedVersion: 5
@@ -34270,6 +34289,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2513541694159346312, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 2686455128359140146, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -34610,6 +34633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   miniBubblePrefab: {fileID: 0}
+  emotePrefab: {fileID: 0}
   miniBubbleOffset: {x: 0, y: 2}
   dialog:
   - '[lf,EffectDialog.txt]'
@@ -34620,6 +34644,11 @@ MonoBehaviour:
   promptPrefab: {fileID: 0}
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  emoteSpawnLocation: {fileID: 0}
+  speechLoop: {fileID: 0}
+  soundPlayer: {fileID: 0}
+  speaking: 0
+  pausedSpeak: 0
   interactor: {fileID: 0}
 --- !u!212 &1938978146
 SpriteRenderer:
@@ -34641,7 +34670,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
