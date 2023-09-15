@@ -15,6 +15,8 @@ public class MoveCameraCutscene : CutsceneData
     public bool freeHudOnExit = false;
     public bool useMainCamera = true;
 
+    public bool ignoreCameraBounds = false;
+
     public enum MovementType
     {
         Linear,
@@ -30,6 +32,8 @@ public class MoveCameraCutscene : CutsceneData
             target = CameraController.mainCam;
         if (useMainCamera)
             CameraController.main.externalControl = true;
+        if (ignoreCameraBounds)
+            CameraController.main.cldr.isTrigger = true;
         if(points.Count > 0)
             changingToNewTransform();
     }
@@ -125,9 +129,15 @@ public class MoveCameraCutscene : CutsceneData
             CameraController.main.externalControl = false;
             if(freeHudOnExit)
                 CanvasManager.ShowHUD(); // TODO this is kind of a hack fix - perhaps there's a better way to integrate things with the hideUI flag
+
+            if (ignoreCameraBounds)
+                CameraController.main.cldr.isTrigger = false;
         }
         if (CinematicBars.current.beingAdded)
             CinematicBars.current.Hide();
+
+        
+
         base.finishedSegment();
     }
 

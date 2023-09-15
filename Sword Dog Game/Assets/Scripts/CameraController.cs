@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform targetTracker;
-    public Vector3 offset = new Vector3(0, 2, -10);
+    public Vector3 offset = new Vector3(0, 0, -10);
 
     public float speed = 5;
     public float defaultZoom = 5;
@@ -33,7 +33,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public Collider2D cldr;
+    public BoxCollider2D cldr;
+    public Rigidbody2D followrb;
 
     public bool externalControl = false;
 
@@ -42,16 +43,18 @@ public class CameraController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         main = this;
         mainCam = GetComponent<Camera>();
-        cldr = GetComponent<Collider2D>();
+        cldr = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.instance != null) 
+        if (PlayerMovement.instance != null)
             targetTracker = PlayerMovement.instance.transform;
+
         else
             targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
+        followrb = targetTracker.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }
@@ -67,7 +70,11 @@ public class CameraController : MonoBehaviour
 
         if (!externalControl)
         {
-            transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
+            Vector3 finalTarg = targetPoint;
+            if (followrb != null)
+                finalTarg += new Vector3(followrb.velocity.x, 0, 0) * .45f;
+
+            transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
             if (Camera.main.orthographicSize != defaultZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - defaultZoom) * Time.deltaTime;
@@ -75,6 +82,12 @@ public class CameraController : MonoBehaviour
                     Camera.main.orthographicSize = defaultZoom;
             }
         }
+
+        rb.velocity = Vector2.zero;
+
+        cldr.size = new Vector3(18, 10) * mainCam.orthographicSize / 5;
+        
+        
     }
 
     public static void OverrideMovement(Transform player, float duration = 0.5f)
