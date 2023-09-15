@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour
     }
 
     public BoxCollider2D cldr;
+    public Rigidbody2D followrb;
 
     public bool externalControl = false;
 
@@ -48,10 +49,12 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.instance != null) 
+        if (PlayerMovement.instance != null)
             targetTracker = PlayerMovement.instance.transform;
+
         else
             targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
+        followrb = targetTracker.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         //transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
     }
@@ -67,7 +70,11 @@ public class CameraController : MonoBehaviour
 
         if (!externalControl)
         {
-            transform.position += (targetPoint - transform.position) * Time.deltaTime * speed;
+            Vector3 finalTarg = targetPoint;
+            if (followrb != null)
+                finalTarg += new Vector3(followrb.velocity.x, 0, 0) * .45f;
+
+            transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
             if (Camera.main.orthographicSize != defaultZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - defaultZoom) * Time.deltaTime;
