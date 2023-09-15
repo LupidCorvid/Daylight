@@ -15,6 +15,8 @@ public class MoveCameraCutscene : CutsceneData
     public bool freeHudOnExit = false;
     public bool useMainCamera = true;
 
+    public bool ignoreCameraBounds = false;
+
     public enum MovementType
     {
         Linear,
@@ -30,6 +32,8 @@ public class MoveCameraCutscene : CutsceneData
             target = CameraController.mainCam;
         if (useMainCamera)
             CameraController.main.externalControl = true;
+        if (ignoreCameraBounds)
+            CameraController.main.gameObject.layer = LayerMask.GetMask("");
         if(points.Count > 0)
             changingToNewTransform();
     }

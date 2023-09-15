@@ -48,9 +48,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -90,8 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTracker: {fileID: 6300512340327299633, guid: 166050e7db04faa4698a3bda01089569, type: 3}
-  offset: {x: 0, y: 2, z: -10}
+  offset: {x: 0, y: 0, z: -10}
   speed: 5
+  defaultZoom: 5
+  cldr: {fileID: 0}
+  externalControl: 0
 --- !u!114 &8232809106833958234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df05cb1eef40ca8469b954cc128d4d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
