@@ -548,38 +548,25 @@ public class PlayerMovement : MonoBehaviour
     private float? SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
 
-        //Get initial raycasts
-        RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
-        RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
-        RaycastHit2D midHit = Physics2D.Raycast(upperRightCorner.y * Vector3.up + transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
+        int numSamples = 15;
+
 
         List<float> angles = new List<float>();
 
-        if (leftHit.distance < colliderSize.y + 1f && leftHit.distance >= colliderSize.y - 0.5f)
+        for (int i = 0; i < numSamples; i++)
         {
-            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.green);
-            angles.Add(-Vector2.SignedAngle(leftHit.normal, Vector2.up));
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i/(numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
+
+            
+            if (hit.distance < colliderSize.y + 1f && hit.distance >= colliderSize.y - 0.5f)
+            {
+                Debug.DrawLine(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i / (numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, hit.point, Color.green);
+                
+                angles.Add(-Vector2.SignedAngle(hit.normal, Vector2.up));
+            }
+            else
+                Debug.DrawLine(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i / (numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, hit.point, Color.red);
         }
-        else
-            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
-
-
-        if (rightHit.distance < colliderSize.y + 1f && rightHit.distance >= colliderSize.y - 0.5f)
-        {
-            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.green);
-            angles.Add(-Vector2.SignedAngle(rightHit.normal, Vector2.up));
-        }
-        else
-            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
-
-        if (midHit.distance < colliderSize.y + 1f && midHit.distance >= colliderSize.y - .05f)
-        {
-            angles.Add(-Vector2.SignedAngle(midHit.normal, Vector2.up));
-            Debug.DrawLine((Vector2)transform.position + new Vector2(0, upperLeftCorner.y), midHit.point, Color.green);
-        }
-        else
-            Debug.DrawLine((Vector2)transform.position + new Vector2(0, upperLeftCorner.y), midHit.point, Color.red);
-
 
         float anglesSum = 0;
 
@@ -588,10 +575,14 @@ public class PlayerMovement : MonoBehaviour
             anglesSum += angles[i];
         }
 
+        angles.Sort();
+
+
         if (angles.Count > 0)
-            return anglesSum / angles.Count;
+            //return anglesSum / angles.Count;
+            return angles[angles.Count / 2];
         else
-            return 0;
+            return null;
     }
 
     /// <summary>
