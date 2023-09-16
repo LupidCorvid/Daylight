@@ -2565,7 +2565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944360054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.68, y: -7.2, z: 0}
+  m_LocalPosition: {x: -8.68, y: -7.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2605,7 +2605,7 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.1
   m_Points:
   - {x: -29.744194, y: 0}
   - {x: 283.74875, y: -0.18684387}
@@ -4154,6 +4154,7 @@ MonoBehaviour:
   freeCameraOnExit: 1
   freeHudOnExit: 0
   useMainCamera: 1
+  ignoreCameraBounds: 0
 --- !u!114 &1650152782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4999,6 +5000,7 @@ MonoBehaviour:
   freeCameraOnExit: 0
   freeHudOnExit: 0
   useMainCamera: 1
+  ignoreCameraBounds: 0
 --- !u!1001 &1574898866829932213
 PrefabInstance:
   m_ObjectHideFlags: 0
