@@ -549,7 +549,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         int numSamples = 15;
-
+        anim.SetBool("ground_close", false);
 
         List<float> angles = new List<float>();
 
@@ -562,6 +562,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.DrawLine(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i / (numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, hit.point, Color.green);
                 
+                if(hit.distance < 2f + colliderSize.y / 2f)
+                    anim.SetBool("ground_close", true);
+
                 angles.Add(-Vector2.SignedAngle(hit.normal, Vector2.up));
             }
             else
@@ -578,9 +581,15 @@ public class PlayerMovement : MonoBehaviour
         angles.Sort();
 
 
+
         if (angles.Count > 0)
+        {
             //return anglesSum / angles.Count;
-            return angles[angles.Count / 2];
+            if (Mathf.Abs(angles[angles.Count / 2]) > 60)
+                return null;
+            else
+                return angles[angles.Count / 2];
+        }
         else
             return null;
     }
