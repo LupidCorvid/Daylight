@@ -431,6 +431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 92984356}
   - component: {fileID: 92984357}
+  - component: {fileID: 92984358}
   m_Layer: 0
   m_Name: cliff4
   m_TagString: Untagged
@@ -505,6 +506,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &92984358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92984355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1001 &108541983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,6 +1123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160002231}
   - component: {fileID: 160002232}
+  - component: {fileID: 160002233}
   m_Layer: 0
   m_Name: big stalagtite
   m_TagString: Untagged
@@ -1175,6 +1198,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &160002233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160002230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &161448890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,6 +1304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209917285}
   - component: {fileID: 209917286}
+  - component: {fileID: 209917287}
   m_Layer: 0
   m_Name: big stalagtite (1)
   m_TagString: Untagged
@@ -1334,6 +1379,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &209917287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209917284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.1, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &211560823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1934,7 @@ GameObject:
   - component: {fileID: 285120200}
   - component: {fileID: 285120199}
   - component: {fileID: 285120198}
+  - component: {fileID: 285120201}
   m_Layer: 7
   m_Name: platform1
   m_TagString: Ground
@@ -1901,7 +1968,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 12279
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -1939,7 +2006,7 @@ EdgeCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -2002,6 +2069,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &285120201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285120196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07c00856de99b64492cef43f7ee0007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cldr: {fileID: 0}
 --- !u!1 &297196356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,6 +2092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297196357}
   - component: {fileID: 297196358}
+  - component: {fileID: 297196359}
   m_Layer: 0
   m_Name: stalactite2
   m_TagString: Untagged
@@ -2086,6 +2167,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &297196359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297196356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.075, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &306276594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,6 +2551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 390135734}
   - component: {fileID: 390135735}
+  - component: {fileID: 390135736}
   m_Layer: 0
   m_Name: shine
   m_TagString: Untagged
@@ -2523,6 +2626,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &390135736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390135733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &403231265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426155868}
   - component: {fileID: 426155869}
+  - component: {fileID: 426155870}
   m_Layer: 0
   m_Name: stalactite2
   m_TagString: Untagged
@@ -2815,6 +2940,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &426155870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426155867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &450336341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,6 +3139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 505778092}
   - component: {fileID: 505778093}
+  - component: {fileID: 505778094}
   m_Layer: 0
   m_Name: cave inside 2 (2)
   m_TagString: Untagged
@@ -3067,6 +3214,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &505778094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505778091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &524710538
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,6 +4383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 734348522}
   - component: {fileID: 734348523}
+  - component: {fileID: 734348524}
   m_Layer: 0
   m_Name: cave inside 2 (3)
   m_TagString: Untagged
@@ -4289,6 +4458,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &734348524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734348521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &738040103
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,6 +4489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 738040104}
   - component: {fileID: 738040105}
+  - component: {fileID: 738040106}
   m_Layer: 0
   m_Name: cliff5
   m_TagString: Untagged
@@ -4373,6 +4564,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &738040106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738040103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &742542614
 GameObject:
   m_ObjectHideFlags: 0
@@ -4383,6 +4595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742542615}
   - component: {fileID: 742542616}
+  - component: {fileID: 742542617}
   m_Layer: 0
   m_Name: stalactite2 (2)
   m_TagString: Untagged
@@ -4457,6 +4670,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &742542617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742542614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &751983765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,6 +4904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830351339}
   - component: {fileID: 830351340}
+  - component: {fileID: 830351341}
   m_Layer: 0
   m_Name: stalactite2 (7)
   m_TagString: Untagged
@@ -4744,6 +4979,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &830351341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830351338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &848806687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,6 +5010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848806688}
   - component: {fileID: 848806689}
+  - component: {fileID: 848806690}
   m_Layer: 0
   m_Name: cave inside 2 (1)
   m_TagString: Untagged
@@ -4828,6 +5085,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &848806690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848806687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &953979411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,6 +6319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1174412147}
   - component: {fileID: 1174412148}
+  - component: {fileID: 1174412149}
   m_Layer: 0
   m_Name: big stalagtite (2)
   m_TagString: Untagged
@@ -6115,6 +6394,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1174412149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174412146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.065, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1181890764
 GameObject:
   m_ObjectHideFlags: 0
@@ -6255,6 +6555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195626510}
   - component: {fileID: 1195626511}
+  - component: {fileID: 1195626512}
   m_Layer: 0
   m_Name: stalactite2 (6)
   m_TagString: Untagged
@@ -6329,6 +6630,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1195626512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195626509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1220674843
 GameObject:
   m_ObjectHideFlags: 0
@@ -6340,7 +6662,7 @@ GameObject:
   - component: {fileID: 1220674844}
   - component: {fileID: 1220674846}
   - component: {fileID: 1220674845}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7256,6 +7578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1388063873}
   - component: {fileID: 1388063874}
+  - component: {fileID: 1388063875}
   m_Layer: 0
   m_Name: cliff5
   m_TagString: Untagged
@@ -7330,6 +7653,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1388063875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388063872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1456584434
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,6 +7684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456584435}
   - component: {fileID: 1456584436}
+  - component: {fileID: 1456584437}
   m_Layer: 0
   m_Name: big stalagtite (3)
   m_TagString: Untagged
@@ -7414,6 +7759,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1456584437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456584434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1470857544
 GameObject:
   m_ObjectHideFlags: 0
@@ -7424,6 +7790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470857545}
   - component: {fileID: 1470857546}
+  - component: {fileID: 1470857547}
   m_Layer: 0
   m_Name: cave inside 2
   m_TagString: Untagged
@@ -7498,6 +7865,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1470857547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470857544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.06, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1476583278
 GameObject:
   m_ObjectHideFlags: 0
@@ -7508,6 +7896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1476583279}
   - component: {fileID: 1476583280}
+  - component: {fileID: 1476583281}
   m_Layer: 0
   m_Name: stalactite2 (4)
   m_TagString: Untagged
@@ -7582,6 +7971,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1476583281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476583278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1479512245
 GameObject:
   m_ObjectHideFlags: 0
@@ -7592,6 +8002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479512246}
   - component: {fileID: 1479512247}
+  - component: {fileID: 1479512248}
   m_Layer: 0
   m_Name: cliff5
   m_TagString: Untagged
@@ -7666,6 +8077,96 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1479512248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479512245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
+--- !u!1001 &1501550578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 225807759336298502, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_Name
+      value: Stalagtite
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -32.293293
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.68678594
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
 --- !u!1 &1504264211
 GameObject:
   m_ObjectHideFlags: 0
@@ -7804,6 +8305,7 @@ GameObject:
   - component: {fileID: 1510520945}
   - component: {fileID: 1510520944}
   - component: {fileID: 1510520943}
+  - component: {fileID: 1510520947}
   m_Layer: 7
   m_Name: platform1 (1)
   m_TagString: Ground
@@ -7837,7 +8339,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 12279
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -7875,7 +8377,7 @@ EdgeCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -7938,6 +8440,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1510520947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510520941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07c00856de99b64492cef43f7ee0007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cldr: {fileID: 0}
 --- !u!1 &1560589885
 GameObject:
   m_ObjectHideFlags: 0
@@ -8067,7 +8582,7 @@ GameObject:
   - component: {fileID: 1572324926}
   - component: {fileID: 1572324928}
   - component: {fileID: 1572324927}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8280,6 +8795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1605667742}
   - component: {fileID: 1605667743}
+  - component: {fileID: 1605667744}
   m_Layer: 0
   m_Name: stalactite2 (5)
   m_TagString: Untagged
@@ -8354,6 +8870,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1605667744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605667741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1618171063
 GameObject:
   m_ObjectHideFlags: 0
@@ -9292,6 +9829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1660229514}
   - component: {fileID: 1660229515}
+  - component: {fileID: 1660229516}
   m_Layer: 0
   m_Name: stalactite2 (3)
   m_TagString: Untagged
@@ -9366,6 +9904,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1660229516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660229513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1713676300
 GameObject:
   m_ObjectHideFlags: 0
@@ -9502,6 +10061,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799651101}
   - component: {fileID: 1799651102}
+  - component: {fileID: 1799651103}
   m_Layer: 0
   m_Name: cave inside 2 (4)
   m_TagString: Untagged
@@ -9576,6 +10136,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1799651103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799651100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1806818584
 GameObject:
   m_ObjectHideFlags: 0
@@ -9586,6 +10167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806818585}
   - component: {fileID: 1806818586}
+  - component: {fileID: 1806818587}
   m_Layer: 0
   m_Name: stalactite2 (1)
   m_TagString: Untagged
@@ -9660,6 +10242,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1806818587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806818584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1820357995
 GameObject:
   m_ObjectHideFlags: 0
@@ -10457,6 +11060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927227941}
   - component: {fileID: 1927227942}
+  - component: {fileID: 1927227943}
   m_Layer: 0
   m_Name: big stalagtite (4)
   m_TagString: Untagged
@@ -10531,6 +11135,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1927227943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927227940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693c287b955671c4085920476a5688fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simplifiedOptions: 0
+  simpleDistance: 0
+  autoChangeColor: 0
+  spriteRenderer: {fileID: 0}
+  distance: {x: -0.05, y: 0.05}
+  cam: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!1 &1927326562
 GameObject:
   m_ObjectHideFlags: 0
