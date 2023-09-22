@@ -40,6 +40,12 @@ public class CameraController : MonoBehaviour
 
     public bool externalControl = false;
 
+    public bool lockX;
+    public bool lockY;
+    public bool lockZoom;
+
+    public Vector3 lockDetails;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -97,12 +103,21 @@ public class CameraController : MonoBehaviour
                 //finalTarg += (Vector3)RbFollowVector;
             }
 
+            float targZoom = defaultZoom;
+
+            if (lockX)
+                finalTarg.x = lockDetails.x;
+            if (lockY)
+                finalTarg.y = lockDetails.y;
+            if (lockZoom)
+                targZoom = lockDetails.z;
+
             transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
-            if (Camera.main.orthographicSize != defaultZoom)
+            if (Camera.main.orthographicSize != targZoom)
             {
-                Camera.main.orthographicSize -= (Camera.main.orthographicSize - defaultZoom) * Time.deltaTime;
-                if (Mathf.Abs(Camera.main.orthographicSize - defaultZoom) < .01f)
-                    Camera.main.orthographicSize = defaultZoom;
+                Camera.main.orthographicSize -= (Camera.main.orthographicSize - targZoom) * Time.deltaTime;
+                if (Mathf.Abs(Camera.main.orthographicSize - targZoom) < .01f)
+                    Camera.main.orthographicSize = targZoom;
             }
         }
 
