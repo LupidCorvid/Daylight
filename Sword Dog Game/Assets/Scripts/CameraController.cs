@@ -80,12 +80,12 @@ public class CameraController : MonoBehaviour
         {
             Vector3 finalTarg = targetPoint;
 
-            float jumpHeight = 6f; // magic var, unmeasured
-            RaycastHit2D hit = Physics2D.Raycast(targetTracker.position, Vector2.down, jumpHeight, camBounds);
-            if (hit.distance <= jumpHeight && hit.distance > 0 && targetTracker.GetComponent<PlayerMovement>() != null) {
-                Debug.DrawLine(targetTracker.position, hit.point, Color.magenta, Time.fixedDeltaTime);
-                finalTarg = new Vector3(finalTarg.x, Mathf.Min(finalTarg.y, targetTracker.GetComponent<PlayerMovement>().lastLandHeight), finalTarg.z);
-            }
+            //float jumpHeight = 6f; // magic var, unmeasured
+            //RaycastHit2D hit = Physics2D.Raycast(targetTracker.position, Vector2.down, jumpHeight, camBounds);
+            //if (hit.distance <= jumpHeight && hit.distance > 0 && targetTracker.GetComponent<PlayerMovement>() != null) {
+            //    Debug.DrawLine(targetTracker.position, hit.point, Color.magenta, Time.fixedDeltaTime);
+            //    finalTarg = new Vector3(finalTarg.x, Mathf.Min(finalTarg.y, targetTracker.GetComponent<PlayerMovement>().lastLandHeight), finalTarg.z);
+            //}
             
             if (followrb != null)
             {
@@ -120,7 +120,10 @@ public class CameraController : MonoBehaviour
             if (lockZoom)
                 targZoom = lockDetails.z;
 
-            transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
+            
+
+            //transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
+            rb.MovePosition((finalTarg - transform.position) * Time.deltaTime * speed + transform.position);
             if (Camera.main.orthographicSize != targZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - targZoom) * Time.deltaTime;
