@@ -37,6 +37,7 @@ public class CameraController : MonoBehaviour
 
     public BoxCollider2D cldr;
     public Rigidbody2D followrb;
+    public LayerMask camBounds;
 
     public bool externalControl = false;
 
@@ -59,7 +60,6 @@ public class CameraController : MonoBehaviour
     {
         if (PlayerMovement.instance != null)
             targetTracker = PlayerMovement.instance.transform;
-
         else
             targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
         followrb = targetTracker.GetComponent<Rigidbody2D>();
@@ -79,6 +79,14 @@ public class CameraController : MonoBehaviour
         if (!externalControl)
         {
             Vector3 finalTarg = targetPoint;
+
+            //float jumpHeight = 6f; // magic var, unmeasured
+            //RaycastHit2D hit = Physics2D.Raycast(targetTracker.position, Vector2.down, jumpHeight, camBounds);
+            //if (hit.distance <= jumpHeight && hit.distance > 0 && targetTracker.GetComponent<PlayerMovement>() != null) {
+            //    Debug.DrawLine(targetTracker.position, hit.point, Color.magenta, Time.fixedDeltaTime);
+            //    finalTarg = new Vector3(finalTarg.x, Mathf.Min(finalTarg.y, targetTracker.GetComponent<PlayerMovement>().lastLandHeight), finalTarg.z);
+            //}
+            
             if (followrb != null)
             {
                 RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2;
@@ -86,7 +94,7 @@ public class CameraController : MonoBehaviour
 
                 //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
                 float magCap = 1;
-                if (Input.GetKey(KeyCode.LeftShift))
+                if (Input.GetKey(KeyCode.LeftShift)) //TODO Input mapping
                 {
                     magCap *= 1.25f; //Increase view range when sprinting
 
@@ -95,7 +103,7 @@ public class CameraController : MonoBehaviour
                 RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));
                 finalTarg += (Vector3)RbFollowVector * 2;
 
-
+                
 
                 //Velocity based
                 //if(Mathf.Abs(followrb.velocity.x) > .75f)
@@ -112,7 +120,10 @@ public class CameraController : MonoBehaviour
             if (lockZoom)
                 targZoom = lockDetails.z;
 
-            transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
+            
+
+            //transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
+            rb.MovePosition((finalTarg - transform.position) * Time.deltaTime * speed + transform.position);
             if (Camera.main.orthographicSize != targZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - targZoom) * Time.deltaTime;
