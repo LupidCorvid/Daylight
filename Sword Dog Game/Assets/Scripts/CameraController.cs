@@ -21,6 +21,8 @@ public class CameraController : MonoBehaviour
 
     Rigidbody2D rb;
 
+    public Vector2 RbFollowVector;
+
     public Vector3 targetPoint
     {
         get
@@ -72,7 +74,28 @@ public class CameraController : MonoBehaviour
         {
             Vector3 finalTarg = targetPoint;
             if (followrb != null)
-                finalTarg += new Vector3(followrb.velocity.x, 0, 0) * .45f;
+            {
+                RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2;
+                //RbFollowVector = Vector2.Lerp(RbFollowVector, Vector2.right * Input.GetAxisRaw("Horizontal") * 2, Time.deltaTime);
+
+                //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
+                float magCap = 1;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    magCap *= 1.25f; //Increase view range when sprinting
+
+                }
+                
+                RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));
+                finalTarg += (Vector3)RbFollowVector * 2;
+
+
+
+                //Velocity based
+                //if(Mathf.Abs(followrb.velocity.x) > .75f)
+                //    RbFollowVector = Vector2.Lerp(new Vector3(followrb.velocity.x, 0, 0), RbFollowVector, .005f) * .45f;
+                //finalTarg += (Vector3)RbFollowVector;
+            }
 
             transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
             if (Camera.main.orthographicSize != defaultZoom)
