@@ -80,33 +80,34 @@ public class CameraController : MonoBehaviour
         {
             Vector3 finalTarg = targetPoint;
 
-            //float jumpHeight = 6f; // magic var, unmeasured
-            //RaycastHit2D hit = Physics2D.Raycast(targetTracker.position, Vector2.down, jumpHeight, camBounds);
-            //if (hit.distance <= jumpHeight && hit.distance > 0 && targetTracker.GetComponent<PlayerMovement>() != null) {
-            //    Debug.DrawLine(targetTracker.position, hit.point, Color.magenta, Time.fixedDeltaTime);
-            //    finalTarg = new Vector3(finalTarg.x, Mathf.Min(finalTarg.y, targetTracker.GetComponent<PlayerMovement>().lastLandHeight), finalTarg.z);
-            //}
             
             if (followrb != null)
             {
-                RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2;
+                //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
                 //RbFollowVector = Vector2.Lerp(RbFollowVector, Vector2.right * Input.GetAxisRaw("Horizontal") * 2, Time.deltaTime);
 
                 //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
-                float magCap = 1;
+                float magCap = 1f;
                 if (Input.GetKey(KeyCode.LeftShift)) //TODO Input mapping
                 {
-                    magCap *= 1.25f; //Increase view range when sprinting
+                    magCap *= 1.5f; //Increase view range when sprinting
 
                 }
-                
-                RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));
+
+                //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
+                if (Input.GetAxisRaw("Horizontal") < 0)
+                    RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
+                else if (Input.GetAxisRaw("Horizontal") > 0)
+                    RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
+                //else //Recenter when not moving
+                //    RbFollowVector -= (RbFollowVector - new Vector2(0, 0)) * Time.deltaTime * 2;
+                //RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));
+                RbFollowVector = Vector2.ClampMagnitude(RbFollowVector, magCap);
+
                 finalTarg += (Vector3)RbFollowVector * 2;
 
-                
-
-                //Velocity based
-                //if(Mathf.Abs(followrb.velocity.x) > .75f)
+                ////Velocity based
+                //if (Mathf.Abs(followrb.velocity.x) > .75f)
                 //    RbFollowVector = Vector2.Lerp(new Vector3(followrb.velocity.x, 0, 0), RbFollowVector, .005f) * .45f;
                 //finalTarg += (Vector3)RbFollowVector;
             }

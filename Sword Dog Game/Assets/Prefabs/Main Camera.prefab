@@ -69,7 +69,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -100,9 +100,18 @@ MonoBehaviour:
   targetTracker: {fileID: 6300512340327299633, guid: 166050e7db04faa4698a3bda01089569, type: 3}
   offset: {x: 0, y: 0, z: -10}
   speed: 5
-  defaultZoom: 5
+  defaultZoom: 7
+  RbFollowVector: {x: 0, y: 0}
   cldr: {fileID: 0}
+  followrb: {fileID: 0}
+  camBounds:
+    serializedVersion: 2
+    m_Bits: 0
   externalControl: 0
+  lockX: 0
+  lockY: 0
+  lockZoom: 0
+  lockDetails: {x: 0, y: 0, z: 0}
 --- !u!114 &8232809106833958234
 MonoBehaviour:
   m_ObjectHideFlags: 0
