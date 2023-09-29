@@ -112,6 +112,7 @@ public class InteractablesTracker : MonoBehaviour
     private void ClearAll()
     {
         interactables.Clear();
+        nearest = null;
         delay = 0f;
     }
     /// <summary>
