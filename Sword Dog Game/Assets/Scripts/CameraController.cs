@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
 
     public Vector3 lockDetails;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         main = this;
