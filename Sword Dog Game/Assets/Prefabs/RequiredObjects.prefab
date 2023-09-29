@@ -45,6 +45,142 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSaver: {fileID: 821516610654104099, guid: 16eb6400c8dc34845afe86d4c97f8f19, type: 3}
+--- !u!1 &962292029925915402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399295243817758899}
+  - component: {fileID: 8700036955584249266}
+  - component: {fileID: 9196985154907713834}
+  - component: {fileID: 7039180882550621514}
+  - component: {fileID: 1345621750111710531}
+  - component: {fileID: 5885957680601357561}
+  - component: {fileID: 4412942761637004894}
+  m_Layer: 0
+  m_Name: DeathCutscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399295243817758899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.5785265, y: 5.7011952, z: 1.355792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5601307463974462013}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8700036955584249266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscenes:
+  - {fileID: 9196985154907713834}
+  - {fileID: 7039180882550621514}
+  - {fileID: 1345621750111710531}
+  - {fileID: 5885957680601357561}
+  - {fileID: 4412942761637004894}
+  cutsceneNumber: 0
+  cutsceneName: PlayerDeath
+  playingThisCutscene: 0
+  stopInteractions: 0
+  stopMovement: 0
+  hideUI: 0
+  controlMusic: 0
+--- !u!114 &9196985154907713834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 0
+  Duration: 1
+  Stall: 0
+--- !u!114 &7039180882550621514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 1.5
+--- !u!114 &1345621750111710531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 1
+  Stall: 1
+--- !u!114 &5885957680601357561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b671a2e956d18af49aa5c6bc0997db04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Pause: 1
+--- !u!114 &4412942761637004894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962292029925915402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bd7890511cd5249841711e48b2c70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  changeToScene: Town Medbay
+  toNewCutscene: Revived
 --- !u!1 &6289010824511995153
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +330,7 @@ Transform:
   - {fileID: 6383164300075854905}
   - {fileID: 7129551919052760218}
   - {fileID: 6615743915099563584}
+  - {fileID: 399295243817758899}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -471,6 +608,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4163793364780408360, guid: 6a38648326a36274a9861765dc92249f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1683319927}
+    - targetCorrespondingSourceObject: {fileID: 4163793364780408360, guid: 6a38648326a36274a9861765dc92249f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8730562060605473075}
   m_SourcePrefab: {fileID: 100100000, guid: 6a38648326a36274a9861765dc92249f, type: 3}
 --- !u!1 &7015845286559979853 stripped
 GameObject:
@@ -549,6 +689,49 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &8730562060605473075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015845286559979853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!4 &7015845286559979953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4163793364780408532, guid: 6a38648326a36274a9861765dc92249f, type: 3}

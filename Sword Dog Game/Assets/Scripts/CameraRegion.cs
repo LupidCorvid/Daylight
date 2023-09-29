@@ -34,7 +34,9 @@ public class CameraRegion : MonoBehaviour
         if (collision.gameObject.name != "Player(Clone)")
             return;
 
-        Debug.Log("hit " + collision.gameObject.name + "|" + CameraController.main.GetInstanceID());
+        //if (CameraController.mainCam == null)
+        //    return;
+
         CameraController.main.offset += addOffset;
         CameraController.main.lockX = lockX;
         CameraController.main.lockY = lockY;
