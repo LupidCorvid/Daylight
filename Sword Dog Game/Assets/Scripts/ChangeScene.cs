@@ -6,13 +6,25 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-public class ChangeScene : MonoBehaviour
+public class ChangeScene : MonoBehaviour, IInteractable
 {
     public string scene;
     public string spawn;
     private Animator crossfade;
     public static bool changingScene = false;
     public static Action clearCollisions, clearInteractables;
+    public Animator spawnedPrompt;
+    public Transform promptSpawnLocation;
+    public enum Direction {
+        LEFT, RIGHT, DOWN, UP
+    }
+    public Direction direction;
+    private bool _inRange = false;
+    public bool inRange
+    {
+        get { return _inRange; }
+        set { _inRange = value; }
+    }
 
     public static Action changeScene;
 
@@ -26,6 +38,12 @@ public class ChangeScene : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void interact(Entity user)
+    {
+        // do nothing -- this is not an interactable transition
+        // just extending off of interactable interface because lazy
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -119,5 +137,43 @@ public class ChangeScene : MonoBehaviour
             AudioManager.instance.Stop();
             MainMenuManager.inMainMenu = false;
         }
+    }
+
+    public void showPrompt(GameObject prompt)
+    {
+        if (spawnedPrompt == null)
+        {
+            GameObject addedPrompt;
+            Quaternion rotation = Quaternion.Euler(0, 0, 0);
+            switch (direction) {
+                case Direction.DOWN:
+                    rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.LEFT:
+                    rotation = Quaternion.Euler(0, 0, 90);
+                    break;
+                case Direction.RIGHT:
+                    rotation = Quaternion.Euler(0, 0, -90);
+                    break;
+            }
+            if (promptSpawnLocation == null)
+                addedPrompt = Instantiate(prompt, transform.position + (1 * Vector3.up), rotation);
+            else
+            {
+                addedPrompt = Instantiate(prompt, promptSpawnLocation.position, rotation);
+                addedPrompt.transform.localScale = promptSpawnLocation.localScale;
+            }
+            spawnedPrompt = addedPrompt.GetComponent<Animator>();
+            spawnedPrompt.SetFloat("InteractType", 3);
+        }
+        else
+        {
+            spawnedPrompt.SetTrigger("Reopen");
+        }
+    }
+
+    public void hidePrompt()
+    {
+        spawnedPrompt?.SetTrigger("Close");
     }
 }
