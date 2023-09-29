@@ -83,17 +83,24 @@ public class CameraController : MonoBehaviour
             
             if (followrb != null)
             {
-                RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
+                //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
                 //RbFollowVector = Vector2.Lerp(RbFollowVector, Vector2.right * Input.GetAxisRaw("Horizontal") * 2, Time.deltaTime);
 
                 //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
-                float magCap = 1;
+                float magCap = 1f;
                 if (Input.GetKey(KeyCode.LeftShift)) //TODO Input mapping
                 {
                     magCap *= 1.5f; //Increase view range when sprinting
 
                 }
 
+                //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
+                if (Input.GetAxisRaw("Horizontal") < 0)
+                    RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
+                else if (Input.GetAxisRaw("Horizontal") > 0)
+                    RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
+                //else //Recenter when not moving
+                //    RbFollowVector -= (RbFollowVector - new Vector2(0, 0)) * Time.deltaTime * 2;
                 //RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));
                 RbFollowVector = Vector2.ClampMagnitude(RbFollowVector, magCap);
 
