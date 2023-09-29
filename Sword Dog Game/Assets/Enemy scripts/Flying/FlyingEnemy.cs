@@ -71,8 +71,8 @@ public class FlyingEnemy : EnemyBase
 
     public override void TakeDamage(int amount, Entity source)
     {
-        base.TakeDamage(amount, source);
         cry();
+        base.TakeDamage(amount, source);
     }
 
 }
