@@ -548,7 +548,29 @@ public class PlayerMovement : MonoBehaviour
 
     private float? SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
+        float? returnVal = OldSlopeCheck(upperLeftCorner, upperRightCorner, 5);
 
+        //if (returnVal == null || !returnVal.HasValue)
+        //{
+        //    float? normalSlope = GetAvgNormal(upperLeftCorner, upperRightCorner);
+        //    if (normalSlope != null && Mathf.DeltaAngle(normalSlope.Value, slopeSideAngle) <= 5)
+        //        return normalSlope;
+        //}
+
+        //if(returnVal != null && Mathf.DeltaAngle(90, returnVal.Value) <= 25)
+        //{
+            
+        //}
+
+        return returnVal;
+
+
+        //return GetAvgNormal(upperLeftCorner, upperRightCorner);
+
+    }
+
+    public float? GetAvgNormal(Vector2 upperLeftCorner, Vector2 upperRightCorner)
+    {
         int numSamples = 15;
         anim.SetBool("ground_close", false);
 
@@ -556,14 +578,14 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < numSamples; i++)
         {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i/(numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i / (numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
 
-            
+
             if (hit.distance < colliderSize.y + 1f && hit.distance >= colliderSize.y - 0.5f)
             {
                 Debug.DrawLine(new Vector2(Mathf.Lerp(upperLeftCorner.x, upperRightCorner.x, i / (numSamples - 1f)), upperRightCorner.y) + (Vector2)transform.position, hit.point, Color.green);
-                
-                if(hit.distance < 2f + colliderSize.y / 2f)
+
+                if (hit.distance < 2f + colliderSize.y / 2f)
                     anim.SetBool("ground_close", true);
 
                 angles.Add(-Vector2.SignedAngle(hit.normal, Vector2.up));
@@ -574,7 +596,7 @@ public class PlayerMovement : MonoBehaviour
 
         float anglesSum = 0;
 
-        for(int i = 0; i < angles.Count; i++)
+        for (int i = 0; i < angles.Count; i++)
         {
             anglesSum += angles[i];
         }
@@ -586,13 +608,128 @@ public class PlayerMovement : MonoBehaviour
         if (angles.Count > 0)
         {
             //return anglesSum / angles.Count;
-            if (Mathf.Abs(angles[angles.Count / 2]) > 60)
+            if (Mathf.Abs(angles[angles.Count / 2]) > 60 || Mathf.DeltaAngle(angles[angles.Count / 2], slopeSideAngle) > 90 * Time.deltaTime)
+            {
+                
                 return null;
+            }
             else
                 return angles[angles.Count / 2];
         }
         else
             return null;
+    }
+
+    private float? OldSlopeCheck(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
+    {
+        float? returnAngle = null;
+
+        //Prevent infinite recursive runs (should never as long as geometry is fully closed)
+        if (runs > 10)
+            return null;
+
+        //Get initial raycasts
+        RaycastHit2D leftHit = Physics2D.Raycast((upperLeftCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
+        RaycastHit2D rightHit = Physics2D.Raycast((upperRightCorner) + (Vector2)transform.position, Vector2.down, slopeCheckDistance + colliderSize.y, whatIsGround);
+
+
+
+        //Draw vertical raycasts, set ground_close to true if hit is close enough to the collider and also != 0,0
+        #region gizmo drawing and ground_close setting
+
+        float minGroundDistance = 2f + colliderSize.y / 2;
+        anim.SetBool("ground_close", false);
+
+        if (leftHit.point != Vector2.zero)
+        {
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+            if (leftHit.distance <= minGroundDistance)
+                anim.SetBool("ground_close", true);
+        }
+        if (rightHit.point != Vector2.zero)
+        {
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+            if (rightHit.distance <= minGroundDistance)
+                anim.SetBool("ground_close", true);
+        }
+        #endregion
+
+        //If needing to rotate and there is not enough data from left or right side, test for better position for left or right and run again
+        #region retake left and right if one or both are missing
+        if ((leftHit.point == Vector2.zero || rightHit.point == Vector2.zero) && isGrounded)
+        {
+            Vector2 leftSide = upperLeftCorner;
+            Vector2 rightSide = upperRightCorner;
+            float yLevel = groundCheckSpot.y + transform.position.y;
+
+            if (leftHit.point == Vector2.zero)
+            {
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
+                if (leftSide.x == 0)
+                    return null;
+            }
+            if (rightHit.point == Vector2.zero)
+            {
+                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel, Vector2.left);
+                if (rightSide.x == 0)
+                    return null;
+            }
+
+            return OldSlopeCheck(leftSide, rightSide, runs + 1);
+        }
+        #endregion
+
+
+        //Get the across raycasts and unsmoothed slope
+        #region acrossRaycasts
+        //Get which raycast made it farther
+        RaycastHit2D farHit = rightHit.distance > leftHit.distance ? rightHit : leftHit;
+        RaycastHit2D nearHit = rightHit.distance < leftHit.distance ? rightHit : leftHit;
+
+        //Get which direction the acrosscast needs to be (it should go from larger to smaller side)
+        int right = leftHit.distance < rightHit.distance ? -1 : 1;
+
+        //Setup positions of across point origins, then raycast across and drawline gizmo to show it
+        Vector2 acrossCheckSpot = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2);
+        Vector2 acrossCheck2 = new Vector2(farHit.point.x, nearHit.point.y + (farHit.point.y - nearHit.point.y) / 2.4f);
+        RaycastHit2D across = Physics2D.Raycast(acrossCheckSpot,
+                                                new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
+        RaycastHit2D across2 = Physics2D.Raycast(acrossCheck2,
+                                                new Vector2(right, 0), Mathf.Abs(upperRightCorner.x - upperLeftCorner.x), whatIsGround);
+        Debug.DrawLine(across.point, acrossCheckSpot, Color.green);
+        Debug.DrawLine(across2.point, acrossCheck2, Color.green);
+
+        //angle between left point hit and right point hit
+        float unsmoothedSlope = Mathf.Atan((rightHit.point.y - leftHit.point.y) / (rightHit.point.x - leftHit.point.x)) * Mathf.Rad2Deg;
+
+        //Percentage of the distance made across
+        float acrossPercent = across.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
+        float acrossPercent2 = across2.distance / (Mathf.Abs(upperRightCorner.x - upperLeftCorner.x));
+        #endregion
+
+        //Make sure it is not reading the underside of a slope the player is on. Retake with shorter bounds if it is
+        #region check for if reading underside
+        bool onLedge = false;
+        //Makes sure that it is not reading the slope of the underside of a slope by not taking abs val. 
+        if (acrossPercent2 - acrossPercent < .0001)
+        {
+            returnAngle = 0;
+            if (acrossPercent > .0001f)
+            {
+                if (right == 1)
+                    return OldSlopeCheck(new Vector2(upperLeftCorner.x + colliderSize.x * acrossPercent, upperLeftCorner.y), upperRightCorner, runs + 1);
+                else
+                    return OldSlopeCheck(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
+            }
+            onLedge = true;
+        }
+        #endregion
+
+        //Apply smoothing
+        if (!float.IsNaN(unsmoothedSlope) && !onLedge)
+            returnAngle = unsmoothedSlope * Mathf.Lerp(1, 0, (Mathf.Abs((acrossPercent / .5f) - 1)));
+
+        return returnAngle;
     }
 
     /// <summary>
