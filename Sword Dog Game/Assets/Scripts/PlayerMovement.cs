@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public bool canTurn = true;
     public bool canSprint = true;
     public PlayerAttack pAttack;
+
+    public PlayerInput inputManager;
 
     public bool facingRight
     {
@@ -128,10 +132,17 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopStaminaRefill = false;
 
+    private void Awake()
+    {
+        if (inputManager == null)
+            inputManager = GetComponent<PlayerInput>();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        
         cldr = cldr1;
 
         if (!overrideColliderWidth)
@@ -232,6 +243,9 @@ public class PlayerMovement : MonoBehaviour
 
             // grab movement input from horizontal axis
             moveX = Input.GetAxisRaw("Horizontal");
+            //moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
+            //moveX = inputManager.actions["Move"].
+
             if (wallOnRight && moveX > 0) moveX = 0;
             if (wallOnLeft && moveX < 0) moveX = 0;
             
@@ -270,7 +284,9 @@ public class PlayerMovement : MonoBehaviour
                 anim.ResetTrigger("trot");
 
             // bark code
-            if (Input.GetKeyDown(KeyCode.B))
+            //if (Input.GetKeyDown(KeyCode.B))
+            
+            if(inputManager.actions["Bark"].WasPressedThisFrame())
             {
                 anim.SetTrigger("bark");
             }
@@ -279,7 +295,9 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             // release jump
-            if (Input.GetButtonUp("Jump"))
+            //if (Input.GetButtonUp("Jump"))
+
+            if(Input.GetButtonUp("Jump"))
             {
                 holdingJump = false;
             }
@@ -1011,7 +1029,7 @@ public class PlayerMovement : MonoBehaviour
             timeSinceJumpPressed = 0.0f;
         }
 
-        if (Input.GetButton("Jump") && timeSinceJumpPressed < 0.2f)
+        if (Input.GetButtonDown("Jump") && timeSinceJumpPressed < 0.2f)
         {
             if (!isJumping)
             {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class MenuManager : MonoBehaviour
         menu.manager = this;
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        
     }
 
     //Handle controller inputs and other general menu interactions here?
@@ -46,5 +48,7 @@ public class MenuManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.S))
                 menu.selectDown();
         }
+
+        
     }
 }
