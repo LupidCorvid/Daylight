@@ -22,6 +22,13 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         get { return _inRange; }
         set { _inRange = value; }
     }
+
+    public enum Direction
+    {
+        LEFT, RIGHT, DOWN, UP
+    }
+    public Direction direction = Direction.UP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +52,24 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         if (spawnedPrompt == null)
         {
             GameObject addedPrompt;
+            Quaternion rotation = Quaternion.Euler(0, 0, 0);
+            switch (direction)
+            {
+                case Direction.DOWN:
+                    rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.LEFT:
+                    rotation = Quaternion.Euler(0, 0, 90);
+                    break;
+                case Direction.RIGHT:
+                    rotation = Quaternion.Euler(0, 0, -90);
+                    break;
+            }
             if (promptSpawnLocation == null)
-                addedPrompt = Instantiate(prompt, transform.position + (1 * Vector3.up), transform.rotation);
+                addedPrompt = Instantiate(prompt, transform.position + (1 * Vector3.up), rotation);
             else
             {
-                addedPrompt = Instantiate(prompt, promptSpawnLocation.position, promptSpawnLocation.rotation);
+                addedPrompt = Instantiate(prompt, promptSpawnLocation.position, rotation);
                 addedPrompt.transform.localScale = promptSpawnLocation.localScale;
             }
             spawnedPrompt = addedPrompt.GetComponent<Animator>();
