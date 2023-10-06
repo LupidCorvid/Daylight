@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canParry: 0
+  isBlocking: 1
 --- !u!1 &937992885873447133
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +551,7 @@ MonoBehaviour:
   canTurn: 1
   canSprint: 1
   pAttack: {fileID: 7333625409189861786}
+  lastLandHeight: 0
   entityBase: {fileID: 4232136647909902652}
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
   mouth: {fileID: 2381358681662667084}
@@ -579,7 +581,7 @@ MonoBehaviour:
   stamina: 6
   maxStamina: 6
   minStamina: 1
-  noFall: 0
+  noFall: 1
   attackMoveTracker: {fileID: 2170697637293356661}
   sprintDust: {fileID: 37055940391111458, guid: e59d02c40c13c9d4b969fe319802b4b1, type: 3}
   attacking: 0
@@ -590,6 +592,7 @@ MonoBehaviour:
   colliderWidth: {x: 2.24, y: 2.123}
   groundCheckSpot: {x: 0, y: -1.7}
   lastSlope: 0
+  stopStaminaRefill: 0
 --- !u!114 &7713005219475735744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b719922b2be42b4980d3dd59447589e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   attackCombo: 0
   isAttacking: 0
   canAttack: 1
@@ -632,6 +636,7 @@ MonoBehaviour:
   attackCooldown: 0
   pMovement: {fileID: 6300512340327299635}
   parryTrackerLocation: {fileID: 1192961463152503506}
+  parryStaminaCost: 2.5
 --- !u!114 &3808553446418265509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,8 +826,6 @@ MonoBehaviour:
   maxHealth: 8
   health: 8
   invincible: 0
-  allies: 1
-  enemies: 2
   facingDir: {x: 0, y: 0}
   playerHealth: {fileID: 0}
   pAttack: {fileID: 0}
