@@ -95,10 +95,14 @@ public class CameraController : MonoBehaviour
                 }
 
                 //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
-                if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
-                    RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
-                else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x > 0)
-                    RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
+                //Prevent camera from moving when in menus
+                if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && !DialogController.main.inDialog) // && not paused(?)
+                {
+                    if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
+                        RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
+                    else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x > 0)
+                        RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
+                }
                 //else //Recenter when not moving
                 //    RbFollowVector -= (RbFollowVector - new Vector2(0, 0)) * Time.deltaTime * 2;
                 //RbFollowVector = new Vector2(Mathf.Clamp(RbFollowVector.x, -magCap, magCap), Mathf.Clamp(RbFollowVector.y, -magCap, magCap));

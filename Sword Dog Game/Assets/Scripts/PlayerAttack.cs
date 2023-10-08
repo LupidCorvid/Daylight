@@ -23,6 +23,10 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerMovement.inputs.actions["Parry"].IsPressed())
+        {
+            Debug.Log("parrying");
+        }
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
             float yInput = PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y;
@@ -53,8 +57,12 @@ public class PlayerAttack : MonoBehaviour
                 attackCombo++;
                 anim.SetTrigger("attack" + attackCombo);
             }
+
+            //Debug.Log(!isAttacking && pMovement.stamina >= parryStaminaCost);
+            
+
             //Parry input
-            if(PlayerMovement.inputs.actions["Parry"].IsPressed() && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if((PlayerMovement.inputs.actions["Parry"].IsPressed()/* || PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f*/) && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
@@ -62,7 +70,10 @@ public class PlayerAttack : MonoBehaviour
                 Vector2 inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 //Vector2 inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
                 if (PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f)
+                {
                     inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
+                    Debug.Log("Aiming");
+                }
                 float angle = Mathf.Atan2(inputVector.y, inputVector.x);
                 Debug.DrawLine(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, default);
                 int neg = (pMovement.facingRight) ? 1 : -1;

@@ -250,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         if(!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
 
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && !DialogController.main.inDialog) // && not paused(?)
         {
             // remember previous movement input
             prevMoveX = moveX;

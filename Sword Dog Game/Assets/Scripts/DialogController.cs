@@ -51,6 +51,8 @@ public class DialogController : MonoBehaviour
     public bool gotResponseThisFrame = false;
     public bool skippedTextThisFrame = false;
 
+    public bool inDialog = false;
+
     public Animator DotAnimator;
 
     void Awake()
@@ -109,6 +111,7 @@ public class DialogController : MonoBehaviour
         textDisplay.alpha = 255;
         headerDisplay.alpha = 255;
         DotAnimator.ResetTrigger("Close");
+        inDialog = true;
     }
     public void closeBox()
     {
@@ -117,6 +120,7 @@ public class DialogController : MonoBehaviour
         textDisplay.alpha = 0;
         headerDisplay.alpha = 0;
         DotAnimator.SetTrigger("Close");
+        inDialog = false;
     }
 
 
