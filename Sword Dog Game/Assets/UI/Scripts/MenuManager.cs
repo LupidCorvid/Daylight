@@ -43,9 +43,9 @@ public class MenuManager : MonoBehaviour
     {
         if (inMenu)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y > 0.05f && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
                 menu.selectUp();
-            if (Input.GetKeyDown(KeyCode.S))
+            if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y < 0.05f && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
                 menu.selectDown();
         }
 

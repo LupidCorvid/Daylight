@@ -132,17 +132,30 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopStaminaRefill = false;
 
+    public static PlayerInput inputs;
+
     private void Awake()
     {
         if (inputManager == null)
             inputManager = GetComponent<PlayerInput>();
+        inputs = inputManager;
     }
+
+    //empty functions to prevent error calls from input settings
+    //public void OnBark() { }
+
+    //public void OnJump() { }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+
+        inputManager.ActivateInput();
+        //inputManager.actions["Bark"].started += BarkTest;
+        //inputManager.actions.FindActionMap("Gameplay").FindAction("Bark").performed += BarkTest;
+
+
         cldr = cldr1;
 
         if (!overrideColliderWidth)
@@ -183,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
         Camera.main.transform.position = transform.position + new Vector3(0, 2, -10);
     }
+
 
     public void checkIfLanding(Collider2D collision)
     {
@@ -242,8 +256,9 @@ public class PlayerMovement : MonoBehaviour
             prevMoveX = moveX;
 
             // grab movement input from horizontal axis
-            moveX = Input.GetAxisRaw("Horizontal");
-            //moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
+            //moveX = Input.GetAxisRaw("Horizontal");
+            moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
+
             //moveX = inputManager.actions["Move"].
 
             if (wallOnRight && moveX > 0) moveX = 0;
@@ -297,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
             // release jump
             //if (Input.GetButtonUp("Jump"))
 
-            if(Input.GetButtonUp("Jump"))
+            if(inputManager.actions["Jump"].WasReleasedThisFrame())
             {
                 holdingJump = false;
             }
@@ -314,7 +329,7 @@ public class PlayerMovement : MonoBehaviour
             // sprinting
             if (trotting && !isSprinting && !isSkidding && canSprint)
             {
-                if ((Input.GetButton("Sprint") && canResprint && stamina >= minStamina) || Input.GetButtonDown("Sprint"))
+                if ((inputManager.actions["Sprint"].IsPressed() && canResprint && stamina >= minStamina) || inputManager.actions["Sprint"].WasPressedThisFrame())
                 {
                     isSprinting = true;
                     if (!isJumping)
@@ -322,7 +337,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (isSprinting && (Input.GetButtonUp("Sprint") || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f) || !canSprint))
+            if (isSprinting && (inputManager.actions["Sprint"].WasReleasedThisFrame() || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f) || !canSprint))
             {
                 // bad code
                 // if (isSprinting)
@@ -335,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 canResprint = false;
             }
-            if (!canResprint && (Input.GetButtonUp("Sprint") || (timeIdle > 0.1f && stamina > minStamina)))
+            if (!canResprint && (inputManager.actions["Sprint"].WasReleasedThisFrame() || (timeIdle > 0.1f && stamina > minStamina)))
             {
                 canResprint = true;
             }
@@ -1018,7 +1033,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // if player presses jump button
-        if (Input.GetButtonDown("Jump"))
+        if (inputManager.actions["Jump"].WasPressedThisFrame())
         {
             if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
             {
@@ -1029,7 +1044,7 @@ public class PlayerMovement : MonoBehaviour
             timeSinceJumpPressed = 0.0f;
         }
 
-        if (Input.GetButtonDown("Jump") && timeSinceJumpPressed < 0.2f)
+        if (inputManager.actions["Jump"].WasPressedThisFrame() && timeSinceJumpPressed < 0.2f)
         {
             if (!isJumping)
             {

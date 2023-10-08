@@ -30,7 +30,7 @@ public class JumpThrough : MonoBehaviour
             bool playerBelow = player.bottom.y < transform.position.y - height;
             
             //gameObject.layer = LayerMask.NameToLayer(playerBelow || Input.GetAxisRaw("Vertical") < -.5f ? "Utility": "Terrain");
-            if(playerBelow || Input.GetAxisRaw("Vertical") < -.5f)
+            if(playerBelow || PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y < -.5f)
             {
                 Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, true);
             }

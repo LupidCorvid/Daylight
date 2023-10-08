@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
-            float yInput = Input.GetAxisRaw("Vertical");
+            float yInput = PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y;
 
             // attack cooldown
             if (attackCooldown > 0)
@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (Input.GetMouseButtonDown(0) && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (PlayerMovement.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -54,12 +54,15 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("attack" + attackCombo);
             }
             //Parry input
-            if(Input.GetMouseButton(1) && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if(PlayerMovement.inputs.actions["Parry"].IsPressed() && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
                 //float angle = (Vector3.Angle(Vector3.right, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position)) * Mathf.Deg2Rad;
                 Vector2 inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                //Vector2 inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
+                if (PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f)
+                    inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
                 float angle = Mathf.Atan2(inputVector.y, inputVector.x);
                 Debug.DrawLine(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, default);
                 int neg = (pMovement.facingRight) ? 1 : -1;

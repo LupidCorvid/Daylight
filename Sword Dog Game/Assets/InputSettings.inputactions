@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "87594787-6988-4319-aea8-1a3c001e24d9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Block",
                     "type": "Button",
                     "id": "20d34297-9444-4856-a5d0-66678890b9fe",
@@ -67,13 +58,58 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "b47298b6-c4df-4311-b2d2-7760f0de7525",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Parry",
+                    "type": "Button",
+                    "id": "f3b86caf-1fa2-4323-9572-f2c21828080a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "5a90de88-dc90-42a8-ab68-83ff1b3a3803",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "4fe78037-a2cd-4dd1-b905-0b492f610315",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AimDir",
+                    "type": "Value",
+                    "id": "9dd09641-b127-4359-a1b5-c0b81a42f18c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "b96b989f-0b0b-4f6a-bf37-53bfffb5ef9f",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<SwitchProControllerHID>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
@@ -160,28 +196,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f647eb29-2170-4b49-b5bf-cf0aa5cdb5a1",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "Default",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f1d65ddb-1078-4b96-82cd-697f234ab760",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Default",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "40281141-96cd-4e0b-8338-76ffb81ae029",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -205,7 +219,7 @@
                 {
                     "name": "",
                     "id": "26b01cfb-d54b-413e-8ae7-3c17f9841ab7",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Default",
@@ -252,19 +266,118 @@
                     "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "Bark",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d1e22d67-bf75-488c-8e53-cc891ab65caa",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "4b2c0b5d-b676-4ac4-9d77-943a6b7db662",
+                    "path": "<SwitchProControllerHID>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Default",
+                    "groups": "",
                     "action": "Bark",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f24c74b0-2466-4166-a0a9-882add52bf5d",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "643d5f2b-e8c0-4683-80c9-f6665777919e",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69b3a3e6-eefe-406c-ada2-782f18464885",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f207315-4591-470e-adb3-055acd94e95b",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "949013ba-e356-42ab-b2d4-e488c5ff5bf8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99525be1-922a-439e-9962-58653eaf2c39",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43c81ac0-a305-4ffe-a3c1-9f6f5bb5f61a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80dfba89-4503-4a0e-933f-fc35f2c8a658",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83b31ef8-e141-4bdf-afba-21fd3cb8cc8a",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "NormalizeVector2",
+                    "groups": "",
+                    "action": "AimDir",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -275,6 +388,27 @@
         {
             "name": "Default",
             "bindingGroup": "Default",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "TestingScheme",
+            "bindingGroup": "TestingScheme",
             "devices": []
         }
     ]

@@ -60,7 +60,7 @@ public class InteractablesTracker : MonoBehaviour
 
     private void Update()
     {
-        if (delay >= maxDelay && Input.GetKeyDown(interactKey))
+        if (delay >= maxDelay && PlayerMovement.inputs.actions["Interact"].IsPressed())
         {
             //nearest?.interact(transform.parent.gameObject);
             nearest?.interact(attachedEntity);

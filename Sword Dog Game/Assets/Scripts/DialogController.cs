@@ -66,7 +66,7 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Return)) && source != null)
+        if ((PlayerMovement.inputs.actions["Interact"].WasPressedThisFrame() || PlayerMovement.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
         {
             if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
             {

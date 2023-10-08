@@ -129,15 +129,15 @@ public class DialogResponseController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if(PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y > 0 && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
         {
             selectedOption--;
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y < 0 && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
         {
             selectedOption++;
         }
-        else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.T))
+        else if (PlayerMovement.inputs.actions["Interact"].WasPressedThisFrame())
         {
             if(awaitingResponse && !mainController.skippedTextThisFrame)
                 makeChoice();

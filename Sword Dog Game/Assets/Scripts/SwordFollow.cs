@@ -279,7 +279,7 @@ public class SwordFollow : MonoBehaviour
     {
         if(pmScript?.pAttack?.isParrying == true)
         {
-            if(Input.GetMouseButtonDown(0) && lastParryFail + parryFailCooldown < Time.time)
+            if(PlayerMovement.inputs.actions["Attack"].IsPressed() && lastParryFail + parryFailCooldown < Time.time)
             {
                 swordParryAnimator.Play("ParryParry");
                 if (canParryCheck.canParry)

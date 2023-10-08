@@ -29,13 +29,13 @@ public class PauseScreen : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetAxisRaw("Vertical") != 0) && EventSystem.current.currentSelectedGameObject == null && paused)
+        if ((PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y != 0) && EventSystem.current.currentSelectedGameObject == null && paused)
         {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
         }
 
         //Temp implementation. Should work to escape menus and check if not in menus first
-        if (Input.GetKeyDown(SettingsManager.currentSettings.pauseKey))
+        if (PlayerMovement.inputs.actions["Pause"].WasPressedThisFrame())
         {
             if(PlayerMenuManager.open)
             {

@@ -88,16 +88,16 @@ public class CameraController : MonoBehaviour
 
                 //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
                 float magCap = 1f;
-                if (Input.GetKey(KeyCode.LeftShift)) //TODO Input mapping
+                if (PlayerMovement.inputs.actions["Sprint"].IsPressed()) //TODO Input mapping
                 {
                     magCap *= 1.5f; //Increase view range when sprinting
 
                 }
 
                 //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
-                if (Input.GetAxisRaw("Horizontal") < 0)
+                if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
                     RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
-                else if (Input.GetAxisRaw("Horizontal") > 0)
+                else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x > 0)
                     RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
                 //else //Recenter when not moving
                 //    RbFollowVector -= (RbFollowVector - new Vector2(0, 0)) * Time.deltaTime * 2;
