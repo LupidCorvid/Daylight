@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.inputs.actions["Parry"].IsPressed())
+        if (PlayerMovement.inputs.actions["Block"].IsPressed())
         {
             Debug.Log("parrying");
         }
@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
             
 
             //Parry input
-            if((PlayerMovement.inputs.actions["Parry"].IsPressed()/* || PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f*/) && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if((PlayerMovement.inputs.actions["Block"].IsPressed()/* || PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f*/) && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
