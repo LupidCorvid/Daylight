@@ -20,7 +20,7 @@
                     "id": "cb250f1b-381c-4005-9d52-4671e31c75f6",
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": true
                 },
                 {
@@ -52,21 +52,21 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b47298b6-c4df-4311-b2d2-7760f0de7525",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Block",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "f3b86caf-1fa2-4323-9572-f2c21828080a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Attack",
@@ -88,7 +88,7 @@
                 },
                 {
                     "name": "AimDir",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "9dd09641-b127-4359-a1b5-c0b81a42f18c",
                     "expectedControlType": "Vector2",
                     "processors": "",
