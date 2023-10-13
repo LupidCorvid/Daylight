@@ -26,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (PlayerMovement.inputs.actions["Block"].IsPressed())
         {
-            Debug.Log("parrying");
+            
         }
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
@@ -63,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
             
 
             //Parry input
-            if((PlayerMovement.inputs.actions["Block"].IsPressed()/* || PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f*/) && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if((PlayerMovement.inputs.actions["Block"].IsPressed()) && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
@@ -105,7 +105,6 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                Debug.Log("stoppedParrying");
 
                 if (isParrying)
                     pMovement.entityBase.moveSpeed.multiplier /= .5f;
