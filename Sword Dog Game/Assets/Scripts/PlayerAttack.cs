@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform parryTrackerLocation;
     public float parryStaminaCost = 2.5f;
 
+    public Vector2 parryAimDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,14 +68,20 @@ public class PlayerAttack : MonoBehaviour
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
                 //float angle = (Vector3.Angle(Vector3.right, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position)) * Mathf.Deg2Rad;
-                Vector2 inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                Vector2 inputVector = Vector2.zero;
+                if (PlayerMovement.inputs.currentControlScheme == "Keyboard")
+                    inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
                 //Vector2 inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
-                if (PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>().magnitude > .1f)
+                if (PlayerMovement.inputs.currentControlScheme == "Controller")
                 {
                     inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
-                    Debug.Log("Aiming");
+                    
                 }
-                float angle = Mathf.Atan2(inputVector.y, inputVector.x);
+                if (inputVector != Vector2.zero)
+                    parryAimDir = inputVector;
+
+                float angle = Mathf.Atan2(parryAimDir.y, parryAimDir.x);
                 Debug.DrawLine(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, default);
                 int neg = (pMovement.facingRight) ? 1 : -1;
                 //angle = Mathf.Clamp(angle, -Mathf.PI/2, Mathf.PI/2));
@@ -98,6 +105,8 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
+                Debug.Log("stoppedParrying");
+
                 if (isParrying)
                     pMovement.entityBase.moveSpeed.multiplier /= .5f;
                 isParrying = false;
