@@ -97,7 +97,7 @@
                 },
                 {
                     "name": "AimDir",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "9dd09641-b127-4359-a1b5-c0b81a42f18c",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -285,8 +285,8 @@
                 {
                     "name": "",
                     "id": "dbecfac2-daf7-4fdf-9d90-aa9d7963c27b",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "Hold",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Sprint",
@@ -308,7 +308,7 @@
                     "name": "",
                     "id": "36db3634-87de-4161-af03-3e62652d241b",
                     "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Parry",
@@ -373,7 +373,7 @@
                 {
                     "name": "",
                     "id": "0f28ec21-7511-4d3e-a607-fec3067065be",
-                    "path": "<XInputController>/rightStick",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",

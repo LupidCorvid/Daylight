@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 [System.Serializable]
 public class Settings
 {
-    public KeyCode interactKey = KeyCode.T;
-    public KeyCode openMenuKey = KeyCode.U;
+    //public InputBinding interactKey;
+    //public InputBinding openMenuKey;
 
-    public KeyCode sprintKey = KeyCode.LeftShift;
-
-    public KeyCode pauseKey = KeyCode.Escape;
-
+    //public InputBinding sprintKey;
+    //public InputBinding pauseKey;
+    
+    //JSON data for the inputActions setup
+    public string keybinds;
     //Separate settings for controller inputs;
     //public KeyCode interactButton
 

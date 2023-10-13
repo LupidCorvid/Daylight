@@ -10,11 +10,6 @@ public class InteractablesTracker : MonoBehaviour
 
     //On enter start animation for appearing, on exit start animation that ends in deletion
     public GameObject interactPrompt;
-    public static KeyCode interactKey
-    {
-        get { return SettingsManager.currentSettings.interactKey; }
-        set { SettingsManager.currentSettings.interactKey = value; }
-    }
 
     //public static KeyCode interactKey = KeyCode.T;
     public static bool alreadyInteracting = false;
@@ -25,6 +20,7 @@ public class InteractablesTracker : MonoBehaviour
 
     private void Awake()
     {
+
     }
 
     private void FixedUpdate()
