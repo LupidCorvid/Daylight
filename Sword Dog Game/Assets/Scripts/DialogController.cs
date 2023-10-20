@@ -116,11 +116,14 @@ public class DialogController : MonoBehaviour
     }
     public void closeBox()
     {
-        anim.SetBool("requestClose", true);
+        if(anim != null)
+            anim?.SetBool("requestClose", true);
         closedAnimator = false;
-        textDisplay.alpha = 0;
-        headerDisplay.alpha = 0;
-        DotAnimator.SetTrigger("Close");
+        if(textDisplay != null)
+            textDisplay.alpha = 0;
+        if(headerDisplay != null)
+           headerDisplay.alpha = 0;
+        DotAnimator?.SetTrigger("Close");
         inDialog = false;
     }
 
@@ -129,10 +132,13 @@ public class DialogController : MonoBehaviour
     {
         if (!CutsceneController.cutsceneHideUI && !PauseScreen.quit)
             CanvasManager.ShowHUD();
-        panel.alpha = 0;
-        panel.interactable = false;
-        panel.blocksRaycasts = false;
-        responseController.close();
+        if (panel != null)
+        {
+            panel.alpha = 0;
+            panel.interactable = false;
+            panel.blocksRaycasts = false;
+        }
+        responseController?.close();
         if (readWhenOpen)
             reading = false;
         closedAnimator = true;

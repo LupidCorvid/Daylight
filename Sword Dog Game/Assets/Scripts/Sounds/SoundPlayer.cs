@@ -120,6 +120,8 @@ public class SoundPlayer : MonoBehaviour
 
         foreach (AudioSource source in sources)
         {
+            if (source == null)
+                continue;
             if (source.clip == clip && source.isPlaying)
             {
                 source.Pause();
@@ -158,6 +160,8 @@ public class SoundPlayer : MonoBehaviour
 
         foreach (AudioSource source in sources)
         {
+            if (source == null)
+                continue;
             if (source.clip == clip)
             {
                 source.UnPause();

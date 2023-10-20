@@ -122,6 +122,8 @@ public class DialogResponseController : MonoBehaviour
 
     public void close()
     {
+        if (canvasGroup == null)
+            return;
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
