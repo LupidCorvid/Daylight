@@ -28,7 +28,6 @@ public class PauseScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if ((PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y != 0) && EventSystem.current.currentSelectedGameObject == null && paused)
         {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);

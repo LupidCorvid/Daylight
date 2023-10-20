@@ -67,15 +67,14 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!ChangeScene.changingScene && !GameSaver.loading && Crossfade.over)
         {
-            //SceneHelper.LoadScene("prologue area");
+            //SceneHelper.LoadScene("Prologue Area");
             GameSaver.currData = new GameSaver.SaveData();
             //InventoryManager.currInventory.contents = new List<ItemSlot>(3);
             InventoryManager.currInventory = new Inventory();
-            QuestsManager.main.questsDatabase.ResetAllQuestProgress();
-
-            InventoryManager.main.refreshInventory();
+            QuestsManager.main?.questsDatabase.ResetAllQuestProgress();
+            InventoryManager.main?.refreshInventory();
             AudioManager.instance.FadeOutCurrent();
-            ChangeScene.LoadScene("prologue area", "", false);
+            ChangeScene.LoadScene("Prologue Area", "", false);
             //CanvasManager.ShowHUD();
         }
     }
