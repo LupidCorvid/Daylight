@@ -754,6 +754,31 @@ public class PlayerMovement : MonoBehaviour
                 else
                     return OldSlopeCheck(upperLeftCorner, new Vector2(upperRightCorner.x - colliderSize.x * acrossPercent, upperRightCorner.y), runs + 1);
             }
+
+            #region Unimplemented across sample find fail handler
+            //New stuff that tries to make it re get slope sample points if the across points don't find somewhere. Currently can cause vibrations
+            //Specifically meant to help with the low branch on forest 2
+            //if(across.point == Vector2.zero)
+            //{
+            //    Vector2 leftSide = upperLeftCorner;
+            //    Vector2 rightSide = upperRightCorner;
+            //    float yLevel = groundCheckSpot.y + transform.position.y;
+            //    if (right == 1)
+            //    {
+            //        rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
+            //        if (leftSide.x == 0)
+            //            return null;
+            //    }
+            //    else
+            //    {
+            //        rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, rightSide, upperRightCorner, yLevel, Vector2.left);
+            //        if (rightSide.x == 0)
+            //            return null;
+            //    }
+
+            //    return OldSlopeCheck(leftSide, rightSide, runs + 1);
+            //}
+            #endregion
             onLedge = true;
         }
         #endregion
