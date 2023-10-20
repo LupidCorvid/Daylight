@@ -10,7 +10,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 {
     public string scene;
     public string spawn;
-    private Animator crossfade;
 
     public Animator spawnedPrompt;
 
@@ -32,7 +31,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
-        crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
     }
 
     // Update is called once per frame
