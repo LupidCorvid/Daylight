@@ -92,7 +92,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
     IEnumerator LoadNextScene()
     {
         ChangeScene.changingScene = true;
-        crossfade.SetTrigger("start");
+        Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
         PlayerMovement.controller.noFall = true;
