@@ -36,18 +36,6 @@ public class PauseScreen : MonoBehaviour
         //Temp implementation. Should work to escape menus and check if not in menus first
         if (InputReader.inputs != null && InputReader.inputs.actions["Pause"].WasPressedThisFrame())
         {
-            if(PlayerMenuManager.open)
-            {
-                PlayerMenuManager.main.closeMenu();
-                return;
-            }
-
-            if(MenuManager.inMenu)
-            {
-                MenuManager.main.closeMenu();
-                return;
-            }
-
             if (ChangeScene.changingScene || GameSaver.loading || !Crossfade.over)
             {
                 return;
@@ -57,8 +45,20 @@ public class PauseScreen : MonoBehaviour
             {
                 return;
             }
-            
-            if(quitPrompt.alpha == 1)
+
+            if (PlayerMenuManager.open)
+            {
+                PlayerMenuManager.main.closeMenu();
+                return;
+            }
+
+            if (MenuManager.inMenu)
+            {
+                MenuManager.main.closeMenu();
+                return;
+            }
+
+            if (quitPrompt.alpha == 1)
             {
                 closePrompt();
             }

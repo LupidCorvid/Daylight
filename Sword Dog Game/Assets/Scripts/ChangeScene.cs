@@ -10,7 +10,6 @@ public class ChangeScene : MonoBehaviour
 {
     public string scene;
     public string spawn;
-    private Animator crossfade;
     public static bool changingScene = false;
     public static Action clearCollisions, clearInteractables;
     public static Action changeScene;
@@ -18,7 +17,6 @@ public class ChangeScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        crossfade = GameObject.Find("Crossfade").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,7 +43,7 @@ public class ChangeScene : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         changingScene = true;
-        crossfade.SetTrigger("start");
+        Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
