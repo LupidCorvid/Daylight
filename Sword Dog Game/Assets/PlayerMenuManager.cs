@@ -75,7 +75,7 @@ public class PlayerMenuManager : MonoBehaviour
         if (!transitioning &&  slideIn != null && (slideIn != menus[currentMenu] || slideIn == slideOut))
             Debug.Log("EERRORRR" + (slideIn == slideOut) + " <- in == out, curr != in ->" + (slideIn != menus[currentMenu]));
 
-        if(PlayerMovement.inputs != null && PlayerMovement.inputs.actions["Inventory"].WasPressedThisFrame())
+        if(InputReader.inputs != null && InputReader.inputs.actions["Inventory"].WasPressedThisFrame())
         {
             if (!PauseScreen.paused && PauseScreen.canPause && !MenuManager.inMenu)
             {

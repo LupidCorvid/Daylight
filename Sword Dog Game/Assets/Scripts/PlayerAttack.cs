@@ -24,13 +24,13 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.inputs.actions["Block"].IsPressed())
+        if (InputReader.inputs.actions["Block"].IsPressed())
         {
             
         }
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
-            float yInput = PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y;
+            float yInput = InputReader.inputs.actions["Move"].ReadValue<Vector2>().y;
 
             // attack cooldown
             if (attackCooldown > 0)
@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (PlayerMovement.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -63,19 +63,19 @@ public class PlayerAttack : MonoBehaviour
             
 
             //Parry input
-            if((PlayerMovement.inputs.actions["Block"].IsPressed()) && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if((InputReader.inputs.actions["Block"].IsPressed()) && !isAttacking && pMovement.stamina >= parryStaminaCost)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
                 //float angle = (Vector3.Angle(Vector3.right, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position)) * Mathf.Deg2Rad;
                 Vector2 inputVector = Vector2.zero;
-                if (PlayerMovement.inputs.currentControlScheme == "Keyboard")
+                if (InputReader.inputs.currentControlScheme == "Keyboard")
                     inputVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-                //Vector2 inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
-                if (PlayerMovement.inputs.currentControlScheme == "Controller")
+                //Vector2 inputVector = InputReader.inputs.actions["AimDir"].ReadValue<Vector2>();
+                if (InputReader.inputs.currentControlScheme == "Controller")
                 {
-                    inputVector = PlayerMovement.inputs.actions["AimDir"].ReadValue<Vector2>();
+                    inputVector = InputReader.inputs.actions["AimDir"].ReadValue<Vector2>();
                     
                 }
                 if (inputVector != Vector2.zero)

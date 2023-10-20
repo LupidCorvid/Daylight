@@ -68,8 +68,8 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.inputs == null) return; // temp
-        if ((PlayerMovement.inputs.actions["Interact"].WasPressedThisFrame() || PlayerMovement.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
+        if (InputReader.inputs == null) return; // temp
+        if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame() || InputReader.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
         {
             if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
             {

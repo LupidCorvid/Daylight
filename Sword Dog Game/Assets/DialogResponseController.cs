@@ -131,16 +131,16 @@ public class DialogResponseController : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerMovement.inputs == null) return; // temp
-        if(PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y > 0 && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
+        if (InputReader.inputs == null) return; // temp
+        if(InputReader.inputs.actions["Move"].ReadValue<Vector2>().y > 0 && InputReader.inputs.actions["Move"].WasPressedThisFrame())
         {
             selectedOption--;
         }
-        else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y < 0 && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
+        else if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < 0 && InputReader.inputs.actions["Move"].WasPressedThisFrame())
         {
             selectedOption++;
         }
-        else if (PlayerMovement.inputs.actions["Interact"].WasPressedThisFrame())
+        else if (InputReader.inputs.actions["Interact"].WasPressedThisFrame())
         {
             if(awaitingResponse && !mainController.skippedTextThisFrame)
                 makeChoice();

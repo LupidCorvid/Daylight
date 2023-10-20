@@ -16,7 +16,7 @@ public class ExitOnMovementCutscene : CutsceneData
     {
         base.cycleExecution();
         //Temp implementation. Can be final as long as all attempts at player movement are considered
-        if(PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().magnitude > 0.1f || PlayerMovement.inputs.actions["Jump"].WasPressedThisFrame())
+        if(InputReader.inputs.actions["Move"].ReadValue<Vector2>().magnitude > 0.1f || InputReader.inputs.actions["Jump"].WasPressedThisFrame())
         {
             finish();
         }

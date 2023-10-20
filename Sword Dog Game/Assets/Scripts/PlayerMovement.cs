@@ -132,14 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopStaminaRefill = false;
 
-    public static PlayerInput inputs;
-
-    private void Awake()
-    {
-        if (inputManager == null)
-            inputManager = GetComponent<PlayerInput>();
-        inputs = inputManager;
-    }
+    //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
     //public void OnBark() { }
@@ -150,8 +143,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        inputManager = InputReader.inputs;
 
-        inputManager.ActivateInput();
+
+        //inputManager.ActivateInput();
         //inputManager.actions["Bark"].started += BarkTest;
         //inputManager.actions.FindActionMap("Gameplay").FindAction("Bark").performed += BarkTest;
 

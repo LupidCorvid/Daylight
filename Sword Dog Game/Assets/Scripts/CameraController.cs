@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
 
                 //float magCap = Input.GetAxis("Horizontal"); //Link to slight inputs
                 float magCap = 1f;
-                if (PlayerMovement.inputs.actions["Sprint"].IsPressed()) //TODO Input mapping
+                if (InputReader.inputs.actions["Sprint"].IsPressed()) //TODO Input mapping
                 {
                     magCap *= 1.5f; //Increase view range when sprinting
 
@@ -98,9 +98,9 @@ public class CameraController : MonoBehaviour
                 //Prevent camera from moving when in menus
                 if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && !DialogController.main.inDialog) // && not paused(?)
                 {
-                    if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
+                    if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
                         RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;
-                    else if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().x > 0)
+                    else if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x > 0)
                         RbFollowVector -= (RbFollowVector - new Vector2(magCap, 0)) * Time.deltaTime * 2;
                 }
                 //else //Recenter when not moving

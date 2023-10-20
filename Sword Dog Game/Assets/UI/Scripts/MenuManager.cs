@@ -43,9 +43,9 @@ public class MenuManager : MonoBehaviour
     {
         if (inMenu)
         {
-            if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y > 0.05f && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
+            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().y > 0.05f && InputReader.inputs.actions["Move"].WasPressedThisFrame())
                 menu.selectUp();
-            if (PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y < 0.05f && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
+            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < 0.05f && InputReader.inputs.actions["Move"].WasPressedThisFrame())
                 menu.selectDown();
         }
 

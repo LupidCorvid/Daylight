@@ -14,7 +14,7 @@ public class PlatformDisabler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y >= .9f)
+        if(InputReader.inputs.actions["Move"].ReadValue<Vector2>().y >= .9f)
         {
             Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, true);
         }

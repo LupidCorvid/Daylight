@@ -445,7 +445,6 @@ GameObject:
   - component: {fileID: 8004215587823365583}
   - component: {fileID: 4232136647909902652}
   - component: {fileID: 2603996948611409079}
-  - component: {fileID: 5272894361902951580}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -552,7 +551,7 @@ MonoBehaviour:
   canTurn: 1
   canSprint: 1
   pAttack: {fileID: 7333625409189861786}
-  inputManager: {fileID: 5272894361902951580}
+  inputManager: {fileID: 0}
   lastLandHeight: 0
   entityBase: {fileID: 4232136647909902652}
   barkFXPrefab: {fileID: 761301532297875351, guid: f71353a964dc9404fa85d43ce94ca8b0, type: 3}
@@ -639,6 +638,7 @@ MonoBehaviour:
   pMovement: {fileID: 6300512340327299635}
   parryTrackerLocation: {fileID: 1192961463152503506}
   parryStaminaCost: 2.5
+  parryAimDir: {x: 0, y: 0}
 --- !u!114 &3808553446418265509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,64 +883,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5272894361902951580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300512340327299644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9c2c46987c3e6c543b3958677a82036a, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bd916ad0-5bae-4b40-944e-a2c2bb356de0
-    m_ActionName: Gameplay/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cb250f1b-381c-4005-9d52-4671e31c75f6
-    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 87594787-6988-4319-aea8-1a3c001e24d9
-    m_ActionName: Gameplay/Attack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 20d34297-9444-4856-a5d0-66678890b9fe
-    m_ActionName: Gameplay/Block[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 534728b1-c12c-4467-b41a-a37a971a5f90
-    m_ActionName: Gameplay/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fe16b383-d722-40a4-8430-4cd43f51aceb
-    m_ActionName: Gameplay/Inventory[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e17c1639-1f5e-4547-b31c-48c2a8c501c4
-    m_ActionName: Gameplay/Bark[/Keyboard/b]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &6314292672212099403
 GameObject:
   m_ObjectHideFlags: 0
