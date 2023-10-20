@@ -65,7 +65,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewSave()
     {
-        if (!ChangeScene.changingScene && !GameSaver.loading && Crossfade.over)
+        if (!ChangeScene.changingScene && !GameSaver.loading)
         {
             //SceneHelper.LoadScene("Prologue Area");
             GameSaver.currData = new GameSaver.SaveData();
@@ -81,7 +81,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMostRecentSave()
     {
-        if (!ChangeScene.changingScene && !GameSaver.loading && Crossfade.over)
+        if (!ChangeScene.changingScene && !GameSaver.loading)
         {
             //GameSaver.main.LoadGame();
             AudioManager.instance.FadeOutCurrent();
