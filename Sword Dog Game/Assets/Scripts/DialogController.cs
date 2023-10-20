@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogController : MonoBehaviour
 {
@@ -130,7 +131,7 @@ public class DialogController : MonoBehaviour
 
     public void finishClose()
     {
-        if (!CutsceneController.cutsceneHideUI && !PauseScreen.quit)
+        if (!CutsceneController.cutsceneHideUI && !PauseScreen.quit && SceneManager.GetActiveScene().name != "Main menu")
             CanvasManager.ShowHUD();
         if (panel != null)
         {
