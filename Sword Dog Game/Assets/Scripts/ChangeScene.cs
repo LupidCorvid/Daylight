@@ -87,7 +87,7 @@ public class ChangeScene : MonoBehaviour
     {
         changingScene = true;
         Crossfade.current.StartFade();
-        DialogController.main.closeBox();
+        DialogController.main?.closeBox();
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
         if(PlayerMovement.controller != null)
