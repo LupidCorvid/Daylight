@@ -74,6 +74,7 @@ public class MainMenuManager : MonoBehaviour
             QuestsManager.main?.questsDatabase.ResetAllQuestProgress();
             InventoryManager.main?.refreshInventory();
             AudioManager.instance.FadeOutCurrent();
+            DialogSource.stringVariables = GameSaver.currData.dialogStringVariables;
             ChangeScene.LoadScene("Prologue Area", "", false);
             //CanvasManager.ShowHUD();
         }

@@ -93,7 +93,10 @@ public class PrologueManager : RoomManager
     {
         //Giveplayer sword
         roomState.swordCollected = true;
-        DialogSource.stringVariables.Add("HasGottenSword", "True");
+        if (!DialogSource.stringVariables.ContainsKey("HasGottenSword"))
+            DialogSource.stringVariables.Add("HasGottenSword", "True");
+        else
+            DialogSource.stringVariables["HasGottenSword"] = "True";
         SwordFollow.instance.transform.position = looseSword.transform.position;
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);

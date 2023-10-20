@@ -37,11 +37,14 @@ public class GameSaver : MonoBehaviour
             StartingSave?.Invoke();
             currData.inventory = ItemDatabase.main.packInventory(InventoryManager.currInventory);
             currData.quests = QuestsManager.main.questsDatabase.packQuests();
+            currData.dialogStringVariables = DialogSource.stringVariables;
 
             SaveData data = currData;
             data.SetPlayer(PlayerMovement.instance);
             var dataToSave = JsonUtility.ToJson(data, true);
             saveSystem.SaveData(dataToSave);
+
+
         }
     }
 
@@ -82,6 +85,7 @@ public class GameSaver : MonoBehaviour
             InventoryManager.currInventory = ItemDatabase.main.unpackInventory(data.inventory);
             InventoryManager.main.refreshInventory();
             QuestsManager.main.questsDatabase.unpackSavedQuests(currData);
+            DialogSource.stringVariables = currData.dialogStringVariables;
 
             EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
             GameObject.Destroy(eventSystem?.gameObject);
@@ -107,6 +111,7 @@ public class GameSaver : MonoBehaviour
         public Buffs.SaveBuffs buffs;
         public ItemDatabase.PackedInventory inventory;
         public QuestList quests;
+        public Dictionary<string, string> dialogStringVariables;
 
 
         public void SetPlayer(GameObject playerObj) {
@@ -117,6 +122,7 @@ public class GameSaver : MonoBehaviour
         {
             roomStates = new RoomStates();
             inventory = new ItemDatabase.PackedInventory();
+            dialogStringVariables = new Dictionary<string, string>();
         }
     }
 
