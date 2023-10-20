@@ -62,7 +62,7 @@ public class PrologueManager : RoomManager
             SwordFollow.instance.SetActive(false);
             NoSwordBlock.SetActive(true);
         }
-        if(!roomState.finishedIntroCutscene)
+        if(!roomState.finishedIntroCutscene && !roomState.swordCollected)
         {
             //roomState.finishedIntroCutscene = true;
             CutsceneController.PlayCutscene("Intro");
