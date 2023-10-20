@@ -57,7 +57,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Update()
     {
-        if((Input.GetAxisRaw("Vertical") != 0) && EventSystem.current.currentSelectedGameObject == null)
+        if(EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
         }
