@@ -101,7 +101,12 @@ public class MoveCameraCutscene : CutsceneData
     public void LinearPositionChange(CameraTransform transform)
     {
         if (Vector2.Distance(target.transform.position, (Vector3)transform.point) > .05f)
-            target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+        {
+            if(transform.relPosition)
+                target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
+            else
+                target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+        }
     }
 
     public void ExponentialMovement(CameraTransform transform)
@@ -112,18 +117,27 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialZoomChange(CameraTransform transform)
     {
-        target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime * transform.speed;
+        if(transform.relPosition)
+            target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime * transform.speed;
     }
 
     public void ExponentialPositionChange(CameraTransform transform)
     {
-        target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed;
+        if(transform.relPosition)
+            target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed;
+        else
+            target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed;
     }
 
     public override void finishedSegment()
     {
         if (points.Count > 0)
-            target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
+        {
+            if(points[^1].relPosition)
+                target.transform.position = new Vector3(points[^1].point.x + transform.position.x, points[^1].point.y + transform.position.y, target.transform.position.z);
+            else
+                target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
+        }
         if (useMainCamera && freeCameraOnExit)
         {
             CameraController.main.externalControl = false;
@@ -163,9 +177,10 @@ public class MoveCameraCutscene : CutsceneData
         public bool letterbox;
         public MovementType transition;
         public bool hideUI;
+        public bool relPosition;
 
 
-        public CameraTransform(float zoom, float speed, Vector2 targetPoint, MovementType transition, bool letterbox = false, bool hideUI = false)
+        public CameraTransform(float zoom, float speed, Vector2 targetPoint, MovementType transition, bool letterbox = false, bool hideUI = false, bool relPosition = false)
         {
             this.zoom = zoom;
             this.speed = speed;
@@ -173,6 +188,7 @@ public class MoveCameraCutscene : CutsceneData
             this.letterbox = letterbox;
             this.transition = transition;
             this.hideUI = hideUI;
+            this.relPosition = relPosition;
         }
     }
 }

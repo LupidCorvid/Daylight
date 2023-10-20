@@ -34,7 +34,10 @@ public class AnimationCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if (!target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name))
+        if (!target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name) 
+            || (target.GetCurrentAnimatorStateInfo(0).normalizedTime < target.GetCurrentAnimatorStateInfo(0).length 
+            && !target.GetCurrentAnimatorStateInfo(0).loop 
+            && target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name)))
         {
             currState++;
             if (currState < stateNames.Count)
