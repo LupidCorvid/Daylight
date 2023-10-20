@@ -129,6 +129,7 @@ public class DialogResponseController : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerMovement.inputs == null) return; // temp
         if(PlayerMovement.inputs.actions["Move"].ReadValue<Vector2>().y > 0 && PlayerMovement.inputs.actions["Move"].WasPressedThisFrame())
         {
             selectedOption--;
