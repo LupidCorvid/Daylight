@@ -59,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseContainerGroup: {fileID: 3693642695915019712}
   resumeButton: {fileID: 4466211094771914006}
+  yesButton: {fileID: 2712134481380000997}
   quitPrompt: {fileID: 3195830351215137738}
 --- !u!225 &2878834602629363756
 CanvasGroup:
@@ -2384,13 +2385,13 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 2712134481380000997}
-    m_SelectOnRight: {fileID: 8965637544491559101}
+    m_SelectOnRight: {fileID: 2712134481380000997}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3058,6 +3059,7 @@ MonoBehaviour:
   openedThisFrame: 0
   gotResponseThisFrame: 0
   skippedTextThisFrame: 0
+  inDialog: 0
   DotAnimator: {fileID: 831801568621357187}
 --- !u!1 &2489937641399710539
 GameObject:
@@ -3308,7 +3310,7 @@ RectTransform:
   - {fileID: 65099415983911038}
   - {fileID: 2088989887}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4798,14 +4800,14 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 2712134481380000997}
-    m_SelectOnRight: {fileID: 2712134481380000997}
+    m_SelectOnLeft: {fileID: 8965637544491559101}
+    m_SelectOnRight: {fileID: 8965637544491559101}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -6455,6 +6457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseContainerGroup: {fileID: 0}
   resumeButton: {fileID: 0}
+  yesButton: {fileID: 0}
   quitPrompt: {fileID: 0}
 --- !u!1 &7231214121494446904
 GameObject:
@@ -8393,6 +8396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseContainerGroup: {fileID: 0}
   resumeButton: {fileID: 0}
+  yesButton: {fileID: 0}
   quitPrompt: {fileID: 0}
 --- !u!225 &2675045423467239871
 CanvasGroup:

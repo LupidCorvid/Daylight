@@ -14,7 +14,7 @@ public class PauseScreen : MonoBehaviour
 
     public CanvasGroup pauseContainerGroup;
 
-    public UnityEngine.UI.Button resumeButton;
+    public UnityEngine.UI.Button resumeButton, yesButton;
 
     public CanvasGroup quitPrompt;
 
@@ -87,7 +87,7 @@ public class PauseScreen : MonoBehaviour
         pauseMenuGroup.alpha = 1;
         pauseMenuGroup.blocksRaycasts = true;
         pauseMenuGroup.interactable = true;
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
 
         pauseContainerGroup.alpha = 1;
         pauseContainerGroup.blocksRaycasts = true;
@@ -133,6 +133,7 @@ public class PauseScreen : MonoBehaviour
         quitPrompt.alpha = 1;
         quitPrompt.blocksRaycasts = true;
         quitPrompt.interactable = true;
+        EventSystem.current.SetSelectedGameObject(yesButton.gameObject);
 
         pauseMenuGroup.alpha = 0;
         pauseMenuGroup.blocksRaycasts = false;
@@ -142,6 +143,7 @@ public class PauseScreen : MonoBehaviour
     public void CancelPrompt()
     {
         closePrompt();
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
 
         pauseMenuGroup.alpha = 1;
         pauseMenuGroup.blocksRaycasts = true;
