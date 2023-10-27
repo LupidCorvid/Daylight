@@ -17,6 +17,8 @@ public class MoveCameraCutscene : CutsceneData
 
     public bool ignoreCameraBounds = false;
 
+    public Rigidbody2D cameraRb;
+
     public enum MovementType
     {
         Linear,
@@ -36,6 +38,8 @@ public class MoveCameraCutscene : CutsceneData
             CameraController.main.cldr.isTrigger = true;
         if(points.Count > 0)
             changingToNewTransform();
+        if (target != null)
+            cameraRb = target.GetComponent<Rigidbody2D>();
     }
 
     public override void cycleExecution()
@@ -102,6 +106,18 @@ public class MoveCameraCutscene : CutsceneData
     {
         if (Vector2.Distance(target.transform.position, (Vector3)transform.point) > .05f)
         {
+            if(cameraRb != null)
+            {
+                if (Vector2.Distance(target.transform.position, (Vector3)transform.point) > .05f)
+                {
+                    if (transform.relPosition)
+                        cameraRb.MovePosition(cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed);
+                    else
+                        cameraRb.MovePosition(cameraRb.transform.position + ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed);
+                }
+                return;
+            }
+
             if(transform.relPosition)
                 target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
             else
@@ -122,6 +138,14 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialPositionChange(CameraTransform transform)
     {
+        if(cameraRb != null)
+        {
+            if (transform.relPosition)
+                cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed);
+            else
+                cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed);
+            return;
+        }
         if(transform.relPosition)
             target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed;
         else
