@@ -8,6 +8,7 @@ public class JumpThrough : MonoBehaviour
     private float height;
     [SerializeField] private SpriteRenderer spriteRenderer;
     public Collider2D cldr;
+    private Collider2D[] playerColliders;
 
 
     // Start is called before the first frame update
@@ -15,6 +16,8 @@ public class JumpThrough : MonoBehaviour
     {
         height = spriteRenderer.bounds.size.y / 2;
         cldr = GetComponent<Collider2D>();
+
+        //playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -23,9 +26,13 @@ public class JumpThrough : MonoBehaviour
         if (player == null)
         {
             player = PlayerMovement.controller;
+            playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
         }
         else
         {
+            if(playerColliders?.Length == 0 )
+                playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
+
             // Debug.DrawLine((Vector3)player.bottom, transform.position - new Vector3(0, height));
             bool playerBelow = player.bottom.y < transform.position.y - height;
             
@@ -33,10 +40,18 @@ public class JumpThrough : MonoBehaviour
             if(playerBelow || InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < -.5f)
             {
                 Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, true);
+                for (int i = 0; i < playerColliders?.Length; i++)
+                {
+                    Physics2D.IgnoreCollision(cldr, playerColliders[i], true);
+                }
             }
             else
             {
                 Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, false);
+                for (int i = 0; i < playerColliders?.Length; i++)
+                {
+                    Physics2D.IgnoreCollision(cldr, playerColliders[i], false);
+                }
             }
         }
     }

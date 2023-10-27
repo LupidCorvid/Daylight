@@ -927,16 +927,16 @@ public class PlayerMovement : MonoBehaviour
             direction = Quaternion.Euler(0, 0, slopeSideAngle) * direction;
         }
         
-        RaycastHit2D wallInfo = Physics2D.Raycast(startPosition1, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
+        //RaycastHit2D wallInfo = Physics2D.Raycast(startPosition1, direction, cldr.bounds.size.x + wallCheckDistance, whatIsGround);
 
-        if (wallInfo.point != Vector2.zero)
-        {
-            Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
-            if (wallInfo.distance <= wallCheckDistance) {
-                if (facingRight) wallOnRight = true;
-                else wallOnLeft = true;
-            }
-        }
+        //if (wallInfo.point != Vector2.zero)
+        //{
+        //    Debug.DrawLine(startPosition1, wallInfo.point, Color.blue);
+        //    if (wallInfo.distance <= wallCheckDistance) {
+        //        if (facingRight) wallOnRight = true;
+        //        else wallOnLeft = true;
+        //    }
+        //}
     }
 
     void CheckGround()
