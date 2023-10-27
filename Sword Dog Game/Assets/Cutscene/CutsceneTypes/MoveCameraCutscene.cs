@@ -90,8 +90,10 @@ public class MoveCameraCutscene : CutsceneData
     public void LinearMovement(CameraTransform transform)
     {
         LinearZoomChange(transform);
-        if (Vector2.Distance(points[curPoint].point, target.transform.position) > .05f)
+        if (Vector2.Distance(transform.point, target.transform.position) > .05f)
             LinearPositionChange(transform);
+        else
+            target.transform.position = transform.point;
     }
 
     public void LinearZoomChange(CameraTransform transform)
@@ -104,25 +106,21 @@ public class MoveCameraCutscene : CutsceneData
 
     public void LinearPositionChange(CameraTransform transform)
     {
-        if (Vector2.Distance(target.transform.position, (Vector3)transform.point) > .05f)
+        if(cameraRb != null && false)
         {
-            if(cameraRb != null)
-            {
-                if (Vector2.Distance(target.transform.position, (Vector3)transform.point) > .05f)
-                {
-                    if (transform.relPosition)
-                        cameraRb.MovePosition(cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed);
-                    else
-                        cameraRb.MovePosition(cameraRb.transform.position + ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed);
-                }
-                return;
-            }
-
-            if(transform.relPosition)
-                target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
+            if (transform.relPosition)
+                cameraRb.MovePosition(cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed);
             else
-                target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+                cameraRb.MovePosition(cameraRb.transform.position + ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed);
+            Debug.DrawLine(cameraRb.transform.position, cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized, Color.magenta);
+            return;
         }
+
+        if(transform.relPosition)
+            target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
+        else
+            target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+        
     }
 
     public void ExponentialMovement(CameraTransform transform)
@@ -138,7 +136,7 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialPositionChange(CameraTransform transform)
     {
-        if(cameraRb != null)
+        if(cameraRb != null && false)
         {
             if (transform.relPosition)
                 cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed);
