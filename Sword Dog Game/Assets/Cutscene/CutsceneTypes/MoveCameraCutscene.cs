@@ -117,8 +117,7 @@ public class MoveCameraCutscene : CutsceneData
 
     public void ExponentialZoomChange(CameraTransform transform)
     {
-        if(transform.relPosition)
-            target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime * transform.speed;
+        target.orthographicSize -= (target.orthographicSize - transform.zoom) * Time.deltaTime * transform.speed;
     }
 
     public void ExponentialPositionChange(CameraTransform transform)
