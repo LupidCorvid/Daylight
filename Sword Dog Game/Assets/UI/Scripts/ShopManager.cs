@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ShopManager : BaseManager
 {
@@ -44,14 +45,10 @@ public class ShopManager : BaseManager
         //    price = 0
 
         //});
-        //addNewItem(new ShopItem()
-        //{
-        //    name = "Tester2",
-        //    description = "This is a tester (again)",
-        //    price = 4
-        //});
+        
         addNewItem(new SpiderTulipBulbShopListing());
         selectItem(CurrentListings[0]);
+        EventSystem.current.SetSelectedGameObject(CurrentListings[0].button.gameObject);
         CurrentListings[0].backgroundImage.sprite = selectedImage;
         currencyAmount.text = "" + InventoryManager.currInventory.CountItem(1);
 
@@ -63,7 +60,13 @@ public class ShopManager : BaseManager
 
     }
 
-
+    public void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null && MenuManager.main.menu == this)
+        {
+            EventSystem.current.SetSelectedGameObject(CurrentListings[currentSelectedIndex].button.gameObject);
+        }
+    }
 
 
     public void addNewItem(ShopItem item)
@@ -73,6 +76,11 @@ public class ShopManager : BaseManager
         listing.item = item;
         listing.mainManager = this;
         CurrentListings.Add(listing);
+        updateListingNavigation();
+        // Navigation nav = listing.button.navigation;
+        // nav.selectOnLeft = closeButton;
+        // nav.selectOnRight = purchaseButton;
+        // listing.button.navigation = nav;
     }
 
     public void removeItem(ShopItem item)
@@ -85,11 +93,13 @@ public class ShopManager : BaseManager
                 CurrentListings.RemoveAt(i);
             }
         }
+        updateListingNavigation();
     }
 
     public void selectItem(ShopItem item)
     {
-        currentSelectedIndex = CurrentListings.FindIndex((x) => (x.item == item));
+        currentSelectedIndex = CurrentListings.FindIndex((x) => x.item == item);
+        updateSideNavigation();
 
         ItemNameDisplay.text = item.name;
         ItemDescriptionDisplay.text = item.description;
@@ -104,14 +114,12 @@ public class ShopManager : BaseManager
 
     public void selectItem(ShopItemListing item)
     {
-
         //deselectClose();
         //deselectPurchase();
-
         selectItem(item.item);
     }
 
-    public void ShopItemClicked(ShopItemListing item)
+    public void ShopItemSelected(ShopItemListing item)
     {
         if (item == CurrentListings[currentSelectedIndex])
             return;
@@ -127,30 +135,35 @@ public class ShopManager : BaseManager
 
     public override void selectDown()
     {
+        // if (EventSystem.current.currentSelectedGameObject == purchaseButton.gameObject) return;
+        // if (EventSystem.current.currentSelectedGameObject == closeButton.gameObject) return;
         
-        CurrentListings[currentSelectedIndex].backgroundImage.sprite = deselectedImage;
+        // CurrentListings[currentSelectedIndex].backgroundImage.sprite = deselectedImage;
 
-        currentSelectedIndex = ++currentSelectedIndex % CurrentListings.Count;
+        // currentSelectedIndex = ++currentSelectedIndex % CurrentListings.Count;
         
-        CurrentListings[currentSelectedIndex].backgroundImage.sprite = selectedImage;
-        selectItem(currentSelectedIndex);
-        
+        // CurrentListings[currentSelectedIndex].backgroundImage.sprite = selectedImage;
+        // selectItem(currentSelectedIndex);
     }
 
     public override void selectUp()
     {
-        CurrentListings[currentSelectedIndex].backgroundImage.sprite = deselectedImage;
-        
-        currentSelectedIndex = --currentSelectedIndex % CurrentListings.Count;
-        if (currentSelectedIndex < 0)
-            currentSelectedIndex = CurrentListings.Count - 1;
+        // if (EventSystem.current.currentSelectedGameObject == purchaseButton.gameObject) return;
+        // if (EventSystem.current.currentSelectedGameObject == closeButton.gameObject) return;
 
-        CurrentListings[currentSelectedIndex].backgroundImage.sprite = selectedImage;
-        selectItem(currentSelectedIndex);
+        // CurrentListings[currentSelectedIndex].backgroundImage.sprite = deselectedImage;
+        
+        // currentSelectedIndex = --currentSelectedIndex % CurrentListings.Count;
+        // if (currentSelectedIndex < 0)
+        //     currentSelectedIndex = CurrentListings.Count - 1;
+
+        // CurrentListings[currentSelectedIndex].backgroundImage.sprite = selectedImage;
+        // selectItem(currentSelectedIndex);
     }
 
     public void closedButtonClicked()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         base.CloseMenu();
         manager.closeMenu();
     }
@@ -217,5 +230,34 @@ public class ShopManager : BaseManager
         {
             purchaseImage.sprite = purchaseDeselected;
         }
+    }
+
+    public void updateListingNavigation()
+    {
+        int max = CurrentListings.Count;
+        for (int i = 0; i < max; i++)
+        {
+            CurrentListings[i].button.navigation = new Navigation
+            {
+                mode = Navigation.Mode.Explicit,
+                selectOnRight = purchaseButton,
+                selectOnLeft = closeButton,
+                selectOnUp = CurrentListings[(i - 1 + max) % max].button,
+                selectOnDown = CurrentListings[(i + 1) % max].button
+            };
+        }
+    }
+
+    public void updateSideNavigation()
+    {
+        // left on purchase goes back to previous selected item
+        Navigation nav = purchaseButton.navigation;
+        nav.selectOnLeft = CurrentListings[currentSelectedIndex].button;
+        purchaseButton.navigation = nav;
+
+        // right on close goes back to previous selected item
+        nav = closeButton.navigation;
+        nav.selectOnRight = CurrentListings[currentSelectedIndex].button;
+        closeButton.navigation = nav;
     }
 }

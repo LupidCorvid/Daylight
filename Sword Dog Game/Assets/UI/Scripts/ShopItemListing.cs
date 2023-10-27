@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class ShopItemListing : MonoBehaviour
+public class ShopItemListing : MonoBehaviour, ISelectHandler
 {
     public ShopManager mainManager;
 
@@ -33,7 +34,12 @@ public class ShopItemListing : MonoBehaviour
 
     public void OnClick()
     {
-        mainManager.ShopItemClicked(this);
+        mainManager.ShopItemSelected(this);
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        mainManager.ShopItemSelected(this);
     }
 
     //public void OnSelect()
