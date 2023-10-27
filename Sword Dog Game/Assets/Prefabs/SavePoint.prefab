@@ -1878,7 +1878,9 @@ GameObject:
   - component: {fileID: 4390757082578228079}
   - component: {fileID: 6909266357356482434}
   - component: {fileID: 475578082662367619}
+  - component: {fileID: 3055481903610780778}
   - component: {fileID: 1174479276433751020}
+  - component: {fileID: 4755206278211064661}
   m_Layer: 0
   m_Name: SaveCutscene
   m_TagString: Untagged
@@ -1917,6 +1919,7 @@ MonoBehaviour:
   - {fileID: 4390757082578228079}
   - {fileID: 6909266357356482434}
   - {fileID: 475578082662367619}
+  - {fileID: 3055481903610780778}
   - {fileID: 1174479276433751020}
   cutsceneNumber: 0
   cutsceneName: Save
@@ -1962,7 +1965,7 @@ MonoBehaviour:
   finished: 0
   points:
   - zoom: 4
-    speed: 1
+    speed: 0.8
     point: {x: 0, y: 0.5}
     letterbox: 0
     transition: 1
@@ -1987,6 +1990,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
+--- !u!114 &3055481903610780778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001663442825813165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a457c2f4dc8347a1f1b2f7f15afb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  target: {fileID: 0}
+  targetByName: 1
+  targetName: Player(Clone)
+  stateNames:
+  - name: wakeUp1
+    speed: 1
+  currState: 0
+  stopOnFinish: 0
+  restoreSpeedOnFinish: 0
 --- !u!114 &1174479276433751020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,10 +2028,24 @@ MonoBehaviour:
   points: []
   target: {fileID: 0}
   freeCameraOnExit: 1
-  freeHudOnExit: 0
+  freeHudOnExit: 1
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
+--- !u!114 &4755206278211064661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001663442825813165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 0.4
 --- !u!1 &8507001405144718965
 GameObject:
   m_ObjectHideFlags: 0

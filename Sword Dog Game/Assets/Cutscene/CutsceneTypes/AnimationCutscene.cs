@@ -22,6 +22,7 @@ public class AnimationCutscene : CutsceneData
             target = GameObject.Find(targetName).GetComponent<Animator>();
         base.startSegment();
         speedOnEnter = target.speed;
+        currState = 0;
         if (stateNames.Count > 0)
         {
             target.speed = stateNames[0].speed;

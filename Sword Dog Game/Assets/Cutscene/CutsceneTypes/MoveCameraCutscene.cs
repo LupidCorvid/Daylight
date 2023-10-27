@@ -51,7 +51,9 @@ public class MoveCameraCutscene : CutsceneData
             return;
         }
 
-        if (Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)
+        if (((Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && !points[curPoint].relPosition)
+            || Vector2.Distance(points[curPoint].point + (Vector2)transform.position, target.transform.position) <= .01f && points[curPoint].relPosition)
+            && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)
         {
             curPoint++;
             if (curPoint < points.Count)
@@ -90,10 +92,7 @@ public class MoveCameraCutscene : CutsceneData
     public void LinearMovement(CameraTransform transform)
     {
         LinearZoomChange(transform);
-        if (Vector2.Distance(transform.point, target.transform.position) > .05f)
-            LinearPositionChange(transform);
-        else
-            target.transform.position = transform.point;
+        LinearPositionChange(transform);
     }
 
     public void LinearZoomChange(CameraTransform transform)
@@ -106,20 +105,20 @@ public class MoveCameraCutscene : CutsceneData
 
     public void LinearPositionChange(CameraTransform transform)
     {
-        if(cameraRb != null && false)
+        if (transform.relPosition)
         {
-            if (transform.relPosition)
-                cameraRb.MovePosition(cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed);
+            if (Vector2.Distance(target.transform.position, transform.point + (Vector2)this.transform.position) < .05f)
+                target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
             else
-                cameraRb.MovePosition(cameraRb.transform.position + ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed);
-            Debug.DrawLine(cameraRb.transform.position, cameraRb.transform.position + (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized, Color.magenta);
-            return;
+                target.transform.position = transform.point + (Vector2)this.transform.position;
         }
-
-        if(transform.relPosition)
-            target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
         else
-            target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+        {
+            if (Vector2.Distance(target.transform.position, transform.point) < .05f)
+                target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+            else
+                target.transform.position = transform.point;
+        }
         
     }
 
