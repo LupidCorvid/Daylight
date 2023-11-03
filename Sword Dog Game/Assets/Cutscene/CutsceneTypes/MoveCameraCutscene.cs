@@ -108,14 +108,14 @@ public class MoveCameraCutscene : CutsceneData
         if (transform.relPosition)
         {
             if (Vector2.Distance(target.transform.position, transform.point + (Vector2)this.transform.position) < .05f)
-                target.transform.position += (((Vector3)transform.point + this.transform.position) - (target.transform.position)).normalized * Time.deltaTime * transform.speed;
+                target.transform.position += (Vector3)((transform.point + (Vector2)this.transform.position) - (Vector2)(target.transform.position)).normalized * Time.deltaTime * transform.speed;
             else
                 target.transform.position = transform.point + (Vector2)this.transform.position;
         }
         else
         {
             if (Vector2.Distance(target.transform.position, transform.point) < .05f)
-                target.transform.position += ((Vector3)transform.point - target.transform.position).normalized * Time.deltaTime * transform.speed;
+                target.transform.position += (Vector3)(transform.point - (Vector2)target.transform.position).normalized * Time.deltaTime * transform.speed;
             else
                 target.transform.position = transform.point;
         }
