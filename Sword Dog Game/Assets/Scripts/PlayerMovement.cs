@@ -670,13 +670,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (leftHit.point != Vector2.zero)
         {
-            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, Color.red);
+            Debug.DrawLine(upperLeftCorner + (Vector2)transform.position, leftHit.point, new Color(1 - runs * .05f, 0, 0, 1));
             if (leftHit.distance <= minGroundDistance)
                 anim.SetBool("ground_close", true);
         }
         if (rightHit.point != Vector2.zero)
         {
-            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, Color.red);
+            Debug.DrawLine(upperRightCorner + (Vector2)transform.position, rightHit.point, new Color(1 - runs * .05f, 0, 0, 1));
             if (rightHit.distance <= minGroundDistance)
                 anim.SetBool("ground_close", true);
         }
@@ -689,6 +689,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 leftSide = upperLeftCorner;
             Vector2 rightSide = upperRightCorner;
             float yLevel = groundCheckSpot.y + transform.position.y;
+            //yLevel = cldr.bounds.min.y;
 
             if (leftHit.point == Vector2.zero)
             {
@@ -799,7 +800,7 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
 
-        Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), new Vector3(groundFinder.point.x, yLevel), Color.magenta);
+        Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), groundFinder.point, Color.magenta);
         side.x = groundFinder.point.x - transform.position.x;
         
         ////Prevent jumpyness on bumpy and tall slopes by ignoring really tall slopes

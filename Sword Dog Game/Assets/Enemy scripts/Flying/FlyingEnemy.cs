@@ -46,6 +46,7 @@ public class FlyingEnemy : EnemyBase
     }
 
 
+    //TODO: ignore collisions of platform colliders?
     public void Awake()
     {
         ai = new FlyingAI(this);
