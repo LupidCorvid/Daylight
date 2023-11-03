@@ -30,22 +30,26 @@ public class LanternFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        GameObject mouth = GameObject.Find("mouthLantern");
-        pmScript = player.GetComponent<PlayerMovement>();
-        lantPreviousLocation = gameObject.transform.position;
-
-        //Check for being flipped
-        if (pmScript.facingRight)
-            lantTargetLocation = new Vector3(mouth.transform.position.x, mouth.transform.position.y - .75f, mouth.transform.position.z);
-        else
-            lantTargetLocation = new Vector3(mouth.transform.position.x, mouth.transform.position.y - .75f, mouth.transform.position.z);
-        
-
+        player ??= GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            gameObject.transform.position = Vector3.Lerp(lantPreviousLocation, lantTargetLocation, 1);
-            
+            player = GameObject.FindGameObjectWithTag("Player");
+            GameObject mouth = GameObject.Find("mouthLantern");
+            pmScript = player.GetComponent<PlayerMovement>();
+            lantPreviousLocation = gameObject.transform.position;
+
+            //Check for being flipped
+            if (pmScript.facingRight)
+                lantTargetLocation = new Vector3(mouth.transform.position.x, mouth.transform.position.y - .75f, mouth.transform.position.z);
+            else
+                lantTargetLocation = new Vector3(mouth.transform.position.x, mouth.transform.position.y - .75f, mouth.transform.position.z);
+
+
+            if (player != null)
+            {
+                gameObject.transform.position = Vector3.Lerp(lantPreviousLocation, lantTargetLocation, 1);
+
+            }
         }
     }
 
