@@ -27,11 +27,17 @@ public class MainMenuManager : MonoBehaviour
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
+            buttons[1].interactable = true;
         }
         else
         {
             Debug.Log("No most recent save found");
             lastSaveDetails.text = "";
+            buttons[1].interactable = false;
+
+            ColorBlock continueButtonColors = buttons[1].colors;
+            continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
+            buttons[1].colors = continueButtonColors;
         }
 
         CanvasManager.InstantHideHUD();
@@ -53,17 +59,23 @@ public class MainMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
 
-        Invoke("ActivateButtons", 0.5f);
+        Invoke("ActivateButtons", 0.4f);
     }
 
     public void ActivateButtons()
     {
-        // Conditionally activate continue game button if a save exists
-        buttons[1].interactable = lastSave != "";
-
         for (int i = 0; i < buttons.Count; i++)
         {
-            if (i != 1) buttons[i].interactable = true;
+            if (i != 1)
+            {
+                buttons[i].interactable = true;
+
+                // Set normal button disabled colors
+                // Necessary because we set them to all black and/or selected color at first to disguise disabling for user
+                ColorBlock buttonColors = buttons[i].colors;
+                buttonColors.disabledColor = new Color(0, 0, 0, 0.6f);
+                buttons[i].colors = buttonColors;
+            }
         }
     }
 
