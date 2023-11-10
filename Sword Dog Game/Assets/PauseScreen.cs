@@ -18,10 +18,13 @@ public class PauseScreen : MonoBehaviour
 
     public CanvasGroup quitPrompt;
 
+    public static PauseScreen main;
+
     // Start is called before the first frame update
     void Start()
     {
         pauseMenuGroup = GetComponent<CanvasGroup>();
+        main = this;
         //Debug.Log(Camera.main.pixelWidth + "  " + Camera.main.pixelHeight);
     }
 
@@ -164,7 +167,7 @@ public class PauseScreen : MonoBehaviour
 
     public IEnumerator BackToMenu() {
         quit = true;
-        GameSaver.main.SaveGame();
+        //GameSaver.main.SaveGame();
         PlayerMovement.created = false;
         SwordFollow.created = false;
         closePrompt();

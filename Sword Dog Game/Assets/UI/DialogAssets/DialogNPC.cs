@@ -165,8 +165,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
         GameObject addedObject = Instantiate(barkFXPrefab, spawnLocation, spawnRotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
-        addedParticle.velocity = velocity;
-        addedParticle.acceleration = acceleration;
+        addedParticle.velocity = velocity + (new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(1f, 1f)) * .25f);
+        addedParticle.acceleration = acceleration + (new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1)) * .25f);
         addedParticle.startTime = Time.time;
     }
 

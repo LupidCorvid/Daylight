@@ -589,8 +589,9 @@ Transform:
   - {fileID: 8758160295240632342}
   - {fileID: 1126466461910333036}
   - {fileID: 2606738659867587148}
+  - {fileID: 595635568086463293}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3718253076167933687
 GameObject:
@@ -1741,6 +1742,70 @@ Transform:
   m_Father: {fileID: 6546092832396059944}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6786127115258678387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595635568086463293}
+  - component: {fileID: 3401331213342869365}
+  m_Layer: 0
+  m_Name: SaveDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595635568086463293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786127115258678387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4998375682232093594}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3401331213342869365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786127115258678387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675c4a1fd7f499d40bfa5e2d3988ce04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barkFXPrefab: {fileID: 0}
+  miniBubblePrefab: {fileID: 0}
+  emotePrefab: {fileID: 0}
+  miniBubbleOffset: {x: 0, y: 2}
+  dialog:
+  - '[abf,200][ss, .05] Save game? [prompt, Save,[CE,SaveGame],Save & Quit,[CE,SaveQuit],No,]
+    [exit]'
+  numInteractions: 0
+  loopInteractions: 0
+  alreadyTalking: 0
+  barkSpawnLocation: {fileID: 0}
+  promptPrefab: {fileID: 0}
+  spawnedPrompt: {fileID: 0}
+  promptSpawnLocation: {fileID: 0}
+  emoteSpawnLocation: {fileID: 0}
+  speechLoop: {fileID: 0}
+  soundPlayer: {fileID: 0}
+  speaking: 0
+  pausedSpeak: 0
+  interactor: {fileID: 0}
 --- !u!1 &7444486422852468844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1942,7 @@ GameObject:
   - component: {fileID: 8899337956730622824}
   - component: {fileID: 4390757082578228079}
   - component: {fileID: 6909266357356482434}
+  - component: {fileID: 4108136850831520754}
   - component: {fileID: 475578082662367619}
   - component: {fileID: 3055481903610780778}
   - component: {fileID: 1174479276433751020}
@@ -1918,9 +1984,11 @@ MonoBehaviour:
   cutscenes:
   - {fileID: 4390757082578228079}
   - {fileID: 6909266357356482434}
+  - {fileID: 4108136850831520754}
   - {fileID: 475578082662367619}
   - {fileID: 3055481903610780778}
   - {fileID: 1174479276433751020}
+  - {fileID: 4755206278211064661}
   cutsceneNumber: 0
   cutsceneName: Save
   playingThisCutscene: 0
@@ -1977,6 +2045,27 @@ MonoBehaviour:
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
+--- !u!114 &4108136850831520754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001663442825813165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 3401331213342869365}
+  interactor: {fileID: 0}
+  getInteractorByName: 0
+  interactorName: 
+  overrideDialog: 1
+  dialog: '[abf,200][ss, .05] Save game? [prompt, Save,[CE,SaveGame],Save & Quit,[CE,SaveQuit],No,]
+    [exit]'
+  restorePriorDialog: 0
 --- !u!114 &475578082662367619
 MonoBehaviour:
   m_ObjectHideFlags: 0

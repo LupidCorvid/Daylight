@@ -42,6 +42,7 @@ public class CutsceneNPCDialog : CutsceneData
         if (getInteractorByName)
             interactor = GameObject.Find(interactorName).GetComponent<Entity>();
 
+        
         npc.interactor = interactor;
         if (overrideDialog)
         {
