@@ -67,13 +67,14 @@ public class observeScript : MonoBehaviour, IInteractable
         else
         {
             spawnedPrompt.SetTrigger("Reopen");
+            spawnedPrompt.SetFloat("Speed", -1);
         }
     }
 
     public void hidePrompt()
     {
-        if (spawnedPrompt != null)
-            spawnedPrompt.SetTrigger("Close");
+        spawnedPrompt?.SetTrigger("Close");
+        spawnedPrompt?.SetFloat("Speed", 1);
     }
 
     public void SpeakMiniBubble()
