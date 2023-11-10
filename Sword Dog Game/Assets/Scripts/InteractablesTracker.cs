@@ -111,6 +111,12 @@ public class InteractablesTracker : MonoBehaviour
         nearest = null;
         delay = 0f;
     }
+
+    public void ClearNearest()
+    {
+        nearest = null;
+    }
+
     /// <summary>
     /// Removes all null variables from the list
     /// </summary>

@@ -140,6 +140,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         DialogController.main.reading = false;
         alreadyTalking = false;
         stoppedTalkingThisFrame = true;
+        interactor?.GetComponentInChildren<InteractablesTracker>()?.ClearNearest();
         interactor = null;
         closedDialog?.Invoke();
     }

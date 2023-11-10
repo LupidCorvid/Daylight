@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Slope variables
     private Vector2 colliderSize;
-    [SerializeField] private float wallCheckDistance = 0.5f;
+    // [SerializeField] private float wallCheckDistance = 0.5f;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private float maxSlopeAngle;
     private float slopeDownAngle;

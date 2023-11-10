@@ -7,7 +7,7 @@ public class observeScript : MonoBehaviour, IInteractable
 
     public Animator spawnedPrompt;
     public Transform promptSpawnLocation;
-    public GameObject prompt;
+    public GameObject prompt; 
     bool isInteracting;
     private MiniBubbleController bubble;
     public GameObject miniBubblePrefab;
@@ -25,6 +25,9 @@ public class observeScript : MonoBehaviour, IInteractable
     void Start()
     {
         isInteracting = false;
+
+        // Hide unused variable warnings (lol)
+        isInteracting.ToString();
     }
 
     // Update is called once per frame

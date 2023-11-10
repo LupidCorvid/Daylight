@@ -20,6 +20,9 @@ public class BlacksmithBehavior : DialogNPC
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+
+        // Hide unused variable warnings (lol)
+        waitToLook.ToString();
     }
 
     // Update is called once per frame

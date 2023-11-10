@@ -39,7 +39,13 @@ public class ShopkeepBehavior : DialogNPC
             bubble.speaker = this;
             bubble.offset = miniBubbleOffset;
             bubble.voiceVol = .2f;
-            bubble.setSource(new DialogSource("[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"));
+            //Make more dialog lines to randomly choose from
+            //haven't confirmed that the random choice stuff works yet
+            string[] dialogOptions = { "[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]",
+                                       "[ss, .05][IA,<size=125%><align=center><margin-right=0.5em>]Interested in buying anything?[w, 1] [exit]"};
+
+
+            bubble.setSource(new DialogSource(dialogOptions[Random.Range(0, dialogOptions.Length)]));
             lastAdvert = Time.time;
         }
     }
