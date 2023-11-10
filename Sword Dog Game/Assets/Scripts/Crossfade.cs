@@ -66,9 +66,9 @@ public class Crossfade : MonoBehaviour
 
     public void Finished()
     {
-        over = true;
         if (animator != null && animator.GetFloat("Speed") > 0)
         {
+            over = true;
             animator.SetFloat("Speed", 0);
         }        
     }
