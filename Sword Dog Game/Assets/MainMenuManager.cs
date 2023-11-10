@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class MainMenuManager : MonoBehaviour
 
     public TMPro.TextMeshProUGUI lastSaveDetails;
 
-    public UnityEngine.UI.Button newGameButton;
+    public List<UnityEngine.UI.Button> buttons;
 
-    public UnityEngine.UI.Button continueButton;
     public static bool inMainMenu;
     private bool quit = false;
 
@@ -22,19 +22,24 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         inMainMenu = true;
+
         lastSave = GetMostRecentSave();
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
-            continueButton.interactable = true;
+            buttons[1].interactable = true;
         }
         else
         {
             Debug.Log("No most recent save found");
-            continueButton.interactable = false;
             lastSaveDetails.text = "";
+            buttons[1].interactable = false;
+
+            ColorBlock continueButtonColors = buttons[1].colors;
+            continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
+            buttons[1].colors = continueButtonColors;
         }
-        
+
         CanvasManager.InstantHideHUD();
 
         BuffList.main?.clearBuffIcons();
@@ -53,13 +58,33 @@ public class MainMenuManager : MonoBehaviour
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+
+        Invoke("ActivateButtons", 0.4f);
+    }
+
+    public void ActivateButtons()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (i != 1)
+            {
+                buttons[i].interactable = true;
+
+                // Set normal button disabled colors
+                // Necessary because we set them to all black and/or selected color at first to disguise disabling for user
+                ColorBlock buttonColors = buttons[i].colors;
+                buttonColors.disabledColor = new Color(0, 0, 0, 0.6f);
+                buttons[i].colors = buttonColors;
+            }
+        }
     }
 
     public void Update()
     {
+        // Select new game button if nothing else is selected
         if(EventSystem.current.currentSelectedGameObject == null)
         {
-            EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+            EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         }
     }
 

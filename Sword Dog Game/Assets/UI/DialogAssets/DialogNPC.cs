@@ -165,8 +165,8 @@ public class DialogNPC : MonoBehaviour, IInteractable
 
         GameObject addedObject = Instantiate(barkFXPrefab, spawnLocation, spawnRotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
-        addedParticle.velocity = velocity;
-        addedParticle.acceleration = acceleration;
+        addedParticle.velocity = velocity + (new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(1f, 1f)) * .25f);
+        addedParticle.acceleration = acceleration + (new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1)) * .25f);
         addedParticle.startTime = Time.time;
     }
 
@@ -189,7 +189,10 @@ public class DialogNPC : MonoBehaviour, IInteractable
     public void hidePrompt()
     {
         if (spawnedPrompt != null)
+        {
             spawnedPrompt.SetTrigger("Close");
+            spawnedPrompt.SetFloat("Speed", 1);
+        }
     }
 
     public void showPrompt(GameObject prompt)
@@ -212,6 +215,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         else
         {
             spawnedPrompt.SetTrigger("Reopen");
+            spawnedPrompt.SetFloat("Speed", -1);
         }
     }
 

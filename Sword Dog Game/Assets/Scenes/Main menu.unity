@@ -1050,7 +1050,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.2924528, g: 0.21810038, b: 0, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.33770385, b: 0, a: 1}
     m_SelectedColor: {r: 0.3301887, g: 0.24735111, b: 0.0043609655, a: 1}
-    m_DisabledColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5019608}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1064,7 +1064,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 187518982}
   m_OnClick:
     m_PersistentCalls:
@@ -1413,7 +1413,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.2924528, g: 0.21810038, b: 0, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.33770385, b: 0, a: 1}
     m_SelectedColor: {r: 0.3301887, g: 0.24735111, b: 0.0043609655, a: 1}
-    m_DisabledColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5019608}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1427,7 +1427,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 323532029}
   m_OnClick:
     m_PersistentCalls:
@@ -6808,7 +6808,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Town
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
   m_sharedMaterial: {fileID: 2979243837832940634, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
@@ -62801,7 +62801,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.2924528, g: 0.21810038, b: 0, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.33770385, b: 0, a: 1}
     m_SelectedColor: {r: 0.3301887, g: 0.24735111, b: 0.0043609655, a: 1}
-    m_DisabledColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -62815,7 +62815,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1414866533}
   m_OnClick:
     m_PersistentCalls:
@@ -84031,8 +84031,12 @@ MonoBehaviour:
     Desert: {fileID: 0}
   lastSave: 
   lastSaveDetails: {fileID: 531293461}
-  newGameButton: {fileID: 2002254589}
-  continueButton: {fileID: 1414866535}
+  buttons:
+  - {fileID: 2002254589}
+  - {fileID: 1414866535}
+  - {fileID: 187518984}
+  - {fileID: 323532031}
+  - {fileID: 2089846722}
 --- !u!1 &1962796186
 GameObject:
   m_ObjectHideFlags: 0
@@ -84481,7 +84485,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.2924528, g: 0.21810038, b: 0, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.33770385, b: 0, a: 1}
     m_SelectedColor: {r: 0.3301887, g: 0.24735111, b: 0.0043609655, a: 1}
-    m_DisabledColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5019608}
+    m_DisabledColor: {r: 0.32941177, g: 0.24705882, b: 0.003921569, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -84495,7 +84499,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2002254587}
   m_OnClick:
     m_PersistentCalls:
@@ -84978,7 +84982,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.2924528, g: 0.21810038, b: 0, a: 1}
     m_PressedColor: {r: 0.4528302, g: 0.33770385, b: 0, a: 1}
     m_SelectedColor: {r: 0.3301887, g: 0.24735111, b: 0.0043609655, a: 1}
-    m_DisabledColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.5019608}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -84992,7 +84996,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2089846723}
   m_OnClick:
     m_PersistentCalls:

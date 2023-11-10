@@ -76,16 +76,18 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         else
         {
             spawnedPrompt.SetTrigger("Reopen");
+            spawnedPrompt.SetFloat("Speed", -1);
         }
     }
 
     public void hidePrompt()
     {
         if (spawnedPrompt != null)
+        {
             spawnedPrompt.SetTrigger("Close");
+            spawnedPrompt.SetFloat("Speed", 1);
+        }
     }
-
-    
 
     IEnumerator LoadNextScene()
     {
