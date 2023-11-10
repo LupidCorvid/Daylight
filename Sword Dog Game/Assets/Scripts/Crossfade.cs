@@ -27,29 +27,28 @@ public class Crossfade : MonoBehaviour
     private void SceneChange()
     {
         if (this != null)
-            Invoke("EndFade", 0.2f);
+            Invoke("EndFade", 0.4f);
     }
 
     void EndFade()
     {
-        animator?.SetTrigger("stop");
+        animator?.SetFloat("Speed", 1);
     }
 
     public void StopFade()
     {
-        animator?.SetTrigger("stop");
+        animator?.SetFloat("Speed", 1);
         ChangeScene.changingScene = false;
     }
     public void StartFade()
     {
         if(animator == null)
         {
-            current = GameObject.FindObjectOfType<Crossfade>();
+            current = FindObjectOfType<Crossfade>();
             if(current != this)
                 current.StartFade();
         }
-        else
-            animator?.SetTrigger("start");
+        animator?.SetFloat("Speed", -1.2f);
         over = false;
     }
 
@@ -68,6 +67,9 @@ public class Crossfade : MonoBehaviour
     public void Finished()
     {
         over = true;
+        if (animator != null && animator.GetFloat("Speed") > 0)
+        {
+            animator.SetFloat("Speed", 0);
+        }        
     }
-
 }
