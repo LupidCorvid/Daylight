@@ -74,7 +74,10 @@ public class SceneTransitionPrompt : MonoBehaviour, IInteractable
 
     public void hidePrompt()
     {
-        spawnedPrompt?.SetTrigger("Close");
-        spawnedPrompt?.SetFloat("Speed", 1);
+        if (spawnedPrompt != null)
+        {
+            spawnedPrompt.SetTrigger("Close");
+            spawnedPrompt.SetFloat("Speed", 1);
+        }
     }
 }
