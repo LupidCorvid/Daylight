@@ -1101,9 +1101,9 @@ public class PlayerMovement : MonoBehaviour
     {
         GameObject addedObject = Instantiate(barkFXPrefab, mouth.position, transform.rotation);
         SpeakParticle addedParticle = addedObject.GetComponent<SpeakParticle>();
-        addedParticle.velocity.y = -1;
-        addedParticle.velocity.x = facingRight ? 1 : -1;
-        addedParticle.acceleration.y = 3;
+        addedParticle.velocity.y = -1 + Random.Range(-1f, 1f) * .25f;
+        addedParticle.velocity.x = (facingRight ? 1 : -1) + Random.Range(-1f, 1f) * .25f;
+        addedParticle.acceleration.y = 3 + Random.Range(-1f, 1f) * .25f;
         addedParticle.startTime = Time.time;
     }
 
