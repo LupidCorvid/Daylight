@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class MainMenuManager : MonoBehaviour
 
     public TMPro.TextMeshProUGUI lastSaveDetails;
 
-    public UnityEngine.UI.Button newGameButton;
+    public List<UnityEngine.UI.Button> buttons;
 
-    public UnityEngine.UI.Button continueButton;
     public static bool inMainMenu;
     private bool quit = false;
 
@@ -22,19 +22,18 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         inMainMenu = true;
+
         lastSave = GetMostRecentSave();
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
-            continueButton.interactable = true;
         }
         else
         {
             Debug.Log("No most recent save found");
-            continueButton.interactable = false;
             lastSaveDetails.text = "";
         }
-        
+
         CanvasManager.InstantHideHUD();
 
         BuffList.main?.clearBuffIcons();
@@ -53,13 +52,27 @@ public class MainMenuManager : MonoBehaviour
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+
+        Invoke("ActivateButtons", 0.5f);
+    }
+
+    public void ActivateButtons()
+    {
+        // Conditionally activate continue game button if a save exists
+        buttons[1].interactable = lastSave != "";
+
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (i != 1) buttons[i].interactable = true;
+        }
     }
 
     public void Update()
     {
+        // Select new game button if nothing else is selected
         if(EventSystem.current.currentSelectedGameObject == null)
         {
-            EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+            EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         }
     }
 
