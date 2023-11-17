@@ -35,7 +35,8 @@ public class ItemListing : MonoBehaviour
 
         if(newItem?.sprite != "")
             itemSprite.sprite = TempObjectsHolder.main.FindSprite(newItem.sprite);
-        
+        NameText.font = FontManager.main.currFont;
+
         UpdateCount(newItem.quantity);
     }
 
@@ -65,6 +66,8 @@ public class ItemListing : MonoBehaviour
             countDisplay.text = "" + count;
             //Debug.Log(countDisplay.gameObject);
             bgSprite.sprite = backgroundCountSprite;
+
+            countDisplay.font = FontManager.main.currFont;
         }
 
     }

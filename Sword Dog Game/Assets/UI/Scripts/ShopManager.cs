@@ -58,6 +58,16 @@ public class ShopManager : BaseManager
         //closeButton.OnSelect += closeSelected;
         //closeButton.OnDeselect += closeDeselected;
 
+        ChangeFont();
+
+    }
+
+    public void ChangeFont()
+    {
+        ItemNameDisplay.font = FontManager.main.currFont;
+        ItemDescriptionDisplay.font = FontManager.main.currFont;
+        ItemPriceDisplay.font = FontManager.main.currFont;
+        currencyAmount.font = FontManager.main.currFont;
     }
 
     public void Update()
