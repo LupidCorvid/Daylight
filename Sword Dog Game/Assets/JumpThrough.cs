@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class JumpThrough : MonoBehaviour
 {
-    private PlayerMovement player;
-    private float height;
+    [HideInInspector]
+    public PlayerMovement player;
+    [HideInInspector]
+    public float height;
     [SerializeField] private SpriteRenderer spriteRenderer;
     public Collider2D cldr;
     private Collider2D[] playerColliders;
 
+    private float startTime = -5;
+    private float holdTime = .1f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +39,12 @@ public class JumpThrough : MonoBehaviour
 
             // Debug.DrawLine((Vector3)player.bottom, transform.position - new Vector3(0, height));
             bool playerBelow = player.bottom.y < transform.position.y - height;
-            
+
+            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < -.5f)
+                startTime = Time.time;
+
             //gameObject.layer = LayerMask.NameToLayer(playerBelow || Input.GetAxisRaw("Vertical") < -.5f ? "Utility": "Terrain");
-            if(playerBelow || InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < -.5f)
+            if (playerBelow || startTime + holdTime > Time.time)
             {
                 Physics2D.IgnoreCollision(cldr, Player.controller.cldr, true);
                 for (int i = 0; i < playerColliders?.Length; i++)
