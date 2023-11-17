@@ -42,7 +42,7 @@ public class SwordTip : MonoBehaviour
             return;
         }
         if (sword.pmScript == null)
-            sword.pmScript = PlayerMovement.controller;
+            sword.pmScript = Player.controller;
 
         if (sword?.pmScript?.attacking == false)
             return;

@@ -26,13 +26,16 @@ public class GameSaver : MonoBehaviour
 
     public void Clear()
     {
-        Destroy(PlayerMovement.instance);
-        PlayerMovement.instance = null;
+        if (Player.instance != null)
+        {
+            Destroy(Player.instance.gameObject);
+            Player.instance = null;
+        }
     }
 
     public void SaveGame()
     {
-        if (!PlayerHealth.dead && !PlayerMovement.controller.resetting && !loading) {
+        if (!PlayerHealth.dead && !Player.controller.resetting && !loading) {
             //SaveData data = new SaveData();
             StartingSave?.Invoke();
             currData.inventory = ItemDatabase.main.packInventory(InventoryManager.currInventory);
@@ -40,7 +43,7 @@ public class GameSaver : MonoBehaviour
             currData.dialogStringVariables = DialogSource.stringVariables;
 
             SaveData data = currData;
-            data.SetPlayer(PlayerMovement.instance);
+            data.SetPlayer(Player.instance.gameObject);
             var dataToSave = JsonUtility.ToJson(data, true);
             saveSystem.SaveData(dataToSave);
 
@@ -52,9 +55,9 @@ public class GameSaver : MonoBehaviour
     public void LoadGame()
     {
         if (!loading) { // load game can only happen from menu
-            if (PlayerMovement.controller == null) {
+            if (Player.controller == null) {
                 StartCoroutine(LoadSaveFile());
-            } else if (!PlayerMovement.controller.resetting && !PlayerHealth.dead) {
+            } else if (!Player.controller.resetting && !PlayerHealth.dead) {
                 StartCoroutine(LoadSaveFile());
             }
         }
@@ -64,10 +67,9 @@ public class GameSaver : MonoBehaviour
     IEnumerator LoadSaveFile()
     {
         loading = true;
-        string dataToLoad = "";
-        dataToLoad = saveSystem.LoadData();
+        string dataToLoad = saveSystem.LoadData();
 
-        if (!String.IsNullOrEmpty(dataToLoad))
+        if (!string.IsNullOrEmpty(dataToLoad))
         {
             AudioManager.instance.FadeOutCurrent();
             Crossfade.current.StartFade();
@@ -93,7 +95,7 @@ public class GameSaver : MonoBehaviour
             SceneHelper.LoadScene(data.player.spawnpoint.scene);
 
             loadedNewData?.Invoke(data);
-            //PlayerMovement.controller.entityBase.buffManager.loadBuffs(data);
+            //Player.controller.entityBase.buffManager.loadBuffs(data);
 
             Crossfade.current.StopFade();
 
@@ -128,9 +130,9 @@ public class GameSaver : MonoBehaviour
 
     // Saves game if player exists on application quit
     private void OnApplicationQuit() {
-        //if (PlayerMovement.instance != null) {
+        //if (Player.instance != null) {
         //    SaveData data = new SaveData();
-        //    data.SetPlayer(PlayerMovement.instance);
+        //    data.SetPlayer(Player.instance);
         //    data.SetOptions(AudioManager.instance);
         //    var dataToSave = JsonUtility.ToJson(data);
         //    saveSystem.SaveData(dataToSave);

@@ -95,7 +95,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
-        PlayerMovement.controller.noFall = true;
+        Player.controller.noFall = true;
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)

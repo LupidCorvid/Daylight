@@ -17,7 +17,7 @@ public class JumpThrough : MonoBehaviour
         height = spriteRenderer.bounds.size.y / 2;
         cldr = GetComponent<Collider2D>();
 
-        //playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
+        //playerColliders = Player.controller.GetComponentsInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -25,13 +25,13 @@ public class JumpThrough : MonoBehaviour
     {
         if (player == null)
         {
-            player = PlayerMovement.controller;
-            playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
+            player = Player.controller;
+            playerColliders = Player.controller.GetComponentsInChildren<Collider2D>();
         }
         else
         {
             if(playerColliders?.Length == 0 )
-                playerColliders = PlayerMovement.controller.GetComponentsInChildren<Collider2D>();
+                playerColliders = Player.controller.GetComponentsInChildren<Collider2D>();
 
             // Debug.DrawLine((Vector3)player.bottom, transform.position - new Vector3(0, height));
             bool playerBelow = player.bottom.y < transform.position.y - height;
@@ -39,7 +39,7 @@ public class JumpThrough : MonoBehaviour
             //gameObject.layer = LayerMask.NameToLayer(playerBelow || Input.GetAxisRaw("Vertical") < -.5f ? "Utility": "Terrain");
             if(playerBelow || InputReader.inputs.actions["Move"].ReadValue<Vector2>().y < -.5f)
             {
-                Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, true);
+                Physics2D.IgnoreCollision(cldr, Player.controller.cldr, true);
                 for (int i = 0; i < playerColliders?.Length; i++)
                 {
                     Physics2D.IgnoreCollision(cldr, playerColliders[i], true);
@@ -47,7 +47,7 @@ public class JumpThrough : MonoBehaviour
             }
             else
             {
-                Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, false);
+                Physics2D.IgnoreCollision(cldr, Player.controller.cldr, false);
                 for (int i = 0; i < playerColliders?.Length; i++)
                 {
                     Physics2D.IgnoreCollision(cldr, playerColliders[i], false);

@@ -14,7 +14,7 @@ public class CaveMouth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        edge1.enabled = PlayerMovement.instance.transform.position.y > -9;
-        edge2.enabled = PlayerMovement.instance.transform.position.y > -9;
+        edge1.enabled = Player.instance.transform.position.y > -9;
+        edge2.enabled = Player.instance.transform.position.y > -9;
     }
 }

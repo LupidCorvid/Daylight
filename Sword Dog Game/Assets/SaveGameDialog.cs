@@ -31,7 +31,7 @@ public class SaveGameDialog : DialogNPC
 
     public void SaveGame()
     {
-        PlayerMovement.instance.GetComponent<Spawnpoint>().SetSpawnpoint(transform);
+        Player.instance.GetComponent<Spawnpoint>().SetSpawnpoint(transform);
         GameSaver.main.SaveGame();
     }
 

@@ -44,7 +44,7 @@ public class PauseScreen : MonoBehaviour
                 return;
             }
 
-            if (PlayerMovement.controller != null && PlayerMovement.controller.resetting)
+            if (Player.controller != null && Player.controller.resetting)
             {
                 return;
             }

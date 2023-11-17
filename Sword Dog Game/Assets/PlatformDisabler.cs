@@ -14,11 +14,12 @@ public class PlatformDisabler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(InputReader.inputs.actions["Move"].ReadValue<Vector2>().y >= .9f)
+        if (Player.controller != null)
         {
-            Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, true);
+            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().y >= .9f)
+                Physics2D.IgnoreCollision(cldr, Player.controller.cldr, true);
+            else
+                Physics2D.IgnoreCollision(cldr, Player.controller.cldr, false);
         }
-        else
-            Physics2D.IgnoreCollision(cldr, PlayerMovement.controller.cldr, false);
     }
 }

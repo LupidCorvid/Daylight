@@ -67,7 +67,7 @@ public class PlayerMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = PlayerMovement.controller?.entityBase;
+        player = Player.controller?.entityBase;
 
         if (main == null)
             main = this;

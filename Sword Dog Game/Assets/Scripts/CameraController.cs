@@ -58,8 +58,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.instance != null)
-            targetTracker = PlayerMovement.instance.transform;
+        if (Player.instance != null)
+            targetTracker = Player.instance.transform;
         else
             targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
         followrb = targetTracker.GetComponent<Rigidbody2D>();
