@@ -9,7 +9,7 @@ public class PlayerSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerMovement.controller != null)
+        if (Player.controller != null)
         {
             return;
         }

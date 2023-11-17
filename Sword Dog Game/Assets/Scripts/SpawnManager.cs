@@ -12,9 +12,9 @@ public class SpawnManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (PlayerMovement.instance != null)
+        if (Player.instance != null)
         {
-            player = PlayerMovement.instance.transform;
+            player = Player.instance.transform;
         }
         if (player != null)
         {
@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     spawnPoint = spawnPointObj.transform;
                     //update saved scene to current scene
-                    PlayerMovement.instance.GetComponent<Spawnpoint>().SetSpawnpoint(spawnPointObj);
+                    Player.instance.GetComponent<Spawnpoint>().SetSpawnpoint(spawnPointObj);
                     Vector3 newPos = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
                     player.position = newPos;
                     SwordFollow.newPos = player.position;

@@ -105,7 +105,7 @@ public class MoveSpeedBuff : Buff
     public override void UpdateSave(Buffs manager)
     {
         base.UpdateSave(manager);
-        if(affectedEntity == PlayerMovement.controller.entityBase)
+        if(affectedEntity == Player.controller.entityBase)
             manager.buffsSave.moveSpeed = new MoveSpeedBuffSave(this);
     }
 

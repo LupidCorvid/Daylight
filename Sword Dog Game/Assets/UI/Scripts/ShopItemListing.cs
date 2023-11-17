@@ -32,6 +32,15 @@ public class ShopItemListing : MonoBehaviour, ISelectHandler
         }
     }
 
+    private void Awake()
+    {
+        ChangeFont();
+    }
+    public void ChangeFont()
+    {
+        text.font = FontManager.main.currFont;
+    }
+
     public void OnClick()
     {
         mainManager.ShopItemSelected(this);

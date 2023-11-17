@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public static Player instance;
+    public static PlayerMovement controller;
+
     public PlayerHealth playerHealth;
     public PlayerAttack pAttack;
+
+    public bool hasLantern = false;
+    public GameObject mouthLantern, darkness;
 
     public override bool attacking
     {
@@ -40,6 +46,24 @@ public class Player : Entity
     {
         base.Start();
         buffManager.loadBuffs(GameSaver.currData);
+
+        // Singleton design pattern
+        if (instance != null && instance != this)
+        {
+            // Destroy(gameObject);
+        }
+        else
+        {
+            controller = GetComponent<PlayerMovement>();
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    public override void Update()
+    {
+        instance = this;
+        controller = GetComponent<PlayerMovement>();
     }
 
     public override Inventory getAssociatedInventory()
@@ -79,5 +103,17 @@ public class Player : Entity
             buffManager.loadBuffs(data);
         else
             GameSaver.loadedNewData -= loadSavedBuffs;
+    }
+
+    public void activateLantern()
+    {
+        darkness.SetActive(true);
+        hasLantern = true;
+    }
+
+    public void deactivateLantern()
+    {
+        darkness.SetActive(false);
+        hasLantern = false;
     }
 }

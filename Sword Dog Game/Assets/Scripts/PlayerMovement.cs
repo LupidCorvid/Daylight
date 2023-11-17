@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public static GameObject instance;
-    public static PlayerMovement controller;
     public Rigidbody2D rb;
     private Animator anim;
     private bool wasGrounded, holdingJump;
@@ -169,18 +167,6 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = true;
         created = true;
 
-        // Singleton design pattern
-        if (instance != null && instance != this)
-        {
-            // Destroy(gameObject);
-        }
-        else
-        {
-            controller = this;
-            instance = gameObject;
-            DontDestroyOnLoad(gameObject);
-        }
-
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
 
@@ -224,10 +210,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
-        instance = gameObject;
-        controller = this;
-        
+    {        
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)

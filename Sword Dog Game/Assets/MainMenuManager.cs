@@ -48,11 +48,8 @@ public class MainMenuManager : MonoBehaviour
         //    SwordFollow.instance.transform.position = new Vector3(100, -100);
 
         //Destroy(FindObjectOfType<AudioListener>().gameObject);
-        Destroy(PlayerMovement.controller?.gameObject);
-        if (SwordFollow.instance != null)
-            Destroy(SwordFollow.instance);
-        if (PlayerMovement.instance != null)
-            Destroy(PlayerMovement.instance);
+        Destroy(Player.instance?.gameObject);
+        Destroy(SwordFollow.instance?.gameObject);
         PauseScreen.canPause = false;
 
         //Cursor.visible = true;

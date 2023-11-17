@@ -65,6 +65,12 @@ public class DialogController : MonoBehaviour
 
         ChangeScene.changeScene += closeBox;
     }
+
+    public void ChangeFont()
+    {
+        textDisplay.font = FontManager.main.currFont;
+        headerDisplay.font = FontManager.main.currFont;
+    }
     
     // Update is called once per frame
     void Update()
@@ -114,6 +120,7 @@ public class DialogController : MonoBehaviour
         headerDisplay.alpha = 255;
         DotAnimator.ResetTrigger("Close");
         inDialog = true;
+        ChangeFont();
     }
     public void closeBox()
     {

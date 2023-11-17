@@ -35,7 +35,7 @@ public class ChangeScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!changingScene && collision.gameObject.CompareTag("Player") && !PlayerHealth.dead && !PlayerMovement.controller.resetting && !GameSaver.loading)
+        if (!changingScene && collision.gameObject.CompareTag("Player") && !PlayerHealth.dead && !Player.controller.resetting && !GameSaver.loading)
         {
             StartCoroutine(LoadNextScene());
         }
@@ -47,7 +47,7 @@ public class ChangeScene : MonoBehaviour
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
-        PlayerMovement.controller.noFall = true;
+        Player.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene(scene);
@@ -66,7 +66,7 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
-        PlayerMovement.controller.noFall = true;
+        Player.controller.noFall = true;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
@@ -88,8 +88,8 @@ public class ChangeScene : MonoBehaviour
         DialogController.main?.closeBox();
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
-        if(PlayerMovement.controller != null)
-            PlayerMovement.controller.noFall = true;
+        if(Player.controller != null)
+            Player.controller.noFall = true;
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)

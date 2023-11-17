@@ -42,12 +42,22 @@ public class ItemSelectPrompt : MonoBehaviour
 
     public void openDefault()
     {
+        ChangeFont();
         useButton.SetActive(true);
         infoButton.SetActive(true);
         discardButton.SetActive(true);
         cancelButton.SetActive(true);
         description.SetActive(false);
         backButton.SetActive(false);
+    }
+
+    public void ChangeFont()
+    {
+        useButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().font = FontManager.main.currFont;
+        infoButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().font = FontManager.main.currFont;
+        discardButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().font = FontManager.main.currFont;
+        cancelButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().font = FontManager.main.currFont;
+        
     }
 
     public void opendescription()
@@ -59,6 +69,8 @@ public class ItemSelectPrompt : MonoBehaviour
         description.SetActive(true);
         backButton.SetActive(true);
         descriptionText.text = currentItem.description;
+        descriptionText.font = FontManager.main.currFont;
+        backButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().font = FontManager.main.currFont;
     }
 
     public void discard()
