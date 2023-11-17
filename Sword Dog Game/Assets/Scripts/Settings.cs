@@ -29,4 +29,11 @@ public class Settings
     public bool sfxMute = false;
 
     public bool fullScreen = true;
+
+    public enum FontOption
+    {
+        GOOD_DOG, OPEN_DYSLEXIA
+    }
+    public FontOption fontFace = FontOption.GOOD_DOG;
+    // public float fontSize = ??
 }

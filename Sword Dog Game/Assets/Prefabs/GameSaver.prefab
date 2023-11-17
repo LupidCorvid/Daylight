@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 821516610654104096}
   - component: {fileID: 821516610654104110}
   - component: {fileID: 568230652374966469}
+  - component: {fileID: 4766905744247682588}
   m_Layer: 0
   m_Name: GameSaver
   m_TagString: Untagged
@@ -75,3 +76,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentActions: {fileID: -944628639613478452, guid: 9c2c46987c3e6c543b3958677a82036a, type: 3}
+--- !u!114 &4766905744247682588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821516610654104099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99561292733a1c545906d97cfb7dd071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fonts:
+  - {fileID: 11400000, guid: 4b75be1f5a3e1074c910eecf8c5dca9e, type: 2}
+  - {fileID: 11400000, guid: 290a0ee4975b3f241bfae9689d060931, type: 2}
+  current: 0
