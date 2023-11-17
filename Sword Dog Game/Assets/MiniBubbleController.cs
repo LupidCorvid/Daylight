@@ -60,6 +60,7 @@ public class MiniBubbleController : MonoBehaviour
 
         textDisplay.ForceMeshUpdate();
         textDisplay.OnPreRenderText += applyTextEffects;
+        ChangeFont();
     }
 
     // Update is called once per frame
@@ -234,5 +235,10 @@ public class MiniBubbleController : MonoBehaviour
     public void StopSpeak()
     {
         speaker?.stopSpeak();
+    }
+
+    public void ChangeFont()
+    {
+        textDisplay.font = FontManager.main.currFont;
     }
 }

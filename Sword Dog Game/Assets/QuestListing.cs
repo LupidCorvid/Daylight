@@ -31,5 +31,8 @@ public class QuestListing : MonoBehaviour
                 questType.sprite = mainQuestIcon;
                 break;
         }
+
+        questDesc.font = FontManager.main.currFont;
+        questReward.font = FontManager.main.currFont;
     }
 }

@@ -49,13 +49,13 @@ public class DialogResponseController : MonoBehaviour
         optionChosen += DialogController.main.receiveResponse;
         mainController = DialogController.main;
     }
-
-
+    
     public void addResponse(string text)
     {
         GameObject addedObject = Instantiate(responsePrefab, responsesContainer.transform);
         options.Add(addedObject);
         addedObject.GetComponent<TextMeshProUGUI>().text = text;
+        addedObject.GetComponent<TextMeshProUGUI>().font = FontManager.main.currFont;
     }
 
     public void clearResponses()
