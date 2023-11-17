@@ -782,6 +782,11 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel, Vector2 direction)
     {
         RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
+        if(groundFinder.point == default && isGrounded && groundCheck.collidersInContact.Count > 0)
+        {
+            Vector2 newHeight = groundCheck.collidersInContact[0].ClosestPoint(new Vector2(usedOrigin.x, yLevel));
+            groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, newHeight.y), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
+        }
 
         Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), groundFinder.point, Color.magenta);
         side.x = groundFinder.point.x - transform.position.x;
