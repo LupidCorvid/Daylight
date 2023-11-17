@@ -169,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+        
 
         if(groundCheckSpot == default)
             groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
@@ -210,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -223,7 +224,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
         else if (timeSinceSprint > 0.1f)
-            deltaStamina += Time.deltaTime;
+            deltaStamina += 1.5f*Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if(!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
@@ -676,7 +677,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (leftHit.point == Vector2.zero)
             {
-                rightSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
+                leftSide = acrossCastForNewSide(upperLeftCorner, upperRightCorner, leftSide, upperLeftCorner, yLevel, Vector2.right);
                 if (leftSide.x == 0)
                     return null;
             }
@@ -782,11 +783,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 acrossCastForNewSide(Vector2 upperLeftOrigin, Vector2 upperRightOrigin, Vector2 side, Vector2 usedOrigin, float yLevel, Vector2 direction)
     {
         RaycastHit2D groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, yLevel), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
-        if(groundFinder.point == default && isGrounded && groundCheck.collidersInContact.Count > 0)
-        {
-            Vector2 newHeight = groundCheck.collidersInContact[0].ClosestPoint(new Vector2(usedOrigin.x, yLevel));
-            groundFinder = Physics2D.Raycast(new Vector2(usedOrigin.x + transform.position.x, newHeight.y), direction, (upperRightOrigin.x - upperLeftOrigin.x), whatIsGround);
-        }
 
         Debug.DrawLine(new Vector2(usedOrigin.x + transform.position.x, yLevel), groundFinder.point, Color.magenta);
         side.x = groundFinder.point.x - transform.position.x;
