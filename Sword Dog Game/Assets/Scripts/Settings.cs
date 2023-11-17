@@ -32,7 +32,7 @@ public class Settings
 
     public enum FontOption
     {
-        GOOD_DOG, OPEN_DYSLEXIA
+        GOOD_DOG, OPEN_DYSLEXIC
     }
     public FontOption fontFace = FontOption.GOOD_DOG;
     // public float fontSize = ??
