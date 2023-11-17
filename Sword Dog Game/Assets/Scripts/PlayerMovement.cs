@@ -224,7 +224,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
         else if (timeSinceSprint > 0.1f)
-            deltaStamina += Time.deltaTime;
+            deltaStamina += 1.5f*Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if(!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
