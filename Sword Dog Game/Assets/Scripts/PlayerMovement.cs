@@ -115,6 +115,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject sprintDust;
 
     public bool attacking = false;
+
+    public bool swordAnimControl = false;
     [SerializeField] private SoundPlayer soundPlayer;
     [SerializeField] private SoundClip landSound;
     public Ground.Type currentGround;
@@ -253,10 +255,10 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //Set turn trigger
-            if (moveX > 0 != facingRight && moveX != 0)
+            if (moveX > 0 != facingRight && moveX != 0 && !pAttack.isParrying)
                 anim.SetTrigger("Turn");
 
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("trotAnim") && !anim.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase2") && !anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
+            if ((!anim.GetCurrentAnimatorStateInfo(0).IsName("trotAnim") && !anim.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase2") && !anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim")) || pAttack.isParrying)
                 anim.ResetTrigger("Turn");
 
             //For if player movespeed should be reduced while turning

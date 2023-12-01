@@ -110,7 +110,7 @@ public class SwordFollow : MonoBehaviour
             attackMoveTracker = pmScript.attackMoveTracker;
         
 
-        if (pmScript.attacking)
+        if (pmScript.attacking || (pmScript.swordAnimControl && !pmScript.pAttack.isParrying))
         {
             AttackMove();
             particleFF.directionX = -rb.velocity.magnitude * particlePushScalar;
