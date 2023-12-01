@@ -252,7 +252,29 @@ public class PlayerMovement : MonoBehaviour
                 timeIdle = 0;
             }
 
-            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
+            //Set turn trigger
+            if (moveX > 0 != facingRight && moveX != 0)
+                anim.SetTrigger("Turn");
+
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("trotAnim") && !anim.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase2") && !anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
+                anim.ResetTrigger("Turn");
+
+            //For if player movespeed should be reduced while turning
+            //if (!sprintReduction && (anim.GetCurrentAnimatorStateInfo(0).IsName("turnWalk") || anim.GetCurrentAnimatorStateInfo(0).IsName("turnSprint")))
+            //{
+            //    entityBase.moveSpeed.multiplier *= .5f;
+            //    sprintReduction = true;
+            //}
+
+            //if (sprintReduction && !(anim.GetCurrentAnimatorStateInfo(0).IsName("turnWalk") || anim.GetCurrentAnimatorStateInfo(0).IsName("turnSprint")))
+            //{
+            //    entityBase.moveSpeed.multiplier /= .5f;
+            //    sprintReduction = false;
+            //}
+                //else
+                //    anim.ResetTrigger("Turn");
+
+                anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
             anim.SetFloat("time_idle", timeIdle);
 
             // track stops per second
