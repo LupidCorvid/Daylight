@@ -9,8 +9,7 @@ public class Heart : MonoBehaviour
     public bool wobbling;
 
     // 0 = empty, 1 = half, 2 = full
-    // TODO: Add torn sprite
-    public Sprite[] sprites;
+    public Sprite[] normalSprites, damagedSprites;
 
     private AnimationClip wobble, blink;
     public static float wobbleSpeed = 0.3f;
@@ -19,7 +18,8 @@ public class Heart : MonoBehaviour
     public float offset;
     private float wobbleIntensity = 0f, targetIntensity = 0f;
     public int type = 2;
-    private static Coroutine blinkRoutine;
+    public bool damaged = false;
+    private Coroutine blinkRoutine, flashRoutine;
 
     private void Start()
     {
@@ -51,10 +51,19 @@ public class Heart : MonoBehaviour
         anim.AddClip(wobble, wobble.name);
     }
 
-    public void SetSprite(int newType)
+    public void SetSprite(int newType, bool isDamaged)
     {
+        damaged = isDamaged;
+
+        int prevType = type;
         type = Mathf.Clamp(newType, 0, 2);
-        GetComponent<Image>().sprite = sprites[type];
+        if (type < prevType && blinkRoutine == null)
+            blinkRoutine = StartCoroutine(Blink(prevType, 1f, 3));
+
+        else if (damaged && flashRoutine == null)
+            flashRoutine = StartCoroutine(DamageFlash(1f, 3));
+        else
+            GetComponent<Image>().sprite = normalSprites[type];
     }
 
     public void Wobble(float intensity)
@@ -80,22 +89,29 @@ public class Heart : MonoBehaviour
             StopWobble();
     }
 
-    public void Blink() {
-        if (blinkRoutine == null && type < 2)
-            blinkRoutine = StartCoroutine(Blink(1f, 3));
-    }
-
-    private IEnumerator Blink(float duration, int amount)
+    private IEnumerator DamageFlash(float duration, int amount)
     {
         Image image = GetComponent<Image>();
-        image.sprite = sprites[type];
         for (int i = 0; i < amount; i++)
         {
-            yield return new WaitForSeconds(duration / amount / 2);
-            if(type+1 < sprites.Length)
-                image.sprite = sprites[type + 1];
-            yield return new WaitForSeconds(duration / amount / 2);
-            image.sprite = sprites[type];
+            image.sprite = damagedSprites[type];
+            yield return new WaitForSecondsRealtime(duration / amount / 2);
+            image.sprite = normalSprites[type];
+            yield return new WaitForSecondsRealtime(duration / amount / 2);
+        }
+
+        flashRoutine = null;
+    }
+
+    private IEnumerator Blink(int prevType, float duration, int amount)
+    {
+        Image image = GetComponent<Image>();
+        for (int i = 0; i < amount; i++)
+        {
+            image.sprite = damagedSprites[prevType];
+            yield return new WaitForSecondsRealtime(duration / amount / 2);
+            image.sprite = normalSprites[type];
+            yield return new WaitForSecondsRealtime(duration / amount / 2);
         }
 
         // Set the routine to null, signaling that it's finished.

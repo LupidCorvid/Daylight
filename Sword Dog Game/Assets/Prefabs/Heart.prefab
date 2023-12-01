@@ -114,7 +114,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0989c09bf24460c438fdea05edb2b5d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e25e200f6281b974d8da380b2655842b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -153,9 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3458200290051837067}
   wobbling: 0
-  sprites:
-  - {fileID: 21300000, guid: 0921e653b5e021b4fb55d6f61a462893, type: 3}
-  - {fileID: 21300000, guid: d4bb2adf3749e08478b13a590bc28c52, type: 3}
-  - {fileID: 21300000, guid: 0989c09bf24460c438fdea05edb2b5d2, type: 3}
+  normalSprites:
+  - {fileID: 21300000, guid: 8cc83ef26f63ef940a7136995b890ef7, type: 3}
+  - {fileID: 21300000, guid: 626557142d548114986da20f19eacde7, type: 3}
+  - {fileID: 21300000, guid: e25e200f6281b974d8da380b2655842b, type: 3}
+  damagedSprites:
+  - {fileID: 21300000, guid: 8cc83ef26f63ef940a7136995b890ef7, type: 3}
+  - {fileID: 21300000, guid: e5baeecfe8a5ccb41ad1e554feae0a57, type: 3}
+  - {fileID: 21300000, guid: a719a4d3f469db146bed1e657c450c25, type: 3}
   offset: 0
   type: 2
+  damaged: 0

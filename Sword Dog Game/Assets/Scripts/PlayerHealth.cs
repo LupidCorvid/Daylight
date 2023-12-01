@@ -81,11 +81,15 @@ public class PlayerHealth : MonoBehaviour
         // }
     }
 
-    public void UpdateHealth(bool blink = true)
+    public void UpdateHealth(bool damage = true)
     {
         int temp = health;
         if (CanvasManager.hearts == null)
             return;
+
+        // Set backsplash based on dog health
+        CanvasManager.HurtBacksplash(health <= Heart.MinWobbleHealth);
+
         for (int i = 0; i < CanvasManager.hearts.Count; i++)
         {
             if (health <= Heart.MinWobbleHealth)
@@ -93,10 +97,8 @@ public class PlayerHealth : MonoBehaviour
             else
                 CanvasManager.hearts[i].wobbling = false;
             
-            CanvasManager.hearts[i].SetSprite(temp);
+            CanvasManager.hearts[i].SetSprite(temp, true);
             temp -= 2;
-            if (blink && temp <= 0)
-                CanvasManager.hearts[i].Blink();
         }
     }
 

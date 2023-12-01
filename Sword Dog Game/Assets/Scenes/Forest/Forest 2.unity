@@ -16112,6 +16112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 192381275}
   cldr: {fileID: 0}
 --- !u!1 &193087823
@@ -37971,6 +37973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 530537817}
   cldr: {fileID: 0}
 --- !u!114 &530537819
@@ -69943,6 +69947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 1011532419}
   cldr: {fileID: 0}
 --- !u!114 &1011532421
@@ -88111,6 +88117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 1485398076}
   cldr: {fileID: 0}
 --- !u!114 &1485398078
@@ -122043,12 +122051,52 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5542508067642074239, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542508067642074239, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542508067642074239, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542508067642074239, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5614000698960060738, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5614000698960060738, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384760836828618509, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384760836828618509, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242242127948759, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242242127948759, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242242127948759, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242242127948759, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7277294204025221987, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
@@ -122067,12 +122115,44 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 7527029004260214912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527029004260214912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527029004260214912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527029004260214912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8661610872384298376, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8661610872384298376, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8661610872384298376, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8661610872384298376, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -145169,6 +145249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 1891583147822417665}
   cldr: {fileID: 0}
 --- !u!114 &5135018090807499559
@@ -148001,6 +148083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 3313480797149902120}
   cldr: {fileID: 0}
 --- !u!114 &7553911076384089371
@@ -148101,6 +148185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 3313480796163385458}
   cldr: {fileID: 0}
 --- !u!114 &7553911077270206542
@@ -149957,6 +150043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ec0bba07ab431409bb030135e13286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  height: 0
   spriteRenderer: {fileID: 6702340750649234681}
   cldr: {fileID: 0}
 --- !u!114 &8958876185984958660
