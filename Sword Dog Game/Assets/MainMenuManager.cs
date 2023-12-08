@@ -128,6 +128,10 @@ public class MainMenuManager : MonoBehaviour
 
     public string GetMostRecentSave()
     {
+        if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + @"\SaveData");
+        }
         string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
 
         string mostRecentFile = "";
