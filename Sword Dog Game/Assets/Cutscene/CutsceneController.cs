@@ -79,7 +79,10 @@ public class CutsceneController : MonoBehaviour
         if (AllCutscenes.ContainsKey(cutsceneName))
         {
             //The is recalled everytime a scene is reloaded. Behavior therefore is expected and not an error
-            // Debug.LogError("There is already a cutscene with the name " + cutsceneName);
+            AllCutscenes.Remove(cutsceneName);
+            // Replace cutscene
+            Debug.Log("Replaced cutscene " + cutsceneName);
+            AllCutscenes.Add(cutsceneName, this);
         }
         else
         {
@@ -90,11 +93,11 @@ public class CutsceneController : MonoBehaviour
 
     public void OnDestroy()
     {
-        if(AllCutscenes.ContainsKey(cutsceneName))
-        {
-            Debug.Log("Removed " + cutsceneName);
-            AllCutscenes.Remove(cutsceneName);
-        }
+        // if(AllCutscenes.ContainsKey(cutsceneName))
+        // {
+        //     Debug.Log("Removed " + cutsceneName);
+        //     AllCutscenes.Remove(cutsceneName);
+        // }
     }
 
     // Start is called before the first frame update
