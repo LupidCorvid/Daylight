@@ -53,6 +53,7 @@ public class LanternFollow : MonoBehaviour
             else
             {
                 // TODO do this better - hides lantern if inactive
+                //Player.darkness.GetComponent<SpriteRenderer>().enabled = false;
                 lantern.enabled = false;
                 lanternLight.enabled = false;
             }

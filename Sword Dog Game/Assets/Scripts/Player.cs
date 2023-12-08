@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Entity
 {
@@ -58,12 +59,16 @@ public class Player : Entity
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        
     }
 
     public override void Update()
     {
         instance = this;
         controller = GetComponent<PlayerMovement>();
+
+        
     }
 
     public override Inventory getAssociatedInventory()
