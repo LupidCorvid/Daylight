@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RivalBehavior : DialogNPC
 {
@@ -12,18 +13,100 @@ public class RivalBehavior : DialogNPC
 
     bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
 
+    //Copy pasted from general code
+    Animator anim;
+    float waitToLook = 0f;
+    bool talking, finishTalkingSequence = false;
+    Vector2 playerPosition = new Vector2(0, 0);
+    bool foundPlayerPosition = false;
+    public float dialogDistance;
+    public string interruptDialog;
+    private MiniBubbleController bubble;
+
+
     void Start()
     {
         rivalAnim = gameObject.GetComponent<Animator>();
         swordAnim = GameObject.Find("rival sword").GetComponent<Animator>();
         if (monster != null)
             monster.killed += monsterKilled;
+
+        if (SceneManager.GetActiveScene().name == "Town")
+            prologueBehaviorActive = false;
     }
     
-    void Update()
+    //void Update()
+    //{
+    //    //if (SceneManager.GetActiveScene().name == "Town")
+    //        //prologueBehaviorActive = false;
+    //    if(prologueBehaviorActive)
+    //        prologueBehavior();
+    //    else
+    //        swordAnim.Play("sword_idle");
+    //}
+
+    //Copy pasted from general code
+    void FixedUpdate()
     {
-        if(prologueBehaviorActive)
+        if (prologueBehaviorActive)
             prologueBehavior();
+        else
+            swordAnim.Play("sword_idle");
+
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            idle();
+
+        if (alreadyTalking)
+        {
+            if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
+            {
+                exitDialog();
+                GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
+                bubble = addedObj.GetComponent<MiniBubbleController>();
+                bubble.speaker = this;
+                bubble.offset = miniBubbleOffset;
+                bubble.setSource(new DialogSource(interruptDialog));
+            }
+        }
+    }
+
+    public void idle()
+    {
+        rivalAnim.Play("rival_idle");
+    }
+
+    public void talkingToPlayer()
+    {
+        rivalAnim.Play("rival_speak");
+    }
+
+    public override void exitDialog()
+    {
+        base.exitDialog();
+        StartCoroutine(finishedTalking());
+
+    }
+    public override void interact(Entity user)
+    {
+        base.interact(user);
+        if (bubble != null && bubble.gameObject != null)
+            bubble.close();
+    }
+    IEnumerator finishedTalking()
+    {
+        foundPlayerPosition = false;
+        waitToLook = 0;
+        if ((playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
+                || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
+        {
+            rivalAnim.Play("rival_speakToSilent");
+        }
+
+        yield return new WaitForSeconds(2);
+
+        finishTalkingSequence = false;
     }
 
     void speak()
