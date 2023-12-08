@@ -51,23 +51,25 @@ public class RivalBehavior : DialogNPC
         if (prologueBehaviorActive)
             prologueBehavior();
         else
+        {
             swordAnim.Play("sword_idle");
 
-        if (alreadyTalking)
-            talkingToPlayer();
-        else if (!finishTalkingSequence)
-            idle();
+            if (alreadyTalking)
+                talkingToPlayer();
+            else if (!finishTalkingSequence)
+                idle();
 
-        if (alreadyTalking)
-        {
-            if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
+            if (alreadyTalking)
             {
-                exitDialog();
-                GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
-                bubble = addedObj.GetComponent<MiniBubbleController>();
-                bubble.speaker = this;
-                bubble.offset = miniBubbleOffset;
-                bubble.setSource(new DialogSource(interruptDialog));
+                if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
+                {
+                    exitDialog();
+                    GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
+                    bubble = addedObj.GetComponent<MiniBubbleController>();
+                    bubble.speaker = this;
+                    bubble.offset = miniBubbleOffset;
+                    bubble.setSource(new DialogSource(interruptDialog));
+                }
             }
         }
     }
