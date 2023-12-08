@@ -79,16 +79,20 @@ public class CutsceneController : MonoBehaviour
         if (AllCutscenes.ContainsKey(cutsceneName))
         {
             //The is recalled everytime a scene is reloaded. Behavior therefore is expected and not an error
-            //Debug.LogError("There is already a cutscene with the name " + cutsceneName);
+            // Debug.LogError("There is already a cutscene with the name " + cutsceneName);
         }
         else
+        {
             AllCutscenes.Add(cutsceneName, this);
+            Debug.Log("Added cutscene " + cutsceneName);
+        }
     }
 
     public void OnDestroy()
     {
         if(AllCutscenes.ContainsKey(cutsceneName))
         {
+            Debug.Log("Removed " + cutsceneName);
             AllCutscenes.Remove(cutsceneName);
         }
     }
