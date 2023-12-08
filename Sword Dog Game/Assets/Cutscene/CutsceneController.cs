@@ -30,6 +30,9 @@ public class CutsceneController : MonoBehaviour
 
     public static Action StopAllCutscenes;
 
+    public bool RemoveOnDestroy = true;
+    public bool OverwriteCopies = false;
+
     
 
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
@@ -80,6 +83,11 @@ public class CutsceneController : MonoBehaviour
         {
             //The is recalled everytime a scene is reloaded. Behavior therefore is expected and not an error
             //Debug.LogError("There is already a cutscene with the name " + cutsceneName);
+            if (OverwriteCopies)
+            {
+                AllCutscenes.Remove(cutsceneName);
+                AllCutscenes.Add(cutsceneName, this);
+            }
         }
         else
             AllCutscenes.Add(cutsceneName, this);
@@ -87,7 +95,7 @@ public class CutsceneController : MonoBehaviour
 
     public void OnDestroy()
     {
-        if(AllCutscenes.ContainsKey(cutsceneName))
+        if(AllCutscenes.ContainsKey(cutsceneName) && RemoveOnDestroy)
         {
             AllCutscenes.Remove(cutsceneName);
         }
