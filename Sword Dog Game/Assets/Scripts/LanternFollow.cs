@@ -9,6 +9,7 @@ public class LanternFollow : MonoBehaviour
     Vector3 lantTargetLocation;
     Vector3 lantPreviousLocation;
     public SpriteRenderer lantern, lanternLight;
+    public GameObject darkness;
     public Rigidbody2D rb;
     public bool autoActivated = false;
 
@@ -27,11 +28,14 @@ public class LanternFollow : MonoBehaviour
             if (!autoActivated)
             {
                 autoActivated = true;
-                Player.instance.activateLantern();
+                Player.instance.hasLantern = true;
             }
 
             if (Player.instance.hasLantern)
             {
+                darkness.SetActive(true);
+                darkness.transform.SetPositionAndRotation(Player.instance.transform.position + new Vector3(1.0f, -1.1f, 0.0f), Player.instance.transform.rotation);
+
                 lantern.enabled = true;
                 lanternLight.enabled = true;
 

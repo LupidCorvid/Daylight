@@ -12,7 +12,7 @@ public class Player : Entity
     public PlayerAttack pAttack;
 
     public bool hasLantern = false;
-    public GameObject mouthLantern, darkness;
+    public GameObject mouthLantern;
 
     public override bool attacking
     {
@@ -108,17 +108,5 @@ public class Player : Entity
             buffManager.loadBuffs(data);
         else
             GameSaver.loadedNewData -= loadSavedBuffs;
-    }
-
-    public void activateLantern()
-    {
-        darkness.SetActive(true);
-        hasLantern = true;
-    }
-
-    public void deactivateLantern()
-    {
-        darkness.SetActive(false);
-        hasLantern = false;
     }
 }
