@@ -58,19 +58,7 @@ public class RivalBehavior : DialogNPC
                 talkingToPlayer();
             else if (!finishTalkingSequence)
                 idle();
-
-            if (alreadyTalking)
-            {
-                if (Vector2.Distance(interactor.transform.position, transform.position) >= dialogDistance)
-                {
-                    exitDialog();
-                    GameObject addedObj = Instantiate(miniBubblePrefab, transform.position + (Vector3)miniBubbleOffset, Quaternion.identity);
-                    bubble = addedObj.GetComponent<MiniBubbleController>();
-                    bubble.speaker = this;
-                    bubble.offset = miniBubbleOffset;
-                    bubble.setSource(new DialogSource(interruptDialog));
-                }
-            }
+            
         }
     }
 
@@ -98,13 +86,13 @@ public class RivalBehavior : DialogNPC
     }
     IEnumerator finishedTalking()
     {
-        foundPlayerPosition = false;
-        waitToLook = 0;
-        if ((playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
-                || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
-        {
-            rivalAnim.Play("rival_speakToSilent");
-        }
+        //foundPlayerPosition = false;
+        //waitToLook = 0;
+        //if ((playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
+        //        || (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX))
+        //{
+        //    rivalAnim.Play("rival_speakToSilent");
+        //}
 
         yield return new WaitForSeconds(2);
 
