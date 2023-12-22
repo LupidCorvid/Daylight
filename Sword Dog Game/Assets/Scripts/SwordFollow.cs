@@ -154,19 +154,28 @@ public class SwordFollow : MonoBehaviour
 
             //Moves
             swordPreviousLocation = transform.position;
-            
+            rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, 0, rb.transform.rotation.eulerAngles.z);
+
             if (!PlayerHealth.gettingUp)
             {
                 rb.velocity = (swordTargetLocation - transform.position) * (speed + 4 * pmScript.calculatedSpeed) / 5;
 
 
-                rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10;
+                //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10;
+                //rb.angularVelocity = Mathf.Clamp(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, player.transform.rotation.eulerAngles.z), -1, 1) * 10;
+                //rb.angularVelocity = Mathf.Clamp(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, player.transform.rotation.eulerAngles.z), -1, 1) * 10;
+                
+                rb.angularVelocity = getAngleDirection(Quaternion.Euler(0,0,transform.rotation.eulerAngles.z), player.transform.rotation) * 10;
+                //getAngleDirection
+                //rb.transform.rotation = player.transform.rotation;
                 //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 1;
             }
             else
             {
                 rb.velocity = (swordTargetLocation - transform.position) * (4 * pmScript.calculatedSpeed) / 5;
-                rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10 * 4;
+                //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 10 * 4;
+                rb.angularVelocity = getAngleDirection(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z), player.transform.rotation) * 40;
+                //rb.angularVelocity = Mathf.Clamp(Mathf.DeltaAngle(transform.rotation.z, player.transform.rotation.z), -40, 40);
                 //rb.angularVelocity = getAngleDirection(transform.rotation, player.transform.rotation) * 1;
             }
 
@@ -238,7 +247,11 @@ public class SwordFollow : MonoBehaviour
         rb.velocity = (attackMoveTracker.transform.position - transform.position) * 60;
 
         ////Multiplied by 60 to match the time of the frame in the animation
-        rb.angularVelocity = getAngleDirection(transform.rotation, attackMoveTracker.transform.rotation) * 60;
+        //rb.angularVelocity = getAngleDirection(transform.rotation, Quaternion.Euler(0,0,attackMoveTracker.transform.rotation.z)) * 60;
+        //rb.transform.rotation = Quaternion.Euler(0, attackMoveTracker.transform.rotation.y, rb.transform.rotation.z);
+        //rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, attackMoveTracker.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
+        rb.transform.rotation = attackMoveTracker.transform.rotation;
+        rb.angularVelocity = 0;
 
     }
 
@@ -265,7 +278,8 @@ public class SwordFollow : MonoBehaviour
             rb.velocity = (swordParryAnimator.transform.position - transform.position) * 60 * Time.fixedDeltaTime * 20;
 
         //Might need to be multiplied by some form of Time.deltaTime
-        rb.angularVelocity = getAngleDirection(transform.rotation, swordParryAnimator.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
+        //rb.angularVelocity = getAngleDirection(transform.rotation, swordParryAnimator.transform.rotation) * 60 * 20 * Time.fixedDeltaTime;
+        rb.transform.rotation = swordParryAnimator.transform.rotation;
     }
 
     public float getAngleDirection(Quaternion rotation1, Quaternion rotation2)
