@@ -67,8 +67,8 @@ public class Player : Entity
     {
         instance = this;
         controller = GetComponent<PlayerMovement>();
+        base.Update();
 
-        
     }
 
     public override Inventory getAssociatedInventory()
