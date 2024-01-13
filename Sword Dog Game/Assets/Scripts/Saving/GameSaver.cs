@@ -108,6 +108,7 @@ public class GameSaver : MonoBehaviour
     [Serializable]
     public class SaveData
     {
+        public bool emptySave = false;
         public PlayerSerialization player;
         public RoomStates roomStates;
         public Buffs.SaveBuffs buffs;

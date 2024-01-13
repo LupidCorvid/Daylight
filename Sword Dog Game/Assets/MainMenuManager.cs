@@ -17,6 +17,10 @@ public class MainMenuManager : MonoBehaviour
     public static bool inMainMenu;
     private bool quit = false;
 
+    public GameObject SaveSlotUIPrefab;
+    public GameObject savesList;
+
+    public CanvasGroup loadMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +61,7 @@ public class MainMenuManager : MonoBehaviour
         //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
 
         Invoke("ActivateButtons", 0.4f);
+        PopulateLoadMenu();
     }
 
     public void ActivateButtons()
@@ -85,7 +90,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void StartNewSave()
+    public static void StartNewSave()
     {
         if (!ChangeScene.changingScene && !GameSaver.loading)
         {
@@ -99,6 +104,20 @@ public class MainMenuManager : MonoBehaviour
             DialogSource.stringVariables = GameSaver.currData.dialogStringVariables;
             ChangeScene.LoadScene("Prologue Area", "", false);
             //CanvasManager.ShowHUD();
+        }
+    }
+
+    public void PopulateLoadMenu()
+    {
+        string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
+
+        for(int i = 0; i < files.Length; i++)
+        {
+            GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
+            SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
+            addedSlot.saveNum = i + 1;
+            addedSlot.savePath = files[i];
+
         }
     }
 
@@ -155,6 +174,22 @@ public class MainMenuManager : MonoBehaviour
             PauseScreen.canPause = true;
             //Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
+    public void LoadMenuToggle()
+    {
+        if(loadMenu.blocksRaycasts)
+        {
+            loadMenu.blocksRaycasts = false;
+            loadMenu.alpha = 0;
+            loadMenu.interactable = false;
+        }
+        else
+        {
+            loadMenu.blocksRaycasts = true;
+            loadMenu.alpha = 1;
+            loadMenu.interactable = true;
         }
     }
 

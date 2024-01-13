@@ -15,6 +15,11 @@ public class SaveSystem : MonoBehaviour
         WriteToFile(saveName + saveDataIndex, dataToSave);
     }
 
+    public static void SaveData(int index, string dataToSave)
+    {
+        WriteToFile("SaveData)" + index, dataToSave);
+    }
+
     public string LoadData()
     {
         string data = "";
@@ -25,7 +30,7 @@ public class SaveSystem : MonoBehaviour
         return data;
     }
 
-    private bool WriteToFile(string name, string content)
+    private static bool WriteToFile(string name, string content)
     {
         var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
         if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
