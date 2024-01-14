@@ -24,14 +24,13 @@ public class PauseScreen : MonoBehaviour
     void Start()
     {
         pauseMenuGroup = GetComponent<CanvasGroup>();
-        main = this;
+        main ??= this;
         //Debug.Log(Camera.main.pixelWidth + "  " + Camera.main.pixelHeight);
     }
 
     // Update is called once per frame
     void Update()
     {
-        main = this;
         if (InputReader.inputs?.actions["Move"].ReadValue<Vector2>().y != 0 && EventSystem.current.currentSelectedGameObject == null && paused)
         {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
