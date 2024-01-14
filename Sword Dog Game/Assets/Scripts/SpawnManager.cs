@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject spawnPointObj;
     private Transform spawnPoint;
 
-    void OnEnable()
+    void Start()
     {
         if (Player.instance != null)
         {
