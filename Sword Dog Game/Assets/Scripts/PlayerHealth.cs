@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
         playerBase = GetComponent<Player>();
         playerBase.playerHealth = this;
-        UpdateHealth();
+        UpdateHealth(false);
     }
 
     // Update is called once per frame
@@ -88,16 +88,17 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         // Set backsplash based on dog health
-        CanvasManager.HurtBacksplash(health <= Heart.MinWobbleHealth);
+        if (damage)
+            CanvasManager.HurtBacksplash(health <= Heart.MinWobbleHealth);
 
         for (int i = 0; i < CanvasManager.hearts.Count; i++)
         {
-            if (health <= Heart.MinWobbleHealth)
+            if (health <= Heart.MinWobbleHealth && damage)
                 CanvasManager.hearts[i].Wobble(Heart.MinWobbleHealth - health + 2f);
             else
                 CanvasManager.hearts[i].wobbling = false;
             
-            CanvasManager.hearts[i].SetSprite(temp, true);
+            CanvasManager.hearts[i].SetSprite(temp, damage);
             temp -= 2;
         }
     }
