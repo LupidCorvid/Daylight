@@ -6,9 +6,16 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    public string saveName = "SaveData_";
+    public const string saveName = "SaveData_";
     [Range(0, 10)]
     public int saveDataIndex = 0;
+
+    public static SaveSystem current;
+
+    private void Awake()
+    {
+        current = this;
+    }
 
     public void SaveData(string dataToSave)
     {
@@ -17,8 +24,10 @@ public class SaveSystem : MonoBehaviour
 
     public static void SaveData(int index, string dataToSave)
     {
-        WriteToFile("SaveData)" + index, dataToSave);
+        WriteToFile(saveName + index, dataToSave);
+        
     }
+
 
     public string LoadData()
     {

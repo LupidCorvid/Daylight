@@ -12,6 +12,8 @@ public class SaveSlot : MonoBehaviour
     public TMPro.TextMeshProUGUI SaveName;
     public TMPro.TextMeshProUGUI LastModified;
 
+    public CanvasGroup defaultGroup;
+    public CanvasGroup ConfirmDeleteGroup;
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +27,21 @@ public class SaveSlot : MonoBehaviour
         {
             
             LastLocation.text = saveData.player.spawnpoint.scene;
-            SaveName.text = "Save #" + saveNum;
+            SaveName.text = "Save #" + (saveNum + 1);
             LastModified.text = File.GetLastWriteTime(savePath).ToString("d");
         }
         else
         {
-            //Change to say new game
+            SetToEmptyVisuals();
         }
 
+    }
+
+    public void SetToEmptyVisuals()
+    {
+        SaveName.text = "New Game";
+        LastLocation.text = "";
+        LastModified.text = "";
     }
 
     // Update is called once per frame
@@ -43,8 +52,38 @@ public class SaveSlot : MonoBehaviour
 
     public void LoadSave()
     {
+        SaveSystem.current.saveDataIndex = saveNum;
 
+        if (saveData.emptySave)
+            MainMenuManager.StartNewSave();
+        else
+        {
+            MainMenuManager.LoadSave(saveData);
+        }
 
+        
+    }
+
+    public void PromptClearData()
+    {
+        ConfirmDeleteGroup.alpha = 1;
+        ConfirmDeleteGroup.blocksRaycasts = true;
+        ConfirmDeleteGroup.interactable = true;
+
+        defaultGroup.alpha = 0;
+        defaultGroup.blocksRaycasts = false;
+        defaultGroup.interactable = false;
+    }
+
+    public void RestoreDefaultDisplay()
+    {
+        defaultGroup.alpha = 1;
+        defaultGroup.blocksRaycasts = true;
+        defaultGroup.interactable = true;
+
+        ConfirmDeleteGroup.alpha = 0;
+        ConfirmDeleteGroup.blocksRaycasts = false;
+        ConfirmDeleteGroup.interactable = false;
     }
 
     public void ClearData()
@@ -53,5 +92,16 @@ public class SaveSlot : MonoBehaviour
         newData.emptySave = true;
 
         SaveSystem.SaveData(saveNum, JsonUtility.ToJson(newData, true)); //Disable prettyPrint to make file size much smaller
+
+        saveData = newData;
+        SetToEmptyVisuals();
     }
+
+    public void ClearDataAndClosePrompt()
+    {
+        RestoreDefaultDisplay();
+        ClearData();
+    }
+
+    
 }

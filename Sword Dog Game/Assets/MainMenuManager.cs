@@ -115,7 +115,7 @@ public class MainMenuManager : MonoBehaviour
         {
             GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
             SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
-            addedSlot.saveNum = i + 1;
+            addedSlot.saveNum = i;
             addedSlot.savePath = files[i];
 
         }
@@ -131,6 +131,18 @@ public class MainMenuManager : MonoBehaviour
         }
         
     }
+
+    public static void LoadSave(GameSaver.SaveData data)
+    {
+        if (!ChangeScene.changingScene && !GameSaver.loading)
+        {
+            GameSaver.currData = data; //Isn't needed?
+            //GameSaver.main.LoadGame();
+            AudioManager.instance.FadeOutCurrent();
+            GameSaver.main.LoadGame();
+        }
+    }
+
 
     public void Quit()
     {
@@ -154,11 +166,14 @@ public class MainMenuManager : MonoBehaviour
         string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
 
         string mostRecentFile = "";
-        System.DateTime mostRecentDate = System.DateTime.Now;
+        System.DateTime mostRecentDate = System.DateTime.MinValue;
         foreach(string file in files)
         {
-            if(File.GetLastWriteTime(file) < System.DateTime.Now)
+            if(File.GetLastWriteTime(file) > mostRecentDate)
             {
+                if (JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(file)).emptySave)
+                    continue;
+
                 mostRecentDate = File.GetLastWriteTime(file);
                 mostRecentFile = file;
             }
