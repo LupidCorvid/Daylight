@@ -31,6 +31,7 @@ public class PauseScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        main = this;
         if (InputReader.inputs?.actions["Move"].ReadValue<Vector2>().y != 0 && EventSystem.current.currentSelectedGameObject == null && paused)
         {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
@@ -162,8 +163,7 @@ public class PauseScreen : MonoBehaviour
 
     public void QuitToTitle()
     {
-        if(this != null)
-            StartCoroutine(BackToMenu());
+        StartCoroutine(BackToMenu());
     }
 
     public IEnumerator BackToMenu() {

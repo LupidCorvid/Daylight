@@ -62968,7 +62968,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1414866533}
   m_OnClick:
     m_PersistentCalls:
@@ -63233,6 +63233,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6521660113578071278, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521660113578071278, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7101513567239608808, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -63315,6 +63323,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7831783537408656194, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658491144505834609, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8661610872384298376, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
@@ -84259,6 +84271,7 @@ MonoBehaviour:
     Town: {fileID: 0}
     Desert: {fileID: 0}
   lastSave: 
+  lastSaveNum: 0
   lastSaveDetails: {fileID: 531293461}
   buttons:
   - {fileID: 2002254589}
@@ -84269,6 +84282,7 @@ MonoBehaviour:
   SaveSlotUIPrefab: {fileID: 8509371042643428048, guid: 00977f806f2471045ae8ba8726dd54e9, type: 3}
   savesList: {fileID: 161395618}
   loadMenu: {fileID: 1061254219}
+  continueText: {fileID: 1414866533}
 --- !u!1 &1962796186
 GameObject:
   m_ObjectHideFlags: 0
@@ -84573,7 +84587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2002254586
 RectTransform:
   m_ObjectHideFlags: 0

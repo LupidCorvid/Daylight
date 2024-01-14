@@ -23,6 +23,8 @@ public class MainMenuManager : MonoBehaviour
 
     public CanvasGroup loadMenu;
 
+    public TMPro.TextMeshProUGUI continueText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,16 +38,18 @@ public class MainMenuManager : MonoBehaviour
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
             buttons[1].interactable = true;
+            continueText.text = "Continue";
         }
         else
         {
-            Debug.Log("No most recent save found");
+            //Debug.Log("No most recent save found");
             lastSaveDetails.text = "";
-            buttons[1].interactable = false;
+            continueText.text = "New Game";
+            //buttons[1].interactable = false;
 
-            ColorBlock continueButtonColors = buttons[1].colors;
-            continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
-            buttons[1].colors = continueButtonColors;
+            //ColorBlock continueButtonColors = buttons[1].colors;
+            //continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
+            //buttons[1].colors = continueButtonColors;
         }
 
         CanvasManager.InstantHideHUD();
@@ -127,6 +131,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMostRecentSave()
     {
+        if(lastSaveNum == -1)
+        {
+            SaveSystem.current.saveDataIndex = 0;
+            StartNewSave();
+        }
+
         if (!ChangeScene.changingScene && !GameSaver.loading && lastSaveNum != -1)
         {
             //GameSaver.main.LoadGame();
