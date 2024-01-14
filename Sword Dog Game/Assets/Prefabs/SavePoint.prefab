@@ -593,6 +593,154 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3290580686935877367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3359026342887003567}
+  - component: {fileID: 597915691444327303}
+  - component: {fileID: 5597003148564624909}
+  - component: {fileID: 698307032414050047}
+  - component: {fileID: 4206019825463301016}
+  - component: {fileID: 2366510173370169149}
+  - component: {fileID: 3297902187122243555}
+  m_Layer: 0
+  m_Name: ExitSaveCutscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3359026342887003567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1126466461910333036}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597915691444327303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscenes:
+  - {fileID: 5597003148564624909}
+  - {fileID: 698307032414050047}
+  - {fileID: 4206019825463301016}
+  - {fileID: 2366510173370169149}
+  - {fileID: 3297902187122243555}
+  cutsceneNumber: 0
+  cutsceneName: SaveExit
+  playingThisCutscene: 0
+  stopInteractions: 1
+  stopMovement: 1
+  hideUI: 1
+  controlMusic: 1
+  RemoveOnDestroy: 1
+  OverwriteCopies: 0
+--- !u!114 &5597003148564624909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 0
+  Stall: 1
+--- !u!114 &698307032414050047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3351ab18d8451d4d99a0158b243399f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+--- !u!114 &4206019825463301016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a457c2f4dc8347a1f1b2f7f15afb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  target: {fileID: 0}
+  targetByName: 1
+  targetName: Player(Clone)
+  stateNames:
+  - name: wakeUp1
+    speed: 1
+  currState: 0
+  stopOnFinish: 0
+  restoreSpeedOnFinish: 0
+--- !u!114 &2366510173370169149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points: []
+  target: {fileID: 0}
+  freeCameraOnExit: 1
+  freeHudOnExit: 1
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &3297902187122243555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290580686935877367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 0.4
 --- !u!1 &3718253076167933687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +2033,7 @@ MonoBehaviour:
   promptSpawnLocation: {fileID: 2606738659867587148}
   spawnedPrompt: {fileID: 0}
   SaveCutscene: {fileID: 8899337956730622824}
+  SaveExitCutscene: {fileID: 597915691444327303}
 --- !u!61 &6059345694003030584
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1942,11 +2091,7 @@ GameObject:
   - component: {fileID: 8899337956730622824}
   - component: {fileID: 4390757082578228079}
   - component: {fileID: 6909266357356482434}
-  - component: {fileID: 4108136850831520754}
-  - component: {fileID: 475578082662367619}
-  - component: {fileID: 3055481903610780778}
-  - component: {fileID: 1174479276433751020}
-  - component: {fileID: 4755206278211064661}
+  - component: {fileID: 7611969869646251828}
   m_Layer: 0
   m_Name: SaveCutscene
   m_TagString: Untagged
@@ -1965,7 +2110,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3359026342887003567}
   m_Father: {fileID: 4998375682232093594}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1984,11 +2130,7 @@ MonoBehaviour:
   cutscenes:
   - {fileID: 4390757082578228079}
   - {fileID: 6909266357356482434}
-  - {fileID: 4108136850831520754}
-  - {fileID: 475578082662367619}
-  - {fileID: 3055481903610780778}
-  - {fileID: 1174479276433751020}
-  - {fileID: 4755206278211064661}
+  - {fileID: 7611969869646251828}
   cutsceneNumber: 0
   cutsceneName: Save
   playingThisCutscene: 0
@@ -1996,6 +2138,8 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 1
   controlMusic: 1
+  RemoveOnDestroy: 1
+  OverwriteCopies: 0
 --- !u!114 &4390757082578228079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,7 +2189,7 @@ MonoBehaviour:
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
---- !u!114 &4108136850831520754
+--- !u!114 &7611969869646251828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2054,87 +2198,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8001663442825813165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  npc: {fileID: 3401331213342869365}
-  interactor: {fileID: 0}
-  getInteractorByName: 0
-  interactorName: 
-  overrideDialog: 1
-  dialog: '[abf,200][ss, .05] Save game? [prompt, Save,[CE,SaveGame],Save & Quit,[CE,SaveQuit],No,]
-    [exit]'
-  restorePriorDialog: 0
---- !u!114 &475578082662367619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001663442825813165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3351ab18d8451d4d99a0158b243399f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
---- !u!114 &3055481903610780778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001663442825813165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a457c2f4dc8347a1f1b2f7f15afb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  target: {fileID: 0}
-  targetByName: 1
-  targetName: Player(Clone)
-  stateNames:
-  - name: wakeUp1
-    speed: 1
-  currState: 0
-  stopOnFinish: 0
-  restoreSpeedOnFinish: 0
---- !u!114 &1174479276433751020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001663442825813165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  points: []
-  target: {fileID: 0}
-  freeCameraOnExit: 1
-  freeHudOnExit: 1
-  useMainCamera: 1
-  ignoreCameraBounds: 0
-  cameraRb: {fileID: 0}
---- !u!114 &4755206278211064661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001663442825813165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  waitTime: 0.4
+  FadeIn: 1
+  Stall: 1
 --- !u!1 &8507001405144718965
 GameObject:
   m_ObjectHideFlags: 0

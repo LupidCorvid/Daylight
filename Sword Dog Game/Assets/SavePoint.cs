@@ -9,6 +9,9 @@ public class SavePoint : MonoBehaviour, IInteractable
     public Animator spawnedPrompt;
 
     public CutsceneController SaveCutscene;
+    public CutsceneController SaveExitCutscene;
+
+    public bool waitingForCutsceneFinish = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,21 @@ public class SavePoint : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if (SaveCutscene.cutsceneNumber > 0 && SaveCutscene.playingThisCutscene)
+            waitingForCutsceneFinish = true;
+
+        if(waitingForCutsceneFinish && !SaveCutscene.playingThisCutscene)
+        {
+            //Open save prompt
+            SaveGamePrompt.main.openDialog(this);
+            waitingForCutsceneFinish = false;
+
+        }
+    }
+
+    public void FinishedSavePrompt()
+    {
+        SaveExitCutscene.StartCutscene();
     }
 
     public void interact(Entity user)
