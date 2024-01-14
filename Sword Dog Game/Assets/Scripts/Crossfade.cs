@@ -13,6 +13,7 @@ public class Crossfade : MonoBehaviour
     public static Action FadeStart;
     public static Action FadeEnd;
     public static bool over = true;
+    public float speed = 1;
 
 
     void Start()
@@ -32,7 +33,7 @@ public class Crossfade : MonoBehaviour
 
     void EndFade()
     {
-        animator?.SetFloat("Speed", 1);
+        animator?.SetFloat("Speed", 1 * speed);
     }
 
     public void StopFade()
@@ -48,7 +49,7 @@ public class Crossfade : MonoBehaviour
             if(current != this)
                 current.StartFade();
         }
-        animator?.SetFloat("Speed", -1.2f);
+        animator?.SetFloat("Speed", -1.2f * speed);
         over = false;
     }
 
@@ -70,6 +71,7 @@ public class Crossfade : MonoBehaviour
         {
             over = true;
             animator.SetFloat("Speed", 0);
+            speed = 1;
         }        
     }
 }

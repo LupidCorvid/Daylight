@@ -672,6 +672,7 @@ MonoBehaviour:
   finished: 0
   FadeIn: 0
   Stall: 1
+  speed: 1
 --- !u!114 &698307032414050047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,6 +2035,7 @@ MonoBehaviour:
   spawnedPrompt: {fileID: 0}
   SaveCutscene: {fileID: 8899337956730622824}
   SaveExitCutscene: {fileID: 597915691444327303}
+  waitingForCutsceneFinish: 0
 --- !u!61 &6059345694003030584
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2204,6 +2206,7 @@ MonoBehaviour:
   finished: 0
   FadeIn: 1
   Stall: 1
+  speed: 1.5
 --- !u!1 &8507001405144718965
 GameObject:
   m_ObjectHideFlags: 0

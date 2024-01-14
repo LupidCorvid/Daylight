@@ -10,9 +10,11 @@ public class ScreenFadeCutscene : CutsceneData
 
     float startTime;
     public bool Stall = true;
+    public float speed = 1;
 
     public override void startSegment()
     {
+        Crossfade.current.speed = speed;
         base.startSegment();
         startTime = Time.time;
         if (FadeIn)
@@ -31,6 +33,13 @@ public class ScreenFadeCutscene : CutsceneData
     public override void abort()
     {
         base.abort();
+        Crossfade.current.speed = 1;
         //Snap to fully faded in or out
+    }
+
+    public override void finishedSegment()
+    {
+        base.finishedSegment();
+        Crossfade.current.speed = speed;
     }
 }
