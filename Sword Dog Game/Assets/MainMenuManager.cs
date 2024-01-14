@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public MenuBackgrounds Backgrounds;
     public string lastSave;
+    public int lastSaveNum;
 
     public TMPro.TextMeshProUGUI lastSaveDetails;
 
@@ -27,7 +28,10 @@ public class MainMenuManager : MonoBehaviour
     {
         inMainMenu = true;
 
-        lastSave = GetMostRecentSave();
+        (string ,int) lastSaveData = GetMostRecentSave();
+        lastSave = lastSaveData.Item1;
+        lastSaveNum = lastSaveData.Item2;
+
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
@@ -123,9 +127,10 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadMostRecentSave()
     {
-        if (!ChangeScene.changingScene && !GameSaver.loading)
+        if (!ChangeScene.changingScene && !GameSaver.loading && lastSaveNum != -1)
         {
             //GameSaver.main.LoadGame();
+            SaveSystem.current.saveDataIndex = lastSaveNum;
             AudioManager.instance.FadeOutCurrent();
             GameSaver.main.LoadGame();
         }
@@ -157,7 +162,7 @@ public class MainMenuManager : MonoBehaviour
 #endif
     }
 
-    public string GetMostRecentSave()
+    public (string, int) GetMostRecentSave()
     {
         if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
         {
@@ -166,21 +171,24 @@ public class MainMenuManager : MonoBehaviour
         string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
 
         string mostRecentFile = "";
+        int mostRecentId = -1;
         System.DateTime mostRecentDate = System.DateTime.MinValue;
-        foreach(string file in files)
+        for(int i = 0; i < files.Length; i++)
         {
-            if(File.GetLastWriteTime(file) > mostRecentDate)
+            if(File.GetLastWriteTime(files[i]) > mostRecentDate)
             {
-                if (JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(file)).emptySave)
+                if (JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(files[i])).emptySave)
                     continue;
 
-                mostRecentDate = File.GetLastWriteTime(file);
-                mostRecentFile = file;
+                mostRecentDate = File.GetLastWriteTime(files[i]);
+                mostRecentFile = files[i];
+                mostRecentId = i;
+                
             }
         }
         Debug.Log("most recent save: " + mostRecentFile + " accessed on " + mostRecentDate.ToString());
 
-        return mostRecentFile;
+        return (mostRecentFile, mostRecentId);
     }
     public void OnDestroy()
     {

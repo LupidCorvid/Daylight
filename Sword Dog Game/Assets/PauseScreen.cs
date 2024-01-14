@@ -162,7 +162,8 @@ public class PauseScreen : MonoBehaviour
 
     public void QuitToTitle()
     {
-        StartCoroutine(BackToMenu());
+        if(this != null)
+            StartCoroutine(BackToMenu());
     }
 
     public IEnumerator BackToMenu() {
