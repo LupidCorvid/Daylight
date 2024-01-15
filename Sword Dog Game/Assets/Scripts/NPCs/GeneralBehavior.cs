@@ -46,6 +46,8 @@ public class GeneralBehavior : DialogNPC
     public override void interact(Entity user)
     {
         base.interact(user);
+        // TODO set this depending on facing direction!!
+        dialogSource.defaultBarkVelocity = new Vector2(-1, -1);
         if (bubble != null && bubble.gameObject != null)
             bubble.close();
     }
