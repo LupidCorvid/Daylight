@@ -191,9 +191,18 @@ public class PauseScreen : MonoBehaviour
         quit = false;
     }
 
-    public void OpenSettings()
+    public void HideMenu()
     {
-        settingsScreen.OpenMenu();
+        pauseMenuGroup.alpha = 0;
+        pauseMenuGroup.blocksRaycasts = false;
+        pauseMenuGroup.interactable = false;
+    }
+
+    public void ShowMenu()
+    {
+        pauseMenuGroup.alpha = 1;
+        pauseMenuGroup.blocksRaycasts = true;
+        pauseMenuGroup.interactable = true;
     }
 
 }

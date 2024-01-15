@@ -71,8 +71,6 @@ public partial class QuestDatabase
             {
                 quest.assigned = true;
                 quest.onAssign();
-                //NEED to look at making this use a different variable thing. Just needs a different system altogether
-                //DialogSource.counterVariables.Add("Quest" + quest.questId + "Prog", (int)quest.progress);
                 return;
             }
         }

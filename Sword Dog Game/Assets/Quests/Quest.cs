@@ -22,14 +22,13 @@ public class Quest
 
     public virtual void complete()
     {
-        //If you don't want rewards to be completed as soon as finished, override without calling base
         completed = true;
-        finalizeCompletion();
+        //finalizeCompletion();
     }
 
     public virtual void finalizeCompletion()
     {
-
+        //Should remove the quest from the save data
     }
 
     public virtual void onAssign()
