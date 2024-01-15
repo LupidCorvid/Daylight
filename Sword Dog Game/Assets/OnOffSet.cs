@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class OnOffSet : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class OnOffSet : MonoBehaviour
 
     public bool state;
 
+    public Action toggled;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateState();
     }
 
     // Update is called once per frame
@@ -41,6 +44,8 @@ public class OnOffSet : MonoBehaviour
         onButton.sprite = onActiveSprite;
         offButton.sprite = offInactiveSprite;
         state = true;
+
+        toggled?.Invoke();
     }
 
     public void TurnOff()
@@ -48,6 +53,8 @@ public class OnOffSet : MonoBehaviour
         onButton.sprite = onInactiveSprite;
         offButton.sprite = offActiveSprite;
         state = false;
+
+        toggled?.Invoke();
     }
 
     
