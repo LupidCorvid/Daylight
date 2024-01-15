@@ -23,6 +23,8 @@ public class PauseScreen : MonoBehaviour
 
     public SettingsMenu settingsScreen;
 
+    public SettingsMiniMenu miniSettings;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,13 @@ public class PauseScreen : MonoBehaviour
             if (MenuManager.inMenu)
             {
                 MenuManager.main.closeMenu();
+                return;
+            }
+
+            if(miniSettings.group.alpha == 1)
+            {
+                miniSettings.CloseMenu();
+                ShowMenu();
                 return;
             }
 
