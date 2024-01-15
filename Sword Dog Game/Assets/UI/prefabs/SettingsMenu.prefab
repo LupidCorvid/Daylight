@@ -184,6 +184,7 @@ MonoBehaviour:
   listeningForNewBind: 0
   assignedAction: Jump
   currKeyDisplay: {fileID: 2919733602163902790}
+  blackList: []
 --- !u!1 &852215690435120308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1904,14 @@ PrefabInstance:
     - target: {fileID: 2325274344338350735, guid: aaa74454603903748b8ae2675e3ffb23, type: 3}
       propertyPath: assignedAction
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325274344338350735, guid: aaa74454603903748b8ae2675e3ffb23, type: 3}
+      propertyPath: blackList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325274344338350735, guid: aaa74454603903748b8ae2675e3ffb23, type: 3}
+      propertyPath: blackList.Array.data[0]
+      value: /Mouse/leftButton
       objectReference: {fileID: 0}
     - target: {fileID: 6711338360666228388, guid: aaa74454603903748b8ae2675e3ffb23, type: 3}
       propertyPath: m_RootOrder

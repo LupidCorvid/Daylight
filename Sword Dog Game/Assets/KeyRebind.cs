@@ -14,6 +14,8 @@ public class KeyRebind : MonoBehaviour
     public string assignedAction;
     public TMPro.TextMeshProUGUI currKeyDisplay;
 
+    public List<string> blackList = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,8 @@ public class KeyRebind : MonoBehaviour
     {
         if (listeningForNewBind)
         {
+            if (blackList.Contains(data.name) || blackList.Contains(data.path)) //Specifically meant to allow for disallowing binding menu key to lmb
+                return;
             InputReader.inputs.actions[assignedAction].ApplyBindingOverride(data.path);
 
             //currKeyDisplay.text = data.name;
@@ -40,6 +44,8 @@ public class KeyRebind : MonoBehaviour
 
     public void StartListening()
     {
+        if (listeningForNewBind)
+            return;
         listeningForNewBind = true;
         currKeyDisplay.text = "-";
     }
