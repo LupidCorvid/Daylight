@@ -24,11 +24,12 @@ public class EnemyBase : Entity
     {
         get
         {
-            return ai.attacking;
+            return ai?.attacking == true;
         }
         set
         {
-            ai.attacking = value;
+            if(ai != null)
+                ai.attacking = value;
         }
     }
 
