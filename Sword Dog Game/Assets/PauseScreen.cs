@@ -9,6 +9,7 @@ public class PauseScreen : MonoBehaviour
     public static bool paused = false;
     public static bool canPause = true;
     public static bool quit = false;
+    public static bool lockPauseStatus = false;
 
     CanvasGroup pauseMenuGroup;
 
@@ -19,6 +20,8 @@ public class PauseScreen : MonoBehaviour
     public CanvasGroup quitPrompt;
 
     public static PauseScreen main;
+
+    public SettingsMenu settingsScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +40,7 @@ public class PauseScreen : MonoBehaviour
         }
 
         //Temp implementation. Should work to escape menus and check if not in menus first
-        if (InputReader.inputs != null && InputReader.inputs.actions["Pause"].WasPressedThisFrame())
+        if (InputReader.inputs != null && InputReader.inputs.actions["Pause"].WasPressedThisFrame() && !lockPauseStatus)
         {
             if (ChangeScene.changingScene || GameSaver.loading || !Crossfade.over)
             {
@@ -186,6 +189,11 @@ public class PauseScreen : MonoBehaviour
         DialogController.closedAnimator = true;
         Crossfade.current.StopFade();
         quit = false;
+    }
+
+    public void OpenSettings()
+    {
+        settingsScreen.OpenMenu();
     }
 
 }

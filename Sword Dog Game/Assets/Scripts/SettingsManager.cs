@@ -15,8 +15,8 @@ public class SettingsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (currentSettings == null)
-            currentSettings = new Settings();
+        //if (currentSettings == null)
+        //    currentSettings = new Settings();
 
         if (File.Exists(Application.persistentDataPath + "/" + fileName))
             LoadSettings();

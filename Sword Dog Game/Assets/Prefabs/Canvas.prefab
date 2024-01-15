@@ -61,6 +61,7 @@ MonoBehaviour:
   resumeButton: {fileID: 4466211094771914006}
   yesButton: {fileID: 2712134481380000997}
   quitPrompt: {fileID: 3195830351215137738}
+  settingsScreen: {fileID: 117231746211991414}
 --- !u!225 &2878834602629363756
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7505,6 +7506,7 @@ MonoBehaviour:
   resumeButton: {fileID: 0}
   yesButton: {fileID: 0}
   quitPrompt: {fileID: 0}
+  settingsScreen: {fileID: 0}
 --- !u!1 &7231214121494446904
 GameObject:
   m_ObjectHideFlags: 0
@@ -9852,6 +9854,7 @@ MonoBehaviour:
   resumeButton: {fileID: 0}
   yesButton: {fileID: 0}
   quitPrompt: {fileID: 0}
+  settingsScreen: {fileID: 0}
 --- !u!225 &2675045423467239871
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -10119,7 +10122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6199474490426642199}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 804356867}
+        m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8970259105834717540
 GameObject:
   m_ObjectHideFlags: 0
@@ -11050,6 +11065,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
+--- !u!114 &117231746211991414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3530832861381286980, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
+  m_PrefabInstance: {fileID: 3503928471442494258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51984d872e0dba74a8999d2a48490042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6518578389629448043 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7698570288439737433, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
