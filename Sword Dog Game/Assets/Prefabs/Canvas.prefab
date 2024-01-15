@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b3ff6c9db9f0843a3cc507990bd544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!1 &397081870535425538
 GameObject:
   m_ObjectHideFlags: 0
@@ -10948,8 +10949,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2848741220698470918, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 4960952990319707659, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960952990319707659, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960952990319707659, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
+      propertyPath: m_BlocksRaycasts
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7698570288439737433, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
@@ -10998,7 +11007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7698570288439737433, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.052590024
+      value: 0.05259002
       objectReference: {fileID: 0}
     - target: {fileID: 7698570288439737433, guid: 312869fdbae01f04b96e415107ff563d, type: 3}
       propertyPath: m_LocalRotation.w
