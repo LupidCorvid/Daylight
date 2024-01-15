@@ -31,8 +31,9 @@ public class KeyRebind : MonoBehaviour
         if (listeningForNewBind)
         {
             InputReader.inputs.actions[assignedAction].ApplyBindingOverride(data.path);
-            
-            currKeyDisplay.text = data.name;
+
+            //currKeyDisplay.text = data.name;
+            currKeyDisplay.text = InputReader.inputs.actions[assignedAction].GetBindingDisplayString(InputBinding.DisplayStringOptions.DontIncludeInteractions);
             listeningForNewBind = false;
         }
     }
