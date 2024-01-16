@@ -70,6 +70,8 @@ public class AudioManager : MonoBehaviour
         {
             musicVolume = SettingsManager.currentSettings.musicVolume;
             mute = SettingsManager.currentSettings.musicMute;
+
+            sfxVolume = SettingsManager.currentSettings.sfxVolume;
         }
         else
         {
@@ -178,6 +180,7 @@ public class AudioManager : MonoBehaviour
                 musicVolume -= 0.1f;
         }
         SettingsManager.currentSettings.musicVolume = musicVolume;
+        SettingsManager.currentSettings.sfxVolume = sfxVolume;
 
         float pitch;
         musicMixer.GetFloat("Pitch", out pitch);

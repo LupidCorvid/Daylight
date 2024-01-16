@@ -33,7 +33,7 @@ public class DotSlider : MonoBehaviour
         value = newValue;
         for (int i = 0; i < dots.Count; i++)
         {
-            if (i * 1 / (dots.Count - 1) <= value)
+            if (i * 1f / (dots.Count - 1) <= value)
                 dots[i].image.color = FillColor;
             else
                 dots[i].image.color = EmptyColor;

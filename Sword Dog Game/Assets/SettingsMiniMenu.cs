@@ -18,9 +18,6 @@ public class SettingsMiniMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        musicSetting.SetValue(SettingsManager.currentSettings.musicVolume);
-        sfxSetting.SetValue(SettingsManager.currentSettings.sfxVolume);
-
 
         musicSetting.changed += MusicSettingChanged;
         sfxSetting.changed += SfxSettingChanged;
@@ -40,13 +37,17 @@ public class SettingsMiniMenu : MonoBehaviour
     public void MusicSettingChanged()
     {
         //SettingsManager.currentSettings.musicVolume = musicSetting.value;
-        AudioManager.instance.musicVolume = musicSetting.value;
+        //AudioManager.instance.musicVolume = musicSetting.value;
+        AudioManager.instance.musicVolume = Mathf.Log10(musicSetting.value + 0.00001f) * 20;
+        //Debug.Log("Check equal: " + (Mathf.Abs(musicSetting.value - Mathf.Pow(10, (SettingsManager.currentSettings.musicVolume / 20)) - 0.00001f) < .001f));
+        //Debug.Log("Real: " + musicSetting.value + "Calced: " + (Mathf.Pow(10, (SettingsManager.currentSettings.musicVolume / 20)) - 0.00001f));
     }
 
     public void SfxSettingChanged()
     {
         //SettingsManager.currentSettings.sfxVolume = sfxSetting.value;
-        AudioManager.instance.sfxVolume = sfxSetting.value;
+        //AudioManager.instance.sfxVolume = sfxSetting.value;
+        AudioManager.instance.sfxVolume = Mathf.Log10(sfxSetting.value + 0.00001f) * 20;
     }
 
     public void qualitySettingChanged()
@@ -74,6 +75,11 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void OpenMenu()
     {
+
+
+        musicSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.musicVolume / 20)) - 0.00001f);
+        sfxSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.sfxVolume / 20)) - 0.00001f);
+
         group.alpha = 1;
         group.blocksRaycasts = true;
         group.interactable = true;
