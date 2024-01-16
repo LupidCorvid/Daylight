@@ -13,7 +13,7 @@ public class SettingsManager : MonoBehaviour
     //public InputActionAsset currentActions;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //if (currentSettings == null)
         //    currentSettings = new Settings();

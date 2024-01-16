@@ -18,6 +18,10 @@ public class SettingsMiniMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        musicSetting.SetValue(SettingsManager.currentSettings.musicVolume);
+        sfxSetting.SetValue(SettingsManager.currentSettings.sfxVolume);
+
+
         musicSetting.changed += MusicSettingChanged;
         sfxSetting.changed += SfxSettingChanged;
 
@@ -35,12 +39,14 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void MusicSettingChanged()
     {
-        
+        //SettingsManager.currentSettings.musicVolume = musicSetting.value;
+        AudioManager.instance.musicVolume = musicSetting.value;
     }
 
     public void SfxSettingChanged()
     {
-
+        //SettingsManager.currentSettings.sfxVolume = sfxSetting.value;
+        AudioManager.instance.sfxVolume = sfxSetting.value;
     }
 
     public void qualitySettingChanged()
@@ -78,5 +84,7 @@ public class SettingsMiniMenu : MonoBehaviour
         group.alpha = 0;
         group.blocksRaycasts = false;
         group.interactable = false;
+
+        SettingsManager.SaveSettings();
     }
 }
