@@ -4317,7 +4317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f896dbfde7bca458f76b25369c5485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setValue: 1
+  value: 1
+  dotNum: 0
   FillColor: {r: 1, g: 0.9729994, b: 0, a: 1}
   EmptyColor: {r: 0.59607846, g: 0.49411765, b: 0.14901961, a: 1}
 --- !u!1 &2007141335935187169
@@ -4615,7 +4616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f896dbfde7bca458f76b25369c5485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setValue: 1
+  value: 1
+  dotNum: 0
   FillColor: {r: 1, g: 0.9729994, b: 0, a: 1}
   EmptyColor: {r: 0.59607846, g: 0.49411765, b: 0.14901961, a: 1}
 --- !u!1 &2289773524987620443
@@ -4738,7 +4740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 789145822666939416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1379257261206297069}
+        m_TargetAssemblyTypeName: OnOffSet, Assembly-CSharp
+        m_MethodName: TurnOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2330677434094278056
 GameObject:
   m_ObjectHideFlags: 0
@@ -7973,7 +7987,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9162416859929583111}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3811728080216404938}
+        m_TargetAssemblyTypeName: OnOffSet, Assembly-CSharp
+        m_MethodName: TurnOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4260798619762321803
 GameObject:
   m_ObjectHideFlags: 0
@@ -8301,7 +8327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f896dbfde7bca458f76b25369c5485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setValue: 1
+  value: 1
+  dotNum: 0
   FillColor: {r: 1, g: 0.9729994, b: 0, a: 1}
   EmptyColor: {r: 0.59607846, g: 0.49411765, b: 0.14901961, a: 1}
 --- !u!1 &4323138211607217467
@@ -11850,7 +11877,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5202141854569278421}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1379257261206297069}
+        m_TargetAssemblyTypeName: OnOffSet, Assembly-CSharp
+        m_MethodName: TurnOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7179490775209391709
 GameObject:
   m_ObjectHideFlags: 0
@@ -12506,10 +12545,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onButton: {fileID: 522328233099309398}
   offButton: {fileID: 9162416859929583111}
-  onActiveSprite: {fileID: 0}
-  onInactiveSprite: {fileID: 0}
-  offActiveSprite: {fileID: 0}
-  offInactiveSprite: {fileID: 0}
+  onActiveSprite: {fileID: 21300000, guid: d5f6801d0cdafb84786468d694794d61, type: 3}
+  onInactiveSprite: {fileID: 21300000, guid: 7450d61b263dcd649bcc70d922345656, type: 3}
+  offActiveSprite: {fileID: 21300000, guid: 10ba6e5103af4e942a9108338495ec21, type: 3}
+  offInactiveSprite: {fileID: 21300000, guid: c6953e67ddce0f24fab1e809730821cf, type: 3}
   state: 0
 --- !u!1 &7698186297144639795
 GameObject:
@@ -14207,7 +14246,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 522328233099309398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3811728080216404938}
+        m_TargetAssemblyTypeName: OnOffSet, Assembly-CSharp
+        m_MethodName: TurnOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8356342344056788270
 GameObject:
   m_ObjectHideFlags: 0

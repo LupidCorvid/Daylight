@@ -39,22 +39,41 @@ public class OnOffSet : MonoBehaviour
             TurnOff();
     }
 
+    public void Set(bool newVal)
+    {
+        state = newVal;
+        if (state)
+            setEnabledSprites();
+        else
+            setDisabledSprites();
+    }
+
     public void TurnOn()
     {
-        onButton.sprite = onActiveSprite;
-        offButton.sprite = offInactiveSprite;
-        state = true;
+        setEnabledSprites();
 
         toggled?.Invoke();
     }
 
+    public void setEnabledSprites()
+    {
+        onButton.sprite = onActiveSprite;
+        offButton.sprite = offInactiveSprite;
+        state = true;
+    }
+
     public void TurnOff()
+    {
+        setDisabledSprites();
+
+        toggled?.Invoke();
+    }
+
+    public void setDisabledSprites()
     {
         onButton.sprite = onInactiveSprite;
         offButton.sprite = offActiveSprite;
         state = false;
-
-        toggled?.Invoke();
     }
 
     

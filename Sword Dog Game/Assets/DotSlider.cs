@@ -9,6 +9,7 @@ public class DotSlider : MonoBehaviour
     List<Button> dots = new List<Button>();
 
     public float value = 1;
+    public int dotNum = 0;
 
     public Action changed;
 
@@ -40,9 +41,25 @@ public class DotSlider : MonoBehaviour
         }
     }
 
+    //Sets value based on intVal/maxVal
+    public void SetValue(int newValue)
+    {
+        if (newValue > dots.Count)
+            return;
+        dotNum = newValue;
+        for (int i = 0; i < dots.Count; i++)
+        {
+            if (i <= newValue)
+                dots[i].image.color = FillColor;
+            else
+                dots[i].image.color = EmptyColor;
+        }
+    }
+
     public void DotClicked(int index)
     {
         value = index * 1f / (dots.Count - 1);
+        dotNum = index;
 
         changed?.Invoke();
 

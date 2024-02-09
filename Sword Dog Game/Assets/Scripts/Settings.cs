@@ -30,6 +30,10 @@ public class Settings
 
     public bool fullScreen = true;
 
+    public bool vSync = false;
+
+    public int quality = 1;
+
     public enum FontOption
     {
         GOOD_DOG, OPEN_DYSLEXIC

@@ -33,6 +33,19 @@ public class SettingsManager : MonoBehaviour
         currentSettings = newSettings;
         if(currentSettings.keybinds != "")
             InputReader.inputs.actions.LoadBindingOverridesFromJson(currentSettings.keybinds);
+
+        //Screen.fullScreen = currentSettings.fullScreen;
+
+        if (currentSettings.fullScreen)
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        else
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+
+        QualitySettings.SetQualityLevel(currentSettings.quality);
+        if (currentSettings.vSync)
+            QualitySettings.vSyncCount = 1;
+        else
+            QualitySettings.vSyncCount = 0;
     }
 
     public static void SaveSettings()

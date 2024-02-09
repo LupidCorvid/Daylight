@@ -26,6 +26,7 @@ public class SettingsMiniMenu : MonoBehaviour
 
         fullScreen.toggled += fullScreenToggled;
         vSync.toggled += vSyncToggled;
+
     }
 
     // Update is called once per frame
@@ -52,17 +53,28 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void qualitySettingChanged()
     {
-
+        QualitySettings.SetQualityLevel(qualitySetting.dotNum);
+        SettingsManager.currentSettings.quality = qualitySetting.dotNum;
     }
 
     public void fullScreenToggled()
     {
-
+        //Screen.fullScreen = fullScreen.state;
+        if (SettingsManager.currentSettings.fullScreen)
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        else
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        SettingsManager.currentSettings.fullScreen = fullScreen.state;
     }
 
     public void vSyncToggled()
     {
+        if (vSync.state)
+            QualitySettings.vSyncCount = 1;
+        else
+            QualitySettings.vSyncCount = 0;
 
+        SettingsManager.currentSettings.vSync = vSync.state;
     }
 
     private void OnDestroy()
@@ -75,10 +87,12 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void OpenMenu()
     {
-
-
         musicSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.musicVolume / 20)) - 0.00001f);
         sfxSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.sfxVolume / 20)) - 0.00001f);
+        qualitySetting.SetValue(SettingsManager.currentSettings.quality);
+
+        fullScreen.Set(SettingsManager.currentSettings.fullScreen);
+        vSync.Set(SettingsManager.currentSettings.vSync);
 
         group.alpha = 1;
         group.blocksRaycasts = true;
