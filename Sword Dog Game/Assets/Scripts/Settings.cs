@@ -34,6 +34,8 @@ public class Settings
 
     public int quality = 1;
 
+    public bool GrassSway = true;
+
     public enum FontOption
     {
         GOOD_DOG, OPEN_DYSLEXIC
