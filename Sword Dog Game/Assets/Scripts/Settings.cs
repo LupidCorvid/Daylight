@@ -36,6 +36,8 @@ public class Settings
 
     public bool GrassSway = true;
 
+    public float xRes = 0.5f, yRes = 0.5f;
+
     public enum FontOption
     {
         GOOD_DOG, OPEN_DYSLEXIC

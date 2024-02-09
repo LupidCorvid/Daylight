@@ -4,11 +4,12 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using UnityEngine.InputSystem;
+using System;
 
 
 public class SettingsManager : MonoBehaviour
 {
-    public static Settings currentSettings;
+    public static Settings currentSettings = null;
     public const string fileName = "Settings.txt";
     //public InputActionAsset currentActions;
 
@@ -18,7 +19,7 @@ public class SettingsManager : MonoBehaviour
         //if (currentSettings == null)
         //    currentSettings = new Settings();
 
-        if (File.Exists(Application.persistentDataPath + "/" + fileName))
+        if (File.Exists(Application.persistentDataPath + "/" + fileName) && currentSettings == null)
             LoadSettings();
         else
         {
@@ -34,13 +35,16 @@ public class SettingsManager : MonoBehaviour
         if(currentSettings.keybinds != "")
             InputReader.inputs.actions.LoadBindingOverridesFromJson(currentSettings.keybinds);
 
-        //Screen.fullScreen = currentSettings.fullScreen;
-
         if (currentSettings.fullScreen)
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        {
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
+        }
         else
-            Screen.fullScreenMode = FullScreenMode.Windowed;
-
+        {
+            currentSettings.xRes = Mathf.Clamp(currentSettings.xRes, 0.1f, 1.0f);
+            currentSettings.yRes = Mathf.Clamp(currentSettings.yRes, 4/9f, 1.0f);
+            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
+        }
         QualitySettings.SetQualityLevel(currentSettings.quality);
         if (currentSettings.vSync)
             QualitySettings.vSyncCount = 1;

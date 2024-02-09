@@ -63,12 +63,20 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void fullScreenToggled()
     {
-        //Screen.fullScreen = fullScreen.state;
-        if (SettingsManager.currentSettings.fullScreen)
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        else
-            Screen.fullScreenMode = FullScreenMode.Windowed;
         SettingsManager.currentSettings.fullScreen = fullScreen.state;
+        if (SettingsManager.currentSettings.fullScreen)
+        {
+            SettingsManager.currentSettings.xRes = (float)Screen.width / Display.main.systemWidth;
+            SettingsManager.currentSettings.yRes = (float)Screen.height / Display.main.systemHeight;
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
+        }
+        else
+        {
+            SettingsManager.currentSettings.xRes = Mathf.Clamp(SettingsManager.currentSettings.xRes, 0.1f, 1.0f);
+            SettingsManager.currentSettings.yRes = Mathf.Clamp(SettingsManager.currentSettings.yRes, 4 / 9f, 1.0f);
+            Screen.SetResolution((int)(SettingsManager.currentSettings.xRes * Display.main.systemWidth), (int)(SettingsManager.currentSettings.yRes * Display.main.systemHeight), false);
+            Screen.SetResolution((int)(SettingsManager.currentSettings.xRes * Display.main.systemWidth), (int)(SettingsManager.currentSettings.yRes * Display.main.systemHeight), false);
+        }
     }
 
     public void vSyncToggled()
@@ -96,8 +104,8 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public void OpenMenu()
     {
-        musicSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.musicVolume / 20)) - 0.00001f);
-        sfxSetting.SetValue(Mathf.Pow(10, (SettingsManager.currentSettings.sfxVolume / 20)) - 0.00001f);
+        musicSetting.SetValue(Mathf.Pow(10, SettingsManager.currentSettings.musicVolume / 20) - 0.00001f);
+        sfxSetting.SetValue(Mathf.Pow(10, SettingsManager.currentSettings.sfxVolume / 20) - 0.00001f);
         qualitySetting.SetValue(SettingsManager.currentSettings.quality);
 
         fullScreen.Set(SettingsManager.currentSettings.fullScreen);
