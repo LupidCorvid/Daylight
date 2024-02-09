@@ -146,6 +146,9 @@ public class SwayEffect : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!SettingsManager.currentSettings.GrassSway)
+            return;
+
         if (((int)Mathf.Pow(2, collision.gameObject.layer) & LayerMask.GetMask("TerrainFX", "Utility")) == 0)
         {
             float distanceModifier = 1;
@@ -225,7 +228,7 @@ public class SwayEffect : MonoBehaviour
         //if (player != null && ((player.position - transform.position).x > 25 || (player.position - transform.position).y > 15))
         //    return;
         //New culling
-        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize/6)
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize/6 || !SettingsManager.currentSettings.GrassSway)
             return;
 
         //Wind direction makes it so that wind rolls in the same direction as things are bending

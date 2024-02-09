@@ -15,6 +15,8 @@ public class SettingsMiniMenu : MonoBehaviour
     public OnOffSet fullScreen;
     public OnOffSet vSync;
 
+    public OnOffSet grassSway;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,8 @@ public class SettingsMiniMenu : MonoBehaviour
 
         fullScreen.toggled += fullScreenToggled;
         vSync.toggled += vSyncToggled;
+
+        grassSway.toggled += grassToggle;
 
     }
 
@@ -77,6 +81,11 @@ public class SettingsMiniMenu : MonoBehaviour
         SettingsManager.currentSettings.vSync = vSync.state;
     }
 
+    public void grassToggle()
+    {
+        SettingsManager.currentSettings.GrassSway = grassSway.state;
+    }
+
     private void OnDestroy()
     {
         if(musicSetting != null)
@@ -93,6 +102,7 @@ public class SettingsMiniMenu : MonoBehaviour
 
         fullScreen.Set(SettingsManager.currentSettings.fullScreen);
         vSync.Set(SettingsManager.currentSettings.vSync);
+        grassSway.Set(SettingsManager.currentSettings.GrassSway);
 
         group.alpha = 1;
         group.blocksRaycasts = true;
