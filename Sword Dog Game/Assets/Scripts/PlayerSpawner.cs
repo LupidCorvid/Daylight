@@ -26,6 +26,7 @@ public class PlayerSpawner : MonoBehaviour
                 // GameSaver.player.inventory.SetValues(newPlayer);
                 // GameSaver.player.attack.SetValues(newPlayer);
                 GameSaver.loading = false;
+                SpawnManager.instance.transform.position = newPlayer.transform.position + new Vector3(0, 2, -10);
             }
         }
     }

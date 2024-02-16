@@ -140,8 +140,6 @@ public class CameraController : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         cldr.size = new Vector3(18, 10) * mainCam.orthographicSize / 5;
-        
-        
     }
 
     public static void OverrideMovement(Transform player, float duration = 0.5f)
