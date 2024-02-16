@@ -56,6 +56,8 @@ public class DialogController : MonoBehaviour
 
     public Animator DotAnimator;
 
+    public bool collected = false;
+
     void Awake()
     {
         main = this;
@@ -75,7 +77,27 @@ public class DialogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputReader.inputs == null) return; // temp
+        //if (InputReader.inputs == null) return; // temp
+        //if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame() || InputReader.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
+        //{
+        //    if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+        //    {
+        //        source.skippingText = true;
+        //        skippedTextThisFrame = true;
+        //    }
+        //    pauseWaitForInputEnd();
+        //}
+        //if (reading)
+        //{
+        //    textDisplay.text = source.read();
+        //    textDisplay.ForceMeshUpdate();
+
+        //}
+
+        //if (main == null || main != this)
+        //    main = this;
+
+        //Copy of No Laughing Matter vers.
         if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame() || InputReader.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
         {
             if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
@@ -87,13 +109,20 @@ public class DialogController : MonoBehaviour
         }
         if (reading)
         {
-            textDisplay.text = source.read();
-            textDisplay.ForceMeshUpdate();
-            
+            if (!collected)
+            {
+                textDisplay.maxVisibleCharacters = 0;
+                textDisplay.text = source.collect();
+                collected = true;
+            }
+            if(source.position > 0 && source.position < source.dialog.Length)
+                Debug.Log("Reading at " + source.position + " " + source.dialog[source.position]);
+            source.read(DialogSource.ReadMode.TYPEWRITE);
+            textDisplay.maxVisibleCharacters = source.charCount;
         }
-        
-        if (main == null || main != this)
-            main = this;
+        if (collected)
+            textDisplay.ForceMeshUpdate();
+
     }
 
     private void LateUpdate()
@@ -197,6 +226,7 @@ public class DialogController : MonoBehaviour
         source = newSource;
         text = "";
         headerDisplay.text = "";
+        source.position = 0;
         textEffects.Clear();
         newSource.requestOptionsStart += promptSelections;
         newSource.changeHeaderName += setHeaderName;
@@ -271,6 +301,9 @@ public class DialogController : MonoBehaviour
     public void OutputCleared()
     {
         textEffects.Clear();
+        source.position--;
+        collected = false;
+        
     }
 
     public int GetLengthNoCommands()

@@ -232,6 +232,7 @@ public class DialogSource
 
     public string collect()
     {
+        int originalPosition = position;
         if (waiting || waitingForButtonInput || dialog == null)
             return outString;
         
@@ -246,7 +247,7 @@ public class DialogSource
                 Debug.LogWarning("Speed was left at 0, this could prevent anything else from running! Always return speed to non-zero once finishing");
             }
         }
-        position = 0;
+        position = originalPosition;
         charCount = 0;
         return outString;
     }
@@ -291,9 +292,17 @@ public class DialogSource
     
     private void readDialog(ReadMode mode = ReadMode.DEFAULT)
     {
+        if (position > dialog.Length)
+        {
+            Debug.Log("Tried reading too far at " + position + " | " + dialog);
+        }
+
         if (waiting || waitingForButtonInput)
             return;
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
+        if (position < 0)
+            position = 0;
+        
         while (position < dialog.Length && dialog[position] == '[')
         {
             //int endPos = dialog.IndexOf(']', position);
@@ -315,10 +324,17 @@ public class DialogSource
                 }
             }
             position = endPos + 1;
-            if (mode != ReadMode.TYPEWRITE) // TODO this may need to be changed to account for effects that should not run in collect mode
-                processStringEffect(mode, parameters.ToArray());
-            else if (parameters[0] != "TFX" && parameters[0] != "/TFX") // TODO this may need to be expanded to cover other effects that should not run in typewrite mode
-                processStringEffect(mode, parameters.ToArray());
+
+            if ((mode == ReadMode.COLLECT && parameters[0] != "c") || mode != ReadMode.COLLECT)
+            {
+                if (mode != ReadMode.TYPEWRITE) // TODO this may need to be changed to account for effects that should not run in collect mode
+                    processStringEffect(mode, parameters.ToArray());
+                else if (parameters[0] != "TFX" && parameters[0] != "/TFX" && parameters[0] != "IA") // TODO this may need to be expanded to cover other effects that should not run in typewrite mode
+                    processStringEffect(mode, parameters.ToArray());
+            }
+
+            if (mode == ReadMode.COLLECT && (parameters[0] == "c" || parameters[0] == "prompt"))
+                skippingText = false;
         }
         if (position >= dialog.Length)
             return;
@@ -368,11 +384,21 @@ public class DialogSource
         //Whitelist so that typewrite only runs certain commands (ones that collect didn't run)
         if(mode == ReadMode.TYPEWRITE)
         {
-            if (input[0] != "w" && input[0] != "c" && input[0] != "exit")
-            {
+            //Whitelist of what to run when running typewrite
+            if (input[0] != "w" && input[0] != "c" && input[0] != "exit" && input[0] != "IA" && input[0] != "prompt" && input[0] != "ss" 
+                && input[0] != "sh" && input[0] != "emote" && input[0] != "reemote" && input[0] != "abf" && input[0] != "wi"
+                && input[0] != "CE")
                 return;
-            }
+            
         }
+        if(mode == ReadMode.COLLECT)
+        {
+            //Blacklist of what not to run when running collect
+            if (input[0] == "ss"|| input[0] == "sh" || input[0] == "b" || input[0] == "prompt" || input[0] == "emote" || input[0] == "reemote"
+                || input[0] == "abf" || input[0] == "wi" || input[0] == "CE")
+                return;
+        }
+
         switch (input[0])
         {
             case "b":
@@ -478,7 +504,7 @@ public class DialogSource
                     responseOutputsNumeric.Add(input[i + 1]);
                 }
                 promptResponse(options.ToArray());
-
+                
                 break;
             case "sh":
                 if (input.Length == 1)
