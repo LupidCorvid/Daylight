@@ -7911,7 +7911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3985560885687876789}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
@@ -8961,10 +8961,10 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 34.1448, y: 2.7174988}
-  m_SizeDelta: {x: -65.0545, y: -87.6472}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 68.43466, y: 46.541107}
+  m_SizeDelta: {x: -66.8171, y: -87.6472}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &1592817886527019191
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8994,10 +8994,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 697e6f44a54d8f7498028284cafb40dd, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -9016,6 +9016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 7627102694050597096}
+  fillImage: {fileID: 4548502962839298305}
 --- !u!1 &4539257094951057503
 GameObject:
   m_ObjectHideFlags: 0
@@ -11254,6 +11255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 7627102694050597096}
+  fillImage: {fileID: 0}
 --- !u!1 &6103636193738898549
 GameObject:
   m_ObjectHideFlags: 0
