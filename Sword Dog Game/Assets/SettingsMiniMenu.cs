@@ -17,6 +17,8 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public OnOffSet grassSway;
 
+    public OnOffSet altFont;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,7 @@ public class SettingsMiniMenu : MonoBehaviour
 
         grassSway.toggled += grassToggle;
 
+        altFont.toggled += altFontToggled;
     }
 
     // Update is called once per frame
@@ -111,10 +114,24 @@ public class SettingsMiniMenu : MonoBehaviour
         fullScreen.Set(SettingsManager.currentSettings.fullScreen);
         vSync.Set(SettingsManager.currentSettings.vSync);
         grassSway.Set(SettingsManager.currentSettings.GrassSway);
+        if(SettingsManager.currentSettings.fontFace == Settings.FontOption.OPEN_DYSLEXIC)
+            altFont.Set(true);
+        else
+            altFont.Set(false);
 
         group.alpha = 1;
         group.blocksRaycasts = true;
         group.interactable = true;
+    }
+
+    public void altFontToggled()
+    {
+        if (altFont.state)
+            SettingsManager.currentSettings.fontFace = Settings.FontOption.OPEN_DYSLEXIC;
+        else
+            SettingsManager.currentSettings.fontFace = Settings.FontOption.GOOD_DOG;
+
+        FontManager.main.current = SettingsManager.currentSettings.fontFace;
     }
 
     public void CloseMenu()

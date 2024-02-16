@@ -20,6 +20,7 @@ public class FontManager : MonoBehaviour
     void Start()
     {
         main = this;
+        current = SettingsManager.currentSettings.fontFace;
     }
 
     // Update is called once per frame
