@@ -78,22 +78,6 @@ public class DialogController : MonoBehaviour
     void Update()
     {
         //if (InputReader.inputs == null) return; // temp
-        //if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame() || InputReader.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
-        //{
-        //    if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
-        //    {
-        //        source.skippingText = true;
-        //        skippedTextThisFrame = true;
-        //    }
-        //    pauseWaitForInputEnd();
-        //}
-        //if (reading)
-        //{
-        //    textDisplay.text = source.read();
-        //    textDisplay.ForceMeshUpdate();
-
-        //}
-
         //if (main == null || main != this)
         //    main = this;
 
@@ -210,6 +194,7 @@ public class DialogController : MonoBehaviour
         source.receiveResponse(response);
         responseController.close();
         gotResponseThisFrame = true;
+        collected = false;
     }
 
     public void setSource(DialogSource newSource)
