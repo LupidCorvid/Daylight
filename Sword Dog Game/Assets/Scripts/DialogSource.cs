@@ -335,7 +335,7 @@ public class DialogSource
 
         if (dialog.Length > position && !(dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
         {
-            if (mode != ReadMode.COLLECT)
+            if (mode != ReadMode.COLLECT && !skippingText)
             {
                 if (barkCooldown > autoBarkFrequency)
                 {
