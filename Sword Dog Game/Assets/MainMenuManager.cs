@@ -33,7 +33,9 @@ public class MainMenuManager : MonoBehaviour
         (string ,int) lastSaveData = GetMostRecentSave();
         lastSave = lastSaveData.Item1;
         lastSaveNum = lastSaveData.Item2;
+        ResetPlayerBools();
 
+        
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
@@ -70,6 +72,16 @@ public class MainMenuManager : MonoBehaviour
 
         Invoke("ActivateButtons", 0.4f);
         PopulateLoadMenu();
+    }
+
+    public void ResetPlayerBools()
+    {
+        //!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open
+        //&& DialogController.main.source?.waiting != true
+        PlayerHealth.dead = false;
+        CutsceneController.cutsceneStopMovement = false;
+        if (DialogController.main?.source != null)
+            DialogController.main.source.waiting = false;
     }
 
     public void ActivateButtons()
