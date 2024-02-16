@@ -32,10 +32,10 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    public void SaveSettings()
-    {
-        SettingsManager.SaveSettings();
-    }
+    //public void SaveSettings()
+    //{
+    //    SettingsManager.SaveSettings();
+    //}
 
     public void CloseMenu()
     {

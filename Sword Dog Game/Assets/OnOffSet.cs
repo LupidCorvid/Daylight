@@ -33,10 +33,11 @@ public class OnOffSet : MonoBehaviour
 
     public void UpdateState()
     {
-        if (state)
-            TurnOn();
-        else
-            TurnOff();
+        //if (state)
+        //    TurnOn();
+        //else
+        //    TurnOff();
+        Set(state);
     }
 
     public void Set(bool newVal)

@@ -21,7 +21,7 @@ public class SettingsManager : MonoBehaviour
 
         if (File.Exists(Application.persistentDataPath + "/" + fileName) && currentSettings == null)
             LoadSettings();
-        else
+        else if (currentSettings == null)
         {
             currentSettings = new Settings();
             SaveSettings();
