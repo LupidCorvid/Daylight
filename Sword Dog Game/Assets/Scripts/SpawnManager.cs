@@ -9,9 +9,12 @@ public class SpawnManager : MonoBehaviour
 
     private GameObject spawnPointObj;
     private Transform spawnPoint;
+    public static SpawnManager instance;
 
-    void Start()
+    void Awake()
     {
+        instance = this;
+
         if (Player.instance != null)
         {
             player = Player.instance.transform;
@@ -32,7 +35,12 @@ public class SpawnManager : MonoBehaviour
                 }
             }
             CameraController.OverrideMovement(player, 0.3f);
-            transform.position = player.position + new Vector3(0, 2, -10);
+        }
+        else if (GameSaver.loading)
+        {
+            transform.position = GameSaver.player.spawnpoint.position;
+            CameraController.OverrideMovement(transform, 0.3f);
+            transform.position += new Vector3(0, 2, -10);
         }
     }
 
