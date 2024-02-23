@@ -12,7 +12,12 @@ public class StaminaBar : MonoBehaviour
     {
         //if(Player.controller != null)
         //    slider.value = Player.controller.stamina / Player.controller.maxStamina;
+        
+        fillImage ??= GetComponent<Image>();
+
         if (Player.controller != null)
             fillImage.fillAmount = Player.controller.stamina / Player.controller.maxStamina;
+
+        
     }
 }

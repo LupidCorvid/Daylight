@@ -209,9 +209,24 @@ public class PauseScreen : MonoBehaviour
 
     public void ShowMenu()
     {
+        //if (!canPause)
+        //    return;
         pauseMenuGroup.alpha = 1;
         pauseMenuGroup.blocksRaycasts = true;
         pauseMenuGroup.interactable = true;
+    }
+
+    public void OpenMenuContainer()
+    {
+        pauseContainerGroup.alpha = 1;
+        pauseContainerGroup.blocksRaycasts = true;
+        pauseContainerGroup.interactable = true;
+    }
+    public void CloseMenuContainer()
+    {
+        pauseContainerGroup.alpha = 0;
+        pauseContainerGroup.blocksRaycasts = false;
+        pauseContainerGroup.interactable = false;
     }
 
 }
