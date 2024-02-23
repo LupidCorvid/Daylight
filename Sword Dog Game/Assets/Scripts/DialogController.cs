@@ -99,10 +99,6 @@ public class DialogController : MonoBehaviour
                 textDisplay.text = source.collect();
                 collected = true;
             }
-            if (source.position > 0 && source.position < source.dialog.Length)
-                Debug.Log("Reading at " + source.position + " " + source.dialog[source.position]);
-            else
-                Debug.Log("Reading out of bounds at " + source.position);
             source.read(DialogSource.ReadMode.TYPEWRITE);
             textDisplay.maxVisibleCharacters = source.charCount; //might have issues with TMPPro stuff? 
         }
@@ -289,7 +285,8 @@ public class DialogController : MonoBehaviour
     public void OutputCleared()
     {
         textEffects.Clear();
-        source.position--;
+        //source.position--;
+        
         collected = false;
         
     }
