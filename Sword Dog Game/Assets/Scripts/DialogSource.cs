@@ -339,7 +339,7 @@ public class DialogSource
         }
         if (position >= dialog.Length)
         {
-            Debug.LogWarning("Hit end of dialog without exiting!");
+            //Debug.LogWarning("Hit end of dialog without exiting!");
             return;
         }
             

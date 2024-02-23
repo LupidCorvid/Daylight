@@ -99,8 +99,10 @@ public class DialogController : MonoBehaviour
                 textDisplay.text = source.collect();
                 collected = true;
             }
-            if(source.position > 0 && source.position < source.dialog.Length)
+            if (source.position > 0 && source.position < source.dialog.Length)
                 Debug.Log("Reading at " + source.position + " " + source.dialog[source.position]);
+            else
+                Debug.Log("Reading out of bounds at " + source.position);
             source.read(DialogSource.ReadMode.TYPEWRITE);
             textDisplay.maxVisibleCharacters = source.charCount; //might have issues with TMPPro stuff? 
         }
@@ -212,6 +214,7 @@ public class DialogController : MonoBehaviour
         text = "";
         headerDisplay.text = "";
         source.position = 0;
+        collected = false;
         textEffects.Clear();
         newSource.requestOptionsStart += promptSelections;
         newSource.changeHeaderName += setHeaderName;
