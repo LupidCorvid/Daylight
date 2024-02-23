@@ -60,7 +60,7 @@ public class DialogController : MonoBehaviour
 
     void Awake()
     {
-        main = this;
+        main ??= this;
         textDisplay.ForceMeshUpdate();
 
         textDisplay.OnPreRenderText += applyTextEffects;
