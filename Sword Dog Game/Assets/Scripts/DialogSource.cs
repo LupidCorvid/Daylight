@@ -10,7 +10,7 @@ public class DialogSource
 
     public string dialog;
     public int position;
-    public int charCount;
+    public int charCount = 0;
 
     //Time to wait between words
     public float speed = 0.075f;
@@ -233,6 +233,7 @@ public class DialogSource
     public string collect()
     {
         int originalPosition = position;
+        int originalCharCount = charCount;
         if (waiting || waitingForButtonInput || dialog == null)
             return outString;
         
@@ -248,7 +249,7 @@ public class DialogSource
             }
         }
         position = originalPosition;
-        charCount = 0;
+        charCount = originalCharCount;
         return outString;
     }
 
@@ -337,7 +338,11 @@ public class DialogSource
                 skippingText = false;
         }
         if (position >= dialog.Length)
+        {
+            Debug.LogWarning("Hit end of dialog without exiting!");
             return;
+        }
+            
 
         if (waitFrameForChar)
         {
@@ -443,6 +448,7 @@ public class DialogSource
             case "c":
                 outString = "";
                 skippingText = false;
+                charCount = 0;
                 clear?.Invoke();
                 break;
             case "abf":

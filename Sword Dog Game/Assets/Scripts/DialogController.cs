@@ -95,14 +95,14 @@ public class DialogController : MonoBehaviour
         {
             if (!collected)
             {
-                textDisplay.maxVisibleCharacters = 0;
+                //textDisplay.maxVisibleCharacters = 0;
                 textDisplay.text = source.collect();
                 collected = true;
             }
             if(source.position > 0 && source.position < source.dialog.Length)
                 Debug.Log("Reading at " + source.position + " " + source.dialog[source.position]);
             source.read(DialogSource.ReadMode.TYPEWRITE);
-            textDisplay.maxVisibleCharacters = source.charCount;
+            textDisplay.maxVisibleCharacters = source.charCount; //might have issues with TMPPro stuff? 
         }
         if (collected)
             textDisplay.ForceMeshUpdate();
