@@ -17,7 +17,7 @@ public class FontManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         main = this;
         current = SettingsManager.currentSettings.fontFace;

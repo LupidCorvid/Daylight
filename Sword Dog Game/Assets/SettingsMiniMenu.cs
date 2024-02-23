@@ -19,10 +19,12 @@ public class SettingsMiniMenu : MonoBehaviour
 
     public OnOffSet altFont;
 
+    public static SettingsMiniMenu main;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        main ??= this;
         musicSetting.changed += MusicSettingChanged;
         sfxSetting.changed += SfxSettingChanged;
 
@@ -141,5 +143,12 @@ public class SettingsMiniMenu : MonoBehaviour
         group.interactable = false;
 
         SettingsManager.SaveSettings();
+
+        if (PauseScreen.canPause)
+        {
+            PauseScreen.main.ShowMenu();
+        }
+        else
+            PauseScreen.main.CloseMenuContainer();
     }
 }

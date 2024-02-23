@@ -238,6 +238,15 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public void OpenSettings()
+    {
+        loadMenu.blocksRaycasts = false;
+        loadMenu.alpha = 0;
+        loadMenu.interactable = false;
+        PauseScreen.main.OpenMenuContainer();
+        SettingsMiniMenu.main.OpenMenu();
+    }
+
 }
 
 [System.Serializable]
