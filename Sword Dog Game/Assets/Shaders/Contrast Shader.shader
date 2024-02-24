@@ -29,12 +29,6 @@ Shader "Custom/Contrast"
         ZWrite Off
         Blend One OneMinusSrcAlpha
 
-        // Grab the screen behind the object into _BackgroundTexture
-        GrabPass
-        {
-            "_BackgroundTexture"
-        }
-
         Pass
         {
         CGPROGRAM
@@ -77,13 +71,13 @@ Shader "Custom/Contrast"
                 return OUT;
             }
 
-            sampler2D _BackgroundTexture;
+            sampler2D _CameraSortingLayerTexture;
             
             fixed4 SpriteFrag2(v2f2 IN) : SV_Target
             {
                 fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
 
-                half4 bgcolor = tex2Dproj(_BackgroundTexture, IN.grabPos);
+                float4 bgcolor = tex2D(_CameraSortingLayerTexture, IN.texcoord );
                 if (bgcolor.x <= 23./255. && bgcolor.y <= 23./255. && bgcolor.z <= 23./255. && bgcolor.w == 1)
                 {
                     c.x = 255.0/255.0 - 11*bgcolor.x;
