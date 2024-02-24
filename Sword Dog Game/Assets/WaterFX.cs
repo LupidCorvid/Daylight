@@ -154,22 +154,32 @@ public class WaterFX : MonoBehaviour
             //    WaveOffset[order[selectedItem] + 1].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * 5;
             //Debug.Log("hit");
 
+            WaterSegment chosenWave = WaveOffset[order[selectedItem]];
+            if (order[selectedItem] - 1 >= 0)
+                WaveOffset[order[selectedItem] - 1].waveVel += WaveOffset[order[selectedItem] - 1].tension * (-(WaveOffset[order[selectedItem] - 1].wavePosition - chosenWave.wavePosition)) - WaveOffset[order[selectedItem] - 1].waveVel * WaveOffset[order[selectedItem] - 1].dampening;
+            if (order[selectedItem] + 1 < WaveOffset.Length)
+                WaveOffset[order[selectedItem] + 1].waveVel += WaveOffset[order[selectedItem] + 1].tension * (-(WaveOffset[order[selectedItem] + 1].wavePosition - chosenWave.wavePosition)) - WaveOffset[order[selectedItem] + 1].waveVel * WaveOffset[order[selectedItem] + 1].dampening;
 
-            float currPos = 0;
-            for (int i = 0; i < WaveOffset.Length; i++)
-            {
 
-                float distance = Mathf.Abs(currPos - order[selectedItem] * vertexDistance);
-                if (distance <= 2f)
-                {
-                    //WaveOffset[i].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
-                    //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
+            //float currPos = 0;
+            //for (int i = 0; i < WaveOffset.Length; i++)
+            //{
 
-                    WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * -(distance - 1f)/2f;
-                }
+            //    float distance = Mathf.Abs(currPos - order[selectedItem] * vertexDistance);
+            //    if (distance <= 1f)
+            //    {
+            //        //WaveOffset[i].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
+            //        //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
 
-                currPos += vertexDistance;
-            }
+            //        //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * -(distance - 1f)/2f;
+
+            //        WaterSegment currWave = WaveOffset[i];
+            //        WaterSegment chosenWave = WaveOffset[order[selectedItem]];
+            //        currWave.waveVel += currWave.tension * (-(currWave.wavePosition - chosenWave.wavePosition)) - currWave.waveVel * currWave.dampening;
+            //    }
+
+            //    currPos += vertexDistance;
+            //}
 
 
             order.RemoveAt(selectedItem);
@@ -218,8 +228,8 @@ public class WaterFX : MonoBehaviour
         public float wavePosition;
         public float waveVel;
 
-        float tension = .7f;
-        float dampening = 0.1f;
+        public float tension = .5f;
+        public float dampening = 0.01f;
 
 
         public WaterSegment()
