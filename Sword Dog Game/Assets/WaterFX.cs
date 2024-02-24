@@ -53,13 +53,15 @@ public class WaterFX : MonoBehaviour
         //}
         for (int i = 0; i < WaveOffset.Length; i++)
         {
-            WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 3;
+            WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
 
             WaveOffset[i].UpdateSegment();
         }
 
 
+        ApplyAdjacencyEffects();
         ApplyWaveHeights();
+        
 
     }
 
@@ -131,6 +133,51 @@ public class WaterFX : MonoBehaviour
         
     }
 
+    public void ApplyAdjacencyEffects()
+    {
+        
+        List<int> order = new List<int>();
+
+        for(int i = 0; i < WaveOffset.Length; i++)
+        {
+            order.Add(i);
+        }
+
+        while(order.Count > 0)
+        {
+            int selectedItem = Random.Range(0, order.Count);
+
+
+            //if (order[selectedItem] - 1 >= 0)
+            //    WaveOffset[order[selectedItem] - 1].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * 5;
+            //if (order[selectedItem] + 1 < WaveOffset.Length)
+            //    WaveOffset[order[selectedItem] + 1].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * 5;
+            //Debug.Log("hit");
+
+
+            float currPos = 0;
+            for (int i = 0; i < WaveOffset.Length; i++)
+            {
+
+                float distance = Mathf.Abs(currPos - order[selectedItem] * vertexDistance);
+                if (distance <= 2f)
+                {
+                    //WaveOffset[i].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
+                    //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
+
+                    WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * -(distance - 1f)/2f;
+                }
+
+                currPos += vertexDistance;
+            }
+
+
+            order.RemoveAt(selectedItem);
+        }
+
+
+    }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -171,8 +218,8 @@ public class WaterFX : MonoBehaviour
         public float wavePosition;
         public float waveVel;
 
-        float tension = .1f;
-        float dampening = .1f;
+        float tension = .9f;
+        float dampening = 0.1f;
 
 
         public WaterSegment()
