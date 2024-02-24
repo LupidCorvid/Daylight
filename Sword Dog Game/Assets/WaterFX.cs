@@ -9,8 +9,8 @@ public class WaterFX : MonoBehaviour
     public float vertexDistance = 1;
 
     Mesh.MeshDataArray UnmodifiedMesh;
-    Mesh mesh;
-    MeshFilter meshProperty;
+    public Mesh mesh;
+    public MeshFilter meshProperty;
 
     int numSegments;
 
@@ -23,6 +23,9 @@ public class WaterFX : MonoBehaviour
     public float windSpeed = 1;
     public float windVolatility = 1;
     public float windStrength = 1;
+
+    public Sprite sprite;
+    public Color color = Color.white;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,15 @@ public class WaterFX : MonoBehaviour
 
         SetUp();
         
+    }
+
+    public void OnValidate()
+    {
+        MaterialPropertyBlock materialBlock = new MaterialPropertyBlock();
+        if(sprite != null)
+            materialBlock.SetTexture("_MainTex", sprite.texture);
+        materialBlock.SetColor("_Color", color);
+        GetComponent<MeshRenderer>().SetPropertyBlock(materialBlock);
     }
 
     public void SetUp()
