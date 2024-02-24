@@ -228,7 +228,7 @@ public class WaterFX : MonoBehaviour
         public float wavePosition;
         public float waveVel;
 
-        public float tension = .5f;
+        public float tension = .7f;
         public float dampening = 0.01f;
 
 
