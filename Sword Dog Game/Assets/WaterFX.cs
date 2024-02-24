@@ -44,7 +44,7 @@ public class WaterFX : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         //for(int i = 0; i < WaveOffset.Length; i++)
@@ -218,7 +218,7 @@ public class WaterFX : MonoBehaviour
         public float wavePosition;
         public float waveVel;
 
-        float tension = .9f;
+        float tension = .7f;
         float dampening = 0.1f;
 
 
