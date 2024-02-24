@@ -20,6 +20,10 @@ public class WaterFX : MonoBehaviour
 
     public float motionResponseDampener = 4;
 
+    public float windSpeed = 1;
+    public float windVolatility = 1;
+    public float windStrength = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +54,9 @@ public class WaterFX : MonoBehaviour
     {
         for (int i = 0; i < WaveOffset.Length; i++)
         {
-            WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
+            //WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
+
+            WaveOffset[i].waveVel += SwayEffect.getWindEffect((transform.position.x - size.x/2) + i * vertexDistance, windSpeed, windVolatility, windStrength) * 100;
 
             WaveOffset[i].UpdateSegment();
         }
