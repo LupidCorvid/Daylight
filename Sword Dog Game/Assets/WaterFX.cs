@@ -18,6 +18,8 @@ public class WaterFX : MonoBehaviour
 
     WaterSegment[] WaveOffset;
 
+    public float motionResponseDampener = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +48,6 @@ public class WaterFX : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //for(int i = 0; i < WaveOffset.Length; i++)
-        //{
-        //    WaveOffset[i].wavePosition = Mathf.Sin((Time.time * 3 + i * vertexDistance));
-        //}
         for (int i = 0; i < WaveOffset.Length; i++)
         {
             WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
@@ -147,40 +144,11 @@ public class WaterFX : MonoBehaviour
         {
             int selectedItem = Random.Range(0, order.Count);
 
-
-            //if (order[selectedItem] - 1 >= 0)
-            //    WaveOffset[order[selectedItem] - 1].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * 5;
-            //if (order[selectedItem] + 1 < WaveOffset.Length)
-            //    WaveOffset[order[selectedItem] + 1].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * 5;
-            //Debug.Log("hit");
-
             WaterSegment chosenWave = WaveOffset[order[selectedItem]];
             if (order[selectedItem] - 1 >= 0)
                 WaveOffset[order[selectedItem] - 1].waveVel += WaveOffset[order[selectedItem] - 1].tension * (-(WaveOffset[order[selectedItem] - 1].wavePosition - chosenWave.wavePosition)) - WaveOffset[order[selectedItem] - 1].waveVel * WaveOffset[order[selectedItem] - 1].dampening;
             if (order[selectedItem] + 1 < WaveOffset.Length)
                 WaveOffset[order[selectedItem] + 1].waveVel += WaveOffset[order[selectedItem] + 1].tension * (-(WaveOffset[order[selectedItem] + 1].wavePosition - chosenWave.wavePosition)) - WaveOffset[order[selectedItem] + 1].waveVel * WaveOffset[order[selectedItem] + 1].dampening;
-
-
-            //float currPos = 0;
-            //for (int i = 0; i < WaveOffset.Length; i++)
-            //{
-
-            //    float distance = Mathf.Abs(currPos - order[selectedItem] * vertexDistance);
-            //    if (distance <= 1f)
-            //    {
-            //        //WaveOffset[i].waveVel -= WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
-            //        //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime;
-
-            //        //WaveOffset[i].waveVel += WaveOffset[order[selectedItem]].waveVel * Time.deltaTime * -(distance - 1f)/2f;
-
-            //        WaterSegment currWave = WaveOffset[i];
-            //        WaterSegment chosenWave = WaveOffset[order[selectedItem]];
-            //        currWave.waveVel += currWave.tension * (-(currWave.wavePosition - chosenWave.wavePosition)) - currWave.waveVel * currWave.dampening;
-            //    }
-
-            //    currPos += vertexDistance;
-            //}
-
 
             order.RemoveAt(selectedItem);
         }
@@ -199,7 +167,7 @@ public class WaterFX : MonoBehaviour
             for(int i = 0; i < WaveOffset.Length; i++)
             {
                 if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
-                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition)/collision.bounds.extents.x);
+                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition)/collision.bounds.extents.x) / motionResponseDampener;
 
                 currPos += vertexDistance;
             }
@@ -216,7 +184,7 @@ public class WaterFX : MonoBehaviour
             for (int i = 0; i < WaveOffset.Length; i++)
             {
                 if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
-                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition) / collision.bounds.extents.x);
+                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition) / collision.bounds.extents.x) / motionResponseDampener;
 
                 currPos += vertexDistance;
             }
