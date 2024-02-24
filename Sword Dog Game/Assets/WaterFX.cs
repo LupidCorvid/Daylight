@@ -12,23 +12,64 @@ public class WaterFX : MonoBehaviour
     Mesh mesh;
     MeshFilter meshProperty;
 
+    int numSegments;
+
+    public Collider2D cldr;
+
+    WaterSegment[] WaveOffset;
+
     // Start is called before the first frame update
     void Start()
     {
         meshProperty = GetComponent<MeshFilter>();
         mesh = meshProperty.mesh;
 
+        if(cldr != null)
+        {
+            size = cldr.bounds.size;
+        }
+
+        SetUp();
+        
+    }
+
+    public void SetUp()
+    {
         BuildMesh();
+        WaveOffset = new WaterSegment[numSegments + 1];
+        for(int i = 0; i < WaveOffset.Length; i++)
+        {
+            WaveOffset[i] = new WaterSegment();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3[] newVerts = mesh.vertices;
 
-        for(int i = 0; i < newVerts.Length; i += 2)
+        //for(int i = 0; i < WaveOffset.Length; i++)
+        //{
+        //    WaveOffset[i].wavePosition = Mathf.Sin((Time.time * 3 + i * vertexDistance));
+        //}
+        for (int i = 0; i < WaveOffset.Length; i++)
         {
-            newVerts[i] = new Vector3(mesh.vertices[i].x, size.y / 2 + Mathf.Sin((Time.time * 3 + i * vertexDistance)), 0);
+            WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 3;
+
+            WaveOffset[i].UpdateSegment();
+        }
+
+
+        ApplyWaveHeights();
+
+    }
+
+    public void ApplyWaveHeights()
+    {
+        Vector3[] newVerts = mesh.vertices;
+        for(int i = 0; i < WaveOffset.Length; i++)
+        {
+            
+            newVerts[2 * i] = new Vector3(newVerts[2 * i].x, (WaveOffset[i].wavePosition + size.y / 2));
         }
 
         mesh.vertices = newVerts;
@@ -36,8 +77,8 @@ public class WaterFX : MonoBehaviour
 
     public void BuildMesh()
     {
-
-        int numSegments = (int)(size.x / vertexDistance);
+        mesh.MarkDynamic();
+        numSegments = (int)(size.x / vertexDistance);
 
         if(numSegments < 0)
         {
@@ -75,7 +116,6 @@ public class WaterFX : MonoBehaviour
         for(int i = 0; i < newVerts.Length; i += 2)
         {
             uvs[i] = new Vector2(newVerts[i].x, newVerts[i].z);
-            //uvs[i + 1] = new Vector2(newVerts[i].x, newVerts[i].z);
         }
 
         mesh.vertices = newVerts;
@@ -89,5 +129,61 @@ public class WaterFX : MonoBehaviour
         Debug.Log("Num segments: " + numSegments);
         Debug.Log("Verts: " + mesh.vertices.Length);
         
+    }
+
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null)
+        {
+            float relPosition = collision.transform.position.x - (transform.position.x - (size.x)/2);
+
+            float currPos = 0;
+            for(int i = 0; i < WaveOffset.Length; i++)
+            {
+                if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
+                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition)/collision.bounds.extents.x);
+
+                currPos += vertexDistance;
+            }
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null)
+        {
+            float relPosition = collision.transform.position.x - (transform.position.x - (size.x) / 2);
+
+            float currPos = 0;
+            for (int i = 0; i < WaveOffset.Length; i++)
+            {
+                if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
+                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition) / collision.bounds.extents.x);
+
+                currPos += vertexDistance;
+            }
+        }
+    }
+
+    public class WaterSegment
+    {
+        public float wavePosition;
+        public float waveVel;
+
+        float tension = .1f;
+        float dampening = .1f;
+
+
+        public WaterSegment()
+        {
+
+        }
+
+        public void UpdateSegment()
+        {
+            wavePosition += waveVel * Time.deltaTime;
+            waveVel += tension * (-wavePosition) - waveVel * dampening;
+        }
     }
 }
