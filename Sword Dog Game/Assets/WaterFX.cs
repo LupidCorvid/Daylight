@@ -98,8 +98,8 @@ public class WaterFX : MonoBehaviour
         int j = 0;
         for(int i = 0; i + 6 <= tris.Length; i += 6)
         {
-            tris[i] = j;           //02
-            tris[i + 1] = j + 1;   //1
+            tris[i] = j + 1;           //02
+            tris[i + 1] = j;   //1
             tris[i + 2] = j + 2;   
 
             tris[i + 3] = j + 1;   // 2
@@ -159,36 +159,38 @@ public class WaterFX : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null)
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
+            return;
+
+        float relPosition = collision.transform.position.x - (transform.position.x - (size.x)/2);
+
+        float currPos = 0;
+        for(int i = 0; i < WaveOffset.Length; i++)
         {
-            float relPosition = collision.transform.position.x - (transform.position.x - (size.x)/2);
+            if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
+                WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition)/collision.bounds.extents.x) / motionResponseDampener;
 
-            float currPos = 0;
-            for(int i = 0; i < WaveOffset.Length; i++)
-            {
-                if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
-                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition)/collision.bounds.extents.x) / motionResponseDampener;
-
-                currPos += vertexDistance;
-            }
+            currPos += vertexDistance;
         }
+        
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.GetMask("TerrainFX") && collision.attachedRigidbody != null)
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
+            return;
+
+        float relPosition = collision.transform.position.x - (transform.position.x - (size.x) / 2);
+
+        float currPos = 0;
+        for (int i = 0; i < WaveOffset.Length; i++)
         {
-            float relPosition = collision.transform.position.x - (transform.position.x - (size.x) / 2);
+            if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
+                WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition) / collision.bounds.extents.x) / motionResponseDampener;
 
-            float currPos = 0;
-            for (int i = 0; i < WaveOffset.Length; i++)
-            {
-                if (Mathf.Abs(currPos - relPosition) < collision.bounds.extents.x)
-                    WaveOffset[i].waveVel += collision.attachedRigidbody.velocity.y * (1 - Mathf.Abs(currPos - relPosition) / collision.bounds.extents.x) / motionResponseDampener;
-
-                currPos += vertexDistance;
-            }
+            currPos += vertexDistance;
         }
+        
     }
 
     public class WaterSegment

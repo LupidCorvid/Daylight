@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1915464746139592106}
   - component: {fileID: 3530853478649386177}
   - component: {fileID: 5644968849048922163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2979095290237250947
 MeshRenderer:
@@ -100,7 +100,7 @@ MonoBehaviour:
   size: {x: 10, y: 5}
   vertexDistance: 0.5
   cldr: {fileID: 5644968849048922163}
-  motionResponseDampener: 4
+  motionResponseDampener: 1
 --- !u!61 &5644968849048922163
 BoxCollider2D:
   m_ObjectHideFlags: 0
