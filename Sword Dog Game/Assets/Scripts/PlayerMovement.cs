@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 
@@ -8,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private Animator anim;
-    private bool wasGrounded, holdingJump;
+    private bool wasGrounded, holdingJump, isTurning = false, reversedTurn = false;
     public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
     public Vector2 bottom;
     public static bool created = false;
@@ -255,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             if (!isGrounded)
-                anim.ResetTrigger("Turn");
+                anim.ResetTrigger("turn");
 
             //For if player movespeed should be reduced while turning
             //if (!sprintReduction && (anim.GetCurrentAnimatorStateInfo(0).IsName("turnWalk") || anim.GetCurrentAnimatorStateInfo(0).IsName("turnSprint")))
@@ -270,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
             //    sprintReduction = false;
             //}
             //else
-            //    anim.ResetTrigger("Turn");
+            //    anim.ResetTrigger("turn");
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
             anim.SetFloat("time_idle", timeIdle);
@@ -410,9 +411,22 @@ public class PlayerMovement : MonoBehaviour
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            Flip();
-            if (!pAttack.isParrying && isGrounded)
-                anim.SetTrigger("Turn");
+            if (!isTurning)
+            {
+                Flip();
+                if (!pAttack.isParrying && isGrounded)
+                {
+                    anim.SetTrigger("turn");
+                    reversedTurn = false;
+                    isTurning = true;
+                    anim.SetFloat("turn_speed", 1f);
+                }
+            }
+            else
+            {
+                reversedTurn = true;
+                anim.SetFloat("turn_speed", -1f);
+            }
         }
 
         // calculate target velocity
@@ -1155,5 +1169,21 @@ public class PlayerMovement : MonoBehaviour
         sprintSpeedMultiplier = 0;
         isSprinting = false;
         isSkidding = true;
+    }
+
+    public void StartTurn()
+    {
+        if (reversedTurn && isTurning) {
+            reversedTurn = false;
+            isTurning = false;
+            Flip();
+            anim.SetBool("exit_turn", true);
+        }
+    }
+
+    public void StopTurn()
+    {
+        isTurning = false;
+        reversedTurn = false;
     }
 }
