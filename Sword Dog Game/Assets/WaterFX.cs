@@ -79,7 +79,8 @@ public class WaterFX : MonoBehaviour
 
         ApplyAdjacencyEffects();
         ApplyWaveHeights();
-        mesh.RecalculateNormals();
+        //mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
 
 
     }
