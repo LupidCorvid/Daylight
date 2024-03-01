@@ -27,6 +27,9 @@ public class WaterFX : MonoBehaviour
     public Sprite sprite;
     public Color color = Color.white;
 
+    public float buoyantForce = 1;
+    public float depthBuoyanceScalar = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +79,8 @@ public class WaterFX : MonoBehaviour
 
         ApplyAdjacencyEffects();
         ApplyWaveHeights();
-        
+        mesh.RecalculateNormals();
+
 
     }
 
@@ -193,7 +197,40 @@ public class WaterFX : MonoBehaviour
 
             currPos += vertexDistance;
         }
-        
+
+        //Slow speed on hitting surface of water
+        if (collision.attachedRigidbody != null)
+        {
+            collision.attachedRigidbody.velocity *= .75f;
+            //if(clampMaxEnterSpeed)
+            //    collision.attachedRigidbody.velocity = new Vector2(collision.attachedRigidbody.velocity.x, Mathf.Clamp(collision.attachedRigidbody.velocity.y, -25, 1000));
+        }
+
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
+            return;
+
+        if (collision.attachedRigidbody != null)
+        {
+            //Buoyany force attempts
+
+            //collision.attachedRigidbody.AddForce(Vector2.up * (collision.transform.position.y - (transform.position.y + size.y)) * buoyantForce * Time.deltaTime);
+            //collision.attachedRigidbody.velocity += (Vector2.down * (collision.transform.position.y - (transform.position.y + size.y/2)) * buoyantForce * Time.fixedDeltaTime);
+            //collision.attachedRigidbody.velocity += (Vector2.up * ((transform.position.y + size.y/2) - collision.transform.position.y) * buoyantForce * Time.fixedDeltaTime * (collision.bounds.size.x * collision.bounds.size.x)/collision.attachedRigidbody.mass);
+
+            //collision.attachedRigidbody.velocity += ((Vector2.down * Time.deltaTime * collision.attachedRigidbody.gravityScale * Physics.gravity) * Mathf.Clamp01(((transform.position.y + size.y / 2) - collision.transform.position.y) * 2/collision.bounds.extents.y));
+            //collision.attachedRigidbody.velocity += ((Vector2.down * Time.deltaTime * collision.attachedRigidbody.gravityScale * Physics.gravity) * Mathf.Clamp01(((transform.position.y + size.y / 2) - collision.transform.position.y) * 2 / collision.bounds.extents.y));
+            //collision.attachedRigidbody.AddForce((Vector2.down * Time.deltaTime * collision.attachedRigidbody.gravityScale * Physics.gravity) * Mathf.Clamp01(((transform.position.y + size.y / 2) - collision.transform.position.y) * 2 / collision.bounds.extents.y) * collision.bounds.size.x * collision.bounds.size.y * buoyantForce);
+            //collision.attachedRigidbody.velocity *= (.999f);
+
+            //if(collision.attachedRigidbody.velocity.y < Physics.gravity.y * -1.5f)
+            //    collision.attachedRigidbody.velocity += ((Vector2.down * Time.deltaTime * collision.attachedRigidbody.gravityScale * Physics.gravity) * Mathf.Clamp01(((transform.position.y + size.y / 2) - collision.transform.position.y) * 2 / collision.bounds.extents.y));
+
+            collision.attachedRigidbody.velocity += Vector2.down * Physics.gravity.y / 2 * Time.deltaTime * collision.attachedRigidbody.gravityScale;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D collision)

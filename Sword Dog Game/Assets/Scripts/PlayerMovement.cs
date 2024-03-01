@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private Animator anim;
-    private bool wasGrounded, holdingJump, isTurning = false, reversedTurn = false;
+    private bool wasGrounded, holdingJump;
     public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
     public Vector2 bottom;
     public static bool created = false;
@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion resetRotation;
     public bool canTurn = true;
     public bool canSprint = true;
+    public static bool isTurning = false, reversedTurn = false;
     public PlayerAttack pAttack;
 
     public PlayerInput inputManager;
@@ -292,6 +293,7 @@ public class PlayerMovement : MonoBehaviour
             // start trotting if player gives input and is moving
             if (isGrounded && moveX != 0 && !trotting && Mathf.Abs(realVelocity) >= 0.01f && !isJumping)
             {
+                Debug.Log("trot");
                 anim.SetTrigger("trot");
                 trotting = true;
             }
@@ -416,6 +418,7 @@ public class PlayerMovement : MonoBehaviour
                 Flip();
                 if (!pAttack.isParrying && isGrounded)
                 {
+                    Debug.Log("turn!!");
                     anim.SetTrigger("turn");
                     reversedTurn = false;
                     isTurning = true;
@@ -1185,5 +1188,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isTurning = false;
         reversedTurn = false;
+        anim.SetBool("exit_turn", true);
     }
 }
