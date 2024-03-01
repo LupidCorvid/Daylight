@@ -68,7 +68,7 @@ public class WaterFX : MonoBehaviour
         {
             //WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
 
-            WaveOffset[i].waveVel += SwayEffect.getWindEffect((transform.position.x - size.x/2) + i * vertexDistance, windSpeed, windVolatility, windStrength) * 100;
+            WaveOffset[i].waveVel += (SwayEffect.getWindEffect((transform.position.x - size.x/2) + i * vertexDistance, windSpeed, windVolatility, windStrength, true)) * 100;
 
             WaveOffset[i].UpdateSegment();
         }
@@ -112,6 +112,7 @@ public class WaterFX : MonoBehaviour
         }
 
         int[] tris = new int[numSegments * 6];
+        Vector2[] uvs = new Vector2[newVerts.Length];
 
         int j = 0;
         for(int i = 0; i + 6 <= tris.Length; i += 6)
@@ -128,16 +129,18 @@ public class WaterFX : MonoBehaviour
 
 
 
-        Vector2[] uvs = new Vector2[newVerts.Length];
 
-        for(int i = 0; i < newVerts.Length; i += 2)
+
+        for (int i = 0; i < newVerts.Length; i += 2)
         {
-            uvs[i] = new Vector2(newVerts[i].x, newVerts[i].z);
+            //uvs[i] = new Vector2(newVerts[i].x, newVerts[i].z);
+            uvs[i] = new Vector2((vertexDistance * i / 2)/size.x, 1);
+            uvs[i + 1] = new Vector2((vertexDistance * i / 2)/size.x, 0);
         }
 
         mesh.vertices = newVerts;
         mesh.triangles = tris;
-        mesh.uv = uvs;
+        mesh.SetUVs(0, uvs);
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
