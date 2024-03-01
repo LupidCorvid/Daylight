@@ -209,7 +209,7 @@ public class SwayEffect : MonoBehaviour
     }
 
     //[Unity.Burst.BurstCompile]
-    public static float getWindEffect(float xPos, float windSpeed, float windVolatility, float windStrength)
+    public static float getWindEffect(float xPos, float windSpeed, float windVolatility, float windStrength, bool centerAtZero = false)
     {
         //return Mathf.PerlinNoise(Time.time * windSpeed * (windStrength > 0 ? -1 : 1) + xPos * windVolatility, 0) * Time.fixedDeltaTime * windStrength;
         //THIS IS THE ONE THAT COMPILES, but does not improve performance much
@@ -217,7 +217,10 @@ public class SwayEffect : MonoBehaviour
         //Doesn't work, scalars must be read only
         // return noise.cnoise(new float2(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + xPos) * windVolatility * sceneVolatilityScalar, 0)) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
         //This DOES NOT work with burst compile, but its what works/looks good for now
-        return Mathf.PerlinNoise(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+        if(centerAtZero)
+            return (Mathf.PerlinNoise(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * windVolatility * sceneVolatilityScalar, 0) - .5f) * 2 * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
+        else
+            return Mathf.PerlinNoise(((Time.time * windSpeed * (windStrength > 0 ? -1 : 1) * sceneSpeedScalar) + (xPos)) * windVolatility * sceneVolatilityScalar, 0) * Time.fixedDeltaTime * windStrength * sceneStrengthScalar;
     }
 
     [Unity.Burst.BurstCompile]
