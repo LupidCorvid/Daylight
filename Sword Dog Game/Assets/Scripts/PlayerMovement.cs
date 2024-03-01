@@ -254,11 +254,7 @@ public class PlayerMovement : MonoBehaviour
                 timeIdle = 0;
             }
 
-            //Set turn trigger
-            if (moveX > 0 != facingRight && moveX != 0 && !pAttack.isParrying)
-                anim.SetTrigger("Turn");
-
-            if ((!anim.GetCurrentAnimatorStateInfo(0).IsName("trotAnim") && !anim.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase2") && !anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim")) || pAttack.isParrying)
+            if (!isGrounded)
                 anim.ResetTrigger("Turn");
 
             //For if player movespeed should be reduced while turning
@@ -273,10 +269,10 @@ public class PlayerMovement : MonoBehaviour
             //    entityBase.moveSpeed.multiplier /= .5f;
             //    sprintReduction = false;
             //}
-                //else
-                //    anim.ResetTrigger("Turn");
+            //else
+            //    anim.ResetTrigger("Turn");
 
-                anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
+            anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
             anim.SetFloat("time_idle", timeIdle);
 
             // track stops per second
@@ -415,6 +411,8 @@ public class PlayerMovement : MonoBehaviour
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
             Flip();
+            if (!pAttack.isParrying && isGrounded)
+                anim.SetTrigger("Turn");
         }
 
         // calculate target velocity
