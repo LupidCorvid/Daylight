@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private Animator anim;
     public int attackCombo = 0;
+    public int maxCombo = 2;
     public bool isAttacking = false, canAttack = true;
     public bool isParrying = false;
     public float attackCooldown = 0.0f;
@@ -46,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < 3 && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < maxCombo && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -127,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
         if (anim == null)
             return;
         // attackCooldown = cooldownLength;
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= maxCombo; i++)
         {
             anim.ResetTrigger("attack" + i);
         }
