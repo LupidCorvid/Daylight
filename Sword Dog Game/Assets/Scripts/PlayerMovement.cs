@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool wasGrounded, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded;
+    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false;
     public Vector2 bottom;
     public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
@@ -293,7 +293,6 @@ public class PlayerMovement : MonoBehaviour
             // start trotting if player gives input and is moving
             if (isGrounded && moveX != 0 && !trotting && Mathf.Abs(realVelocity) >= 0.01f && !isJumping)
             {
-                Debug.Log("trot");
                 anim.SetTrigger("trot");
                 trotting = true;
             }
@@ -418,7 +417,6 @@ public class PlayerMovement : MonoBehaviour
                 Flip();
                 if (!pAttack.isParrying && isGrounded)
                 {
-                    Debug.Log("turn!!");
                     anim.SetTrigger("turn");
                     reversedTurn = false;
                     isTurning = true;
@@ -1179,15 +1177,27 @@ public class PlayerMovement : MonoBehaviour
         if (reversedTurn && isTurning) {
             reversedTurn = false;
             isTurning = false;
-            Flip();
+            StopCoroutine(WaitToFlip());
+            StartCoroutine(WaitToFlip());
             anim.SetBool("exit_turn", true);
+            attackMoveTracker.transform.rotation = Quaternion.Euler(Vector3.zero);
+            SwordFollow.sword.transform.localScale = new Vector3(facingRight ? -1 : 1, 1, 1);
+            SwordFollow.sword.transform.rotation = Quaternion.Euler(Vector3.zero);
+            SwordFollow.sword.adjustLocationX *= -1; 
+            finishedReverseTurnThisFrame = true;
         }
+    }
+
+    private IEnumerator WaitToFlip()
+    {
+        yield return null;
+        Flip();
     }
 
     public void StopTurn()
     {
-        isTurning = false;
-        reversedTurn = false;
+        // isTurning = false;
+        // reversedTurn = false;
         anim.SetBool("exit_turn", true);
     }
 }

@@ -230,6 +230,13 @@ public class SwordFollow : MonoBehaviour
 
     public void AttackMove()
     {
+        if (pmScript.finishedReverseTurnThisFrame)
+        {
+            pmScript.finishedReverseTurnThisFrame = false;
+            pmScript.swordAnimControl = false;
+            return;
+        }
+
         //Make sure that the sword is facing the right direction
         if (!pmScript.facingRight)
         {
