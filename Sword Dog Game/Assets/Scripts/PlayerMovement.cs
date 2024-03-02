@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private Animator anim;
-    private bool wasGrounded, holdingJump;
+    private bool waitingToTurn, holdingJump;
     public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false;
     public Vector2 bottom;
     public static bool created = false;
@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
             entityBase.facingDir = new Vector2(neg, 0);
         }
     }
+    public bool intendedFacingRight;
 
     public float lastLandHeight;
     private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
@@ -412,8 +413,9 @@ public class PlayerMovement : MonoBehaviour
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            if (!isTurning)
+            if (!isTurning && !reversedTurn && !waitingToTurn)
             {
+                intendedFacingRight = !facingRight;
                 Flip();
                 if (!pAttack.isParrying && isGrounded)
                 {
@@ -423,11 +425,13 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetFloat("turn_speed", 1f);
                 }
             }
-            else
-            {
-                reversedTurn = true;
-                anim.SetFloat("turn_speed", -1f);
-            }
+        }
+
+        if ((moveX < 0 && intendedFacingRight) || (moveX > 0 && !intendedFacingRight))
+        {
+            intendedFacingRight = !intendedFacingRight;
+            reversedTurn = !reversedTurn;
+            anim.SetFloat("turn_speed", reversedTurn ? -1 : 1f);
         }
 
         // calculate target velocity
@@ -1110,6 +1114,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
             anim.SetTrigger("start_jump");
             timeSinceJump = 0.0f;
+            isTurning = false;
+            reversedTurn = false;
+            waitingToTurn = false;
+            finishedReverseTurnThisFrame = false;
         }
     }
 
@@ -1177,6 +1185,7 @@ public class PlayerMovement : MonoBehaviour
         if (reversedTurn && isTurning) {
             reversedTurn = false;
             isTurning = false;
+            waitingToTurn = true;
             StopCoroutine(WaitToFlip());
             StartCoroutine(WaitToFlip());
             anim.SetBool("exit_turn", true);
@@ -1192,12 +1201,11 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return null;
         Flip();
+        waitingToTurn = false;
     }
 
     public void StopTurn()
     {
-        // isTurning = false;
-        // reversedTurn = false;
         anim.SetBool("exit_turn", true);
     }
 }
