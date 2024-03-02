@@ -394,6 +394,12 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
             }
         }
+
+        // Fixes turn deadlock
+        if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0)
+        {
+            anim.SetBool("exit_turn", true);
+        }
     }
 
     void FixedUpdate()
@@ -423,6 +429,11 @@ public class PlayerMovement : MonoBehaviour
                     reversedTurn = false;
                     isTurning = true;
                     anim.SetFloat("turn_speed", 1f);
+                    if (Player.instance.hasLantern)
+                    {
+                        var mouth = Player.instance.mouthLantern.transform;
+                        mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
+                    }
                 }
             }
         }
@@ -1182,6 +1193,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartTurn()
     {
+        anim.ResetTrigger("turn");
         if (reversedTurn && isTurning) {
             reversedTurn = false;
             isTurning = false;
@@ -1192,7 +1204,12 @@ public class PlayerMovement : MonoBehaviour
             attackMoveTracker.transform.rotation = Quaternion.Euler(Vector3.zero);
             SwordFollow.sword.transform.localScale = new Vector3(facingRight ? -1 : 1, 1, 1);
             SwordFollow.sword.transform.rotation = Quaternion.Euler(Vector3.zero);
-            SwordFollow.sword.adjustLocationX *= -1; 
+            SwordFollow.sword.adjustLocationX *= -1;
+            if (Player.instance.hasLantern)
+            {
+                var mouth = Player.instance.mouthLantern.transform;
+                mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
+            }
             finishedReverseTurnThisFrame = true;
         }
     }
@@ -1201,6 +1218,7 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return null;
         Flip();
+        yield return null;
         waitingToTurn = false;
     }
 
