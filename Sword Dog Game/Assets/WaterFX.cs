@@ -151,8 +151,8 @@ public class WaterFX : MonoBehaviour
         mesh.RecalculateBounds();
         mesh.RecalculateTangents();
 
-        Debug.Log("Num segments: " + numSegments);
-        Debug.Log("Verts: " + mesh.vertices.Length);
+        //Debug.Log("Num segments: " + numSegments);
+        //Debug.Log("Verts: " + mesh.vertices.Length);
         
     }
 
