@@ -47,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // attack input detection + combo tracking
-            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack && attackCombo < maxCombo && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack /*&& attackCombo < maxCombo*/ && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 isAttacking = true;
                 attackCombo++;
-                anim.SetTrigger("attack" + attackCombo);
+                anim.SetTrigger("attack" + (attackCombo % 2 + 1));
             }
 
             //Debug.Log(!isAttacking && pMovement.stamina >= parryStaminaCost);
