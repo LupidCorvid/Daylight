@@ -30,6 +30,8 @@ public class WaterFX : MonoBehaviour
     public float buoyantForce = 1;
     public float depthBuoyanceScalar = 1;
 
+    public GameObject splashPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +74,7 @@ public class WaterFX : MonoBehaviour
             //WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
 
             WaveOffset[i].waveVel += (SwayEffect.getWindEffect((transform.position.x - size.x/2) + i * vertexDistance, windSpeed, windVolatility, windStrength, true)) * 100;
+            CheckForSpawnParticle(WaveOffset[i], i);
 
             WaveOffset[i].UpdateSegment();
         }
@@ -83,6 +86,45 @@ public class WaterFX : MonoBehaviour
         mesh.RecalculateTangents();
 
 
+    }
+
+    public void CheckForSpawnParticle(WaterSegment segment, int index)
+    {
+        float acceleration = segment.tension * (-segment.wavePosition) - segment.waveVel * segment.dampening;
+
+        if(segment.waveVel + acceleration < 0 && segment.waveVel > 0 && acceleration < -1)
+        {
+            Debug.Log("SPLASH!");
+            GameObject addedObj = Instantiate(splashPrefab, new Vector3(transform.position.x - size.x / 2 + (index * vertexDistance), transform.position.y + size.y / 2 + segment.wavePosition), transform.rotation, transform);
+
+            //Make water droplets quantity and size vary with intensity of the splash?
+            //make only the centermost peak spawn the droplet set?
+            //  ^\ if not doing this, could instead make the droplets be launched in the direction of the normal of the line formed
+            //     by the current segment and the height of the ones next to it
+            //NOTE: can also just get the normal data from the mesh (though this may be pointing into z axis)
+
+            Vector2 adjacentLeftNormal = new Vector2();
+            if(index > 1)
+            {
+                adjacentLeftNormal = new Vector2(WaveOffset[index - 1].wavePosition - segment.wavePosition, vertexDistance);
+            }
+            Vector2 adjacentRightNormal = new Vector2();
+            if (index < WaveOffset.Length - 1)
+            {
+                adjacentRightNormal = new Vector2(segment.wavePosition- WaveOffset[index + 1].wavePosition, vertexDistance);
+            }
+
+            Vector2 average = (adjacentLeftNormal + adjacentRightNormal) / 2;
+            Vector3 worldPos = new Vector3(transform.position.x - size.x / 2 + (index * vertexDistance), transform.position.y + size.y / 2 + segment.wavePosition);
+            
+            Debug.DrawLine(worldPos, (worldPos + (Vector3)average * 5), Color.magenta);
+
+            addedObj.GetComponent<Rigidbody2D>().velocity = average * 5;
+            addedObj.transform.localScale *= Mathf.Clamp(average.magnitude, 0.5f, 2);
+            addedObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a / 3f);
+
+
+        }
     }
 
     public void ApplyWaveHeights()
