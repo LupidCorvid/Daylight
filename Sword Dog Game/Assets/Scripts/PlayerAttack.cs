@@ -61,10 +61,8 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetFloat("attackSpeed", pMovement.entityBase.attackSpeed);
 
                 isAttacking = true;
-                if (attackCombo < maxCombo) {
-                    attackCombo++;
-                    anim.SetTrigger("attack" + attackCombo);
-                }
+                attackCombo = attackCombo % 2 + 1;
+                anim.SetTrigger("attack" + attackCombo);
             }
 
             //Debug.Log(!isAttacking && pMovement.stamina >= parryStaminaCost);
