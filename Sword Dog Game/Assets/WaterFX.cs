@@ -32,6 +32,10 @@ public class WaterFX : MonoBehaviour
 
     public GameObject splashPrefab;
 
+    public float LightRayDepth = 0.95f;
+    public float surfaceWidth = 0.985f;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +57,8 @@ public class WaterFX : MonoBehaviour
         if(sprite != null)
             materialBlock.SetTexture("_MainTex", sprite.texture);
         materialBlock.SetColor("_Color", color);
+        materialBlock.SetFloat("_LightRayDepth", LightRayDepth);
+        materialBlock.SetFloat("_SurfaceWidth", surfaceWidth);
         GetComponent<MeshRenderer>().SetPropertyBlock(materialBlock);
     }
 
