@@ -417,7 +417,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 intendedFacingRight = !facingRight;
                 Flip();
-                if (!pAttack.isParrying && isGrounded)
+                if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
                 {
                     anim.SetTrigger("turn");
                     reversedTurn = false;
