@@ -394,12 +394,6 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
             }
         }
-
-        // Fixes turn deadlock
-        if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0)
-        {
-            anim.SetBool("exit_turn", true);
-        }
     }
 
     void FixedUpdate()
@@ -419,7 +413,7 @@ public class PlayerMovement : MonoBehaviour
         // flip sprite depending on direction of input
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            if (!isTurning && !reversedTurn && !waitingToTurn)
+            if (!isTurning && !reversedTurn && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
                 Flip();
@@ -535,6 +529,12 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = false;
                 jumpTime = 0f;
             }
+        }
+
+        // Fixes turn deadlock
+        if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0 && isTurning)
+        {
+            EndTurn();
         }
     }
 
@@ -1191,35 +1191,23 @@ public class PlayerMovement : MonoBehaviour
         isSkidding = true;
     }
 
-    public void StartTurn()
+    public void EndTurn()
     {
-        anim.ResetTrigger("turn");
-        if (reversedTurn && isTurning) {
-            reversedTurn = false;
-            isTurning = false;
-            waitingToTurn = true;
-            StopCoroutine(WaitToFlip());
-            StartCoroutine(WaitToFlip());
-            anim.SetBool("exit_turn", true);
-            attackMoveTracker.transform.rotation = Quaternion.Euler(Vector3.zero);
-            SwordFollow.sword.transform.localScale = new Vector3(facingRight ? -1 : 1, 1, 1);
-            SwordFollow.sword.transform.rotation = Quaternion.Euler(Vector3.zero);
-            SwordFollow.sword.adjustLocationX *= -1;
-            if (Player.instance.hasLantern)
-            {
-                var mouth = Player.instance.mouthLantern.transform;
-                mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
-            }
-            finishedReverseTurnThisFrame = true;
-        }
-    }
-
-    private IEnumerator WaitToFlip()
-    {
-        yield return null;
+        reversedTurn = false;
+        isTurning = false;
         Flip();
-        yield return null;
-        waitingToTurn = false;
+        anim.SetBool("exit_turn", true);
+        anim.SetFloat("turn_speed", 1);
+        attackMoveTracker.transform.rotation = Quaternion.Euler(Vector3.zero);
+        SwordFollow.sword.transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+        SwordFollow.sword.transform.rotation = Quaternion.Euler(Vector3.zero);
+        SwordFollow.sword.adjustLocationX *= -1;
+        if (Player.instance.hasLantern)
+        {
+            var mouth = Player.instance.mouthLantern.transform;
+            mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
+        }
+        finishedReverseTurnThisFrame = true;
     }
 
     public void StopTurn()

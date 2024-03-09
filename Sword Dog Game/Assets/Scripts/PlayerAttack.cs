@@ -137,9 +137,6 @@ public class PlayerAttack : MonoBehaviour
             anim.ResetTrigger("attack" + i);
         }
         anim.ResetTrigger("exit_trot");
-        anim.SetBool("exit_turn", false);
-        PlayerMovement.isTurning = false;
-        PlayerMovement.reversedTurn = false;
         pMovement.finishedReverseTurnThisFrame = false;
     }
 }
