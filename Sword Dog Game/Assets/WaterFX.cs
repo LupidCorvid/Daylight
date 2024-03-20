@@ -127,7 +127,7 @@ public class WaterFX : MonoBehaviour
 
             addedObj.GetComponent<Rigidbody2D>().velocity = average * 5;
             addedObj.transform.localScale *= Mathf.Clamp(average.magnitude, 0.5f, 2);
-            addedObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a / 3f);
+            addedObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a / 2f) * .6f;
 
 
         }
