@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class QuestsManager : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class QuestsManager : MonoBehaviour
     public List<QuestListing> questListings = new List<QuestListing>();
 
     public static QuestsManager main;
+
+    public Action<Quest, QuestEventType> QuestEvent;
+
+    public enum QuestEventType
+    {
+        Assigned,
+        Updated,
+        Completed
+    }
 
     public void Awake()
     {
@@ -86,9 +96,6 @@ public class QuestsManager : MonoBehaviour
     public void AssignQuestWithNotif(Quest quest)
     {
         AssignQuest(quest);
-        //Notify player of the new quest
-        //Need to handle the id version of this func as well
-        //Should make a separatee function for notifs, with versions for updated quest, completed quest, and assigned quests
     }
 
     public Quest getQuest(int id)
@@ -105,11 +112,14 @@ public class QuestsManager : MonoBehaviour
     {
         Quest gottenQuest = getQuest(id);
         gottenQuest.progress = newProgress;
+
+        gottenQuest.updateProgress();
+
         if (gottenQuest.progress >= gottenQuest.neededProgress)
             gottenQuest.complete();
+
         if (checkIfCompleted(id))
             removeListing(id);
-
     }
 
     public void setQuestProgress(Quest quest, float newProgress)
