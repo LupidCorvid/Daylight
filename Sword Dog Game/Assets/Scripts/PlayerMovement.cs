@@ -426,18 +426,13 @@ public class PlayerMovement : MonoBehaviour
             if (!isTurning && !reversedTurn && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
-                Flip();
                 if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
                 {
                     anim.SetTrigger("turn");
                     reversedTurn = false;
-                    isTurning = true;
                     anim.SetFloat("turn_speed", 1f);
-                    if (Player.instance.hasLantern)
-                    {
-                        var mouth = Player.instance.mouthLantern.transform;
-                        mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
-                    }
+                } else {
+                    Flip();
                 }
             }
         }
@@ -1208,6 +1203,15 @@ public class PlayerMovement : MonoBehaviour
         isSkidding = true;
     }
 
+    public void StartTurn()
+    {
+        if (!isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
+        {
+            Flip();
+            isTurning = true;
+        }
+    }
+
     public void EndTurn()
     {
         reversedTurn = false;
@@ -1215,9 +1219,9 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         anim.SetBool("exit_turn", true);
         anim.SetFloat("turn_speed", 1);
-        attackMoveTracker.transform.rotation = Quaternion.Euler(Vector3.zero);
+        attackMoveTracker.transform.Rotate(0, 0, -180);
         SwordFollow.sword.transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
-        SwordFollow.sword.transform.rotation = Quaternion.Euler(Vector3.zero);
+        SwordFollow.sword.transform.Rotate(0, 0, -180);
         SwordFollow.sword.adjustLocationX *= -1;
         if (Player.instance.hasLantern)
         {
