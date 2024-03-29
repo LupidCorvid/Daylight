@@ -83,6 +83,14 @@ public class QuestsManager : MonoBehaviour
         CreateListing(questsDatabase.findQuest(quest.questId));
     }
 
+    public void AssignQuestWithNotif(Quest quest)
+    {
+        AssignQuest(quest);
+        //Notify player of the new quest
+        //Need to handle the id version of this func as well
+        //Should make a separatee function for notifs, with versions for updated quest, completed quest, and assigned quests
+    }
+
     public Quest getQuest(int id)
     {
         return questsDatabase.findQuest(id);
