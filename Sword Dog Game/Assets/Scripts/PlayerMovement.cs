@@ -431,11 +431,6 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetTrigger("turn");
                     reversedTurn = false;
                     anim.SetFloat("turn_speed", 1f);
-                    // if (Player.instance.hasLantern)
-                    // {
-                    //     var mouth = Player.instance.mouthLantern.transform;
-                    //     mouth.localPosition = new Vector3(mouth.localPosition.x * -1, 0, 0);
-                    // }
                 } else {
                     Flip();
                 }
