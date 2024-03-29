@@ -1102,13 +1102,18 @@ public class PlayerMovement : MonoBehaviour
         // if player presses jump button
         if (inputManager.actions["Jump"].WasPressedThisFrame())
         {
-            if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
+            if (!attacking)
             {
-                jumpSpeedMultiplier = 1f;
-                isJumping = false;
-                jumpTime = 0f;
+                if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
+                {
+                    jumpSpeedMultiplier = 1f;
+                    isJumping = false;
+                    jumpTime = 0f;
+                }
+                timeSinceJumpPressed = 0.0f;
             }
-            timeSinceJumpPressed = 0.0f;
+            else
+                anim.SetTrigger("TryingMove");
         }
 
         if (inputManager.actions["Jump"].WasPressedThisFrame() && timeSinceJumpPressed < 0.2f)
