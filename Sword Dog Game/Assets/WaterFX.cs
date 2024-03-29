@@ -98,9 +98,8 @@ public class WaterFX : MonoBehaviour
     {
         float acceleration = segment.tension * (-segment.wavePosition) - segment.waveVel * segment.dampening;
 
-        if(segment.waveVel + acceleration < 0 && segment.waveVel > 0 && acceleration < -0.75f)
+        if(segment.waveVel + acceleration < 0 && segment.waveVel > 0 && acceleration < -0.6f)
         {
-            Debug.Log("SPLASH!");
             GameObject addedObj = Instantiate(splashPrefab, new Vector3(transform.position.x - size.x / 2 + (index * vertexDistance), transform.position.y + size.y / 2 + segment.wavePosition), transform.rotation, transform);
 
             //Make water droplets quantity and size vary with intensity of the splash?

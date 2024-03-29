@@ -8,11 +8,13 @@ public class WaterDroplet : MonoBehaviour
     public float lifeTime = 0.25f;
     public Rigidbody2D rb;
     public float rotationOffset;
+    public float startAlpha;
+    public SpriteRenderer rend;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        startAlpha = rend.color.a;
     }
 
     // Update is called once per frame
@@ -20,8 +22,15 @@ public class WaterDroplet : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0,0,Vector2.SignedAngle(Vector2.right, rb.velocity) + rotationOffset);
 
-        if (!float.IsNaN(startTime) && startTime + lifeTime < Time.time)
-            Destroy(gameObject);
+
+
+        if (!float.IsNaN(startTime))
+        {
+            rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, (1 - (Time.time - startTime) / lifeTime) * startAlpha);
+
+            if(startTime + lifeTime < Time.time)
+                Destroy(gameObject);
+        }
 
     }
     public void OnTriggerEnter2D(Collider2D collision)
