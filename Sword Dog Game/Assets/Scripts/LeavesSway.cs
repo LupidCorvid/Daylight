@@ -95,7 +95,7 @@ public class LeavesSway : MonoBehaviour
     [Unity.Burst.BurstCompile]
     public void updateRotations()
     {
-        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25)
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 25 || !SettingsManager.currentSettings.GrassSway)
             return;
 
         float newRotation;
