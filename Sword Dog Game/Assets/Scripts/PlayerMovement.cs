@@ -1100,6 +1100,8 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // if player presses jump button
+        //Maybe could make the jumps that cancel the attack return anims be done once the return anim is cancelled? 
+        //Currently it just stops the return animation without triggering a jump
         if (inputManager.actions["Jump"].WasPressedThisFrame())
         {
             if (!attacking)
