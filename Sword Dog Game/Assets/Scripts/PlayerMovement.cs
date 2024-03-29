@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerInput inputManager;
 
+    public bool stopMovement;
+
     public bool facingRight
     {
         get
@@ -244,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             //Disable moving while attacking
             
 
-            if (!attacking)
+            if (!stopMovement)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
             else
             {
@@ -1099,7 +1101,7 @@ public class PlayerMovement : MonoBehaviour
         //Currently it just stops the return animation without triggering a jump
         if (inputManager.actions["Jump"].WasPressedThisFrame())
         {
-            if (!attacking)
+            if (!stopMovement)
             {
                 if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
                 {
