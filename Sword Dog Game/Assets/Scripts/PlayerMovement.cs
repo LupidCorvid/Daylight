@@ -242,10 +242,16 @@ public class PlayerMovement : MonoBehaviour
             // grab movement input from horizontal axis
             //moveX = Input.GetAxisRaw("Horizontal");
             //Disable moving while attacking
+            
+
             if (!attacking)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
             else
+            {
                 moveX = 0;
+                if (inputManager.actions["Move"].ReadValue<Vector2>().x != 0)
+                    anim.SetTrigger("TryingMove");
+            }
 
             //moveX = inputManager.actions["Move"].
 
