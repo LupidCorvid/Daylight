@@ -123,7 +123,7 @@ public class BiterAI : BaseAI
         {
             turning = false;
             //anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
-            enemyBase.facingDir = Vector2.right * (anim.transform.localScale.z > 0 ? -1 : 1);
+            enemyBase.facingDir = Vector2.right * (anim.transform.localScale.x > 0 ? -1 : 1);
             enemyBase.moveSpeed.multiplier *= 2;
         }
     }
