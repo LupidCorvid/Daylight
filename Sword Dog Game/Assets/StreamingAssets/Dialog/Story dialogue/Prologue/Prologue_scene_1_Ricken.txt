@@ -12,7 +12,7 @@ Scene1{
 Scene1.1{
 [sh, Rival][abf,10][ss, .035] Wow[ss,.15]...[ss,.035] Nice swingin',[w,.2] rookie![wi] 
 [c][reemote, 3][w,.7] Hey![w,.2] I'm no rookie,[w,.3] I'm your senior by one,[w,.3] no,[w,.3] two months![w,.4] Maybe one day you'll catch up to MY skill level and complete a mission without snoozing,[w,.3] err,[w,.3] what was your name again?[wi] 
-[c][CE,enterPlayerName] PLAYER![w,.4] That's right,[w,.2] you better square up to these monsters if you ever want to get to my level![wi] [c][exit]
+[c][CE,enterPlayerName] [IA,<color=#FFDC30>]PLAYER[IA,</color>]![w,.4] That's right,[w,.2] you better square up to these monsters if you ever want to get to my level![wi] [c][exit]
 }
 
 Scene1.2{
@@ -31,8 +31,8 @@ LeaveNoSword{
 [PM][series,NoSwordSer,[llf,LeaveNoSword1],[llf,LeaveNoSword2]][mcount,NoSwordSer,+,1][wi] [UPM][exit]
 }
 LeaveNoSword1{
- What are you doing?[w, .2] Where is your sword?[w,.2] You shouldn't face one of these guys without your sword!
+ What are you doing?[w, .2] Where is [IA,<color=#FFDC30>]your sword[IA,</color>]?[w,.2] You shouldn't face one of these guys without [IA,<color=#FFDC30>]your sword[IA,</color>]!
 }
 LeaveNoSword2{
- Still no sword?[w,.2] Go get your sword! 
+ Still no sword?[w,.2] Go get [IA,<color=#FFDC30>]your sword[IA,</color>]! 
 }
