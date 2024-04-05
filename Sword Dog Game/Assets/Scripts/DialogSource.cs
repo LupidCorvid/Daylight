@@ -306,9 +306,12 @@ public class DialogSource
         ///TODO: calling loadfile seems to delay text appearing by like half a second, since the prompts always take half a second to appear.
         if (position < 0)
             position = 0;
-        
+
+        bool processedCommand = false;
+
         while (position < dialog.Length && dialog[position] == '[')
         {
+            processedCommand = true;
             //int endPos = dialog.IndexOf(']', position);
             int endPos = getCommandEnd(dialog, position);
             List<string> parameters = new List<string>();
@@ -352,6 +355,10 @@ public class DialogSource
             waitFrameForChar = false;
             return;
         }
+
+        if (processedCommand)
+            return;
+
         if (mode != ReadMode.TYPEWRITE)
             outString += dialog[position];
         position++;
