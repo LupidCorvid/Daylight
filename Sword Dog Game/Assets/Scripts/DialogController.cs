@@ -58,6 +58,8 @@ public class DialogController : MonoBehaviour
 
     public bool collected = false;
 
+    public bool pausePlayerMovement = false;
+
     void Awake()
     {
         main ??= this;
@@ -144,6 +146,7 @@ public class DialogController : MonoBehaviour
            headerDisplay.alpha = 0;
         DotAnimator?.SetTrigger("Close");
         inDialog = false;
+        pausePlayerMovement = false;
     }
 
 

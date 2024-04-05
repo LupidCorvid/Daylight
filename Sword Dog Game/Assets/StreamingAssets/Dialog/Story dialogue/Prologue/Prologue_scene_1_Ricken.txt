@@ -4,7 +4,7 @@ Default{
 }
 
 Scene1{
-[sh, Rival][abf,10][ss,.025] Oh thank goodness![w,.6][ss, .035] I thought I was about to get put down![wi] [c][gvar,HasGottenSword,,[llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True]Wait a second[ss,.15]...[wi] 
+[sh, Rival][abf,10][ss,.025][c] [gvar,HasGottenSword,Oh thank goodness![w,.6][ss, .035] I thought I was about to get put down![wi] ,[llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True]Wait a second[ss,.15]...[wi] 
 [c][abf,15][emote, 0][ss,.035][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![w,.4] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] hundreds of those monsters while you were snoozing! [wi] 
 [c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH![w,.2] Quickly![w,.3] Finish it off! [/TFX,Shake][w, 2] [exit]
 }
@@ -28,11 +28,11 @@ Scene2.1{
 }
 
 LeaveNoSword{
-[series,NoSwordSer,[llf,LeaveNoSword1],[llf,LeaveNoSword2]][mcount,NoSwordSer,+,1][wi] [exit]
+[PM][series,NoSwordSer,[llf,LeaveNoSword1],[llf,LeaveNoSword2]][mcount,NoSwordSer,+,1][wi] [UPM][exit]
 }
 LeaveNoSword1{
-Wait,[w,.1] what are you doing?[w, .2] Where is your sword?[w,.2] You shouldn't face one of these guys without your sword!
+ What are you doing?[w, .2] Where is your sword?[w,.2] You shouldn't face one of these guys without your sword!
 }
 LeaveNoSword2{
-Wait,[w,.1] still no sword? Go get your sword!
+ Still no sword?[w,.2] Go get your sword! 
 }

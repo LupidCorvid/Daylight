@@ -93,11 +93,6 @@ public class QuestsManager : MonoBehaviour
         CreateListing(questsDatabase.findQuest(quest.questId));
     }
 
-    public void AssignQuestWithNotif(Quest quest)
-    {
-        AssignQuest(quest);
-    }
-
     public Quest getQuest(int id)
     {
         return questsDatabase.findQuest(id);

@@ -144,6 +144,9 @@ public class DialogSource
      * [GQC,id, true, false] //Gets if quest with id was completed or not. Outputs string in true or false section depending on it
      * [GQP,id, true, false] //Gets if quest with id has needed progression to complete or not. Outputs string in true or false section depending on it
      * [GQA,id, true, false] //Gets if quest with id was assigned or not. Outputs string in true or false section depending on it
+     * 
+     * [PM] //Pauses player movement
+     * [UPM] //Unpauses player movement
      */
     public DialogSource(string dialog)
     {
@@ -392,7 +395,7 @@ public class DialogSource
             //Whitelist of what to run when running typewrite
             if (input[0] != "w" && input[0] != "c" && input[0] != "exit" && input[0] != "IA" && input[0] != "prompt" && input[0] != "ss" 
                 && input[0] != "sh" && input[0] != "emote" && input[0] != "reemote" && input[0] != "abf" && input[0] != "wi"
-                && input[0] != "CE")
+                && input[0] != "CE" && input[0] != "PM" && input[0] != "UPM")
                 return;
             
         }
@@ -400,7 +403,7 @@ public class DialogSource
         {
             //Blacklist of what not to run when running collect
             if (input[0] == "ss"|| input[0] == "sh" || input[0] == "b" || input[0] == "prompt" || input[0] == "emote" || input[0] == "reemote"
-                || input[0] == "abf" || input[0] == "wi" || input[0] == "CE")
+                || input[0] == "abf" || input[0] == "wi" || input[0] == "CE" || input[0] == "PM" || input[0] == "UPM")
                 return;
         }
 
@@ -900,6 +903,27 @@ public class DialogSource
                 }
                 else
                     Debug.LogError("Invalid number of arguments for reemote!");
+                break;
+            case "PM":
+                if (input.Length == 1)
+                {
+                    if (DialogController.main.source == this)
+                    {
+                        DialogController.main.pausePlayerMovement = true;
+                    }
+                    
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for Pause Movement (PM)!");
+                break;
+            case "UPM":
+                if (input.Length == 1)
+                {
+                    if (DialogController.main.source == this)
+                        DialogController.main.pausePlayerMovement = false;
+                }
+                else
+                    Debug.LogError("Invalid number of arguments for UnPause Movement (UPM)!");
                 break;
 
             default:
