@@ -18,12 +18,28 @@ public class Player : Entity
     {
         get
         {
-            return pAttack.isAttacking;
+            if (controller == null)
+                return false;
+
+            return controller.attacking;
         }
 
         set
         {
-            pAttack.isAttacking = value;
+            //Cannot be set
+        }
+    }
+
+
+    public override Vector2 facingDir
+    {
+        get
+        {
+            return new Vector2(controller.facingRight ? 1 : -1, 0);
+        }
+        set
+        {
+            // Can't be set
         }
     }
 
@@ -68,6 +84,7 @@ public class Player : Entity
         instance = this;
         controller = GetComponent<PlayerMovement>();
         base.Update();
+        
 
     }
 

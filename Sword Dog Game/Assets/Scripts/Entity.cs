@@ -82,7 +82,13 @@ public class Entity : MonoBehaviour, IParryable, ITeam
 
     public Buffs buffManager;
 
-    public Vector2 facingDir;
+    private Vector2 _facingDir;
+
+    public virtual Vector2 facingDir
+    {
+        get { return _facingDir; }
+        set { _facingDir = value; }
+    }
 
     public virtual Inventory getAssociatedInventory()
     {

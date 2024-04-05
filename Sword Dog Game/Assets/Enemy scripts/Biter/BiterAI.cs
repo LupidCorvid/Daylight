@@ -10,7 +10,7 @@ public class BiterAI : BaseAI
 
     public float lastAttack;
 
-    public float maintainDistance = 6;
+    public float maintainDistance = 7;
 
     public float attackCooldown
     {
@@ -95,7 +95,7 @@ public class BiterAI : BaseAI
                 if (randomChargeChance < .90f * Time.deltaTime)
                     waitingOnChance = false;
 
-                if (Time.time > lastAttack + attackCooldown && !waitingOnChance)
+                if (Time.time > lastAttack + attackCooldown && !waitingOnChance && !(targetEntity.attacking && Vector2.Dot(enemyBase.facingDir, targetEntity.facingDir) < 0))
                 {
                     state = AIStates.pursuit;
                     if(Random.Range(0f, 1f) > .25f)
