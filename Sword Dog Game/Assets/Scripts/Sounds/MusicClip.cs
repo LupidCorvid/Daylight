@@ -6,7 +6,7 @@ using UnityEngine;
 public class MusicClip : SoundPlayable
 {
     public AudioClip clip;
-    public int BPM, timeSignature, barsLength;
+    public int BPM, timeSignature, timeSignatureBottom = 4, barsLength;
     public AudioManager.GameArea area;
     public override AudioClip GetClip()
     {

@@ -291,7 +291,7 @@ public class AudioManager : MonoBehaviour
         currentArea = newArea;
 
         //Calculate loop point
-        loopPointSeconds = 60.0f * (music.barsLength * music.timeSignature) / music.BPM;
+        loopPointSeconds = 60.0f * (music.barsLength * 4 * music.timeSignature / music.timeSignatureBottom) / music.BPM;
 
         //Prevent fading the same clip on both players
         if (music == currentSong)
