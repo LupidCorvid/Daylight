@@ -1,0 +1,46 @@
+-Blocks
+Default{
+[sh,The General][abf,10][ss, .05][series,LeftGeneral,Hi there.[w, .35],[llf,Left],[llf,Left2], [ss, .3]... [w, 1] [exit]] I am practicing to become a voice actor.[w, .15] What do you want to hear? 
+[prompt, Fear,[llf,Fear], Joy, [llf,Joy], Wobbly, [llf,Wobbly]] [wi] [ss, .05] Thank you for listening![w, 1][mcount,LeftGeneral,=,0] [exit]
+}
+
+Left{
+That was rude of you.[w, .35] Anyways,[w, .35] }
+Left2{
+Why do I bother talking to you if you are going to keep leaving?[w, .35] Don't leave this time. [wi] [c]}
+
+Fear{
+[ss, .025][IA,<size=200%>][emote,4][reemote,4][TFX, Shake, 1.5]AAAAAHHHH!!![/TFX,Shake][IA,</size>]
+}
+Joy{
+[ss, .05][emote,2][reemote,2][TFX, Wave, 5, 5, 50]Yaaaaay![/TFX,Wave]
+}
+Wobbly{
+[ss, 0.05][IA,<size=125%>][emote,1][reemote,1][TFX, Wiggle, 1, 2]Oooooooooooooooooooooooooooooo[/TFX,Wiggle][IA,</size>]
+}
+Interrupted{
+[ss,.05][mcount,LeftGeneral,+,1] [series,LeftGeneral, ,I was talking to you! [w, 3], Really?[w, .45] Again? [w, 3], I give up. [w, 2], [ss, .2]...] [exit]
+}
+
+Prologue2{
+[c][gvar,playerName]! Where have you been?! You and Ricken- [emote, 3] Wh-Where's Ricken? He... He didn't- [wi][c] Haaa, that’s good to hear. You had me worried that another warrior... [wi][reemote, 3] Nevermind my worries... [gvar,playerName], report! How’d the mission go? [wi][c][llf,MissionDetails][exit]
+}
+
+MissionDetails{
+[c]Let me get this straight... [w, .2] After successfully dispatching several monsters,[w, .2] something,[w, .2] presumably a monster,[w, .2] snuck up behind you and knocked you unconscious... [wi]
+[c]When you awoke, not in the place where you were struck, you could only assume that said assailant had dragged you deeper into the forest...[w, .2] However, Ricken managed to fend off said attacker; that is until more monsters appeared... [wi]
+[c]When Ricken had been backed into a corner, you had finally managed to catch up to him,[w, .2] swoop in,[w, .2] rescue him,[w, .2] and return safely in order to report this ordeal back to me... [wi]
+[c]Your report in short:[w, .2] the monsters are getting closer. [wi][c][emote, 0][IA,<size=120%>][TFX, Shake, 1.2] I wished you had reported back to me something I didn’t already know![/TFX,Shake][IA,</size>][wi]
+[c]While I'm thankful we didn't lose another rising warrior, hearing that the last of the elder’s pupils couldn’t even accomplish such a simple task is disheartening. [wi]
+[c]Not only for me... but for your fellow villagers who look up to us in order to safeguard and protect them. [wi]
+[c][reemote, 5][IA,<size=120%>] I don’t want apologies, boy.[w, .1] I want results![IA,</size>][w, .2] And it looks like you and your fellow rookie need training and easier missions. [wi]
+[c]Report over. You are dismissed. Go! Patrol around the town and see if anyone is in need of assistance. [wi][exit]
+}
+
+Prologue3{
+[c] Now that everyone’s been debriefed on the warriors’ recent undertakings...[w, .1] I’d like to issue an apology to every one of my fellow townspeople. [wi][c] As your General, and on behalf of my men’s recent failings, I have let every single one of you down. [wi][c] Our battle, or more accurately rebuff, against the monsters hasn’t been proceeding as smoothly as we'd like. Multiple times over just this past month, I have received reports of monsters getting more elusive and coordinated in their onslaught. [wi][c] So much so that...[w, .2] worst of all...[w, .2] one of our very own warriors has yet to return from their outing. [wi][c][reemote, 4] The fiend that we think got to him is one that we’ve been monitoring for a while. It’s been recently spotted heading towards the east side of the forest so that area will be off limits except for the scouts and seasoned warriors that I will be assigning to track the beast and hopefully locate the missing warrior. [wi][c] Shae, Yuri, and Nigel, see me at the well. Meeting adjourned. [wi][c][exit]
+}
+
+Prologue4{
+[c][gvar,playerName]! I see you've completed your first quest, well done. Our blacksmith is in need of more materials to strengthen our armory. See him in the dojo and attend to his needs. Dismissed! [wi][c][exit]
+}
