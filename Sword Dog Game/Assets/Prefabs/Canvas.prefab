@@ -5464,7 +5464,7 @@ RectTransform:
   - {fileID: 8838013092825691317}
   - {fileID: 2088989887}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8940,6 +8940,7 @@ GameObject:
   - component: {fileID: 1592817886527019191}
   - component: {fileID: 4548502962839298305}
   - component: {fileID: 4546406003705504280}
+  - component: {fileID: 4501725286693511401}
   m_Layer: 5
   m_Name: Stamina bar
   m_TagString: Untagged
@@ -9019,6 +9020,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 7627102694050597096}
   fillImage: {fileID: 4548502962839298305}
+--- !u!95 &4501725286693511401
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500159194319376230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 045715d7194a2a444a27cba98f992c0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &4539257094951057503
 GameObject:
   m_ObjectHideFlags: 0
