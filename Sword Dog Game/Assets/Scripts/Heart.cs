@@ -58,12 +58,10 @@ public class Heart : MonoBehaviour
     public void SetSprite(int newType, bool isDamaged)
     {
         damaged = isDamaged;
-
         int prevType = type;
         type = Mathf.Clamp(newType, 0, 2);
-        if (type < prevType && blinkRoutine == null)
+        if (damaged && type < prevType && blinkRoutine == null)
             blinkRoutine = StartCoroutine(Blink(prevType, 1f, 3));
-
         else if (damaged && flashRoutine == null)
             flashRoutine = StartCoroutine(DamageFlash(1f, 3));
         else
