@@ -424,9 +424,13 @@ public class PlayerMovement : MonoBehaviour
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
+        
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
-            if (!isTurning && !reversedTurn && !waitingToTurn && !finishedReverseTurnThisFrame)
+            if (!isTurning) reversedTurn = false;
+            if (finishedReverseTurnThisFrame) finishedReverseTurnThisFrame = false;
+
+            if (!isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
                 if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
@@ -440,7 +444,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if ((moveX < 0 && intendedFacingRight) || (moveX > 0 && !intendedFacingRight))
+        if (isTurning && (moveX < 0 && intendedFacingRight) || (moveX > 0 && !intendedFacingRight))
         {
             intendedFacingRight = !intendedFacingRight;
             reversedTurn = !reversedTurn;
@@ -540,7 +544,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Fixes turn deadlock
-        if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0 && isTurning)
+        if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0)
         {
             EndTurn();
         }
