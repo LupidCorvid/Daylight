@@ -19,7 +19,13 @@ public class SettingsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            SettingsManager.currentSettings.fullScreen = !SettingsManager.currentSettings.fullScreen;
+            SettingsManager.UpdateFullscreen();
+            SettingsManager.SaveSettings();
+        }
+
     }
 
     public void ResetBinds()

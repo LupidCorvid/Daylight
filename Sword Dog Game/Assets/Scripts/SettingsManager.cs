@@ -35,21 +35,30 @@ public class SettingsManager : MonoBehaviour
         if(currentSettings.keybinds != "")
             InputReader.inputs.actions.LoadBindingOverridesFromJson(currentSettings.keybinds);
 
-        if (currentSettings.fullScreen)
-        {
-            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
-        }
-        else
-        {
-            currentSettings.xRes = Mathf.Clamp(currentSettings.xRes, 0.1f, 1.0f);
-            currentSettings.yRes = Mathf.Clamp(currentSettings.yRes, 4/9f, 1.0f);
-            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
-        }
+        UpdateFullscreen();
+
         QualitySettings.SetQualityLevel(currentSettings.quality);
         if (currentSettings.vSync)
             QualitySettings.vSyncCount = 1;
         else
             QualitySettings.vSyncCount = 0;
+    }
+
+    public static void UpdateFullscreen()
+    {
+        if (currentSettings.fullScreen)
+        {
+            currentSettings.xRes = (float)Screen.width / Display.main.systemWidth;
+            currentSettings.yRes = (float)Screen.height / Display.main.systemHeight;
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
+        }
+        else
+        {
+            currentSettings.xRes = Mathf.Clamp(currentSettings.xRes, 0.1f, 1.0f);
+            currentSettings.yRes = Mathf.Clamp(currentSettings.yRes, 4 / 9f, 1.0f);
+            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
+            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
+        }
     }
 
     public static void SaveSettings()
