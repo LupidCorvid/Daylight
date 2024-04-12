@@ -133,6 +133,13 @@ public class GameSaver : MonoBehaviour
             inventory = new ItemDatabase.PackedInventory();
             dialogStringVariables = new Dictionary<string, string>();
         }
+
+        public static SaveData EmptySave()
+        {
+            SaveData returnData = new SaveData();
+            returnData.emptySave = true;
+            return returnData;
+        }
     }
 
     // Saves game if player exists on application quit

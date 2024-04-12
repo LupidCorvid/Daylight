@@ -131,14 +131,41 @@ public class MainMenuManager : MonoBehaviour
 
     public void PopulateLoadMenu()
     {
-        string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
 
-        for(int i = 0; i < files.Length; i++)
+        //string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
+
+        //for (int i = 0; i < files.Length; i++)
+        //{
+        //    GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
+        //    SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
+        //    addedSlot.saveNum = i;
+        //    addedSlot.savePath = files[i];
+        //}
+
+        //int addedFiles = 0;
+        //while(files.Length + addedFiles < 3)
+        //{
+        //    GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
+        //    SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
+        //    addedSlot.saveNum = files.Length + addedFiles;
+        //    addedSlot.savePath = Application.persistentDataPath + @"\SaveData\SaveData_" + (files.Length + addedFiles) + @".DOG";
+        //    File.CreateText(addedSlot.savePath);
+        //    addedFiles++;
+        //}
+
+        //string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
+
+        for (int i = 0; i < 3; i++)
         {
+
             GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
             SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
             addedSlot.saveNum = i;
-            addedSlot.savePath = files[i];
+            addedSlot.savePath = Application.persistentDataPath + @"\SaveData\SaveData_" + (i) + @".DOG";
+            if (!File.Exists(Application.persistentDataPath + @"\SaveData\SaveData_" + (i) + @".DOG"))
+            {
+                File.WriteAllText(addedSlot.savePath, JsonUtility.ToJson(GameSaver.SaveData.EmptySave()));
+            }
 
         }
     }
