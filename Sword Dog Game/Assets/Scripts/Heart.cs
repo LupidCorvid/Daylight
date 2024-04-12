@@ -24,9 +24,11 @@ public class Heart : MonoBehaviour
     private void Start()
     {
         // create a new AnimationClip
-        wobble = new AnimationClip();
-        wobble.name = "Wobble";
-        wobble.legacy = true;
+        wobble = new AnimationClip
+        {
+            name = "Wobble",
+            legacy = true
+        };
 
         // create a curve to move the GameObject and assign to the clip
         Keyframe[] keys;
@@ -38,10 +40,12 @@ public class Heart : MonoBehaviour
         flipWobble = !flipWobble;
         
         for (int i = 1; i <= 2; i++){
-            AnimationEvent stop = new AnimationEvent();
-            stop.functionName = "CheckStopWobble";
-            stop.time = wobbleSpeed / i;
-            stop.objectReferenceParameter = this;
+            AnimationEvent stop = new AnimationEvent
+            {
+                functionName = "CheckStopWobble",
+                time = wobbleSpeed / i,
+                objectReferenceParameter = this
+            };
             wobble.AddEvent(stop);
         }
 
@@ -120,9 +124,6 @@ public class Heart : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) Wobble(3f);
-        if (Input.GetKeyDown(KeyCode.Y)) wobbling = false;
-
         if (!wobbling)
             targetIntensity = 0f;
 
