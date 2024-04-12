@@ -118,7 +118,9 @@ public class MainMenuManager : MonoBehaviour
             GameSaver.currData = new GameSaver.SaveData();
             //InventoryManager.currInventory.contents = new List<ItemSlot>(3);
             InventoryManager.currInventory = new Inventory();
-            QuestsManager.main?.questsDatabase.ResetAllQuestProgress();
+            //QuestsManager.main?.questsDatabase.ResetAllQuestProgress();
+            QuestsManager.main.questsDatabase = new QuestDatabase();
+            QuestsManager.main.RefreshListings();
             InventoryManager.main?.refreshInventory();
             AudioManager.instance.FadeOutCurrent();
             DialogSource.stringVariables = GameSaver.currData.dialogStringVariables;

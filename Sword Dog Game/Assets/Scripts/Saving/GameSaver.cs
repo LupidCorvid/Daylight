@@ -86,6 +86,12 @@ public class GameSaver : MonoBehaviour
             //InventoryManager.currInventory.AddItems(unpackedItems);
             InventoryManager.currInventory = ItemDatabase.main.unpackInventory(data.inventory);
             InventoryManager.main.refreshInventory();
+
+            QuestsManager.main.questsDatabase = new QuestDatabase();
+            QuestsManager.main.questsDatabase.ResetAllQuestProgress();
+            QuestsManager.main.RefreshListings();
+
+            //QuestsManager.main.questsDatabase.populateQuestsList();
             QuestsManager.main.questsDatabase.unpackSavedQuests(currData);
             DialogSource.stringVariables = currData.dialogStringVariables;
 

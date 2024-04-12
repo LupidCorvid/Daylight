@@ -44,7 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public bool intendedFacingRight;
 
     public float lastLandHeight;
-    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, sprintSpeedMultiplier, timeSinceSprint, timeIdle;
+    private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, timeSinceSprint, timeIdle;
+    public float sprintSpeedMultiplier;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     public Entity entityBase;
