@@ -234,8 +234,15 @@ public class PlayerMovement : MonoBehaviour
         else if (timeSinceSprint > 0.1f)
             deltaStamina += 1.5f*Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
-        if(!stopStaminaRefill)
+        if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
+
+        // Disable frozen sprinting during cutscenes    
+        if (CutsceneController.cutsceneStopMovement && isSprinting)
+        {
+            isSprinting = false;
+            anim.ResetTrigger("start_sprint");
+        }
 
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement) // && not paused(?)
         {

@@ -119,7 +119,7 @@ public class MoveCameraCutscene : CutsceneData
             else
                 target.transform.position = transform.point;
         }
-        
+        target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -10);
     }
 
     public void ExponentialMovement(CameraTransform transform)

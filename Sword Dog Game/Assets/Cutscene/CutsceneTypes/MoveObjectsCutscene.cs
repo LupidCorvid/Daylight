@@ -16,7 +16,14 @@ public class MoveObjectsCutscene : CutsceneData
         {
             if (!transform.getFromName)
             {
-                transform.objectToMove.transform.position = transform.newLocation;
+                if (!transform.relativePosition)
+                {
+                    transform.objectToMove.transform.position = transform.newLocation;
+                }
+                else
+                {
+                    transform.objectToMove.transform.localPosition = transform.newLocation;
+                }
                 transform.objectToMove.transform.localScale = transform.newScale;
             }
             else
@@ -45,14 +52,16 @@ public class MoveObjectsCutscene : CutsceneData
         public Vector3 newLocation;
         public Vector3 newScale;
         public float newRotation;
+        public bool relativePosition;
 
-        public MoveObject(Transform objectToMove, Vector3 location, Vector3 newScale, float newRotation = 0, bool GetFromName = false, string TransformName = "")
+        public MoveObject(Transform objectToMove, Vector3 location, Vector3 newScale, float newRotation = 0, bool RelativePosition = false, bool GetFromName = false, string TransformName = "")
         {
             this.objectToMove = objectToMove;
             newLocation = location;
             this.newScale = newScale;
             transformName = TransformName;
             getFromName = GetFromName;
+            relativePosition = RelativePosition;
             this.newRotation = newRotation;
         }
     }
