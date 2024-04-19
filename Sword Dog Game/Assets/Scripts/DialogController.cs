@@ -84,7 +84,7 @@ public class DialogController : MonoBehaviour
         //    main = this;
 
         //Copy of No Laughing Matter vers.
-        if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame() || InputReader.inputs.actions["Pause"].WasPressedThisFrame()) && source != null)
+        if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame()) && source != null)
         {
             if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
             {
