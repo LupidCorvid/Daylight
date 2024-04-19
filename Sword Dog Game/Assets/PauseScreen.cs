@@ -120,7 +120,7 @@ public class PauseScreen : MonoBehaviour
         foreach (AudioSource source in sources)
         {
             // Don't resume audio source if this is a speaker who has finished talking
-            if (System.Array.Exists(DialogController.speaker.soundPlayer.sources, element => element == source) && !DialogController.main.reading) {
+            if (DialogController.speaker?.soundPlayer?.sources != null && System.Array.Exists(DialogController.speaker.soundPlayer.sources, element => element == source) && !DialogController.main.reading) {
                 continue;
             }
             source.UnPause();
