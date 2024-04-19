@@ -44,6 +44,7 @@ public class SwordFollow : MonoBehaviour
 
     public float parryFailCooldown = 1.5f;
     public float lastParryFail = -100f;
+    public float hoverRate = 5f, hoverStrength = 0.03f;
 
     // Start is called before the first frame update
     void Start()
@@ -149,7 +150,8 @@ public class SwordFollow : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             playerLocation = player.transform.position;
 
-            var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY);
+            float passiveHover = hoverStrength * Mathf.Sin(hoverRate * Time.fixedTime);
+            var offset = player.transform.rotation * new Vector2(adjustLocationX, adjustLocationY + passiveHover);
             swordTargetLocation = playerLocation + offset;
 
             //Moves
