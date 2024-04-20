@@ -220,6 +220,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PauseScreen.paused) return;
+        
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -244,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             anim.ResetTrigger("start_sprint");
         }
 
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement) // && not paused(?)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement)
         {
             // remember previous movement input
             prevMoveX = moveX;
