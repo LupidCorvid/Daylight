@@ -47,10 +47,11 @@ public class TimeCycle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(lastWeatherUpdate + 1 < Time.time)
+        UpdateWind();
+        if (lastWeatherUpdate + 1 < Time.time)
         {
             UpdateRain();
-            UpdateWind();
+            
         }
     }
 
@@ -92,7 +93,7 @@ public class TimeCycle : MonoBehaviour
 
     public void UpdateWind()
     {
-        SceneWindSetter.currActive.strengths.x = roomBaseWind + (Mathf.PerlinNoise(roomLocation.x + GameTime * volatilityScalar, 100) - .5f)/.5f * 2;
+        SceneWindSetter.currActive.strengths.x = roomBaseWind + 10 * (Mathf.PerlinNoise(roomLocation.x + GameTime * volatilityScalar/100f, 100) - .5f)/.5f * 2;
         windVal = SceneWindSetter.currActive.strengths.x;
     }
 }
