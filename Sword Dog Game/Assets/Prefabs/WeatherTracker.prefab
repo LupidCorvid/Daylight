@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5954381141223180086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4255197551074386325}
+  - component: {fileID: 357300754666794540}
+  - component: {fileID: 6107223599588412529}
+  m_Layer: 0
+  m_Name: WeatherTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4255197551074386325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954381141223180086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 44.920444, y: 6.367729, z: -2.7987947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2893245211082352231}
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &357300754666794540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954381141223180086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af327ac279e69b640837d9cf7aa3d599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameStartTime: 0
+  roomLocation: {x: 0, y: 0}
+  Raining: 0
+  neededHumidity: 0.8
+  stopRainReq: 0.6
+  volatilityScalar: 0.01
+  HumidityVal: 0
+  RainStartTime: 0
+  windVal: 0
+  roomBaseWind: 0
+--- !u!114 &6107223599588412529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954381141223180086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3f2bbe0b006d3418b22bc67679351e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengths: {x: 0, y: 0}
+  volatility: 0
+  speed: 0
+  windZone: {fileID: 3380203679328218515}
+  linkStrengthSpeedVelo: 1
+  randoOnStart: 0
+--- !u!1 &7542455821996281485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2893245211082352231}
+  - component: {fileID: 3380203679328218515}
+  - component: {fileID: 8000653903323777279}
+  m_Layer: 0
+  m_Name: WindZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2893245211082352231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542455821996281485}
+  m_LocalRotation: {x: -0.16797338, y: 0.68686604, z: 0.16797338, w: 0.68686604}
+  m_LocalPosition: {x: 7.8467484, y: -14.308726, z: 6.5480013}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4255197551074386325}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -27.484, y: 90, z: 0}
+--- !u!182 &3380203679328218515
+WindZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542455821996281485}
+  m_Enabled: 1
+  m_Mode: 0
+  m_Radius: 20
+  m_WindMain: 1
+  m_WindTurbulence: 10
+  m_WindPulseMagnitude: 1
+  m_WindPulseFrequency: 5
+--- !u!114 &8000653903323777279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542455821996281485}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3f2bbe0b006d3418b22bc67679351e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengths: {x: 1, y: 1}
+  volatility: 1
+  speed: 1
+  windZone: {fileID: 3380203679328218515}
+  linkStrengthSpeedVelo: 1
+  randoOnStart: 1

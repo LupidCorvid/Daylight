@@ -15,10 +15,15 @@ public class SceneWindSetter : MonoBehaviour
 
     public static SceneWindSetter currActive;
 
+    private void Awake()
+    {
+        currActive = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        currActive = this;
+        
         if (randoOnStart)
         {
             linkStrengthSpeedVelo = true;

@@ -73031,71 +73031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
---- !u!1 &979574548
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 979574550}
-  - component: {fileID: 979574549}
-  - component: {fileID: 979574551}
-  m_Layer: 0
-  m_Name: WindZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!182 &979574549
-WindZone:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979574548}
-  m_Enabled: 1
-  m_Mode: 0
-  m_Radius: 20
-  m_WindMain: 1
-  m_WindTurbulence: 10
-  m_WindPulseMagnitude: 1
-  m_WindPulseFrequency: 5
---- !u!4 &979574550
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979574548}
-  m_LocalRotation: {x: -0.16797338, y: 0.68686604, z: 0.16797338, w: 0.68686604}
-  m_LocalPosition: {x: 7.8467484, y: -14.308726, z: 6.5480013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1873059389}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -27.484, y: 90, z: 0}
---- !u!114 &979574551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979574548}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3f2bbe0b006d3418b22bc67679351e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strengths: {x: 1, y: 1}
-  volatility: 1
-  speed: 1
-  windZone: {fileID: 979574549}
-  linkStrengthSpeedVelo: 1
-  randoOnStart: 1
 --- !u!1 &980130394
 GameObject:
   m_ObjectHideFlags: 0
@@ -113555,79 +113490,6 @@ Transform:
   m_Father: {fileID: 2075553441}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1873059387
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1873059389}
-  - component: {fileID: 1873059388}
-  - component: {fileID: 1873059390}
-  m_Layer: 0
-  m_Name: WeatherTracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1873059388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873059387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af327ac279e69b640837d9cf7aa3d599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameStartTime: 0
-  roomLocation: {x: 0, y: 0}
-  Raining: 0
-  neededHumidity: 0.9
-  stopRainReq: 0.75
-  volatilityScalar: 0.01
-  HumidityVal: 0
-  RainStartTime: 0
-  windVal: 0
---- !u!4 &1873059389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873059387}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.920444, y: 6.367729, z: -2.7987947}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 979574550}
-  m_Father: {fileID: 0}
-  m_RootOrder: 24
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1873059390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873059387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3f2bbe0b006d3418b22bc67679351e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strengths: {x: 0, y: 0}
-  volatility: 0
-  speed: 0
-  windZone: {fileID: 979574549}
-  linkStrengthSpeedVelo: 1
-  randoOnStart: 0
 --- !u!1 &1879264507
 GameObject:
   m_ObjectHideFlags: 0
@@ -130858,6 +130720,71 @@ Transform:
   m_Father: {fileID: 2835739991370223721}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1747361734360405153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 357300754666794540, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: roomLocation.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44.920444
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.367729
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.7987947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255197551074386325, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954381141223180086, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
+      propertyPath: m_Name
+      value: WeatherTracker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83c2276dfd879074fa49a2fa995a566f, type: 3}
 --- !u!82 &1866848623456014703
 AudioSource:
   m_ObjectHideFlags: 0

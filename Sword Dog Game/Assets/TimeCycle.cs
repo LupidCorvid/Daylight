@@ -47,7 +47,7 @@ public class TimeCycle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateWind();
+        //UpdateWind();
         if (lastWeatherUpdate + 1 < Time.time)
         {
             UpdateRain();
