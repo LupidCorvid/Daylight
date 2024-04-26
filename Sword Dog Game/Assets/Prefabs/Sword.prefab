@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 6583157704598411567}
   - component: {fileID: 7435707140238394891}
   - component: {fileID: 4600268384154661545}
+  - component: {fileID: 6544310172558386937}
   m_Layer: 11
   m_Name: Sword
   m_TagString: Untagged
@@ -207,6 +208,8 @@ MonoBehaviour:
   canParryCheck: {fileID: 0}
   parryFailCooldown: 1.5
   lastParryFail: -100
+  hoverRate: 5
+  hoverStrength: 0.03
 --- !u!50 &2591983749293105045
 Rigidbody2D:
   serializedVersion: 4
@@ -919,6 +922,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
+--- !u!95 &6544310172558386937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591983749293105129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9595cdce182853b45b603ada32b349c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &5280208853786250205
 GameObject:
   m_ObjectHideFlags: 0
