@@ -101,6 +101,7 @@ public class SaveSlot : MonoBehaviour
     {
         RestoreDefaultDisplay();
         ClearData();
+        MainMenuManager.main.FetchLastSave();
     }
 
     

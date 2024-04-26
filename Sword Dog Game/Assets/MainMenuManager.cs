@@ -25,34 +25,26 @@ public class MainMenuManager : MonoBehaviour
 
     public TMPro.TextMeshProUGUI continueText;
 
+    public static MainMenuManager main;
+    public static GameObject instance;
+
     // Start is called before the first frame update
     void Start()
     {
-        inMainMenu = true;
-
-        (string ,int) lastSaveData = GetMostRecentSave();
-        lastSave = lastSaveData.Item1;
-        lastSaveNum = lastSaveData.Item2;
-        ResetPlayerBools();
-
-        
-        if (lastSave != "")
+        // Singleton design pattern
+        if (instance != null && instance != this)
         {
-            lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
-            buttons[1].interactable = true;
-            continueText.text = "Continue";
+            Destroy(gameObject);
         }
         else
         {
-            //Debug.Log("No most recent save found");
-            lastSaveDetails.text = "";
-            continueText.text = "New Game";
-            //buttons[1].interactable = false;
-
-            //ColorBlock continueButtonColors = buttons[1].colors;
-            //continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
-            //buttons[1].colors = continueButtonColors;
+            instance = gameObject;
+            main = this;
         }
+
+        inMainMenu = true;
+
+        FetchLastSave();
 
         CanvasManager.InstantHideHUD();
 
@@ -276,6 +268,31 @@ public class MainMenuManager : MonoBehaviour
         SettingsMiniMenu.main.OpenMenu();
     }
 
+    public void FetchLastSave()
+    {
+        (string, int) lastSaveData = GetMostRecentSave();
+        lastSave = lastSaveData.Item1;
+        lastSaveNum = lastSaveData.Item2;
+        ResetPlayerBools();
+        
+        if (lastSave != "")
+        {
+            lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
+            buttons[1].interactable = true;
+            continueText.text = "Continue";
+        }
+        else
+        {
+            //Debug.Log("No most recent save found");
+            lastSaveDetails.text = "";
+            continueText.text = "New Game";
+            //buttons[1].interactable = false;
+
+            //ColorBlock continueButtonColors = buttons[1].colors;
+            //continueButtonColors.disabledColor = new Color(0,0,0,0.6f);
+            //buttons[1].colors = continueButtonColors;
+        }
+    }
 }
 
 [System.Serializable]
