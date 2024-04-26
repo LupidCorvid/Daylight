@@ -14,6 +14,8 @@ public class Player : Entity
     public bool hasLantern = false;
     public GameObject mouthLantern;
 
+    public ParticleSystem rain;
+
     public override bool attacking
     {
         get
