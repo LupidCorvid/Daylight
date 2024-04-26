@@ -13,9 +13,12 @@ public class SceneWindSetter : MonoBehaviour
     public bool linkStrengthSpeedVelo = true;
     public bool randoOnStart = false;
 
+    public static SceneWindSetter currActive;
+
     // Start is called before the first frame update
     void Start()
     {
+        currActive = this;
         if (randoOnStart)
         {
             linkStrengthSpeedVelo = true;
@@ -26,6 +29,9 @@ public class SceneWindSetter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currActive != this)
+            return;
+
         if (linkStrengthSpeedVelo)
         {
             speed = 1 + ((Mathf.Abs(strengths.x) - 1) / 4f);

@@ -28,10 +28,15 @@ public class TimeCycle : MonoBehaviour
 
     public float RainStartTime;
 
+    public float windVal;
+
+    public float roomBaseWind = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         UpdateRain();
+        UpdateWind();
     }
 
     private void Update()
@@ -45,7 +50,7 @@ public class TimeCycle : MonoBehaviour
         if(lastWeatherUpdate + 1 < Time.time)
         {
             UpdateRain();
-            
+            UpdateWind();
         }
     }
 
@@ -83,7 +88,11 @@ public class TimeCycle : MonoBehaviour
         rainScalar = Mathf.Lerp(neededHumidity, stopRainReq, (Time.time - RainStartTime) / 5);
 
         SetRainState();
+    }
 
-        
+    public void UpdateWind()
+    {
+        SceneWindSetter.currActive.strengths.x = roomBaseWind + (Mathf.PerlinNoise(roomLocation.x + GameTime * volatilityScalar, 100) - .5f)/.5f * 2;
+        windVal = SceneWindSetter.currActive.strengths.x;
     }
 }

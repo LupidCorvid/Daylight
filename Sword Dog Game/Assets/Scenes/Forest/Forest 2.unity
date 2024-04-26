@@ -32884,7 +32884,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &411109137
 GameObject:
@@ -39934,7 +39934,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &474866550
 GameObject:
@@ -43756,7 +43756,7 @@ Transform:
   m_Children:
   - {fileID: 627539039}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &543953750
 BoxCollider2D:
@@ -46042,7 +46042,7 @@ Transform:
   m_Children:
   - {fileID: 556804228}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &613956121
 MonoBehaviour:
@@ -61375,7 +61375,7 @@ Transform:
   - {fileID: 2142235308}
   - {fileID: 1741001463}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747795641
 GameObject:
@@ -64041,7 +64041,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &844682654
 GameObject:
@@ -73071,12 +73071,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979574548}
   m_LocalRotation: {x: -0.16797338, y: 0.68686604, z: 0.16797338, w: 0.68686604}
-  m_LocalPosition: {x: 52.767193, y: -7.940997, z: 3.7492068}
+  m_LocalPosition: {x: 7.8467484, y: -14.308726, z: 6.5480013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 1873059389}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -27.484, y: 90, z: 0}
 --- !u!114 &979574551
 MonoBehaviour:
@@ -81981,7 +81981,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 272707562808797190, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 272707562808797190, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -82537,7 +82537,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249326167
 GameObject:
@@ -84671,7 +84671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1368755119
 GameObject:
@@ -103598,7 +103598,7 @@ Transform:
   m_Children:
   - {fileID: 1461006520}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1687129879
 BoxCollider2D:
@@ -113565,6 +113565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1873059389}
   - component: {fileID: 1873059388}
+  - component: {fileID: 1873059390}
   m_Layer: 0
   m_Name: WeatherTracker
   m_TagString: Untagged
@@ -113590,6 +113591,9 @@ MonoBehaviour:
   neededHumidity: 0.9
   stopRainReq: 0.75
   volatilityScalar: 0.01
+  HumidityVal: 0
+  RainStartTime: 0
+  windVal: 0
 --- !u!4 &1873059389
 Transform:
   m_ObjectHideFlags: 0
@@ -113601,10 +113605,29 @@ Transform:
   m_LocalPosition: {x: 44.920444, y: 6.367729, z: -2.7987947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 979574550}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1873059390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873059387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3f2bbe0b006d3418b22bc67679351e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengths: {x: 0, y: 0}
+  volatility: 0
+  speed: 0
+  windZone: {fileID: 979574549}
+  linkStrengthSpeedVelo: 1
+  randoOnStart: 0
 --- !u!1 &1879264507
 GameObject:
   m_ObjectHideFlags: 0
@@ -116420,7 +116443,7 @@ Transform:
   m_Children:
   - {fileID: 114939752}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1947932593
 GameObject:
@@ -124240,7 +124263,7 @@ Transform:
   - {fileID: 1184053005}
   - {fileID: 1007045254}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028513780
 GameObject:
@@ -128472,7 +128495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 225807759336298616, guid: 9df6086dcc160f64dbf58ddab642c8fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -149898,7 +149921,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4432886340032031664, guid: fac20645426ec6840802fc6bbdeeb08b, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4432886340032031664, guid: fac20645426ec6840802fc6bbdeeb08b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -154397,7 +154420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993214411986571415, guid: 61534a0ecf3c03048a7ec355bfa334f9, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7993214411986571415, guid: 61534a0ecf3c03048a7ec355bfa334f9, type: 3}
       propertyPath: m_LocalPosition.x
