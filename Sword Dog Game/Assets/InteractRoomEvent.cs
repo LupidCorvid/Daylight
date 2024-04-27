@@ -19,18 +19,18 @@ public class InteractRoomEvent : MonoBehaviour, IInteractable
 
     public string eventName;
 
-    public void interact(Entity user)
+    public virtual void interact(Entity user)
     {
         RoomManager.currentRoom.callRoomEvent(eventName);
         hidePrompt();
     }
 
-    public void OnDestroy()
+    public virtual void OnDestroy()
     {
         hidePrompt();
     }
 
-    public void hidePrompt()
+    public virtual void hidePrompt()
     {
         if (spawnedPrompt != null)
         {
@@ -39,7 +39,7 @@ public class InteractRoomEvent : MonoBehaviour, IInteractable
         }
     }
 
-    public void showPrompt(GameObject prompt)
+    public virtual void showPrompt(GameObject prompt)
     {
         if (spawnedPrompt == null)
         {

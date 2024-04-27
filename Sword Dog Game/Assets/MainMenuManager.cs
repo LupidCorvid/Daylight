@@ -46,7 +46,7 @@ public class MainMenuManager : MonoBehaviour
 
         FetchLastSave();
 
-        CanvasManager.InstantHideHUD();
+        CanvasManager.HideHUD(true);
 
         BuffList.main?.clearBuffIcons();
         Buff.totalBuffs = 0;
@@ -274,7 +274,7 @@ public class MainMenuManager : MonoBehaviour
         lastSave = lastSaveData.Item1;
         lastSaveNum = lastSaveData.Item2;
         ResetPlayerBools();
-        
+
         if (lastSave != "")
         {
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;

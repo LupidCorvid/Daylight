@@ -84,9 +84,9 @@ public class MoveCameraCutscene : CutsceneData
             CinematicBars.current.Hide();
 
         if (points[curPoint].hideUI)
-            CanvasManager.HideHUD();
+            CanvasManager.HideHUD(points[curPoint].instantUI);
         else
-            CanvasManager.ShowHUD();
+            CanvasManager.ShowHUD(points[curPoint].instantUI);
     }
 
     public void LinearMovement(CameraTransform transform)
@@ -197,10 +197,11 @@ public class MoveCameraCutscene : CutsceneData
         public bool letterbox;
         public MovementType transition;
         public bool hideUI;
+        public bool instantUI;
         public bool relPosition;
 
 
-        public CameraTransform(float zoom, float speed, Vector2 targetPoint, MovementType transition, bool letterbox = false, bool hideUI = false, bool relPosition = false)
+        public CameraTransform(float zoom, float speed, Vector2 targetPoint, MovementType transition, bool letterbox = false, bool hideUI = false, bool instantUI = false, bool relPosition = false)
         {
             this.zoom = zoom;
             this.speed = speed;
@@ -208,6 +209,7 @@ public class MoveCameraCutscene : CutsceneData
             this.letterbox = letterbox;
             this.transition = transition;
             this.hideUI = hideUI;
+            this.instantUI = instantUI;
             this.relPosition = relPosition;
         }
     }

@@ -51,30 +51,18 @@ public class CanvasManager : MonoBehaviour
         instaShow = false;
     }
 
-    public static void HideHUD()
+    public static void HideHUD(bool instant = false)
     {
         HUDscale = 0;
         shownHUD = false;
+        instaHide = instant;
     }
 
-    public static void InstantHideHUD()
-    {
-        HUDscale = 0;
-        instaHide = true;
-        shownHUD = false;
-    }
-
-    public static void ShowHUD()
+    public static void ShowHUD(bool instant = false)
     {
         HUDscale = 1;
         shownHUD = true;
-    }
-
-    public static void InstantShowHUD()
-    {
-        HUDscale = 1;
-        instaShow = true;
-        shownHUD = true;
+        instaShow = instant;
     }
 
     public static void HurtBacksplash(bool lowHealth)

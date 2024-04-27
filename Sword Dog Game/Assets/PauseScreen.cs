@@ -189,7 +189,7 @@ public class PauseScreen : MonoBehaviour
         closePrompt();
         unPause();
         ChangeScene.changingScene = true;
-        // CanvasManager.InstantHideHUD();
+        // CanvasManager.HideHUD(true);
         AudioManager.instance.FadeOutCurrent();
         Crossfade.current.StartFade();
         DialogController.main.closeBox();

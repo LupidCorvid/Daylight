@@ -28,6 +28,9 @@ public class PrologueManager : RoomManager
     {
         switch (name)
         {
+            case "SpawnSwordPrompt":
+                looseSword.GetComponent<SwordPickupBehavior>().spawnPrompt();
+                break;
             case "GetSword":
                 collectSword();
                 break;

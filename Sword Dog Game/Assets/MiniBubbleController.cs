@@ -86,12 +86,12 @@ public class MiniBubbleController : MonoBehaviour
         Vector2 expectedPlace = position + offset;
         if (mainCamera.OverlapPoint(expectedPlace))
         {
-            transform.position += ((Vector3)expectedPlace - transform.position) * Time.deltaTime * 10;
+            transform.position += 10 * Time.deltaTime * ((Vector3)expectedPlace - transform.position);
             return;
         }
 
         Vector2 cameraEdge = mainCamera.ClosestPoint(expectedPlace);
-        Vector2 newPosition = new Vector2();
+        Vector2 newPosition = new();
 
 
         if (cameraEdge.x < mainCamera.transform.position.x)
@@ -110,7 +110,7 @@ public class MiniBubbleController : MonoBehaviour
                 close();//Start exit and deletion
         }
 
-        transform.position += (((Vector3)newPosition - transform.position) * Time.deltaTime * 10);
+        transform.position += 10 * Time.deltaTime * ((Vector3)newPosition - transform.position);
     }
 
     public void setSource(DialogSource newSource)
@@ -240,5 +240,10 @@ public class MiniBubbleController : MonoBehaviour
     public void ChangeFont()
     {
         textDisplay.font = FontManager.main.currFont;
+    }
+
+    public void SetBackground(bool visible)
+    {
+        GetComponentInChildren<SpriteRenderer>().enabled = visible;
     }
 }

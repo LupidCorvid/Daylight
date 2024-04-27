@@ -105,7 +105,7 @@ public class ChangeScene : MonoBehaviour
         //Crossfade.changeScene?.Invoke();
         Crossfade.current.StopFade();
         if (showHUD)
-            CanvasManager.InstantShowHUD();
+            CanvasManager.ShowHUD(true);
         changingScene = false;
     }
 
