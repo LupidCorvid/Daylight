@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class SceneTransitionPrompt : MonoBehaviour, IInteractable
 {
@@ -19,6 +21,9 @@ public class SceneTransitionPrompt : MonoBehaviour, IInteractable
         set { _inRange = value; }
     }
 
+    public float moveRate = 0.4f, moveMax = 0.25f;
+    private float animTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +33,27 @@ public class SceneTransitionPrompt : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if (PauseScreen.paused) return;
+        animTime += Time.deltaTime;
+        if (spawnedPrompt != null)
+        {
+            InteractPrompt prompt = spawnedPrompt.GetComponent<InteractPrompt>();
+            switch (direction)
+            {
+                case Direction.LEFT:
+                    prompt.xOffset = moveMax * -(Mathf.Sin(moveRate * animTime + Mathf.PI) + 1) / 2;
+                    break;
+                case Direction.RIGHT:
+                    prompt.xOffset = moveMax * (Mathf.Sin(moveRate * animTime + Mathf.PI) + 1) / 2;
+                    break;
+                case Direction.UP:
+                    prompt.yOffset = moveMax * (Mathf.Sin(moveRate * animTime + Mathf.PI) + 1) / 2;
+                    break;
+                case Direction.DOWN:
+                    prompt.yOffset = moveMax * -(Mathf.Sin(moveRate * animTime + Mathf.PI) + 1) / 2;
+                    break;
+            }
+        }
     }
 
     public void interact(Entity user)

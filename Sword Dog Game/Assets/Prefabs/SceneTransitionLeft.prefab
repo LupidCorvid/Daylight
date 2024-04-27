@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5538455235740123334
 MonoBehaviour:
@@ -48,6 +48,8 @@ MonoBehaviour:
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 7472849338598888870}
   direction: 0
+  moveRate: 5
+  moveMax: 0.25
 --- !u!61 &4616754268698261803
 BoxCollider2D:
   m_ObjectHideFlags: 0

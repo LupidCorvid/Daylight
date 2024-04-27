@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractPrompt : MonoBehaviour
 {
     private Vector3 startPos;
+    public float xOffset;
     public float yOffset;
     private Animator anim;
     public bool tutorial;
@@ -19,7 +20,7 @@ public class InteractPrompt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = startPos + new Vector3(0, yOffset, 0);
+        transform.position = startPos + new Vector3(xOffset, yOffset, 0);
         if (tutorial && anim.GetFloat("Speed") < 0 && anim.GetBool("OpenBubble"))
         {
             anim.ResetTrigger("OpenBubble");
