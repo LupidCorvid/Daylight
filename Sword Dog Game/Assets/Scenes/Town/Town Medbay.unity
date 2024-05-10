@@ -1936,6 +1936,7 @@ MonoBehaviour:
   finished: 0
   FadeIn: 0
   Stall: 1
+  speed: 1
 --- !u!114 &1878034666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1956,12 +1957,14 @@ MonoBehaviour:
     newLocation: {x: 7, y: -1.336309, z: 0}
     newScale: {x: -1, y: 1, z: 1}
     newRotation: 0
+    relativePosition: 0
   - objectToMove: {fileID: 324237321}
     getFromName: 1
     transformName: Sword
     newLocation: {x: 8.19, y: -1.98, z: 0}
     newScale: {x: 1, y: 1, z: 1}
     newRotation: 83.422
+    relativePosition: 0
 --- !u!114 &1878034667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,6 +1991,8 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 0
   controlMusic: 0
+  RemoveOnDestroy: 1
+  OverwriteCopies: 0
 --- !u!4 &1878034668
 Transform:
   m_ObjectHideFlags: 0

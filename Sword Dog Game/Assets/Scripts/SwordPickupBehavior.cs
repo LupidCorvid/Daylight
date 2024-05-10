@@ -88,7 +88,7 @@ public class SwordPickupBehavior : InteractRoomEvent
             bubble.offset = miniBubbleOffset;
             bubble.setPosition = position;
             // TODO figure out how to insert an input prompt icon here
-            bubble.setSource(new DialogSource("[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.1em><voffset=0.0em>] E to interact [wi] [exit]"));
+            bubble.setSource(new DialogSource("[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.1em><voffset=0.0em>] [btn, Interact] to interact [wi] [exit]"));
         }
 
         if (swordAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0)

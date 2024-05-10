@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class DialogSource
 {
@@ -147,6 +149,8 @@ public class DialogSource
      * 
      * [PM] //Pauses player movement
      * [UPM] //Unpauses player movement
+     *
+     * [btn, input] // Replaces with input prompt icon for specified input
      */
     public DialogSource(string dialog)
     {
@@ -932,6 +936,14 @@ public class DialogSource
                 else
                     Debug.LogError("Invalid number of arguments for UnPause Movement (UPM)!");
                 break;
+            case "btn":
+                if (input.Length == 2)
+                {
+                    dialog = dialog.Insert(position, replaceBinding(input[1].Trim()));
+                }
+                else
+                    Debug.LogWarning("Invalid number of arguments for button[btn]!");
+                break;
 
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
@@ -939,6 +951,23 @@ public class DialogSource
                 break;
 
         }
+    }
+
+    public string replaceBinding(string actionNeeded)
+    {
+        InputBinding binding = InputReader.inputs.actions[actionNeeded].bindings[(int)InputReader.deviceType];
+        TMP_SpriteAsset spriteAsset = InputReader.spriteAssets[(int)InputReader.deviceType];
+        string inputName = renameInput(actionNeeded, binding.ToString());
+        Debug.Log(binding.ToString() + " " + inputName);
+        return $"<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">";
+    }
+
+    public string renameInput(string actionNeeded, string inputName)
+    {
+        inputName = inputName.Replace(actionNeeded + ":", string.Empty);
+        inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("<Gamepad>/", "Xbox_");
+        return inputName;
     }
 
     public void resetDialog()
