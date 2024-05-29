@@ -110,8 +110,9 @@ GameObject:
   - component: {fileID: 3163985152030941434}
   - component: {fileID: 3163985152030941433}
   - component: {fileID: 3163985152030941432}
+  - component: {fileID: 9172365578185263101}
   m_Layer: 10
-  m_Name: ThingEnemy
+  m_Name: Spikeball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,6 +300,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 03b080d4f56a6da4f99725d553621fdf, type: 2}
   alsoFlash: []
   forceNonSolidFlash: 0
+  spriteRenderer: {fileID: 0}
 --- !u!114 &3163985152030941434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,25 +349,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 2
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
-    multiplier: 1
+    baseMultiplier: 1
     additive: 0
     additiveBase: 0
+    multiplier: 1
+    setZeroSources: 0
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 2
-  enemies: 1
   aggroRange: 10
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
   anim: {fileID: 0}
+  killValue: 5
+  soundPlayer: {fileID: 0}
+  crySound: {fileID: 0}
+--- !u!95 &9172365578185263101
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163985152030941319}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41d370bb1a65ec74a928819b5df2c45e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
