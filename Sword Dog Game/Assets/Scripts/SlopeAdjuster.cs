@@ -32,6 +32,8 @@ public class SlopeAdjuster : MonoBehaviour
 
     public float lastSlope;
 
+    public float widthLengthScalar = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +43,8 @@ public class SlopeAdjuster : MonoBehaviour
 
         colliderSize = cldr.bounds.size;
 
-        upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
-        upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
+        upperLeftCorner = new Vector2((-cldr.bounds.extents.x * widthLengthScalar) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
+        upperRightCorner = new Vector2((cldr.bounds.extents.x * widthLengthScalar) + cldr.offset.x, upperLeftCorner.y);
 
         groundCheckSpot = (Vector2)(groundCheck.transform.position - transform.position) + Vector2.up * groundCheck.cldr.offset.y;
 
