@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5704716239398448569}
   - component: {fileID: 1503401291945691334}
-  - component: {fileID: 2340568160233977254}
+  - component: {fileID: 3584797894075283731}
   m_Layer: 13
   m_Name: Spikes
   m_TagString: Untagged
@@ -68,7 +68,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.75
---- !u!114 &2340568160233977254
+--- !u!114 &3584797894075283731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,10 +77,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1158284358826057040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf878b77d005c7488062280edb47c02, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e0e217a5b6d7ab44b12ff8aeaca4375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  enemyBase: {fileID: 3163985152030941432}
   damageCooldown: 1
   requireMovement: 1
 --- !u!1 &3163985151747751099
@@ -486,7 +486,7 @@ PolygonCollider2D:
     - - {x: 1.7668371, y: 1.0940504}
       - {x: -1.7099085, y: 1.0977972}
       - {x: -1.7135715, y: -1.4318101}
-      - {x: -1.1167586, y: -1.94}
-      - {x: 1.1544614, y: -1.9399999}
+      - {x: -1.1167586, y: -1.81}
+      - {x: 1.1544614, y: -1.81}
       - {x: 1.7675321, y: -1.3931729}
   m_UseDelaunayMesh: 0
