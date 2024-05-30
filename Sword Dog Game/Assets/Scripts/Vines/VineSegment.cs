@@ -42,6 +42,10 @@ public class VineSegment : MonoBehaviour
     }
     public void FixedUpdate()
     {
+        //Culling
+        if (Mathf.Abs(Camera.main.transform.position.x - transform.position.x) > 20 * Camera.main.orthographicSize / 6 || !SettingsManager.currentSettings.GrassSway)
+            return;
+
         //Wind direction makes it so that wind rolls in the same direction as things are bending
         //int windDirection = (windStrength * sceneSpeedScalar > 0 ? -1 : 1);
         //rb.velocity += (Vector2.right * Mathf.PerlinNoise(((Time.time * windSpeed * windDirection * sceneSpeedScalar) + (transform.position.x)) * windVolatility * sceneVolatilityScalar, 0) * Time.deltaTime * windStrength * sceneStrengthScalar)/rb.mass;
