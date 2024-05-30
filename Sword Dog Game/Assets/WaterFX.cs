@@ -284,6 +284,7 @@ public class WaterFX : MonoBehaviour
             
             Vector3 worldSpace = transform.position + new Vector3(((i - (numSegments * 2 + 2))/2 * vertexDistance - size.x / 2), size.y/2);
             float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? zWidth : zStartDist;
+            worldSpace.y += SwayEffect.getWindEffect(worldSpace.x, windSpeed/7, windVolatility, windStrength, true) * 10/(Mathf.Clamp(Mathf.Abs(cam.transform.position.y - worldSpace.y) * .5f, 1, 20));
 
             if (changeOnZoom && (!onlyChangeOnGreaterZoom || cam.orthographicSize > 5))
                 newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth * 5f / cam.orthographicSize), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f * 5f / cam.orthographicSize), transform.position.z) - transform.position;
