@@ -27117,7 +27117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1294671896
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27186,7 +27186,7 @@ MonoBehaviour:
   onlyChangeOnGreaterZoom: 1
   texture: {fileID: 21300000, guid: 5721004894358804e82fb17b121ec11c, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  scalar: {x: 1, y: 1, z: 0.1}
+  scalar: {x: 2, y: 1, z: 0.1}
   rotation: {x: 0, y: 180, z: 0}
   distanceOffset: 0
 --- !u!4 &1294671899
@@ -38476,6 +38476,11 @@ MonoBehaviour:
   splashPrefab: {fileID: 2932426905938753825, guid: 319eb419f4027ca4c8a1195df7f73bb8, type: 3}
   LightRayDepth: 0.95
   surfaceWidth: 0.985
+  zWidth: 1
+  zStartDist: 0.5
+  cam: {fileID: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!23 &1295222459313835991
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39347,6 +39352,11 @@ MonoBehaviour:
   splashPrefab: {fileID: 2932426905938753825, guid: 319eb419f4027ca4c8a1195df7f73bb8, type: 3}
   LightRayDepth: 0.95
   surfaceWidth: 0.985
+  zWidth: 1
+  zStartDist: 0.5
+  cam: {fileID: 0}
+  changeOnZoom: 1
+  onlyChangeOnGreaterZoom: 1
 --- !u!61 &8572786426278038119
 BoxCollider2D:
   m_ObjectHideFlags: 0

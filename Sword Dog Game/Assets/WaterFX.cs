@@ -35,7 +35,14 @@ public class WaterFX : MonoBehaviour
     public float LightRayDepth = 0.95f;
     public float surfaceWidth = 0.985f;
 
-    
+
+    public float zWidth = 1;
+    public float zStartDist = .5f;
+
+    public Camera cam;
+    public bool changeOnZoom = true;
+    public bool onlyChangeOnGreaterZoom = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +55,8 @@ public class WaterFX : MonoBehaviour
         }
 
         SetUp();
-        
+
+        cam ??= Camera.main;
     }
 
     public void OnValidate()
@@ -75,6 +83,9 @@ public class WaterFX : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (cam == null)
+            cam = Camera.main;
+
         for (int i = 0; i < WaveOffset.Length; i++)
         {
             //WaveOffset[i].waveVel += (Mathf.Sin((Time.time + i * vertexDistance))) * Time.deltaTime * 2;
@@ -88,8 +99,10 @@ public class WaterFX : MonoBehaviour
 
         ApplyAdjacencyEffects();
         ApplyWaveHeights();
+        ApplyParallaxEffect();
         //mesh.RecalculateNormals();
         mesh.RecalculateTangents();
+        mesh.RecalculateBounds();
 
 
     }
@@ -126,7 +139,7 @@ public class WaterFX : MonoBehaviour
 
             addedObj.GetComponent<Rigidbody2D>().velocity = average * 5;
             addedObj.transform.localScale *= Mathf.Clamp(average.magnitude, 0.5f, 2);
-            addedObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a / 2f) * .6f;
+            addedObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, color.a * 1.2f) * .6f;
 
 
         }
@@ -149,25 +162,27 @@ public class WaterFX : MonoBehaviour
         mesh.MarkDynamic();
         numSegments = (int)(size.x / vertexDistance);
 
+        
         if(numSegments < 0)
         {
             return;
         }
 
-        Vector3[] newVerts = new Vector3[numSegments * 2 + 2];
+        Vector3[] newVerts = new Vector3[(numSegments * 2 + 2)*2];
 
-        for(int i = 0; i <= numSegments; i++)
+        //Forward facing section
+        for (int i = 0; i <= numSegments; i++)
         {
             newVerts[2 * i] = new Vector3(i * vertexDistance - size.x/2, size.y / 2, 0);
             newVerts[2 * i + 1] = new Vector3(i * vertexDistance - size.x/2, -size.y / 2, 0);
             //Odds are lower area, evens are upper
         }
 
-        int[] tris = new int[numSegments * 6];
+        int[] tris = new int[(numSegments * 6) * 3];
         Vector2[] uvs = new Vector2[newVerts.Length];
 
         int j = 0;
-        for(int i = 0; i + 6 <= tris.Length; i += 6)
+        for(int i = 0; i + 6 <= tris.Length/3; i += 6)
         {
             tris[i] = j + 1;           //02
             tris[i + 1] = j;   //1
@@ -180,15 +195,59 @@ public class WaterFX : MonoBehaviour
         }
 
 
-
-
-
-        for (int i = 0; i < newVerts.Length; i += 2)
+        for (int i = 0; i < newVerts.Length/2; i += 2)
         {
             //uvs[i] = new Vector2(newVerts[i].x, newVerts[i].z);
             uvs[i] = new Vector2((vertexDistance * i / 2)/size.x, 1);
             uvs[i + 1] = new Vector2((vertexDistance * i / 2)/size.x, 0);
         }
+
+
+        //Top Section
+        //----------------------------------------------
+        int topIndexStart = (numSegments * 2 + 2);
+        for (int i = 0; i <= numSegments; i++)
+        {
+            newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zWidth);
+            newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zStartDist);
+            //Odds are lower area, evens are upper
+        }
+
+        j = topIndexStart;
+        for (int i = tris.Length/3; i + 6 <= tris.Length * 2 / 3; i += 6)
+        {
+            tris[i] = j + 1;           //02
+            tris[i + 1] = j;   //1
+            tris[i + 2] = j + 2;
+
+            tris[i + 3] = j + 1;   // 2
+            tris[i + 4] = j + 2;   //13
+            tris[i + 5] = j + 3;
+            j += 2;
+        }
+
+        for (int i = newVerts.Length / 2; i < newVerts.Length; i += 2)
+        {
+            //uvs[i] = new Vector2(newVerts[i].x, newVerts[i].z);
+            uvs[i] = new Vector2((vertexDistance * i / 2) / size.x, 1);
+            uvs[i + 1] = new Vector2((vertexDistance * i / 2) / size.x, 1);
+        }
+
+
+        j = 0;
+        for (int i = tris.Length * 2 / 3; i + 6 <= tris.Length; i += 6)
+        {
+            tris[i] = topIndexStart + j + 1;   //02
+            tris[i + 1] = j;   //1
+            tris[i + 2] = j + 2;
+
+            tris[i + 3] = topIndexStart + j + 1;   // 2
+            tris[i + 4] = j + 2;   //13
+            tris[i + 5] = topIndexStart + j + 3;
+            j += 2;
+        }
+
+
 
         mesh.vertices = newVerts;
         mesh.triangles = tris;
@@ -201,6 +260,38 @@ public class WaterFX : MonoBehaviour
         //Debug.Log("Num segments: " + numSegments);
         //Debug.Log("Verts: " + mesh.vertices.Length);
         
+    }
+
+
+    public void ApplyParallaxEffect()
+    {
+
+        if (cam == null)
+            return;
+
+        //Apply parallaxToTopSection
+        Vector3[] newVerts = new Vector3[mesh.vertexCount];
+
+        for(int i = 0; i < (numSegments * 2 + 2); i++)
+        {
+            newVerts[i] = mesh.vertices[i];
+        }
+
+        for (int i = (numSegments * 2 + 2); i < (numSegments * 2 + 2)*2; i++)
+        {
+            //newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zWidth);
+            //newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, zStartDist);
+            
+            Vector3 worldSpace = transform.position + new Vector3(((i - (numSegments * 2 + 2))/2 * vertexDistance - size.x / 2), size.y/2);
+            float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? zWidth : zStartDist;
+
+            if (changeOnZoom && (!onlyChangeOnGreaterZoom || cam.orthographicSize > 5))
+                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth * 5f / cam.orthographicSize), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f * 5f / cam.orthographicSize), transform.position.z) - transform.position;
+            else
+                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f), transform.position.z) - transform.position;
+        }
+
+        mesh.vertices = newVerts;
     }
 
     public void ApplyAdjacencyEffects()
@@ -226,7 +317,7 @@ public class WaterFX : MonoBehaviour
             order.RemoveAt(selectedItem);
         }
 
-
+        
     }
 
 

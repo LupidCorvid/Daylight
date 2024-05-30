@@ -48,7 +48,7 @@ public class StretchParallax : MonoBehaviour
 
         meshFilter.sharedMesh = new Mesh();
         Mesh.ApplyAndDisposeWritableMeshData(originalSnapshot, meshFilter.sharedMesh);
-
+        meshFilter.sharedMesh.MarkDynamic();
 
     }
 
