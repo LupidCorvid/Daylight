@@ -25,6 +25,8 @@ public class StretchParallax : MonoBehaviour
     public Vector3 scalar = new Vector3(1,1,1);
     public Vector3 rotation = new Vector3();
 
+    public float distanceOffset = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +77,7 @@ public class StretchParallax : MonoBehaviour
         for(int i = 0; i < vertices.Length; i++)
         {
             Vector3 worldSpace = (Quaternion.Euler(rotation) * Vector3.Scale(originalVertices[i], scalar)) + transform.position;
-            float depth = originalVertices[i].z * scalar.z;
+            float depth = (originalVertices[i].z) * scalar.z + distanceOffset;
 
             if (changeOnZoom && (!onlyChangeOnGreaterZoom || cam.orthographicSize > 5))
                 vertices[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth * 5f / cam.orthographicSize), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * depth/5f * 5f / cam.orthographicSize), transform.position.z) - transform.position;
