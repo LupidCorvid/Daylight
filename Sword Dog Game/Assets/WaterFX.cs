@@ -46,6 +46,9 @@ public class WaterFX : MonoBehaviour
     public float distantWavesScalar = 1;
     public float distantWavesVolatilityScalar = 1;
     public float distantWavesFalloffDistance = 1;
+    public float distantWavesSpeedScalar = 1;
+
+    public Vector2 parallaxFXScalar = new Vector2(1, 1);
 
     // Start is called before the first frame update
     void Start()
@@ -288,12 +291,12 @@ public class WaterFX : MonoBehaviour
             
             Vector3 worldSpace = transform.position + new Vector3(((i - (numSegments * 2 + 2))/2 * vertexDistance - size.x / 2), size.y/2);
             float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? zWidth : zStartDist;
-            worldSpace.y += SwayEffect.getWindEffect(worldSpace.x, windSpeed/7, windVolatility * distantWavesVolatilityScalar, windStrength, true) * 10 * distantWavesScalar/(Mathf.Clamp(Mathf.Abs(cam.transform.position.y - worldSpace.y) * .5f * distantWavesFalloffDistance, 1, 20 * distantWavesScalar));
+            worldSpace.y += SwayEffect.getWindEffect(worldSpace.x, windSpeed/7 * distantWavesSpeedScalar, windVolatility * distantWavesVolatilityScalar, windStrength, true) * 10 * distantWavesScalar/(Mathf.Clamp(Mathf.Abs(cam.transform.position.y - worldSpace.y) * .5f * distantWavesFalloffDistance, 1, 20 * distantWavesScalar));
 
             if (changeOnZoom && (!onlyChangeOnGreaterZoom || cam.orthographicSize > 5))
-                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth * 5f / cam.orthographicSize), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f * 5f / cam.orthographicSize), transform.position.z) - transform.position;
+                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * -depth * 5f / cam.orthographicSize) * parallaxFXScalar.x, worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f * 5f / cam.orthographicSize) * parallaxFXScalar.y, transform.position.z) - transform.position;
             else
-                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * depth), worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f), transform.position.z) - transform.position;
+                newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * -depth) * parallaxFXScalar.x, worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f) * parallaxFXScalar.y, transform.position.z) - transform.position;
         }
 
         mesh.vertices = newVerts;

@@ -30254,6 +30254,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!33 &1493691745 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 1915464746139592106, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+  m_PrefabInstance: {fileID: 8178011847721862314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1524641579
 GameObject:
   m_ObjectHideFlags: 0
@@ -39915,6 +39920,8 @@ MonoBehaviour:
   distantWavesScalar: 1
   distantWavesVolatilityScalar: 1
   distantWavesFalloffDistance: 1
+  distantWavesSpeedScalar: 1
+  parallaxFXScalar: {x: 1, y: 1}
 --- !u!23 &1295222459313835991
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40507,12 +40514,24 @@ PrefabInstance:
       value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 746200887}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: size.x
-      value: 60
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: size.y
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: zWidth
-      value: 2.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: windSpeed
@@ -40520,8 +40539,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: zStartDist
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: meshProperty
+      value: 
+      objectReference: {fileID: 1493691745}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: windStrength
       value: 0.2
@@ -40532,15 +40555,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: distantWavesScalar
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: parallaxFXScalar.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
+      propertyPath: distantWavesSpeedScalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: distantWavesFalloffDistance
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3530853478649386177, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: distantWavesVolatilityScalar
-      value: 5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5644968849048922163, guid: 4296d89185f2f2245bc246dc2b5c9b5f, type: 3}
       propertyPath: m_Size.x
@@ -40838,6 +40869,8 @@ MonoBehaviour:
   distantWavesScalar: 1
   distantWavesVolatilityScalar: 1
   distantWavesFalloffDistance: 1
+  distantWavesSpeedScalar: 1
+  parallaxFXScalar: {x: 1, y: 1}
 --- !u!61 &8572786426278038119
 BoxCollider2D:
   m_ObjectHideFlags: 0
