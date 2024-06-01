@@ -138,6 +138,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopStaminaRefill = false;
 
+    public bool allowJumpInterrupts = true;
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -245,6 +247,7 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = false;
             anim.ResetTrigger("start_sprint");
         }
+
 
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement)
         {
@@ -1115,7 +1118,7 @@ public class PlayerMovement : MonoBehaviour
         //Currently it just stops the return animation without triggering a jump
         if (inputManager.actions["Jump"].WasPressedThisFrame())
         {
-            if (!stopMovement)
+            if (!stopMovement || allowJumpInterrupts)
             {
                 if (isGrounded && !(rb.velocity.y > 0f) && isJumping)
                 {
