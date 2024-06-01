@@ -46,6 +46,9 @@ public class PlayerAttack : MonoBehaviour
                 attackCooldown = 0;
             }
 
+
+            anim.SetFloat("attack_direction", yInput);
+
             // attack input detection + combo tracking
             if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack /*&& attackCombo < maxCombo*/ && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
             {
