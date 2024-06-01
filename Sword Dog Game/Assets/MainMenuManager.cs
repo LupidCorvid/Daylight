@@ -229,7 +229,8 @@ public class MainMenuManager : MonoBehaviour
                 
             }
         }
-        Debug.Log("most recent save: " + mostRecentFile + " accessed on " + mostRecentDate.ToString());
+        if (mostRecentId != -1)
+            Debug.Log("most recent save: " + mostRecentFile + " accessed on " + mostRecentDate.ToString());
 
         return (mostRecentFile, mostRecentId);
     }

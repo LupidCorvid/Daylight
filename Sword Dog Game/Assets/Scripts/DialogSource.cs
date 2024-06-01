@@ -965,7 +965,8 @@ public class DialogSource
     public string renameInput(string actionNeeded, string inputName)
     {
         inputName = inputName.Replace(actionNeeded + ":", string.Empty);
-        inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("/Keyboard/", "Keyboard_");
+        inputName = inputName.Replace("/Mouse/", "Mouse_");
         inputName = inputName.Replace("<Gamepad>/", "Xbox_");
         return inputName;
     }
