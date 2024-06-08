@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.UI;
 
 public class KeyRebind : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class KeyRebind : MonoBehaviour
     public TMPro.TextMeshProUGUI currKeyDisplay;
 
     public List<string> blackList = new List<string>();
+
+    public Button rebindButton;
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +38,10 @@ public class KeyRebind : MonoBehaviour
             if (blackList.Contains(data.name) || blackList.Contains(data.path)) //Specifically meant to allow for disallowing binding menu key to lmb
                 return;
             InputReader.inputs.actions[assignedAction].ApplyBindingOverride(data.path);
-
             //currKeyDisplay.text = data.name;
             currKeyDisplay.text = InputReader.inputs.actions[assignedAction].GetBindingDisplayString(InputBinding.DisplayStringOptions.DontIncludeInteractions);
             listeningForNewBind = false;
+            rebindButton.interactable = true;
         }
     }
 
@@ -48,6 +51,7 @@ public class KeyRebind : MonoBehaviour
             return;
         listeningForNewBind = true;
         currKeyDisplay.text = "-";
+        rebindButton.interactable = false;
     }
 
   
