@@ -878,7 +878,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.1, y: 0.05}
+  distance: {x: -0.1, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.15, y: 0.05}
+  distance: {x: -0.15, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: -0.05, y: 0.05, z: 0}
   changeOnZoom: 1
@@ -8303,7 +8303,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.4, y: 0.09}
+  distance: {x: -0.4, y: -0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -8902,7 +8902,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -8993,7 +8993,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.25, y: 0.1}
+  distance: {x: -0.25, y: -0.1}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -30662,7 +30662,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -35667,7 +35667,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -36713,7 +36713,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.075, y: 0.03}
+  distance: {x: -0.075, y: -0.03}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -38570,7 +38570,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: -0.05, y: 0.05, z: 0}
   changeOnZoom: 1
@@ -39489,7 +39489,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.25, y: 0.1}
+  distance: {x: -0.25, y: -0.1}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -42968,7 +42968,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.2, y: 0.05}
+  distance: {x: -0.2, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -49169,7 +49169,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.1, y: 0.06}
+  distance: {x: -0.1, y: -0.06}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -59285,7 +59285,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -65269,7 +65269,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.2, y: 0.05}
+  distance: {x: -0.2, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -67326,6 +67326,11 @@ MonoBehaviour:
   cam: {fileID: 0}
   changeOnZoom: 1
   onlyChangeOnGreaterZoom: 1
+  distantWavesScalar: 1
+  distantWavesVolatilityScalar: 1
+  distantWavesFalloffDistance: 1
+  distantWavesSpeedScalar: 1
+  parallaxFXScalar: {x: 1, y: 1}
 --- !u!33 &941190311
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -69059,7 +69064,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.05, y: 0.05}
+  distance: {x: -0.05, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -69353,7 +69358,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.2, y: 0.05}
+  distance: {x: -0.2, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -72359,7 +72364,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -72847,7 +72852,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.25, y: 0.1}
+  distance: {x: -0.25, y: -0.1}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -74568,7 +74573,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.2, y: 0.05}
+  distance: {x: -0.2, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -78531,7 +78536,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -79377,7 +79382,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.4, y: 0.05}
+  distance: {x: -0.4, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -79589,7 +79594,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -87296,7 +87301,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.4, y: 0.09}
+  distance: {x: -0.4, y: -0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -87868,7 +87873,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.15, y: 0.075}
+  distance: {x: -0.15, y: -0.075}
   cam: {fileID: 0}
   startPos: {x: -0.15, y: 0.075, z: 0}
   changeOnZoom: 1
@@ -89306,7 +89311,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.09}
+  distance: {x: -0.4, y: -0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -98431,7 +98436,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.15, y: 0.075}
+  distance: {x: -0.15, y: -0.075}
   cam: {fileID: 0}
   startPos: {x: -0.15, y: 0.075, z: 0}
   changeOnZoom: 1
@@ -98777,7 +98782,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -99168,7 +99173,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -110622,7 +110627,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.4, y: 0.05}
+  distance: {x: -0.4, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -111406,7 +111411,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -112834,7 +112839,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.05, y: 0.05}
+  distance: {x: -0.05, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: -0.05, y: 0.05, z: 0}
   changeOnZoom: 1
@@ -120733,7 +120738,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.05}
+  distance: {x: -0.3, y: -0.05}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -120809,7 +120814,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.25, y: 0.1}
+  distance: {x: -0.25, y: -0.1}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -120919,7 +120924,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.075, y: 0.03}
+  distance: {x: -0.075, y: -0.03}
   cam: {fileID: 0}
   startPos: {x: 9.08, y: -5.14, z: 0}
   changeOnZoom: 1
@@ -121312,7 +121317,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.4, y: 0.09}
+  distance: {x: -0.4, y: -0.09}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
@@ -123343,7 +123348,7 @@ MonoBehaviour:
   simpleDistance: 0
   autoChangeColor: 0
   spriteRenderer: {fileID: 0}
-  distance: {x: -0.3, y: 0.07}
+  distance: {x: -0.3, y: -0.07}
   cam: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   changeOnZoom: 1
