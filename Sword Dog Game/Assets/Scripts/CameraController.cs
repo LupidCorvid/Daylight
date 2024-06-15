@@ -117,9 +117,9 @@ public class CameraController : MonoBehaviour
             float targZoom = defaultZoom;
             if (Player.controller != null && Player.controller.sprintWindUpPercent >= 0.5 && Player.controller.isSprinting)
             {
-                targZoom += 1f; // TODO replace with FOV change setting
+                targZoom += SettingsManager.currentSettings.fovChange;
             }
-            
+
             if (lockX)
                 finalTarg.x = lockDetails.x;
             if (lockY)

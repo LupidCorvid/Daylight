@@ -43,5 +43,8 @@ public class Settings
         GOOD_DOG, OPEN_DYSLEXIC
     }
     public FontOption fontFace = FontOption.GOOD_DOG;
+
     // public float fontSize = ??
+
+    public float fovChange = 1;
 }
