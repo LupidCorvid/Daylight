@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     public float lastLandHeight;
     private float moveX, prevMoveX, beenOnLand, lastOnLand, jumpTime, jumpSpeedMultiplier, timeSinceJumpPressed, timeSinceJump, fallTime, timeSinceSprint, timeIdle;
     public float sprintSpeedMultiplier;
+    public float maxSprintSpeedMultiplier = 2.5f;
     private int stepDirection, stops;
     private Vector3 targetVelocity, velocity = Vector3.zero;
     public Entity entityBase;
@@ -387,7 +388,7 @@ public class PlayerMovement : MonoBehaviour
             if (isSprinting && !isSkidding)
             {
                 timeSinceSprint = 0;
-                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.75f, 0.005f);
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, maxSprintSpeedMultiplier, 0.005f);
             }
             else
             {
