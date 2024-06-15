@@ -79,7 +79,6 @@ public class CameraController : MonoBehaviour
         if (!externalControl)
         {
             Vector3 finalTarg = targetPoint;
-
             
             if (followrb != null)
             {
@@ -91,7 +90,6 @@ public class CameraController : MonoBehaviour
                 if (InputReader.inputs.actions["Sprint"].IsPressed()) //TODO Input mapping
                 {
                     magCap *= 1.5f; //Increase view range when sprinting
-
                 }
 
                 //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
@@ -117,18 +115,21 @@ public class CameraController : MonoBehaviour
             }
 
             float targZoom = defaultZoom;
-
+            if (Player.controller != null && Player.controller.sprintWindUpPercent >= 0.5 && Player.controller.isSprinting)
+            {
+                targZoom += 1f; // TODO replace with FOV change setting
+            }
+            
             if (lockX)
                 finalTarg.x = lockDetails.x;
             if (lockY)
                 finalTarg.y = lockDetails.y;
             if (lockZoom)
                 targZoom = lockDetails.z;
-
             
 
             //transform.position += (finalTarg - transform.position) * Time.deltaTime * speed;
-            rb.MovePosition((finalTarg - transform.position) * Time.deltaTime * speed + transform.position);
+            rb.MovePosition(speed * Time.deltaTime * (finalTarg - transform.position) + transform.position);
             if (Camera.main.orthographicSize != targZoom)
             {
                 Camera.main.orthographicSize -= (Camera.main.orthographicSize - targZoom) * Time.deltaTime;
