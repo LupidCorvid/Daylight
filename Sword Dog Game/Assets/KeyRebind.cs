@@ -19,6 +19,8 @@ public class KeyRebind : MonoBehaviour
 
     public Button rebindButton;
 
+    public bool StartedListeningThisFrame = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class KeyRebind : MonoBehaviour
 
     public void UpdateToNewKey(InputControl data)
     {
-        if (listeningForNewBind)
+        if (listeningForNewBind && !StartedListeningThisFrame)
         {
             if (blackList.Contains(data.name) || blackList.Contains(data.path)) //Specifically meant to allow for disallowing binding menu key to lmb
                 return;
@@ -45,6 +47,11 @@ public class KeyRebind : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        StartedListeningThisFrame = false;
+    }
+
     public void StartListening()
     {
         if (listeningForNewBind)
@@ -52,6 +59,7 @@ public class KeyRebind : MonoBehaviour
         listeningForNewBind = true;
         currKeyDisplay.text = "-";
         rebindButton.interactable = false;
+        StartedListeningThisFrame = true;
     }
 
   
