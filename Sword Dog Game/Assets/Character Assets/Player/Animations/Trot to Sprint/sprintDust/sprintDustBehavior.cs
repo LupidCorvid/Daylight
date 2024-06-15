@@ -32,7 +32,7 @@ public class sprintDustBehavior : MonoBehaviour
                 Instantiate(dust, Player.instance.transform.position, Quaternion.identity);
                 triggered = true;
             }
-            else if (stateInfo.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase1") && !triggered)
+            else if (stateInfo.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase1") && stateInfo.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.25f && !triggered)
             {
                 Vector3 pos = Player.instance.transform.position;
                 pos.x += Player.controller.facingRight ? -1f : 1f;
