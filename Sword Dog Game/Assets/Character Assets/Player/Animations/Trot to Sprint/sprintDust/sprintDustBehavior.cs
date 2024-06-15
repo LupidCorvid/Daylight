@@ -29,15 +29,19 @@ public class sprintDustBehavior : MonoBehaviour
             //Makes the dust appear
             if (stateInfo.GetCurrentAnimatorStateInfo(0).IsName("trotToSprint") && !triggered)
             {
-                Vector3 pos = new Vector3(Player.instance.transform.position.x, Player.instance.transform.position.y, Player.instance.transform.position.z);
+                Instantiate(dust, Player.instance.transform.position, Quaternion.identity);
+                triggered = true;
+            }
+            else if (stateInfo.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase1") && !triggered)
+            {
+                Vector3 pos = Player.instance.transform.position;
+                pos.x += Player.controller.facingRight ? -1f : 1f;
                 Instantiate(dust, pos, Quaternion.identity);
-                
-
                 triggered = true;
             }
 
             //Resets the flag so that the dust can appear on next sprint
-            if (!stateInfo.GetCurrentAnimatorStateInfo(0).IsName("trotToSprint") && !stateInfo.GetCurrentAnimatorStateInfo(0).IsName("Sprint"))
+            if (!stateInfo.GetCurrentAnimatorStateInfo(0).IsName("trotToSprint") && !stateInfo.GetCurrentAnimatorStateInfo(0).IsName("sprintPhase1"))
             {
                 triggered = false;
             }
