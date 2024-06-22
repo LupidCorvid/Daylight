@@ -142,5 +142,6 @@ public class PlayerAttack : MonoBehaviour
         }
         anim.ResetTrigger("exit_trot");
         pMovement.finishedReverseTurnThisFrame = false;
+        pMovement.isDashing = false;
     }
 }

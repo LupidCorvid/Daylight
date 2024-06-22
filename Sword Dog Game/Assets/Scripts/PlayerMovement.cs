@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool waitingToTurn, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false;
+    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false, isDashing = false;
     public Vector2 bottom;
     public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     public float landAnimTime = .5f;
     float lastLand = 0;
 
-    public float stamina = 0.0f, maxStamina = 6.0f, minStamina = 1.0f;
+    public float stamina = 20.0f, baseStamina = 20.0f, maxStamina = 20.0f, minStamina = 1.0f;
     public bool noFall = false;
 
     Vector2 lastMidairVelocity;
@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
         float deltaStamina = 0.0f;
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
-        else if (timeSinceSprint > 0.1f)
+        else if (timeSinceSprint > 0.1f && !isDashing)
             deltaStamina += 1.5f*Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
@@ -1261,6 +1261,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
+        isDashing = true;
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
             rb.AddForce(new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1)));
@@ -1269,5 +1270,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(transform.localScale.x * dashForce, 0.0f));
         }
+        stamina = Mathf.Max(stamina - baseStamina / 3, 0);
+    }
+
+    // TODO not called atm but should be if dash becomes its own move
+    public void StopDash() {
+        isDashing = false;
     }
 }

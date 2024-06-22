@@ -763,6 +763,7 @@ MonoBehaviour:
   wallOnLeft: 0
   behindGrounded: 0
   finishedReverseTurnThisFrame: 0
+  isDashing: 0
   bottom: {x: 0, y: 0}
   canTurn: 1
   canSprint: 1
@@ -783,6 +784,7 @@ MonoBehaviour:
   behindGroundCheck: {fileID: 6054203388353271554}
   roofCheck: {fileID: 5205619093326231413}
   jumpForce: 650
+  dashForce: 1000
   movementSmoothing: 0.05
   slopeCheckDistance: 3
   maxSlopeAngle: 45
@@ -799,6 +801,7 @@ MonoBehaviour:
   invincible: 0
   landAnimTime: 1.25
   stamina: 20
+  baseStamina: 20
   maxStamina: 20
   minStamina: 1
   noFall: 1
