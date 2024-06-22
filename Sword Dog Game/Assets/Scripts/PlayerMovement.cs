@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion resetRotation;
     public bool canTurn = true;
     public bool canSprint = true;
+    public bool canDash = false;
     public static bool isTurning = false, reversedTurn = false;
     public PlayerAttack pAttack;
 
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 2000f;
 
     // Amount of force added when the player dashes
-    [SerializeField] private float dashForce = 1000f;
+    [SerializeField] private float dashForce = 100f;
 
     // How much to smooth out movement
     [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
@@ -423,6 +424,9 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
             }
         }
+
+        canDash = stamina > baseStamina / 3;
+        anim.SetBool("can_dash", canDash);
     }
 
     void FixedUpdate()
@@ -1118,7 +1122,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         if (isDashing) return;
-        
+
         // if player presses jump button
         //Maybe could make the jumps that cancel the attack return anims be done once the return anim is cancelled? 
         //Currently it just stops the return animation without triggering a jump
@@ -1266,11 +1270,11 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            rb.AddForce(new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1)));
+            rb.velocity = new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1));
         }
         else
         {
-            rb.AddForce(new Vector2(transform.localScale.x * dashForce, 0.0f));
+            rb.velocity = new Vector2(transform.localScale.x * dashForce, 0.0f);
         }
         stamina = Mathf.Max(stamina - baseStamina / 3, 0);
     }
