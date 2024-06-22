@@ -52,6 +52,9 @@ public class LungerAI : BaseAI
         if(state == AIStates.moving)
         {
             cldr.sharedMaterial = ((Lunger)enemyBase).slippery;
+
+            if (target == null)
+                return;
             if (target.transform.position.x < transform.position.x)
             {
                 //rb.AddForce(Vector2.left * moveSpeed * Time.deltaTime * 500);
