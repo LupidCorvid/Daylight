@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool waitingToTurn, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false, isDashing = false;
+    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false;
     public Vector2 bottom;
     public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
@@ -18,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion resetRotation;
     public bool canTurn = true;
     public bool canSprint = true;
-    public bool canDash = false;
-    public bool blackout = false;
     public static bool isTurning = false, reversedTurn = false;
     public PlayerAttack pAttack;
 
@@ -84,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 2000f;
 
     // Amount of force added when the player dashes
-    [SerializeField] private float dashForce = 100f;
+    [SerializeField] private float dashForce = 1000f;
 
     // How much to smooth out movement
     [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
@@ -116,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     public float landAnimTime = .5f;
     float lastLand = 0;
 
-    public float stamina = 20.0f, baseStamina = 20.0f, maxStamina = 20.0f, minStamina = 1.0f;
+    public float stamina = 0.0f, maxStamina = 6.0f, minStamina = 1.0f;
     public bool noFall = false;
 
     Vector2 lastMidairVelocity;
@@ -145,6 +143,10 @@ public class PlayerMovement : MonoBehaviour
     public bool stopStaminaRefill = false;
 
     public bool allowJumpInterrupts = true;
+
+    //Is swimming if swimmings <= 0, not a bool just so that when going between two seams it doesn't cancel swimming
+    public int Swimming = 0;
+
 
     //public static PlayerInput inputs;
 
@@ -229,7 +231,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (PauseScreen.paused) return;
-        
+
+        if (Swimming < 1)
+            GroundMovementUpdate();
+        else
+            SwimmingUpdate();
+    }
+
+    public void GroundMovementUpdate()
+    {
+
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -241,8 +252,8 @@ public class PlayerMovement : MonoBehaviour
         float deltaStamina = 0.0f;
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
-        else if (timeSinceSprint > 0.1f && !isDashing)
-            deltaStamina += 1.5f*Time.deltaTime;
+        else if (timeSinceSprint > 0.1f)
+            deltaStamina += 1.5f * Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
@@ -263,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
             // grab movement input from horizontal axis
             //moveX = Input.GetAxisRaw("Horizontal");
             //Disable moving while attacking
-            
+
 
             if (!stopMovement)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
@@ -278,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (wallOnRight && moveX > 0) moveX = 0;
             if (wallOnLeft && moveX < 0) moveX = 0;
-            
+
             if (moveX == 0 && timeIdle < 1f)
             {
                 timeIdle += Time.deltaTime;
@@ -333,8 +344,8 @@ public class PlayerMovement : MonoBehaviour
 
             // bark code
             //if (Input.GetKeyDown(KeyCode.B))
-            
-            if(inputManager.actions["Bark"].WasPressedThisFrame())
+
+            if (inputManager.actions["Bark"].WasPressedThisFrame())
             {
                 anim.SetTrigger("bark");
             }
@@ -345,7 +356,7 @@ public class PlayerMovement : MonoBehaviour
             // release jump
             //if (Input.GetButtonUp("Jump"))
 
-            if(inputManager.actions["Jump"].WasReleasedThisFrame())
+            if (inputManager.actions["Jump"].WasReleasedThisFrame())
             {
                 holdingJump = false;
             }
@@ -401,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
                     timeSinceSprint += Time.deltaTime;
 
                 sprintWindUpPercent = 1;
-                
+
                 if (!isSkidding)
                     sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
@@ -425,12 +436,77 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
             }
         }
+    }
 
-        canDash = stamina > baseStamina / 3;
-        anim.SetBool("can_dash", canDash);
+    public void SwimmingUpdate()
+    {
+
+        Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
+        int flipped = facingRight ? 1 : 1;
+        float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
+        Debug.DrawLine(transform.position + new Vector3(Mathf.Cos(inputAngle * Mathf.Deg2Rad), Mathf.Sin(inputAngle * Mathf.Deg2Rad)), transform.position);
+
+
+        float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+
+        if (inputManager.actions["move"].IsPressed())
+            turnTowards(new Vector2(inputMovement.x * flipped, inputMovement.y));
+
+        
+
+        if(((rb.velocity + (Vector2)(transform.rotation * Vector2.right * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
+        {
+            rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
+        }
+
+
+        
+        
+    }
+
+    public void turnTowards(Vector2 inputDir)
+    {
+        float angle;
+        inputDir.Normalize();
+        angle = (Mathf.Atan2(inputDir.y, inputDir.x) * Mathf.Rad2Deg);
+
+
+        angle = Mathf.DeltaAngle(transform.eulerAngles.z, angle);
+        if (Mathf.Abs(angle) <= 0.01)
+        {
+            return;
+        }
+        //Calculate the distance to move left and right to find the optimal rotation direction
+        float rotationSpeed = 60f;
+        float maxRotationSpeed = 180f;
+
+        angle = angle * Time.deltaTime * rotationSpeed;
+        if (angle > maxRotationSpeed * Time.deltaTime)
+        {
+            angle = maxRotationSpeed * Time.deltaTime;
+        }
+        if (angle < -1 * maxRotationSpeed * Time.deltaTime)
+        {
+            angle = -1 * maxRotationSpeed * Time.deltaTime;
+        }
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + angle);
+        //updateDirection();
+        Debug.DrawLine(transform.rotation * Vector2.right + transform.position, transform.position);
+        slopeSideAngle = transform.eulerAngles.z;
+        lastGroundedSlope = slopeSideAngle;
+        lastUngroundedSlope = slopeSideAngle;
+        facingRight = false;
     }
 
     void FixedUpdate()
+    {
+        if(Swimming < 1)
+            GroundMovementFixedUpdate();
+
+    }
+
+
+    public void GroundMovementFixedUpdate()
     {
         // check if the player is against a wall
         CheckWall();
@@ -445,13 +521,13 @@ public class PlayerMovement : MonoBehaviour
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
-        
+
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
             if (!isTurning) reversedTurn = false;
             if (finishedReverseTurnThisFrame) finishedReverseTurnThisFrame = false;
 
-            if (!isDashing && !isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
+            if (!isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
                 if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
@@ -459,7 +535,9 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetTrigger("turn");
                     reversedTurn = false;
                     anim.SetFloat("turn_speed", 1f);
-                } else {
+                }
+                else
+                {
                     Flip();
                 }
             }
@@ -491,7 +569,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             cldr.sharedMaterial = slippery;
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+            Vector3 newVel = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+
+            if(newVel.magnitude > rb.velocity.magnitude || isGrounded)
+                rb.velocity = newVel;
         }
 
         // if (!isGrounded)
@@ -519,14 +600,14 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
-            jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
+            jumpSpeedMultiplier = 1f + 2f / (10f * jumpTime + 4f);
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
                 rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
-        else 
+        else
         {
             jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.3f);
         }
@@ -545,7 +626,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.ResetTrigger("fall");
                 isFalling = false;
                 fallTime = 0.0f;
-            }   
+            }
         }
 
         if (!isGrounded)
@@ -568,6 +649,32 @@ public class PlayerMovement : MonoBehaviour
         if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0)
         {
             EndTurn();
+        }
+    }
+
+
+    public void EnterWater()
+    {
+        Swimming++;
+
+        if(Swimming > 0)
+        {
+            rb.gravityScale = 0;
+            rb.drag = 2;
+        }
+    }
+
+    public void LeaveWater()
+    {
+
+        Swimming--;
+
+        if(Swimming < 1)
+        {
+            rb.gravityScale = 4.5f;
+            rb.drag = 0;
+            rb.velocity *= 1.5f;
+            //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
         }
     }
 
@@ -1122,8 +1229,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (isDashing) return;
-
         // if player presses jump button
         //Maybe could make the jumps that cancel the attack return anims be done once the return anim is cancelled? 
         //Currently it just stops the return animation without triggering a jump
@@ -1235,7 +1340,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartTurn()
     {
-        if (!isDashing && !isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
+        if (!isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
         {
             Flip();
             isTurning = true;
@@ -1268,20 +1373,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
-        isDashing = true;
-        if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
-        {
-            rb.velocity = new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1));
-        }
-        else
-        {
-            rb.velocity = new Vector2(transform.localScale.x * dashForce, 0.0f);
-        }
-        stamina = Mathf.Max(stamina - baseStamina / 3, 0);
-    }
-
-    // TODO not called atm but should be if dash becomes its own move
-    public void StopDash() {
-        isDashing = false;
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        rb.AddForce(direction * dashForce);
     }
 }

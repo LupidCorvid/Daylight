@@ -348,10 +348,13 @@ public class WaterFX : MonoBehaviour
         //Slow speed on hitting surface of water
         if (collision.attachedRigidbody != null)
         {
-            collision.attachedRigidbody.velocity *= .75f;
+            collision.attachedRigidbody.velocity *= .5f;
             //if(clampMaxEnterSpeed)
             //    collision.attachedRigidbody.velocity = new Vector2(collision.attachedRigidbody.velocity.x, Mathf.Clamp(collision.attachedRigidbody.velocity.y, -25, 1000));
         }
+
+        if (collision.GetComponent<PlayerMovement>() != null)
+            collision.GetComponent<PlayerMovement>().EnterWater();
 
     }
 
@@ -395,7 +398,11 @@ public class WaterFX : MonoBehaviour
 
             currPos += vertexDistance;
         }
-        
+
+
+        if (collision.GetComponent<PlayerMovement>() != null)
+            collision.GetComponent<PlayerMovement>().LeaveWater();
+
     }
 
     public class WaterSegment
