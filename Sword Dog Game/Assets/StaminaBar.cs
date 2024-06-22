@@ -20,15 +20,17 @@ public class StaminaBar : MonoBehaviour
 
         if (Player.controller != null)
         {
-            fillImage.fillAmount = Player.controller.stamina / Player.controller.maxStamina;
+            fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount, Player.controller.stamina / Player.controller.maxStamina, 0.5f);
             if (Player.controller.isSprinting && !pulsing)
             {
                 animator.SetTrigger("start");
+                animator.ResetTrigger("stop");
                 pulsing = true;
             }
             if (!Player.controller.isSprinting && pulsing)
             {
                 animator.SetTrigger("stop");
+                animator.ResetTrigger("start");
                 pulsing = false;
             }
         }
