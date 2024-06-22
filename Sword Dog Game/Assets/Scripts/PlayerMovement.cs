@@ -1223,7 +1223,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("grounded", isGrounded);
 
         anim.SetBool("jump", isJumping);
-        if (!isGrounded && isSkidding) StopSkid();
+        if ((!isGrounded || canResprint) && isSkidding) StopSkid();
     }
 
 
