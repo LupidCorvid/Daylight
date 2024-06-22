@@ -446,7 +446,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isTurning) reversedTurn = false;
             if (finishedReverseTurnThisFrame) finishedReverseTurnThisFrame = false;
 
-            if (!isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
+            if (!isDashing && !isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
                 if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
@@ -1117,6 +1117,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        if (isDashing) return;
+        
         // if player presses jump button
         //Maybe could make the jumps that cancel the attack return anims be done once the return anim is cancelled? 
         //Currently it just stops the return animation without triggering a jump
@@ -1228,7 +1230,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartTurn()
     {
-        if (!isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
+        if (!isDashing && !isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
         {
             Flip();
             isTurning = true;
