@@ -1261,7 +1261,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
-        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
-        rb.AddForce(direction * dashForce);
+        if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
+        {
+            rb.AddForce(new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1)));
+        }
+        else
+        {
+            rb.AddForce(new Vector2(transform.localScale.x * dashForce, 0.0f));
+        }
     }
 }
