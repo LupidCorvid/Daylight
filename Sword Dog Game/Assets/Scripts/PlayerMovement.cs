@@ -144,6 +144,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool allowJumpInterrupts = true;
 
+    //Is swimming if swimmings <= 0, not a bool just so that when going between two seams it doesn't cancel swimming
+    public int Swimming = 0;
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -227,7 +230,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (PauseScreen.paused) return;
-        
+
+        if (Swimming < 1)
+            GroundMovementUpdate();
+        else
+            SwimmingUpdate();
+    }
+
+    public void GroundMovementUpdate()
+    {
+
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -240,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
         else if (timeSinceSprint > 0.1f)
-            deltaStamina += 1.5f*Time.deltaTime;
+            deltaStamina += 1.5f * Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
@@ -261,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
             // grab movement input from horizontal axis
             //moveX = Input.GetAxisRaw("Horizontal");
             //Disable moving while attacking
-            
+
 
             if (!stopMovement)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
@@ -276,7 +288,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (wallOnRight && moveX > 0) moveX = 0;
             if (wallOnLeft && moveX < 0) moveX = 0;
-            
+
             if (moveX == 0 && timeIdle < 1f)
             {
                 timeIdle += Time.deltaTime;
@@ -331,8 +343,8 @@ public class PlayerMovement : MonoBehaviour
 
             // bark code
             //if (Input.GetKeyDown(KeyCode.B))
-            
-            if(inputManager.actions["Bark"].WasPressedThisFrame())
+
+            if (inputManager.actions["Bark"].WasPressedThisFrame())
             {
                 anim.SetTrigger("bark");
             }
@@ -343,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
             // release jump
             //if (Input.GetButtonUp("Jump"))
 
-            if(inputManager.actions["Jump"].WasReleasedThisFrame())
+            if (inputManager.actions["Jump"].WasReleasedThisFrame())
             {
                 holdingJump = false;
             }
@@ -399,7 +411,7 @@ public class PlayerMovement : MonoBehaviour
                     timeSinceSprint += Time.deltaTime;
 
                 sprintWindUpPercent = 1;
-                
+
                 if (!isSkidding)
                     sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
@@ -425,7 +437,67 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SwimmingUpdate()
+    {
+
+        Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
+        int flipped = facingRight ? 1 : 1;
+        float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
+
+        float swimSpeed = 15 * inputMovement.magnitude * (1 + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+
+        if (inputManager.actions["move"].IsPressed())
+            turnTowards(new Vector2(inputMovement.x * flipped, -inputMovement.y));
+
+        
+
+        if(((rb.velocity + (Vector2)(transform.rotation * Vector2.right * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
+        {
+            rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
+        }
+        
+        
+    }
+
+    public void turnTowards(Vector2 inputDir)
+    {
+        float angle;
+        inputDir.Normalize();
+        angle = (Mathf.Atan2(inputDir.y, inputDir.x) * Mathf.Rad2Deg);
+
+
+        angle = Mathf.DeltaAngle(transform.eulerAngles.z, angle);
+        if (Mathf.Abs(angle) <= 0.01)
+        {
+            return;
+        }
+        //Calculate the distance to move left and right to find the optimal rotation direction
+        float rotationSpeed = 15f;
+        float maxRotationSpeed = 90f;
+
+        angle = angle * Time.deltaTime * rotationSpeed;
+        if (angle > maxRotationSpeed * Time.deltaTime)
+        {
+            angle = maxRotationSpeed * Time.deltaTime;
+        }
+        if (angle < -1 * maxRotationSpeed * Time.deltaTime)
+        {
+            angle = -1 * maxRotationSpeed * Time.deltaTime;
+        }
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + angle);
+        //updateDirection();
+        Debug.DrawLine(transform.rotation * Vector2.right + transform.position, transform.position);
+    }
+
     void FixedUpdate()
+    {
+        if(Swimming < 1)
+            GroundMovementFixedUpdate();
+
+    }
+
+
+    public void GroundMovementFixedUpdate()
     {
         // check if the player is against a wall
         CheckWall();
@@ -440,7 +512,7 @@ public class PlayerMovement : MonoBehaviour
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
-        
+
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
             if (!isTurning) reversedTurn = false;
@@ -454,7 +526,9 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetTrigger("turn");
                     reversedTurn = false;
                     anim.SetFloat("turn_speed", 1f);
-                } else {
+                }
+                else
+                {
                     Flip();
                 }
             }
@@ -514,14 +588,14 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
-            jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
+            jumpSpeedMultiplier = 1f + 2f / (10f * jumpTime + 4f);
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
                 rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
-        else 
+        else
         {
             jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.3f);
         }
@@ -540,7 +614,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.ResetTrigger("fall");
                 isFalling = false;
                 fallTime = 0.0f;
-            }   
+            }
         }
 
         if (!isGrounded)
@@ -563,6 +637,30 @@ public class PlayerMovement : MonoBehaviour
         if (anim.GetFloat("turn_speed") < 0 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0)
         {
             EndTurn();
+        }
+    }
+
+
+    public void EnterWater()
+    {
+        Swimming++;
+
+        if(Swimming > 0)
+        {
+            rb.gravityScale = 0;
+            rb.drag = 2;
+        }
+    }
+
+    public void LeaveWater()
+    {
+
+        Swimming--;
+
+        if(Swimming < 1)
+        {
+            rb.gravityScale = 4.5f;
+            rb.drag = 0;
         }
     }
 
