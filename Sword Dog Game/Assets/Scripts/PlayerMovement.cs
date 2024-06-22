@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
     //Is swimming if swimmings <= 0, not a bool just so that when going between two seams it doesn't cancel swimming
     public int Swimming = 0;
 
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -443,11 +444,13 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         int flipped = facingRight ? 1 : 1;
         float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
+        Debug.DrawLine(transform.position + new Vector3(Mathf.Cos(inputAngle * Mathf.Deg2Rad), Mathf.Sin(inputAngle * Mathf.Deg2Rad)), transform.position);
 
-        float swimSpeed = 15 * inputMovement.magnitude * (1 + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+
+        float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
 
         if (inputManager.actions["move"].IsPressed())
-            turnTowards(new Vector2(inputMovement.x * flipped, -inputMovement.y));
+            turnTowards(new Vector2(inputMovement.x * flipped, inputMovement.y));
 
         
 
@@ -455,6 +458,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
         }
+
+
         
         
     }
@@ -472,8 +477,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         //Calculate the distance to move left and right to find the optimal rotation direction
-        float rotationSpeed = 15f;
-        float maxRotationSpeed = 90f;
+        float rotationSpeed = 60f;
+        float maxRotationSpeed = 180f;
 
         angle = angle * Time.deltaTime * rotationSpeed;
         if (angle > maxRotationSpeed * Time.deltaTime)
@@ -487,6 +492,10 @@ public class PlayerMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + angle);
         //updateDirection();
         Debug.DrawLine(transform.rotation * Vector2.right + transform.position, transform.position);
+        slopeSideAngle = transform.eulerAngles.z;
+        lastGroundedSlope = slopeSideAngle;
+        lastUngroundedSlope = slopeSideAngle;
+        facingRight = false;
     }
 
     void FixedUpdate()
@@ -560,7 +569,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             cldr.sharedMaterial = slippery;
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+            Vector3 newVel = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
+
+            if(newVel.magnitude > rb.velocity.magnitude || isGrounded)
+                rb.velocity = newVel;
         }
 
         // if (!isGrounded)
@@ -661,6 +673,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.gravityScale = 4.5f;
             rb.drag = 0;
+            rb.velocity *= 1.5f;
+            //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
         }
     }
 
