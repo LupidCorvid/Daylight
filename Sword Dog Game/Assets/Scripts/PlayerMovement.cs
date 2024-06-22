@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canTurn = true;
     public bool canSprint = true;
     public bool canDash = false;
+    public bool blackout = false;
     public static bool isTurning = false, reversedTurn = false;
     public PlayerAttack pAttack;
 

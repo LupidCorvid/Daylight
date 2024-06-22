@@ -21,7 +21,6 @@ public class SaveGamePrompt : MonoBehaviour
         promptGroup.alpha = 1;
         promptGroup.interactable = true;
         promptGroup.blocksRaycasts = true;
-
     }
 
     public void SaveGame()

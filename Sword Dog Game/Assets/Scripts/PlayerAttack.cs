@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
         {
             
         }
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
+        if (!pMovement.blackout && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open) // && not paused(?)
         {
             float yInput = InputReader.inputs.actions["Move"].ReadValue<Vector2>().y;
 
@@ -46,11 +46,10 @@ public class PlayerAttack : MonoBehaviour
                 attackCooldown = 0;
             }
 
-
             anim.SetFloat("attack_direction", yInput);
 
             // attack input detection + combo tracking
-            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack /*&& attackCombo < maxCombo*/ && !PauseScreen.paused && !PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && SwordFollow.instance?.activeInHierarchy == true)
+            if (InputReader.inputs.actions["Attack"].WasPressedThisFrame() && !isParrying && canAttack /*&& attackCombo < maxCombo*/ && !PauseScreen.paused && !PlayerHealth.dead && SwordFollow.instance?.activeInHierarchy == true)
             {
                 // set attack direction + context
                 if (!isAttacking)
@@ -75,7 +74,7 @@ public class PlayerAttack : MonoBehaviour
             
 
             //Parry input
-            if((InputReader.inputs.actions["Block"].IsPressed()) && !isAttacking && pMovement.stamina >= parryStaminaCost)
+            if(InputReader.inputs.actions["Block"].IsPressed() && !isAttacking && pMovement.stamina >= parryStaminaCost && !pMovement.swordAnimControl)
             {
                 if (!isParrying)
                     pMovement.entityBase.moveSpeed.multiplier *= .5f;
@@ -117,18 +116,22 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-
-                if (isParrying)
-                    pMovement.entityBase.moveSpeed.multiplier /= .5f;
-                isParrying = false;
-                pMovement.canTurn = true;
-                pMovement.canSprint = true;
-                pMovement.stopStaminaRefill = false;
+                StopParry();
             }
             
             // perhaps useful in the future for preventing sprint/jump from interrupting attack
             anim.SetBool("attacking", isAttacking);
         }
+    }
+
+    private void StopParry()
+    {
+        if (isParrying)
+            pMovement.entityBase.moveSpeed.multiplier /= .5f;
+        isParrying = false;
+        pMovement.canTurn = true;
+        pMovement.canSprint = true;
+        pMovement.stopStaminaRefill = false;
     }
 
     // stops attacks -- called from animation events in return states
