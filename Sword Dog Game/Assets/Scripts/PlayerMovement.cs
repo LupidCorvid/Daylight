@@ -81,6 +81,9 @@ public class PlayerMovement : MonoBehaviour
     // Amount of force added when the player jumps
     [SerializeField] private float jumpForce = 2000f;
 
+    // Amount of force added when the player dashes
+    [SerializeField] private float dashForce = 1000f;
+
     // How much to smooth out movement
     [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
 
@@ -1254,5 +1257,11 @@ public class PlayerMovement : MonoBehaviour
     public void StopTurn()
     {
         anim.SetBool("exit_turn", true);
+    }
+
+    public void Dash()
+    {
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        rb.AddForce(direction * dashForce);
     }
 }
