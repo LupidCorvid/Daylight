@@ -64,8 +64,11 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetFloat("attackSpeed", pMovement.entityBase.attackSpeed);
 
                 isAttacking = true;
-                attackCombo = attackCombo % 2 + 1;
-                anim.SetTrigger("attack" + attackCombo);
+                if (!(pMovement.isDashing && !pMovement.canDash))
+                {
+                    attackCombo = attackCombo % 2 + 1;
+                    anim.SetTrigger("attack" + attackCombo);
+                }
             }
 
             //Debug.Log(!isAttacking && pMovement.stamina >= parryStaminaCost);
@@ -131,17 +134,33 @@ public class PlayerAttack : MonoBehaviour
     // stops attacks -- called from animation events in return states
     private void StopAttack()
     {
-        attackCombo = 0;
-        isAttacking = false;
+        StopAttack(true);
+    }
+
+    private void StopAttack(bool resetCombo = false)
+    {
         if (anim == null)
             return;
+        isAttacking = false;
+        if (resetCombo)
+            ResetCombo();
         // attackCooldown = cooldownLength;
+        anim.ResetTrigger("exit_trot");
+        pMovement.finishedReverseTurnThisFrame = false;
+        pMovement.isDashing = false;
+    }
+
+    private void StopAttackKeepCombo()
+    {
+        StopAttack(false);
+    }
+
+    private void ResetCombo()
+    {
+        attackCombo = 0;
         for (int i = 1; i <= maxCombo; i++)
         {
             anim.ResetTrigger("attack" + i);
         }
-        anim.ResetTrigger("exit_trot");
-        pMovement.finishedReverseTurnThisFrame = false;
-        pMovement.isDashing = false;
     }
 }
