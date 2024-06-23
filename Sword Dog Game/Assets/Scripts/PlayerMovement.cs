@@ -496,6 +496,12 @@ public class PlayerMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + angle);
         //updateDirection();
         Debug.DrawLine(transform.rotation * Vector2.right + transform.position, transform.position);
+        
+        if ((transform.rotation * Vector2.right).x < 0)
+            transform.localScale = new Vector3(transform.localScale.x, -1, 1);
+        else
+            transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+
         slopeSideAngle = transform.eulerAngles.z;
         lastGroundedSlope = slopeSideAngle;
         lastUngroundedSlope = slopeSideAngle;
@@ -678,6 +684,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 4.5f;
             rb.drag = 0;
             rb.velocity *= 1.5f;
+            transform.localScale = new Vector3(transform.localScale.x, 1, 1);
             //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
         }
     }
