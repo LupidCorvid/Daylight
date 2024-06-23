@@ -454,7 +454,12 @@ public class PlayerMovement : MonoBehaviour
         float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
 
         if (inputManager.actions["move"].IsPressed())
+        {
             turnTowards(new Vector2(inputMovement.x * flipped, inputMovement.y));
+            rb.drag = 1;
+        }
+        else
+            rb.drag = 1.5f;
 
         
 
