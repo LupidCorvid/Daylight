@@ -684,6 +684,15 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 4.5f;
             rb.drag = 0;
             rb.velocity *= 1.5f;
+
+            if (transform.localScale.y < 0)
+            {
+                facingRight = false;
+                slopeSideAngle += 180;
+                
+                lastGroundedSlope += 180;
+                lastUngroundedSlope += 180;
+            }
             transform.localScale = new Vector3(transform.localScale.x, 1, 1);
             //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
         }
