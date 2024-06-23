@@ -463,9 +463,15 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
         }
 
+        if (inputManager.actions["jump"].WasPressedThisFrame())
+        {
+            rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
+        }
 
-        
-        
+
+
+
+
     }
 
     public void turnTowards(Vector2 inputDir)
@@ -670,7 +676,7 @@ public class PlayerMovement : MonoBehaviour
         if(Swimming > 0)
         {
             rb.gravityScale = 0;
-            rb.drag = 2;
+            rb.drag = 1;
 
 
             if (!facingRight)
