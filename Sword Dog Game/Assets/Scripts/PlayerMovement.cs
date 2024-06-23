@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private bool waitingToTurn, holdingJump;
-    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false;
+    public bool isGrounded, isRoofed, isJumping, isFalling, trotting, isSprinting, canResprint, isSkidding, wallOnRight, wallOnLeft, behindGrounded, finishedReverseTurnThisFrame = false, isDashing = false;
     public Vector2 bottom;
     public static bool created = false;
     private float beenLoaded = 0.0f, minLoadTime = 0.1f;
@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion resetRotation;
     public bool canTurn = true;
     public bool canSprint = true;
+    public bool canDash = false;
+    public bool blackout = false;
     public static bool isTurning = false, reversedTurn = false;
     public PlayerAttack pAttack;
 
@@ -82,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 2000f;
 
     // Amount of force added when the player dashes
-    [SerializeField] private float dashForce = 1000f;
+    [SerializeField] private float dashForce = 100f;
 
     // How much to smooth out movement
     [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
@@ -114,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     public float landAnimTime = .5f;
     float lastLand = 0;
 
-    public float stamina = 0.0f, maxStamina = 6.0f, minStamina = 1.0f;
+    public float stamina = 20.0f, baseStamina = 20.0f, maxStamina = 20.0f, minStamina = 1.0f;
     public bool noFall = false;
 
     Vector2 lastMidairVelocity;
@@ -252,8 +254,8 @@ public class PlayerMovement : MonoBehaviour
         float deltaStamina = 0.0f;
         if (isSprinting)
             deltaStamina -= Time.deltaTime;
-        else if (timeSinceSprint > 0.1f)
-            deltaStamina += 1.5f * Time.deltaTime;
+        else if (timeSinceSprint > 0.1f && !isDashing)
+            deltaStamina += 1.5f*Time.deltaTime;
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
@@ -436,6 +438,8 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 0;
             }
         }
+        canDash = stamina > baseStamina / 3;
+        anim.SetBool("can_dash", canDash);
     }
 
     public void SwimmingUpdate()
@@ -521,13 +525,13 @@ public class PlayerMovement : MonoBehaviour
         calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
 
         // flip sprite depending on direction of input
-
+        
         if ((moveX < 0 && facingRight) || (moveX > 0 && !facingRight))
         {
             if (!isTurning) reversedTurn = false;
             if (finishedReverseTurnThisFrame) finishedReverseTurnThisFrame = false;
 
-            if (!isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
+            if (!isDashing && !isTurning && !waitingToTurn && !finishedReverseTurnThisFrame)
             {
                 intendedFacingRight = !facingRight;
                 if (!pAttack.isParrying && !pAttack.isAttacking && isGrounded)
@@ -600,14 +604,14 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping)
         {
             jumpTime += Time.fixedDeltaTime;
-            jumpSpeedMultiplier = 1f + 2f / (10f * jumpTime + 4f);
+            jumpSpeedMultiplier = 1f + 2f/(10f * jumpTime + 4f);
             if (holdingJump)
             {
                 jumpSpeedMultiplier *= 1.25f;
                 rb.AddForce(new Vector2(0f, rb.mass * jumpForce / 400f / jumpTime));
             }
         }
-        else
+        else 
         {
             jumpSpeedMultiplier = Mathf.Lerp(jumpSpeedMultiplier, 1, 0.3f);
         }
@@ -626,7 +630,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.ResetTrigger("fall");
                 isFalling = false;
                 fallTime = 0.0f;
-            }
+            }   
         }
 
         if (!isGrounded)
@@ -1229,6 +1233,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        if (isDashing) return;
+
         // if player presses jump button
         //Maybe could make the jumps that cancel the attack return anims be done once the return anim is cancelled? 
         //Currently it just stops the return animation without triggering a jump
@@ -1340,7 +1346,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartTurn()
     {
-        if (!isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
+        if (!isDashing && !isTurning && !anim.GetBool("exit_turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0)
         {
             Flip();
             isTurning = true;
@@ -1375,5 +1381,20 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 direction = facingRight ? Vector2.right : Vector2.left;
         rb.AddForce(direction * dashForce);
+        isDashing = true;
+        if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
+        {
+            rb.velocity = new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1));
+        }
+        else
+        {
+            rb.velocity = new Vector2(transform.localScale.x * dashForce, 0.0f);
+        }
+        stamina = Mathf.Max(stamina - baseStamina / 3, 0);
+    }
+
+    // TODO not called atm but should be if dash becomes its own move
+    public void StopDash() {
+        isDashing = false;
     }
 }
