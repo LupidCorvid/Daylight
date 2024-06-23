@@ -671,6 +671,23 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.gravityScale = 0;
             rb.drag = 2;
+
+
+            if (!facingRight)
+            {
+                transform.localScale = new Vector3(transform.localScale.x, -1, 1);
+
+                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+                slopeSideAngle += 180;
+
+                lastGroundedSlope += 180;
+                lastUngroundedSlope += 180;
+            }
+            else
+            {
+                transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+                //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+            }
         }
     }
 
@@ -689,10 +706,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 facingRight = false;
                 slopeSideAngle += 180;
-                
+
                 lastGroundedSlope += 180;
                 lastUngroundedSlope += 180;
             }
+            else
+                facingRight = true;
+
             transform.localScale = new Vector3(transform.localScale.x, 1, 1);
             //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
         }
