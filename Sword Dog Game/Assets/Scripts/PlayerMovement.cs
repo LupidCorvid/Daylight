@@ -681,12 +681,12 @@ public class PlayerMovement : MonoBehaviour
         if(Swimming > 0)
         {
             rb.gravityScale = 0;
-            rb.drag = 1;
+            rb.drag = 1.5f;
 
 
             if (!facingRight)
             {
-                transform.localScale = new Vector3(transform.localScale.x, -1, 1);
+                transform.localScale = new Vector3(1, -1, 1);
 
                 transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
                 slopeSideAngle += 180;
@@ -696,9 +696,12 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+                transform.localScale = new Vector3(1, 1, 1);
                 //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
             }
+
+
+            //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
         }
     }
 
