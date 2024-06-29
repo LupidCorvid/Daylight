@@ -715,17 +715,28 @@ public class PlayerMovement : MonoBehaviour
 
             if (transform.localScale.y < 0)
             {
-                facingRight = false;
+                facingRight = true;
                 slopeSideAngle += 180;
 
                 lastGroundedSlope += 180;
                 lastUngroundedSlope += 180;
             }
             else
-                facingRight = true;
+            {
+                facingRight = false;
+            }
 
-            transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+            transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+
+
+            int negative = facingRight ? 1 : -1;
+            float rotationAmount = (rb.velocity.y * Time.deltaTime * 75 * negative); //the constant number needs to match that of ROTATION_INTENSITY in midair_rotation
+            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+            lastGroundedSlope = slopeSideAngle - rotationAmount;
+
             //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
+
+            transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
         }
     }
 
