@@ -254,6 +254,7 @@ public class SwordFollow : MonoBehaviour
         //Moves to match the attack tracker animator
 
         rb.velocity = (attackMoveTracker.transform.position - transform.position) * 60;
+        transform.localScale = new Vector3(transform.localScale.x * attackMoveTracker.transform.localScale.x, transform.localScale.y * transform.localScale.y, 1);
 
         ////Multiplied by 60 to match the time of the frame in the animation
         //rb.angularVelocity = getAngleDirection(transform.rotation, Quaternion.Euler(0,0,attackMoveTracker.transform.rotation.z)) * 60;
