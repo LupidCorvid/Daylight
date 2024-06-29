@@ -10,6 +10,8 @@ public class SettingsMenu : MonoBehaviour
 
     public CanvasGroup KeybindsGroup;
 
+    public string oldSettings;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,10 +53,14 @@ public class SettingsMenu : MonoBehaviour
         KeybindsGroup.blocksRaycasts = false;
 
         PauseScreen.lockPauseStatus = false;
+
+        InputReader.inputs.actions.LoadBindingOverridesFromJson(oldSettings);
     }
 
     public void OpenMenu()
     {
+        oldSettings = InputReader.inputs.actions.SaveBindingOverridesAsJson();
+
         keyBindings.AddRange(GetComponentsInChildren<KeyRebind>());
         foreach (KeyRebind binding in keyBindings)
         {
@@ -67,5 +73,10 @@ public class SettingsMenu : MonoBehaviour
         KeybindsGroup.blocksRaycasts = true;
 
         PauseScreen.lockPauseStatus = true;
+    }
+
+    public void SaveSettings()
+    {
+        oldSettings = InputReader.inputs.actions.SaveBindingOverridesAsJson();
     }
 }
