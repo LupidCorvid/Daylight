@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This script detects when the sword hits an enemy
+
 public class SwordTip : MonoBehaviour
 {
     public SwordFollow sword;
@@ -15,6 +18,8 @@ public class SwordTip : MonoBehaviour
     public Animator swordAnimator;
 
     public Entity user;
+
+    [SerializeField] GameObject slashFx;
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +61,10 @@ public class SwordTip : MonoBehaviour
         Rigidbody2D otherRb = other.GetComponent<Rigidbody2D>();
 
         enemy?.TakeDamage(damage, user);
+        if(enemy != null)
+            Instantiate(slashFx, enemy.transform.position, Quaternion.identity); //Spawn slash effect
 
-        if(otherRb != null)
+        if (otherRb != null)
         {
             if(otherRb.bodyType != RigidbodyType2D.Static && otherRb != sword.pmScript.rb)
                 otherRb.AddForce(((Vector2)(other.transform.position - sword.pmScript.transform.position).normalized) * knockback * (Mathf.Clamp(sword.rb.velocity.magnitude, 0, 2)));
