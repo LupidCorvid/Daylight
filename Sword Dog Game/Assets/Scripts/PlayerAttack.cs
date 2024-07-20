@@ -58,10 +58,16 @@ public class PlayerAttack : MonoBehaviour
                     SwordFollow.sword.speed = 2;
                     attackCombo = 0;
                     attackCooldown = 0;
+
+                    // Add air resistance for midair attacks
+                    if (!pMovement.isGrounded)
+                    {
+                        GetComponent<Rigidbody2D>().drag = 20;
+                    }
                 }
 
                 anim.SetFloat("attackSpeed", pMovement.entityBase.attackSpeed);
-
+                
                 isAttacking = true;
                 if (!(pMovement.isDashing && !pMovement.canDash))
                 {
@@ -134,6 +140,10 @@ public class PlayerAttack : MonoBehaviour
         pMovement.stopStaminaRefill = false;
     }
 
+    private void NoDrag() {
+        GetComponent<Rigidbody2D>().drag = 0;
+    }
+
     // stops attacks -- called from animation events in return states
     private void StopAttack()
     {
@@ -142,6 +152,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void StopAttack(bool resetCombo = false)
     {
+        NoDrag();
         if (anim == null)
             return;
         isAttacking = false;
