@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
                     anim.SetFloat("attack_direction", yInput);
                     if (yInput < 0)
                     {
-                        Debug.Log("downswing"); downSwing = true;
+                        downSwing = true;
                     }
                     SwordFollow.sword.speed = 2;
                     attackCombo = 0;
@@ -151,7 +151,6 @@ public class PlayerAttack : MonoBehaviour
         {
             rb.gravityScale = 12;
             downSwing = false;
-            Debug.Log("highgrav");
         }
     }
 
