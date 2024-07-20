@@ -208,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
             if (!noFall)
                 soundPlayer.PlaySound(landSound);
             noFall = false;
+            rb.gravityScale = 4.5f;
         }
     }
 

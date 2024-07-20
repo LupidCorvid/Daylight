@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public PlayerMovement pMovement;
     public Transform parryTrackerLocation;
     public float parryStaminaCost = 2.5f;
+    public bool downSwing = false;
 
     public Vector2 parryAimDir;
     // Start is called before the first frame update
@@ -55,6 +56,10 @@ public class PlayerAttack : MonoBehaviour
                 if (!isAttacking)
                 {
                     anim.SetFloat("attack_direction", yInput);
+                    if (yInput < 0)
+                    {
+                        Debug.Log("downswing"); downSwing = true;
+                    }
                     SwordFollow.sword.speed = 2;
                     attackCombo = 0;
                     attackCooldown = 0;
@@ -93,7 +98,6 @@ public class PlayerAttack : MonoBehaviour
                 if (InputReader.inputs.currentControlScheme == "Controller")
                 {
                     inputVector = InputReader.inputs.actions["AimDir"].ReadValue<Vector2>();
-                    
                 }
                 if (inputVector != Vector2.zero)
                     parryAimDir = inputVector;
@@ -141,7 +145,14 @@ public class PlayerAttack : MonoBehaviour
     }
 
     private void NoDrag() {
-        GetComponent<Rigidbody2D>().drag = 0;
+        var rb = GetComponent<Rigidbody2D>();
+        rb.drag = 0;
+        if (downSwing && !pMovement.isGrounded)
+        {
+            rb.gravityScale = 12;
+            downSwing = false;
+            Debug.Log("highgrav");
+        }
     }
 
     // stops attacks -- called from animation events in return states
