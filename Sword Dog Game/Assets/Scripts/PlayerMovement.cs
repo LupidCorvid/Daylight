@@ -150,6 +150,9 @@ public class PlayerMovement : MonoBehaviour
     public int Swimming = 0;
 
 
+    public GameObject submergeTrackerPrefab;
+    public PlayerSubmergeTracker submergeTracker;
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -239,6 +242,12 @@ public class PlayerMovement : MonoBehaviour
             GroundMovementUpdate();
         else
             SwimmingUpdate();
+
+        if (submergeTracker == null)
+        {
+            submergeTracker = Instantiate(submergeTrackerPrefab).GetComponent<PlayerSubmergeTracker>();
+            submergeTracker.player = this;
+        }
     }
 
     public void GroundMovementUpdate()

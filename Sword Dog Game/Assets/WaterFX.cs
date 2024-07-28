@@ -332,7 +332,11 @@ public class WaterFX : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
+        {
+            if (collision.GetComponent<PlayerSubmergeTracker>() != null)
+                collision.GetComponent<PlayerSubmergeTracker>().EnteringWater();
             return;
+        }
 
         float relPosition = collision.transform.position.x - (transform.position.x - (size.x)/2);
 
@@ -353,8 +357,7 @@ public class WaterFX : MonoBehaviour
             //    collision.attachedRigidbody.velocity = new Vector2(collision.attachedRigidbody.velocity.x, Mathf.Clamp(collision.attachedRigidbody.velocity.y, -25, 1000));
         }
 
-        if (collision.GetComponent<PlayerMovement>() != null)
-            collision.GetComponent<PlayerMovement>().EnterWater();
+        
 
     }
 
@@ -386,7 +389,12 @@ public class WaterFX : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
+        {
+            if (collision.GetComponent<PlayerSubmergeTracker>() != null)
+                collision.GetComponent<PlayerSubmergeTracker>().LeavingWater();
+
             return;
+        }
 
         float relPosition = collision.transform.position.x - (transform.position.x - (size.x) / 2);
 
@@ -400,8 +408,7 @@ public class WaterFX : MonoBehaviour
         }
 
 
-        if (collision.GetComponent<PlayerMovement>() != null)
-            collision.GetComponent<PlayerMovement>().LeaveWater();
+       
 
     }
 
