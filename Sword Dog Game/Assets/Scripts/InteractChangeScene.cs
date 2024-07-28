@@ -10,6 +10,7 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 {
     public string scene;
     public string spawn;
+    public AudioManager.GameArea newArea;
 
     public Animator spawnedPrompt;
 
@@ -94,6 +95,10 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         ChangeScene.changingScene = true;
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
+        if (newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT)
+        {
+            AudioManager.instance.FadeOutCurrent();
+        }
         yield return new WaitForSeconds(1f);
         Player.controller.noFall = true;
         SwordFollow.DisableMovement();
