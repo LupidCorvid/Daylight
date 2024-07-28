@@ -151,6 +151,23 @@ public class DialogSource
      * [UPM] //Unpauses player movement
      *
      * [btn, input] // Replaces with input prompt icon for specified input
+     * 
+     * 
+     * [emote, emoteID] // Makes the speaker emote
+     * [emote, emoteID, lifetime] //Makes the speaker emote for a custom timeframe
+     * 
+     * [reemote, emoteID] // Makes the player emote in response to the speaker
+     * [reemote, emoteID, lifetime] // makes the player emote in response to the speaker
+     * 
+     * emotes
+        1 - anger
+        2 - content
+        3 - happy 
+        4 - questioning
+        5 - surprised
+        6 - Worry
+        7 - sad
+        8 - talk
      */
     public DialogSource(string dialog)
     {
@@ -958,16 +975,18 @@ public class DialogSource
         InputBinding binding = InputReader.inputs.actions[actionNeeded].bindings[(int)InputReader.deviceType];
         TMP_SpriteAsset spriteAsset = InputReader.spriteAssets[(int)InputReader.deviceType];
         string inputName = renameInput(actionNeeded, binding.ToString());
-        Debug.Log(binding.ToString() + " " + inputName);
-        return $"<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">";
+        return $"[IA,<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">]";
     }
 
     public string renameInput(string actionNeeded, string inputName)
     {
         inputName = inputName.Replace(actionNeeded + ":", string.Empty);
         inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("[Keyboard]", "");
         inputName = inputName.Replace("<Mouse>/", "Mouse_");
+        inputName = inputName.Replace("[Mouse]", "");
         inputName = inputName.Replace("<Gamepad>/", "Xbox_");
+        inputName = inputName.Replace("[Gamepad]", "");
         return inputName;
     }
 
