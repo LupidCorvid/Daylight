@@ -52,13 +52,13 @@ public class WaterFX : MonoBehaviour
 
     public bool useVariableDistances = false;
     
-    public List<IntPair> distanceSets = new List<IntPair>();
+    public List<DistPair> distanceSets = new List<DistPair>();
 
     [System.Serializable]
-    public struct IntPair
+    public struct DistPair
     {
-        public int near;
-        public int far;
+        public float near;
+        public float far;
     }
 
     // Start is called before the first frame update
@@ -319,9 +319,19 @@ public class WaterFX : MonoBehaviour
             float segmentNearDepth;
             float segmentFarDepth;
 
-            if (useVariableDistances)
+            if (useVariableDistances && distanceSets.Count > 0)
             {
-
+                int segment = (i - (numSegments * 2 + 2))/2;
+                if(distanceSets.Count <= segment)
+                {
+                    segmentNearDepth = distanceSets[^1].near;
+                    segmentFarDepth = distanceSets[^1].far;
+                }
+                else
+                {
+                    segmentNearDepth = distanceSets[segment].near;
+                    segmentFarDepth = distanceSets[segment].far;
+                }
             }
             else
             {
@@ -332,7 +342,7 @@ public class WaterFX : MonoBehaviour
 
             
             Vector3 worldSpace = transform.position + new Vector3(((i - (numSegments * 2 + 2))/2 * vertexDistance - size.x / 2), size.y/2);
-            float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? zWidth : zStartDist;
+            float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? segmentFarDepth : segmentNearDepth;
             worldSpace.y += SwayEffect.getWindEffect(worldSpace.x, windSpeed/7 * distantWavesSpeedScalar, windVolatility * distantWavesVolatilityScalar, windStrength, true) * 10 * distantWavesScalar/(Mathf.Clamp(Mathf.Abs(cam.transform.position.y - worldSpace.y) * .5f * distantWavesFalloffDistance, 1, 20 * distantWavesScalar));
 
             if (changeOnZoom && (!onlyChangeOnGreaterZoom || cam.orthographicSize > 5))
