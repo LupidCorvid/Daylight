@@ -46,7 +46,7 @@ public class ChangeScene : MonoBehaviour
         changingScene = true;
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
-        if (newArea != AudioManager.instance.currentArea) {
+        if (newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT) {
             AudioManager.instance.FadeOutCurrent();
         }
         yield return new WaitForSeconds(1f);
