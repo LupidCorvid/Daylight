@@ -5690,9 +5690,9 @@ MonoBehaviour:
   meshProperty: {fileID: 651105281}
   cldr: {fileID: 651105279}
   motionResponseDampener: 1
-  windSpeed: -7
-  windVolatility: 0.1
-  windStrength: 0.2
+  windSpeed: 1
+  windVolatility: 1
+  windStrength: 0.1
   sprite: {fileID: 0}
   color: {r: 0.92549026, g: 0.7960785, b: 0.16862746, a: 0.5882353}
   buoyantForce: 1
@@ -5705,11 +5705,13 @@ MonoBehaviour:
   cam: {fileID: 2139305502}
   changeOnZoom: 1
   onlyChangeOnGreaterZoom: 1
-  distantWavesScalar: 10
+  distantWavesScalar: 15
   distantWavesVolatilityScalar: 1
   distantWavesFalloffDistance: 2.5
-  distantWavesSpeedScalar: 15
+  distantWavesSpeedScalar: 12.5
   parallaxFXScalar: {x: 1, y: 1}
+  useVariableDistances: 0
+  distanceSets: []
 --- !u!33 &651105281
 MeshFilter:
   m_ObjectHideFlags: 0

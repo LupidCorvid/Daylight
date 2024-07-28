@@ -50,6 +50,17 @@ public class WaterFX : MonoBehaviour
 
     public Vector2 parallaxFXScalar = new Vector2(1, 1);
 
+    public bool useVariableDistances = false;
+    
+    public List<IntPair> distanceSets = new List<IntPair>();
+
+    [System.Serializable]
+    public struct IntPair
+    {
+        public int near;
+        public int far;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -215,9 +226,26 @@ public class WaterFX : MonoBehaviour
         int topIndexStart = (numSegments * 2 + 2);
         for (int i = 0; i <= numSegments; i++)
         {
-            newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zWidth);
-            newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zStartDist);
-            //Odds are lower area, evens are upper
+            if (useVariableDistances && distanceSets.Count > 0)
+            {
+                if (i < distanceSets.Count)
+                {
+                    newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, distanceSets[i].far);
+                    newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, distanceSets[i].near);
+                }
+                else
+                {
+                    newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, distanceSets[^1].far);
+                    newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, distanceSets[^1].near);
+                }
+            }
+            else
+            {
+                newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, zWidth);
+                newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, zStartDist);
+                //Odds are lower area, evens are upper
+            }
+
         }
 
         j = topIndexStart;
@@ -288,6 +316,20 @@ public class WaterFX : MonoBehaviour
         {
             //newVerts[topIndexStart + 2 * i] = new Vector3(i * vertexDistance - size.x / 2, size.y/2, zWidth);
             //newVerts[topIndexStart + 2 * i + 1] = new Vector3(i * vertexDistance - size.x / 2, size.y / 2, zStartDist);
+            float segmentNearDepth;
+            float segmentFarDepth;
+
+            if (useVariableDistances)
+            {
+
+            }
+            else
+            {
+                segmentFarDepth = zWidth;
+                segmentNearDepth = zStartDist;
+            }
+
+
             
             Vector3 worldSpace = transform.position + new Vector3(((i - (numSegments * 2 + 2))/2 * vertexDistance - size.x / 2), size.y/2);
             float depth = (i - (numSegments * 2 + 2)) % 2 == 0 ? zWidth : zStartDist;
