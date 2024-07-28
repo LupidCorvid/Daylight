@@ -4,9 +4,14 @@ Default{
 }
 
 Scene1{
-[sh, Ricken][abf,10][ss,.025][c] [gvar,HasGottenSword,Oh thank goodness![w,.6][ss, .035] I thought I was about to get put down![wi] ,[llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True]Wait a second[ss,.15]...[wi] 
-[c][abf,15][emote, 0][ss,.035][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![w,.4] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] hundreds of those monsters while you were snoozing! [wi] 
-[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts][ss, .025][TFX, Shake, 1.5] AHH![w,.2] Quickly![w,.3] Finish it off! [/TFX,Shake][w, 2] [exit]
+[sh, Ricken][abf,10][ss,.025][c] [gvar,HasGottenSword,Oh thank goodness![wi]
+[c][ss, .035] I thought I was about to get put down![wi]
+[c] [llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True]Wait a second[ss,.15]...[wi]
+[c][abf,15][emote, 0][ss,.035][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![wi]
+[c] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] [IA,<i>]hundreds[IA,</i>] of those monsters while you were snoozing! [wi] 
+[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts]
+[c][ss, .025][TFX, Shake, 1.5] AHH![wi]
+[c]Quickly![w,.2] Finish it off! [/TFX,Shake][w, 2] [exit]
 }
 
 Scene1.1{
@@ -17,14 +22,19 @@ Scene1.1{
 
 Scene1.2{
 [sh, Ricken][abf,10][ss, .033][TFX, Wave, 5, 5, 50] Waaaait,[w,.2] [IA,<color=#FFDC30>][gvar, playerName][IA,</color>]! [/TFX,Wave][wi] 
-[c][CE, flashRed][reemote, 4][abf,5][ss, .035][w,.5] Oh,[w,.2] what's this? [w, .3] Hehe[ss,.15]...[ss,.035] well, actually[ss,.15]...[ss,.035] [w, .2] I wasn't lying about more of them showing up after you got knocked out[ss,.15]...[ss,.035] [w, .1] I trounced what I could,[w,.2] but one still escaped[ss,.15]...[ss,.05] [w, .2] And I couldn't give chase because- [w, .2][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg[ss,.15]...[ss,.05][wi] 
-[c] Ye-[w,.3] yeah,[w,.2] let's get back to town[ss,.1]...[w, .2] ...[ss,.035]And thanks[ss,.1]... [ss,.035]for the help, [w, .2][IA,<size=80%>] [ss,.075]friend[ss,.1]...[ss,.035] [IA,</size>][w, .2] I[w,.1]-I[w,.1]-I mean rookie! [wi] [exit]
+[c][CE, flashRed][reemote, 4][abf,5][ss, .035][w,.5] Oh,[w,.2] what's this?[wi]
+[c] Hehe[ss,.15]...[ss,.035] well, actually[ss,.15]...[wi]
+[c] [ss,.035] I wasn't lying about more of them showing up after you got knocked out[ss,.15]...[ss,.035] [w, .1] I trounced what I could,[w,.2] but one still escaped[ss,.15]...[ss,.05] [w, .2] And I couldn't give chase because- [w, .2][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg[ss,.15]...[ss,.05][wi]
+[c] [reemote, 6] Ye-[w,.3] yeah,[w,.2] let's get back to town[ss,.1]...[wi]
+[c] ...[ss,.035]And thanks[ss,.1]... [ss,.035]for the help, [w, .2][IA,<size=80%>] [ss,.075]friend[ss,.1]...[ss,.035] [IA,</size>][w, .2] I[w,.1]-I[w,.1]-I mean [IA,<i>]rookie[IA,</i>]! [wi] [exit]
 }
 
 Scene2.1{
 [sh, Ricken][abf,10][ss, .035][TFX, Wave, 5, 5, 50] Woohoo![/TFX,Wave] We made it back.[wi]
-[c][reemote, 5] Hm?[w, .1] Yeah...[w, .1] you're right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away and dangerously close to town, at that... [wi]
-[c] But![w, .2] Reporting and braving the General's wrath sounds like your problem. I haveta get my leg checked! Make sure to let the General know about how great of a job I did at safekeeping the town! [wi][c]
+[c][reemote, 5] Hm?[wi]
+[c] Yeah...[w, .1] you're right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away [IA,<i>]and[IA,</i>] dangerously close to town, at that... [wi]
+[c] But![w, .2] Reporting and braving the General's wrath sounds like [IA,<i>]your[IA,</i>] problem. [IA,<i>]I[IA,</i>] haveta get my leg checked![wi][CE, WalkAwayABit]
+[c] Make sure to let the General know about how great of a job I did at safekeeping the town! [wi][exit]
 }
 
 LeaveNoSword{
@@ -35,4 +45,29 @@ LeaveNoSword1{
 }
 LeaveNoSword2{
  Still no sword?[w,.2] Go get [IA,<color=#FFDC30>]your sword[IA,</color>]! 
+}
+
+Prologue5.1{
+[gvar,hasAloe,[llf,Prologue5.1HasAloe],[llf,Prologue5.1NoAloe]]
+}
+
+Prologue5.1HasAloe{
+[sh, Ricken][abf,10][ss, .035][c] Hey rookie! Did you miss me?! [wi]
+[c] I bet you were in tears, worried that your superior would [IA, <i>]never[IA, </i>] recover...[wi]
+[c] But you gotta understand, rookie..[wi]
+[c] As someone with two,[w, .1] no,[w, .1] [IA,<i>][ss, .025]three[IA,</i>][ss, .035] months more experience than you in the biz, getting injured and instantaneously bouncing back,[w, .2] regardless of your wounded pride,[w, .2] comes with the territory.[wi]
+
+[c] So you'd better be prepared to never let the townsfolk down.[wi]
+[c] [ss, 0.28] If you can't handle being their hope or the risks of being a warrior, stop now before something life-threatening befalls you, friend...[wi]
+
+[c] [ss, 0.35] That guy.[w, 0.2] A few weeks in his new promotion and he thinks he can walk in like he owns the place.[wi]
+[c] You should go to the meeting. I'll catch up in a minute![wi][exit]
+}
+
+Prologue5.1NoAloe{
+[sh, Ricken][abf,10][ss, .035] [c] Aughhh...[w, 0.2] [ss, 0.25] my leggg...[wi][exit]
+}
+
+Prologue6{
+[sh, Ricken][abf,10][ss, .035] [c] You hear that rookie? [w, 0.2] The General wants us at his office.[w, 0.2] Let's get a move on![wi][exit]
 }
