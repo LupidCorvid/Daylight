@@ -605,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town Medbay
   spawn: FromTown
+  newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
   direction: 3
@@ -5689,7 +5690,7 @@ MonoBehaviour:
   mesh: {fileID: 0}
   meshProperty: {fileID: 651105281}
   cldr: {fileID: 651105279}
-  motionResponseDampener: 0.5
+  motionResponseDampener: 1
   windSpeed: 1
   windVolatility: 1
   windStrength: 0.1
@@ -5698,10 +5699,10 @@ MonoBehaviour:
   buoyantForce: 1
   depthBuoyanceScalar: 1
   splashPrefab: {fileID: 2932426905938753825, guid: 319eb419f4027ca4c8a1195df7f73bb8, type: 3}
-  LightRayDepth: 0.95
-  surfaceWidth: 0.985
+  LightRayDepth: 0
+  surfaceWidth: 0
   zWidth: 0.1
-  zStartDist: 0.1
+  zStartDist: 0.05
   cam: {fileID: 2139305502}
   changeOnZoom: 1
   onlyChangeOnGreaterZoom: 1
@@ -5713,7 +5714,7 @@ MonoBehaviour:
   useVariableDistances: 0
   distanceSets:
   - near: 0.001
-    far: 0.002
+    far: 0.03
   - near: 0.01
     far: 0.02
   - near: 0.1
@@ -12543,6 +12544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town Dojo
   spawn: FromTown
+  newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 1024801515}
   direction: 3
