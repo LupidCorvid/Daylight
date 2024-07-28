@@ -5689,7 +5689,7 @@ MonoBehaviour:
   mesh: {fileID: 0}
   meshProperty: {fileID: 651105281}
   cldr: {fileID: 651105279}
-  motionResponseDampener: 1
+  motionResponseDampener: 0.5
   windSpeed: 1
   windVolatility: 1
   windStrength: 0.1
@@ -5711,7 +5711,13 @@ MonoBehaviour:
   distantWavesSpeedScalar: 12.5
   parallaxFXScalar: {x: 1, y: 1}
   useVariableDistances: 0
-  distanceSets: []
+  distanceSets:
+  - near: 0.001
+    far: 0.002
+  - near: 0.01
+    far: 0.02
+  - near: 0.1
+    far: 0.2
 --- !u!33 &651105281
 MeshFilter:
   m_ObjectHideFlags: 0
