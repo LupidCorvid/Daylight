@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void checkIfLanding(Collider2D collision)
     {
-        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene)
+        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene && Swimming <= 0)
         {
             lastLand = Time.time;
             if (!noFall)
@@ -738,6 +738,8 @@ public class PlayerMovement : MonoBehaviour
             rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
             lastGroundedSlope = slopeSideAngle - rotationAmount;
 
+            //lastUngroundedSlope = slopeSideAngle;
+
             //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
 
             transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
@@ -1099,7 +1101,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (lastLand + landAnimTime > Time.time)
         {
-            slopeSideAngle = Mathf.Lerp(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+            slopeSideAngle = Mathf.LerpAngle(lastUngroundedSlope, slopeSideAngle, Mathf.Clamp((Time.time - lastLand) * Mathf.Abs(lastMidairVelocity.y) / (landAnimTime), 0, 1));
+            //slopeSideAngle = 0;
         }
     }
 
