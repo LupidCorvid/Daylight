@@ -958,16 +958,18 @@ public class DialogSource
         InputBinding binding = InputReader.inputs.actions[actionNeeded].bindings[(int)InputReader.deviceType];
         TMP_SpriteAsset spriteAsset = InputReader.spriteAssets[(int)InputReader.deviceType];
         string inputName = renameInput(actionNeeded, binding.ToString());
-        Debug.Log(binding.ToString() + " " + inputName);
-        return $"<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">";
+        return $"[IA,<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">]";
     }
 
     public string renameInput(string actionNeeded, string inputName)
     {
         inputName = inputName.Replace(actionNeeded + ":", string.Empty);
         inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("[Keyboard]", "");
         inputName = inputName.Replace("<Mouse>/", "Mouse_");
+        inputName = inputName.Replace("[Mouse]", "");
         inputName = inputName.Replace("<Gamepad>/", "Xbox_");
+        inputName = inputName.Replace("[Gamepad]", "");
         return inputName;
     }
 
