@@ -3569,7 +3569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.62027
+      value: -6.6202393
       objectReference: {fileID: 0}
     - target: {fileID: 6712416993626590192, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7751,7 +7751,7 @@ GameObject:
   - component: {fileID: 1023262327}
   - component: {fileID: 1023262326}
   m_Layer: 0
-  m_Name: ToTest
+  m_Name: ToPrologue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7771,6 +7771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: prologue area
   spawn: From town
+  newArea: 2
 --- !u!61 &1023262327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10022,6 +10023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Forest 1
   spawn: FromTown
+  newArea: 3
 --- !u!61 &1464030902
 BoxCollider2D:
   m_ObjectHideFlags: 0

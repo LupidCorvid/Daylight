@@ -10,6 +10,7 @@ public class ChangeScene : MonoBehaviour
 {
     public string scene;
     public string spawn;
+    public AudioManager.GameArea newArea;
     public static bool changingScene = false;
     public static Action clearCollisions, clearInteractables;
     public static Action changeScene;
@@ -45,6 +46,9 @@ public class ChangeScene : MonoBehaviour
         changingScene = true;
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
+        if (newArea != AudioManager.instance.currentArea) {
+            AudioManager.instance.FadeOutCurrent();
+        }
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
         Player.controller.noFall = true;
