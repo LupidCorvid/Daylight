@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void checkIfLanding(Collider2D collision)
     {
-        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene)
+        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene && Swimming <= 0)
         {
             lastLand = Time.time;
             if (!noFall)
