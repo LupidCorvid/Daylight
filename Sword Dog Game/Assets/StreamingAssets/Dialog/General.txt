@@ -3,12 +3,12 @@ Default{
 [sh,The General][abf,6][ss, .05] [llf,Prologue2] [exit]
 }
 
-Prologue2{
+Prologue4{
 [IA,<color=#FFDC30>]PLAYER[IA,</color>]! Where have you been?! You and Ricken- [wi] [c][emote, 3] Wh-[w, .1] Where's Ricken?[w, .3] He...[w, .2][IA,<size=60%>] He didn't- [IA,</size>][wi] [c][reemote, 7][w, .5] Haaa,[w, .1] that's good to hear.[w, .1] You had me worried that another warrior...[wi] [c] ...[wi] [c] Nevermind my worries.[wi] 
 [c] [IA,<color=#FFDC30>]PLAYER[IA,</color>], report![w, .1] How did the mission go? [wi] [reemote, 7] [w, 1] [llf,MissionDetails][exit]
 }
 
-MissionDetails{
+Prologue4.1{
 [c]Let me get this straight... [w, .2] After successfully dispatching several monsters,[w, .2] something,[w, .2] presumably a monster,[w, .2] snuck up behind you and knocked you unconscious... [wi]
 [c]When you awoke,[w, .1] not in the place where you were struck,[w, .1] you could only assume that said assailant had dragged you deeper into the forest...[w, .2] However, Ricken managed to fend off said attacker;[w, .2] that is[w, .2] until more monsters appeared... [wi]
 [c]When Ricken had been backed into a corner,[w, .1] you had finally managed to catch up to him,[w, .2] swoop in,[w, .2] rescue him,[w, .2] and return safely in order to report this ordeal back to me... [wi]
@@ -21,20 +21,21 @@ MissionDetails{
 [c]You are dismissed.[wi] [exit]
 }
 
-MDresponse1{
+P4.1Response1{
 [c] [reemote, 5] [ss, .03] [IA,<size=120%>] [TFX, Shake, .8] I don't want apologies, boy.[w, .1] I want results![/TFX,Shake][IA,</size>][wi]
 }
-MDresponse2{
+P4.1Response2{
 [c]You'd better.[w, .1] It would be in your best interest if you want to keep your rank.[wi]
 }
-MDresponse3{
+P4.1Response3{
 [c] [ss, .03] [IA,<size=120%>] [TFX, Shake, .8] Quit standing around looking sorry for yourself![/TFX,Shake][IA,</size>][wi]
 }
 
-Prologue3{
-[c] Now that everyone's been debriefed on the warriors' recent undertakings...[w, .1] I'd like to issue an apology to every one of my fellow townspeople. [wi][c] As your General, and on behalf of my men’s recent failings, I have let every single one of you down. [wi][c] Our battle, or more accurately rebuff, against the monsters hasn’t been proceeding as smoothly as we'd like. Multiple times over just this past month, I have received reports of monsters getting more elusive and coordinated in their onslaught. [wi][c] So much so that...[w, .2] worst of all...[w, .2] one of our very own warriors has yet to return from their outing. [wi][c][reemote, 4] The fiend that we think got to him is one that we’ve been monitoring for a while. It’s been recently spotted heading towards the east side of the forest so that area will be off limits except for the scouts and seasoned warriors that I will be assigning to track the beast and hopefully locate the missing warrior. [wi][c] Shae, Yuri, and Nigel, see me at the well. Meeting adjourned. [wi][c][exit]
+Prologue5.1{
 }
 
-Prologue4{
-[c][gvar,playerName]! I see you've completed your first quest, well done. Our blacksmith is in need of more materials to strengthen our armory. See him in the dojo and attend to his needs. Dismissed! [wi][c][exit]
+Prologue6{
+}
+
+Forest1{
 }
