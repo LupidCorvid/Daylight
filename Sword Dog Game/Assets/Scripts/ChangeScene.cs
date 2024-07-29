@@ -50,6 +50,7 @@ public class ChangeScene : MonoBehaviour
             AudioManager.instance.FadeOutCurrent();
         }
         yield return new WaitForSeconds(1f);
+        Crossfade.waiting = true;
         DisableMenuMusic();
         Player.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();

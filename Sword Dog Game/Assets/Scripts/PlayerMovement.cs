@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (PauseScreen.paused) return;
+        if (PauseScreen.paused || Crossfade.waiting) return;
 
         if (Swimming < 1)
             GroundMovementUpdate();

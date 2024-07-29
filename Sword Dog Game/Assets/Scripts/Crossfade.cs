@@ -13,8 +13,8 @@ public class Crossfade : MonoBehaviour
     public static Action FadeStart;
     public static Action FadeEnd;
     public static bool over = true;
+    public static bool waiting = false;
     public float speed = 1;
-
 
     void Start()
     {
@@ -36,11 +36,18 @@ public class Crossfade : MonoBehaviour
         animator?.SetFloat("Speed", 1 * speed);
     }
 
+    void NotWaiting()
+    {
+        if (animator.GetFloat("Speed") >= 0)
+            waiting = false;
+    }
+
     public void StopFade()
     {
         animator?.SetFloat("Speed", 1);
         ChangeScene.changingScene = false;
     }
+
     public void StartFade()
     {
         if(animator == null)
