@@ -149,7 +149,7 @@ public class PlayerAttack : MonoBehaviour
         rb.drag = 0;
         if (downSwing && !pMovement.isGrounded)
         {
-            rb.gravityScale = 12;
+            rb.gravityScale = 9;
             downSwing = false;
         }
     }
