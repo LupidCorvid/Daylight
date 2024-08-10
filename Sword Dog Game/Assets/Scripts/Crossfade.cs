@@ -39,7 +39,10 @@ public class Crossfade : MonoBehaviour
     void NotWaiting()
     {
         if (animator.GetFloat("Speed") >= 0)
+        {
+            ChangeScene.changingScene = false;
             waiting = false;
+        }
     }
 
     public void StopFade()
