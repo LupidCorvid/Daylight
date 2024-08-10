@@ -236,7 +236,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (PauseScreen.paused || Crossfade.waiting) return;
+        if (PauseScreen.paused) return;
+        if (ChangeScene.changingScene) {
+            moveX = 0;
+            return;
+        }
 
         if (Swimming < 1)
             GroundMovementUpdate();
@@ -252,7 +256,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundMovementUpdate()
     {
-
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -395,9 +398,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSprinting && (inputManager.actions["Sprint"].WasReleasedThisFrame() || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f) || !canSprint))
             {
-                // bad code
-                // if (isSprinting)
-                //     GameObject.Instantiate(sprintDust, new Vector3(transform.position.x + (facingRight ? -2.3f : 2.3f), transform.position.y - 0.9f), Quaternion.identity).GetComponent<SpriteRenderer>().flipX = !facingRight;
                 isSprinting = false;
                 anim.ResetTrigger("start_sprint");
             }

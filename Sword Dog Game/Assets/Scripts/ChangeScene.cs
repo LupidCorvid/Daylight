@@ -34,7 +34,7 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!changingScene && collision.gameObject.CompareTag("Player") && !PlayerHealth.dead && Player.controller != null && !Player.controller.resetting && !GameSaver.loading)
         {
@@ -62,7 +62,6 @@ public class ChangeScene : MonoBehaviour
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
-        changingScene = false;
     }
 
     public static void ChangeSceneMinimal(string scene)
