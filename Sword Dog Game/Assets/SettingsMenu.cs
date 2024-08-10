@@ -11,6 +11,7 @@ public class SettingsMenu : MonoBehaviour
     public CanvasGroup KeybindsGroup;
 
     public string oldSettings;
+    private bool collectedBindings = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +62,12 @@ public class SettingsMenu : MonoBehaviour
     {
         oldSettings = InputReader.inputs.actions.SaveBindingOverridesAsJson();
 
-        keyBindings.AddRange(GetComponentsInChildren<KeyRebind>());
+        if (!collectedBindings)
+        {
+            keyBindings.AddRange(GetComponentsInChildren<KeyRebind>());
+            collectedBindings = true;
+        }
+
         foreach (KeyRebind binding in keyBindings)
         {
             //binding.currKeyDisplay.text = InputReader.inputs.actions[binding.assignedAction].bindings[0].name;
