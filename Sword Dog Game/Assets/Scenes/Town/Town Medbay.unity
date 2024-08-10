@@ -467,7 +467,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235977494}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -492,7 +492,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 3.365388, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -503,7 +503,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17, y: 8}
+  m_Size: {x: 40.590393, y: 8}
   m_EdgeRadius: 0
 --- !u!114 &235977496
 MonoBehaviour:
@@ -518,11 +518,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addOffset: {x: 0, y: 0, z: 0}
-  lockX: 1
+  lockX: 0
   lockY: 1
-  lockZoom: 1
-  lockToPoint: 1
-  lockPosition: {x: 6.62, y: 0.8}
+  lockZoom: 0
+  lockToPoint: 0
+  lockPosition: {x: 10, y: 0.8}
   zoomLock: 5
   ignoreColliders: 1
 --- !u!4 &235977497
@@ -873,11 +873,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.3
   m_Points:
-  - {x: 24.989975, y: -3.8040864}
-  - {x: -17.69225, y: -4.10585}
-  - {x: -17.720917, y: 14.480007}
-  - {x: 26.450151, y: 14.477098}
-  - {x: 26.936014, y: -3.8722954}
+  - {x: 25.78968, y: -1.743355}
+  - {x: -18.582518, y: -1.6983192}
+  - {x: -18.550371, y: 11.413211}
+  - {x: 26.580847, y: 11.536467}
+  - {x: 26.855135, y: -0.77053547}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
