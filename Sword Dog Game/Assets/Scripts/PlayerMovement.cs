@@ -237,10 +237,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (PauseScreen.paused) return;
-        if (ChangeScene.changingScene) {
-            moveX = 0;
-            return;
-        }
 
         if (Swimming < 1)
             GroundMovementUpdate();
@@ -273,15 +269,7 @@ public class PlayerMovement : MonoBehaviour
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
 
-        // Disable frozen sprinting during cutscenes    
-        if (CutsceneController.cutsceneStopMovement && isSprinting)
-        {
-            isSprinting = false;
-            anim.ResetTrigger("start_sprint");
-        }
-
-
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main.source?.waiting != true && !DialogController.main.pausePlayerMovement && !ChangeScene.changingScene)
         {
             // remember previous movement input
             prevMoveX = moveX;
@@ -433,15 +421,20 @@ public class PlayerMovement : MonoBehaviour
         {
             moveX = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
-            isSprinting = false;
-            anim.SetBool("sprinting", false);
+            // Disable frozen sprinting  
+            if (isSprinting)
+            {
+                isSprinting = false;
+                anim.ResetTrigger("start_sprint");
+                anim.SetBool("sprinting", false);
+            }
             anim.SetBool("moveX", false);
             anim.SetBool("attacking", false);
             timeSinceSprint = 1.0f;
             isJumping = false;
             sprintSpeedMultiplier = 1.0f;
             jumpSpeedMultiplier = 1.0f;
-            if (!CutsceneController.cutsceneStopMovement && !PlayerMenuManager.open && !MenuManager.inMenu)
+            if (PlayerHealth.dead)
             {
                 stamina = Mathf.Lerp(stamina, 0, 0.02f);
                 if (stamina <= 0.1f)
