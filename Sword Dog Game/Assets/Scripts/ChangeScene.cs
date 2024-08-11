@@ -110,7 +110,6 @@ public class ChangeScene : MonoBehaviour
         Crossfade.current.StopFade();
         if (showHUD)
             CanvasManager.ShowHUD(true);
-        changingScene = false;
     }
 
     public static void DisableMenuMusic()

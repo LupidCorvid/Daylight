@@ -12,6 +12,7 @@ public class KeyRebind : MonoBehaviour
     public bool listeningForNewBind = false;
     public string assignedAction;
     public TMPro.TextMeshProUGUI currKeyDisplay;
+    public string oldKey;
 
     public List<string> blackList = new List<string>();
 

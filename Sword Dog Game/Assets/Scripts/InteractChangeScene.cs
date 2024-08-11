@@ -114,7 +114,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         DialogController.closedAnimator = true;
         SpawnManager.spawningAt = spawn;
         Crossfade.changeScene?.Invoke();
-        ChangeScene.changingScene = false;
     }
 
     

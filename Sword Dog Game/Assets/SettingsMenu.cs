@@ -30,25 +30,9 @@ public class SettingsMenu : MonoBehaviour
         }
 
     }
-
-    public void ResetBinds()
-    {
-        InputReader.inputs.actions.RemoveAllBindingOverrides();
-
-        foreach(KeyRebind binding in keyBindings)
-        {
-            binding.currKeyDisplay.text = InputReader.inputs.actions[binding.assignedAction].GetBindingDisplayString(InputBinding.DisplayStringOptions.DontIncludeInteractions);
-        }
-    }
-
-    //public void SaveSettings()
-    //{
-    //    SettingsManager.SaveSettings();
-    //}
-
+    
     public void CloseMenu()
     {
-
         KeybindsGroup.alpha = 0;
         KeybindsGroup.interactable = false;
         KeybindsGroup.blocksRaycasts = false;
@@ -70,8 +54,8 @@ public class SettingsMenu : MonoBehaviour
 
         foreach (KeyRebind binding in keyBindings)
         {
-            //binding.currKeyDisplay.text = InputReader.inputs.actions[binding.assignedAction].bindings[0].name;
             binding.currKeyDisplay.text = InputReader.inputs.actions[binding.assignedAction].GetBindingDisplayString(InputBinding.DisplayStringOptions.DontIncludeInteractions);
+            binding.oldKey = binding.currKeyDisplay.text;
         }
 
         KeybindsGroup.alpha = 1;
@@ -84,5 +68,9 @@ public class SettingsMenu : MonoBehaviour
     public void SaveSettings()
     {
         oldSettings = InputReader.inputs.actions.SaveBindingOverridesAsJson();
+        foreach (KeyRebind binding in keyBindings)
+        {
+            binding.oldKey = binding.currKeyDisplay.text;
+        }
     }
 }

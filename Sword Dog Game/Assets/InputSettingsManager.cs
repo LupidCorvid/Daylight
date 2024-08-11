@@ -8,37 +8,37 @@ using UnityEngine.UI;
 
 public class InputSettingsManager : MonoBehaviour
 {
-    public SettingsMenu parent;
+    public SettingsMenu menu;
     public Button saveButton, resetButton, backButton;
-    public bool pointerUpCheck;
+    public bool pointerUpCheck; 
 
-    public void CheckDuplicates(bool enableBackground = true)
+    public void CheckDuplicates(bool affectButtons = true)
     {
         bool duplicates = false;
         ResetDuplicates();
 
         // Mark duplicate pairs in red
-        for (int i = 0; i < parent.keyBindings.Count; i++)
+        for (int i = 0; i < menu.keyBindings.Count; i++)
         {
-            if (enableBackground)
-                parent.keyBindings[i].backgroundButton.interactable = true;
+            if (affectButtons)
+                menu.keyBindings[i].backgroundButton.interactable = true;
             
-            for (int j = i + 1; j < parent.keyBindings.Count; j++)
+            for (int j = i + 1; j < menu.keyBindings.Count; j++)
             {
-                if (parent.keyBindings[i].currKeyDisplay.text == parent.keyBindings[j].currKeyDisplay.text)
+                if (menu.keyBindings[i].currKeyDisplay.text == menu.keyBindings[j].currKeyDisplay.text)
                 {
-                    parent.keyBindings[i].currKeyDisplay.color = Color.red;
-                    parent.keyBindings[j].currKeyDisplay.color = Color.red;
+                    menu.keyBindings[i].currKeyDisplay.color = Color.red;
+                    menu.keyBindings[j].currKeyDisplay.color = Color.red;
                     duplicates = true;
                 }
             }
         }
 
-        if (enableBackground)
+        if (affectButtons)
         {
-            // Save button usability depends on duplicate keybinds
-            saveButton.interactable = !duplicates;
-
+            // Save button usability depends on modifications and no duplicate keybinds
+            saveButton.interactable = !duplicates && CheckModifications();
+            
             resetButton.interactable = true;
             backButton.interactable = true;
         }
@@ -46,7 +46,7 @@ public class InputSettingsManager : MonoBehaviour
 
     public void ResetDuplicates()
     {
-        foreach (KeyRebind k in parent.keyBindings)
+        foreach (KeyRebind k in menu.keyBindings)
         {
             k.currKeyDisplay.color = Color.white;
         }
@@ -55,7 +55,7 @@ public class InputSettingsManager : MonoBehaviour
     public void DisableOtherButtons(KeyRebind curr)
     {
         curr.backgroundButton.interactable = true;
-        foreach (KeyRebind k in parent.keyBindings)
+        foreach (KeyRebind k in menu.keyBindings)
         {
             if (k != curr)
             {
@@ -70,15 +70,30 @@ public class InputSettingsManager : MonoBehaviour
 
     public void ResetMenu()
     {
-        foreach (KeyRebind k in parent.keyBindings)
+        InputReader.inputs.actions.RemoveAllBindingOverrides();
+        bool modified = false;
+        foreach (KeyRebind k in menu.keyBindings)
         {
+            k.currKeyDisplay.text = InputReader.inputs.actions[k.assignedAction].GetBindingDisplayString(InputBinding.DisplayStringOptions.DontIncludeInteractions);
             k.currKeyDisplay.color = Color.white;
             k.backgroundButton.interactable = true;
             k.rebindButton.interactable = true;
+            if (k.currKeyDisplay.text != k.oldKey)
+                modified = true;
         }
-        saveButton.interactable = false;
+        saveButton.interactable = modified;
         resetButton.interactable = true;
         backButton.interactable = true;
+    }
+
+    public bool CheckModifications()
+    {
+        foreach (KeyRebind k in menu.keyBindings)
+        {
+            if (k.currKeyDisplay.text != k.oldKey)
+                return true;
+        }
+        return false;
     }
 
     public void SaveSettings()
