@@ -18,6 +18,18 @@ public class ChangeScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneTransitionPrompt prompt = GetComponentInChildren<SceneTransitionPrompt>();
+        Vector3 offset = new Vector3(1.5f, 0f, 0f);
+        switch (prompt.direction) {
+            case SceneTransitionPrompt.Direction.LEFT:
+                transform.position -= offset;
+                prompt.transform.position += offset;
+                break;
+            case SceneTransitionPrompt.Direction.RIGHT:
+                transform.position += offset;
+                prompt.transform.position -= offset;
+                break;
+        }
     }
 
     // Update is called once per frame
