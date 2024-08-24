@@ -16,6 +16,7 @@ public class CameraRegion : MonoBehaviour
     public float zoomLock;
 
     public bool ignoreColliders = true;
+    public bool instantZoom = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +50,8 @@ public class CameraRegion : MonoBehaviour
             CameraController.main.lockDetails.z = zoomLock;
         if (ignoreColliders)
             CameraController.main.cldr.isTrigger = true;
-
+        if (instantZoom)
+            Camera.main.orthographicSize = zoomLock;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
