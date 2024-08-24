@@ -521,10 +521,10 @@ MonoBehaviour:
   lockX: 0
   lockY: 1
   lockZoom: 1
-  lockToPoint: 0
-  lockPosition: {x: 10, y: 0.8}
-  zoomLock: 4
-  ignoreColliders: 1
+  lockToPoint: 1
+  lockPosition: {x: 10, y: 0.5}
+  zoomLock: 5
+  ignoreColliders: 0
 --- !u!4 &235977497
 Transform:
   m_ObjectHideFlags: 0
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toEnable: {fileID: 235977495}
-  delay: 0.5
+  delay: 0.1
 --- !u!1 &316612882
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,11 +873,12 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.3
   m_Points:
-  - {x: 25.78968, y: -1.743355}
-  - {x: -18.582518, y: -1.6983192}
-  - {x: -18.550371, y: 11.413211}
-  - {x: 26.580847, y: 11.536467}
-  - {x: 26.855135, y: -0.77053547}
+  - {x: 25.319916, y: 9.832939}
+  - {x: 25.28677, y: -1.680412}
+  - {x: -16.871239, y: -1.6312101}
+  - {x: -16.906202, y: 10.977003}
+  - {x: -18.549921, y: 12.207556}
+  - {x: -18.409845, y: 13.523671}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
