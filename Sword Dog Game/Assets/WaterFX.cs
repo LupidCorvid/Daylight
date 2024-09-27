@@ -386,7 +386,7 @@ public class WaterFX : MonoBehaviour
         if (Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("DamageArea") || Mathf.Pow(2, collision.gameObject.layer) == LayerMask.GetMask("Utility"))
         {
             if (collision.GetComponent<PlayerSubmergeTracker>() != null)
-                collision.GetComponent<PlayerSubmergeTracker>().EnteringWater();
+                collision.GetComponent<PlayerSubmergeTracker>().EnteringWater(this);
             return;
         }
 
@@ -459,8 +459,49 @@ public class WaterFX : MonoBehaviour
             currPos += vertexDistance;
         }
 
+    }
 
-       
+    public float getXLocalFromWorldSpacec(float x)
+    {
+        return x - (transform.position.x - (size.x) / 2);
+    }
+
+    public WaterSegment getSegmentForLocalSpace(float x)
+    {
+        //To convert from world to local space
+        //float relPosition = WorldSpace - (transform.position.x - (size.x) / 2);
+
+
+        //for (int i = 0; i < WaveOffset.Length - 1; i++)
+        //{
+
+        //    if (WaveOffset[i + 1].wavePosition > x)
+        //        return WaveOffset[i];
+        //}
+
+        return WaveOffset[(int)(x / vertexDistance)];
+
+        //return null;//not in range
+    }
+
+    public float getHeightAtPoint(float x, bool interpolate)
+    {
+        if(!interpolate)
+        {
+            return WaveOffset[(int)(x / vertexDistance)].wavePosition;
+        }
+        else
+        {
+            int startIndex = (int)(x / vertexDistance);
+            if (startIndex + 1 < WaveOffset.Length)
+            {
+
+
+                return Mathf.Lerp(WaveOffset[startIndex].wavePosition, WaveOffset[startIndex + 1].wavePosition, x - startIndex * vertexDistance);
+            }
+
+            else return WaveOffset[startIndex].wavePosition;
+        }
 
     }
 

@@ -67,7 +67,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029010653, y: 0.2901054}
+  m_Offset: {x: -0.011163831, y: 0.03566712}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -78,7 +78,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8471081, y: 0.39658058}
+  m_Size: {x: 1.856036, y: 0.8518913}
   m_EdgeRadius: 0
 --- !u!114 &5269726348313339881
 MonoBehaviour:
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  inWater: {fileID: 0}
   wade: {fileID: 8891119202303198819}
 --- !u!50 &665358567693273431
 Rigidbody2D:
@@ -186,7 +187,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000059604645, y: -0.27675742}
+  m_Offset: {x: 0.000000059604645, y: 0.6829657}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -197,7 +198,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8570551, y: 0.5536171}
+  m_Size: {x: 1.8570551, y: 0.31257045}
   m_EdgeRadius: 0
 --- !u!114 &8891119202303198819
 MonoBehaviour:
@@ -211,3 +212,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3a4eb3359f58c4084551cc1a43f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterDepth: 0

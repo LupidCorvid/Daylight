@@ -246,8 +246,10 @@ public class PlayerMovement : MonoBehaviour
             submergeTracker.player = this;
         }
 
-        if (Swimming < 1 && submergeTracker.wade.waterDepth <= 0)
+        if (Swimming < 1 && (submergeTracker.wade.waterDepth <= 0 /*&& isGrounded*/))
             GroundMovementUpdate();
+        else if (Swimming > 0 && (submergeTracker.wade.waterDepth <= 0))
+            WadingMovement();
         else
             SwimmingUpdate();
 
@@ -449,9 +451,66 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("can_dash", canDash);
     }
 
+    public void WadingMovement()
+    {
+        Debug.Log("Wading");
+        float WaterLevel = submergeTracker.inWater.size.y/2 + submergeTracker.inWater.transform.position.y;
+
+        //Need to make the water take into account the waves.
+        //WaterLevel += submergeTracker.inWater.getSegmentForLocalSpace(submergeTracker.inWater.getXLocalFromWorldSpacec(transform.position.x)).wavePosition;
+        
+        //Divide by constant to reduce range it pushes
+        WaterLevel += (submergeTracker.inWater.getHeightAtPoint(submergeTracker.inWater.getXLocalFromWorldSpacec(transform.position.x), true));
+
+        //Offset to keep more of the player in or out of the water when wading
+        //WaterLevel -= 0.5f;
+
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x, WaterLevel));
+
+        //transform.position = new Vector3(transform.position.x, WaterLevel);
+
+        //return;
+        //Float to line up with water level
+
+        Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
+        if (inputMovement.y > 0)
+            inputMovement.y = 0;
+
+        float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
+
+        float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+
+        if (inputManager.actions["move"].IsPressed())
+        {
+            //turnTowards(new Vector2(inputMovement.x, inputMovement.y));
+            //Need to use mirroring sprite instead of turnTowards
+
+            rb.drag = 1;
+        }
+        else
+            rb.drag = 1.5f;
+
+        if (((rb.velocity + (inputMovement * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
+        {
+            //rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
+            rb.velocity += (inputMovement * swimSpeed) * Time.deltaTime;
+        }
+
+        //rb.velocity += Vector2.up * (transform.position.y - WaterLevel) * Time.deltaTime;
+
+        //Change final constant to make it snappier
+        transform.position += Vector3.up * (WaterLevel - transform.position.y) * Time.deltaTime * 2;
+
+        //if (inputManager.actions["jump"].WasPressedThisFrame())
+        //{
+        //    rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
+        //}
+
+    }
+
     public void SwimmingUpdate()
     {
-
+        //waterDepth <= 0 means to wade
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         int flipped = facingRight ? 1 : 1;
         float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
@@ -521,7 +580,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Swimming < 1 && (submergeTracker == null || submergeTracker.wade.waterDepth <= 0))
+        if(Swimming < 1)
             GroundMovementFixedUpdate();
 
     }
