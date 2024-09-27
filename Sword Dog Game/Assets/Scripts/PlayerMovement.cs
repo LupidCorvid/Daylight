@@ -153,6 +153,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject submergeTrackerPrefab;
     public PlayerSubmergeTracker submergeTracker;
 
+    bool wading = false;
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -238,16 +240,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PauseScreen.paused) return;
 
-        if (Swimming < 1)
-            GroundMovementUpdate();
-        else
-            SwimmingUpdate();
-
         if (submergeTracker == null)
         {
             submergeTracker = Instantiate(submergeTrackerPrefab).GetComponent<PlayerSubmergeTracker>();
             submergeTracker.player = this;
         }
+
+        if (Swimming < 1 && submergeTracker.wade.waterDepth <= 0)
+            GroundMovementUpdate();
+        else
+            SwimmingUpdate();
+
+        
     }
 
     public void GroundMovementUpdate()
@@ -464,8 +468,6 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 1.5f;
 
-        
-
         if(((rb.velocity + (Vector2)(transform.rotation * Vector2.right * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
         {
             rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
@@ -475,11 +477,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
         }
-
-
-
-
-
     }
 
     public void turnTowards(Vector2 inputDir)
@@ -524,7 +521,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Swimming < 1)
+        if(Swimming < 1 && (submergeTracker == null || submergeTracker.wade.waterDepth <= 0))
             GroundMovementFixedUpdate();
 
     }

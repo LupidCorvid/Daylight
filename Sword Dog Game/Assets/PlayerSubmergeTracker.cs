@@ -6,6 +6,8 @@ public class PlayerSubmergeTracker : MonoBehaviour
 {
     public PlayerMovement player;
 
+    public WadeChecker wade;
+
 
     public void EnteringWater()
     {

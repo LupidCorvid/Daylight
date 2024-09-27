@@ -4419,7 +4419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &303463452
 Transform:
   m_ObjectHideFlags: 0
@@ -4494,6 +4494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Town
   spawn: From test
+  newArea: 0
 --- !u!1 &323663867
 GameObject:
   m_ObjectHideFlags: 0
@@ -39930,6 +39931,8 @@ MonoBehaviour:
   distantWavesFalloffDistance: 1
   distantWavesSpeedScalar: 1
   parallaxFXScalar: {x: 1, y: 1}
+  useVariableDistances: 0
+  distanceSets: []
 --- !u!114 &944924638873259661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41267,6 +41270,8 @@ MonoBehaviour:
   distantWavesFalloffDistance: 1
   distantWavesSpeedScalar: 1
   parallaxFXScalar: {x: 1, y: 1}
+  useVariableDistances: 0
+  distanceSets: []
 --- !u!61 &8572786426278038119
 BoxCollider2D:
   m_ObjectHideFlags: 0
