@@ -30,7 +30,7 @@ public class SettingsMenu : MonoBehaviour
         }
 
     }
-    
+
     public void CloseMenu()
     {
         KeybindsGroup.alpha = 0;

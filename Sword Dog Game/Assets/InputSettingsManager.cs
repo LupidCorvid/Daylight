@@ -10,7 +10,8 @@ public class InputSettingsManager : MonoBehaviour
 {
     public SettingsMenu menu;
     public Button saveButton, resetButton, backButton;
-    public bool pointerUpCheck; 
+    public bool pointerUpCheck;
+    public GameObject tint, confirmPopup;
 
     public void CheckDuplicates(bool affectButtons = true)
     {
@@ -99,5 +100,29 @@ public class InputSettingsManager : MonoBehaviour
     public void SaveSettings()
     {
         saveButton.interactable = false;
+    }
+
+    public void PromptConfirmBack()
+    {
+        if (saveButton.interactable)
+        {
+            OpenConfirmPrompt();
+        }
+        else
+        {
+            menu.CloseMenu();
+        }
+    }
+
+    public void OpenConfirmPrompt()
+    {
+        tint.SetActive(true);
+        confirmPopup.SetActive(true);
+    }
+
+    public void CloseConfirmPrompt()
+    {
+        tint.SetActive(false);
+        confirmPopup.SetActive(false);
     }
 }
