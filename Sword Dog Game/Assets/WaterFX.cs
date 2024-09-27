@@ -486,6 +486,12 @@ public class WaterFX : MonoBehaviour
 
     public float getHeightAtPoint(float x, bool interpolate)
     {
+
+        if ((int)(x / vertexDistance) >= WaveOffset.Length)
+            return WaveOffset[^1].wavePosition;
+        if ((int)(x / vertexDistance) < 0)
+            return WaveOffset[0].wavePosition;
+
         if(!interpolate)
         {
             return WaveOffset[(int)(x / vertexDistance)].wavePosition;
@@ -495,8 +501,6 @@ public class WaterFX : MonoBehaviour
             int startIndex = (int)(x / vertexDistance);
             if (startIndex + 1 < WaveOffset.Length)
             {
-
-
                 return Mathf.Lerp(WaveOffset[startIndex].wavePosition, WaveOffset[startIndex + 1].wavePosition, x - startIndex * vertexDistance);
             }
 

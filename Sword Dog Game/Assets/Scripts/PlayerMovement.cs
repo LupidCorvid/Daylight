@@ -248,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Swimming < 1 && (submergeTracker.wade.waterDepth <= 0 /*&& isGrounded*/))
             GroundMovementUpdate();
-        else if (Swimming > 0 && (submergeTracker.wade.waterDepth <= 0))
+        else if (Swimming > 0 && (submergeTracker.wade.waterDepth <= 0) && Mathf.Abs(rb.velocity.y) < 2)
             WadingMovement();
         else
             SwimmingUpdate();
@@ -454,6 +454,8 @@ public class PlayerMovement : MonoBehaviour
     public void WadingMovement()
     {
         Debug.Log("Wading");
+        //Will have to rotate to level out. Can't be instant as you wade for a couple of frames when entering and exiting water
+
         float WaterLevel = submergeTracker.inWater.size.y/2 + submergeTracker.inWater.transform.position.y;
 
         //Need to make the water take into account the waves.
@@ -742,25 +744,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 0;
             rb.drag = 1.5f;
 
-
-            if (!facingRight)
-            {
-                transform.localScale = new Vector3(1, -1, 1);
-
-                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
-                slopeSideAngle += 180;
-
-                lastGroundedSlope += 180;
-                lastUngroundedSlope += 180;
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
-            }
-
-
-            //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
+            ChangeToWaterRotation();
         }
     }
 
@@ -775,33 +759,60 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
             rb.velocity *= 1.5f;
 
-            if (transform.localScale.y < 0)
-            {
-                facingRight = true;
-                slopeSideAngle += 180;
-
-                lastGroundedSlope += 180;
-                lastUngroundedSlope += 180;
-            }
-            else
-            {
-                facingRight = false;
-            }
-
-            transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
-
-
-            int negative = facingRight ? 1 : -1;
-            float rotationAmount = (rb.velocity.y * Time.deltaTime * 75 * negative); //the constant number needs to match that of ROTATION_INTENSITY in midair_rotation
-            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
-            lastGroundedSlope = slopeSideAngle - rotationAmount;
-
-            //lastUngroundedSlope = slopeSideAngle;
-
-            //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
-
-            transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+            ChangeToLandRotation();
         }
+    }
+
+    public void ChangeToWaterRotation()
+    {
+        if (!facingRight)
+        {
+            transform.localScale = new Vector3(1, -1, 1);
+
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+            slopeSideAngle += 180;
+
+            lastGroundedSlope += 180;
+            lastUngroundedSlope += 180;
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+        }
+
+
+        //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
+    }
+
+    public void ChangeToLandRotation()
+    {
+        if (transform.localScale.y < 0)
+        {
+            facingRight = true;
+            slopeSideAngle += 180;
+
+            lastGroundedSlope += 180;
+            lastUngroundedSlope += 180;
+        }
+        else
+        {
+            facingRight = false;
+        }
+
+        transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+
+
+        int negative = facingRight ? 1 : -1;
+        float rotationAmount = (rb.velocity.y * Time.deltaTime * 75 * negative); //the constant number needs to match that of ROTATION_INTENSITY in midair_rotation
+        rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+        lastGroundedSlope = slopeSideAngle - rotationAmount;
+
+        //lastUngroundedSlope = slopeSideAngle;
+
+        //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
+
+        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
     }
 
     // flips sprite when player changes movement direction
