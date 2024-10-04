@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopMovement;
 
+    public bool waterRotation;
+
     public bool facingRight
     {
         get
@@ -258,6 +260,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundMovementUpdate()
     {
+        if (waterRotation)
+        {
+            ChangeToLandRotation();
+            waterRotation = false;
+        }
+
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -454,15 +462,25 @@ public class PlayerMovement : MonoBehaviour
     public void WadingMovement()
     {
         Debug.Log("Wading");
+
+        if(waterRotation)
+        {
+            ChangeToLandRotation();
+            waterRotation = false;
+        }
+
+        float waveTanAngle = submergeTracker.inWater.getTanAngleAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x));
+        //turnTowards(new Vector2(Mathf.Cos(waveTanAngle), Mathf.Sin(waveTanAngle)));
+        //transform.rotation = Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
+
         //Will have to rotate to level out. Can't be instant as you wade for a couple of frames when entering and exiting water
 
         float WaterLevel = submergeTracker.inWater.size.y/2 + submergeTracker.inWater.transform.position.y;
 
-        //Need to make the water take into account the waves.
-        //WaterLevel += submergeTracker.inWater.getSegmentForLocalSpace(submergeTracker.inWater.getXLocalFromWorldSpacec(transform.position.x)).wavePosition;
         
         //Divide by constant to reduce range it pushes
-        WaterLevel += (submergeTracker.inWater.getHeightAtPoint(submergeTracker.inWater.getXLocalFromWorldSpacec(transform.position.x), true));
+        WaterLevel += (submergeTracker.inWater.getHeightAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x), true));
 
         //Offset to keep more of the player in or out of the water when wading
         //WaterLevel -= 0.5f;
@@ -519,6 +537,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwimmingUpdate()
     {
+
+        if(!waterRotation)
+        {
+            ChangeToWaterRotation();
+            waterRotation = true;
+        }
         //waterDepth <= 0 means to wade
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         int flipped = facingRight ? 1 : 1;
@@ -751,7 +775,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 0;
             rb.drag = 1.5f;
 
-            ChangeToWaterRotation();
+            //ChangeToWaterRotation();
         }
     }
 
@@ -766,7 +790,7 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
             rb.velocity *= 1.5f;
 
-            ChangeToLandRotation();
+            //ChangeToLandRotation();
         }
     }
 

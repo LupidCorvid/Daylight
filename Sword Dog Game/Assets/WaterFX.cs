@@ -461,7 +461,7 @@ public class WaterFX : MonoBehaviour
 
     }
 
-    public float getXLocalFromWorldSpacec(float x)
+    public float getXLocalFromWorldSpace(float x)
     {
         return x - (transform.position.x - (size.x) / 2);
     }
@@ -469,19 +469,7 @@ public class WaterFX : MonoBehaviour
     public WaterSegment getSegmentForLocalSpace(float x)
     {
         //To convert from world to local space
-        //float relPosition = WorldSpace - (transform.position.x - (size.x) / 2);
-
-
-        //for (int i = 0; i < WaveOffset.Length - 1; i++)
-        //{
-
-        //    if (WaveOffset[i + 1].wavePosition > x)
-        //        return WaveOffset[i];
-        //}
-
         return WaveOffset[(int)(x / vertexDistance)];
-
-        //return null;//not in range
     }
 
     public float getHeightAtPoint(float x, bool interpolate)
@@ -507,6 +495,12 @@ public class WaterFX : MonoBehaviour
             else return WaveOffset[startIndex].wavePosition;
         }
 
+    }
+
+    public float getTanAngleAtPoint(float xPos)
+    {
+        float angle = Mathf.Atan2(getHeightAtPoint(xPos + vertexDistance, false) -getHeightAtPoint(xPos, false), vertexDistance);
+        return angle;
     }
 
     public class WaterSegment
