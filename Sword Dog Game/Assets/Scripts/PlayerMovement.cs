@@ -503,6 +503,13 @@ public class PlayerMovement : MonoBehaviour
         //Change final constant to make it snappier
         transform.position += Vector3.up * (WaterLevel - transform.position.y) * Time.deltaTime * 2;
 
+
+        if(inputManager.actions["jump"].WasPressedThisFrame())
+        {
+            //Jump();
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
+        }
         //if (inputManager.actions["jump"].WasPressedThisFrame())
         //{
         //    rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
