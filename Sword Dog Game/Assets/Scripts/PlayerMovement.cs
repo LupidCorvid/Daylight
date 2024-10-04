@@ -461,13 +461,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void WadingMovement()
     {
-        Debug.Log("Wading");
+        //Debug.Log("Wading");
 
         if(waterRotation)
         {
             ChangeToLandRotation();
             waterRotation = false;
         }
+
 
         float waveTanAngle = submergeTracker.inWater.getTanAngleAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x));
         //turnTowards(new Vector2(Mathf.Cos(waveTanAngle), Mathf.Sin(waveTanAngle)));
@@ -495,6 +496,17 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         if (inputMovement.y > 0)
             inputMovement.y = 0;
+
+        if(inputMovement.x > 0)
+        {
+            facingRight = true;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (inputMovement.x < 0)
+        {
+            facingRight = false;
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
 
         float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
 
