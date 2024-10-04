@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool stopMovement;
 
+    public bool waterRotation;
+
     public bool facingRight
     {
         get
@@ -153,6 +155,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject submergeTrackerPrefab;
     public PlayerSubmergeTracker submergeTracker;
 
+    bool wading = false;
+
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -238,20 +242,30 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PauseScreen.paused) return;
 
-        if (Swimming < 1)
-            GroundMovementUpdate();
-        else
-            SwimmingUpdate();
-
         if (submergeTracker == null)
         {
             submergeTracker = Instantiate(submergeTrackerPrefab).GetComponent<PlayerSubmergeTracker>();
             submergeTracker.player = this;
         }
+
+        if (Swimming < 1 && (submergeTracker.wade.waterDepth <= 0 /*&& isGrounded*/))
+            GroundMovementUpdate();
+        else if (Swimming > 0 && (submergeTracker.wade.waterDepth <= 0) && Mathf.Abs(rb.velocity.y) < 2)
+            WadingMovement();
+        else
+            SwimmingUpdate();
+
+        
     }
 
     public void GroundMovementUpdate()
     {
+        if (waterRotation)
+        {
+            ChangeToLandRotation();
+            waterRotation = false;
+        }
+
         bottom = new Vector2(cldr.bounds.center.x, cldr.bounds.center.y - cldr.bounds.extents.y);
 
         if (timeSinceJumpPressed < 1f)
@@ -445,9 +459,91 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("can_dash", canDash);
     }
 
+    public void WadingMovement()
+    {
+        Debug.Log("Wading");
+
+        if(waterRotation)
+        {
+            ChangeToLandRotation();
+            waterRotation = false;
+        }
+
+        float waveTanAngle = submergeTracker.inWater.getTanAngleAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x));
+        //turnTowards(new Vector2(Mathf.Cos(waveTanAngle), Mathf.Sin(waveTanAngle)));
+        //transform.rotation = Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
+
+        //Will have to rotate to level out. Can't be instant as you wade for a couple of frames when entering and exiting water
+
+        float WaterLevel = submergeTracker.inWater.size.y/2 + submergeTracker.inWater.transform.position.y;
+
+        
+        //Divide by constant to reduce range it pushes
+        WaterLevel += (submergeTracker.inWater.getHeightAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x), true));
+
+        //Offset to keep more of the player in or out of the water when wading
+        //WaterLevel -= 0.5f;
+
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x, WaterLevel));
+
+        //transform.position = new Vector3(transform.position.x, WaterLevel);
+
+        //return;
+        //Float to line up with water level
+
+        Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
+        if (inputMovement.y > 0)
+            inputMovement.y = 0;
+
+        float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
+
+        float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+
+        if (inputManager.actions["move"].IsPressed())
+        {
+            //turnTowards(new Vector2(inputMovement.x, inputMovement.y));
+            //Need to use mirroring sprite instead of turnTowards
+
+            rb.drag = 1;
+        }
+        else
+            rb.drag = 1.5f;
+
+        if (((rb.velocity + (inputMovement * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
+        {
+            //rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
+            rb.velocity += (inputMovement * swimSpeed) * Time.deltaTime;
+        }
+
+        //rb.velocity += Vector2.up * (transform.position.y - WaterLevel) * Time.deltaTime;
+
+        //Change final constant to make it snappier
+        transform.position += Vector3.up * (WaterLevel - transform.position.y) * Time.deltaTime * 2;
+
+
+        if(inputManager.actions["jump"].WasPressedThisFrame())
+        {
+            //Jump();
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
+        }
+        //if (inputManager.actions["jump"].WasPressedThisFrame())
+        //{
+        //    rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
+        //}
+
+    }
+
     public void SwimmingUpdate()
     {
 
+        if(!waterRotation)
+        {
+            ChangeToWaterRotation();
+            waterRotation = true;
+        }
+        //waterDepth <= 0 means to wade
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         int flipped = facingRight ? 1 : 1;
         float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
@@ -464,8 +560,6 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 1.5f;
 
-        
-
         if(((rb.velocity + (Vector2)(transform.rotation * Vector2.right * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
         {
             rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
@@ -475,11 +569,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += (Vector2)(transform.rotation * (Vector2.right * 5));
         }
-
-
-
-
-
     }
 
     public void turnTowards(Vector2 inputDir)
@@ -686,25 +775,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 0;
             rb.drag = 1.5f;
 
-
-            if (!facingRight)
-            {
-                transform.localScale = new Vector3(1, -1, 1);
-
-                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
-                slopeSideAngle += 180;
-
-                lastGroundedSlope += 180;
-                lastUngroundedSlope += 180;
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-                //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
-            }
-
-
-            //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
+            //ChangeToWaterRotation();
         }
     }
 
@@ -719,33 +790,60 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
             rb.velocity *= 1.5f;
 
-            if (transform.localScale.y < 0)
-            {
-                facingRight = true;
-                slopeSideAngle += 180;
-
-                lastGroundedSlope += 180;
-                lastUngroundedSlope += 180;
-            }
-            else
-            {
-                facingRight = false;
-            }
-
-            transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
-
-
-            int negative = facingRight ? 1 : -1;
-            float rotationAmount = (rb.velocity.y * Time.deltaTime * 75 * negative); //the constant number needs to match that of ROTATION_INTENSITY in midair_rotation
-            rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
-            lastGroundedSlope = slopeSideAngle - rotationAmount;
-
-            //lastUngroundedSlope = slopeSideAngle;
-
-            //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
-
-            transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
+            //ChangeToLandRotation();
         }
+    }
+
+    public void ChangeToWaterRotation()
+    {
+        if (!facingRight)
+        {
+            transform.localScale = new Vector3(1, -1, 1);
+
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+            slopeSideAngle += 180;
+
+            lastGroundedSlope += 180;
+            lastUngroundedSlope += 180;
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            //transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 180);
+        }
+
+
+        //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
+    }
+
+    public void ChangeToLandRotation()
+    {
+        if (transform.localScale.y < 0)
+        {
+            facingRight = true;
+            slopeSideAngle += 180;
+
+            lastGroundedSlope += 180;
+            lastUngroundedSlope += 180;
+        }
+        else
+        {
+            facingRight = false;
+        }
+
+        transform.localScale = new Vector3(facingRight ? 1 : -1, 1, 1);
+
+
+        int negative = facingRight ? 1 : -1;
+        float rotationAmount = (rb.velocity.y * Time.deltaTime * 75 * negative); //the constant number needs to match that of ROTATION_INTENSITY in midair_rotation
+        rotationAmount = Mathf.Clamp(rotationAmount, -75, 75);
+        lastGroundedSlope = slopeSideAngle - rotationAmount;
+
+        //lastUngroundedSlope = slopeSideAngle;
+
+        //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(3, 1.5f));
+
+        transform.rotation = Quaternion.Euler(0, 0, slopeSideAngle);
     }
 
     // flips sprite when player changes movement direction

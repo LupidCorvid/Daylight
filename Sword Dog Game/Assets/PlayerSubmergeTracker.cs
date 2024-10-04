@@ -6,10 +6,15 @@ public class PlayerSubmergeTracker : MonoBehaviour
 {
     public PlayerMovement player;
 
+    public WaterFX inWater;
 
-    public void EnteringWater()
+    public WadeChecker wade;
+
+
+    public void EnteringWater(WaterFX water)
     {
         player.EnterWater();
+        inWater = water;
     }
 
     public void LeavingWater()
