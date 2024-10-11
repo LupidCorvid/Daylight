@@ -51,10 +51,15 @@ public class NamingScreenScript : MonoBehaviour
                 switch(selectableInputs[cursorPos].text)
                 {
                     case "Backspace":
-                        inputtedName = inputtedName.Substring(0, inputtedName.Length - 1);
+                        if(inputtedName.Length > 0)
+                            inputtedName = inputtedName.Substring(0, inputtedName.Length - 1);
                         break;
                     case "Accept":
                         Debug.Log("Name accept hit");
+                        if(!DialogSource.stringVariables.ContainsKey(" playerName"))
+                            DialogSource.stringVariables.Add(" playerName", inputtedName);
+                        else
+                            DialogSource.stringVariables[" playerName"] = inputtedName;
                         break;
                 }
             }
@@ -81,5 +86,10 @@ public class NamingScreenScript : MonoBehaviour
             else
                 chars[i].text = "";
         }
+    }
+
+    public void Close()
+    {
+
     }
 }
