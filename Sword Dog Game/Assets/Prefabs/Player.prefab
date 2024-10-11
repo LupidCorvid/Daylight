@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 974524988010002649}
   - component: {fileID: 8004215587823365583}
   - component: {fileID: 4232136647909902652}
+  - component: {fileID: 753334121987281846}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -772,6 +773,7 @@ MonoBehaviour:
   pAttack: {fileID: 7333625409189861786}
   inputManager: {fileID: 0}
   stopMovement: 0
+  waterRotation: 0
   intendedFacingRight: 1
   lastLandHeight: 0
   sprintSpeedMultiplier: 1.5
@@ -1063,6 +1065,58 @@ MonoBehaviour:
   pAttack: {fileID: 0}
   hasLantern: 0
   mouthLantern: {fileID: 2013864310079171884}
+--- !u!212 &753334121987281846
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300512340327299644}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 6885db70b4c60274ba8187cb35528d83, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4.5, y: 3.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &6314292672212099403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1222,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 381d007e957fd634e8d96275bc489093, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e1b1bc42dc97f042b8c931df97f5daf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
