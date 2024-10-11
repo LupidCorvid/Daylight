@@ -492,12 +492,38 @@ public class PlayerMovement : MonoBehaviour
 
         //return;
         //Float to line up with water level
-
+        
+        ///Anim stuff
+        ///---------
         Vector2 inputMovement = inputManager.actions["move"].ReadValue<Vector2>();
         if (inputMovement.y > 0)
             inputMovement.y = 0;
 
-        if(inputMovement.x > 0)
+        if (!stopMovement)
+            moveX = inputMovement.x;
+        else
+        {
+            moveX = 0;
+            if (inputMovement.x != 0)
+                anim.SetTrigger("TryingMove");
+        }
+
+        if (moveX == 0 && timeIdle < 1f)
+        {
+            timeIdle += Time.deltaTime;
+        }
+        else if (moveX != 0)
+        {
+            timeIdle = 0;
+        }
+
+        anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
+        anim.SetFloat("time_idle", timeIdle);
+        ///-------------
+        ///End anim stuff
+
+
+        if (inputMovement.x > 0)
         {
             facingRight = true;
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -510,7 +536,7 @@ public class PlayerMovement : MonoBehaviour
 
         float inputAngle = Mathf.Atan2(inputMovement.y, inputMovement.x) * Mathf.Rad2Deg;
 
-        float swimSpeed = 15f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
+        float swimSpeed = 10f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
 
         if (inputManager.actions["move"].IsPressed())
         {
@@ -520,7 +546,7 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 1;
         }
         else
-            rb.drag = 1.5f;
+            rb.drag = 2f;
 
         if (((rb.velocity + (inputMovement * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
         {
@@ -788,6 +814,8 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 1.5f;
 
             //ChangeToWaterRotation();
+            //Change to an enter water anim
+            anim.Play("IdleTread");
         }
     }
 
@@ -803,6 +831,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity *= 1.5f;
 
             //ChangeToLandRotation();
+            anim.Play("Fall");
         }
     }
 
