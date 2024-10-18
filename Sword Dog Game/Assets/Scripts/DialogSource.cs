@@ -286,7 +286,6 @@ public class DialogSource
         }
         while ((lastReadTime + speed < Time.time) && (Time.time > waitStart + waitTime) || skippingText)
         {
-            speak?.Invoke();
             lastReadTime = Time.time;
             readDialog(mode);
 
@@ -317,6 +316,9 @@ public class DialogSource
     
     private void readDialog(ReadMode mode = ReadMode.DEFAULT)
     {
+        dialog.Replace("\n", "\n");
+        dialog.Replace("\t", "\t");
+        dialog.Replace("\r", "\r");
         if (position > dialog.Length)
         {
             Debug.Log("Tried reading too far at " + position + " | " + dialog);
@@ -385,10 +387,17 @@ public class DialogSource
         position++;
         charCount++;
 
-        if (dialog.Length > position && !(dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t'))
+        if (dialog.Length > position && !(dialog[position] == ' ' || dialog[position] == '\n' || dialog[position] == '\t' || dialog[position] == '\r'))
         {
             if (mode != ReadMode.COLLECT && !skippingText)
             {
+                if (dialog[position] != '[' && dialog[position] != ']' && dialog[position] != '.' && dialog[position] != '!' && dialog[position] != '?')
+                {
+                    Debug.Log(dialog[position] + " " + (int)(dialog[position]));
+                    speak?.Invoke();
+                }
+                else
+                    pauseSpeak?.Invoke();
                 if (barkCooldown > autoBarkFrequency)
                 {
                     barkEffect();
