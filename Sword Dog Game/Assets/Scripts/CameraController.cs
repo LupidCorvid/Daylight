@@ -53,6 +53,12 @@ public class CameraController : MonoBehaviour
         main = this;
         mainCam = GetComponent<Camera>();
         cldr = GetComponent<BoxCollider2D>();
+
+        if (Player.instance != null)
+            targetTracker = Player.instance.transform;
+        else
+            targetTracker = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.position = new Vector3(targetTracker.transform.position.x, targetTracker.transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
