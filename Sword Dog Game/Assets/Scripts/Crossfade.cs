@@ -12,7 +12,7 @@ public class Crossfade : MonoBehaviour
 
     public static Action FadeStart;
     public static Action FadeEnd;
-    public static bool over = true;
+    public static bool over = false;
     public static bool waiting = false;
     public float speed = 1;
 
