@@ -20,6 +20,9 @@ public class TextWave : TextEffect
     //Effects seem to be applied to index 0 a ton, and it gets worse the more text there is. It may be because it is there first, and so it gets the most hits
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
     {
+        if (!PauseScreen.paused)
+            time += Time.deltaTime;
+
         int endPoint = end;
         if (endPoint == -1 || endPoint > textMesh.characterCount)
             endPoint = textMesh.characterCount;
@@ -38,8 +41,8 @@ public class TextWave : TextEffect
                 continue;
 
             //Calculates offset
-            float offset = Mathf.Sin(info.vertex_BL.position.x/waveLength + (Time.time * speed)) * intensity;
-            Vector3 offsetVector = new Vector3(0, offset, 0);
+            float offset = Mathf.Sin(info.vertex_BL.position.x/waveLength + (time * speed)) * intensity;
+            Vector3 offsetVector = new(0, offset, 0);
 
             //Applies changes made to the vertices
             textMesh.meshInfo[index].vertices[vertexIndex + 0] += offsetVector;
