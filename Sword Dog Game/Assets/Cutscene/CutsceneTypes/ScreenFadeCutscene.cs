@@ -19,12 +19,10 @@ public class ScreenFadeCutscene : CutsceneData
         startTime = Time.time;
         if (FadeToBlack)
         {
-            Debug.Log("Fade to black");
             Crossfade.FadeStart?.Invoke();
         }
         else
         {
-            Debug.Log("Fade out");
             Crossfade.FadeEnd?.Invoke();
         }
     }

@@ -436,6 +436,11 @@ public class PlayerMovement : MonoBehaviour
                 if (!isSkidding)
                     sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
+
+            if(!isDashing && inputManager.actions["Dash"].WasPressedThisFrame())
+            {
+                Dash();
+            }
         }
         else
         {
