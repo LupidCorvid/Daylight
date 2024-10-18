@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
 --- !u!82 &3896857379661312674
 AudioSource:
   m_ObjectHideFlags: 0
@@ -604,10 +605,9 @@ GameObject:
   - component: {fileID: 3359026342887003567}
   - component: {fileID: 597915691444327303}
   - component: {fileID: 5597003148564624909}
-  - component: {fileID: 698307032414050047}
   - component: {fileID: 4206019825463301016}
   - component: {fileID: 2366510173370169149}
-  - component: {fileID: 3297902187122243555}
+  - component: {fileID: 1683905656026227656}
   m_Layer: 0
   m_Name: ExitSaveCutscene
   m_TagString: Untagged
@@ -644,10 +644,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 5597003148564624909}
-  - {fileID: 698307032414050047}
   - {fileID: 4206019825463301016}
   - {fileID: 2366510173370169149}
-  - {fileID: 3297902187122243555}
+  - {fileID: 1683905656026227656}
   cutsceneNumber: 0
   cutsceneName: SaveExit
   playingThisCutscene: 0
@@ -670,22 +669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  FadeIn: 0
+  FadeToBlack: 0
   Stall: 1
-  speed: 1
---- !u!114 &698307032414050047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290580686935877367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3351ab18d8451d4d99a0158b243399f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
+  speed: 0.5
 --- !u!114 &4206019825463301016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,7 +714,7 @@ MonoBehaviour:
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
---- !u!114 &3297902187122243555
+--- !u!114 &1683905656026227656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -915,6 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
 --- !u!82 &7582272154277610336
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1472,6 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
 --- !u!82 &3337859029865527710
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2184,6 +2172,7 @@ MonoBehaviour:
     letterbox: 0
     transition: 1
     hideUI: 1
+    instantUI: 0
     relPosition: 1
   target: {fileID: 0}
   freeCameraOnExit: 0
@@ -2204,7 +2193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  FadeIn: 1
+  FadeToBlack: 1
   Stall: 1
   speed: 1.5
 --- !u!1 &8507001405144718965
@@ -2380,6 +2369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
 --- !u!82 &2218507914313155668
 AudioSource:
   m_ObjectHideFlags: 0

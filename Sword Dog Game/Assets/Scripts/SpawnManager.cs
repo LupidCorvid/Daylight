@@ -34,12 +34,10 @@ public class SpawnManager : MonoBehaviour
                     SwordFollow.sceneChange?.Invoke();
                 }
             }
-            CameraController.OverrideMovement(player, 0.3f);
         }
         else if (GameSaver.loading)
         {
             transform.position = GameSaver.player.spawnpoint.position;
-            CameraController.OverrideMovement(transform, 0.3f);
             transform.position += new Vector3(0, 2, -10);
         }
     }

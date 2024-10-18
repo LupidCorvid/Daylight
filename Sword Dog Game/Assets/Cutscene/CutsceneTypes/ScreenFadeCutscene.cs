@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScreenFadeCutscene : CutsceneData
 {
-    public bool FadeIn = false;
+    public bool FadeToBlack = false;
 
     private const int fadeTime = 1; //Animations are set to be 1 second long
 
@@ -17,10 +17,16 @@ public class ScreenFadeCutscene : CutsceneData
         Crossfade.current.speed = speed;
         base.startSegment();
         startTime = Time.time;
-        if (FadeIn)
+        if (FadeToBlack)
+        {
+            Debug.Log("Fade to black");
             Crossfade.FadeStart?.Invoke();
+        }
         else
+        {
+            Debug.Log("Fade out");
             Crossfade.FadeEnd?.Invoke();
+        }
     }
 
     public override void cycleExecution()
