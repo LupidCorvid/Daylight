@@ -393,7 +393,6 @@ public class DialogSource
             {
                 if (dialog[position] != '[' && dialog[position] != ']' && dialog[position] != '.' && dialog[position] != '!' && dialog[position] != '?')
                 {
-                    Debug.Log(dialog[position] + " " + (int)(dialog[position]));
                     speak?.Invoke();
                 }
                 else
