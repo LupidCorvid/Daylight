@@ -15,9 +15,6 @@ public class CameraController : MonoBehaviour
     public static CameraController main;
 
     public static Camera mainCam;
-    private static bool overrideMovement = false;
-    private static float overrideFor = 0.5f, maxDelay = 0.5f;
-    private static Vector3 overrideTracker;
 
     Rigidbody2D rb;
 
@@ -27,11 +24,9 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            if (!overrideMovement && targetTracker != null)
+            if (targetTracker != null)
                 return targetTracker.position + offset;
-            if (overrideTracker == null)
-                return Vector2.zero;
-            return overrideTracker + offset;
+            return Vector2.zero;
         }
     }
 
@@ -75,13 +70,6 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (overrideMovement)
-        {
-            overrideFor += Time.fixedDeltaTime;
-            if (overrideFor > maxDelay)
-                overrideMovement = false;
-        }
-
         if (!externalControl)
         {
             Vector3 finalTarg = targetPoint;
@@ -147,13 +135,5 @@ public class CameraController : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         cldr.size = new Vector3(18, 10) * mainCam.orthographicSize / 5;
-    }
-
-    public static void OverrideMovement(Transform player, float duration = 0.5f)
-    {
-        duration = Mathf.Clamp(duration, 0, maxDelay);
-        overrideMovement = true;
-        overrideFor = maxDelay - duration;
-        overrideTracker = player.position;
     }
 }

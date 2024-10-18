@@ -25,6 +25,16 @@ public class Crossfade : MonoBehaviour
         FadeEnd += FadeIn;
     }
 
+    void Update()
+    {
+        // Fixes deadlock
+        if (animator.GetFloat("Speed") < 0 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0)
+        {
+            animator.SetFloat("Speed", 0);
+            animator.Play("Crossfade", 0, 0);
+        }
+    }
+
     private void SceneChange()
     {
         if (this != null)
@@ -59,7 +69,7 @@ public class Crossfade : MonoBehaviour
             if(current != this)
                 current.StartFade();
         }
-        animator?.SetFloat("Speed", -1.2f * speed);
+        animator?.SetFloat("Speed", -1f * speed);
         over = false;
     }
 
