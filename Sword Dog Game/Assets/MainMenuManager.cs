@@ -14,6 +14,8 @@ public class MainMenuManager : MonoBehaviour
     public TMPro.TextMeshProUGUI lastSaveDetails;
 
     public List<UnityEngine.UI.Button> buttons;
+    public Button continueButton;
+    public Transform continuePos, newGamePos;
 
     public static bool inMainMenu;
     private bool quit = false;
@@ -60,7 +62,7 @@ public class MainMenuManager : MonoBehaviour
 
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        //EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
 
         Invoke("ActivateButtons", 0.4f);
         PopulateLoadMenu();
@@ -98,7 +100,7 @@ public class MainMenuManager : MonoBehaviour
         // Select new game button if nothing else is selected
         if(EventSystem.current.currentSelectedGameObject == null)
         {
-            EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
+            EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
         }
     }
 
@@ -281,12 +283,15 @@ public class MainMenuManager : MonoBehaviour
             lastSaveDetails.text = JsonUtility.FromJson<GameSaver.SaveData>(File.ReadAllText(lastSave)).player.spawnpoint.scene;
             buttons[1].interactable = true;
             continueText.text = "Continue";
+            continueButton.transform.position = continuePos.position;
+            continueText.transform.position += new Vector3(0, 2, 0);
         }
         else
         {
             //Debug.Log("No most recent save found");
             lastSaveDetails.text = "";
             continueText.text = "New Game";
+            continueButton.transform.position = newGamePos.position;
             //buttons[1].interactable = false;
 
             //ColorBlock continueButtonColors = buttons[1].colors;

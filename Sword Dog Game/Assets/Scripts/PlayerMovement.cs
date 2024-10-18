@@ -375,7 +375,13 @@ public class PlayerMovement : MonoBehaviour
 
             if (inputManager.actions["Jump"].WasReleasedThisFrame())
             {
+                if (holdingJump && isJumping && rb.velocity.y > 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
+                }
+
                 holdingJump = false;
+                
             }
 
             // if (Input.GetKeyDown(KeyCode.V))

@@ -10,6 +10,7 @@ public abstract class TextEffect
     public int end = -1;
 
     public string type;
+    protected float time;
 
     public abstract void ApplyEffectToMesh(TMP_TextInfo textMesh);
 

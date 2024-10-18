@@ -17,6 +17,9 @@ public class TextWiggle : TextEffect
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
     {
+        if (!PauseScreen.paused)
+            time += Time.deltaTime;
+
         int endPoint = end;
         if (endPoint == -1 || endPoint > textMesh.characterCount)
             endPoint = textMesh.characterCount;
@@ -35,7 +38,7 @@ public class TextWiggle : TextEffect
                 continue;
 
             //Calculates offset
-            Vector3 offsetVector = new Vector3(((Mathf.PerlinNoise(Time.time * speed, 0 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, ((Mathf.PerlinNoise(Time.time * speed, 50 + info.vertex_BL.position.x * 100) - .5f) / .5f) * intensity, 0);
+            Vector3 offsetVector = new((Mathf.PerlinNoise(time * speed, 0 + info.vertex_BL.position.x * 100) - .5f) / .5f * intensity, (Mathf.PerlinNoise(time * speed, 50 + info.vertex_BL.position.x * 100) - .5f) / .5f * intensity, 0);
 
             //Applies changes made to the vertices
             textMesh.meshInfo[index].vertices[vertexIndex + 0] += offsetVector;

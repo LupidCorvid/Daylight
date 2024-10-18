@@ -40,15 +40,18 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HUD = myHUD;
-        HUD.transform.localScale = Vector3.Lerp(HUD.transform.localScale, new Vector3(HUDscale, HUDscale, HUDscale), 0.05f);
-        if (instaHide)
-            HUD.transform.localScale = Vector3.one * HUDscale;
-        instaHide = false;
+        if (!PauseScreen.paused)
+        {
+            HUD = myHUD;
+            HUD.transform.localScale = Vector3.Lerp(HUD.transform.localScale, new Vector3(HUDscale, HUDscale, HUDscale), 0.05f);
+            if (instaHide)
+                HUD.transform.localScale = Vector3.one * HUDscale;
+            instaHide = false;
 
-        if (instaShow)
-            HUD.transform.localScale = Vector3.one * HUDscale;
-        instaShow = false;
+            if (instaShow)
+                HUD.transform.localScale = Vector3.one * HUDscale;
+            instaShow = false;
+        }
     }
 
     public static void HideHUD(bool instant = false)

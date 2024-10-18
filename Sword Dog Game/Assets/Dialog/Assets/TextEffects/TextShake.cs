@@ -15,6 +15,8 @@ public class TextShake : TextEffect
 
     public override void ApplyEffectToMesh(TMP_TextInfo textMesh)
     {
+        if (PauseScreen.paused) return;
+        
         int endPoint = end;
         if (endPoint == -1 || endPoint > textMesh.characterCount)
             endPoint = textMesh.characterCount;
@@ -33,8 +35,7 @@ public class TextShake : TextEffect
                 continue;
 
             //Calculates offset
-            Vector3 offsetVector = new Vector3(Random.Range(-intensity, intensity), Random.Range(-intensity, intensity), 0);
-            
+            Vector3 offsetVector = new(Random.Range(-intensity, intensity), Random.Range(-intensity, intensity), 0);
 
             //Applies changes made to the vertices
             textMesh.meshInfo[index].vertices[vertexIndex + 0] += offsetVector;
