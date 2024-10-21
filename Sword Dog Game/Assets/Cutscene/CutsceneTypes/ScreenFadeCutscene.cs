@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScreenFadeCutscene : CutsceneData
 {
+    [FormerlySerializedAs("FadeIn")]
     public bool FadeToBlack = false;
 
     private const int fadeTime = 1; //Animations are set to be 1 second long
@@ -30,7 +32,7 @@ public class ScreenFadeCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
-        if (startTime + fadeTime <= Time.time || !Stall)
+        if (startTime + fadeTime / speed <= Time.time || !Stall)
             finishedSegment();
     }
 
