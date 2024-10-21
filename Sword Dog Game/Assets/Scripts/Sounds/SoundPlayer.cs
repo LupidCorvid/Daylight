@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource[] sources;
-    public static bool debugSounds = true;
+    public static bool debugSounds = false;
 
     // Start is called before the first frame update
     void Start()
