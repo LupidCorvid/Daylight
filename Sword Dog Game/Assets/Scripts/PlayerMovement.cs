@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
     float lastLand = 0;
 
     public float stamina = 20.0f, baseStamina = 20.0f, maxStamina = 20.0f, minStamina = 1.0f;
-    public bool noFall = false;
 
     Vector2 lastMidairVelocity;
 
@@ -209,12 +208,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void checkIfLanding(Collider2D collision)
     {
-        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene && Swimming <= 0)
+        if(Mathf.Pow(2, collision.gameObject.layer) == whatIsGround && !isGrounded && !ChangeScene.changingScene && Swimming <= 0 && Crossfade.over)
         {
             lastLand = Time.time;
-            if (!noFall)
-                soundPlayer.PlaySound(landSound);
-            noFall = false;
+            soundPlayer.PlaySound(landSound);
             rb.gravityScale = 4.5f;
         }
     }

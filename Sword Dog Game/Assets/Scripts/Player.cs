@@ -56,7 +56,6 @@ public class Player : Entity
     public void Awake()
     {
         //seems like this is added too late
-        
     }
 
     public override void Start()
@@ -75,8 +74,6 @@ public class Player : Entity
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
-        
     }
 
     public override void Update()

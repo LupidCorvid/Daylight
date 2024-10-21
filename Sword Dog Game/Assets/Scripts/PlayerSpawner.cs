@@ -18,7 +18,6 @@ public class PlayerSpawner : MonoBehaviour
             if (GameSaver.loading && GameSaver.player != null)
             {
                 newPlayer.transform.position = GameSaver.player.spawnpoint.position;
-                newPlayer.GetComponent<PlayerMovement>().noFall = true;
                 // data transfers
                 GameSaver.player.controller.SetValues(newPlayer);
                 GameSaver.player.health.SetValues(newPlayer);

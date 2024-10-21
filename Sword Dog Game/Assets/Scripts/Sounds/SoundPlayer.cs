@@ -5,11 +5,31 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource[] sources;
+    public static bool debugSounds = true;
 
     // Start is called before the first frame update
     void Start()
     {
         sources = transform.GetComponents<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (!debugSounds) return;
+        string text = "";
+        for (int index = sources.Length - 1; index >= 0; index--)
+        {
+            if (sources[index].isPlaying)
+                text += index + " " + sources[index].time + "\n";
+        }
+        if (text != "")
+        {
+            string f = "";
+            if (transform.parent != null)
+                f += transform.parent.gameObject.name + ">";
+            f += gameObject.name + "\n" + text;
+            Debug.Log(f);
+        }
     }
 
     public void PlaySound(string path, float volume = 1, bool loop = false)

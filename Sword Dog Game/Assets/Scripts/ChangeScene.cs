@@ -64,7 +64,6 @@ public class ChangeScene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Crossfade.waiting = true;
         DisableMenuMusic();
-        Player.controller.noFall = true;
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         SceneHelper.LoadScene(scene);
@@ -82,7 +81,6 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
-        Player.controller.noFall = true;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
@@ -104,8 +102,6 @@ public class ChangeScene : MonoBehaviour
         DialogController.main?.closeBox();
         yield return new WaitForSeconds(1f);
         DisableMenuMusic();
-        if(Player.controller != null)
-            Player.controller.noFall = true;
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)

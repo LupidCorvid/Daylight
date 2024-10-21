@@ -100,7 +100,6 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
             AudioManager.instance.FadeOutCurrent();
         }
         yield return new WaitForSeconds(1f);
-        Player.controller.noFall = true;
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         if (eventSystem != null)
