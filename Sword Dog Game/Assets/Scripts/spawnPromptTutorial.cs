@@ -32,7 +32,8 @@ public class spawnPromptTutorial : MonoBehaviour
                                         "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Move] to Move [IA,</size></align></margin-right>] [wi] [exit]",
                                         "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Attack] to Attack [IA,</size></align></margin-right>] [wi] [exit]",
                                         "[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.5em>] [btn, Inventory] to open inventory [IA,</size></align></margin-right>] [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Block] to Block [IA,</size></align></margin-right>] [wi] [exit]"};
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Block] to Block [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Move] to Fall through platforms [IA,</size></align></margin-right>] [wi] [exit]"};
             bubble.setPosition = transform.position;
 
             //Check which prompt is being done
@@ -43,6 +44,7 @@ public class spawnPromptTutorial : MonoBehaviour
             else if (gameObject.name == "attackPrompt") bubble.setSource(new DialogSource(dialogOptions[4]));
             else if (gameObject.name == "inventoryPrompt") bubble.setSource(new DialogSource(dialogOptions[5]));
             else if (gameObject.name == "blockPrompt") bubble.setSource(new DialogSource(dialogOptions[6]));
+            else if (gameObject.name == "fallPrompt") bubble.setSource(new DialogSource(dialogOptions[7]));
             else bubble.setSource(new DialogSource("???"));
 
 
