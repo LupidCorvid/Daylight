@@ -481,7 +481,16 @@ public class PlayerMovement : MonoBehaviour
         float waveTanAngle = submergeTracker.inWater.getTanAngleAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x));
         //turnTowards(new Vector2(Mathf.Cos(waveTanAngle), Mathf.Sin(waveTanAngle)));
         //transform.rotation = Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg),
+        //    Mathf.Clamp(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5), Time.deltaTime * 15, 360));
+        if (Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg)) < 15)
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
+        else
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), 
+                Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5));
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg),
+        //    Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5);
 
         //Will have to rotate to level out. Can't be instant as you wade for a couple of frames when entering and exiting water
 
