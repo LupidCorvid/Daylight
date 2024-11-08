@@ -497,10 +497,24 @@ public class WaterFX : MonoBehaviour
 
     }
 
+    
     public float getTanAngleAtPoint(float xPos)
     {
         float angle = Mathf.Atan2(getHeightAtPoint(xPos + vertexDistance, false) -getHeightAtPoint(xPos, false), vertexDistance);
         return angle;
+    }
+
+    public void ApplyImpactAtPoint(float xPos, float impactForce, float impactSize)
+    {
+        float currPos = 0;
+        float relPosition = xPos - (transform.position.x - (size.x) / 2);
+        for (int i = 0; i < WaveOffset.Length; i++)
+        {
+            if (Mathf.Abs(currPos - relPosition) < impactSize)
+                WaveOffset[i].waveVel += impactForce * (1 - Mathf.Abs(currPos - relPosition) / impactSize);
+
+            currPos += vertexDistance;
+        }
     }
 
     public class WaterSegment
