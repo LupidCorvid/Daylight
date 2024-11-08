@@ -2,109 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spawnPromptTutorial : InteractRoomEvent
+public class spawnPromptTutorial : MonoBehaviour
 {
-    public GameObject tutorialPrompt;
-    private MiniBubbleController bubble = null;
+    //public GameObject miniBubblePrefab;
+    //public Vector2 miniBubbleOffset = new (0, 2);
+
+    private MiniBubbleController bubble;
     public GameObject miniBubblePrefab;
-    public Vector2 miniBubbleOffset = new (0, 2);
-    //public Animator swordAnim;
-    //private bool interacted = false;
+    public float lastAdvert = -15;
+    public float advertisingCooldown = 5;
 
-    //Is for the pawprint icon
-    public void spawnPrompt()
+
+    void spawnPrompt()
     {
-        // Prompt is always there until sword is picked up
-        GameObject addedPrompt;
-        if (promptSpawnLocation == null)
-            addedPrompt = Instantiate(tutorialPrompt, transform.position + (1 * Vector3.up), transform.rotation);
-        else
+        if (lastAdvert + advertisingCooldown < Time.time)
         {
-            addedPrompt = Instantiate(tutorialPrompt, promptSpawnLocation.position, promptSpawnLocation.rotation);
-            addedPrompt.transform.localScale = promptSpawnLocation.localScale;
-        }
-        spawnedPrompt = addedPrompt.GetComponent<Animator>();
-    }
-
-    //For picking up sword
-    /*public override void interact(Entity user)
-    {
-        RoomManager.currentRoom.callRoomEvent(eventName);
-        actuallyHidePrompt();
-        interacted = true;
-    }*/
-
-    public void actuallyHidePrompt()
-    {
-        if (spawnedPrompt != null)
-        {
-            spawnedPrompt.SetTrigger("Close");
-            if (spawnedPrompt.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.5)
-            {
-                spawnedPrompt.SetFloat("Speed", -2);
-            }
-        }
-        if (bubble != null)
-        {
-            bubble.close();
-        }
-    }
-
-    public override void hidePrompt()
-    {
-        //if (interacted) return;
-        if (spawnedPrompt != null)
-        {
-            spawnedPrompt.SetFloat("Speed", -1);
-            if (spawnedPrompt.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                spawnedPrompt.Play(spawnedPrompt.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 1);
-            }
-        }
-        if (bubble != null)
-        {
-            bubble.close();
-            bubble = null;
-        }
-        /*if (swordAnim != null)
-        {
-            if (swordAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                swordAnim.Play(swordAnim.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 1);
-            }
-            swordAnim.SetFloat("Speed", -1);
-        }*/
-    }
-
-    public override void showPrompt(GameObject prompt)
-    {
-        spawnedPrompt?.SetTrigger("OpenBubble");
-        spawnedPrompt?.SetFloat("Speed", 1);
-
-        if (bubble == null)
-        {
-            Vector3 position = transform.position + (Vector3)miniBubbleOffset;
-            GameObject addedObj = Instantiate(miniBubblePrefab, position, Quaternion.identity);
+            print(transform.position);
+            GameObject addedObj = Instantiate(miniBubblePrefab, transform.position, Quaternion.identity);
             bubble = addedObj.GetComponent<MiniBubbleController>();
-            bubble.SetBackground(false);
-            bubble.offset = miniBubbleOffset;
-            bubble.setPosition = position;
-            // TODO figure out how to insert an input prompt icon here
-            bubble.setSource(new DialogSource("[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.1em><voffset=0.0em>] [btn, Jump] to jump [wi] [exit]"));
-        }
+            bubble.enableBarks = false;
+            bubble.enableVoice = false;
+            bubble.speaker = null;
+            bubble.voiceVol = 0;
+            bubble.offset = Vector2.zero;
+            
+            string[] dialogOptions = { "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Jump] to Jump [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Dash] to Dash [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Sprint] to Sprint [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Move] to Move [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Attack] to Attack [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.5em>] [btn, Inventory] to open inventory [IA,</size></align></margin-right>] [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Block] to Block [IA,</size></align></margin-right>] [wi] [exit]"};
+            bubble.setPosition = transform.position;
 
-        //For the sword
-       /* if (swordAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0)
-        {
-            swordAnim.Play(swordAnim.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0);
+            //Check which prompt is being done
+            if(gameObject.name == "jumpPrompt") bubble.setSource(new DialogSource(dialogOptions[0]));
+            else if (gameObject.name == "dashPrompt") bubble.setSource(new DialogSource(dialogOptions[1]));
+            else if (gameObject.name == "dashPrompt") bubble.setSource(new DialogSource(dialogOptions[2]));
+            else if (gameObject.name == "movePrompt") bubble.setSource(new DialogSource(dialogOptions[3]));
+            else if (gameObject.name == "attackPrompt") bubble.setSource(new DialogSource(dialogOptions[4]));
+            else if (gameObject.name == "inventoryPrompt") bubble.setSource(new DialogSource(dialogOptions[5]));
+            else if (gameObject.name == "blockPrompt") bubble.setSource(new DialogSource(dialogOptions[6]));
+            else bubble.setSource(new DialogSource("???"));
+
+
+            lastAdvert = Time.time;
         }
-        swordAnim.SetFloat("Speed", 1);*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player"){
+        if (collision.tag == "Player")
+        {
             spawnPrompt();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            bubble.close();
         }
     }
 }
