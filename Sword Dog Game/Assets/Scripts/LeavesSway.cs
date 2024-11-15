@@ -101,8 +101,8 @@ public class LeavesSway : MonoBehaviour
         float newRotation;
         if (useVelocity)
         {
-            //float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
-            float swayVelocity = ((SwayEffect.getWindEffect(transform.position.x,swaySpeed,swayVolatility, swayIntensity) * 2) - 1);
+            float swayVelocity = ((Mathf.PerlinNoise(((Time.time * swaySpeed * sceneSpeedScalar) + transform.position.x) * swayVolatility * sceneVolatilityScalar, 0) * 2) - 1) * swayIntensity * sceneIntensityScalar;
+            //float swayVelocity = ((SwayEffect.getWindEffect(transform.position.x,swaySpeed,swayVolatility, swayIntensity, true) * 2));
             newRotation = lastRotation + swayVelocity * Time.deltaTime;
         }
         else
