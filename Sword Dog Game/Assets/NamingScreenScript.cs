@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class NamingScreenScript : MonoBehaviour
@@ -30,7 +31,7 @@ public class NamingScreenScript : MonoBehaviour
                 chars.RemoveAt(i);
         }
 
-        selectableInputs.AddRange(KeyListHolder.GetComponentsInChildren<TextMeshProUGUI>());
+        //selectableInputs.AddRange(KeyListHolder.GetComponentsInChildren<TextMeshProUGUI>());
     }
 
     // Update is called once per frame
@@ -38,43 +39,56 @@ public class NamingScreenScript : MonoBehaviour
     {
         UpdateDisplayedName();
 
-        cursor.transform.position = selectableInputs[cursorPos].transform.position + Vector3.right * (selectableInputs[cursorPos].rectTransform.rect.width - 12.5f);
+        //cursor.transform.position = selectableInputs[cursorPos].transform.position + Vector3.right * (selectableInputs[cursorPos].rectTransform.rect.width - 12.5f);
         //cursor.transform.GetChild(0).position = selectableInputs[cursorPos].rectTransform.rect.width
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            cursor.transform.position = EventSystem.current.currentSelectedGameObject.transform.position;
+            //cursor.transform.GetChild(0).position = Vector3.right * EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().rect.width;
 
+        }
 
+        //if (InputReader.inputs.actions["Interact"].WasPressedThisFrame())
+        //{
+        //    TextMeshProUGUI hoveredItem = EventSystem.current.currentSelectedGameObject.GetComponent<TextMeshProUGUI>();
+        //    if (hoveredItem == null)
+        //        return;
+        //    if (hoveredItem.text.Length <= 1)
+        //        //inputtedName += selectableInputs[cursorPos].text;
+        //        inputtedName += hoveredItem.text;
+
+        //    else
+        //    {
+        //        switch (hoveredItem.text)
+        //        {
+        //            case "Backspace":
+        //                if (inputtedName.Length > 0)
+        //                    inputtedName = inputtedName.Substring(0, inputtedName.Length - 1);
+        //                break;
+        //            case "Accept":
+        //                Debug.Log("Name accept hit");
+        //                if (!DialogSource.stringVariables.ContainsKey(" playerName"))
+        //                    DialogSource.stringVariables.Add(" playerName", inputtedName);
+        //                else
+        //                    DialogSource.stringVariables[" playerName"] = inputtedName;
+        //                break;
+        //        }
+        //    }
+        //}
+
+        //if (InputReader.inputs.actions["Move"].WasPressedThisFrame())
+        //{
+        //    if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x < -.1f)
+        //        cursorPos--;
+        //    if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x > .1f)
+        //        cursorPos++;
+        //}
+
+        //cursorPos = (cursorPos + selectableInputs.Count) % selectableInputs.Count;
         if (InputReader.inputs.actions["Interact"].WasPressedThisFrame())
         {
-            if(selectableInputs[cursorPos].text.Length <= 1)
-                inputtedName += selectableInputs[cursorPos].text;
-            else
-            {
-                switch(selectableInputs[cursorPos].text)
-                {
-                    case "Backspace":
-                        if(inputtedName.Length > 0)
-                            inputtedName = inputtedName.Substring(0, inputtedName.Length - 1);
-                        break;
-                    case "Accept":
-                        Debug.Log("Name accept hit");
-                        if(!DialogSource.stringVariables.ContainsKey(" playerName"))
-                            DialogSource.stringVariables.Add(" playerName", inputtedName);
-                        else
-                            DialogSource.stringVariables[" playerName"] = inputtedName;
-                        break;
-                }
-            }
+            ReceivedInput();
         }
-
-        if (InputReader.inputs.actions["Move"].WasPressedThisFrame())
-        {
-            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x < -.1f)
-                cursorPos--;
-            if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x > .1f)
-                cursorPos++;
-        }
-
-        cursorPos = (cursorPos + selectableInputs.Count) % selectableInputs.Count;
-
     }
 
     public void UpdateDisplayedName()
@@ -92,4 +106,36 @@ public class NamingScreenScript : MonoBehaviour
     {
 
     }
+
+    public void ReceivedInput()
+    {
+       
+        TextMeshProUGUI hoveredItem = EventSystem.current.currentSelectedGameObject.GetComponent<TextMeshProUGUI>();
+        if (hoveredItem == null)
+            return;
+        if (hoveredItem.text.Length <= 1 && inputtedName.Length < chars.Count)
+            //inputtedName += selectableInputs[cursorPos].text;
+            inputtedName += hoveredItem.text;
+
+        else
+        {
+            switch (hoveredItem.text)
+            {
+                case "Backspace":
+                    if (inputtedName.Length > 0)
+                        inputtedName = inputtedName.Substring(0, inputtedName.Length - 1);
+                    break;
+                case "Accept":
+                    Debug.Log("Name accept hit");
+                    if (!DialogSource.stringVariables.ContainsKey(" playerName"))
+                        DialogSource.stringVariables.Add(" playerName", inputtedName);
+                    else
+                        DialogSource.stringVariables[" playerName"] = inputtedName;
+                    break;
+            }
+        }
+        
+    }
+
+    
 }
