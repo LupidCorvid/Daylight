@@ -113,7 +113,7 @@ public class NamingScreenScript : MonoBehaviour
         TextMeshProUGUI hoveredItem = EventSystem.current.currentSelectedGameObject.GetComponent<TextMeshProUGUI>();
         if (hoveredItem == null)
             return;
-        if (hoveredItem.text.Length <= 1)
+        if (hoveredItem.text.Length <= 1 && inputtedName.Length < chars.Count)
             //inputtedName += selectableInputs[cursorPos].text;
             inputtedName += hoveredItem.text;
 
