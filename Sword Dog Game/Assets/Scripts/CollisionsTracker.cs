@@ -31,12 +31,18 @@ public class CollisionsTracker : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        triggersInContact.Add(collision);
-        triggerEnter?.Invoke(collision);
+        if (!triggersInContact.Contains(collision))
+        {
+            triggersInContact.Add(collision);
+            triggerEnter?.Invoke(collision);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        triggersInContact.Remove(collision);
+        if (triggersInContact.Contains(collision))
+        {
+            triggersInContact.Remove(collision);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
