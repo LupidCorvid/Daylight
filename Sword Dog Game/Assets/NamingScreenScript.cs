@@ -52,6 +52,7 @@ public class NamingScreenScript : MonoBehaviour
         {
             cursor.transform.position = EventSystem.current.currentSelectedGameObject.transform.position;
             //cursor.transform.GetChild(0).position = Vector3.right * EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().rect.width;
+            cursor.transform.GetChild(0).localPosition = Vector3.right * (EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().rect.width/2 + 50);
             lastSelectedValidObject = EventSystem.current.currentSelectedGameObject;
         }
         else
@@ -136,7 +137,7 @@ public class NamingScreenScript : MonoBehaviour
                     break;
                 case "Accept":
                     Debug.Log("Name accept hit");
-                    if (loadingScene)
+                    if (loadingScene || inputtedName.Length <= 0)
                         break;
                     if (!DialogSource.stringVariables.ContainsKey(" playerName"))
                         DialogSource.stringVariables.Add(" playerName", inputtedName);
@@ -144,7 +145,10 @@ public class NamingScreenScript : MonoBehaviour
                         DialogSource.stringVariables[" playerName"] = inputtedName;
 
                     if (true)
+                    {
                         ChangeScene.LoadScene("prologue area", "", false);
+                        loadingScene = true;
+                    }
                     break;
             }
         }
