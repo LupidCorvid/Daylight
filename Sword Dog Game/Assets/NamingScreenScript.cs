@@ -20,6 +20,12 @@ public class NamingScreenScript : MonoBehaviour
 
     public GameObject KeyListHolder;
 
+    public GameObject initialSelectedObject;
+
+    GameObject lastSelectedValidObject;
+
+    bool loadingScene = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,7 @@ public class NamingScreenScript : MonoBehaviour
         }
 
         //selectableInputs.AddRange(KeyListHolder.GetComponentsInChildren<TextMeshProUGUI>());
+        EventSystem.current.SetSelectedGameObject(initialSelectedObject);
     }
 
     // Update is called once per frame
@@ -45,8 +52,10 @@ public class NamingScreenScript : MonoBehaviour
         {
             cursor.transform.position = EventSystem.current.currentSelectedGameObject.transform.position;
             //cursor.transform.GetChild(0).position = Vector3.right * EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().rect.width;
-
+            lastSelectedValidObject = EventSystem.current.currentSelectedGameObject;
         }
+        else
+            EventSystem.current.SetSelectedGameObject(lastSelectedValidObject);
 
         //if (InputReader.inputs.actions["Interact"].WasPressedThisFrame())
         //{
@@ -127,10 +136,15 @@ public class NamingScreenScript : MonoBehaviour
                     break;
                 case "Accept":
                     Debug.Log("Name accept hit");
+                    if (loadingScene)
+                        break;
                     if (!DialogSource.stringVariables.ContainsKey(" playerName"))
                         DialogSource.stringVariables.Add(" playerName", inputtedName);
                     else
                         DialogSource.stringVariables[" playerName"] = inputtedName;
+
+                    if (true)
+                        ChangeScene.LoadScene("prologue area", "", false);
                     break;
             }
         }

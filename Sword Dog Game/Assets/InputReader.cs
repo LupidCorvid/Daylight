@@ -22,7 +22,7 @@ public class InputReader : MonoBehaviour
     {
         spriteAssets = listOfSpriteAssets;
         PlayerInput newInput = GetComponent<PlayerInput>();
-        if (newInput != null && inputs == null)
+        if ((newInput != null && inputs == null) || inputs.gameObject == null)
             inputs = newInput;
         inputs.ActivateInput();
     }

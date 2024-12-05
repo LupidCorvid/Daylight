@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
 
                 //RbFollowVector += Vector2.right * Input.GetAxis("Horizontal") * Time.deltaTime * 2 * (Input.GetKey(KeyCode.LeftShift) ? 1.25f : 1);
                 //Prevent camera from moving when in menus
-                if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && !DialogController.main.inDialog && !Player.controller.stopMovement && !DialogController.main.pausePlayerMovement && !ChangeScene.changingScene) // && not paused(?)
+                if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.inDialog == false && !Player.controller.stopMovement && DialogController.main?.pausePlayerMovement == false && !ChangeScene.changingScene) // && not paused(?)
                 {
                     if (InputReader.inputs.actions["Move"].ReadValue<Vector2>().x < 0)
                         RbFollowVector -= (RbFollowVector - new Vector2(-magCap, 0)) * Time.deltaTime * 2;

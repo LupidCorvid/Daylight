@@ -56,8 +56,10 @@ public class MainMenuManager : MonoBehaviour
         //    SwordFollow.instance.transform.position = new Vector3(100, -100);
 
         //Destroy(FindObjectOfType<AudioListener>().gameObject);
-        Destroy(Player.instance?.gameObject);
-        Destroy(SwordFollow.instance?.gameObject);
+        if(Player.instance != null)
+            Destroy(Player.instance?.gameObject);
+        if(SwordFollow.instance != null)
+            Destroy(SwordFollow.instance?.gameObject);
         PauseScreen.canPause = false;
 
         //Cursor.visible = true;
@@ -98,7 +100,7 @@ public class MainMenuManager : MonoBehaviour
     public void Update()
     {
         // Select new game button if nothing else is selected
-        if(EventSystem.current.currentSelectedGameObject == null)
+        if(EventSystem.current?.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
         }
@@ -118,7 +120,8 @@ public class MainMenuManager : MonoBehaviour
             InventoryManager.main?.refreshInventory();
             AudioManager.instance.FadeOutCurrent();
             DialogSource.stringVariables = GameSaver.currData.dialogStringVariables;
-            ChangeScene.LoadScene("Prologue Area", "", false);
+            //ChangeScene.LoadScene("Prologue Area", "", false);
+            ChangeScene.LoadScene("Introduction", "", false);
             //CanvasManager.ShowHUD();
         }
     }
