@@ -42,7 +42,7 @@ public class DialogSource
     public event Action<String, float, bool> ps;
     public event Action<String> es;
 
-    public event Action exit;
+    public event Action exit, readout;
     public event Action speak, pauseSpeak, stopSpeak;
 
     public event Action<string[]> requestOptionsStart;
@@ -115,7 +115,8 @@ public class DialogSource
      * [llf, block] //Loads a different block from within the current file
      * 
      * [wi] //Waits for user input to continue
-     * 
+     * [wit] //Waits for user input and terminates readout (for tutorial minibubble)
+
      * [IA, text] //Instantly adds some text. Meant for use with tmppro styling
      * 
      * [CE, p1, p2, p3, ...] //Calls an event. Only works if the thing running it has a listener to the event. Parameters are parsed by the listener.
@@ -430,7 +431,7 @@ public class DialogSource
         {
             //Whitelist of what to run when running typewrite
             if (input[0] != "w" && input[0] != "c" && input[0] != "exit" && input[0] != "IA" && input[0] != "prompt" && input[0] != "ss" 
-                && input[0] != "sh" && input[0] != "emote" && input[0] != "reemote" && input[0] != "abf" && input[0] != "wi"
+                && input[0] != "sh" && input[0] != "emote" && input[0] != "reemote" && input[0] != "abf" && input[0] != "wi" && input[0] != "wit"
                 && input[0] != "CE" && input[0] != "PM" && input[0] != "UPM")
                 return;
             
@@ -439,7 +440,7 @@ public class DialogSource
         {
             //Blacklist of what not to run when running collect
             if (input[0] == "ss"|| input[0] == "sh" || input[0] == "b" || input[0] == "prompt" || input[0] == "emote" || input[0] == "reemote"
-                || input[0] == "abf" || input[0] == "wi" || input[0] == "CE" || input[0] == "PM" || input[0] == "UPM")
+                || input[0] == "abf" || input[0] == "wi" || input[0] == "wit" || input[0] == "CE" || input[0] == "PM" || input[0] == "UPM")
                 return;
         }
 
@@ -594,6 +595,17 @@ public class DialogSource
                 }
                 else
                     Debug.LogError("Invalid number or arguments for waitInput[wi]!");
+                break;
+            case "wit":
+                if (input.Length == 1)
+                {
+                    waitingForButtonInput = true;
+                    readout?.Invoke();
+                    startWaitingForInput?.Invoke();
+                    skippingText = false;
+                }
+                else
+                    Debug.LogError("Invalid number or arguments for waitInputTerminate[wit]!");
                 break;
             case "svar":
                 if (input.Length == 3)
@@ -988,8 +1000,10 @@ public class DialogSource
 
     public string renameInput(string actionNeeded, string inputName)
     {
+        Debug.Log(inputName);
         inputName = inputName.Replace(actionNeeded + ":", string.Empty);
         inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("/Keyboard/", "Keyboard_");
         inputName = inputName.Replace("[Keyboard]", "");
         inputName = inputName.Replace("<Mouse>/", "Mouse_");
         inputName = inputName.Replace("[Mouse]", "");
