@@ -26,14 +26,14 @@ public class spawnPromptTutorial : MonoBehaviour
             bubble.voiceVol = 0;
             bubble.offset = Vector2.zero;
             
-            string[] dialogOptions = { "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Jump] to Jump [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Dash] to Dash [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Sprint] to Sprint [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Move] to Move [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Attack] to Attack [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.5em>] [btn, Inventory] to open inventory [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Block] to Block [wi] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn, Move] to Fall through platforms [wi] [exit]"};
+            string[] dialogOptions = { "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Jump] to Jump [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Dash] to Dash [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Sprint] to Sprint [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Move] to Move [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Attack] to Attack [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.5em>] [btn,Inventory] to open inventory [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Block] to Block [wi] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em>] [btn,Move] to Fall through platforms [wi] [exit]"};
             bubble.setPosition = transform.position;
 
             //Check which prompt is being done
