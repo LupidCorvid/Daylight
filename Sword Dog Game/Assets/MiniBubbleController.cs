@@ -39,7 +39,7 @@ public class MiniBubbleController : MonoBehaviour
     public List<TextEffect> textEffects = new List<TextEffect>();
 
     bool closing = false;
-    public bool open = false;
+    public bool open = false, readout = false;
 
     public Animator anim;
 
@@ -75,7 +75,10 @@ public class MiniBubbleController : MonoBehaviour
                 collected = true;
             }
             dialog.read(DialogSource.ReadMode.TYPEWRITE);
-            textDisplay.maxVisibleCharacters = dialog.charCount;
+            if (!readout)
+            {
+                textDisplay.maxVisibleCharacters = dialog.charCount;
+            }
         }
         if (collected)
             textDisplay.ForceMeshUpdate();
@@ -128,6 +131,7 @@ public class MiniBubbleController : MonoBehaviour
             dialog.speak -= SpeakVoice;
             dialog.pauseSpeak -= PauseSpeak;
             dialog.stopSpeak -= StopSpeak;
+            dialog.readout -= ReadOut;
         }
         dialog = newSource;
         if(textDisplay != null)
@@ -144,6 +148,7 @@ public class MiniBubbleController : MonoBehaviour
         dialog.speak += SpeakVoice;
         dialog.pauseSpeak += PauseSpeak;
         dialog.stopSpeak += StopSpeak;
+        dialog.readout += ReadOut;
     }
 
     public void close()
@@ -152,7 +157,11 @@ public class MiniBubbleController : MonoBehaviour
         collected = false;
         textDisplay.maxVisibleCharacters = int.MaxValue;
 
-        anim?.SetTrigger("Close");
+        if (anim != null)
+        {
+            anim.SetTrigger("Close");
+        }
+        readout = false;
         closing = true;
     }
 
@@ -230,6 +239,13 @@ public class MiniBubbleController : MonoBehaviour
     {
         if (enableVoice)
             speaker?.pauseSpeak();
+        
+    }
+
+    public void ReadOut()
+    {
+        readout = true;
+        textDisplay.maxVisibleCharacters = int.MaxValue;
     }
 
     public void StopSpeak()
