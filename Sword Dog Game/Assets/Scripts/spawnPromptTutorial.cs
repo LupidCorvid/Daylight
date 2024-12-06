@@ -39,7 +39,7 @@ public class spawnPromptTutorial : MonoBehaviour
             //Check which prompt is being done
             if(gameObject.name == "jumpPrompt") bubble.setSource(new DialogSource(dialogOptions[0]));
             else if (gameObject.name == "dashPrompt") bubble.setSource(new DialogSource(dialogOptions[1]));
-            else if (gameObject.name == "dashPrompt") bubble.setSource(new DialogSource(dialogOptions[2]));
+            else if (gameObject.name == "sprintPrompt") bubble.setSource(new DialogSource(dialogOptions[2]));
             else if (gameObject.name == "movePrompt") bubble.setSource(new DialogSource(dialogOptions[3]));
             else if (gameObject.name == "attackPrompt") bubble.setSource(new DialogSource(dialogOptions[4]));
             else if (gameObject.name == "inventoryPrompt") bubble.setSource(new DialogSource(dialogOptions[5]));
