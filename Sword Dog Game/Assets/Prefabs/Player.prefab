@@ -788,7 +788,7 @@ MonoBehaviour:
   behindGroundCheck: {fileID: 6054203388353271554}
   roofCheck: {fileID: 5205619093326231413}
   jumpForce: 800
-  dashForce: 50
+  dashVel: 25
   movementSmoothing: 0.05
   slopeCheckDistance: 3
   maxSlopeAngle: 45
@@ -808,7 +808,6 @@ MonoBehaviour:
   baseStamina: 20
   maxStamina: 20
   minStamina: 1
-  noFall: 1
   attackMoveTracker: {fileID: 2170697637293356661}
   sprintDust: {fileID: 37055940391111458, guid: e59d02c40c13c9d4b969fe319802b4b1, type: 3}
   attacking: 0
@@ -822,6 +821,8 @@ MonoBehaviour:
   lastSlope: 0
   stopStaminaRefill: 0
   allowJumpInterrupts: 1
+  dashTime: 0.25
+  dashStartTime: -100
   Swimming: 0
   submergeTrackerPrefab: {fileID: 643175602813083693, guid: dadcf40941b85ba4a9fa7ac40896917d, type: 3}
   submergeTracker: {fileID: 0}

@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 2000f;
 
     // Amount of force added when the player dashes
-    [SerializeField] private float dashForce = 100f;
+    [SerializeField] private float dashVel = 10;
 
     // How much to smooth out movement
     [Range(0, .3f)][SerializeField] private float movementSmoothing = 0.05f;
@@ -146,6 +146,10 @@ public class PlayerMovement : MonoBehaviour
     public bool stopStaminaRefill = false;
 
     public bool allowJumpInterrupts = true;
+
+    public float dashTime = .25f;
+    public float dashStartTime = -100;
+
 
     //Is swimming if swimmings <= 0, not a bool just so that when going between two seams it doesn't cancel swimming
     public int Swimming = 0;
@@ -289,6 +293,22 @@ public class PlayerMovement : MonoBehaviour
             //moveX = Input.GetAxisRaw("Horizontal");
             //Disable moving while attacking
 
+            if(dashStartTime + dashTime > Time.time)
+            {
+                Vector2 dashDir = facingRight ? Vector2.right : Vector2.left;
+
+                rb.velocity = new Vector2(dashDir.x * dashVel, rb.velocity.y);
+                isDashing = true;
+                return;
+            }
+            else
+            {
+                //On end of dash
+                if (isDashing)
+                    rb.velocity = new Vector2(10 * (facingRight ? 1 : -1), rb.velocity.y);
+                isDashing = false;
+                
+            }
 
             if (!stopMovement)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
@@ -315,21 +335,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (!isGrounded)
                 anim.ResetTrigger("turn");
-
-            //For if player movespeed should be reduced while turning
-            //if (!sprintReduction && (anim.GetCurrentAnimatorStateInfo(0).IsName("turnWalk") || anim.GetCurrentAnimatorStateInfo(0).IsName("turnSprint")))
-            //{
-            //    entityBase.moveSpeed.multiplier *= .5f;
-            //    sprintReduction = true;
-            //}
-
-            //if (sprintReduction && !(anim.GetCurrentAnimatorStateInfo(0).IsName("turnWalk") || anim.GetCurrentAnimatorStateInfo(0).IsName("turnSprint")))
-            //{
-            //    entityBase.moveSpeed.multiplier /= .5f;
-            //    sprintReduction = false;
-            //}
-            //else
-            //    anim.ResetTrigger("turn");
 
             anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
             anim.SetFloat("time_idle", timeIdle);
@@ -380,15 +385,6 @@ public class PlayerMovement : MonoBehaviour
                 holdingJump = false;
                 
             }
-
-            // if (Input.GetKeyDown(KeyCode.V))
-            // {
-            //     FindObjectOfType<CinematicBars>().Show(200, .3f);
-            // }
-            // if (Input.GetKeyUp(KeyCode.V))
-            // {
-            //     FindObjectOfType<CinematicBars>().Hide(.3f);
-            // }
 
             // sprinting
             if (trotting && !isSprinting && !isSkidding && canSprint)
@@ -1603,17 +1599,9 @@ public class PlayerMovement : MonoBehaviour
     public void Dash()
     {
         Vector2 direction = facingRight ? Vector2.right : Vector2.left;
-        rb.AddForce(direction * dashForce);
-        isDashing = true;
-        if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
-        {
-            rb.velocity = new Vector2(transform.localScale.x * dashForce * -slopeNormalPerp.x, dashForce * -slopeNormalPerp.y * (facingRight ? 1 : -1));
-        }
-        else
-        {
-            rb.velocity = new Vector2(transform.localScale.x * dashForce, 0.0f);
-        }
         stamina = Mathf.Max(stamina - baseStamina / 3, 0);
+        dashStartTime = Time.time;
+        
     }
 
     // TODO not called atm but should be if dash becomes its own move
