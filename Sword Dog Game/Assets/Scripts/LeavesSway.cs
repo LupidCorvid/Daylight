@@ -50,6 +50,8 @@ public class LeavesSway : MonoBehaviour
 
     public bool disableLeaves;
 
+    float maxLeafSpawnVelocity = 10;
+
     public void Start()
     {
         lastShakeDrop = Time.time - 1.5f;
@@ -156,10 +158,14 @@ public class LeavesSway : MonoBehaviour
                 }
             }
 
-            if (collision.attachedRigidbody.velocity.magnitude >= passingEmmissionSensitivity)
+            if (collision?.attachedRigidbody?.velocity.magnitude >= passingEmmissionSensitivity)
             {
                 ParticleSystem.EmitParams particleSetter = new ParticleSystem.EmitParams();
-                particleSetter.velocity = new Vector2(collision.attachedRigidbody.velocity.x * .5f, .5f * collision.attachedRigidbody.velocity.y - (9.8f * Time.deltaTime));
+                Vector2 spawnVel = collision.attachedRigidbody.velocity;
+                if (spawnVel.magnitude > maxLeafSpawnVelocity)
+                    spawnVel = spawnVel.normalized * maxLeafSpawnVelocity;
+
+                particleSetter.velocity = new Vector2(spawnVel.x * .5f, .5f * spawnVel.y - (9.8f * Time.deltaTime));
                 particleSetter.position = (cldr.ClosestPoint(collision.transform.position) - (Vector2)transform.position);
                 if (particleSetter.velocity.y < -9.8)
                     particleSetter.velocity = new Vector3(particleSetter.velocity.x, -9.8f, 0);
