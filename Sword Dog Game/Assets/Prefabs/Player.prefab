@@ -788,7 +788,7 @@ MonoBehaviour:
   behindGroundCheck: {fileID: 6054203388353271554}
   roofCheck: {fileID: 5205619093326231413}
   jumpForce: 800
-  dashVel: 25
+  dashVel: 30
   movementSmoothing: 0.05
   slopeCheckDistance: 3
   maxSlopeAngle: 45
@@ -821,8 +821,9 @@ MonoBehaviour:
   lastSlope: 0
   stopStaminaRefill: 0
   allowJumpInterrupts: 1
-  dashTime: 0.25
+  dashTime: 0.2
   dashStartTime: -100
+  dashCooldown: 0.75
   Swimming: 0
   submergeTrackerPrefab: {fileID: 643175602813083693, guid: dadcf40941b85ba4a9fa7ac40896917d, type: 3}
   submergeTracker: {fileID: 0}

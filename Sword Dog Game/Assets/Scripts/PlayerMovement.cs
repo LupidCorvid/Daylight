@@ -149,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float dashTime = .25f;
     public float dashStartTime = -100;
+    public float dashCooldown = .25f;
 
 
     //Is swimming if swimmings <= 0, not a bool just so that when going between two seams it doesn't cancel swimming
@@ -430,7 +431,7 @@ public class PlayerMovement : MonoBehaviour
                     sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
             }
 
-            if(!isDashing && inputManager.actions["Dash"].WasPressedThisFrame())
+            if(!isDashing && inputManager.actions["Dash"].WasPressedThisFrame() && dashTime + dashStartTime + dashCooldown < Time.time)
             {
                 Dash();
             }
