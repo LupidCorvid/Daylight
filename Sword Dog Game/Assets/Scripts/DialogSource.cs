@@ -74,6 +74,9 @@ public class DialogSource
     public const string BLOCKS_SIGNATURE = "-Blocks";
 
     public bool skippingText = false;
+
+    public bool skippableText = true;
+
     //number of characters/second
     /*Dialogue guide:
      * [] is escape
@@ -160,6 +163,8 @@ public class DialogSource
      * [reemote, emoteID] // Makes the player emote in response to the speaker
      * [reemote, emoteID, lifetime] // makes the player emote in response to the speaker
      * 
+     * [Skpble] //Sets skippable to true
+     * [Unskpble] //Sets skippable to false
      * emotes
         1 - anger
         2 - content
@@ -432,7 +437,7 @@ public class DialogSource
             //Whitelist of what to run when running typewrite
             if (input[0] != "w" && input[0] != "c" && input[0] != "exit" && input[0] != "IA" && input[0] != "prompt" && input[0] != "ss" 
                 && input[0] != "sh" && input[0] != "emote" && input[0] != "reemote" && input[0] != "abf" && input[0] != "wi" && input[0] != "wit"
-                && input[0] != "CE" && input[0] != "PM" && input[0] != "UPM")
+                && input[0] != "CE" && input[0] != "PM" && input[0] != "UPM" && input[0] != "skpble" && input[0] != "unskpbl")
                 return;
             
         }
@@ -440,7 +445,8 @@ public class DialogSource
         {
             //Blacklist of what not to run when running collect
             if (input[0] == "ss"|| input[0] == "sh" || input[0] == "b" || input[0] == "prompt" || input[0] == "emote" || input[0] == "reemote"
-                || input[0] == "abf" || input[0] == "wi" || input[0] == "wit" || input[0] == "CE" || input[0] == "PM" || input[0] == "UPM")
+                || input[0] == "abf" || input[0] == "wi" || input[0] == "wit" || input[0] == "CE" || input[0] == "PM" || input[0] == "UPM"
+                || input[0] == "skpble" || input[0] == "unskpbl")
                 return;
         }
 
@@ -982,6 +988,12 @@ public class DialogSource
                     Debug.LogWarning("Invalid number of arguments for button[btn]!");
                 break;
 
+            case "skpbl":
+                skippableText = true;
+                break;
+            case "unskpbl":
+                skippableText = false;
+                break;
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call

@@ -86,7 +86,7 @@ public class DialogController : MonoBehaviour
         //Copy of No Laughing Matter vers.
         if ((InputReader.inputs.actions["Interact"].WasPressedThisFrame()) && source != null)
         {
-            if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame)
+            if (!(source.waiting || source.waitingForButtonInput) && !openedThisFrame && reading && !gotResponseThisFrame && source.skippableText)
             {
                 source.skippingText = true;
                 skippedTextThisFrame = true;
