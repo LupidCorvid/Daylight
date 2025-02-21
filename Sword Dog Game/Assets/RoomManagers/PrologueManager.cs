@@ -47,6 +47,12 @@ public class PrologueManager : RoomManager
                     attemptedLeave = true;
                 }
                 break;
+            case "EnemyPan":
+                if(!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+                {
+                    CutsceneController.PlayCutscene("EnemyPan");
+                }
+                break;
             //case "MonsterKilled":
             //    if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
             //    {
