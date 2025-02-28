@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PrologueManager : RoomManager
 {
+    //Only variables put in roomState will be saved, any variables locally here will not be saved upon leaving the room
+
     public PrologueAreaState roomState;
 
     public Entity prologueMonster;
@@ -13,13 +15,13 @@ public class PrologueManager : RoomManager
 
     bool attemptedLeave = false;
 
-    public override void  Awake()
+    public override void  Awake() //Called immediately when the object is loaded into the scene
     {
         base.Awake();
-        roomState = GameSaver.currData.roomStates.prologueState;
+        roomState = GameSaver.currData.roomStates.prologueState; //Reads in the save data (copy by reference)
     }
 
-    public void Start()
+    public void Start() //Called on frame 1
     {
         buildRoom();
     }
@@ -62,8 +64,11 @@ public class PrologueManager : RoomManager
         }
     }
 
+    //If the room will look different depending on the save data, use this function
+    //Not required
     public void buildRoom()
     {
+        //Make modifications according to the save data
         if (roomState.swordCollected)
             Destroy(looseSword);
         else

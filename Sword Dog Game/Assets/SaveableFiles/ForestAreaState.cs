@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ForestAreaStates
+
+//All forest scenes will be managed by one class
+public class ForestAreaState
 {
+    //Essentially, put all story beats that need to be saved to file as variables here. This guides the direction of the story.
 }

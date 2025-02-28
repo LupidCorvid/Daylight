@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Unity might complain about these all being in one file
 public class Forest1Manager : RoomManager
 {
 }
