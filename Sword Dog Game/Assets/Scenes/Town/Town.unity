@@ -4036,6 +4036,8 @@ GameObject:
   - component: {fileID: 424776972}
   - component: {fileID: 424776971}
   - component: {fileID: 424776976}
+  - component: {fileID: 424776978}
+  - component: {fileID: 424776977}
   m_Layer: 0
   m_Name: TownPanCutscene
   m_TagString: Untagged
@@ -4082,7 +4084,7 @@ MonoBehaviour:
     relPosition: 0
     minSpeed: 0
   target: {fileID: 2139305502}
-  freeCameraOnExit: 1
+  freeCameraOnExit: 0
   freeHudOnExit: 0
   useMainCamera: 1
   ignoreCameraBounds: 1
@@ -4120,7 +4122,7 @@ MonoBehaviour:
   position: {x: 49.2, y: 3.27}
   zoom: 5
   useMainCamera: 1
-  ignoreCameraBounds: 1
+  ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
 --- !u!114 &424776974
 MonoBehaviour:
@@ -4156,6 +4158,8 @@ MonoBehaviour:
   - {fileID: 424776972}
   - {fileID: 424776971}
   - {fileID: 424776976}
+  - {fileID: 424776978}
+  - {fileID: 424776977}
   cutsceneNumber: 0
   cutsceneName: P_TownPan
   playingThisCutscene: 0
@@ -4181,6 +4185,42 @@ MonoBehaviour:
   FadeToBlack: 1
   Stall: 1
   speed: 1
+--- !u!114 &424776977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424776969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &424776978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424776969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points: []
+  target: {fileID: 0}
+  freeCameraOnExit: 1
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
 --- !u!1 &426294456
 GameObject:
   m_ObjectHideFlags: 0

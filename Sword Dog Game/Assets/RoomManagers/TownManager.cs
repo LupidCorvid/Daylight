@@ -54,7 +54,7 @@ public class DojoManager : RoomManager
     public override void Awake() //Called immediately when the object is loaded into the scene
     {
         base.Awake();
-        roomState = GameSaver.currData.roomStates.dojoState; //Reads in the save data (copy by reference)
+        roomState = GameSaver.currData.roomStates.townState; //Reads in the save data (copy by reference)
     }
 
     public void Start() //Called on frame 1
@@ -75,7 +75,7 @@ public class MedbayManager : RoomManager
     public override void Awake() //Called immediately when the object is loaded into the scene
     {
         base.Awake();
-        roomState = GameSaver.currData.roomStates.medbayState; //Reads in the save data (copy by reference)
+        roomState = GameSaver.currData.roomStates.townState; //Reads in the save data (copy by reference)
     }
 
     public void Start() //Called on frame 1
