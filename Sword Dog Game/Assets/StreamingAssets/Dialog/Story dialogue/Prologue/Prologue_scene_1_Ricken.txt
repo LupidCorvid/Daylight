@@ -8,8 +8,11 @@ Scene1{
 [c][ss, .035] I thought I was about to get put down![wi],[c][llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True][c] Wait a second[ss,.15]...[wi]
 [c][abf,15][emote, 0][ss,.035][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![wi]
 [c] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] [IA,<i>]hundreds[IA,</i>] of those monsters while you were snoozing! [wi] 
-[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts]
-[c][ss, .025] [TFX,Shake,1.5] AHH![wi] Quickly![w,.2] Finish it off! [/TFX,Shake][w, 2] [exit]
+[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts] [exit]
+}
+
+Scene1.1.1{
+[unskpbl][sh, Ricken][abf,10][c][ss, .025] [TFX,Shake,1.5] AHH![wi] Quickly![w,.2] Finish it off! [/TFX,Shake][w, 2] [exit]
 }
 
 Scene1.1{
