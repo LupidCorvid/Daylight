@@ -15,6 +15,12 @@ public class NPCFollow : MonoBehaviour
 
     public bool allowingForMovement = false;
     public Rigidbody2D rb;
+    public bool currentlyTryingMove = false;
+
+    public bool MovingToPoint = false;
+    public Vector2 targPoint;
+    public float pointTargDistance = 0.1f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,27 +33,45 @@ public class NPCFollow : MonoBehaviour
     {
         rb.simulated = allowingForMovement;
 
-        if (target == null)
+        if (!currentlyTryingMove)
             return;
 
-        if(Mathf.Abs(transform.position.x - target.position.x) > startMoveDistance)
+        if (!MovingToPoint)
         {
-            moving = true;
-        }
-        else if(Mathf.Abs(transform.position.x - target.position.x) < stopMoveDistance)
-        {
-            moving = false;
-        }
+            if (target == null)
+                return;
+
+            if (Mathf.Abs(transform.position.x - target.position.x) > startMoveDistance)
+            {
+                moving = true;
+            }
+            else if (Mathf.Abs(transform.position.x - target.position.x) < stopMoveDistance)
+            {
+                moving = false;
+            }
 
 
-        if (moving)
-        {
-            if (transform.position.x > target.position.x)
-                movement.MoveLeft();
+            if (moving)
+            {
+                if (transform.position.x > target.position.x)
+                    movement.MoveLeft();
+                else
+                    movement.MoveRight();
+            }
             else
-                movement.MoveRight();
+                movement.NotMoving();
         }
         else
-            movement.NotMoving();
+        {
+            if (Mathf.Abs(transform.position.x - targPoint.x) > pointTargDistance)
+            {
+                if (transform.position.x > targPoint.x)
+                    movement.MoveLeft();
+                else
+                    movement.MoveRight();
+            }
+            else
+                movement.NotMoving();
+        }
     }
 }
