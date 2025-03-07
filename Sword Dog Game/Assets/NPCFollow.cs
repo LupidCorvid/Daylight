@@ -25,6 +25,7 @@ public class NPCFollow : MonoBehaviour
     public float RunningDistance = 8;
     bool running = false;
 
+    //Sprint logic needs to be moved to baseMovement
     public float walkSpeed = 4;
     public float sprintSpeed = 6;
 
