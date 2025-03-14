@@ -1614,6 +1614,100 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &210906011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 210906012}
+  - component: {fileID: 210906014}
+  - component: {fileID: 210906013}
+  - component: {fileID: 210906015}
+  m_Layer: 0
+  m_Name: TownPanCutsceneEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &210906012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1268160082}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210906013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &210906014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscenes:
+  - {fileID: 210906013}
+  - {fileID: 210906015}
+  cutsceneNumber: 0
+  cutsceneName: P_TownPanEnd
+  playingThisCutscene: 0
+  stopInteractions: 0
+  stopMovement: 1
+  hideUI: 0
+  controlMusic: 0
+  RemoveOnDestroy: 1
+  OverwriteCopies: 1
+--- !u!114 &210906015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points: []
+  target: {fileID: 2139305502}
+  freeCameraOnExit: 1
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
 --- !u!1 &229782326
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,11 +4127,11 @@ GameObject:
   - component: {fileID: 424776975}
   - component: {fileID: 424776974}
   - component: {fileID: 424776973}
-  - component: {fileID: 424776972}
+  - component: {fileID: 424776979}
   - component: {fileID: 424776971}
+  - component: {fileID: 424776972}
   - component: {fileID: 424776976}
-  - component: {fileID: 424776978}
-  - component: {fileID: 424776977}
+  - component: {fileID: 424776980}
   m_Layer: 0
   m_Name: TownPanCutscene
   m_TagString: Untagged
@@ -4074,8 +4168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   points:
-  - zoom: 5
-    speed: 5
+  - zoom: 7
+    speed: 3
     point: {x: 59.2, y: 3.27}
     letterbox: 1
     transition: 0
@@ -4120,7 +4214,7 @@ MonoBehaviour:
   finished: 0
   target: {fileID: 2139305502}
   position: {x: 49.2, y: 3.27}
-  zoom: 5
+  zoom: 7
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
@@ -4155,11 +4249,9 @@ MonoBehaviour:
   cutscenes:
   - {fileID: 424776974}
   - {fileID: 424776973}
-  - {fileID: 424776972}
-  - {fileID: 424776971}
+  - {fileID: 424776979}
   - {fileID: 424776976}
-  - {fileID: 424776978}
-  - {fileID: 424776977}
+  - {fileID: 424776980}
   cutsceneNumber: 0
   cutsceneName: P_TownPan
   playingThisCutscene: 0
@@ -4185,7 +4277,7 @@ MonoBehaviour:
   FadeToBlack: 1
   Stall: 1
   speed: 1
---- !u!114 &424776977
+--- !u!114 &424776979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4194,14 +4286,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 424776969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  FadeToBlack: 0
-  Stall: 1
-  speed: 1
---- !u!114 &424776978
+  cutscenes:
+  - RequireCompletion: 1
+    cutscene: {fileID: 424776971}
+  - RequireCompletion: 1
+    cutscene: {fileID: 424776972}
+--- !u!114 &424776980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4210,17 +4304,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 424776969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 53bd7890511cd5249841711e48b2c70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  points: []
-  target: {fileID: 0}
-  freeCameraOnExit: 1
-  freeHudOnExit: 0
-  useMainCamera: 1
-  ignoreCameraBounds: 0
-  cameraRb: {fileID: 0}
+  changeToScene: Town2
+  toNewCutscene: P_TownPan2
 --- !u!1 &426294456
 GameObject:
   m_ObjectHideFlags: 0
@@ -7234,11 +7323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2
+      value: 19.09
       objectReference: {fileID: 0}
     - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: 0.24
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6383164300075854907, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
@@ -8987,6 +9076,7 @@ Transform:
   m_Children:
   - {fileID: 1372872634}
   - {fileID: 424776970}
+  - {fileID: 210906012}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

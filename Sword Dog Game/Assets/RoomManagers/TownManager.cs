@@ -26,6 +26,7 @@ public class TownManager : RoomManager
     {
 
         Debug.Log("Event called: " + name);
+        //Only do these if calling from room event object that calls the cutscene
         switch (name)
         {
             //The VERY first time the player enters
@@ -41,6 +42,7 @@ public class TownManager : RoomManager
                 if (roomState.P_TownPan == false && roomState.P_FirstTimeEnter_triggered == true)
                 {
                     CutsceneController.PlayCutscene("P_TownPan");
+                    roomState.P_TownPan = true;
                 }
                 break;
         }
