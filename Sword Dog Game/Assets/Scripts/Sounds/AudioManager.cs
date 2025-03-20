@@ -132,8 +132,6 @@ public class AudioManager : MonoBehaviour
         {
             if (BGM1[activePlayer].time >= loopPointSeconds)
             {
-                BGM2[activePlayer].Stop();
-                BGM2[activePlayer].time = 0;
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM1[activePlayer].clip = currentSong.GetClip();
@@ -146,8 +144,6 @@ public class AudioManager : MonoBehaviour
         {
             if (BGM2[activePlayer].time >= loopPointSeconds)
             {
-                BGM2[activePlayer].Stop();
-                BGM2[activePlayer].time = 0;
                 activePlayer = 1 - activePlayer;
                 if (currentSong != null)
                     BGM2[activePlayer].clip = currentSong.GetClip();
