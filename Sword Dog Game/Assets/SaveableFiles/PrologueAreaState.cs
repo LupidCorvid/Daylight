@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+//Cannot put gameobjects in here
+//If you can't convert it into a string, it can't be put here (it's going in a JSON file)
 public class PrologueAreaState
 {
     public bool swordCollected = false;

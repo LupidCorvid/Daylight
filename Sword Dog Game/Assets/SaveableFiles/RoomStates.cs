@@ -6,9 +6,13 @@ using UnityEngine;
 public class RoomStates
 {
     public PrologueAreaState prologueState;
+    public TownAreaState townState;
+    public ForestAreaState forest1State;
 
     public RoomStates()
     {
         prologueState = new PrologueAreaState();
+        townState = new TownAreaState();
+        forest1State = new ForestAreaState();
     }
 }
