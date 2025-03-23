@@ -17,6 +17,8 @@ Stay enabled until the user interact exits or exits inside the house collider
 
  */
 
+//TODO: Enable/disable indoor colliders, enable/disable NPCs
+
 public class EnterHouse : MonoBehaviour
 {
     public GameObject houseFront, houseBack; //Sprite of the front/back of the house
