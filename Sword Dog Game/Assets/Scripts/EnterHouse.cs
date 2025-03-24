@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* Optimization suggestions/Minor bugs:
- * Make exit areas an array to accomodate 2 or more exits
- * Sometimes entiering from the top flickers the sprite, find out how to fix that
+ * Sometimes entering from the top flickers the sprite, find out how to fix that
 */
 
 /*Program Details:
@@ -21,14 +20,14 @@ Stay enabled until the user interact exits or exits inside the house collider
 	.enabled = false for all enabled objects, immediately
  */
 
-//TODO: Enable/disable NPCs, 
+//TODO: Enter through front door
 
 
 public class EnterHouse : MonoBehaviour
 {
     public GameObject houseFront, houseBack; //Sprite of the front/back of the house
                                              //houseFront has component for fadeItem
-    public GameObject exitArea, exitArea1; //The exits/entrances of the house that don't require a prompt
+    public GameObject [] exitAreas; //The exits/entrances of the house that don't require a prompt
     public GameObject frontDoor; //The exit/entrance that requires a prompt to enter
     public GameObject insideWall, insideFloor;
     public GameObject[] NPCs;
@@ -52,7 +51,6 @@ public class EnterHouse : MonoBehaviour
     void Update()
     {
         //Update the house back to default if the player leaves
-        //TODO: find a way to only trigger if player LEFT house only
         if (!playerIsInsideHouse)
         {
             //Increase the alpha
@@ -90,11 +88,14 @@ public class EnterHouse : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (collision.IsTouching(exitArea.GetComponent<BoxCollider2D>()) || collision.IsTouching(exitArea1.GetComponent<BoxCollider2D>()))
+            for (int i = 0; i < exitAreas.Length; i++)
             {
-                houseBack.GetComponent<BoxCollider2D>().enabled = true;
-                insideCollidersActive(true);
-                NPCsActive(true);
+                if (collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()))
+                {
+                    houseBack.GetComponent<BoxCollider2D>().enabled = true;
+                    insideCollidersActive(true);
+                    NPCsActive(true);
+                }
             }
         }
     }
@@ -103,12 +104,14 @@ public class EnterHouse : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            bool isTouchingExitArea = collision.IsTouching(exitArea.GetComponent<BoxCollider2D>()) || collision.IsTouching(exitArea1.GetComponent<BoxCollider2D>());
+            bool isTouchingExitArea = false;
+            for (int i = 0; i < exitAreas.Length; i++)
+                isTouchingExitArea = collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>());
 
             //If touching frontDoor
             //Spawn the prompt
             if (collision.IsTouching(frontDoor.GetComponent<BoxCollider2D>()))
-                print("Spawn the prompt");
+            print("Spawn the prompt");
 
             //If touching exitArea
             //Decrease alpha on the front of the house
