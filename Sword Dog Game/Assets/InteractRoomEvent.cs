@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InteractRoomEvent : MonoBehaviour, IInteractable
 {
@@ -19,9 +20,12 @@ public class InteractRoomEvent : MonoBehaviour, IInteractable
 
     public string eventName;
 
+    public Action interactedWith; //Actions: An array of function pointers that will call the functions when the action is invoked
+
     public virtual void interact(Entity user)
     {
         RoomManager.currentRoom.callRoomEvent(eventName);
+        interactedWith?.Invoke(); //Call this if it's not null
         hidePrompt();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 /* Optimization suggestions/Minor bugs:
  * Sometimes entering from the top flickers the sprite, find out how to fix that
+ * Add collider to front of house to detect if the player entered from the right side
 */
 
 /*Program Details:
@@ -37,6 +38,9 @@ public class EnterHouse : MonoBehaviour
 
     public bool increaseAlphaOnHouse = false;
     public bool playerIsInsideHouse = false;
+    public bool touchingInsideHouse = false;
+
+    public InteractRoomEvent interactPrompt;
 
     //All colliders and NPCs inside the house are disabled at start
     void Start()
@@ -46,6 +50,8 @@ public class EnterHouse : MonoBehaviour
         insideFloor.SetActive(false);
 
         NPCsActive(false);
+
+        interactPrompt.interactedWith += determineAction; //Subscribes/adds the function to the list of actions in the other script
     }
     
     void Update()
@@ -75,6 +81,29 @@ public class EnterHouse : MonoBehaviour
         }
     }
 
+    //When entering through the front door, see if you need to open or close the house
+    void determineAction()
+    {
+        if (playerIsInsideHouse) closeHouse();
+        else openHouse();
+    }
+
+    void openHouse()
+    {
+        houseBack.GetComponent<BoxCollider2D>().enabled = true;
+        insideCollidersActive(true);
+        NPCsActive(true);
+    }
+
+    void closeHouse()
+    {
+        playerIsInsideHouse = false;
+        increaseAlphaOnHouse = true;
+        houseBack.GetComponent<BoxCollider2D>().enabled = false;
+        insideCollidersActive(false);
+        NPCsActive(false);
+    }
+
     //Either activates or disables internal colliders depending on parameter
     void insideCollidersActive(bool flag)
     {
@@ -92,9 +121,7 @@ public class EnterHouse : MonoBehaviour
             {
                 if (collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()))
                 {
-                    houseBack.GetComponent<BoxCollider2D>().enabled = true;
-                    insideCollidersActive(true);
-                    NPCsActive(true);
+                    openHouse();
                 }
             }
         }
@@ -130,11 +157,7 @@ public class EnterHouse : MonoBehaviour
             }
             else
             {
-                playerIsInsideHouse = false;
-                increaseAlphaOnHouse = true;
-                houseBack.GetComponent<BoxCollider2D>().enabled = false;
-                insideCollidersActive(false);
-                NPCsActive(false);
+                closeHouse();
             }
         }
     }
