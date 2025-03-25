@@ -29,6 +29,7 @@ public class EnterHouse : MonoBehaviour
     public GameObject houseFront, houseBack; //Sprite of the front/back of the house
                                              //houseFront has component for fadeItem
     public GameObject [] exitAreas; //The exits/entrances of the house that don't require a prompt
+    public GameObject[] exitAreaChecks; //Colliders to check if you're entering from the right direction
     public GameObject frontDoor; //The exit/entrance that requires a prompt to enter
     public GameObject insideWall, insideFloor;
     public GameObject[] NPCs;
@@ -38,14 +39,13 @@ public class EnterHouse : MonoBehaviour
 
     public bool increaseAlphaOnHouse = false;
     public bool playerIsInsideHouse = false;
-    public bool touchingInsideHouse = false;
 
     public InteractRoomEvent interactPrompt;
 
     //All colliders and NPCs inside the house are disabled at start
     void Start()
     {
-        houseBack.GetComponent<BoxCollider2D>().enabled = false;
+        //houseBack.GetComponent<BoxCollider2D>().enabled = false;
         insideWall.SetActive(false);
         insideFloor.SetActive(false);
 
@@ -90,7 +90,8 @@ public class EnterHouse : MonoBehaviour
 
     void openHouse()
     {
-        houseBack.GetComponent<BoxCollider2D>().enabled = true;
+        //houseBack.GetComponent<BoxCollider2D>().enabled = true;
+        playerIsInsideHouse = true;
         insideCollidersActive(true);
         NPCsActive(true);
     }
@@ -99,7 +100,7 @@ public class EnterHouse : MonoBehaviour
     {
         playerIsInsideHouse = false;
         increaseAlphaOnHouse = true;
-        houseBack.GetComponent<BoxCollider2D>().enabled = false;
+        //houseBack.GetComponent<BoxCollider2D>().enabled = false;
         insideCollidersActive(false);
         NPCsActive(false);
     }
@@ -117,19 +118,45 @@ public class EnterHouse : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            for (int i = 0; i < exitAreas.Length; i++)
+            //for (int i = 0; i < exitAreas.Length; i++)
+            //{
+            //    //Touching exits/entrances from OUTSIDE house
+            //    if (!playerIsInsideHouse && collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()) && !collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()))
+            //    {
+            //        openHouse();
+            //        break;
+            //    }
+            //}
+
+            //Detect when to open the house
+            //touching exit area check AND touching exit area AND NOT touching inside of house
+            for (int i = 0; i < exitAreaChecks.Length; i++)
             {
-                if (collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()))
+                if (collision.IsTouching(exitAreaChecks[i].GetComponent<BoxCollider2D>()) && collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()) && !collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()))
                 {
                     openHouse();
                 }
             }
         }
     }
-    
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            //Detect when to close the house
+            if (!collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()) && playerIsInsideHouse)
+            {
+                closeHouse();
+            }
+
+            
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.tag == "Player" && playerIsInsideHouse == true)
         {
             bool isTouchingExitArea = false;
             for (int i = 0; i < exitAreas.Length; i++)
@@ -149,16 +176,7 @@ public class EnterHouse : MonoBehaviour
             //Make sure that the alpha continues decreasing
             if(playerIsInsideHouse && collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()) && !isTouchingExitArea)
                 houseFront.GetComponent<fadeItem>().decreaseAlpha();
-                
-            //Check if the player is still inside the house
-            //Update internal colliders and NPCs as needed
-            if (collision.IsTouching(houseBack.GetComponent<BoxCollider2D>())){
-                playerIsInsideHouse = true;
-            }
-            else
-            {
-                closeHouse();
-            }
+            
         }
     }
     
