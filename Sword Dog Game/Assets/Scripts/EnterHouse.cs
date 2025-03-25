@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Optimization suggestions/Minor bugs:
- * Sometimes entering from the top flickers the sprite, find out how to fix that
- * Add collider to front of house to detect if the player entered from the right side
-*/
 
 /*Program Details:
 Interact with house OR step into exitArea collider
@@ -20,8 +16,6 @@ Stay enabled until the user interact exits or exits inside the house collider
 	while colliding (front has alpha 0 so it's still active)
 	.enabled = false for all enabled objects, immediately
  */
-
-//TODO: Enter through front door
 
 
 public class EnterHouse : MonoBehaviour
@@ -118,24 +112,13 @@ public class EnterHouse : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            //for (int i = 0; i < exitAreas.Length; i++)
-            //{
-            //    //Touching exits/entrances from OUTSIDE house
-            //    if (!playerIsInsideHouse && collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()) && !collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()))
-            //    {
-            //        openHouse();
-            //        break;
-            //    }
-            //}
-
             //Detect when to open the house
             //touching exit area check AND touching exit area AND NOT touching inside of house
             for (int i = 0; i < exitAreaChecks.Length; i++)
             {
                 if (collision.IsTouching(exitAreaChecks[i].GetComponent<BoxCollider2D>()) && collision.IsTouching(exitAreas[i].GetComponent<BoxCollider2D>()) && !collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()))
-                {
                     openHouse();
-                }
+                
             }
         }
     }
@@ -146,11 +129,7 @@ public class EnterHouse : MonoBehaviour
         {
             //Detect when to close the house
             if (!collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()) && playerIsInsideHouse)
-            {
                 closeHouse();
-            }
-
-            
         }
     }
 
@@ -176,7 +155,6 @@ public class EnterHouse : MonoBehaviour
             //Make sure that the alpha continues decreasing
             if(playerIsInsideHouse && collision.IsTouching(houseBack.GetComponent<BoxCollider2D>()) && !isTouchingExitArea)
                 houseFront.GetComponent<fadeItem>().decreaseAlpha();
-            
         }
     }
     
