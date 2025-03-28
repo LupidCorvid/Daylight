@@ -143,6 +143,21 @@ public class RivalBehavior : DialogNPC
 
     public void flashRed()
     {
+        rivalAnim.Play("rival_hurtLeg");
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        //Color rivalColor = sr.GetComponent<Color>();
+
+        sr.color = Color.red;
+
+        float timer = 0f;
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime;
+            if (timer >= .3f) sr.color = Color.black;
+            else if (timer >= .6f) sr.color = Color.red;
+            else if (timer >= .9f) sr.color = Color.black;
+        }
+        sr.color = Color.black;
 
     }
 
