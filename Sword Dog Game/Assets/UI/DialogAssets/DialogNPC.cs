@@ -273,13 +273,15 @@ public class DialogNPC : MonoBehaviour, IInteractable
         }
     }
 
-    /* 0 anger
+    /* These values are in the generalEmote animator controller
+     * 0 anger
      * 1 content
      * 2 happy
      * 3 questioning
      * 4 surprise
      * 5 worry 
      * 6 sad
+     * 7 talk
      */
 
     //Person you're speaking to

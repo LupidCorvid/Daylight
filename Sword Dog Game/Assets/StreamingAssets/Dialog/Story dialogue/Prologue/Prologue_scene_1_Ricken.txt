@@ -29,17 +29,19 @@ Scene1.1.1{
 
 Scene1.1{
 [unskpbl][sh, Ricken][abf,10][ss, .035] Wow[ss,.15]...[ss,.035] Nice swingin',[w,.2] rookie![wi] 
-[c][reemote, 3][w,.7] Hey![w,.2] I'm no rookie,[w,.3] I'm your senior by one,[w,.3] no,[w,.3] two months![w,.4] Maybe one day you'll catch up to MY skill level and complete a mission without snoozing,[w,.3] err,[w,.3] what was your name again?[wi] 
-[c][IA,<color=#FFDC30>][gvar, playerName][IA,</color>]![w,.4] That's right,[w,.2] you better square up to these monsters if you ever want to get to my level![wi] [c][exit]
 }
 
 Scene1.2{
-[unskpbl][sh, Ricken][abf,10][ss, .033][TFX, Wave, 5, 5, 50] Waaaait,[w,.2] [IA,<color=#FFDC30>][gvar, playerName][IA,</color>]! [/TFX,Wave][wi] 
+[unskpbl][sh, Ricken][abf,10][ss, .035][c] Hey,[w,.2] I'm no rookie![w,.3] I'm your senior by one,[w,.2] no,[w,.2] two months![w,.3] Maybe one day you'll catch up to MY skill level and complete a mission without snoozing halfway through.[wi] 
+}
+
+Scenne1.3{
 [c][CE, flashRed][reemote, 4][abf,5][ss, .035][w,.5] Oh,[w,.2] what's this?[wi]
 [c] Hehe[ss,.15]...[ss,.035] well, actually[ss,.15]...[wi]
 [c] [ss,.035] I wasn't lying about more of them showing up after you got knocked out[ss,.15]...[ss,.035] [w, .1] I trounced what I could,[w,.2] but one still escaped[ss,.15]...[ss,.05] [w, .2] And I couldn't give chase because- [w, .2][TFX, Shake, 1.2] OW- [w, .3][/TFX,Shake] My leg[ss,.15]...[ss,.05][wi]
 [c] [reemote, 6] Ye-[w,.3] yeah,[w,.2] let's get back to town[ss,.1]...[wi]
 [c] ...[ss,.035]And thanks[ss,.1]... [ss,.035]for the help, [w, .2][IA,<size=80%>] [ss,.075]friend[ss,.1]...[ss,.035] [IA,</size>][w, .2] I[w,.1]-I[w,.1]-I mean [IA,<i>]rookie[IA,</i>]! [wi] [exit]
+
 }
 
 Scene2.1{
