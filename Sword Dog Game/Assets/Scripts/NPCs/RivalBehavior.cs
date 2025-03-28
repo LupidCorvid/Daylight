@@ -143,7 +143,8 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
 
     public void CutsceneEvent(string parameters)
     {
-        anim.Play("rival_injury");
+        //anim.Play("rival_injury");
+        flashRed();
     }
 
     public void flashRed()
