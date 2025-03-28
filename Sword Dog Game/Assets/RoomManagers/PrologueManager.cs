@@ -57,12 +57,12 @@ public class PrologueManager : RoomManager
                     CutsceneController.PlayCutscene("EnemyPan");
                 }
                 break;
-            //case "MonsterKilled":
-            //    if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
-            //    {
-            //        CutsceneController.PlayCutscene("SavedFromMonster");
-            //    }
-            //    break;
+            case "MonsterKilled":
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+                {
+                    CutsceneController.PlayCutscene("SavedFromMonster");
+                }
+                break;
         }
     }
 
