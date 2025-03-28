@@ -3,12 +3,24 @@ Default{
 
 }
 
+Scene0{
+[unskpbl][sh, Ricken][abf,10][ss,.025][c] [TFX,Shake,1.5] Aaahhh! [/TFX,Shake][w,.4] I-[ss,.1]Is the end for the great warrior Ricken-[wi] [c][exit]
+}
+
 Scene1{
 [unskpbl][sh, Ricken][abf,10][ss,.025][c] [gvar,HasGottenSword,Oh thank goodness![wi]
-[c][ss, .035] I thought I was about to get put down![wi],[c][llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True][c] Wait a second[ss,.15]...[wi]
-[c][abf,15][emote, 0][ss,.035][CE,turnAnimRival] Hey![w,.2] Where were you,[w,.25] rookie?![wi]
-[c] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] [IA,<i>]hundreds[IA,</i>] of those monsters while you were snoozing! [wi] 
-[c][abf,10][reemote, 3][w,.7] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts] [exit]
+[c][ss, .035] I thought I was about to get put down![wi],[c][llf,LeaveNoSword]][abf,2] [svar,ListenedWithSword,True][c] Wait a second[ss,.15]...[wi] [CE,turnAnimRival][c][exit]
+
+}
+
+Scene1.1.2{
+[unskpbl][sh, Ricken][abf,15][ss,.035][c] Hey![w,.2] Where were you,[w,.25] rookie?![wi]
+[c] I was left to take on[ss,.1]...[ss,.035][w,.15] another dozen or so,[w,.3] no,[w,.3] [IA,<i>]hundreds[IA,</i>] of those monsters while you were snoozing! [wi] [c][exit]
+
+}
+
+Scene1.1.3{
+[unskpbl][sh, Ricken][abf,10][w,.7][c] What?![w,.4] You don't believe me?[w,.4] Where's your faith in your superior- [w, .15][CE, monsterReacts] [exit]
 }
 
 Scene1.1.1{

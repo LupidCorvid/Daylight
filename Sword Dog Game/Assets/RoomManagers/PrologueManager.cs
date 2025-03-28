@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PrologueManager : RoomManager
 {
@@ -12,6 +13,7 @@ public class PrologueManager : RoomManager
 
     public GameObject looseSword;
     public GameObject NoSwordBlock;
+    public GameObject Ricken;
 
     bool attemptedLeave = false;
 

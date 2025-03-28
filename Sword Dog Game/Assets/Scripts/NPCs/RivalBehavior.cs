@@ -31,19 +31,9 @@ public class RivalBehavior : DialogNPC
         if (monster != null)
             monster.killed += monsterKilled;
 
-        if (SceneManager.GetActiveScene().name == "Town")
+        if (SceneManager.GetActiveScene().name != "prologue area")
             prologueBehaviorActive = false;
     }
-    
-    //void Update()
-    //{
-    //    //if (SceneManager.GetActiveScene().name == "Town")
-    //        //prologueBehaviorActive = false;
-    //    if(prologueBehaviorActive)
-    //        prologueBehavior();
-    //    else
-    //        swordAnim.Play("sword_idle");
-    //}
 
     //Copy pasted from general code
     void FixedUpdate()
@@ -112,11 +102,6 @@ public class RivalBehavior : DialogNPC
 
     void prologueBehavior()
     {
-        //Debug
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            monsterDefeated = true;
-        }
 
         if (monster == null)
             monsterDefeated = true;
