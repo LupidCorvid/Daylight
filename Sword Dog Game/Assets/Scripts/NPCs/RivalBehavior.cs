@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RivalBehavior : DialogNPC
+public class RivalBehavior : DialogNPC, ICutsceneCallable
 {
     Animator rivalAnim, swordAnim;
     bool prologueBehaviorActive = true;
@@ -139,6 +139,11 @@ public class RivalBehavior : DialogNPC
     public void enterPlayerName()
     {
 
+    }
+
+    public void CutsceneEvent(string parameters)
+    {
+        anim.Play("rival_injury");
     }
 
     public void flashRed()
