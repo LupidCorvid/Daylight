@@ -67,6 +67,7 @@ public class AnimationCutscene : CutsceneData
     {
         public string name;
         public float speed;
+        public bool loop = false;
     }
 
 

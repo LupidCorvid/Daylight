@@ -146,7 +146,7 @@ public class NamingScreenScript : MonoBehaviour
 
                     if (true)
                     {
-                        ChangeScene.LoadScene("prologue area", "", false);
+                        ChangeScene.LoadScene("IntroCutscene", "", false);
                         loadingScene = true;
                     }
                     break;
