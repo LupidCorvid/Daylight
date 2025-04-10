@@ -30,7 +30,7 @@ public class TownManager : RoomManager
         switch (name)
         {
             //The VERY first time the player enters
-            //The General talks to the player
+            //Ricken talks to the player
             case "P_FirstTimeEnter":
                 if (!DialogController.dialogOpen && roomState.P_FirstTimeEnter_triggered == false)
                 {
@@ -43,6 +43,14 @@ public class TownManager : RoomManager
                 {
                     CutsceneController.PlayCutscene("P_TownPan");
                     roomState.P_TownPan = true;
+                }
+                break;
+            case "P_GeneralFirstTimeEnter":
+                if (roomState.P_TownPan == true && roomState.P_GeneralFirstTimeEnter == false)
+                {
+                    CutsceneController.PlayCutscene("P_GeneralFirstTimeEnter");
+                    roomState.P_GeneralFirstTimeEnter = true;
+                    
                 }
                 break;
         }
