@@ -27,6 +27,7 @@ public class AnimationCutscene : CutsceneData
         {
             target.speed = stateNames[0].speed;
             target.Play(stateNames[0].name);
+            Debug.Log("After start: " + target.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         }
         else
             finishedSegment();
@@ -35,11 +36,13 @@ public class AnimationCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
+        Debug.Log("On update: " + target.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if (!target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name) 
             || (target.GetCurrentAnimatorStateInfo(0).normalizedTime < target.GetCurrentAnimatorStateInfo(0).length 
             && !target.GetCurrentAnimatorStateInfo(0).loop 
             && target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name)))
         {
+            Debug.Log(target.GetCurrentAnimatorClipInfo(0)[0].clip.name);
             currState++;
             if (currState < stateNames.Count)
             {

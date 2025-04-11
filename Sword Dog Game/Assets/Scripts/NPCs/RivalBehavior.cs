@@ -48,7 +48,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
                 talkingToPlayer();
             else if (!finishTalkingSequence)
                 idle();
-            
+
         }
     }
 
@@ -125,7 +125,8 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
                 animWaitTime = 0f;
                 monsterTransitionExecuted = true;
                 print("animWaitTime Done");
-            } 
+            }
+            Debug.Log("Setting rival anim");
         }
     }
 

@@ -169,7 +169,7 @@ public class MoveCameraCutscene : CutsceneData
             }
             else
             {
-                if (Vector2.Distance((((Vector3)((Vector2)target.transform.position - transform.point)).normalized * transform.minSpeed * Time.deltaTime), transform.point) > transform.minSpeed * Time.deltaTime)
+                if (Vector2.Distance((((Vector3)((Vector2)target.transform.position - transform.point)).normalized * transform.minSpeed * Time.deltaTime), transform.point) > Time.deltaTime)
                     target.transform.position -= ((Vector3)((Vector2)target.transform.position - transform.point)).normalized * transform.minSpeed * Time.deltaTime;
                 else
                     target.transform.position = transform.point;
