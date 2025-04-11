@@ -5848,6 +5848,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4405441, y: 7.782444}
   m_EdgeRadius: 0
+--- !u!1 &515816384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515816385}
+  m_Layer: 0
+  m_Name: RickenTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515816385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515816384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.36, y: -5.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1268160082}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &575507952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10113,8 +10144,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1928285643}
-  - {fileID: 1887713560}
   - {fileID: 2042827011}
+  - {fileID: 515816385}
   - {fileID: 1372872634}
   - {fileID: 424776970}
   - {fileID: 210906012}
@@ -13952,37 +13983,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 89910439303006872, guid: 93dc5606726c13c4d99430706a4d43cc, type: 3}
   m_PrefabInstance: {fileID: 1875703350}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1887713559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1887713560}
-  m_Layer: 0
-  m_Name: Ricken target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1887713560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887713559}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.36, y: -5.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1268160082}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896472686
 GameObject:
   m_ObjectHideFlags: 0
@@ -15045,7 +15045,7 @@ MonoBehaviour:
   finished: 0
   targetNPC: {fileID: 113593366}
   goToPoint: 1
-  targ: {fileID: 0}
+  targ: {fileID: 515816385}
   targPoints:
   - {x: -11.36, y: -5.31}
   lockMovementAfter: 1
@@ -15093,17 +15093,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2042827010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a457c2f4dc8347a1f1b2f7f15afb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 47037ce1504b97d409a3beecc75e1adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  target: {fileID: 0}
-  targetByName: 0
-  targetName: 
-  stateNames: []
-  currState: 0
-  stopOnFinish: 0
-  restoreSpeedOnFinish: 0
+  parameters: turnAnimRival
 --- !u!1 &2045204253
 GameObject:
   m_ObjectHideFlags: 0

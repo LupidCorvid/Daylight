@@ -463,8 +463,17 @@ MonoBehaviour:
   target: {fileID: 0}
   startMoveDistance: 6
   stopMoveDistance: 5
+  moving: 0
   allowingForMovement: 0
   rb: {fileID: 5596580178810680927}
+  currentlyTryingMove: 0
+  MovingToPoint: 0
+  targPoint: {x: 0, y: 0}
+  pointTargDistance: 0.1
+  canRun: 0
+  RunningDistance: 8
+  walkSpeed: 4
+  sprintSpeed: 6
 --- !u!114 &8577884318717015373
 MonoBehaviour:
   m_ObjectHideFlags: 0
