@@ -119,6 +119,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
             animWaitTime += Time.deltaTime;
             rivalAnim.Play("rival_cowerToIdle");
             swordAnim.Play("sword_cowerToIdle");
+            Debug.Log("Setting rival anim");
 
             if (animWaitTime >= 1)
             {
@@ -126,7 +127,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
                 monsterTransitionExecuted = true;
                 print("animWaitTime Done");
             }
-            Debug.Log("Setting rival anim");
+            
         }
     }
 
