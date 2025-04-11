@@ -35,6 +35,7 @@ public class TownManager : RoomManager
                 if (!DialogController.dialogOpen && roomState.P_FirstTimeEnter_triggered == false)
                 {
                     CutsceneController.PlayCutscene("P_FirstTimeEnter");
+                    roomState.P_FirstTimeEnter_triggered = true;
                 }
                 break;
             //There is a box collider in the scene that will check this case if the player triggers it. 
