@@ -9,13 +9,13 @@ public class TownAreaState
 {
     //Essentially, put all story beats that need to be saved to file as variables here. This guides the direction of the story.
     public bool P_FirstTimeEnter_triggered = false;
-        /* Protag and Ricken walk in.
-        * After a slight bit, the textbox appears and "woohoo we made it!"
-        * Protag worry emote
-        * Ricken turns around
-        * Rest of the yammering
-        * Ricken trots off screen quickly
-        */
+    /* Protag and Ricken walk in.
+    * After a slight bit, the textbox appears and "woohoo we made it!"
+    * Ricken turns around
+    * Protag questioning emote
+    * Rest of the yammering
+    * Ricken trots off screen quickly
+    */
 
     public bool P_TownPan = false;
         //Pan to three areas of the town, then return control to the character
