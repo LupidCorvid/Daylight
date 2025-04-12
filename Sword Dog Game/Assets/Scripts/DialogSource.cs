@@ -224,7 +224,14 @@ public class DialogSource
 
     public static string LoadFile(string filePath)
     {
+        // Handles incorrect pathing for non-windows machines
+        if (!File.Exists(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath)))
+        {
+            string[] splitPath = filePath.Split("\\");
+            filePath = Path.Combine(splitPath);
+        }
         string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath));
+
         return gottenText;
     }
 
