@@ -209,7 +209,7 @@ public class DialogSource
                         continue;
                     Debug.Log(blockName);
                     //Maybe change to use a short string series instead?
-                    string blockText = loadedText.Substring(i + 3, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
+                    string blockText = loadedText.Substring(i + 2, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
                     blocks.Add(blockName, blockText);
                     lastBlockStart = i + 1;
                 }
