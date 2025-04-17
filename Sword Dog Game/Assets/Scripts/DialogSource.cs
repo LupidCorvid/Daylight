@@ -191,14 +191,14 @@ public class DialogSource
             {
                 if (loadedText[i] == '{')
                 {
-                    var arr = loadedText.ToCharArray();
-                    string ls = "[";
-                    foreach (char d in arr)
-                    {
-                        ls += "\"" + (int)d + "\",";
-                    }
-                    ls += "]";
-                    Debug.Log(ls);
+                    //var arr = loadedText.ToCharArray();
+                    //string ls = "[";
+                    //foreach (char d in arr)
+                    //{
+                    //    ls += "\"" + (int)d + "\",";
+                    //}
+                    //ls += "]";
+                    //Debug.Log(ls);
 
                     string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
                     //titleChunk = titleChunk.LastIndexOf('\n');
@@ -207,9 +207,9 @@ public class DialogSource
                         blockName = loadedText.Substring(titleChunk.LastIndexOf('\n') + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf('\n') + lastBlockStart));
                     else
                         continue;
-                    Debug.Log(blockName);
+                    Debug.Log(i);
                     //Maybe change to use a short string series instead?
-                    string blockText = loadedText.Substring(i + 2, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
+                    string blockText = loadedText.Substring(i + 3, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
                     blocks.Add(blockName, blockText);
                     lastBlockStart = i + 1;
                 }
