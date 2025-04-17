@@ -191,7 +191,14 @@ public class DialogSource
             {
                 if (loadedText[i] == '{')
                 {
-                    Debug.Log(loadedText.ToCharArray().ArrayToString());
+                    var arr = loadedText.ToCharArray();
+                    string ls = "[";
+                    foreach (char d in arr)
+                    {
+                        ls += "\"" + (int)d + "\",";
+                    }
+                    ls += "]";
+                    Debug.Log(ls);
 
                     string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
                     //titleChunk = titleChunk.LastIndexOf('\n');
