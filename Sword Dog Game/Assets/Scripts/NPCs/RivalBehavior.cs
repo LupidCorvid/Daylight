@@ -14,7 +14,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
 
     //Copy pasted from general code
-    Animator anim;
+    //Animator anim;
     float waitToLook = 0f;
     bool talking, finishTalkingSequence = false;
     Vector2 playerPosition = new Vector2(0, 0);
@@ -23,23 +23,39 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     public string interruptDialog;
     private MiniBubbleController bubble;
 
+    public bool isTurning = false; //Toggle if turnAnim is triggered //Attempt for turn animation
+    public GameObject rivalSword;
+
 
     void Start()
     {
         rivalAnim = gameObject.GetComponent<Animator>();
         swordAnim = GameObject.Find("rival sword").GetComponent<Animator>();
+        rivalSword = GameObject.Find("rival sword");
         if (monster != null)
             monster.killed += monsterKilled;
 
         if (SceneManager.GetActiveScene().name != "prologue area")
             prologueBehaviorActive = false;
     }
+    
 
     //Copy pasted from general code
     void FixedUpdate()
     {
         if (prologueBehaviorActive)
             prologueBehavior();
+
+        //Attempt for turn animation
+        //if (gameObject.transform.eulerAngles.y >= 180 && isTurning)
+        //{
+        //    gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        //    gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        //    isTurning = false;
+        //}
+        if (talking && !isTurning && !prologueBehaviorActive) speak();
+        rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
+        print(rivalSword.transform.localPosition);
     }
 
     public void idle()
@@ -129,10 +145,15 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
 
     public void turnAnimRival()
     {
-        rivalAnim.Play("rival_turn");
-        swordAnim.Play("sword_turn");
-        //Permanently reverse from whatever the previous state was
-        //gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        //Attempt for turn animation
+        //rivalAnim.Play("rival_turn");
+        //swordAnim.Play("sword_turn");
+        //isTurning = true;
+
+        gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
+        rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
+        print(rivalSword.transform.position);
     }
 
     public void enterPlayerName()
@@ -149,7 +170,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
                 break;
             case "turnAnimRival":
                 turnAnimRival();
-                print("triggered turnAnimRival");
+                //print("triggered turnAnimRival");
                 break;
         }
     }

@@ -1379,6 +1379,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4508770890934130804, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: rivalSword
+      value: 
+      objectReference: {fileID: 319146410}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3784,6 +3788,11 @@ PrefabInstance:
       addedObject: {fileID: 1966794696}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+--- !u!1 &319146410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3703650060970454080, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+  m_PrefabInstance: {fileID: 113593364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &327409623
 GameObject:
   m_ObjectHideFlags: 0
@@ -15118,7 +15127,6 @@ GameObject:
   - component: {fileID: 2042827019}
   - component: {fileID: 2042827018}
   - component: {fileID: 2042827016}
-  - component: {fileID: 2042827015}
   - component: {fileID: 2042827014}
   m_Layer: 0
   m_Name: FirstTimeEnterCutscene
@@ -15157,7 +15165,6 @@ MonoBehaviour:
   cutscenes:
   - {fileID: 2042827019}
   - {fileID: 2042827018}
-  - {fileID: 2042827015}
   - {fileID: 2042827014}
   cutsceneNumber: 0
   cutsceneName: P_FirstTimeEnter
@@ -15188,20 +15195,6 @@ MonoBehaviour:
   overrideDialog: 1
   dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.1]'
   restorePriorDialog: 0
---- !u!114 &2042827015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  waitTime: 1
 --- !u!114 &2042827016
 MonoBehaviour:
   m_ObjectHideFlags: 0
