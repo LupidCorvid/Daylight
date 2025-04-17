@@ -201,10 +201,11 @@ public class DialogSource
                     //Debug.Log(ls);
 
                     string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
+                    
                     //titleChunk = titleChunk.LastIndexOf('\n');
                     string blockName;
-                    if (titleChunk.LastIndexOf('\n') != -1)
-                        blockName = loadedText.Substring(titleChunk.LastIndexOf('\n') + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf('\n') + lastBlockStart));
+                    if (titleChunk.LastIndexOf(Environment.NewLine) != -1)
+                        blockName = loadedText.Substring(titleChunk.LastIndexOf(Environment.NewLine) + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf(Environment.NewLine) + lastBlockStart));
                     else
                         continue;
                     Debug.Log(i);
