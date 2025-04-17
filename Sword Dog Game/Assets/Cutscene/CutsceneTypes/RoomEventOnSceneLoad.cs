@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomEventOnSceneLoad : MonoBehaviour
+public class RoomEventOnSceneLoad : CutsceneData
 {
-    public string eventName;
+    public string eventName = "";
+    public string[] eventParams;
     bool called = false;
-
-    public bool oneTimeTrigger = true;
-    public bool triggered = false;
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -18,7 +16,18 @@ public class RoomEventOnSceneLoad : MonoBehaviour
         {
             RoomManager.currentRoom.callRoomEvent(eventName);
             called = true;
-            Destroy(gameObject);
+            Destroy(gameObject); //Prevents infinite update call
         }
+    }
+
+    public override void cycleExecution()
+    {
+        base.cycleExecution();
+        finishedSegment();
+    }
+
+    public override void abort()
+    {
+        base.abort();
     }
 }

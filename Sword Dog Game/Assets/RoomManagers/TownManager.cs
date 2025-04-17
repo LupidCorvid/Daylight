@@ -25,7 +25,7 @@ public class TownManager : RoomManager
     public override void receivedEvent(string name, params object[] parameters)
     {
 
-        Debug.Log("Event called: " + name);
+        //Debug.Log("Event called: " + name);
         //Only do these if calling from room event object that calls the cutscene
         switch (name)
         {

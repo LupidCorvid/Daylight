@@ -40,21 +40,15 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     {
         if (prologueBehaviorActive)
             prologueBehavior();
-        else
-        {
-            swordAnim.Play("sword_idle");
-
-            if (alreadyTalking)
-                talkingToPlayer();
-            else if (!finishTalkingSequence)
-                idle();
-
-        }
     }
 
     public void idle()
     {
-        rivalAnim.Play("rival_idle");
+        swordAnim.Play("sword_idle");
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            rivalAnim.Play("rival_idle");
     }
 
     public void talkingToPlayer()
@@ -138,7 +132,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         rivalAnim.Play("rival_turn");
         swordAnim.Play("sword_turn");
         //Permanently reverse from whatever the previous state was
-        gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        //gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
     }
 
     public void enterPlayerName()
@@ -155,6 +149,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
                 break;
             case "turnAnimRival":
                 turnAnimRival();
+                print("triggered turnAnimRival");
                 break;
         }
     }

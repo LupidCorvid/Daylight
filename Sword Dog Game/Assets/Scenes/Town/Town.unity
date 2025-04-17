@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.84
+      value: -54.25
       objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4508770890934130804, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
   m_PrefabInstance: {fileID: 113593364}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 416854194}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b00a390ed3f4d4b44aa528500f69ce8a, type: 3}
@@ -4785,6 +4785,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413945812}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &416854194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2866529742025518, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+  m_PrefabInstance: {fileID: 113593364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &424550383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6882,6 +6887,137 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &746030007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746030008}
+  - component: {fileID: 746030013}
+  - component: {fileID: 746030012}
+  - component: {fileID: 746030011}
+  - component: {fileID: 746030010}
+  - component: {fileID: 746030009}
+  m_Layer: 0
+  m_Name: FirstTimeEnterCutscene (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &746030008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1268160082}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &746030009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 113593367}
+  interactor: {fileID: 0}
+  getInteractorByName: 1
+  interactorName: Player(Clone)
+  overrideDialog: 1
+  dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.1]'
+  restorePriorDialog: 0
+--- !u!114 &746030010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 1
+--- !u!114 &746030011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47037ce1504b97d409a3beecc75e1adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  personWithScript: {fileID: 0}
+  parameters: turnAnimRival
+--- !u!114 &746030012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  targetNPC: {fileID: 113593366}
+  goToPoint: 1
+  targ: {fileID: 515816385}
+  targPoints:
+  - {x: -11.36, y: -5.31}
+  lockMovementAfter: 1
+  keepTargetsAfter: 0
+--- !u!114 &746030013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746030007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscenes:
+  - {fileID: 746030012}
+  - {fileID: 746030011}
+  - {fileID: 746030010}
+  - {fileID: 746030009}
+  cutsceneNumber: 0
+  cutsceneName: P_FirstTimeEnter
+  playingThisCutscene: 0
+  stopInteractions: 0
+  stopMovement: 0
+  hideUI: 1
+  controlMusic: 0
+  RemoveOnDestroy: 1
+  OverwriteCopies: 0
 --- !u!1 &850988307
 GameObject:
   m_ObjectHideFlags: 0
@@ -10145,6 +10281,7 @@ Transform:
   m_Children:
   - {fileID: 1928285643}
   - {fileID: 2042827011}
+  - {fileID: 746030008}
   - {fileID: 515816385}
   - {fileID: 1372872634}
   - {fileID: 424776970}
@@ -14320,9 +14457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b0e3a7bc9b59248bd9702ffa2aa66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finished: 0
   eventName: P_FirstTimeEnter
-  oneTimeTrigger: 1
-  triggered: 0
+  eventParams: []
 --- !u!1 &1935916532
 GameObject:
   m_ObjectHideFlags: 0
@@ -14978,7 +15115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2042827011}
   - component: {fileID: 2042827012}
-  - component: {fileID: 2042827013}
+  - component: {fileID: 2042827019}
+  - component: {fileID: 2042827018}
   - component: {fileID: 2042827016}
   - component: {fileID: 2042827015}
   - component: {fileID: 2042827014}
@@ -15017,8 +15155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
-  - {fileID: 2042827013}
-  - {fileID: 2042827016}
+  - {fileID: 2042827019}
+  - {fileID: 2042827018}
   - {fileID: 2042827015}
   - {fileID: 2042827014}
   cutsceneNumber: 0
@@ -15030,26 +15168,6 @@ MonoBehaviour:
   controlMusic: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
---- !u!114 &2042827013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  targetNPC: {fileID: 113593366}
-  goToPoint: 1
-  targ: {fileID: 515816385}
-  targPoints:
-  - {x: -11.36, y: -5.31}
-  lockMovementAfter: 1
-  keepTargetsAfter: 0
 --- !u!114 &2042827014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15097,7 +15215,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
+  personWithScript: {fileID: 416854194}
   parameters: turnAnimRival
+--- !u!114 &2042827018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  cutscenes:
+  - RequireCompletion: 1
+    cutscene: {fileID: 2042827016}
+--- !u!114 &2042827019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 0.5
 --- !u!1 &2045204253
 GameObject:
   m_ObjectHideFlags: 0
