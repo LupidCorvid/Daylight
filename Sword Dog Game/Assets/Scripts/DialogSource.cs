@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Text;
 
 public class DialogSource
 {
@@ -184,6 +185,10 @@ public class DialogSource
     public static Dictionary<string, string> getBlocks(string loadedText)
     {
         Dictionary<string, string> blocks = new Dictionary<string, string>();
+
+        // Normalize line endings on different OS's
+        loadedText = loadedText.Replace(Environment.NewLine, "\r\n");
+        
         if (loadedText.Length > BLOCKS_SIGNATURE.Length && loadedText.Substring(0, 7) == BLOCKS_SIGNATURE)
         {
             int lastBlockStart = 0;
@@ -191,24 +196,14 @@ public class DialogSource
             {
                 if (loadedText[i] == '{')
                 {
-                    //var arr = loadedText.ToCharArray();
-                    //string ls = "[";
-                    //foreach (char d in arr)
-                    //{
-                    //    ls += "\"" + (int)d + "\",";
-                    //}
-                    //ls += "]";
-                    //Debug.Log(ls);
-
                     string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
-                    
                     //titleChunk = titleChunk.LastIndexOf('\n');
                     string blockName;
-                    if (titleChunk.LastIndexOf(Environment.NewLine) != -1)
-                        blockName = loadedText.Substring(titleChunk.LastIndexOf(Environment.NewLine) + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf(Environment.NewLine) + lastBlockStart));
+                    if (titleChunk.LastIndexOf('\n') != -1)
+                        blockName = loadedText.Substring(titleChunk.LastIndexOf('\n') + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf('\n') + lastBlockStart));
                     else
                         continue;
-                    Debug.Log(i);
+                    
                     //Maybe change to use a short string series instead?
                     string blockText = loadedText.Substring(i + 3, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
                     blocks.Add(blockName, blockText);
@@ -240,7 +235,7 @@ public class DialogSource
             string[] splitPath = filePath.Split("\\");
             filePath = Path.Combine(splitPath);
         }
-        string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath));
+        string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath), Encoding.UTF8);
 
         return gottenText;
     }
