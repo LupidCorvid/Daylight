@@ -1323,6 +1323,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1220289766}
     m_Modifications:
+    - target: {fileID: 3703650060970454085, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -15124,9 +15128,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2042827011}
   - component: {fileID: 2042827012}
+  - component: {fileID: 2042827021}
   - component: {fileID: 2042827019}
   - component: {fileID: 2042827018}
   - component: {fileID: 2042827016}
+  - component: {fileID: 2042827020}
   - component: {fileID: 2042827014}
   m_Layer: 0
   m_Name: FirstTimeEnterCutscene
@@ -15226,6 +15232,10 @@ MonoBehaviour:
   cutscenes:
   - RequireCompletion: 1
     cutscene: {fileID: 2042827016}
+  - RequireCompletion: 1
+    cutscene: {fileID: 2042827020}
+  - RequireCompletion: 1
+    cutscene: {fileID: 2042827014}
 --- !u!114 &2042827019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15240,6 +15250,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   waitTime: 0.5
+--- !u!114 &2042827020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  targetNPC: {fileID: 113593366}
+  goToPoint: 1
+  targ: {fileID: 113593365}
+  targPoints:
+  - {x: 7, y: 0}
+  lockMovementAfter: 1
+  keepTargetsAfter: 0
+--- !u!114 &2042827021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7544282153493438230371120e94c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  objectsToMove:
+  - objectToMove: {fileID: 113593365}
+    getFromName: 0
+    transformName: 
+    newLocation: {x: -10, y: -3, z: 0}
+    newScale: {x: 1, y: 1, z: 1}
+    newRotation: 0
+    relativePosition: 0
 --- !u!1 &2045204253
 GameObject:
   m_ObjectHideFlags: 0

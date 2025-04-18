@@ -39,6 +39,8 @@ public class Biter : EnemyBase
         }
     }
 
+    public bool inPrologue = false;
+    bool animControlled = false;
 
     public void Awake()
     {
@@ -63,5 +65,28 @@ public class Biter : EnemyBase
         ((BiterAI)ai).state = BiterAI.AIStates.keepDistance;
         
         //ai.anim.SetTrigger("Land");
+    }
+
+    public override void Die()
+    {
+        if(!inPrologue)
+            base.Die();
+        else
+        {
+            animControlled = true;
+            killed?.Invoke();
+        }
+    }
+
+    public override void Update()
+    {
+        if(!animControlled)
+            base.Update();
+    }
+
+    public override void FixedUpdate()
+    {
+        if(!animControlled)
+            base.FixedUpdate();
     }
 }

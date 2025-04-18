@@ -18,6 +18,10 @@ public class NPCMoveCutscene : CutsceneData
         targetNPC.allowingForMovement = true;
         targetNPC.currentlyTryingMove = true;
         targetNPC.MovingToPoint = goToPoint;
+        if(goToPoint)
+        {
+            targetNPC.targPoint = targPoints[currPoint];
+        }
     }
 
     public override void cycleExecution()
@@ -25,7 +29,7 @@ public class NPCMoveCutscene : CutsceneData
         base.cycleExecution();
         if(goToPoint)
         {
-            if(Mathf.Abs(targPoints[currPoint].x - targetNPC.transform.position.x) < 1)
+            if(Mathf.Abs(targPoints[currPoint].x - targetNPC.transform.position.x) < 5)
             {
                 if (currPoint < targPoints.Count - 1)
                 {
