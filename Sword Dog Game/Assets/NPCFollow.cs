@@ -52,10 +52,18 @@ public class NPCFollow : MonoBehaviour
     public Animator swordAnim;
     public string swordTurnAnim = "";
 
+    float turnMinTime = .1f;
+    float turnStartTime = 0;
+
     // Update is called once per frame
     void Update()
     {
         rb.simulated = allowingForMovement;
+
+        if (turning && !currentlyTryingMove)
+        {
+            TurnAnim();
+        }
 
         if (!currentlyTryingMove)
             return;
@@ -130,16 +138,12 @@ public class NPCFollow : MonoBehaviour
             
             anim.Play(turnAnimName);
             swordAnim?.Play(swordTurnAnim);
+            turnStartTime = Time.time;
         }
-        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
+        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName) && turnMinTime + turnStartTime < Time.time)
         {
             turning = false;
             gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-            if (swordAnim != null)
-            {
-                swordAnim.transform.rotation *= Quaternion.Euler(0, 180, 0);
-            }
-            Debug.Log("Flip");
         }
     }
 

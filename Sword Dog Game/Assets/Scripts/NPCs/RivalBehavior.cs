@@ -26,6 +26,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     public bool isTurning = false; //Toggle if turnAnim is triggered //Attempt for turn animation
     public GameObject rivalSword;
 
+    public NPCFollow followScript;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //}
         if (talking && !isTurning && !prologueBehaviorActive) speak();
         //rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
-        print(rivalSword.transform.localPosition);
+        //print(rivalSword.transform.localPosition);
     }
 
     public void idle()
@@ -154,11 +155,12 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
         //rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
         //print(rivalSword.transform.position);
+        followScript.TurnAnim();
     }
 
     public void enterPlayerName()
     {
-
+        
     }
     
     public void CutsceneEvent(string functionToCall)
