@@ -69,7 +69,7 @@ public class NPCFollow : MonoBehaviour
             return;
 
         //Rptate if not already facing right direction
-        if(turning || (target != null && !turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight))))
+        if(turning || (target != null && (!turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)))))
         {
             TurnAnim();
         }

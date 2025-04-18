@@ -13,6 +13,8 @@ public class CutsceneEventCutscene : CutsceneData
         base.startSegment();
         personWithScript.GetComponent<ICutsceneCallable>().CutsceneEvent(parameters); //eventToCall.CutsceneEvent(parameters);
         finishedSegment();
+        Debug.Log(gameObject.name);
+        this.enabled = false;
     }
 
 }
