@@ -29,6 +29,15 @@ public class NPCFollow : MonoBehaviour
     public float walkSpeed = 4;
     public float sprintSpeed = 6;
 
+    public bool SpriteFacesRight = true;
+
+    bool turning = false;
+
+    public Animator anim;
+
+    public bool ControlFlip = true;
+    public string turnAnimName;
+
     float moveSpeed
     {
         get { return running ? sprintSpeed : walkSpeed; }
@@ -36,8 +45,12 @@ public class NPCFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
+
+    //Some NPCS have swords to animate as well
+    public Animator swordAnim;
+    public string swordTurnAnim = "";
 
     // Update is called once per frame
     void Update()
@@ -46,6 +59,13 @@ public class NPCFollow : MonoBehaviour
 
         if (!currentlyTryingMove)
             return;
+
+        //Rptate if not already facing right direction
+        if(turning || (target != null && !turning && (transform.position.x - target.position.x < 0 ^ (anim.transform.localScale.x > 0 ^ !SpriteFacesRight))))
+        {
+            TurnAnim();
+        }
+
 
         if (!MovingToPoint)
         {
@@ -68,9 +88,9 @@ public class NPCFollow : MonoBehaviour
             if (moving)
             {
                 if (transform.position.x > target.position.x)
-                    movement.MoveLeft(moveSpeed);
+                    MoveLeft();
                 else
-                    movement.MoveRight(moveSpeed);
+                    MoveRight();
             }
             else
             {
@@ -89,9 +109,9 @@ public class NPCFollow : MonoBehaviour
 
 
                 if (transform.position.x > targPoint.x)
-                    movement.MoveLeft(moveSpeed);
+                    MoveLeft();
                 else
-                    movement.MoveRight(moveSpeed);
+                    MoveRight();
             }
             else
             {
@@ -102,6 +122,27 @@ public class NPCFollow : MonoBehaviour
         }
     }
 
+    public void TurnAnim()
+    {
+        if (!turning)
+        {
+            turning = true;
+            
+            anim.Play(turnAnimName);
+            swordAnim?.Play(swordTurnAnim);
+        }
+        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
+        {
+            turning = false;
+            anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
+            if (swordAnim != null)
+            {
+                swordAnim.transform.rotation *= Quaternion.Euler(0, 180, 0);
+            }
+            Debug.Log("Flip");
+        }
+    }
+
     public void SetStopMoving()
     {
         movement.NotMoving();
@@ -109,9 +150,9 @@ public class NPCFollow : MonoBehaviour
 
     public void StartRunning()
     {
-        if(!running)
+        if (!running)
         {
-            
+
         }
 
         running = true;
@@ -119,10 +160,24 @@ public class NPCFollow : MonoBehaviour
 
     public void StopRunning()
     {
-        if(running)
+        if (running)
         {
 
         }
         running = false;
+    }
+
+    public void MoveLeft()
+    {
+        if ((anim.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning)
+            TurnAnim();
+        movement.MoveLeft();
+    }
+
+    public void MoveRight()
+    {
+        if ((anim.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning)
+            TurnAnim();
+        movement.MoveRight();
     }
 }

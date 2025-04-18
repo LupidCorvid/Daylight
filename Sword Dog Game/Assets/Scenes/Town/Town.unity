@@ -1323,6 +1323,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1220289766}
     m_Modifications:
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 416854197}
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: swordAnim
+      value: 
+      objectReference: {fileID: 319146411}
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: turnAnimName
+      value: rival_turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: swordTurnAnim
+      value: sword_turn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: SpriteFacesLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: SpriteFacesRight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3703650060970454085, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3797,6 +3821,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3703650060970454080, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
   m_PrefabInstance: {fileID: 113593364}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &319146411 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3703650060970454085, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+  m_PrefabInstance: {fileID: 113593364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &327409623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,6 +4830,11 @@ MeshFilter:
 --- !u!1 &416854194 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2866529742025518, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+  m_PrefabInstance: {fileID: 113593364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &416854197 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8076098344034795785, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
   m_PrefabInstance: {fileID: 113593364}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &424550383
@@ -15169,9 +15203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
+  - {fileID: 2042827021}
   - {fileID: 2042827019}
   - {fileID: 2042827018}
-  - {fileID: 2042827014}
   cutsceneNumber: 0
   cutsceneName: P_FirstTimeEnter
   playingThisCutscene: 0
