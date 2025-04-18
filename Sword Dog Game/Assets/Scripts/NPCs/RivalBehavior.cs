@@ -54,7 +54,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //    isTurning = false;
         //}
         if (talking && !isTurning && !prologueBehaviorActive) speak();
-        rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
+        //rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
         print(rivalSword.transform.localPosition);
     }
 
@@ -150,10 +150,10 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //swordAnim.Play("sword_turn");
         //isTurning = true;
 
-        gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
-        rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
-        rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
-        print(rivalSword.transform.position);
+        //gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        //rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
+        //rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
+        //print(rivalSword.transform.position);
     }
 
     public void enterPlayerName()
