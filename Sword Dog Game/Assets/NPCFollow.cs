@@ -61,7 +61,7 @@ public class NPCFollow : MonoBehaviour
             return;
 
         //Rptate if not already facing right direction
-        if(turning || (target != null && !turning && (transform.position.x - target.position.x < 0 ^ (anim.transform.localScale.x > 0 ^ !SpriteFacesRight))))
+        if(turning || (target != null && !turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight))))
         {
             TurnAnim();
         }
@@ -134,7 +134,7 @@ public class NPCFollow : MonoBehaviour
         else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
         {
             turning = false;
-            anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
             if (swordAnim != null)
             {
                 swordAnim.transform.rotation *= Quaternion.Euler(0, 180, 0);
@@ -169,14 +169,14 @@ public class NPCFollow : MonoBehaviour
 
     public void MoveLeft()
     {
-        if ((anim.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning)
+        if ((gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning)
             TurnAnim();
         movement.MoveLeft();
     }
 
     public void MoveRight()
     {
-        if ((anim.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning)
+        if ((gameObject.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning)
             TurnAnim();
         movement.MoveRight();
     }
