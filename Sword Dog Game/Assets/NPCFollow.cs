@@ -38,6 +38,8 @@ public class NPCFollow : MonoBehaviour
     public bool ControlFlip = true;
     public string turnAnimName;
 
+    public bool backpedal = false;
+
     float moveSpeed
     {
         get { return running ? sprintSpeed : walkSpeed; }
@@ -60,18 +62,24 @@ public class NPCFollow : MonoBehaviour
     {
         rb.simulated = allowingForMovement;
 
-        if (turning && !currentlyTryingMove)
+        if (!backpedal)
         {
-            TurnAnim();
+            if (turning && !currentlyTryingMove)
+            {
+                TurnAnim();
+            }
         }
 
         if (!currentlyTryingMove)
             return;
 
-        //Rptate if not already facing right direction
-        if(turning || (target != null && (!turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)))))
+        //Rotate if not already facing right direction
+        if (!backpedal)
         {
-            TurnAnim();
+            if (turning || (target != null && (!turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)))))
+            {
+                TurnAnim();
+            }
         }
 
 
@@ -132,6 +140,7 @@ public class NPCFollow : MonoBehaviour
 
     public void TurnAnim()
     {
+        
         if (!turning)
         {
             turning = true;
@@ -173,14 +182,14 @@ public class NPCFollow : MonoBehaviour
 
     public void MoveLeft()
     {
-        if ((gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning)
+        if ((gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
         movement.MoveLeft();
     }
 
     public void MoveRight()
     {
-        if ((gameObject.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning)
+        if ((gameObject.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
         movement.MoveRight();
     }

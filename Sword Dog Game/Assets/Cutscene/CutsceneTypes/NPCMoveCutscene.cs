@@ -8,6 +8,7 @@ public class NPCMoveCutscene : CutsceneData
     public bool goToPoint = false;
     public Transform targ;
     public List<Vector2> targPoints = new List<Vector2>();
+    public bool backpedal = false;
     public bool lockMovementAfter = true;
     public bool keepTargetsAfter = false;
     int currPoint = 0;
@@ -18,10 +19,13 @@ public class NPCMoveCutscene : CutsceneData
         targetNPC.allowingForMovement = true;
         targetNPC.currentlyTryingMove = true;
         targetNPC.MovingToPoint = goToPoint;
-        if(goToPoint)
+        if (goToPoint)
         {
             targetNPC.targPoint = targPoints[currPoint];
         }
+        else
+            targetNPC.target = targ;
+        targetNPC.backpedal = backpedal;
     }
 
     public override void cycleExecution()
@@ -43,9 +47,10 @@ public class NPCMoveCutscene : CutsceneData
                 }
             }
         }
-        else if(!targetNPC.moving)
+        else if(!targetNPC.moving || Mathf.Abs(targ.position.x - targetNPC.transform.position.x) < 5)
         {
             finishedSegment();
+            Debug.Log("logger");
         }
     }
 
@@ -60,5 +65,6 @@ public class NPCMoveCutscene : CutsceneData
         {
             targetNPC.currentlyTryingMove = false;
         }
+        backpedal = false;
     }
 }
