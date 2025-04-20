@@ -10269,8 +10269,9 @@ GameObject:
   - component: {fileID: 1225848997}
   - component: {fileID: 1225848996}
   - component: {fileID: 1225848995}
+  - component: {fileID: 1225849007}
   m_Layer: 0
-  m_Name: FirstTimeEnterCutscene (2)
+  m_Name: FirstTimeEnterCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10309,7 +10310,7 @@ MonoBehaviour:
   getInteractorByName: 1
   interactorName: Player(Clone)
   overrideDialog: 1
-  dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.1]'
+  dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.2]'
   restorePriorDialog: 0
 --- !u!114 &1225848996
 MonoBehaviour:
@@ -10516,6 +10517,7 @@ MonoBehaviour:
   - {fileID: 1225848997}
   - {fileID: 1225848996}
   - {fileID: 1225848995}
+  - {fileID: 1225849007}
   cutsceneNumber: 0
   cutsceneName: P_FirstTimeEnter
   playingThisCutscene: 0
@@ -10525,6 +10527,26 @@ MonoBehaviour:
   controlMusic: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
+--- !u!114 &1225849007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225848993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  targetNPC: {fileID: 113593366}
+  goToPoint: 0
+  targ: {fileID: 1091595947}
+  targPoints: []
+  backpedal: 1
+  lockMovementAfter: 1
+  keepTargetsAfter: 0
 --- !u!1001 &1237198908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10708,7 +10730,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1928285643}
-  - {fileID: 2042827011}
   - {fileID: 1225848994}
   - {fileID: 746030008}
   - {fileID: 515816385}
@@ -15535,273 +15556,6 @@ Transform:
   m_Father: {fileID: 1216112690}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2042827010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2042827011}
-  - component: {fileID: 2042827012}
-  - component: {fileID: 2042827021}
-  - component: {fileID: 2042827019}
-  - component: {fileID: 2042827018}
-  - component: {fileID: 2042827022}
-  - component: {fileID: 2042827020}
-  - component: {fileID: 2042827016}
-  - component: {fileID: 2042827014}
-  - component: {fileID: 2042827023}
-  - component: {fileID: 2042827025}
-  - component: {fileID: 2042827024}
-  - component: {fileID: 2042827026}
-  m_Layer: 0
-  m_Name: FirstTimeEnterCutscene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2042827011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1268160082}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2042827012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutscenes:
-  - {fileID: 2042827021}
-  - {fileID: 2042827019}
-  - {fileID: 2042827018}
-  - {fileID: 2042827023}
-  - {fileID: 2042827025}
-  - {fileID: 2042827024}
-  - {fileID: 2042827026}
-  cutsceneNumber: 0
-  cutsceneName: P_FirstTimeEnter
-  playingThisCutscene: 0
-  stopInteractions: 0
-  stopMovement: 0
-  hideUI: 1
-  controlMusic: 0
-  RemoveOnDestroy: 1
-  OverwriteCopies: 0
---- !u!114 &2042827014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  npc: {fileID: 113593367}
-  interactor: {fileID: 0}
-  getInteractorByName: 1
-  interactorName: Player(Clone)
-  overrideDialog: 1
-  dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.1]'
-  restorePriorDialog: 0
---- !u!114 &2042827016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47037ce1504b97d409a3beecc75e1adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  personWithScript: {fileID: 416854194}
-  parameters: turnAnimRival
---- !u!114 &2042827018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  cutscenes:
-  - RequireCompletion: 1
-    cutscene: {fileID: 2042827022}
-  - RequireCompletion: 1
-    cutscene: {fileID: 2042827014}
---- !u!114 &2042827019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  waitTime: 0.5
---- !u!114 &2042827020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  targetNPC: {fileID: 113593366}
-  goToPoint: 1
-  targ: {fileID: 113593365}
-  targPoints:
-  - {x: 7, y: 0}
-  backpedal: 0
-  lockMovementAfter: 1
-  keepTargetsAfter: 0
---- !u!114 &2042827021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7544282153493438230371120e94c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  objectsToMove:
-  - objectToMove: {fileID: 113593365}
-    getFromName: 0
-    transformName: 
-    newLocation: {x: -10, y: -1, z: 0}
-    newScale: {x: 1, y: 1, z: 1}
-    newRotation: 0
-    relativePosition: 0
---- !u!114 &2042827022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97052fcd1aeb30d4bacfc8c3d2356314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  cutscenes:
-  - {fileID: 2042827020}
-  - {fileID: 2042827016}
-  currCutscene: 0
---- !u!114 &2042827023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97202702815fc64d9cc5ed84edc226c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  emoteType: 5
-  lifetime: 1
---- !u!114 &2042827024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  npc: {fileID: 113593367}
-  interactor: {fileID: 0}
-  getInteractorByName: 1
-  interactorName: Player(Clone)
-  overrideDialog: 1
-  dialog: '[lf,Story dialogue\Prologue\Prologue_scene_1_Ricken.txt,Scene2.1]'
-  restorePriorDialog: 0
---- !u!114 &2042827025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  waitTime: 1.75
---- !u!114 &2042827026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042827010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b986e7f08d944cf4bbd6070f3c71012a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finished: 0
-  targetNPC: {fileID: 113593366}
-  goToPoint: 0
-  targ: {fileID: 1091595947}
-  targPoints: []
-  backpedal: 1
-  lockMovementAfter: 1
-  keepTargetsAfter: 0
 --- !u!1 &2045204253
 GameObject:
   m_ObjectHideFlags: 0
