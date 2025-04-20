@@ -8300,7 +8300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015845286559979953, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.2
+      value: 17.84
       objectReference: {fileID: 0}
     - target: {fileID: 7015845286559979953, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15268,6 +15268,7 @@ GameObject:
   - component: {fileID: 2042827021}
   - component: {fileID: 2042827019}
   - component: {fileID: 2042827018}
+  - component: {fileID: 2042827026}
   - component: {fileID: 2042827022}
   - component: {fileID: 2042827020}
   - component: {fileID: 2042827016}
@@ -15378,6 +15379,8 @@ MonoBehaviour:
     cutscene: {fileID: 2042827022}
   - RequireCompletion: 1
     cutscene: {fileID: 2042827014}
+  - RequireCompletion: 1
+    cutscene: {fileID: 2042827026}
 --- !u!114 &2042827019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15499,6 +15502,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   waitTime: 1.75
+--- !u!114 &2042827026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 7
+    speed: 1
+    point: {x: 9.9, y: 3.27}
+    letterbox: 0
+    transition: 0
+    hideUI: 1
+    instantUI: 0
+    relPosition: 0
+    minSpeed: 1
+  target: {fileID: 0}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
 --- !u!1 &2045204253
 GameObject:
   m_ObjectHideFlags: 0
