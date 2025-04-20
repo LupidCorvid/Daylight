@@ -143,43 +143,19 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     }
 
     //Dialog Events Below
-
-    public void turnAnimRival()
-    {
-        //Attempt for turn animation
-        //rivalAnim.Play("rival_turn");
-        //swordAnim.Play("sword_turn");
-        //isTurning = true;
-
-        //gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
-        //rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
-        //rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
-        //print(rivalSword.transform.position);
-        followScript.TurnAnim();
-    }
-
-    public void enterPlayerName()
-    {
-        
-    }
     
     public void CutsceneEvent(string functionToCall)
     {
         switch (functionToCall)
         {
             case "flashRed":
-                flashRed();
+                rivalAnim.Play("rival_injury");
                 break;
             case "turnAnimRival":
-                turnAnimRival();
+                followScript.TurnAnim();
                 //print("triggered turnAnimRival");
                 break;
         }
-    }
-
-    public void flashRed()
-    {
-        rivalAnim.Play("rival_injury");
     }
 
     public void monsterKilled()
@@ -189,10 +165,5 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //    monsterDefeated = true;
         //    CutsceneController.PlayCutscene("SavedFromMonster");
         //}
-    }
-
-    public void followPlayerToTown()
-    {
-
     }
 }

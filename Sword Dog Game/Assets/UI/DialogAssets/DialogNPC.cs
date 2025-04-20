@@ -282,6 +282,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
      * 5 worry 
      * 6 sad
      * 7 talk
+     * 8 playful (not implemented yet)
      */
 
     //Person you're speaking to
