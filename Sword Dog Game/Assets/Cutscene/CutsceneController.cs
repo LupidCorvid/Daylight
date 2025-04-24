@@ -144,6 +144,15 @@ public class CutsceneController : MonoBehaviour
                     nestedScenes.Add(pair.cutscene);
                 }
             }
+
+            if(data as SequenceCutscene != null)
+            {
+                SequenceCutscene seqCutscene = (SequenceCutscene)data;
+                foreach(CutsceneData cutscene in seqCutscene.cutscenes)
+                {
+                    nestedScenes.Add(cutscene);
+                }
+            }
         }
 
         for(int i = newList.Count - 1; i >= 0; --i)

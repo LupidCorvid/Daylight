@@ -51,6 +51,8 @@ public class MoveCameraCutscene : CutsceneData
             return;
         }
 
+        //If the distance between the point and the camera is <= .01f, OR if the point was overshot
+        //AND the zoom is correct
         if (((Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && !points[curPoint].relPosition)
             || Vector2.Distance(points[curPoint].point + (Vector2)transform.position, target.transform.position) <= .01f && points[curPoint].relPosition)
             && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)

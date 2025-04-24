@@ -44,11 +44,13 @@ Scene1.3{
 }
 
 Scene2.1{
-[unskpbl][sh, Ricken][abf,10][ss, .035][TFX, Wave, 5, 5, 50] Woohoo![/TFX,Wave] We made it back.[wi]
-[c][reemote, 5] Hm?[wi]
-[c] Yeah...[w, .1] you're right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away [IA,<i>]and[IA,</i>] dangerously close to town, at that... [wi]
-[c] But![w, .2] Reporting and braving the General's wrath sounds like [IA,<i>]your[IA,</i>] problem. [IA,<i>]I[IA,</i>] haveta get my leg checked![wi][CE, WalkAwayABit]
-[c] Make sure to let the General know about how great of a job I did at safekeeping the town! [wi][exit]
+[unskpbl][sh, Ricken][abf,10][ss, .035][TFX, Wave, 5, 5, 50] Woohoo![/TFX,Wave] We made it back![wi] [exit]
+}
+
+Scene2.2{
+[unskpbl][sh, Ricken][abf,10][ss, .035] Yeah...[w, .1] you're right...[w, .1] Someone [TFX, Wave, 5, 5, 50]does[/TFX,Wave] have to tell the General that the monsters got away [IA,<i>]and[IA,</i>] dangerously close to town, at that... [wi]
+[c] But![w, .2] Reporting and braving the General's wrath sounds like [IA,<i>]your[IA,</i>] problem. [IA,<i>]I[IA,</i>] haveta get my leg checked! [wi]
+[c] Make sure to let the General know about how great of a job I did at safekeeping the town! [wi] [exit]
 }
 
 LeaveNoSword{

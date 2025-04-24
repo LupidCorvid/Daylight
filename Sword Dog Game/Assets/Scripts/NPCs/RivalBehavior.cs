@@ -26,6 +26,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     public bool isTurning = false; //Toggle if turnAnim is triggered //Attempt for turn animation
     public GameObject rivalSword;
 
+    public NPCFollow followScript;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //}
         if (talking && !isTurning && !prologueBehaviorActive) speak();
         //rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
-        print(rivalSword.transform.localPosition);
+        //print(rivalSword.transform.localPosition);
     }
 
     public void idle()
@@ -142,42 +143,19 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     }
 
     //Dialog Events Below
-
-    public void turnAnimRival()
-    {
-        //Attempt for turn animation
-        //rivalAnim.Play("rival_turn");
-        //swordAnim.Play("sword_turn");
-        //isTurning = true;
-
-        //gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
-        //rivalSword.GetComponent<SpriteRenderer>().flipX = !rivalSword.GetComponent<SpriteRenderer>().flipX;
-        //rivalSword.transform.position = rivalSword.transform.position + new Vector3(-30f, 0f, 0f);
-        //print(rivalSword.transform.position);
-    }
-
-    public void enterPlayerName()
-    {
-
-    }
     
     public void CutsceneEvent(string functionToCall)
     {
         switch (functionToCall)
         {
             case "flashRed":
-                flashRed();
+                rivalAnim.Play("rival_injury");
                 break;
             case "turnAnimRival":
-                turnAnimRival();
+                followScript.TurnAnim();
                 //print("triggered turnAnimRival");
                 break;
         }
-    }
-
-    public void flashRed()
-    {
-        rivalAnim.Play("rival_injury");
     }
 
     public void monsterKilled()
@@ -189,8 +167,15 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //}
     }
 
-    public void followPlayerToTown()
+    //Takes an arbitrary number of arguments, use how ever you need
+    //This calls another cutscene from Unity, and it happens at the same time as the currect cutscene
+    public override void eventCalled(params string[] input)
     {
-
+        switch(input[0])
+        {
+            case "backPedal":
+                //Call backpedal cutscene CutsceneController.PlayCutscene("P_TownPan");
+                break;
+        }
     }
 }
