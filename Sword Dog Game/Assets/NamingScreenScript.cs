@@ -6,7 +6,7 @@ using TMPro;
 
 public class NamingScreenScript : MonoBehaviour
 {
-    public string inputtedName = "";
+    public string inputtedName = "Feng";
 
     public int cursorPos = 0;
 

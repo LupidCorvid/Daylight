@@ -49,6 +49,7 @@ public class TownManager : RoomManager
             case "P_GeneralFirstTimeEnter":
                 if (roomState.P_TownPan == true && roomState.P_GeneralFirstTimeEnter == false)
                 {
+                    print("Debug!");
                     CutsceneController.PlayCutscene("P_GeneralFirstTimeEnter");
                     roomState.P_GeneralFirstTimeEnter = true;
                     

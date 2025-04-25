@@ -17,6 +17,7 @@ public class GeneralBehavior : DialogNPC, ICutsceneCallable
     private MiniBubbleController bubble;
 
     public NPCFollow followScript;
+    public GameObject sword;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +27,7 @@ public class GeneralBehavior : DialogNPC, ICutsceneCallable
 
     void FixedUpdate()
     {
-        if (alreadyTalking)
-            talkingToPlayer();
-        else if (!finishTalkingSequence)
-            idle();
+        //idle()
 
         if(alreadyTalking)
         {
@@ -56,22 +54,14 @@ public class GeneralBehavior : DialogNPC, ICutsceneCallable
 
     private void idle()
     {
-        waitToLook += Time.deltaTime;
-        // print(waitToLook);
-        
-
-        if (waitToLook >= 7)
-        {
-            anim.Play("GEN_look");
-        }
-        else
-        {
-            anim.Play("GEN_idle");
-        }
-
-        if (waitToLook >= 15) waitToLook = 0;
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            waitToLook += Time.deltaTime;
+            if (waitToLook >= 7) anim.Play("GEN_look");
+            else anim.Play("GEN_idle");
+            if (waitToLook >= 15) waitToLook = 0;
     }
-
 
     public override void exitDialog()
     {
@@ -79,6 +69,8 @@ public class GeneralBehavior : DialogNPC, ICutsceneCallable
         StartCoroutine(finishedTalking());
 
     }
+
+    //Turns the head to look at the player if player is moving while talking to the NPC
     private void talkingToPlayer()
     {
         //if the player is on the left side, play turn head animation
@@ -93,23 +85,12 @@ public class GeneralBehavior : DialogNPC, ICutsceneCallable
         
         //If the player is on his left and he's facing right...
         if (playerPosition.x < transform.position.x && !gameObject.GetComponent<SpriteRenderer>().flipX)
-        {
             anim.Play("GEN_lookAtPlayer");
-        }
 
         //If the player is on his right and he's facing left...
         //TODO: currently not working
         if (playerPosition.x > transform.position.x && gameObject.GetComponent<SpriteRenderer>().flipX)
-        {
             anim.Play("GEN_lookAtPlayer");
-        }
-
-        //Debug
-        /*if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            finishTalkingSequence = true;
-            talking = false;
-        }*/
     }
 
     IEnumerator finishedTalking()
