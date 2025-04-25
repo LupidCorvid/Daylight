@@ -44,7 +44,6 @@ public class NPCFollow : MonoBehaviour
 
     public string walkAnim;
 
-
     float moveSpeed
     {
         get { return running ? sprintSpeed : walkSpeed; }
