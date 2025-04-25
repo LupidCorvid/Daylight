@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralBehavior : DialogNPC
+public class GeneralBehavior : DialogNPC, ICutsceneCallable
 {
     Animator anim;
     float waitToLook = 0f;
@@ -15,6 +15,8 @@ public class GeneralBehavior : DialogNPC
 
     public string interruptDialog;
     private MiniBubbleController bubble;
+
+    public NPCFollow followScript;
 
     // Start is called before the first frame update
     void Start()
@@ -125,4 +127,15 @@ public class GeneralBehavior : DialogNPC
         finishTalkingSequence = false;
     }
 
+    //Dialog Events Below
+
+    public void CutsceneEvent(string functionToCall)
+    {
+        switch (functionToCall)
+        {
+            case "turnAnimGeneral":
+                followScript.TurnAnim();
+                break;
+        }
+    }
 }

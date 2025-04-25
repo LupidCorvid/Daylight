@@ -3587,7 +3587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.620178
+      value: -6.6201477
       objectReference: {fileID: 0}
     - target: {fileID: 6712416993626590192, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5838,6 +5838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491015354}
   - component: {fileID: 491015355}
+  - component: {fileID: 491015356}
   m_Layer: 0
   m_Name: GeneralTalkTrigger
   m_TagString: Untagged
@@ -5889,7 +5890,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 6.724514, y: -3.391222}
@@ -5905,6 +5906,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4405441, y: 7.782444}
   m_EdgeRadius: 0
+--- !u!114 &491015356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491015353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6bad2ca48dd2348822b2c241bfdf1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: P_GeneralFirstTimeEnter
+  oneTimeTrigger: 1
+  triggered: 0
+  triggerCooldown: 0
 --- !u!1 &515816384
 GameObject:
   m_ObjectHideFlags: 0
@@ -10009,6 +10026,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146857060}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1148004347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7962026614516624368, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+  m_PrefabInstance: {fileID: 7962026614343422545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1149459536
 GameObject:
   m_ObjectHideFlags: 0
@@ -16208,7 +16230,17 @@ GameObject:
   m_Component:
   - component: {fileID: 2132174695}
   - component: {fileID: 2132174697}
-  - component: {fileID: 2132174696}
+  - component: {fileID: 2132174699}
+  - component: {fileID: 2132174698}
+  - component: {fileID: 2132174700}
+  - component: {fileID: 2132174701}
+  - component: {fileID: 2132174703}
+  - component: {fileID: 2132174702}
+  - component: {fileID: 2132174704}
+  - component: {fileID: 2132174708}
+  - component: {fileID: 2132174707}
+  - component: {fileID: 2132174706}
+  - component: {fileID: 2132174705}
   m_Layer: 0
   m_Name: GeneralTalkCutscene
   m_TagString: Untagged
@@ -16231,22 +16263,6 @@ Transform:
   m_Father: {fileID: 1268160082}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2132174696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132174694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec6bad2ca48dd2348822b2c241bfdf1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: P_GeneralFirstTimeEnter
-  oneTimeTrigger: 1
-  triggered: 0
-  triggerCooldown: 0
 --- !u!114 &2132174697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16259,7 +16275,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscenes: []
+  cutscenes:
+  - {fileID: 2132174699}
+  - {fileID: 2132174698}
+  - {fileID: 2132174700}
+  - {fileID: 2132174701}
+  - {fileID: 2132174703}
+  - {fileID: 2132174702}
+  - {fileID: 2132174704}
+  - {fileID: 2132174708}
+  - {fileID: 2132174707}
+  - {fileID: 2132174706}
+  - {fileID: 2132174705}
   cutsceneNumber: 0
   cutsceneName: 
   playingThisCutscene: 0
@@ -16269,6 +16296,186 @@ MonoBehaviour:
   controlMusic: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
+--- !u!114 &2132174698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 1.75
+--- !u!114 &2132174699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6c0dfb767119f42af9113effd21d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  character: {fileID: 0}
+  emoteType: 4
+  lifetime: 1
+--- !u!114 &2132174700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47037ce1504b97d409a3beecc75e1adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  personWithScript: {fileID: 1148004347}
+  parameters: turnAnimGeneral
+--- !u!114 &2132174701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 7962026614343422546}
+  interactor: {fileID: 0}
+  getInteractorByName: 1
+  interactorName: Player(Clone)
+  overrideDialog: 1
+  dialog: '[lf,General.txt,Prologue4]'
+  restorePriorDialog: 0
+--- !u!114 &2132174702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 1.75
+--- !u!114 &2132174703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97202702815fc64d9cc5ed84edc226c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  emoteType: 7
+  lifetime: 1
+--- !u!114 &2132174704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 7962026614343422546}
+  interactor: {fileID: 0}
+  getInteractorByName: 1
+  interactorName: Player(Clone)
+  overrideDialog: 1
+  dialog: '[lf,General.txt,Prologue4.1]'
+  restorePriorDialog: 0
+--- !u!114 &2132174705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8383f81b67476e4aadfcc19676e3556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  npc: {fileID: 7962026614343422546}
+  interactor: {fileID: 0}
+  getInteractorByName: 1
+  interactorName: Player(Clone)
+  overrideDialog: 1
+  dialog: '[lf,General.txt,Prologue4.2]'
+  restorePriorDialog: 0
+--- !u!114 &2132174706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &2132174707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf1f7b42204bd4fb4dd74dd1d50268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  waitTime: 1
+--- !u!114 &2132174708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 1
+  Stall: 1
+  speed: 1
 --- !u!1001 &2134314395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18421,7 +18628,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8886986453328694049, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
   m_PrefabInstance: {fileID: 7962026614343422545}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1148004347}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7b9a5633a2f6874898f1fece8590479, type: 3}
