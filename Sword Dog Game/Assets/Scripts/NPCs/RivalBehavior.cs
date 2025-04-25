@@ -167,6 +167,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //}
     }
 
+    //Used for [CE, p1, p2, ...]
     //Takes an arbitrary number of arguments, use how ever you need
     //This calls another cutscene from Unity, and it happens at the same time as the currect cutscene
     public override void eventCalled(params string[] input)
@@ -174,7 +175,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         switch(input[0])
         {
             case "backPedal":
-                //Call backpedal cutscene CutsceneController.PlayCutscene("P_TownPan");
+                CutsceneController.PlayCutscene("U_rickenBackpedal");
                 break;
         }
     }
