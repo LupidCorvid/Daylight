@@ -90,6 +90,8 @@ public class Entity : MonoBehaviour, IParryable, ITeam
         set { _facingDir = value; }
     }
 
+    public bool freezeAI = false;
+
     public virtual Inventory getAssociatedInventory()
     {
         return null;
