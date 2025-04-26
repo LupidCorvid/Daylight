@@ -13,6 +13,8 @@ public class LanternFollow : MonoBehaviour
     public Rigidbody2D rb;
     public bool autoActivated = false;
 
+    public bool playerIsHolding;
+
     // Start is called before the first frame update
     void Start()
     {
