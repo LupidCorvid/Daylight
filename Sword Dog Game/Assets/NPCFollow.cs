@@ -23,7 +23,7 @@ public class NPCFollow : MonoBehaviour
 
     public bool canRun = false;
     public float RunningDistance = 8;
-    bool running = false;
+    public bool running = false;
 
     //Sprint logic needs to be moved to baseMovement
     public float walkSpeed = 4;
@@ -201,7 +201,7 @@ public class NPCFollow : MonoBehaviour
     {
         if ((FlipVisualsTarg.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
-        movement.MoveLeft();
+        movement.MoveLeft(moveSpeed);
         //Do not restart animation if already playing
         if (walkAnim != "" && !anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
             WalkAnim();
@@ -216,7 +216,7 @@ public class NPCFollow : MonoBehaviour
     {
         if ((FlipVisualsTarg.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
-        movement.MoveRight();
+        movement.MoveRight(moveSpeed);
         //Do not restart animation if already playing
         if (walkAnim != "" && !anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
             WalkAnim();

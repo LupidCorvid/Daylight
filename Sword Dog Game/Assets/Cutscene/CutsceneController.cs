@@ -202,7 +202,10 @@ public class CutsceneController : MonoBehaviour
         if (playingThisCutscene && cutsceneStopMovement && stopMovement)
             cutsceneStopMovement = false;
         if (playingThisCutscene && cutsceneHideUI && hideUI)
+        {
             cutsceneHideUI = false;
+            CanvasManager.ShowHUD();
+        }
         if (playingThisCutscene && cutsceneControlMusic && controlMusic)
             cutsceneControlMusic = false;
         if (playingThisCutscene && FreezePlayerRigidbody && cutsceneFreezePlayerRb)

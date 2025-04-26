@@ -2166,6 +2166,7 @@ MonoBehaviour:
   lockMovementAfter: 1
   keepTargetsAfter: 0
   AIToFreeze: {fileID: 0}
+  sprint: 0
 --- !u!114 &181335238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9917,6 +9918,7 @@ MonoBehaviour:
   lockMovementAfter: 1
   keepTargetsAfter: 0
   AIToFreeze: {fileID: 0}
+  sprint: 0
 --- !u!114 &1146042465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10501,6 +10503,7 @@ GameObject:
   - component: {fileID: 1225849005}
   - component: {fileID: 1225849004}
   - component: {fileID: 1225849003}
+  - component: {fileID: 1225849009}
   - component: {fileID: 1225849002}
   - component: {fileID: 1225849001}
   - component: {fileID: 1225849000}
@@ -10640,6 +10643,7 @@ MonoBehaviour:
   lockMovementAfter: 1
   keepTargetsAfter: 0
   AIToFreeze: {fileID: 0}
+  sprint: 0
 --- !u!114 &1225849001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10673,7 +10677,7 @@ MonoBehaviour:
   points:
   - zoom: 7
     speed: 1
-    point: {x: 1.01, y: 3.91}
+    point: {x: -2, y: 3.91}
     letterbox: 0
     transition: 0
     hideUI: 1
@@ -10682,7 +10686,7 @@ MonoBehaviour:
     minSpeed: 1
   target: {fileID: 0}
   freeCameraOnExit: 0
-  freeHudOnExit: 0
+  freeHudOnExit: 1
   useMainCamera: 1
   ignoreCameraBounds: 0
   resetBarsOnExit: 0
@@ -10707,6 +10711,8 @@ MonoBehaviour:
     cutscene: {fileID: 1225848998}
   - RequireCompletion: 1
     cutscene: {fileID: 1225849002}
+  - RequireCompletion: 1
+    cutscene: {fileID: 1225849009}
 --- !u!114 &1225849004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10742,6 +10748,13 @@ MonoBehaviour:
     newScale: {x: 1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
+  - objectToMove: {fileID: 113593365}
+    getFromName: 1
+    transformName: Player(Clone)
+    newLocation: {x: -14, y: -1, z: 0}
+    newScale: {x: 1, y: 1, z: 1}
+    newRotation: 0
+    relativePosition: 0
 --- !u!114 &1225849006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10766,8 +10779,8 @@ MonoBehaviour:
   cutsceneNumber: 0
   cutsceneName: P_FirstTimeEnter
   playingThisCutscene: 0
-  stopInteractions: 0
-  stopMovement: 0
+  stopInteractions: 1
+  stopMovement: 1
   hideUI: 1
   controlMusic: 0
   FreezePlayerRigidbody: 0
@@ -10809,6 +10822,27 @@ MonoBehaviour:
   lockMovementAfter: 1
   keepTargetsAfter: 0
   AIToFreeze: {fileID: 0}
+  sprint: 1
+--- !u!114 &1225849009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225848993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b0ada80bab59244a647084a1958e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  goToPoint: 1
+  targ: {fileID: 0}
+  targPoints:
+  - {x: 0, y: 0}
+  backpedal: 0
+  keepTargetsAfter: 0
+  sprinting: 0
 --- !u!1001 &1237198908
 PrefabInstance:
   m_ObjectHideFlags: 0
