@@ -15,6 +15,7 @@ public class PrologueManager : RoomManager
     public GameObject NoSwordBlock;
     public GameObject Ricken;
     public Collider2D monsterAliveBlock;
+    public NPCFollow RickenFollow;
 
     bool attemptedLeave = false;
 
@@ -63,6 +64,11 @@ public class PrologueManager : RoomManager
                 {
                     CutsceneController.PlayCutscene("SavedFromMonster");
                 }
+                break;
+            case "RickenStartFollow":
+                RickenFollow.target = Player.controller.transform;
+                RickenFollow.currentlyTryingMove = true;
+                RickenFollow.allowingForMovement = true;
                 break;
         }
     }
