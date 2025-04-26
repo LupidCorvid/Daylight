@@ -14,15 +14,21 @@ public class LanternFollow : MonoBehaviour
     public bool autoActivated = false;
 
     public bool playerIsHolding;
+    public Entity actor;
+    public GameObject target;
 
-    // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void FixedUpdate()
+    {
+        if (playerIsHolding) playerHasLantern();
+        else entityHasLantern();
+    }
+
+    void playerHasLantern()
     {
         if (Player.instance != null)
         {
@@ -66,10 +72,32 @@ public class LanternFollow : MonoBehaviour
         }
     }
 
+    void entityHasLantern()
+    {
+        print("Is this happening?");
+        if (actor != null)
+        {
+            lantern.enabled = true;
+            lanternLight.enabled = true;
+                
+            lantPreviousLocation = transform.position;
+
+            //Check for being flipped
+            if (actor.facingDir.x > 0) //facing right
+                lantTargetLocation = new Vector3(target.transform.position.x, target.transform.position.y - .75f, target.transform.position.z);
+            else
+                lantTargetLocation = new Vector3(target.transform.position.x, target.transform.position.y - .75f, target.transform.position.z);
+            
+            transform.position = Vector3.Lerp(lantPreviousLocation, lantTargetLocation, 1);
+        }
+        else
+        {
+            print("WRONG");
+        }
+    }
+
     public void AttackMove()
     {
-        
-
     }
     
     public void Freeze()
