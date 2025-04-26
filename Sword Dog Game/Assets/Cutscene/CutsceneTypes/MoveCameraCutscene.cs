@@ -40,6 +40,7 @@ public class MoveCameraCutscene : CutsceneData
             changingToNewTransform();
         if (target != null)
             cameraRb = target.GetComponent<Rigidbody2D>();
+        
     }
 
     public override void cycleExecution()
@@ -197,10 +198,9 @@ public class MoveCameraCutscene : CutsceneData
             if (ignoreCameraBounds)
                 CameraController.main.cldr.isTrigger = false;
         }
-        if (CinematicBars.current.beingAdded)
-            CinematicBars.current.Hide();
-
         
+        if (CinematicBars.current != null && CinematicBars.current.beingAdded)
+            CinematicBars.current.Hide();
 
         base.finishedSegment();
     }

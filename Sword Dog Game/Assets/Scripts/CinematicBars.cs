@@ -30,7 +30,8 @@ public class CinematicBars : MonoBehaviour
         bottomBar.anchorMax = new Vector2(1, 0);
         bottomBar.sizeDelta = new Vector2(0, 0);
 
-        current = this;
+        if(this != null)
+            current = this;
     }
 
     // Update is called once per frame

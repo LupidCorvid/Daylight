@@ -8,7 +8,7 @@ using UnityEngine;
 public class TownAreaState
 {
     //Essentially, put all story beats that need to be saved to file as variables here. This guides the direction of the story.
-    public bool P_FirstTimeEnter_triggered = false;
+    public bool P_FirstTimeEnter_triggered = true;
         /* Protag and Ricken walk in.
         * After a slight bit, the textbox appears and "woohoo we made it!"
         * Ricken turns around

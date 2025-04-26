@@ -2187,6 +2187,7 @@ MonoBehaviour:
   stopMovement: 0
   hideUI: 0
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!1001 &186187803
@@ -2470,8 +2471,13 @@ GameObject:
   m_Component:
   - component: {fileID: 210906012}
   - component: {fileID: 210906014}
+  - component: {fileID: 210906019}
+  - component: {fileID: 210906018}
+  - component: {fileID: 210906017}
   - component: {fileID: 210906013}
-  - component: {fileID: 210906015}
+  - component: {fileID: 210906016}
+  - component: {fileID: 210906022}
+  - component: {fileID: 210906021}
   m_Layer: 0
   m_Name: TownPanCutsceneEnd
   m_TagString: Untagged
@@ -2523,18 +2529,120 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
-  - {fileID: 210906013}
-  - {fileID: 210906015}
+  - {fileID: 210906019}
+  - {fileID: 210906018}
+  - {fileID: 210906016}
+  - {fileID: 210906022}
+  - {fileID: 210906021}
   cutsceneNumber: 0
   cutsceneName: P_TownPanEnd
   playingThisCutscene: 0
   stopInteractions: 0
   stopMovement: 1
-  hideUI: 0
+  hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 1
---- !u!114 &210906015
+--- !u!114 &210906016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 1
+  Stall: 1
+  speed: 1
+--- !u!114 &210906017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 8
+    speed: 3
+    point: {x: 210, y: 3.27}
+    letterbox: 1
+    transition: 0
+    hideUI: 1
+    instantUI: 0
+    relPosition: 0
+    minSpeed: 0
+  target: {fileID: 2139305502}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 1
+  cameraRb: {fileID: 0}
+--- !u!114 &210906018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  cutscenes:
+  - RequireCompletion: 1
+    cutscene: {fileID: 210906017}
+  - RequireCompletion: 1
+    cutscene: {fileID: 210906013}
+--- !u!114 &210906019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e390f4814ade446a31adaf53391025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  target: {fileID: 2139305502}
+  position: {x: 195, y: 3.27}
+  zoom: 8
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &210906021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &210906022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2550,9 +2658,9 @@ MonoBehaviour:
   points: []
   target: {fileID: 2139305502}
   freeCameraOnExit: 1
-  freeHudOnExit: 0
+  freeHudOnExit: 1
   useMainCamera: 1
-  ignoreCameraBounds: 0
+  ignoreCameraBounds: 1
   cameraRb: {fileID: 0}
 --- !u!1 &229782326
 GameObject:
@@ -3210,6 +3318,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1278087035613626278, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 133.41016
+      objectReference: {fileID: 0}
     - target: {fileID: 1401140974741087912, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3619,8 +3731,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 4.133301
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.620178
+      value: -6.620117
       objectReference: {fileID: 0}
     - target: {fileID: 6712416993626590192, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5008,12 +5124,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   points:
-  - zoom: 7
+  - zoom: 8
     speed: 3
     point: {x: 59.2, y: 3.27}
     letterbox: 1
     transition: 0
-    hideUI: 0
+    hideUI: 1
     instantUI: 0
     relPosition: 0
     minSpeed: 0
@@ -5054,7 +5170,7 @@ MonoBehaviour:
   finished: 0
   target: {fileID: 2139305502}
   position: {x: 49.2, y: 3.27}
-  zoom: 7
+  zoom: 8
   useMainCamera: 1
   ignoreCameraBounds: 0
   cameraRb: {fileID: 0}
@@ -5099,6 +5215,7 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 1
   controlMusic: 1
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!114 &424776976
@@ -8216,7 +8333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015845286559979953, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.84
+      value: 23.5
       objectReference: {fileID: 0}
     - target: {fileID: 7015845286559979953, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9754,6 +9871,7 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!4 &1146042463
@@ -10009,6 +10127,206 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1197019536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197019537}
+  - component: {fileID: 1197019545}
+  - component: {fileID: 1197019544}
+  - component: {fileID: 1197019543}
+  - component: {fileID: 1197019542}
+  - component: {fileID: 1197019541}
+  - component: {fileID: 1197019540}
+  - component: {fileID: 1197019539}
+  - component: {fileID: 1197019538}
+  m_Layer: 0
+  m_Name: TownPanCutsceneEnd (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1197019537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1268160082}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197019538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &1197019539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e390f4814ade446a31adaf53391025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  target: {fileID: 2139305502}
+  position: {x: 23.5, y: 3.27}
+  zoom: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &1197019540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 1
+  Stall: 1
+  speed: 1
+--- !u!114 &1197019541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6468e297ca8efe49a28063d324fe103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeToBlack: 0
+  Stall: 1
+  speed: 1
+--- !u!114 &1197019542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 7
+    speed: 3
+    point: {x: 215, y: 3.27}
+    letterbox: 1
+    transition: 0
+    hideUI: 1
+    instantUI: 0
+    relPosition: 0
+    minSpeed: 0
+  target: {fileID: 2139305502}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 1
+  cameraRb: {fileID: 0}
+--- !u!114 &1197019543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d7eec1560a0a3489f4f1790ae735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  cutscenes:
+  - RequireCompletion: 1
+    cutscene: {fileID: 1197019542}
+  - RequireCompletion: 1
+    cutscene: {fileID: 1197019541}
+--- !u!114 &1197019544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e390f4814ade446a31adaf53391025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  target: {fileID: 2139305502}
+  position: {x: 203.98, y: 3.27}
+  zoom: 7
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &1197019545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197019536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5971e925c0b5241ba6ddf1aaa8b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscenes:
+  - {fileID: 1197019544}
+  - {fileID: 1197019543}
+  - {fileID: 1197019540}
+  - {fileID: 1197019539}
+  - {fileID: 1197019538}
+  cutsceneNumber: 0
+  cutsceneName: P_TownPanEnd
+  playingThisCutscene: 0
+  stopInteractions: 0
+  stopMovement: 1
+  hideUI: 1
+  controlMusic: 0
+  FreezePlayerRigidbody: 0
+  RemoveOnDestroy: 1
+  OverwriteCopies: 1
 --- !u!1 &1216112689
 GameObject:
   m_ObjectHideFlags: 0
@@ -10445,6 +10763,7 @@ MonoBehaviour:
   stopMovement: 0
   hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!114 &1225849007
@@ -10673,6 +10992,7 @@ Transform:
   - {fileID: 1372872634}
   - {fileID: 424776970}
   - {fileID: 210906012}
+  - {fileID: 1197019537}
   - {fileID: 491015354}
   - {fileID: 2132174695}
   m_Father: {fileID: 0}
@@ -11160,7 +11480,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.8593445, y: -3.7149882}
+  m_Offset: {x: -2.088976, y: -3.7149882}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11171,7 +11491,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.015579, y: 8.429976}
+  m_Size: {x: 5.5563164, y: 8.429976}
   m_EdgeRadius: 0
 --- !u!4 &1372872634
 Transform:
@@ -12464,6 +12784,7 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!4 &1650152783
@@ -15593,6 +15914,7 @@ MonoBehaviour:
   stopMovement: 1
   hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!114 &2045204256
@@ -16255,6 +16577,7 @@ MonoBehaviour:
   stopMovement: 0
   hideUI: 1
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!114 &2132174698
