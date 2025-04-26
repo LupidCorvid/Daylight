@@ -114,7 +114,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     void prologueBehavior()
     {
 
-        if (monster == null)
+        if (((PrologueManager)RoomManager.currentRoom)?.roomState.prologueMonsterKilled == true)
             monsterDefeated = true;
 
         //Rival cowers in front of the monster
