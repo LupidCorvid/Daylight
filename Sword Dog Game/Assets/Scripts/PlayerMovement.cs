@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
     private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
     public bool isOnSlope, canWalkOnSlope;
-    public PhysicsMaterial2D slippery, friction;
+    public PhysicsMaterial2D slippery, friction, immovable;
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
 
@@ -262,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundMovementUpdate()
     {
+
         if (waterRotation)
         {
             ChangeToLandRotation();
@@ -284,6 +285,13 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
+
+        //Freeze X only so player can finish falling to ground
+        //Since presumably player is already grounded, Y is mostly locked as they can't move into the ground and gravity will keep them floored
+        rb.constraints = CutsceneController.cutsceneFreezePlayerRb ? RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeRotation;
+        //rb.drag = CutsceneController.cutsceneFreezePlayerRb ? 9999999 : 0;
+        //if (CutsceneController.cutsceneFreezePlayerRb)
+        //    rb.sharedMaterial = immovable;
 
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene)
         {

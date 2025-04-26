@@ -14,6 +14,7 @@ public class PrologueManager : RoomManager
     public GameObject looseSword;
     public GameObject NoSwordBlock;
     public GameObject Ricken;
+    public Collider2D monsterAliveBlock;
 
     bool attemptedLeave = false;
 
@@ -45,10 +46,10 @@ public class PrologueManager : RoomManager
                 }
                 break;
             case "AttemptedLeave":
-                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && roomState.prologueMonsterKilled && !attemptedLeave)
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
                 {
                     CutsceneController.PlayCutscene("AttemptedLeave");
-                    attemptedLeave = true;
+                    //attemptedLeave = true;
                 }
                 break;
             case "EnemyPan":
@@ -91,6 +92,9 @@ public class PrologueManager : RoomManager
 
         if (!QuestsManager.main.checkIfAssigned(0))
             QuestsManager.main.AssignQuest(new GetupQuest());
+
+        if (roomState.prologueMonsterKilled)
+            monsterAliveBlock.enabled = false;
     }
 
     public void savedFriend()
