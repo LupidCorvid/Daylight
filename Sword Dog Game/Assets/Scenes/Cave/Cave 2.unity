@@ -726,6 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Cave 12
   spawn: FromCave2
+  newArea: 0
 --- !u!1 &153311412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,6 +3777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Mountain 1
   spawn: FromCave2
+  newArea: 0
 --- !u!1 &682392567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6691,6 +6693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Forest 6
   spawn: FromCave2
+  newArea: 0
 --- !u!1 &1343494611
 GameObject:
   m_ObjectHideFlags: 0
@@ -8668,6 +8671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: Forest 6
   spawn: FromCave2
+  newArea: 0
 --- !u!61 &1771530782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10372,6 +10376,10 @@ PrefabInstance:
       propertyPath: darkness
       value: 
       objectReference: {fileID: 640062222}
+    - target: {fileID: 7171495202996140873, guid: e2df21fcd5bee6b41846a735769d2d55, type: 3}
+      propertyPath: playerIsHolding
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7825445179592872319, guid: e2df21fcd5bee6b41846a735769d2d55, type: 3}
       propertyPath: m_Name
       value: LanternObject
