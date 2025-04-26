@@ -70,6 +70,9 @@ public class PrologueManager : RoomManager
                 RickenFollow.currentlyTryingMove = true;
                 RickenFollow.allowingForMovement = true;
                 break;
+            case "TesterCutscene":
+                CutsceneController.PlayCutscene("TestPlayerMove");
+                break;
         }
     }
 
