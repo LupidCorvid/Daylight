@@ -202,7 +202,7 @@ MonoBehaviour:
   interactor: {fileID: 0}
   dialogDistance: 10
   interruptDialog: '[lf,General.txt,Interrupted]'
-  followScript: {fileID: 0}
+  followScript: {fileID: 5480382021138609974}
   sword: {fileID: 8801826253041960971}
 --- !u!61 &8674809502802813793
 BoxCollider2D:
@@ -279,7 +279,7 @@ Transform:
   m_GameObject: {fileID: 7962026614516624368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 36.891357, y: -2.2391558, z: -0.029092358}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2753385420199512206}
@@ -369,11 +369,13 @@ MonoBehaviour:
   RunningDistance: 8
   walkSpeed: 4
   sprintSpeed: 6
-  SpriteFacesRight: 1
+  SpriteFacesRight: 0
   anim: {fileID: 8973422037011292205}
   ControlFlip: 1
+  flipAnimator: 0
   turnAnimName: turn
   backpedal: 0
+  walkAnim: 
   swordAnim: {fileID: 2881856010715488909}
   swordTurnAnim: turn
 --- !u!114 &5698690709920727981
@@ -506,7 +508,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8801826253041960971}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.12, y: 0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -557,7 +559,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 551e88123ef7a9c40aa64fba2d86bbd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 3.2, y: 1.1}
