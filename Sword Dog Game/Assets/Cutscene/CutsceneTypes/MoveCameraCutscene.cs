@@ -17,6 +17,8 @@ public class MoveCameraCutscene : CutsceneData
 
     public bool ignoreCameraBounds = false;
 
+    public bool resetBarsOnExit = false;
+
     public Rigidbody2D cameraRb;
 
     public enum MovementType
@@ -199,7 +201,7 @@ public class MoveCameraCutscene : CutsceneData
                 CameraController.main.cldr.isTrigger = false;
         }
         
-        if (CinematicBars.current != null && CinematicBars.current.beingAdded)
+        if (CinematicBars.current != null  && resetBarsOnExit)
             CinematicBars.current.Hide();
 
         base.finishedSegment();
