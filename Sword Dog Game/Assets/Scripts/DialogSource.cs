@@ -30,7 +30,10 @@ public class DialogSource
 
     public string outString = "";
 
-    public static Dictionary<string, string> stringVariables = new Dictionary<string, string>();
+    public static Dictionary<string, string> stringVariables = new Dictionary<string, string>()
+    {
+        {" playerName", "Feng"}
+    };
     public static Dictionary<string, int> counterVariables = new Dictionary<string, int>();
 
     private bool waitFrameForChar = false;

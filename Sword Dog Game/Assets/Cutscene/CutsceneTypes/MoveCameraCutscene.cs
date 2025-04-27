@@ -17,6 +17,8 @@ public class MoveCameraCutscene : CutsceneData
 
     public bool ignoreCameraBounds = false;
 
+    public bool resetBarsOnExit = false;
+
     public Rigidbody2D cameraRb;
 
     public enum MovementType
@@ -40,6 +42,7 @@ public class MoveCameraCutscene : CutsceneData
             changingToNewTransform();
         if (target != null)
             cameraRb = target.GetComponent<Rigidbody2D>();
+        
     }
 
     public override void cycleExecution()
@@ -53,8 +56,8 @@ public class MoveCameraCutscene : CutsceneData
 
         //If the distance between the point and the camera is <= .01f, OR if the point was overshot
         //AND the zoom is correct
-        if (((Vector2.Distance(points[curPoint].point, target.transform.position) <= .01f && !points[curPoint].relPosition)
-            || Vector2.Distance(points[curPoint].point + (Vector2)transform.position, target.transform.position) <= .01f && points[curPoint].relPosition)
+        if (((Vector2.Distance(points[curPoint].targPos, target.transform.position) <= .01f && !points[curPoint].relPosition)
+            || Vector2.Distance(points[curPoint].targPos + (Vector2)transform.position, target.transform.position) <= .01f && points[curPoint].relPosition)
             && Mathf.Abs(target.orthographicSize - points[curPoint].zoom) < .01f)
         {
             curPoint++;
@@ -109,17 +112,17 @@ public class MoveCameraCutscene : CutsceneData
     {
         if (transform.relPosition)
         {
-            if (Vector2.Distance(target.transform.position, transform.point + (Vector2)this.transform.position) > .05f)
-                target.transform.position += (Vector3)((transform.point + (Vector2)this.transform.position) - (Vector2)(target.transform.position)).normalized * Time.deltaTime * transform.speed;
+            if (Vector2.Distance(target.transform.position, transform.targPos + (Vector2)this.transform.position) > .05f)
+                target.transform.position += (Vector3)((transform.targPos + (Vector2)this.transform.position) - (Vector2)(target.transform.position)).normalized * Time.deltaTime * transform.speed;
             else
-                target.transform.position = transform.point + (Vector2)this.transform.position;
+                target.transform.position = transform.targPos + (Vector2)this.transform.position;
         }
         else
         {
-            if (Vector2.Distance(target.transform.position, transform.point) > .05f)
-                target.transform.position += (Vector3)(transform.point - (Vector2)target.transform.position).normalized * Time.deltaTime * transform.speed;
+            if (Vector2.Distance(target.transform.position, transform.targPos) > .05f)
+                target.transform.position += (Vector3)(transform.targPos - (Vector2)target.transform.position).normalized * Time.deltaTime * transform.speed;
             else
-                target.transform.position = transform.point;
+                target.transform.position = transform.targPos;
         }
         target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -10);
     }
@@ -141,15 +144,15 @@ public class MoveCameraCutscene : CutsceneData
         {
             if (transform.relPosition)
             {
-                if (((target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed) - target.transform.position).magnitude > transform.minSpeed)
-                    cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed);
+                if (((target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.targPos + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed) - target.transform.position).magnitude > transform.minSpeed)
+                    cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - (transform.targPos + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed);
                 else
                     LinearMovement(transform);
             }
             else
             {
-                if (((target.transform.position - (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed) - target.transform.position).magnitude > transform.minSpeed)
-                    cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed);
+                if (((target.transform.position - (Vector3)((Vector2)target.transform.position - transform.targPos) * Time.deltaTime * transform.speed) - target.transform.position).magnitude > transform.minSpeed)
+                    cameraRb.MovePosition(target.transform.position - (Vector3)((Vector2)target.transform.position - transform.targPos) * Time.deltaTime * transform.speed);
                 else
                     LinearMovement(transform);
             }
@@ -158,23 +161,23 @@ public class MoveCameraCutscene : CutsceneData
         }
         if (transform.relPosition)
         {
-            if ((((Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed)).magnitude > transform.minSpeed * Time.deltaTime)
-                target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed;
+            if ((((Vector3)((Vector2)target.transform.position - (transform.targPos + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed)).magnitude > transform.minSpeed * Time.deltaTime)
+                target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.targPos + (Vector2)this.transform.position)) * Time.deltaTime * transform.speed;
             else
-                target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.point + (Vector2)this.transform.position)).normalized * Time.deltaTime * transform.speed;
+                target.transform.position -= (Vector3)((Vector2)target.transform.position - (transform.targPos + (Vector2)this.transform.position)).normalized * Time.deltaTime * transform.speed;
         }
         else
         {
-            if ((((Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed)).magnitude > transform.minSpeed * Time.deltaTime)
+            if ((((Vector3)((Vector2)target.transform.position - transform.targPos) * Time.deltaTime * transform.speed)).magnitude > transform.minSpeed * Time.deltaTime)
             {
-                target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.point) * Time.deltaTime * transform.speed;
+                target.transform.position -= (Vector3)((Vector2)target.transform.position - transform.targPos) * Time.deltaTime * transform.speed;
             }
             else
             {
-                if (Vector2.Distance((((Vector3)((Vector2)target.transform.position - transform.point)).normalized * transform.minSpeed * Time.deltaTime), transform.point) > Time.deltaTime)
-                    target.transform.position -= ((Vector3)((Vector2)target.transform.position - transform.point)).normalized * transform.minSpeed * Time.deltaTime;
+                if (Vector2.Distance((((Vector3)((Vector2)target.transform.position - transform.targPos)).normalized * transform.minSpeed * Time.deltaTime), transform.targPos) > Time.deltaTime)
+                    target.transform.position -= ((Vector3)((Vector2)target.transform.position - transform.targPos)).normalized * transform.minSpeed * Time.deltaTime;
                 else
-                    target.transform.position = transform.point;
+                    target.transform.position = transform.targPos;
             }
         }
     }
@@ -184,9 +187,9 @@ public class MoveCameraCutscene : CutsceneData
         if (points.Count > 0)
         {
             if(points[^1].relPosition)
-                target.transform.position = new Vector3(points[^1].point.x + transform.position.x, points[^1].point.y + transform.position.y, target.transform.position.z);
+                target.transform.position = new Vector3(points[^1].targPos.x + transform.position.x, points[^1].targPos.y + transform.position.y, target.transform.position.z);
             else
-                target.transform.position = new Vector3(points[^1].point.x, points[^1].point.y, target.transform.position.z);
+                target.transform.position = new Vector3(points[^1].targPos.x, points[^1].targPos.y, target.transform.position.z);
         }
         if (useMainCamera && freeCameraOnExit)
         {
@@ -197,10 +200,9 @@ public class MoveCameraCutscene : CutsceneData
             if (ignoreCameraBounds)
                 CameraController.main.cldr.isTrigger = false;
         }
-        if (CinematicBars.current.beingAdded)
-            CinematicBars.current.Hide();
-
         
+        if (CinematicBars.current != null  && resetBarsOnExit)
+            CinematicBars.current.Hide();
 
         base.finishedSegment();
     }
@@ -231,6 +233,21 @@ public class MoveCameraCutscene : CutsceneData
         public bool relPosition;
         public float minSpeed;
 
+        public Transform targTransform;
+        public bool useTransformX, useTransformY;
+        public Vector2 targPos
+        {
+            get
+            {
+                if(targTransform == null)
+                    return point;
+                else
+                {
+                    return (new Vector2(useTransformX ? targTransform.position.x : point.x, useTransformY ? targTransform.position.y : point.y));
+                }
+            }
+        }
+
         public CameraTransform(float zoom, float speed, Vector2 targetPoint, MovementType transition, bool letterbox = false, bool hideUI = false, bool instantUI = false, bool relPosition = false)
         {
             this.zoom = zoom;
@@ -242,6 +259,9 @@ public class MoveCameraCutscene : CutsceneData
             this.instantUI = instantUI;
             this.relPosition = relPosition;
             minSpeed = 0;
+            targTransform = null;
+            useTransformX = false;
+            useTransformY = false;
         }
     }
 }

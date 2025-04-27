@@ -78,9 +78,14 @@ public class Biter : EnemyBase
         }
     }
 
+    public override void TakeDamage(int amount, Entity source)
+    {
+        base.TakeDamage(amount, source);
+    }
+
     public override void Update()
     {
-        if(!animControlled)
+        if (!animControlled)
             base.Update();
     }
 

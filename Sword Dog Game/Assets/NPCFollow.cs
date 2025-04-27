@@ -23,7 +23,7 @@ public class NPCFollow : MonoBehaviour
 
     public bool canRun = false;
     public float RunningDistance = 8;
-    bool running = false;
+    public bool running = false;
 
     //Sprint logic needs to be moved to baseMovement
     public float walkSpeed = 4;
@@ -36,9 +36,13 @@ public class NPCFollow : MonoBehaviour
     public Animator anim;
 
     public bool ControlFlip = true;
+    public bool flipAnimator = false;
+
     public string turnAnimName;
 
     public bool backpedal = false;
+
+    public string walkAnim;
 
     float moveSpeed
     {
@@ -56,6 +60,11 @@ public class NPCFollow : MonoBehaviour
 
     float turnMinTime = .1f;
     float turnStartTime = 0;
+
+    private GameObject FlipVisualsTarg
+    {
+        get { return flipAnimator ? anim.gameObject : gameObject; }
+    }
 
     // Update is called once per frame
     void Update()
@@ -76,7 +85,7 @@ public class NPCFollow : MonoBehaviour
         //Rotate if not already facing right direction
         if (!backpedal)
         {
-            if (turning || (target != null && (!turning && (transform.position.x - target.position.x < 0 ^ (gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)))))
+            if (turning || (target != null && (!turning && (transform.position.x - target.position.x < 0 ^ (FlipVisualsTarg.transform.localScale.x > 0 ^ !SpriteFacesRight)))))
             {
                 TurnAnim();
             }
@@ -146,13 +155,21 @@ public class NPCFollow : MonoBehaviour
             turning = true;
             
             anim.Play(turnAnimName);
-            swordAnim?.Play(swordTurnAnim);
+            if(swordAnim != null)
+                swordAnim?.Play(swordTurnAnim);
             turnStartTime = Time.time;
         }
         else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName) && turnMinTime + turnStartTime < Time.time)
         {
             turning = false;
-            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            if(flipAnimator)
+                anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
+            else
+                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+
+            Entity ent = gameObject.GetComponent<Entity>();
+            if (ent != null)
+                ent.facingDir = (((gameObject.transform.localScale.x < 0) ^ SpriteFacesRight ) ? Vector2.right : Vector2.left);
         }
     }
 
@@ -182,15 +199,26 @@ public class NPCFollow : MonoBehaviour
 
     public void MoveLeft()
     {
-        if ((gameObject.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
+        if ((FlipVisualsTarg.transform.localScale.x > 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
-        movement.MoveLeft();
+        movement.MoveLeft(moveSpeed);
+        //Do not restart animation if already playing
+        if (walkAnim != "" && !anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
+            WalkAnim();
+    }
+
+    public void WalkAnim()
+    {
+        anim.Play(walkAnim);
     }
 
     public void MoveRight()
     {
-        if ((gameObject.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
+        if ((FlipVisualsTarg.transform.localScale.x < 0 ^ !SpriteFacesRight)&& !turning && !backpedal)
             TurnAnim();
-        movement.MoveRight();
+        movement.MoveRight(moveSpeed);
+        //Do not restart animation if already playing
+        if (walkAnim != "" && !anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName))
+            WalkAnim();
     }
 }

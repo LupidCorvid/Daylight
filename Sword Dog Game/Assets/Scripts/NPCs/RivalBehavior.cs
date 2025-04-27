@@ -114,7 +114,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     void prologueBehavior()
     {
 
-        if (monster == null)
+        if (((PrologueManager)RoomManager.currentRoom)?.roomState.prologueMonsterKilled == true)
             monsterDefeated = true;
 
         //Rival cowers in front of the monster
@@ -130,13 +130,13 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
             animWaitTime += Time.deltaTime;
             rivalAnim.Play("rival_cowerToIdle");
             swordAnim.Play("sword_cowerToIdle");
-            Debug.Log("Setting rival anim");
+            //Debug.Log("Setting rival anim");
 
             if (animWaitTime >= 1)
             {
                 animWaitTime = 0f;
                 monsterTransitionExecuted = true;
-                print("animWaitTime Done");
+                //print("animWaitTime Done");
             }
             
         }
@@ -167,6 +167,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         //}
     }
 
+    //Used for [CE, p1, p2, ...]
     //Takes an arbitrary number of arguments, use how ever you need
     //This calls another cutscene from Unity, and it happens at the same time as the currect cutscene
     public override void eventCalled(params string[] input)
@@ -174,7 +175,7 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         switch(input[0])
         {
             case "backPedal":
-                //Call backpedal cutscene CutsceneController.PlayCutscene("P_TownPan");
+                CutsceneController.PlayCutscene("U_rickenBackpedal");
                 break;
         }
     }

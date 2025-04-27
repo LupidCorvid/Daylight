@@ -12,6 +12,10 @@ public class NPCMoveCutscene : CutsceneData
     public bool lockMovementAfter = true;
     public bool keepTargetsAfter = false;
     int currPoint = 0;
+    public Entity AIToFreeze;
+    public bool sprint = false;
+
+    bool origSprint = false;
 
     public override void startSegment()
     {
@@ -26,6 +30,11 @@ public class NPCMoveCutscene : CutsceneData
         else
             targetNPC.target = targ;
         targetNPC.backpedal = backpedal;
+        if (AIToFreeze != null)
+            AIToFreeze.freezeAI = true;
+
+        origSprint = targetNPC.running;
+        targetNPC.running = sprint;
     }
 
     public override void cycleExecution()
@@ -66,5 +75,8 @@ public class NPCMoveCutscene : CutsceneData
             targetNPC.currentlyTryingMove = false;
         }
         backpedal = false;
+        if (AIToFreeze != null)
+            AIToFreeze.freezeAI = false;
+        targetNPC.running = origSprint;
     }
 }

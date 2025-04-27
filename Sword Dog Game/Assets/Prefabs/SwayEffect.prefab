@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4964237784128347473}
   - component: {fileID: 1509547255701639146}
   - component: {fileID: 829176201743508285}
+  - component: {fileID: 266925836006419062}
   m_Layer: 6
   m_Name: SwayEffect
   m_TagString: Untagged
@@ -160,6 +161,7 @@ MonoBehaviour:
   rotate: 0
   soundPlayer: {fileID: 3224681526980186024}
   rustleFX: {fileID: 11400000, guid: a67aa5b6a81c89c4cad95741b1ecfcdc, type: 2}
+  lastWindTime: 0
 --- !u!114 &3224681526980186024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c645889cf1ca84b8b4eca6f2938f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
 --- !u!82 &1695146680
 AudioSource:
   m_ObjectHideFlags: 0
@@ -556,3 +559,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &266925836006419062
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740305173776453933}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_SortAtRoot: 0

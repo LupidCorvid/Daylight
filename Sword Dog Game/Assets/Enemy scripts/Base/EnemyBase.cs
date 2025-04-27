@@ -53,20 +53,25 @@ public class EnemyBase : Entity
     public override void Update()
     {
         base.Update();
-        ai?.Update();
+        if (!freezeAI)
+        {
+            ai?.Update();
+        }
     }
 
     public virtual void FixedUpdate()
     {
-        ai?.FixedUpdate();
+        if(!freezeAI)
+            ai?.FixedUpdate();
     }
 
     public virtual void LateUpdate()
     {
-        ai?.LateUpdate();
+        if(!freezeAI)
+            ai?.LateUpdate();
     }
 
-    public void die()
+    public override void Die()
     {
         killed?.Invoke();
         Destroy(gameObject);
@@ -79,7 +84,7 @@ public class EnemyBase : Entity
         base.TakeDamage(amount, source);
         health -= amount;
         if (health <= 0)
-            die();
+            Die();
         GetComponentInChildren<SimpleFlash>()?.Flash(1f, 3, true);
     }
 
