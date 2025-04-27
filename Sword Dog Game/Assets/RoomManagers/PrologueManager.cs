@@ -43,20 +43,20 @@ public class PrologueManager : RoomManager
             case "ApproachedRival":
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !DialogSource.stringVariables.ContainsKey("ListenedWithSword") && !DialogController.dialogOpen)
                 {
-                    //CutsceneController.PlayCutscene("RivalApproached");
+                    CutsceneController.PlayCutscene("RivalApproached");
                 }
                 break;
             case "AttemptedLeave":
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
                 {
-                    //CutsceneController.PlayCutscene("AttemptedLeave");
+                    CutsceneController.PlayCutscene("AttemptedLeave");
                     //attemptedLeave = true;
                 }
                 break;
             case "EnemyPan":
                 if(!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
                 {
-                    //CutsceneController.PlayCutscene("EnemyPan");
+                    CutsceneController.PlayCutscene("EnemyPan");
                 }
                 break;
             case "MonsterKilled":

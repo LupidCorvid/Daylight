@@ -147,7 +147,8 @@ public class DialogController : MonoBehaviour
             textDisplay.alpha = 0;
         if(headerDisplay != null)
            headerDisplay.alpha = 0;
-        DotAnimator?.SetTrigger("Close");
+        if(DotAnimator != null)
+            DotAnimator?.SetTrigger("Close");
         inDialog = false;
         pausePlayerMovement = false;
         

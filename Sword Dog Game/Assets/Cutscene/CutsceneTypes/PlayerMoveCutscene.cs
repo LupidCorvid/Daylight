@@ -85,4 +85,10 @@ public class PlayerMoveCutscene : CutsceneData
         base.finishedSegment();
         player.externalControl = false;
     }
+
+    public override void abort()
+    {
+        base.abort();
+        player.externalControl = false;
+    }
 }
