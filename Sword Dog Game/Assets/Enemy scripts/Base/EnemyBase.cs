@@ -53,8 +53,10 @@ public class EnemyBase : Entity
     public override void Update()
     {
         base.Update();
-        if(!freezeAI)
+        if (!freezeAI)
+        {
             ai?.Update();
+        }
     }
 
     public virtual void FixedUpdate()

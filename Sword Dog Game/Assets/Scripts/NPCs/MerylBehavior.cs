@@ -113,6 +113,7 @@ public class MerylBehavior : DialogNPC
                 healUser();
                 break;
             case "AloeQuestAssign":
+                CanvasManager.main.queuedQuestNotif = ("New quest: " + new MerylAloeQuest().questDescription);
                 QuestsManager.main.AssignQuest(new MerylAloeQuest());
                 break;
             case "AloePayment":

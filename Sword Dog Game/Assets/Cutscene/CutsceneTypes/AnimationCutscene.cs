@@ -40,7 +40,11 @@ public class AnimationCutscene : CutsceneData
             finishedSegment();
 
         if (FreezeAI)
+        {
             FreezeAI.freezeAI = true;
+            if (FreezeAI as EnemyBase != null)
+                ((EnemyBase)FreezeAI)?.movement?.SetSlippery(false);
+        }
     }
 
     public override void cycleExecution()
