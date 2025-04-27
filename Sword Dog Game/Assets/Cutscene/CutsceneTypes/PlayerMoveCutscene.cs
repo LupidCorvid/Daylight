@@ -31,8 +31,11 @@ public class PlayerMoveCutscene : CutsceneData
     {
         base.cycleExecution();
 
-        if(player == null)
+        if (player == null)
+        {
             player = Player.controller;
+            player.externalControl = true;
+        }
 
         if (goToPoint)
         {
