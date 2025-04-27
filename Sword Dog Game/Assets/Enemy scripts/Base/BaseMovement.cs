@@ -84,6 +84,14 @@ public class BaseMovement : MonoBehaviour
 
     }
 
+    public void SetSlippery(bool isSlippery)
+    {
+        if (isSlippery)
+            cldr.sharedMaterial = slippery;
+        else
+            cldr.sharedMaterial = friction;
+    }
+
     /* if (moveX == 0.0 && rb.velocity.x != 0.0f)
         {
             if (canWalkOnSlope)

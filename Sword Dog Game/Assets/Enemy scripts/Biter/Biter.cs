@@ -85,8 +85,10 @@ public class Biter : EnemyBase
 
     public override void Update()
     {
-        if(!animControlled)
+        if (!animControlled)
             base.Update();
+        else
+            movement.SetSlippery(false);
     }
 
     public override void FixedUpdate()
