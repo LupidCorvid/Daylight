@@ -86,6 +86,9 @@ public class BaseMovement : MonoBehaviour
 
     public void SetSlippery(bool isSlippery)
     {
+        if (cldr == null)
+            return;
+
         if (isSlippery)
             cldr.sharedMaterial = slippery;
         else

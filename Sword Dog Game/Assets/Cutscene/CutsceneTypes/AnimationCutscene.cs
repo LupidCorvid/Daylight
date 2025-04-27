@@ -42,8 +42,8 @@ public class AnimationCutscene : CutsceneData
         if (FreezeAI)
         {
             FreezeAI.freezeAI = true;
-            if ((EnemyBase)FreezeAI != null)
-                ((EnemyBase)FreezeAI).movement.SetSlippery(false);
+            if (FreezeAI as EnemyBase != null)
+                ((EnemyBase)FreezeAI)?.movement?.SetSlippery(false);
         }
     }
 
