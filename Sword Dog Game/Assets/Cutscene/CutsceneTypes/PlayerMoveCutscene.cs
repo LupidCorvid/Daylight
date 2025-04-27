@@ -30,6 +30,10 @@ public class PlayerMoveCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
+
+        if(player == null)
+            player = Player.controller;
+
         if (goToPoint)
         {
             if (Mathf.Abs(targPoints[currPoint].x - player.transform.position.x) < 5)

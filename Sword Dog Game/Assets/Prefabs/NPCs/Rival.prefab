@@ -397,7 +397,7 @@ Transform:
   - {fileID: 2437852053636258864}
   - {fileID: 3705920781724156080}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &2309757166844472230
 PolygonCollider2D:
@@ -475,13 +475,16 @@ MonoBehaviour:
   pointTargDistance: 0.1
   canRun: 0
   RunningDistance: 8
+  running: 0
   walkSpeed: 4
   sprintSpeed: 6
   SpriteFacesRight: 1
   anim: {fileID: 8076098344034795785}
   ControlFlip: 1
+  flipAnimator: 0
   turnAnimName: rival_turn
   backpedal: 0
+  walkAnim: rival_walk
   swordAnim: {fileID: 3703650060970454085}
   swordTurnAnim: sword_turn
 --- !u!114 &8577884318717015373
