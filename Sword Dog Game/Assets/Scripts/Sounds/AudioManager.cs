@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     private int volumeChangesPerSecond = 15;
 
     public float fadeDuration = 1.0f;
-    private float loopPointSeconds;
+    private float loopPointSeconds, repeatPointSeconds;
     private bool firstSet = true;
     private bool firstSongPlayed = false;
     public bool paused = false;
@@ -149,7 +149,7 @@ public class AudioManager : MonoBehaviour
                 if (currentSong != null)
                     BGM1[activePlayer].clip = currentSong.GetClip();
                 BGM1[activePlayer].volume = 1.0f;
-                BGM1[activePlayer].time = 0;
+                BGM1[activePlayer].time = repeatPointSeconds;
                 BGM1[activePlayer].Play();
             }
         }
@@ -161,7 +161,7 @@ public class AudioManager : MonoBehaviour
                 if (currentSong != null)
                     BGM2[activePlayer].clip = currentSong.GetClip();
                 BGM2[activePlayer].volume = 1.0f;
-                BGM2[activePlayer].time = 0;
+                BGM2[activePlayer].time = repeatPointSeconds;
                 BGM2[activePlayer].Play();
             }
         }
@@ -301,6 +301,9 @@ public class AudioManager : MonoBehaviour
 
         //Calculate loop point
         loopPointSeconds = 60.0f * (music.barsLength * 4 * music.timeSignature / music.timeSignatureBottom) / music.BPM;
+
+        //Calculate repeat point
+        repeatPointSeconds = 60.0f * (music.repeatBar * 4 * music.timeSignature / music.timeSignatureBottom) / music.BPM;
 
         //Prevent fading the same clip on both players
         if (music == currentSong)
