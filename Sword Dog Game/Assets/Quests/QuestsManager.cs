@@ -89,8 +89,9 @@ public class QuestsManager : MonoBehaviour
 
     public void AssignQuest(Quest quest)
     {
-        questsDatabase.AddQuest(quest);
-        CreateListing(questsDatabase.findQuest(quest.questId));
+        //questsDatabase.AddQuest(quest);
+        //CreateListing(questsDatabase.findQuest(quest.questId));
+        AssignQuest(quest.questId);
     }
 
     public Quest getQuest(int id)
