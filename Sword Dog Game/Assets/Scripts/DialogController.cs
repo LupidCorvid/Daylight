@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class DialogController : MonoBehaviour
 {
@@ -59,6 +60,8 @@ public class DialogController : MonoBehaviour
     public bool collected = false;
 
     public bool pausePlayerMovement = false;
+
+    public TMPro.TextMeshProUGUI contText;
 
     void Awake()
     {
@@ -236,7 +239,30 @@ public class DialogController : MonoBehaviour
 
     public void pauseWaitForInputStart()
     {
+        contText.text = replaceBinding("Interact");
         DotAnimator.SetTrigger("Open");
+    }
+
+    public string renameInput(string actionNeeded, string inputName)
+    {
+        Debug.Log(inputName);
+        inputName = inputName.Replace(actionNeeded + ":", string.Empty);
+        inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
+        inputName = inputName.Replace("/Keyboard/", "Keyboard_");
+        inputName = inputName.Replace("[Keyboard]", "");
+        inputName = inputName.Replace("<Mouse>/", "Mouse_");
+        inputName = inputName.Replace("[Mouse]", "");
+        inputName = inputName.Replace("<Gamepad>/", "Xbox_");
+        inputName = inputName.Replace("[Gamepad]", "");
+        return inputName;
+    }
+
+    public string replaceBinding(string actionNeeded)
+    {
+        InputBinding binding = InputReader.inputs.actions[actionNeeded].bindings[(int)InputReader.deviceType];
+        TMP_SpriteAsset spriteAsset = InputReader.spriteAssets[(int)InputReader.deviceType];
+        string inputName = renameInput(actionNeeded, binding.ToString());
+        return $"<sprite=\"{spriteAsset.name}\" name=\"{inputName}\">";
     }
 
     public void pauseWaitForInputEnd()
