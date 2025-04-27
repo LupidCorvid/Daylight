@@ -12,6 +12,8 @@ public class ChangeScene : MonoBehaviour
     public string spawn;
     public AudioManager.GameArea newArea;
     public static bool changingScene = false;
+    public static bool maintainMovement = false;
+    public bool ContinueMovement = false;
     public static Action clearCollisions, clearInteractables;
     public static Action changeScene;
 
@@ -56,12 +58,16 @@ public class ChangeScene : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         changingScene = true;
+        if (ContinueMovement)
+            maintainMovement = true;
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         if (newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT) {
             AudioManager.instance.FadeOutCurrent();
         }
         yield return new WaitForSeconds(1f);
+        if (ContinueMovement)
+            maintainMovement = false;
         Crossfade.waiting = true;
         DisableMenuMusic();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();

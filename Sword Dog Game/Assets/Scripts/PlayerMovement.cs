@@ -446,6 +446,10 @@ public class PlayerMovement : MonoBehaviour
                 Dash();
             }
         }
+        else if(ChangeScene.maintainMovement)
+        {
+            FakeInput(moveX);
+        }
         else if (!externalControl)
         {
             moveX = 0;
