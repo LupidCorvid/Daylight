@@ -150,6 +150,7 @@ public class DialogController : MonoBehaviour
         DotAnimator?.SetTrigger("Close");
         inDialog = false;
         pausePlayerMovement = false;
+        
     }
 
 
@@ -168,6 +169,7 @@ public class DialogController : MonoBehaviour
             reading = false;
         closedAnimator = true;
         InteractablesTracker.alreadyInteracting = false;
+        CanvasManager.main.DisplayQueuedNotif();
     }
 
     public void forceClose()
