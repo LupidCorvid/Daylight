@@ -127,18 +127,18 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
 
-        // Check for desyncing during crossfades
-        if ((fader[0] != null || fader[1] != null) && BGM2[activePlayer].isPlaying && BGM1[activePlayer].isPlaying)
-        {
-            if (firstSet && BGM2[activePlayer].timeSamples != BGM1[activePlayer].timeSamples)
-            {
-                BGM1[activePlayer].timeSamples = BGM2[activePlayer].timeSamples;
-            }
-            else if (!firstSet && BGM1[activePlayer].timeSamples != BGM2[activePlayer].timeSamples)
-            {
-                BGM2[activePlayer].timeSamples = BGM1[activePlayer].timeSamples;
-            }
-        }
+        //// Check for desyncing during crossfades
+        //if ((fader[0] != null || fader[1] != null) && BGM2[activePlayer].isPlaying && BGM1[activePlayer].isPlaying)
+        //{
+        //    if (firstSet && BGM2[activePlayer].timeSamples != BGM1[activePlayer].timeSamples)
+        //    {
+        //        BGM1[activePlayer].timeSamples = BGM2[activePlayer].timeSamples;
+        //    }
+        //    else if (!firstSet && BGM1[activePlayer].timeSamples != BGM2[activePlayer].timeSamples)
+        //    {
+        //        BGM2[activePlayer].timeSamples = BGM1[activePlayer].timeSamples;
+        //    }
+        //}
 
         //Manages looping tracks
         if (firstSet)
