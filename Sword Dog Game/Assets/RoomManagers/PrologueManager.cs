@@ -108,13 +108,15 @@ public class PrologueManager : RoomManager
 
     public void savedFriend()
     {
-        roomState.prologueMonsterKilled = true;
-        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
-
-        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
         {
             CutsceneController.PlayCutscene("SavedFromMonster");
         }
+
+        roomState.prologueMonsterKilled = true;
+        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
+
+        
     }
 
 
