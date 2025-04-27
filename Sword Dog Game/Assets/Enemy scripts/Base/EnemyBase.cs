@@ -57,8 +57,6 @@ public class EnemyBase : Entity
         {
             ai?.Update();
         }
-        else
-            movement.SetSlippery(false);
     }
 
     public virtual void FixedUpdate()
