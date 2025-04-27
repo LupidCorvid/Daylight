@@ -16,6 +16,9 @@ public class AnimationCutscene : CutsceneData
     public bool restoreSpeedOnFinish = false;
     private float speedOnEnter;
 
+    private float animMinTime = 1;
+    private float animStartTime = 0;
+
     public override void startSegment()
     {
         if (targetByName)
@@ -27,6 +30,7 @@ public class AnimationCutscene : CutsceneData
         {
             target.speed = stateNames[0].speed;
             target.Play(stateNames[0].name);
+            animStartTime = Time.time;
         }
         else
             finishedSegment();
@@ -35,6 +39,10 @@ public class AnimationCutscene : CutsceneData
     public override void cycleExecution()
     {
         base.cycleExecution();
+
+        if (Time.time < animStartTime + animMinTime)
+            return;
+
         if (!target.GetCurrentAnimatorStateInfo(0).IsName(stateNames[currState].name) 
             || (target.GetCurrentAnimatorStateInfo(0).normalizedTime < target.GetCurrentAnimatorStateInfo(0).length 
             && !target.GetCurrentAnimatorStateInfo(0).loop 
@@ -44,6 +52,7 @@ public class AnimationCutscene : CutsceneData
             if (currState < stateNames.Count)
             {
                 target.Play(stateNames[currState].name);
+                animStartTime = Time.time;
                 target.speed = stateNames[currState].speed;
             }
             else

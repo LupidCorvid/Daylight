@@ -74,7 +74,6 @@ public class LanternFollow : MonoBehaviour
 
     void entityHasLantern()
     {
-        print("Is this happening?");
         if (actor != null)
         {
             lantern.enabled = true;
@@ -89,10 +88,6 @@ public class LanternFollow : MonoBehaviour
                 lantTargetLocation = new Vector3(target.transform.position.x, target.transform.position.y - .75f, target.transform.position.z);
             
             transform.position = Vector3.Lerp(lantPreviousLocation, lantTargetLocation, 1);
-        }
-        else
-        {
-            print("WRONG");
         }
     }
 
