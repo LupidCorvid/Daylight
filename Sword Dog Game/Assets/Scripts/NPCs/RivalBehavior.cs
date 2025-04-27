@@ -47,16 +47,12 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
         if (prologueBehaviorActive)
             prologueBehavior();
 
-        //Attempt for turn animation
-        //if (gameObject.transform.eulerAngles.y >= 180 && isTurning)
-        //{
-        //    gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
-        //    gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        //    isTurning = false;
-        //}
+        if (alreadyTalking && rivalAnim.GetCurrentAnimatorStateInfo(0).IsName("rival_idle"))
+        {
+            talkingToPlayer();
+        }
+
         if (talking && !isTurning && !prologueBehaviorActive) speak();
-        //rivalSword.transform.localPosition = new Vector3(-30f, 0f, 0f);
-        //print(rivalSword.transform.localPosition);
     }
 
     public void idle()
@@ -70,13 +66,14 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
 
     public void talkingToPlayer()
     {
-        rivalAnim.Play("rival_speak");
+        rivalAnim.Play("rival_silentToSpeak");
     }
 
     public override void exitDialog()
     {
         base.exitDialog();
-        StartCoroutine(finishedTalking());
+        rivalAnim.SetTrigger("FinishedTalking");
+        //StartCoroutine(finishedTalking());
 
     }
     public override void interact(Entity user)
