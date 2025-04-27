@@ -92,8 +92,8 @@ public class AnimationCutscene : CutsceneData
     [System.Serializable]
     public class animState
     {
-        public string name;
-        public float speed;
+        public string name = "";
+        public float speed = 1;
         public bool loop = false;
     }
 
