@@ -72,7 +72,8 @@ public class RivalBehavior : DialogNPC, ICutsceneCallable
     public override void exitDialog()
     {
         base.exitDialog();
-        rivalAnim.SetTrigger("FinishedTalking");
+        if(rivalAnim != null)
+            rivalAnim.SetTrigger("FinishedTalking");
         //StartCoroutine(finishedTalking());
 
     }
