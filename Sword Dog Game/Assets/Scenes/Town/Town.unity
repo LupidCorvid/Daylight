@@ -16705,6 +16705,7 @@ GameObject:
   - component: {fileID: 2132174705}
   - component: {fileID: 2132174710}
   - component: {fileID: 2132174709}
+  - component: {fileID: 2132174711}
   m_Layer: 0
   m_Name: GeneralTalkCutscene
   m_TagString: Untagged
@@ -16753,6 +16754,7 @@ MonoBehaviour:
   - {fileID: 2132174707}
   - {fileID: 2132174706}
   - {fileID: 2132174705}
+  - {fileID: 2132174711}
   cutsceneNumber: 0
   cutsceneName: P_GeneralFirstTimeEnter
   playingThisCutscene: 0
@@ -16974,6 +16976,23 @@ MonoBehaviour:
   finished: 0
   Music: {fileID: 11400000, guid: 43ea4f03e990f431fa9e9a74995ffa57, type: 2}
   Area: 11
+  FadeDuration: 1
+  Stall: 0
+--- !u!114 &2132174711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
+  Area: 4
   FadeDuration: 1
   Stall: 0
 --- !u!1001 &2134314395
