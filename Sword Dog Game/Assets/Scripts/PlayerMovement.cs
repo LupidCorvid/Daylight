@@ -295,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
         //if (CutsceneController.cutsceneFreezePlayerRb)
         //    rb.sharedMaterial = immovable;
 
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene)
         {
             // remember previous movement input
             prevMoveX = moveX;
