@@ -28,12 +28,12 @@ public class spawnPromptTutorial : MonoBehaviour
             
             string[] dialogOptions = { "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Jump] to Jump [wit] [exit]",
                                         "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Dash] to Dash [wit] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Sprint] to Sprint [wit] [exit]",
+                                        "[ss, 0.035] [IA,<size=140%><align=center><voffset=-0.5em>][btn,Sprint] to Sprint [wit] [exit]",
                                         "[ss, 0.035][IA,<size=110%><align=center><voffset=-0.75em><mspace=1.2em><sprite=\"keyboard\" name=\"Keyboard_a\"><sprite=\"keyboard\" name=\"Keyboard_d\"></mspace>] to Move [wit] [exit]",
                                         "[ss, 0.035] [IA,<size=130%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Attack] to Attack [wit] [exit]",
                                         "[ss, 0.035] [IA,<size=120%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Inventory] to open inventory [wit] [exit]",
                                         "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><voffset=-0.5em>][btn,Block] to Block [wit] [exit]",
-                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><sprite=\"keyboard\" name=\"Keyboard_s\">] to Fall through platforms [wit] [exit]"};
+                                        "[ss, 0.035] [IA,<size=140%><align=center><margin-right=0.5em><sprite=\"keyboard\" name=\"Keyboard_s\">] to Fall through [wit] [exit]"};
             bubble.setPosition = transform.position;
 
             //Check which prompt is being done
