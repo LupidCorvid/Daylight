@@ -186,7 +186,6 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopMovement = true;
         if (hideUI)
         {
-            Debug.Log("HIDE THAT SHIT BRO");
             cutsceneHideUI = true;
             CanvasManager.HideHUD();
         }
@@ -217,7 +216,6 @@ public class CutsceneController : MonoBehaviour
         if (playingThisCutscene && cutsceneHideUI && hideUI)
         {
             cutsceneHideUI = false;
-            Debug.Log("showing HUD again because I'm dumb!!");
             CanvasManager.ShowHUD();
         }
         if (playingThisCutscene && cutsceneControlMusic && controlMusic)

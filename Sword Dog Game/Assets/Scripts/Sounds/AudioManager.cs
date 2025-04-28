@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     private float loopPointSeconds, repeatPointSeconds;
     private bool firstSet = true;
     private bool firstSongPlayed = false;
+    public bool disableSceneFade = false;
     public bool paused = false;
 
     public AudioMixerSnapshot normal, hurt;
@@ -272,6 +273,12 @@ public class AudioManager : MonoBehaviour
             case "OCEAN":
                 theArea = GameArea.OCEAN;
                 break;
+            case "RICKEN":
+                theArea = GameArea.RICKEN;
+                break;
+            case "GENERAL":
+                theArea = GameArea.GENERAL;
+                break;
             default:
                 Debug.LogWarning("Invalid area provided! Using current");
                 theArea = currentArea;
@@ -304,6 +311,9 @@ public class AudioManager : MonoBehaviour
 
         //Calculate repeat point
         repeatPointSeconds = 60.0f * (music.repeatBar * 4 * music.timeSignature / music.timeSignatureBottom) / music.BPM;
+
+        //Track scene fade flag
+        disableSceneFade = music.disableSceneFade;
 
         //Prevent fading the same clip on both players
         if (music == currentSong)

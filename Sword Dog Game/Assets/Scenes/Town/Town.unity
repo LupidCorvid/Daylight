@@ -6034,6 +6034,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &471322936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+  m_PrefabInstance: {fileID: 1838528582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2625dd5de6172439ab6cc98292415b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &484153274
 GameObject:
   m_ObjectHideFlags: 0
@@ -11163,9 +11174,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomState:
-    P_FirstTimeEnter_triggered: 1
+    P_FirstTimeEnter_triggered: 0
     P_TownPan: 0
     P_GeneralFirstTimeEnter: 0
+  musicOnLoad: {fileID: 471322936}
 --- !u!1 &1283591629
 GameObject:
   m_ObjectHideFlags: 0
@@ -14648,6 +14660,10 @@ PrefabInstance:
       propertyPath: newTrack
       value: 
       objectReference: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
+    - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: barsLength
       value: 32

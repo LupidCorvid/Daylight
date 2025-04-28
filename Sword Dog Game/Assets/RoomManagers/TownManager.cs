@@ -5,6 +5,7 @@ using UnityEngine;
 public class TownManager : RoomManager
 {
     public TownAreaState roomState;
+    public SwitchMusicOnLoad musicOnLoad;
 
     public override void Awake() //Called immediately when the object is loaded into the scene
     {
@@ -14,6 +15,11 @@ public class TownManager : RoomManager
 
     public void Start() //Called on frame 1
     {
+        if (roomState.P_FirstTimeEnter_triggered)
+        {
+            Debug.Log("fhfjh");
+            musicOnLoad.enabled = true;
+        }
         buildRoom();
     }
 

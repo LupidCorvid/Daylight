@@ -16,10 +16,12 @@ public class MusicChangeCutscene : CutsceneData
         base.startSegment();
         startTime = Time.time;
         // Automatically crossfades/unpauses
-        
+
         // TODO this in the future
         // AudioManager.instance.ChangeBGM(Music, FadeDuration);
-        AudioManager.instance.ChangeBGM(Music, Area, FadeDuration);
+        Debug.Log(AudioManager.instance.currentSong + " " + Music);
+        if (AudioManager.instance.currentSong != Music)
+            AudioManager.instance.ChangeBGM(Music, Area, FadeDuration);
     }
 
     public override void cycleExecution()
