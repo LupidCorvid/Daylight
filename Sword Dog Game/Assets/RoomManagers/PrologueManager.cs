@@ -14,6 +14,7 @@ public class PrologueManager : RoomManager
     public GameObject looseSword;
     public GameObject NoSwordBlock;
     public GameObject Ricken;
+    public GameObject monsterLantern;
     public Collider2D monsterAliveBlock;
     public NPCFollow RickenFollow;
 
@@ -104,6 +105,12 @@ public class PrologueManager : RoomManager
 
         if (roomState.prologueMonsterKilled)
             monsterAliveBlock.enabled = false;
+
+        if (roomState.finishedIntroCutscene)
+            Destroy(Ricken);
+
+        if (roomState.prologueMonsterKilled)
+            Destroy(monsterLantern);
     }
 
     public void savedFriend()
