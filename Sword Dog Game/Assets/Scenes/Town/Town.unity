@@ -2482,6 +2482,7 @@ GameObject:
   - component: {fileID: 210906025}
   - component: {fileID: 210906022}
   - component: {fileID: 210906021}
+  - component: {fileID: 210906026}
   m_Layer: 0
   m_Name: TownPanCutsceneEnd
   m_TagString: Untagged
@@ -2534,6 +2535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 210906019}
+  - {fileID: 210906026}
   - {fileID: 210906018}
   - {fileID: 210906016}
   - {fileID: 210906023}
@@ -2587,7 +2589,7 @@ MonoBehaviour:
     letterbox: 1
     transition: 0
     hideUI: 1
-    instantUI: 0
+    instantUI: 1
     relPosition: 0
     minSpeed: 0
     targTransform: {fileID: 0}
@@ -2729,6 +2731,39 @@ MonoBehaviour:
   zoom: 7
   useMainCamera: 1
   ignoreCameraBounds: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &210906026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 10
+    speed: 1
+    point: {x: 195, y: 5.27}
+    letterbox: 0
+    transition: 0
+    hideUI: 1
+    instantUI: 1
+    relPosition: 0
+    minSpeed: 0
+    targTransform: {fileID: 0}
+    useTransformX: 0
+    useTransformY: 0
+  target: {fileID: 0}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  resetBarsOnExit: 0
   cameraRb: {fileID: 0}
 --- !u!1 &229782326
 GameObject:
@@ -5233,10 +5268,12 @@ GameObject:
   - component: {fileID: 424776974}
   - component: {fileID: 424776973}
   - component: {fileID: 424776979}
+  - component: {fileID: 424776981}
   - component: {fileID: 424776971}
   - component: {fileID: 424776972}
   - component: {fileID: 424776976}
   - component: {fileID: 424776980}
+  - component: {fileID: 424776982}
   m_Layer: 0
   m_Name: TownPanCutscene
   m_TagString: Untagged
@@ -5356,6 +5393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
+  - {fileID: 424776982}
   - {fileID: 424776974}
   - {fileID: 424776973}
   - {fileID: 424776979}
@@ -5405,6 +5443,8 @@ MonoBehaviour:
     cutscene: {fileID: 424776971}
   - RequireCompletion: 1
     cutscene: {fileID: 424776972}
+  - RequireCompletion: 1
+    cutscene: {fileID: 424776981}
 --- !u!114 &424776980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5420,6 +5460,40 @@ MonoBehaviour:
   finished: 0
   changeToScene: Town2
   toNewCutscene: P_TownPan2
+--- !u!114 &424776981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424776969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
+  Area: 4
+  FadeDuration: 1
+  Stall: 0
+--- !u!114 &424776982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424776969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
+  Area: 4
+  FadeDuration: 1
+  Stall: 0
 --- !u!1 &426294456
 GameObject:
   m_ObjectHideFlags: 0
@@ -10468,6 +10542,8 @@ GameObject:
   - component: {fileID: 1225849008}
   - component: {fileID: 1225849011}
   - component: {fileID: 1225849010}
+  - component: {fileID: 1225849012}
+  - component: {fileID: 1225849013}
   m_Layer: 0
   m_Name: FirstTimeEnterCutscene
   m_TagString: Untagged
@@ -10725,6 +10801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
+  - {fileID: 1225849012}
   - {fileID: 1225849005}
   - {fileID: 1225849004}
   - {fileID: 1225849003}
@@ -10732,6 +10809,7 @@ MonoBehaviour:
   - {fileID: 1225848996}
   - {fileID: 1225848995}
   - {fileID: 1225849007}
+  - {fileID: 1225849013}
   - {fileID: 1225849008}
   - {fileID: 1225849011}
   - {fileID: 1225849010}
@@ -10741,7 +10819,7 @@ MonoBehaviour:
   stopInteractions: 1
   stopMovement: 1
   hideUI: 1
-  controlMusic: 0
+  controlMusic: 1
   FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
@@ -10844,6 +10922,39 @@ MonoBehaviour:
     newScale: {x: 0, y: 0, z: 0}
     newRotation: 0
     relativePosition: 0
+--- !u!114 &1225849012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225848993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Music: {fileID: 11400000, guid: 8dc152eb20adf4375bf59c1006810dc3, type: 2}
+  Area: 10
+  FadeDuration: 1
+  Stall: 0
+--- !u!114 &1225849013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225848993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 0
+  Duration: 2
+  Stall: 0
 --- !u!1001 &1237198908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14524,6 +14635,10 @@ PrefabInstance:
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: BPM
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+      propertyPath: delay
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
       propertyPath: newArea

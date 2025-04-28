@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public enum GameArea
     {
-        CURRENT, MENU, PROLOGUE, FOREST, TOWN, CAVES, MOUNTAIN, DESERT, UNDERGROUND_DESERT, OCEAN
+        CURRENT, MENU, PROLOGUE, FOREST, TOWN, CAVES, MOUNTAIN, DESERT, UNDERGROUND_DESERT, OCEAN, RICKEN, GENERAL
     }
 
     /// <summary>

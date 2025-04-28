@@ -18,19 +18,17 @@ public class SwitchMusicOnLoad : MonoBehaviour
             theAM = FindObjectOfType<AudioManager>();
             // TODO this in the future
             // theAM.ChangeBGM(newTrack);
-            theAM.ChangeBGM(newTrack, newArea);
 
+            if (CutsceneController.inCutscene && CutsceneController.cutsceneControlMusic)
+            {
+                return;
+            }
+
+            theAM.ChangeBGM(newTrack, newArea);
             if (delay > 0)
             {
                 theAM.PauseCurrent();
                 StartCoroutine(PlayMusicDelayed());
-            }
-            else
-            {
-                if (CutsceneController.inCutscene && CutsceneController.cutsceneControlMusic)
-                {
-                    theAM.PauseCurrent();
-                }
             }
         }
     }
