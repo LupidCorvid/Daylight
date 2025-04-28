@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &204124683045642115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4121797076467881694}
+  - component: {fileID: 923998895632146479}
+  - component: {fileID: 7768983711377083011}
+  - component: {fileID: 4463069822332183465}
+  m_Layer: 0
+  m_Name: white_willowBranch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4121797076467881694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204124683045642115}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 97.53, y: 6.85, z: -0.28374147}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &923998895632146479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204124683045642115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ddf9c78124eff469e4c98140df5dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentSprites:
+  - {fileID: 21300000, guid: 7ee7b0e4ad4719d4190afc7fb6290478, type: 3}
+  - {fileID: 21300000, guid: 2687824aa94e29a4293df16619244840, type: 3}
+  - {fileID: 21300000, guid: 8aa27ad8f7e5a8d4bb05519c329689ac, type: 3}
+  - {fileID: 21300000, guid: b005163ebe1cf004f80b918c41202a80, type: 3}
+  - {fileID: 21300000, guid: 46d4687b247bd45478614d63255088f0, type: 3}
+  tailSprite: {fileID: 21300000, guid: 6e64b87af251967499292eecb2e3a59c, type: 3}
+  headSprite: {fileID: 0}
+  randomizeSprites: 1
+  length: 10
+  numSegments: 10
+  segments: []
+  segmentPrefab: {fileID: 7602361877450296122, guid: 395d61786f9c96947b2758cdcf35dbbc, type: 3}
+  generateVinesOnStart: 0
+  windStrength: 5
+  windSpeed: 3
+  windVolatility: 0.2
+  MovementReactionScalar: 1
+  maintainVineAspectRatio: 1
+  width: 1
+--- !u!50 &7768983711377083011
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204124683045642115}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4463069822332183465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204124683045642115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d3804e216d55647925c60ffe103458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newLayer: -1
+  newColor: {r: 0.79215693, g: 0.56078434, b: 0.14901961, a: 1}
+  changeLayer: 1
+  changeColor: 1
+  changeParticleColor: 0
+  ChangeScale: 1
