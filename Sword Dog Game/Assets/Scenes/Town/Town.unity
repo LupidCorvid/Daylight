@@ -16703,6 +16703,8 @@ GameObject:
   - component: {fileID: 2132174707}
   - component: {fileID: 2132174706}
   - component: {fileID: 2132174705}
+  - component: {fileID: 2132174710}
+  - component: {fileID: 2132174709}
   m_Layer: 0
   m_Name: GeneralTalkCutscene
   m_TagString: Untagged
@@ -16739,7 +16741,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 2132174699}
+  - {fileID: 2132174709}
   - {fileID: 2132174698}
+  - {fileID: 2132174710}
   - {fileID: 2132174700}
   - {fileID: 2132174701}
   - {fileID: 2132174703}
@@ -16939,6 +16943,39 @@ MonoBehaviour:
   FadeToBlack: 1
   Stall: 1
   speed: 1
+--- !u!114 &2132174709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  FadeIn: 0
+  Duration: 1
+  Stall: 0
+--- !u!114 &2132174710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132174694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Music: {fileID: 11400000, guid: 43ea4f03e990f431fa9e9a74995ffa57, type: 2}
+  Area: 11
+  FadeDuration: 1
+  Stall: 0
 --- !u!1001 &2134314395
 PrefabInstance:
   m_ObjectHideFlags: 0
