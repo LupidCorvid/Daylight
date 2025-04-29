@@ -2483,6 +2483,7 @@ GameObject:
   - component: {fileID: 210906027}
   - component: {fileID: 210906022}
   - component: {fileID: 210906021}
+  - component: {fileID: 210906028}
   m_Layer: 0
   m_Name: TownPanCutsceneEnd
   m_TagString: Untagged
@@ -2535,6 +2536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 210906019}
+  - {fileID: 210906028}
   - {fileID: 210906018}
   - {fileID: 210906016}
   - {fileID: 210906023}
@@ -2753,6 +2755,39 @@ MonoBehaviour:
     newScale: {x: 1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
+--- !u!114 &210906028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 10
+    speed: 0
+    point: {x: 195, y: 5.27}
+    letterbox: 0
+    transition: 0
+    hideUI: 1
+    instantUI: 1
+    relPosition: 0
+    minSpeed: 0
+    targTransform: {fileID: 0}
+    useTransformX: 0
+    useTransformY: 0
+  target: {fileID: 0}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  resetBarsOnExit: 0
+  cameraRb: {fileID: 0}
 --- !u!1 &229782326
 GameObject:
   m_ObjectHideFlags: 0
