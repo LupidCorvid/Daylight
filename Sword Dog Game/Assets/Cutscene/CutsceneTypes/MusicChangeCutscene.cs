@@ -19,7 +19,6 @@ public class MusicChangeCutscene : CutsceneData
 
         // TODO this in the future
         // AudioManager.instance.ChangeBGM(Music, FadeDuration);
-        Debug.Log(AudioManager.instance.currentSong + " " + Music);
         if (AudioManager.instance.currentSong != Music)
             AudioManager.instance.ChangeBGM(Music, Area, FadeDuration);
     }
