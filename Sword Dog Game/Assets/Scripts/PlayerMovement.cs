@@ -163,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool wading = false;
 
+    Vector2 downDir = new Vector2(0, -1);
     //public static PlayerInput inputs;
 
     //empty functions to prevent error calls from input settings
@@ -219,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
         {
             lastLand = Time.time;
             soundPlayer.PlaySound(landSound);
-            rb.gravityScale = 4.5f;
+            //rb.gravityScale = 4.5f;
         }
     }
 
@@ -795,6 +796,13 @@ public class PlayerMovement : MonoBehaviour
     {
         // check if the player is against a wall
         CheckWall();
+        rb.gravityScale = 0;
+
+        //downDir = transform.rotation * Vector2.down;
+        downDir = Quaternion.Euler(0, 0, lastGroundedSlope) * Vector2.down;
+        rb.velocity += 4.5f * downDir * Time.fixedDeltaTime;
+        Debug.DrawLine(transform.position, (Vector2)transform.position + downDir);
+        
 
         realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
         lastPosition = transform.position;
@@ -935,6 +943,7 @@ public class PlayerMovement : MonoBehaviour
         {
             EndTurn();
         }
+        
     }
 
 
@@ -1615,7 +1624,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0f, jumpForce * rb.mass)); // force added during a jump
+            rb.AddForce(01 * downDir * jumpForce * rb.mass); // force added during a jump
             anim.SetTrigger("start_jump");
             timeSinceJump = 0.0f;
             isTurning = false;
