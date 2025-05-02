@@ -12,7 +12,6 @@ public class PrologueManager : RoomManager
     public Entity prologueMonster;
 
     public GameObject looseSword;
-    public GameObject NoSwordBlock;
     public GameObject Ricken;
     public GameObject monsterLantern;
     public Collider2D monsterAliveBlock;
@@ -87,7 +86,6 @@ public class PrologueManager : RoomManager
         else
         {
             SwordFollow.instance.SetActive(false);
-            NoSwordBlock.SetActive(true);
         }
         if(!roomState.finishedIntroCutscene && !roomState.swordCollected)
         {
@@ -139,7 +137,6 @@ public class PrologueManager : RoomManager
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
-        NoSwordBlock.SetActive(false);
     }
 
     private void OnDestroy()

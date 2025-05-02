@@ -7,6 +7,8 @@ public class TownManager : RoomManager
     public TownAreaState roomState;
     public SwitchMusicOnLoad musicOnLoad;
 
+    public Collider2D FirstEnterCutsceneCameraBounds;
+
     public override void Awake() //Called immediately when the object is loaded into the scene
     {
         base.Awake();
@@ -26,6 +28,8 @@ public class TownManager : RoomManager
     //Read in variables from file, things that might change throughout the game
     public void buildRoom()
     {
+        if (roomState.P_FirstTimeEnter_triggered)
+            FirstEnterCutsceneCameraBounds.enabled = false;
     }
 
     public override void receivedEvent(string name, params object[] parameters)
