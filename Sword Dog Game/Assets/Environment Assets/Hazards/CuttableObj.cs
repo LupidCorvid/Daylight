@@ -7,6 +7,7 @@ public class CuttableObj : MonoBehaviour
     public ParticleSystem targParticleSystem;
     public GameObject sprite;
     public Collider2D blockingCollider;
+    public Collider2D hittableCollider;
 
     bool markedToDelete = false;
 
@@ -17,6 +18,7 @@ public class CuttableObj : MonoBehaviour
             targParticleSystem.Emit(10);
             Destroy(sprite);
             Destroy(blockingCollider.gameObject);
+            hittableCollider.enabled = false;
             markedToDelete = true;
         }
     }

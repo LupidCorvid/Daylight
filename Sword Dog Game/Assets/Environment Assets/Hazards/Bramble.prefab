@@ -34,7 +34,7 @@ Transform:
   - {fileID: 5595128526169264938}
   - {fileID: 9133623022874179355}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &7338700910757932097
 CircleCollider2D:
@@ -86,6 +86,7 @@ MonoBehaviour:
   targParticleSystem: {fileID: 219140875017524746}
   sprite: {fileID: 6975035399135262344}
   blockingCollider: {fileID: 7763209784846915083}
+  hittableCollider: {fileID: 7338700910757932097}
 --- !u!1 &4641844322397343165
 GameObject:
   m_ObjectHideFlags: 0
