@@ -8,6 +8,7 @@ public class SwitchMusicOnLoad : MonoBehaviour
     // TODO deprecate
     public AudioManager.GameArea newArea;
     private AudioManager theAM;
+    public float delay = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,17 +18,24 @@ public class SwitchMusicOnLoad : MonoBehaviour
             theAM = FindObjectOfType<AudioManager>();
             // TODO this in the future
             // theAM.ChangeBGM(newTrack);
-            theAM.ChangeBGM(newTrack, newArea);
+
             if (CutsceneController.inCutscene && CutsceneController.cutsceneControlMusic)
             {
+                return;
+            }
+
+            theAM.ChangeBGM(newTrack, newArea);
+            if (delay > 0)
+            {
                 theAM.PauseCurrent();
+                StartCoroutine(PlayMusicDelayed());
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator PlayMusicDelayed()
     {
-
+        yield return new WaitForSeconds(delay);
+        AudioManager.instance.UnPauseCurrent();
     }
 }

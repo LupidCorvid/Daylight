@@ -22,11 +22,13 @@ public class CutsceneController : MonoBehaviour
     public bool stopMovement;
     public bool hideUI;
     public bool controlMusic;
+    public bool FreezePlayerRigidbody = false;
 
     public static bool cutsceneStopInteractions = false;
     public static bool cutsceneStopMovement = false;
     public static bool cutsceneHideUI = false;
     public static bool cutsceneControlMusic = false;
+    public static bool cutsceneFreezePlayerRb = false;
 
     public static Action StopAllCutscenes;
 
@@ -99,6 +101,10 @@ public class CutsceneController : MonoBehaviour
         {
             AllCutscenes.Remove(cutsceneName);
         }
+        if(playingThisCutscene)
+        {
+            StopCutscene();
+        }
     }
 
     // Start is called before the first frame update
@@ -144,6 +150,15 @@ public class CutsceneController : MonoBehaviour
                     nestedScenes.Add(pair.cutscene);
                 }
             }
+
+            if(data as SequenceCutscene != null)
+            {
+                SequenceCutscene seqCutscene = (SequenceCutscene)data;
+                foreach(CutsceneData cutscene in seqCutscene.cutscenes)
+                {
+                    nestedScenes.Add(cutscene);
+                }
+            }
         }
 
         for(int i = newList.Count - 1; i >= 0; --i)
@@ -170,9 +185,14 @@ public class CutsceneController : MonoBehaviour
         if (stopMovement)
             cutsceneStopMovement = true;
         if (hideUI)
+        {
             cutsceneHideUI = true;
+            CanvasManager.HideHUD();
+        }
         if (controlMusic)
             cutsceneControlMusic = true;
+        if (FreezePlayerRigidbody)
+            cutsceneFreezePlayerRb = true;
         StopAllCutscenes += FinishCutscene;
     }
 
@@ -184,14 +204,24 @@ public class CutsceneController : MonoBehaviour
 
     public void StopCutscene()
     {
+        if(playingThisCutscene && cutsceneNumber < cutscenes.Count && cutscenes[cutsceneNumber] != null)
+        {
+            cutscenes[cutsceneNumber].abort();
+        }
+
         if (playingThisCutscene && cutsceneStopInteractions && stopInteractions)
             cutsceneStopInteractions = false;
         if (playingThisCutscene && cutsceneStopMovement && stopMovement)
             cutsceneStopMovement = false;
         if (playingThisCutscene && cutsceneHideUI && hideUI)
+        {
             cutsceneHideUI = false;
+            CanvasManager.ShowHUD();
+        }
         if (playingThisCutscene && cutsceneControlMusic && controlMusic)
             cutsceneControlMusic = false;
+        if (playingThisCutscene && FreezePlayerRigidbody && cutsceneFreezePlayerRb)
+            cutsceneFreezePlayerRb = false;
 
         inCutscene = false;
         playingThisCutscene = false;

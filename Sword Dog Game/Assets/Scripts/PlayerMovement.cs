@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool waterRotation;
 
+    public bool externalControl = false;
+
     public bool facingRight
     {
         get
@@ -101,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
     public bool isOnSlope, canWalkOnSlope;
-    public PhysicsMaterial2D slippery, friction;
+    public PhysicsMaterial2D slippery, friction, immovable;
     public float calculatedSpeed = 4.0f;
     public float sprintWindUpPercent = 1.0f;
 
@@ -262,6 +264,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundMovementUpdate()
     {
+
         if (waterRotation)
         {
             ChangeToLandRotation();
@@ -284,6 +287,13 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerHealth.dead) deltaStamina = 0;
         if (!stopStaminaRefill)
             stamina = Mathf.Clamp(stamina + deltaStamina, 0, maxStamina);
+
+        //Freeze X only so player can finish falling to ground
+        //Since presumably player is already grounded, Y is mostly locked as they can't move into the ground and gravity will keep them floored
+        rb.constraints = CutsceneController.cutsceneFreezePlayerRb ? RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeRotation;
+        //rb.drag = CutsceneController.cutsceneFreezePlayerRb ? 9999999 : 0;
+        //if (CutsceneController.cutsceneFreezePlayerRb)
+        //    rb.sharedMaterial = immovable;
 
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene)
         {
@@ -436,7 +446,11 @@ public class PlayerMovement : MonoBehaviour
                 Dash();
             }
         }
-        else
+        else if(ChangeScene.maintainMovement)
+        {
+            FakeInput(moveX);
+        }
+        else if (!externalControl)
         {
             moveX = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -462,6 +476,14 @@ public class PlayerMovement : MonoBehaviour
         }
         canDash = stamina > baseStamina / 3;
         anim.SetBool("can_dash", canDash);
+    }
+
+    public void StopSprint()
+    {
+        isSprinting = false;
+        anim.ResetTrigger("start_sprint");
+        canResprint = true;
+        anim.SetBool("sprinting", false);
     }
 
     public void WadingMovement()
@@ -587,6 +609,104 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void FakeInput(float inMoveX)
+    {
+        prevMoveX = moveX;
+        
+        // grab movement input from horizontal axis
+        //moveX = Input.GetAxisRaw("Horizontal");
+        //Disable moving while attacking
+
+        if (dashStartTime + dashTime > Time.time)
+        {
+            Vector2 dashDir = facingRight ? Vector2.right : Vector2.left;
+
+            rb.velocity = new Vector2(dashDir.x * dashVel, rb.velocity.y);
+            isDashing = true;
+            return;
+        }
+        else
+        {
+            //On end of dash
+            if (isDashing)
+                rb.velocity = new Vector2(10 * (facingRight ? 1 : -1), rb.velocity.y);
+            isDashing = false;
+
+        }
+
+        //if (!stopMovement)
+            moveX = inMoveX;
+        //else
+        //{
+        //    moveX = 0;
+        //    if (inputManager.actions["Move"].ReadValue<Vector2>().x != 0)
+        //        anim.SetTrigger("TryingMove");
+        //}
+
+        //moveX = inputManager.actions["Move"].
+
+        if (wallOnRight && moveX > 0) moveX = 0;
+        if (wallOnLeft && moveX < 0) moveX = 0;
+
+        if (moveX == 0 && timeIdle < 1f)
+        {
+            timeIdle += Time.deltaTime;
+        }
+        else if (moveX != 0)
+        {
+            timeIdle = 0;
+        }
+
+        if (!isGrounded)
+            anim.ResetTrigger("turn");
+
+        anim.SetBool("moveX", moveX != 0 && Mathf.Abs(realVelocity) > 0.001f);
+        anim.SetFloat("time_idle", timeIdle);
+
+        // track stops per second
+        if (prevMoveX != 0 && moveX == 0)
+        {
+            stops++;
+            StartCoroutine("RemoveStop");
+        }
+
+        // fix input spam breaking trot state
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("idleAnim"))
+        {
+            trotting = false;
+        }
+
+        // start trotting if player gives input and is moving
+        if (isGrounded && moveX != 0 && !trotting && Mathf.Abs(realVelocity) >= 0.01f && !isJumping)
+        {
+            anim.SetTrigger("trot");
+            trotting = true;
+        }
+        if (timeIdle >= 0.4f)
+            anim.ResetTrigger("trot");
+
+        //Sprinting stuff
+        // sprinting
+
+        anim.SetBool("sprinting", isSprinting);
+
+        if (isSprinting && !isSkidding)
+        {
+            timeSinceSprint = 0;
+            sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, maxSprintSpeedMultiplier, 0.005f);
+        }
+        else
+        {
+            if (timeSinceSprint < 1f)
+                timeSinceSprint += Time.deltaTime;
+
+            sprintWindUpPercent = 1;
+
+            if (!isSkidding)
+                sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1.0f, 0.5f);
+        }
+    }
+
     public void SwimmingUpdate()
     {
 
@@ -683,7 +803,7 @@ public class PlayerMovement : MonoBehaviour
             sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1f, 0.05f);
 
         // calculate speed
-        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
+        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent * Time.fixedDeltaTime;
 
         // flip sprite depending on direction of input
         
@@ -721,7 +841,7 @@ public class PlayerMovement : MonoBehaviour
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * calculatedSpeed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target

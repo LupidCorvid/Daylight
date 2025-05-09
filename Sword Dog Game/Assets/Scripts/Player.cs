@@ -13,6 +13,7 @@ public class Player : Entity
 
     public bool hasLantern = false;
     public GameObject mouthLantern;
+    public GameObject emotePrefab;
 
     public override bool attacking
     {
@@ -81,8 +82,16 @@ public class Player : Entity
         instance = this;
         controller = GetComponent<PlayerMovement>();
         base.Update();
-        
+    }
 
+    //Player's response to the npc
+    public void spawnReEmote(int type, float lifeTime)
+    {
+        GameObject addedObj = Instantiate(emotePrefab, emotePosition.position, emotePosition.rotation, TempObjectsHolder.asTransform);
+        GeneralEmote spawnedEmote = addedObj.GetComponent<GeneralEmote>();
+        spawnedEmote.type = type;
+        spawnedEmote.lifeTime = lifeTime;
+        spawnedEmote.followScript.target = emotePosition;
     }
 
     public override Inventory getAssociatedInventory()

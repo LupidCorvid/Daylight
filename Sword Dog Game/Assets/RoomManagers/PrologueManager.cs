@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PrologueManager : RoomManager
 {
@@ -11,7 +12,10 @@ public class PrologueManager : RoomManager
     public Entity prologueMonster;
 
     public GameObject looseSword;
-    public GameObject NoSwordBlock;
+    public GameObject Ricken;
+    public GameObject monsterLantern;
+    public Collider2D monsterAliveBlock;
+    public NPCFollow RickenFollow;
 
     bool attemptedLeave = false;
 
@@ -43,10 +47,10 @@ public class PrologueManager : RoomManager
                 }
                 break;
             case "AttemptedLeave":
-                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && roomState.prologueMonsterKilled && !attemptedLeave)
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
                 {
                     CutsceneController.PlayCutscene("AttemptedLeave");
-                    attemptedLeave = true;
+                    //attemptedLeave = true;
                 }
                 break;
             case "EnemyPan":
@@ -55,12 +59,20 @@ public class PrologueManager : RoomManager
                     CutsceneController.PlayCutscene("EnemyPan");
                 }
                 break;
-            //case "MonsterKilled":
-            //    if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
-            //    {
-            //        CutsceneController.PlayCutscene("SavedFromMonster");
-            //    }
-            //    break;
+            case "MonsterKilled":
+                if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+                {
+                    CutsceneController.PlayCutscene("SavedFromMonster");
+                }
+                break;
+            case "RickenStartFollow":
+                RickenFollow.target = Player.controller.transform;
+                RickenFollow.currentlyTryingMove = true;
+                RickenFollow.allowingForMovement = true;
+                break;
+            case "TesterCutscene":
+                CutsceneController.PlayCutscene("TestPlayerMove");
+                break;
         }
     }
 
@@ -74,7 +86,6 @@ public class PrologueManager : RoomManager
         else
         {
             SwordFollow.instance.SetActive(false);
-            NoSwordBlock.SetActive(true);
         }
         if(!roomState.finishedIntroCutscene && !roomState.swordCollected)
         {
@@ -89,17 +100,28 @@ public class PrologueManager : RoomManager
 
         if (!QuestsManager.main.checkIfAssigned(0))
             QuestsManager.main.AssignQuest(new GetupQuest());
+
+        if (roomState.prologueMonsterKilled)
+            monsterAliveBlock.enabled = false;
+
+        if (roomState.finishedIntroCutscene)
+            Destroy(Ricken);
+
+        if (roomState.prologueMonsterKilled)
+            Destroy(monsterLantern);
     }
 
     public void savedFriend()
     {
-        roomState.prologueMonsterKilled = true;
-        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
-
-        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
         {
             CutsceneController.PlayCutscene("SavedFromMonster");
         }
+
+        roomState.prologueMonsterKilled = true;
+        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
+
+        
     }
 
 
@@ -115,7 +137,6 @@ public class PrologueManager : RoomManager
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
-        NoSwordBlock.SetActive(false);
     }
 
     private void OnDestroy()

@@ -113,11 +113,13 @@ public class MerylBehavior : DialogNPC
                 healUser();
                 break;
             case "AloeQuestAssign":
+                CanvasManager.main.queuedQuestNotif = ("New quest: " + new MerylAloeQuest().questDescription);
                 QuestsManager.main.AssignQuest(new MerylAloeQuest());
                 break;
             case "AloePayment":
                 Utilities.main.SpawnLooseItem(new Bone(10), interactor.transform.position);
                 interactor.getAssociatedInventory().RemoveItem(new TeardropAloe(), 2);
+                CanvasManager.main.queuedQuestNotif = ("Completed quest: " + new MerylAloeQuest().questDescription);
                 QuestsManager.main.setQuestCompletion(1, true);
                 break;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RivalBehavior : DialogNPC
+public class RivalBehavior : DialogNPC, ICutsceneCallable
 {
     Animator rivalAnim, swordAnim;
     bool prologueBehaviorActive = true;
@@ -14,7 +14,7 @@ public class RivalBehavior : DialogNPC
     bool monsterTransitionExecuted = false; //For transitioning from cowering to idle
 
     //Copy pasted from general code
-    Animator anim;
+    //Animator anim;
     float waitToLook = 0f;
     bool talking, finishTalkingSequence = false;
     Vector2 playerPosition = new Vector2(0, 0);
@@ -23,59 +23,58 @@ public class RivalBehavior : DialogNPC
     public string interruptDialog;
     private MiniBubbleController bubble;
 
+    public bool isTurning = false; //Toggle if turnAnim is triggered //Attempt for turn animation
+    public GameObject rivalSword;
+
+    public NPCFollow followScript;
 
     void Start()
     {
         rivalAnim = gameObject.GetComponent<Animator>();
         swordAnim = GameObject.Find("rival sword").GetComponent<Animator>();
+        rivalSword = GameObject.Find("rival sword");
         if (monster != null)
             monster.killed += monsterKilled;
 
-        if (SceneManager.GetActiveScene().name == "Town")
+        if (SceneManager.GetActiveScene().name != "prologue area")
             prologueBehaviorActive = false;
     }
     
-    //void Update()
-    //{
-    //    //if (SceneManager.GetActiveScene().name == "Town")
-    //        //prologueBehaviorActive = false;
-    //    if(prologueBehaviorActive)
-    //        prologueBehavior();
-    //    else
-    //        swordAnim.Play("sword_idle");
-    //}
 
     //Copy pasted from general code
     void FixedUpdate()
     {
         if (prologueBehaviorActive)
             prologueBehavior();
-        else
-        {
-            swordAnim.Play("sword_idle");
 
-            if (alreadyTalking)
-                talkingToPlayer();
-            else if (!finishTalkingSequence)
-                idle();
-            
+        if (alreadyTalking && rivalAnim.GetCurrentAnimatorStateInfo(0).IsName("rival_idle"))
+        {
+            talkingToPlayer();
         }
+
+        if (talking && !isTurning && !prologueBehaviorActive) speak();
     }
 
     public void idle()
     {
-        rivalAnim.Play("rival_idle");
+        swordAnim.Play("sword_idle");
+        if (alreadyTalking)
+            talkingToPlayer();
+        else if (!finishTalkingSequence)
+            rivalAnim.Play("rival_idle");
     }
 
     public void talkingToPlayer()
     {
-        rivalAnim.Play("rival_speak");
+        rivalAnim.Play("rival_silentToSpeak");
     }
 
     public override void exitDialog()
     {
         base.exitDialog();
-        StartCoroutine(finishedTalking());
+        if(rivalAnim != null)
+            rivalAnim.SetTrigger("FinishedTalking");
+        //StartCoroutine(finishedTalking());
 
     }
     public override void interact(Entity user)
@@ -112,13 +111,8 @@ public class RivalBehavior : DialogNPC
 
     void prologueBehavior()
     {
-        //Debug
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            monsterDefeated = true;
-        }
 
-        if (monster == null)
+        if (((PrologueManager)RoomManager.currentRoom)?.roomState.prologueMonsterKilled == true)
             monsterDefeated = true;
 
         //Rival cowers in front of the monster
@@ -134,31 +128,32 @@ public class RivalBehavior : DialogNPC
             animWaitTime += Time.deltaTime;
             rivalAnim.Play("rival_cowerToIdle");
             swordAnim.Play("sword_cowerToIdle");
+            //Debug.Log("Setting rival anim");
 
             if (animWaitTime >= 1)
             {
                 animWaitTime = 0f;
                 monsterTransitionExecuted = true;
-                print("animWaitTime Done");
-            } 
+                //print("animWaitTime Done");
+            }
+            
         }
     }
 
     //Dialog Events Below
-
-    public void turnAnimRival()
+    
+    public void CutsceneEvent(string functionToCall)
     {
-
-    }
-
-    public void enterPlayerName()
-    {
-
-    }
-
-    public void flashRed()
-    {
-
+        switch (functionToCall)
+        {
+            case "flashRed":
+                rivalAnim.Play("rival_injury");
+                break;
+            case "turnAnimRival":
+                followScript.TurnAnim();
+                //print("triggered turnAnimRival");
+                break;
+        }
     }
 
     public void monsterKilled()
@@ -170,8 +165,16 @@ public class RivalBehavior : DialogNPC
         //}
     }
 
-    public void followPlayerToTown()
+    //Used for [CE, p1, p2, ...]
+    //Takes an arbitrary number of arguments, use how ever you need
+    //This calls another cutscene from Unity, and it happens at the same time as the currect cutscene
+    public override void eventCalled(params string[] input)
     {
-
+        switch(input[0])
+        {
+            case "backPedal":
+                CutsceneController.PlayCutscene("U_rickenBackpedal");
+                break;
+        }
     }
 }

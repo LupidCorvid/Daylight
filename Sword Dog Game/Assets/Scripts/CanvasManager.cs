@@ -19,6 +19,11 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager main;
     public static Coroutine blinkRoutine;
 
+    public Animator newQuestNotif;
+    public TMPro.TextMeshProUGUI questNotifText;
+
+    public string queuedQuestNotif;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,5 +89,18 @@ public class CanvasManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(duration / amount / 2);
         }
         blinkRoutine = null;
+    }
+
+    public void Notif(string notifText)
+    {
+        questNotifText.text = notifText;
+        newQuestNotif.Play("NewQuest");
+    }
+
+    public void DisplayQueuedNotif()
+    {
+        if(queuedQuestNotif != "")
+            Notif(queuedQuestNotif);
+        queuedQuestNotif = "";
     }
 }

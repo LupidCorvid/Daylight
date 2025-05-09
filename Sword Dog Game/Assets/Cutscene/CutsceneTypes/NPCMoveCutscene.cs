@@ -8,9 +8,14 @@ public class NPCMoveCutscene : CutsceneData
     public bool goToPoint = false;
     public Transform targ;
     public List<Vector2> targPoints = new List<Vector2>();
+    public bool backpedal = false;
     public bool lockMovementAfter = true;
     public bool keepTargetsAfter = false;
     int currPoint = 0;
+    public Entity AIToFreeze;
+    public bool sprint = false;
+
+    bool origSprint = false;
 
     public override void startSegment()
     {
@@ -18,6 +23,18 @@ public class NPCMoveCutscene : CutsceneData
         targetNPC.allowingForMovement = true;
         targetNPC.currentlyTryingMove = true;
         targetNPC.MovingToPoint = goToPoint;
+        if (goToPoint)
+        {
+            targetNPC.targPoint = targPoints[currPoint];
+        }
+        else
+            targetNPC.target = targ;
+        targetNPC.backpedal = backpedal;
+        if (AIToFreeze != null)
+            AIToFreeze.freezeAI = true;
+
+        origSprint = targetNPC.running;
+        targetNPC.running = sprint;
     }
 
     public override void cycleExecution()
@@ -25,7 +42,7 @@ public class NPCMoveCutscene : CutsceneData
         base.cycleExecution();
         if(goToPoint)
         {
-            if(Mathf.Abs(targPoints[currPoint].x - targetNPC.transform.position.x) < 1)
+            if(Mathf.Abs(targPoints[currPoint].x - targetNPC.transform.position.x) < 5)
             {
                 if (currPoint < targPoints.Count - 1)
                 {
@@ -39,9 +56,10 @@ public class NPCMoveCutscene : CutsceneData
                 }
             }
         }
-        else if(!targetNPC.moving)
+        else if(!targetNPC.moving || Mathf.Abs(targ.position.x - targetNPC.transform.position.x) < 5)
         {
             finishedSegment();
+            Debug.Log("logger");
         }
     }
 
@@ -56,5 +74,9 @@ public class NPCMoveCutscene : CutsceneData
         {
             targetNPC.currentlyTryingMove = false;
         }
+        backpedal = false;
+        if (AIToFreeze != null)
+            AIToFreeze.freezeAI = false;
+        targetNPC.running = origSprint;
     }
 }

@@ -158,8 +158,8 @@ public class MainMenuManager : MonoBehaviour
             GameObject addedSave = Instantiate(SaveSlotUIPrefab, savesList.transform);
             SaveSlot addedSlot = addedSave.GetComponent<SaveSlot>();
             addedSlot.saveNum = i;
-            addedSlot.savePath = Application.persistentDataPath + @"\SaveData\SaveData_" + (i) + @".DOG";
-            if (!File.Exists(Application.persistentDataPath + @"\SaveData\SaveData_" + (i) + @".DOG"))
+            addedSlot.savePath = Path.Combine(Application.persistentDataPath, @"SaveData", @"SaveData_" + (i) + @".DOG");
+            if (!File.Exists(addedSlot.savePath))
             {
                 File.WriteAllText(addedSlot.savePath, JsonUtility.ToJson(GameSaver.SaveData.EmptySave()));
             }
@@ -212,11 +212,12 @@ public class MainMenuManager : MonoBehaviour
 
     public (string, int) GetMostRecentSave()
     {
-        if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
+        string saveDataPath = Path.Combine(Application.persistentDataPath, @"SaveData");
+        if (!Directory.Exists(saveDataPath))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + @"\SaveData");
+            Directory.CreateDirectory(saveDataPath);
         }
-        string[] files = Directory.GetFiles(Application.persistentDataPath + @"\SaveData");
+        string[] files = Directory.GetFiles(saveDataPath);
 
         string mostRecentFile = "";
         int mostRecentId = -1;

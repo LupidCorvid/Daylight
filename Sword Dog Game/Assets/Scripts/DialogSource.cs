@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Text;
 
 public class DialogSource
 {
@@ -29,7 +30,10 @@ public class DialogSource
 
     public string outString = "";
 
-    public static Dictionary<string, string> stringVariables = new Dictionary<string, string>();
+    public static Dictionary<string, string> stringVariables = new Dictionary<string, string>()
+    {
+        {" playerName", "Feng"}
+    };
     public static Dictionary<string, int> counterVariables = new Dictionary<string, int>();
 
     private bool waitFrameForChar = false;
@@ -184,6 +188,10 @@ public class DialogSource
     public static Dictionary<string, string> getBlocks(string loadedText)
     {
         Dictionary<string, string> blocks = new Dictionary<string, string>();
+
+        // Normalize line endings on different OS's
+        loadedText = loadedText.Replace(Environment.NewLine, "\r\n");
+        
         if (loadedText.Length > BLOCKS_SIGNATURE.Length && loadedText.Substring(0, 7) == BLOCKS_SIGNATURE)
         {
             int lastBlockStart = 0;
@@ -191,7 +199,6 @@ public class DialogSource
             {
                 if (loadedText[i] == '{')
                 {
-                    
                     string titleChunk = loadedText.Substring(lastBlockStart, i - lastBlockStart);
                     //titleChunk = titleChunk.LastIndexOf('\n');
                     string blockName;
@@ -199,6 +206,7 @@ public class DialogSource
                         blockName = loadedText.Substring(titleChunk.LastIndexOf('\n') + lastBlockStart + 1, i - 1 - (titleChunk.LastIndexOf('\n') + lastBlockStart));
                     else
                         continue;
+                    
                     //Maybe change to use a short string series instead?
                     string blockText = loadedText.Substring(i + 3, getCommandEnd(loadedText, i, '{', '}') - (i + 3));
                     blocks.Add(blockName, blockText);
@@ -224,7 +232,14 @@ public class DialogSource
 
     public static string LoadFile(string filePath)
     {
-        string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath + @"\Dialog\", filePath));
+        // Handles incorrect pathing for non-windows machines
+        if (!File.Exists(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath)))
+        {
+            string[] splitPath = filePath.Split("\\");
+            filePath = Path.Combine(splitPath);
+        }
+        string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath), Encoding.UTF8);
+
         return gottenText;
     }
 

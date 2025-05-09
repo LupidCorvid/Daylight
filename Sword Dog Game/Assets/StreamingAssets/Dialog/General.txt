@@ -4,11 +4,17 @@ Default{
 }
 
 Prologue4{
-[sh,The General][abf,6][ss, .05][IA,<color=#FFDC30>][gvar,playerName][IA,</color>]! Where have you been?! You and Ricken- [wi] [c][emote, 3] Wh- [w, .1] Where's Ricken? [w, .3] He... [w, .2][IA,<size=60%>] He didn't- [IA,</size>] [wi] [c][reemote, 7] [w, .5] Haaa, [w, .1] that's good to hear. [w, .1] You had me worried that another warrior- [wi] [c] ...[wi] [c] Nevermind my worries... [wi] 
-[c] [IA,<color=#FFDC30>][gvar,playerName][IA,</color>], report! [w, .1] How did the mission go? [wi] [reemote, 7] [w, 1] [llf,Prologue4.1] [exit]
+[sh,The General][abf,6][ss, .05][gvar, playerName]! Where have you been?! You and Ricken- [wi] [c][emote, 3] Wh- [w, .1] Where's Ricken? [w, .3] He... [w, .2][IA,<size=60%>] He didn't- [IA,</size>] [wi] [exit]
+
+
 }
 
 Prologue4.1{
+[sh,The General][abf,6][ss, .05] Haaa, [w, .1] that's good to hear. [w, .1] You had me worried that another warrior- [wi] [c] ...[wi] [c] Nevermind my worries... [wi] 
+[c] [gvar, playerName], report! [w, .1] How did the mission go? [wi] [exit]
+}
+
+Prologue4.2{
 [sh,The General][abf,6][ss, .05]
 [c]Let me get this straight... [w, .2] [wi]
 [c]After successfully dispatching several of the assigned monsters... [wi]
@@ -19,21 +25,21 @@ Prologue4.1{
 [c]Your report in short:[w, .2] the monsters are getting closer. [wi] 
 [c] [ss, .03] [emote, 0] [IA,<size=120%>] [TFX, Shake, 1.2] I wished you had reported back to me something I didn't already know![/TFX,Shake][IA,</size>][wi]
 [c] [ss, .05] [IA,<size=60%>][TFX, Wave, 5, 3, 50]*Sigh*[/TFX,Wave][IA,</size>] While I'm thankful we didn't lose another rising warrior,[w, .1] hearing that the last of the elder's pupils couldn't even accomplish such a simple task is disheartening.[wi]
-[c]Not [IA,<i>]only[IA,</i>] for me...[w, .2] but for your fellow villagers who look up to us in order to safeguard and protect them. [prompt, "We're sorry...",[llf,P4.1Response1], "I'll make sure this doesn't happen again.",[llf,P4.1Response2], "...",[llf,P4.1Response3]]
+[c]Not [IA,<i>]only[IA,</i>] for me...[w, .2] but for your fellow villagers who look up to us in order to safeguard and protect them. [prompt, "We're sorry...",[llf,P4.2Response1], "I'll make sure this doesn't happen again.",[llf,P4.2Response2], "...",[llf,P4.2Response3]]
 [c] [ss, .05] Clearly, you and your fellow rookie need training and easier missions.[w, .2] [wi]
 [c]Report over.[w, .2] Go patrol around the town and see if anyone is in need of assistance.[wi]
 [c]You are dismissed.[wi] [exit]
 }
 
-P4.1Response1{
+P4.2Response1{
 [sh,The General][abf,6][ss, .05]
-[c] [reemote, 5] [ss, .03] [IA,<size=120%>] [TFX, Shake, .8] I don't want apologies, boy.[w, .1] I want results![/TFX,Shake][IA,</size>][wi]
+[c] [ss, .03] [IA,<size=120%>] [TFX, Shake, .8] I don't want apologies, boy.[w, .1] I want results![/TFX,Shake][IA,</size>][wi]
 }
-P4.1Response2{
+P4.2Response2{
 [sh,The General][abf,6][ss, .05]
 [c] You'd better![w, .1] It would be in your best interest if you want to keep your rank.[wi]
 }
-P4.1Response3{
+P4.2Response3{
 [sh,The General][abf,6][ss, .05]
 [c] [ss, .03] [IA,<size=120%>] [TFX, Shake, .8] Quit standing around looking sorry for yourself![/TFX,Shake][IA,</size>][wi]
 }

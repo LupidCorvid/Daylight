@@ -6,7 +6,7 @@ using TMPro;
 
 public class NamingScreenScript : MonoBehaviour
 {
-    public string inputtedName = "";
+    public string inputtedName = "Feng";
 
     public int cursorPos = 0;
 
@@ -146,7 +146,7 @@ public class NamingScreenScript : MonoBehaviour
 
                     if (true)
                     {
-                        ChangeScene.LoadScene("prologue area", "", false);
+                        ChangeScene.LoadScene("IntroCutscene", "", false);
                         loadingScene = true;
                     }
                     break;

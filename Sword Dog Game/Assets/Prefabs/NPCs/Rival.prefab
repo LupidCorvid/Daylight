@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ed4f859d17c244644a8df38400399387, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -141,6 +141,9 @@ MonoBehaviour:
   monster: {fileID: 0}
   dialogDistance: 0
   interruptDialog: 
+  isTurning: 0
+  rivalSword: {fileID: 3703650060970454080}
+  followScript: {fileID: 2565580551260284601}
 --- !u!61 &5693027133895096867
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -383,7 +386,7 @@ Transform:
   m_GameObject: {fileID: 3703650061167044159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.793566, y: -2.0336502, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3703650060970454083}
@@ -463,8 +466,27 @@ MonoBehaviour:
   target: {fileID: 0}
   startMoveDistance: 6
   stopMoveDistance: 5
+  moving: 0
   allowingForMovement: 0
   rb: {fileID: 5596580178810680927}
+  currentlyTryingMove: 0
+  MovingToPoint: 0
+  targPoint: {x: 0, y: 0}
+  pointTargDistance: 0.1
+  canRun: 0
+  RunningDistance: 8
+  running: 0
+  walkSpeed: 4
+  sprintSpeed: 6
+  SpriteFacesRight: 1
+  anim: {fileID: 8076098344034795785}
+  ControlFlip: 1
+  flipAnimator: 0
+  turnAnimName: rival_turn
+  backpedal: 0
+  walkAnim: rival_walk
+  swordAnim: {fileID: 3703650060970454085}
+  swordTurnAnim: sword_turn
 --- !u!114 &8577884318717015373
 MonoBehaviour:
   m_ObjectHideFlags: 0

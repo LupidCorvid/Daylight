@@ -8,7 +8,7 @@ public class BugShroomAI : BaseAI
 
     //public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
     //public List<hitTarget> hitTargets = new List<hitTarget>();
-
+    bool attackQueued = false;
 
     public float attackCooldown
     {
@@ -64,9 +64,10 @@ public class BugShroomAI : BaseAI
             case AIState.seeking:
                 SeekMovement();
                 anim.ResetTrigger("Attacking");
-                if (Vector2.Distance(transform.position, target.position) <= stopRange && lastAttack + attackCooldown < Time.time)
+                if (Vector2.Distance(transform.position, target.position) <= stopRange * 1.1f && lastAttack + attackCooldown < Time.time)
                 {
                     Attack();
+                    attackQueued = true;
                 }
                     
                 break;
@@ -77,7 +78,10 @@ public class BugShroomAI : BaseAI
                 else
                     anim.transform.localScale = new Vector3(1, 1, 1);
 
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack"))
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack") && attackQueued)
+                    attackQueued = false;
+
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack") && !attackQueued)
                     state = AIState.idle;
                 break;
         }
@@ -132,6 +136,8 @@ public class BugShroomAI : BaseAI
         {
             float distance = Mathf.Abs(target.transform.position.x + stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+
+            speed = Mathf.Max(speed, .1f);
             movement.MoveLeft(speed);
             anim.SetFloat("WalkingSpeed", Mathf.Clamp(speed/3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
@@ -140,6 +146,7 @@ public class BugShroomAI : BaseAI
         {
             float distance = Mathf.Abs(target.transform.position.x - stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            speed = Mathf.Max(speed, .1f);
             movement.MoveRight(speed);
             //movement.MoveRight(moveSpeed);
             //anim.SetFloat("WalkingSpeed", moveSpeed/3f);

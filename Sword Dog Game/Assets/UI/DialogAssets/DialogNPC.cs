@@ -273,6 +273,19 @@ public class DialogNPC : MonoBehaviour, IInteractable
         }
     }
 
+    /* These values are in the generalEmote animator controller
+     * 0 anger
+     * 1 content
+     * 2 happy
+     * 3 questioning
+     * 4 surprise
+     * 5 worry 
+     * 6 sad
+     * 7 talk
+     * 8 playful (not implemented yet)
+     */
+
+    //Person you're speaking to
     public void spawnEmote(int type, float lifeTime)
     {
         GameObject addedObj = Instantiate(emotePrefab, emoteSpawnLocation.transform.position, emoteSpawnLocation.transform.rotation, TempObjectsHolder.asTransform);
@@ -282,7 +295,7 @@ public class DialogNPC : MonoBehaviour, IInteractable
         spawnedEmote.followScript.target = emoteSpawnLocation.transform;
     }
 
-
+    //Player's response to the npc
     public void spawnReEmote(int type, float lifeTime)
     {
         GameObject addedObj = Instantiate(emotePrefab, interactor.emotePosition.position, interactor.emotePosition.rotation, TempObjectsHolder.asTransform);

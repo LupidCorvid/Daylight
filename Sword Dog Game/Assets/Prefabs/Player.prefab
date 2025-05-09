@@ -774,6 +774,7 @@ MonoBehaviour:
   inputManager: {fileID: 0}
   stopMovement: 0
   waterRotation: 0
+  externalControl: 0
   intendedFacingRight: 1
   lastLandHeight: 0
   sprintSpeedMultiplier: 1.5
@@ -796,6 +797,7 @@ MonoBehaviour:
   canWalkOnSlope: 0
   slippery: {fileID: 6200000, guid: d72f1b0548c3b254a9bd19d509a80e39, type: 2}
   friction: {fileID: 6200000, guid: 8c4f8834425bcf442bf55b14234bc0e9, type: 2}
+  immovable: {fileID: 6200000, guid: 7bd1401d70e40204b83126f68844a3e6, type: 2}
   calculatedSpeed: 4
   sprintWindUpPercent: 1
   cldr1: {fileID: 974524988010002649}
@@ -1046,7 +1048,7 @@ MonoBehaviour:
     multiplier: 1
     setZeroSources: 0
   moveSpeed:
-    baseValue: 4
+    baseValue: 180
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
@@ -1063,10 +1065,12 @@ MonoBehaviour:
   maxHealth: 8
   health: 8
   invincible: 0
+  freezeAI: 0
   playerHealth: {fileID: 0}
   pAttack: {fileID: 0}
   hasLantern: 0
   mouthLantern: {fileID: 2013864310079171884}
+  emotePrefab: {fileID: 4940022028847480465, guid: f753fbb75cb933a44a5637f9edcff42d, type: 3}
 --- !u!212 &753334121987281846
 SpriteRenderer:
   m_ObjectHideFlags: 0

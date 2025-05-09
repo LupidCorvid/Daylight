@@ -41,9 +41,9 @@ public class SaveSystem : MonoBehaviour
 
     private static bool WriteToFile(string name, string content)
     {
-        var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
-        if (!Directory.Exists(Application.persistentDataPath + @"\SaveData"))
-            Directory.CreateDirectory(Application.persistentDataPath + @"\SaveData");
+        var fullPath = Path.Combine(Application.persistentDataPath, @"SaveData", name + ".DOG");
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, @"SaveData")))
+            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, @"SaveData"));
 
         try
         {
@@ -60,7 +60,7 @@ public class SaveSystem : MonoBehaviour
 
     private bool ReadFromFile(string name, out string content)
     {
-        var fullPath = Path.Combine(Application.persistentDataPath + @"\SaveData", name + ".DOG");
+        var fullPath = Path.Combine(Application.persistentDataPath, @"SaveData", name + ".DOG");
         try
         {
             content = File.ReadAllText(fullPath);
@@ -76,7 +76,7 @@ public class SaveSystem : MonoBehaviour
 
     public bool SaveFileExists() 
     {
-        var fullPath = Path.Combine(Application.persistentDataPath, saveName + saveDataIndex);
+        var fullPath = Path.Combine(Application.persistentDataPath, @"SaveData", saveName + saveDataIndex);
         return File.Exists(fullPath);
     }
 }
