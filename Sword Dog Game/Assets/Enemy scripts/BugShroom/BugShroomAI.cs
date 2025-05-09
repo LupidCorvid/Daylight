@@ -52,7 +52,7 @@ public class BugShroomAI : BaseAI
             case AIState.idle:
                 anim.SetFloat("WalkingSpeed", .75f);
                 movement.NotMoving();
-                if (target != null && Vector2.Distance(transform.position, target.position) > stopRange)
+                if (target != null && Mathf.Abs(transform.position.x - target.position.x) > stopRange)
                 {
                     state = AIState.seeking;
                 }
@@ -64,7 +64,7 @@ public class BugShroomAI : BaseAI
             case AIState.seeking:
                 SeekMovement();
                 anim.ResetTrigger("Attacking");
-                if (Vector2.Distance(transform.position, target.position) <= stopRange && lastAttack + attackCooldown < Time.time)
+                if (Mathf.Abs(transform.position.x - target.position.x) <= stopRange && lastAttack + attackCooldown < Time.time)
                 {
                     Attack();
                 }
@@ -132,6 +132,8 @@ public class BugShroomAI : BaseAI
         {
             float distance = Mathf.Abs(target.transform.position.x + stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+
+            speed = Mathf.Max(speed, .1f);
             movement.MoveLeft(speed);
             anim.SetFloat("WalkingSpeed", Mathf.Clamp(speed/3f, .75f, 9999999f));
             anim.transform.localScale = new Vector3(1, 1, 1);
@@ -140,6 +142,7 @@ public class BugShroomAI : BaseAI
         {
             float distance = Mathf.Abs(target.transform.position.x - stopRange - transform.position.x);
             float speed = Mathf.Clamp(distance * 5, 0f, moveSpeed);
+            speed = Mathf.Max(speed, .1f);
             movement.MoveRight(speed);
             //movement.MoveRight(moveSpeed);
             //anim.SetFloat("WalkingSpeed", moveSpeed/3f);
