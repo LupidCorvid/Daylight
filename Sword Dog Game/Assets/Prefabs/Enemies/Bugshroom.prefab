@@ -111,6 +111,7 @@ MonoBehaviour:
   cldr: {fileID: 6058493211403701905}
   groundCheck: {fileID: 8739965475116297149}
   lastSlope: 0
+  widthLengthScalar: 1
 --- !u!50 &4516523643932583988
 Rigidbody2D:
   serializedVersion: 4
@@ -175,24 +176,26 @@ MonoBehaviour:
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   moveSpeed:
     baseValue: 3
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
   attackSpeed:
     baseValue: 1
     baseMultiplier: 1
     additive: 0
     additiveBase: 0
     multiplier: 1
+    setZeroSources: 0
+  emotePosition: {fileID: 0}
   maxHealth: 10
   health: 10
   invincible: 0
-  allies: 0
-  enemies: 0
-  facingDir: {x: 0, y: 0}
+  freezeAI: 0
   aggroRange: 10
   movement: {fileID: 6171613311389390137}
   slopeChecker: {fileID: 218444822182697661}

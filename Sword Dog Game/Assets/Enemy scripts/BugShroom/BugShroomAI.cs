@@ -8,7 +8,7 @@ public class BugShroomAI : BaseAI
 
     //public List<PlayerHealth> hitThisFrame = new List<PlayerHealth>();
     //public List<hitTarget> hitTargets = new List<hitTarget>();
-
+    bool attackQueued = false;
 
     public float attackCooldown
     {
@@ -52,7 +52,7 @@ public class BugShroomAI : BaseAI
             case AIState.idle:
                 anim.SetFloat("WalkingSpeed", .75f);
                 movement.NotMoving();
-                if (target != null && Mathf.Abs(transform.position.x - target.position.x) > stopRange)
+                if (target != null && Vector2.Distance(transform.position, target.position) > stopRange)
                 {
                     state = AIState.seeking;
                 }
@@ -64,9 +64,10 @@ public class BugShroomAI : BaseAI
             case AIState.seeking:
                 SeekMovement();
                 anim.ResetTrigger("Attacking");
-                if (Mathf.Abs(transform.position.x - target.position.x) <= stopRange && lastAttack + attackCooldown < Time.time)
+                if (Vector2.Distance(transform.position, target.position) <= stopRange * 1.1f && lastAttack + attackCooldown < Time.time)
                 {
                     Attack();
+                    attackQueued = true;
                 }
                     
                 break;
@@ -77,7 +78,10 @@ public class BugShroomAI : BaseAI
                 else
                     anim.transform.localScale = new Vector3(1, 1, 1);
 
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack"))
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack") && attackQueued)
+                    attackQueued = false;
+
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon2_attack") && !attackQueued)
                     state = AIState.idle;
                 break;
         }
