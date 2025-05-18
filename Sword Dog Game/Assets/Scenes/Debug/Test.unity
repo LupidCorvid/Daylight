@@ -4359,11 +4359,15 @@ MonoBehaviour:
     instantUI: 0
     relPosition: 0
     minSpeed: 0
+    targTransform: {fileID: 0}
+    useTransformX: 0
+    useTransformY: 0
   target: {fileID: 0}
   freeCameraOnExit: 0
   freeHudOnExit: 0
   useMainCamera: 1
   ignoreCameraBounds: 0
+  resetBarsOnExit: 0
   cameraRb: {fileID: 0}
 --- !u!114 &294639849
 MonoBehaviour:
@@ -4391,6 +4395,7 @@ MonoBehaviour:
   stopMovement: 0
   hideUI: 0
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!4 &294639850
@@ -4510,6 +4515,7 @@ MonoBehaviour:
   currState: 0
   stopOnFinish: 0
   restoreSpeedOnFinish: 0
+  FreezeAI: {fileID: 0}
 --- !u!114 &296098108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4530,6 +4536,7 @@ MonoBehaviour:
   stopMovement: 0
   hideUI: 0
   controlMusic: 0
+  FreezePlayerRigidbody: 0
   RemoveOnDestroy: 1
   OverwriteCopies: 0
 --- !u!4 &296098109
@@ -4545,7 +4552,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303463451
 GameObject:
@@ -4640,6 +4647,7 @@ MonoBehaviour:
   scene: Town
   spawn: From test
   newArea: 0
+  ContinueMovement: 0
 --- !u!1 &323663867
 GameObject:
   m_ObjectHideFlags: 0
@@ -20105,6 +20113,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9045224149153439544, guid: a22e6c578ed26434fa0199e276fefe4f, type: 3}
   m_PrefabInstance: {fileID: 846209967}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &905729616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905729618}
+  - component: {fileID: 905729617}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &905729617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905729616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3425a1e6d30534d72a93724797efdf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: f2184ada5c4fd4adb9406fa13d50299d, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &905729618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905729616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &912399414
 GameObject:
   m_ObjectHideFlags: 0
@@ -21343,6 +21408,7 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   invincible: 0
+  freezeAI: 0
   aggroRange: 10
   movement: {fileID: 0}
   slopeChecker: {fileID: 0}
@@ -33071,6 +33137,7 @@ MonoBehaviour:
   scene: Town
   spawn: From test
   newArea: 4
+  ContinueMovement: 0
 --- !u!4 &1542776425
 Transform:
   m_ObjectHideFlags: 0
@@ -35678,8 +35745,59 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683319923}
+    - targetCorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683319922}
   m_SourcePrefab: {fileID: 100100000, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+--- !u!1 &1683319921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+  m_PrefabInstance: {fileID: 1683319920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1683319922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683319921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6356da209ea07402ba2abf8b24df0f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &1683319923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683319921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77115f8df0034e538734b2d34ae9662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1700292546
 GameObject:
   m_ObjectHideFlags: 0
@@ -42506,7 +42624,7 @@ Transform:
   - {fileID: 8003655887954542534}
   - {fileID: 3536377446088823248}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4827573924260648918
 MonoBehaviour:
@@ -43430,6 +43548,7 @@ MonoBehaviour:
   maxHealth: 8
   health: 8
   invincible: 0
+  freezeAI: 0
   aggroRange: 10
   movement: {fileID: 4827573924260648918}
   slopeChecker: {fileID: 8681545944290624121}

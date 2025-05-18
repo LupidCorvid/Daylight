@@ -156,6 +156,7 @@ MonoBehaviour:
   scene: Cave 8
   spawn: FromCave10
   newArea: 0
+  ContinueMovement: 0
 --- !u!61 &448839396
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1209,8 +1210,59 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 994099904}
+    - targetCorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 994099903}
   m_SourcePrefab: {fileID: 100100000, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+--- !u!1 &994099902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7015845286559979853, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
+  m_PrefabInstance: {fileID: 994099901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &994099903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994099902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6356da209ea07402ba2abf8b24df0f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &994099904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994099902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77115f8df0034e538734b2d34ae9662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1060159198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1407,63 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3837834196585392742, guid: 2135045fa19e05f47ba8c8223f9f5947, type: 3}
   m_PrefabInstance: {fileID: 1106787627}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1338506769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338506771}
+  - component: {fileID: 1338506770}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1338506770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338506769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3425a1e6d30534d72a93724797efdf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: f2184ada5c4fd4adb9406fa13d50299d, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &1338506771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338506769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423668972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,6 +1497,7 @@ MonoBehaviour:
   scene: Cave 11
   spawn: FromCave10
   newArea: 0
+  ContinueMovement: 0
 --- !u!61 &1423668974
 BoxCollider2D:
   m_ObjectHideFlags: 0
