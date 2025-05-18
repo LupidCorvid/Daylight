@@ -147,7 +147,8 @@ public class DialogController : MonoBehaviour
             textDisplay.alpha = 0;
         if(headerDisplay != null)
            headerDisplay.alpha = 0;
-        DotAnimator?.SetTrigger("Close");
+        if(DotAnimator != null)
+            DotAnimator?.SetTrigger("Close");
         inDialog = false;
         pausePlayerMovement = false;
         
@@ -247,7 +248,7 @@ public class DialogController : MonoBehaviour
 
     public string renameInput(string actionNeeded, string inputName)
     {
-        Debug.Log(inputName);
+        //Debug.Log(inputName);
         inputName = inputName.Replace(actionNeeded + ":", string.Empty);
         inputName = inputName.Replace("<Keyboard>/", "Keyboard_");
         inputName = inputName.Replace("/Keyboard/", "Keyboard_");

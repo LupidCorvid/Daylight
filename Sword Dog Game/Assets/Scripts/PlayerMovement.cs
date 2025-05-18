@@ -446,6 +446,10 @@ public class PlayerMovement : MonoBehaviour
                 Dash();
             }
         }
+        else if(ChangeScene.maintainMovement)
+        {
+            FakeInput(moveX);
+        }
         else if (!externalControl)
         {
             moveX = 0;
@@ -799,7 +803,7 @@ public class PlayerMovement : MonoBehaviour
             sprintSpeedMultiplier = Mathf.Lerp(sprintSpeedMultiplier, 1f, 0.05f);
 
         // calculate speed
-        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent;
+        calculatedSpeed = speed * Mathf.Min(jumpSpeedMultiplier * sprintSpeedMultiplier, 2.0f) * sprintWindUpPercent * Time.fixedDeltaTime;
 
         // flip sprite depending on direction of input
         
@@ -837,7 +841,7 @@ public class PlayerMovement : MonoBehaviour
         // sloped movement
         if (isOnSlope && isGrounded && !isJumping && canWalkOnSlope)
         {
-            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * speed * -slopeNormalPerp.y, 0.0f);
+            targetVelocity.Set(PlayerHealth.dead ? 0 : moveX * calculatedSpeed * -slopeNormalPerp.x, moveX * calculatedSpeed * -slopeNormalPerp.y, 0.0f);
         }
 
         // apply velocity, dampening between current and target

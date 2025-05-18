@@ -12,8 +12,8 @@ public class PrologueManager : RoomManager
     public Entity prologueMonster;
 
     public GameObject looseSword;
-    public GameObject NoSwordBlock;
     public GameObject Ricken;
+    public GameObject monsterLantern;
     public Collider2D monsterAliveBlock;
     public NPCFollow RickenFollow;
 
@@ -43,20 +43,20 @@ public class PrologueManager : RoomManager
             case "ApproachedRival":
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !DialogSource.stringVariables.ContainsKey("ListenedWithSword") && !DialogController.dialogOpen)
                 {
-                    //CutsceneController.PlayCutscene("RivalApproached");
+                    CutsceneController.PlayCutscene("RivalApproached");
                 }
                 break;
             case "AttemptedLeave":
                 if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
                 {
-                    //CutsceneController.PlayCutscene("AttemptedLeave");
+                    CutsceneController.PlayCutscene("AttemptedLeave");
                     //attemptedLeave = true;
                 }
                 break;
             case "EnemyPan":
                 if(!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
                 {
-                    //CutsceneController.PlayCutscene("EnemyPan");
+                    CutsceneController.PlayCutscene("EnemyPan");
                 }
                 break;
             case "MonsterKilled":
@@ -86,7 +86,6 @@ public class PrologueManager : RoomManager
         else
         {
             SwordFollow.instance.SetActive(false);
-            NoSwordBlock.SetActive(true);
         }
         if(!roomState.finishedIntroCutscene && !roomState.swordCollected)
         {
@@ -104,17 +103,25 @@ public class PrologueManager : RoomManager
 
         if (roomState.prologueMonsterKilled)
             monsterAliveBlock.enabled = false;
+
+        if (roomState.finishedIntroCutscene)
+            Destroy(Ricken);
+
+        if (roomState.prologueMonsterKilled)
+            Destroy(monsterLantern);
     }
 
     public void savedFriend()
     {
-        roomState.prologueMonsterKilled = true;
-        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
-
-        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene)
+        if (!GameSaver.currData.roomStates.prologueState.finishedIntroCutscene && !roomState.prologueMonsterKilled)
         {
             CutsceneController.PlayCutscene("SavedFromMonster");
         }
+
+        roomState.prologueMonsterKilled = true;
+        QuestsManager.main.setQuestProgress(new GetupQuest(), 1);
+
+        
     }
 
 
@@ -130,7 +137,6 @@ public class PrologueManager : RoomManager
         SwordFollow.instance.transform.rotation = looseSword.transform.GetChild(0).rotation;
         Destroy(looseSword);
         SwordFollow.instance.SetActive(true);
-        NoSwordBlock.SetActive(false);
     }
 
     private void OnDestroy()

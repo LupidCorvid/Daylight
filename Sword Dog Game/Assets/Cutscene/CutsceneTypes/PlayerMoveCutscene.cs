@@ -31,8 +31,11 @@ public class PlayerMoveCutscene : CutsceneData
     {
         base.cycleExecution();
 
-        if(player == null)
+        if (player == null)
+        {
             player = Player.controller;
+            player.externalControl = true;
+        }
 
         if (goToPoint)
         {
@@ -80,6 +83,12 @@ public class PlayerMoveCutscene : CutsceneData
     public override void finishedSegment()
     {
         base.finishedSegment();
+        player.externalControl = false;
+    }
+
+    public override void abort()
+    {
+        base.abort();
         player.externalControl = false;
     }
 }

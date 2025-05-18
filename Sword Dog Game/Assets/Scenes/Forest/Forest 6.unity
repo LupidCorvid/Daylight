@@ -1091,7 +1091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19891005}
   m_LocalRotation: {x: -0, y: -0, z: -0.069068015, w: 0.997612}
-  m_LocalPosition: {x: 158.8068, y: -1.9800001, z: 1.7990329}
+  m_LocalPosition: {x: 157.22, y: -2.03, z: 1.7990329}
   m_LocalScale: {x: -1.8521096, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23876,6 +23876,7 @@ MonoBehaviour:
   scene: Forest 4 bottom
   spawn: FromForest6
   newArea: 0
+  ContinueMovement: 1
 --- !u!61 &498281076
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30795,6 +30796,22 @@ PrefabInstance:
     - target: {fileID: 7642868542203545494, guid: a1953b37f3a89254b874938d9130306a, type: 3}
       propertyPath: m_Name
       value: SceneTransitionRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762590583992538524, guid: a1953b37f3a89254b874938d9130306a, type: 3}
+      propertyPath: m_Size.x
+      value: 9.003971
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762590583992538524, guid: a1953b37f3a89254b874938d9130306a, type: 3}
+      propertyPath: m_Size.y
+      value: 9.937229
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762590583992538524, guid: a1953b37f3a89254b874938d9130306a, type: 3}
+      propertyPath: m_Offset.x
+      value: -1.3065319
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762590583992538524, guid: a1953b37f3a89254b874938d9130306a, type: 3}
+      propertyPath: m_Offset.y
+      value: 2.7525282
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -79516,7 +79533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700723450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 165.2, y: -2.1, z: 0}
+  m_LocalPosition: {x: 161.61, y: -2.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81400,11 +81417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 156.1
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 8526581034175272701, guid: 9c951ce47ba48614a87bd382e37e7284, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3
+      value: -0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -92603,6 +92620,7 @@ MonoBehaviour:
   scene: Forest 7
   spawn: FromForest6
   newArea: 0
+  ContinueMovement: 1
 --- !u!61 &2061839543
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92635,7 +92653,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.359947}
+  m_Offset: {x: -0.9867096, y: 1.3599472}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -92646,7 +92664,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 12.786203}
+  m_Size: {x: 10.946136, y: 12.786203}
   m_EdgeRadius: 0
 --- !u!4 &2061839544
 Transform:

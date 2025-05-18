@@ -101,6 +101,10 @@ public class CutsceneController : MonoBehaviour
         {
             AllCutscenes.Remove(cutsceneName);
         }
+        if(playingThisCutscene)
+        {
+            StopCutscene();
+        }
     }
 
     // Start is called before the first frame update
@@ -181,7 +185,10 @@ public class CutsceneController : MonoBehaviour
         if (stopMovement)
             cutsceneStopMovement = true;
         if (hideUI)
+        {
             cutsceneHideUI = true;
+            CanvasManager.HideHUD();
+        }
         if (controlMusic)
             cutsceneControlMusic = true;
         if (FreezePlayerRigidbody)
@@ -197,6 +204,11 @@ public class CutsceneController : MonoBehaviour
 
     public void StopCutscene()
     {
+        if(playingThisCutscene && cutsceneNumber < cutscenes.Count && cutscenes[cutsceneNumber] != null)
+        {
+            cutscenes[cutsceneNumber].abort();
+        }
+
         if (playingThisCutscene && cutsceneStopInteractions && stopInteractions)
             cutsceneStopInteractions = false;
         if (playingThisCutscene && cutsceneStopMovement && stopMovement)

@@ -5,6 +5,9 @@ using UnityEngine;
 public class TownManager : RoomManager
 {
     public TownAreaState roomState;
+    public SwitchMusicOnLoad musicOnLoad;
+
+    public Collider2D FirstEnterCutsceneCameraBounds;
 
     public override void Awake() //Called immediately when the object is loaded into the scene
     {
@@ -14,12 +17,19 @@ public class TownManager : RoomManager
 
     public void Start() //Called on frame 1
     {
+        if (roomState.P_FirstTimeEnter_triggered)
+        {
+            Debug.Log("fhfjh");
+            musicOnLoad.enabled = true;
+        }
         buildRoom();
     }
 
     //Read in variables from file, things that might change throughout the game
     public void buildRoom()
     {
+        if (roomState.P_FirstTimeEnter_triggered)
+            FirstEnterCutsceneCameraBounds.enabled = false;
     }
 
     public override void receivedEvent(string name, params object[] parameters)
