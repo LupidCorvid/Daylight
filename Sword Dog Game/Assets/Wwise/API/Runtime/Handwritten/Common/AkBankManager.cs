@@ -106,17 +106,15 @@ public static class AkBankManager
 				return AkUnitySoundEngine.AK_INVALID_UNIQUE_ID;
 			}
 
-#if UNITY_SWITCH
-			// No bank decoding on Nintendo switch
-			handle = new BankHandle(name, bankType);
-#else
 			if (decodeBank && bankType != AkBankTypeEnum.AkBankType_User)
 			{
 				UnityEngine.Debug.LogError("Decoding Auto-generated SoundBanks is not supported.");
+				decodeBank = false;
 			}
 
-			handle = decodeBank ? new DecodableBankHandle(name, saveDecodedBank) : new BankHandle(name, bankType);
-#endif
+			handle = decodeBank && AkUnitySoundEngine.PlatformSupportsDecodeBank() ? 
+				new DecodableBankHandle(name, saveDecodedBank) : new BankHandle(name, bankType);
+
 			m_BankHandles.Add(name, handle);
 		}
 		return handle.LoadBank();

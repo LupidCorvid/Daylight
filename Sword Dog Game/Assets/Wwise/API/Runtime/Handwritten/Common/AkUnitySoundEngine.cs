@@ -228,6 +228,8 @@ public partial class AkUnitySoundEngine
 	public const string Deprecation_2022_1_0 = "This functionality is deprecated as of Wwise v2022.1.0 and will be removed in a future release.";
 	public const string Deprecation_2023_1_0 = "This functionality is deprecated as of Wwise v2023.1.0 and will be removed in a future release.";
 	public const string Deprecation_2024_1_0 = "This functionality is deprecated as of Wwise v2024.1.0 and will be removed in a future release.";
+	public const string Ak_Sound_Engine_Rename_2024_1_0 = "AkSoundEngine has been renamed to AkUnitySoundEngine as of Wwise v2024.1.0.";
+	public const string Ak_Sound_Engine_Init_Rename_2024_1_0 = "AkSoundEngineInitialization has been renamed to AkUnitySoundEngineInitialization as of Wwise v2024.1.0.";
 	#endregion
 
 	#region GameObject wrappers
@@ -598,79 +600,6 @@ public partial class AkUnitySoundEngine
 		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
 
 		{ return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_5(in_pszEventName, in_gameObjectID_id, in_iPosition); }
-	}
-
-	public static AKRESULT SeekOnEvent(uint in_eventID, UnityEngine.GameObject in_gameObjectID, float in_fPercent, bool in_bSeekToNearestMarker, uint in_PlayingID)
-	{
-
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_6(in_eventID, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker, in_PlayingID);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_9(in_eventID, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker, in_PlayingID); }
-#endif
-	}
-
-	public static AKRESULT SeekOnEvent(uint in_eventID, UnityEngine.GameObject in_gameObjectID, float in_fPercent, bool in_bSeekToNearestMarker)
-	{
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_7(in_eventID, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_10(in_eventID, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker); }
-#endif
-	}
-
-	public static AKRESULT SeekOnEvent(uint in_eventID, UnityEngine.GameObject in_gameObjectID, float in_fPercent)
-	{
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_8(in_eventID, in_gameObjectID_id, in_fPercent);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_11(in_eventID, in_gameObjectID_id, in_fPercent); }
-#endif
-	}
-
-	public static AKRESULT SeekOnEvent(string in_pszEventName, UnityEngine.GameObject in_gameObjectID, float in_fPercent, bool in_bSeekToNearestMarker, uint in_PlayingID)
-	{
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_9(in_pszEventName, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker, in_PlayingID);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_12(in_pszEventName, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker, in_PlayingID); }
-#endif
-	}
-
-	public static AKRESULT SeekOnEvent(string in_pszEventName, UnityEngine.GameObject in_gameObjectID, float in_fPercent, bool in_bSeekToNearestMarker)
-	{
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_10(in_pszEventName, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_13(in_pszEventName, in_gameObjectID_id, in_fPercent, in_bSeekToNearestMarker); }
-#endif
-	}
-
-	public static AKRESULT SeekOnEvent(string in_pszEventName, UnityEngine.GameObject in_gameObjectID, float in_fPercent)
-	{
-		var in_gameObjectID_id = AkUnitySoundEngine.GetAkGameObjectID(in_gameObjectID);
-		AkUnitySoundEngine.PreGameObjectAPICall(in_gameObjectID, in_gameObjectID_id);
-
-#if (UNITY_OPENHARMONY || UNITY_SWITCH || UNITY_ANDROID || UNITY_STANDALONE_LINUX || UNITY_WEBGL) && !UNITY_EDITOR
-		return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_11(in_pszEventName, in_gameObjectID_id, in_fPercent);
-#else
-        { return (AKRESULT)AkUnitySoundEnginePINVOKE.CSharp_SeekOnEvent__SWIG_14(in_pszEventName, in_gameObjectID_id, in_fPercent); }
-#endif
 	}
 
 	public static void CancelEventCallbackGameObject(UnityEngine.GameObject in_gameObjectID)
@@ -1278,6 +1207,6 @@ public partial class AkUnitySoundEngine
 	public const uint AK_PENDING_EVENT_LOAD_ID = uint.MaxValue;
 }
 
-[System.Obsolete(AkUnitySoundEngine.Deprecation_2024_1_0)]
+[System.Obsolete(AkUnitySoundEngine.Ak_Sound_Engine_Rename_2024_1_0)]
 public class AkSoundEngine : AkUnitySoundEngine {}
 #endif // #if ! (UNITY_DASHBOARD_WIDGET || UNITY_WEBPLAYER || UNITY_WII || UNITY_WIIU || UNITY_NACL || UNITY_FLASH || UNITY_BLACKBERRY) // Disable under unsupported platforms.

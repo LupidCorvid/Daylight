@@ -16,8 +16,6 @@ in a written agreement between you and Audiokinetic Inc.
 Copyright (c) 2025 Audiokinetic Inc.
 *******************************************************************************/
 
-using System.Text.RegularExpressions;
-
 /// <summary>
 ///     This class is responsible for determining the path where sound banks are located. When using custom platforms, this
 ///     class needs to be extended.
@@ -83,20 +81,7 @@ public partial class AkBasePathGetter
 		if (string.IsNullOrEmpty(fullBasePath))
 			fullBasePath = AkWwiseInitializationSettings.ActivePlatformSettings.SoundbankPath;
 
-#if !UNITY_EDITOR && UNITY_WEBGL
-		fullBasePath = System.IO.Path.Combine(UnityEngine.Application.persistentDataPath, fullBasePath);
-#elif UNITY_EDITOR || !UNITY_ANDROID
-		fullBasePath = System.IO.Path.Combine(UnityEngine.Application.streamingAssetsPath, fullBasePath);
-#endif
-
-#if UNITY_SWITCH
-		if (fullBasePath.StartsWith("/"))
-			fullBasePath = fullBasePath.Substring(1);
-#endif
-
-#if UNITY_OPENHARMONY
-		fullBasePath = fullBasePath.Substring(fullBasePath.IndexOf("Data"));
-#endif
+		AdjustFullBasePathForPlatform(ref fullBasePath);
 
 		// Combine base path with platform sub-folder
 		var platformBasePath = System.IO.Path.Combine(fullBasePath, platformName);
@@ -246,12 +231,7 @@ public partial class AkBasePathGetter
 
 	public void EvaluateGamePaths()
 	{
-#if UNITY_SWITCH && !UNITY_EDITOR
-		// Calling Application.persistentDataPath crashes Switch
-		string tempPersistentDataPath = null;
-#else
-		string tempPersistentDataPath = UnityEngine.Application.persistentDataPath;
-#endif
+		string tempPersistentDataPath = GetPersistentDataPath();
 
 		PersistentDataPath = tempPersistentDataPath;
 
@@ -269,14 +249,7 @@ public partial class AkBasePathGetter
 			tempSoundBankBasePath = GetPlatformBasePath();
 
 #if !AK_WWISE_ADDRESSABLES //Don't log this if we're using addressables
-#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_OPENHARMONY)
-			// Can't use File.Exists on Android, assume banks are there
-			var InitBnkFound = true;
-#else
-			var InitBnkFound = System.IO.File.Exists(System.IO.Path.Combine(tempSoundBankBasePath, "Init.bnk"));
-#endif
-			
-			if (string.IsNullOrEmpty(tempSoundBankBasePath) || !InitBnkFound)
+			if (string.IsNullOrEmpty(tempSoundBankBasePath) || !InitBankExists(tempSoundBankBasePath))
 			{
 				if (LogWarnings)
 				{
@@ -292,19 +265,7 @@ public partial class AkBasePathGetter
 		}
 
 		SoundBankBasePath = tempSoundBankBasePath;
-
-		string tempDecodedBankFullPath = null;
-
-#if !UNITY_SWITCH || UNITY_EDITOR
-#if (UNITY_ANDROID ||  UNITY_IOS) && !UNITY_EDITOR
-		// This is for platforms that only have a specific file location for persistent data.
-		tempDecodedBankFullPath = System.IO.Path.Combine(tempPersistentDataPath, DecodedBankFolder);
-#else
-		tempDecodedBankFullPath = System.IO.Path.Combine(tempSoundBankBasePath, DecodedBankFolder);
-#endif
-#endif
-
-		DecodedBankFullPath = tempDecodedBankFullPath;
+		DecodedBankFullPath = GetDecodedBankPath();
 	}
 
 	public string SoundBankBasePath { get; private set; }

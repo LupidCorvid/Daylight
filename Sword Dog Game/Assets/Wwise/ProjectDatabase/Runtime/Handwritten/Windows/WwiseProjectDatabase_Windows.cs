@@ -46,7 +46,7 @@ public partial class WwiseProjectDatabase
         return ProjectInfoExists;
     }
     
-    public static void Init(string inDirectoryPath, string inDirectoryPlatformName, string language)
+    public static void Init(string inDirectoryPath, string inDirectoryPlatformName, string language = null)
     {
         InitCheckUp(inDirectoryPath);
         if (!ProjectInfoExists)
@@ -55,7 +55,10 @@ public partial class WwiseProjectDatabase
         try
         {
             WwiseProjectDatabasePINVOKE_Windows.Init(inDirectoryPath, inDirectoryPlatformName);
-            WwiseProjectDatabasePINVOKE_Windows.SetCurrentLanguage(language);
+            if (!string.IsNullOrEmpty(language))
+            {
+                WwiseProjectDatabasePINVOKE_Windows.SetCurrentLanguage(language);
+            }
         }
         catch (System.Exception e)
         {

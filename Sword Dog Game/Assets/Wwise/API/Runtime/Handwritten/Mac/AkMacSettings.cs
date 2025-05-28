@@ -22,6 +22,15 @@ public partial class AkCommonUserSettings
 	{
 		settings.uSampleRate = m_SampleRate;
 	}
+
+	protected partial string GetPluginPath()
+	{
+#if UNITY_EDITOR_OSX
+		return System.IO.Path.GetFullPath(AkUtilities.GetPathInPackage("Runtime/Plugins/Mac/DSP"));
+#else
+		return System.IO.Path.Combine(UnityEngine.Application.dataPath, "Plugins" + System.IO.Path.DirectorySeparatorChar);
+#endif
+	}
 }
 #endif
 

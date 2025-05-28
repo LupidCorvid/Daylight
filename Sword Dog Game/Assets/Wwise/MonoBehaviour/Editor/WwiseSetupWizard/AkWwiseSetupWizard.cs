@@ -5,9 +5,9 @@ The content of this file may not be used without valid licenses to the
 AUDIOKINETIC Wwise Technology.
 Note that the use of the game engine is subject to the Unity(R) Terms of
 Service at https://unity3d.com/legal/terms-of-service
- 
+
 License Usage
- 
+
 Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
 this file in accordance with the end user license agreement provided with the
 software or, alternatively, in accordance with the terms contained
@@ -29,12 +29,12 @@ public class WwiseSetupWizard
 		{2023, "WWISE_ADDRESSABLES_23_1_OR_LATER"},
 		{2024, "WWISE_ADDRESSABLES_24_1_OR_LATER"}
 	};
-	
+
 	static Dictionary<int, string> WwiseVersionDefines = new Dictionary<int, string>()
 	{
 		{2024, "WWISE_2024_OR_LATER"}
 	};
-	
+
 	public static void RunModify()
 	{
 		try
@@ -588,7 +588,7 @@ public class WwiseSetupWizard
 		// 11. Activate XboxOne network sockets.
 		AkXboxOneUtils.EnableXboxOneNetworkSockets();
 #endif
-		
+
 		// 12. Add addressables version define
 		SetWwiseVersionDefines(WwiseAddressableDefines, true, "com.audiokinetic.wwise.addressables");
 		
@@ -671,9 +671,6 @@ public class WwiseSetupWizard
 
 		// attach initializer component
 		UnityEditor.Undo.AddComponent<AkInitializer>(WwiseGlobalGameObject);
-
-		// Set focus on WwiseGlobal
-		UnityEditor.Selection.activeGameObject = WwiseGlobalGameObject;
 	}
 
 	private static bool DisableBuiltInAudio()
@@ -705,8 +702,8 @@ public class WwiseSetupWizard
 
 		var r = new System.Text.RegularExpressions.Regex("_WwiseIntegrationTemp.*?([/\\\\])");
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
-		var FullPath = AkUtilities.GetFullPath(UnityEngine.Application.dataPath, settings.GeneratedSoundbanksPath);
-		var ProjectPath = AkUtilities.GetFullPath(UnityEngine.Application.dataPath, settings.WwiseProjectPath);
+		var FullPath = AkUtilities.GetFullPath(r.Replace(UnityEngine.Application.dataPath, "$1"), settings.GeneratedSoundbanksPath);
+		var ProjectPath = AkUtilities.GetFullPath(r.Replace(UnityEngine.Application.dataPath, "$1"), settings.WwiseProjectPath);
 		var SoundbankPath = AkUtilities.MakeRelativePath(System.IO.Path.GetDirectoryName(ProjectPath), FullPath);
 #else
 		var SoundbankPath = AkUtilities.GetFullPath(r.Replace(UnityEngine.Application.streamingAssetsPath, "$1"), settings.SoundbankPath);

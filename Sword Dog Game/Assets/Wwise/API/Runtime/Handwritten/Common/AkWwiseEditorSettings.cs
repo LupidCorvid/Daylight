@@ -26,6 +26,18 @@ public class WwiseSettings
 {
 	public const string Filename = "WwiseSettings.xml";
 
+	public static string GitRepositoryLink
+	{
+		get
+		{
+			string wwiseVersion = AkUnitySoundEngine.WwiseVersion;
+			string shortWwiseVersion = wwiseVersion.Substring(2, 6);
+			string repositoryLink = "https://github.com/audiokinetic/WwiseUnityAddressables.git";
+			repositoryLink += $"#v{shortWwiseVersion}";
+			return repositoryLink;
+		}
+	}
+
 	public static string Path
 	{
 		get { return System.IO.Path.Combine(UnityEngine.Application.dataPath, Filename); }
@@ -52,6 +64,14 @@ public class WwiseSettings
 	public bool UseWaapi = true;
 	public string WaapiPort = "8080";
 	public string WaapiIP = "127.0.0.1";
+
+	public bool UseGitRepository = true;
+	public string PackageSource = "";
+	public string AddressableBankFolder = "WwiseData/Bank";
+	public bool UseCustomBuildScript = false;
+	public string AddressableAssetBuilderPath =  "Assets/AddressableAssetsData/DataBuilders/BuildScriptWwisePacked.asset";
+	public bool AutomaticallyUpdateExternalSourcesPath = false;
+	public string ExternalSourcesPath = "WwiseData/Bank";
 
 	public string XMLTranslatorTimeout = "0";	//Timeout (in ms) for error translator through SoundBanksInfo.xml. Set to 0 to disable.
 	public string WaapiTranslatorTimeout = "0"; //Timeout (in ms) for error translator through WAAPI. Set to 0 to disable.
@@ -221,7 +241,16 @@ public class AkWwiseEditorSettings
 			public static UnityEngine.GUIContent UseWaapi = new UnityEngine.GUIContent("Connect to Wwise");
 			public static UnityEngine.GUIContent WaapiIP = new UnityEngine.GUIContent("WAAPI IP address");
 			public static UnityEngine.GUIContent WaapiPort = new UnityEngine.GUIContent("WAAPI port");
-
+			
+			public static string AddressableInstallerSection = "Wwise Addressable Installer";
+			public static UnityEngine.GUIContent UseGitRepository = new UnityEngine.GUIContent("Install the addressable from a git repository", "If true, will expect a git repository link to import the package, if false will install from a local folder.");
+			public static UnityEngine.GUIContent PackageSource = new UnityEngine.GUIContent("Package Source", "Can be a git repository link or a local folder depending on the setting above.");
+			public static UnityEngine.GUIContent AddressableBankFolder = new UnityEngine.GUIContent("Addressable SoundBanks Folder", "Where the banks will be generated. The path should be relative to the Asset Folder");
+			public static UnityEngine.GUIContent UseCustomBuildScript = new UnityEngine.GUIContent("Use Custom Build Script", "If toggled on, specify a path to the custom build script in the AddressableAssetBuilderPath field. Otherwise the default Wwise Build script will be automatically created during the installation.");
+			public static UnityEngine.GUIContent AddressableAssetBuilderPath = new UnityEngine.GUIContent("Addressable Asset Build Path", "Where the custom asset builder is located.");
+			public static UnityEngine.GUIContent AutomaticallyUpdateExternalSourcesPath = new UnityEngine.GUIContent("Automatically Update External Sources Path", "If toggled on, the external sources path will be updated during the installation.");
+			public static UnityEngine.GUIContent ExternalSourcesPath = new UnityEngine.GUIContent("External Sources Path", "The new external sources path after the addressable package installation.");
+			
 			public static string TranslatorSection = "Wwise Error Message Translator";
 			public static UnityEngine.GUIContent XMLTranslatorTimeout = new UnityEngine.GUIContent("XML Translator Timeout", "Maximum time (ms) taken to convert numeric ID in errors through SoundBankInfo.xml. Set to 0 to disable. Change will be applied next time play mode is entered.");
 			public static UnityEngine.GUIContent WaapiTranslatorTimeout = new UnityEngine.GUIContent("WAAPI Translator Timeout", "Maximum time (ms) taken to convert numeric ID in errors through WAAPI. Set to 0 to disable. Change will be applied next time play mode is entered.");
@@ -449,6 +478,7 @@ public class AkWwiseEditorSettings
 								if (previousPath != newPath)
 								{
 									settings.SoundbankPath = newPath;
+									AkWwiseInitializationSettings.Instance.UserSettings.m_BasePath = newPath;
 									changed = true;
 								}
 							}
@@ -494,7 +524,141 @@ public class AkWwiseEditorSettings
 				settings.WaapiPort = UnityEditor.EditorGUILayout.TextField(Styles.WaapiPort, settings.WaapiPort);
 				settings.WaapiIP = UnityEditor.EditorGUILayout.TextField(Styles.WaapiIP, settings.WaapiIP);
 			}
-
+			
+			UnityEngine.GUILayout.Space(UnityEditor.EditorGUIUtility.standardVerticalSpacing);
+			UnityEngine.GUILayout.Label(Styles.AddressableInstallerSection, UnityEditor.EditorStyles.boldLabel);
+			using (new UnityEngine.GUILayout.VerticalScope("box"))
+			{
+				settings.UseGitRepository = UnityEditor.EditorGUILayout.Toggle(Styles.UseGitRepository, settings.UseGitRepository);
+				if (settings.UseGitRepository)
+				{
+					EditorGUI.BeginDisabledGroup(true); 
+					settings.PackageSource = UnityEditor.EditorGUILayout.TextField(Styles.PackageSource, WwiseSettings.GitRepositoryLink);
+					EditorGUI.EndDisabledGroup();
+				}
+				else
+				{
+					if (settings.PackageSource.StartsWith("https://"))
+					{
+						settings.PackageSource = "";
+					}
+					using (new UnityEngine.GUILayout.HorizontalScope())
+					{
+						UnityEditor.EditorGUILayout.PrefixLabel(Styles.PackageSource);
+						UnityEditor.EditorGUILayout.SelectableLabel(settings.PackageSource, Styles.TextField, UnityEngine.GUILayout.Height(17));
+						if (Ellipsis())
+						{
+#if UNITY_EDITOR_OSX
+							var path = UnityEditor.EditorUtility.OpenFilePanel("Select your Wwise Addressable source.", "/Applications/", "");
+#else
+							var path = UnityEditor.EditorUtility.OpenFolderPanel("Select your Wwise Addressable source.", System.Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "");
+#endif
+							if (path.Length != 0)
+							{
+								settings.PackageSource = System.IO.Path.GetFullPath(path);
+								changed = true;
+							}
+						}
+					}
+				}
+				using (new UnityEngine.GUILayout.HorizontalScope())
+				{
+					UnityEditor.EditorGUILayout.PrefixLabel(Styles.AddressableBankFolder);
+					UnityEditor.EditorGUILayout.SelectableLabel(settings.AddressableBankFolder, Styles.TextField, UnityEngine.GUILayout.Height(17));
+					if (Ellipsis())
+					{
+						var FullPath = AkUtilities.GetFullPath(UnityEngine.Application.dataPath,
+							settings.GeneratedSoundbanksPath);
+						var OpenInPath = System.IO.Path.GetDirectoryName(FullPath);
+						var path = UnityEditor.EditorUtility.OpenFolderPanel(
+							"Select Addressable Bank folder", OpenInPath,
+							FullPath.Substring(OpenInPath.Length + 1));
+						if (path.Length != 0)
+						{
+							if (!path.Contains(UnityEngine.Application.dataPath))
+							{
+								UnityEditor.EditorUtility.DisplayDialog("Error",
+									"The SoundBanks destination folder must be located within the Unity project 'Assets' folder.",
+									"Ok");
+							}
+							else if (path == UnityEngine.Application.dataPath)
+							{
+								UnityEditor.EditorUtility.DisplayDialog("Error",
+									"The SoundBanks destination folder cannot be the 'Assets' folder.", "Ok");
+							}
+							else
+							{
+								settings.AddressableBankFolder = AkUtilities.MakeRelativePath(UnityEngine.Application.dataPath, path);
+								changed = true;
+							}
+						}
+					}
+				}
+				settings.UseCustomBuildScript = UnityEditor.EditorGUILayout.Toggle(Styles.UseCustomBuildScript, settings.UseCustomBuildScript);
+				if (settings.UseCustomBuildScript)
+				{
+					using (new UnityEngine.GUILayout.HorizontalScope())
+					{
+						UnityEditor.EditorGUILayout.PrefixLabel(Styles.AddressableAssetBuilderPath);
+						UnityEditor.EditorGUILayout.SelectableLabel(settings.AddressableAssetBuilderPath, Styles.TextField, UnityEngine.GUILayout.Height(17));
+						if (Ellipsis())
+						{
+							var path = UnityEditor.EditorUtility.OpenFilePanel("Select the Addressable Asset Builder Path.", UnityEngine.Application.dataPath, "asset");
+							if (path.Length != 0)
+							{
+								if (!path.Contains(UnityEngine.Application.dataPath))
+								{
+									UnityEditor.EditorUtility.DisplayDialog("Error", "The SoundBanks destination folder must be located within the Unity project 'Assets' folder.", "Ok");
+								}
+								else if (path == UnityEngine.Application.dataPath)
+								{
+									UnityEditor.EditorUtility.DisplayDialog("Error", "The SoundBanks destination folder cannot be the 'Assets' folder.", "Ok");
+								}
+								else
+								{
+									settings.AddressableAssetBuilderPath = AkUtilities.MakeRelativePath(UnityEngine.Application.dataPath, path);
+									changed = true;
+								}
+							}
+						}
+					}
+				}
+				settings.AutomaticallyUpdateExternalSourcesPath = UnityEditor.EditorGUILayout.Toggle(Styles.AutomaticallyUpdateExternalSourcesPath, settings.AutomaticallyUpdateExternalSourcesPath);
+				if (settings.AutomaticallyUpdateExternalSourcesPath)
+				{
+					using (new UnityEngine.GUILayout.HorizontalScope())
+					{
+						UnityEditor.EditorGUILayout.PrefixLabel(Styles.ExternalSourcesPath);
+						UnityEditor.EditorGUILayout.SelectableLabel(settings.ExternalSourcesPath, Styles.TextField, UnityEngine.GUILayout.Height(17));
+						if (Ellipsis())
+						{
+							var path = UnityEditor.EditorUtility.OpenFolderPanel(
+								"Select External Sources folder", UnityEngine.Application.dataPath,
+								"");
+							if (path.Length != 0)
+							{
+								if (!path.Contains(UnityEngine.Application.dataPath))
+								{
+									UnityEditor.EditorUtility.DisplayDialog("Error",
+										"The External Sources destination folder must be located within the Unity project 'Assets' folder.",
+										"Ok");
+								}
+								else if (path == UnityEngine.Application.dataPath)
+								{
+									UnityEditor.EditorUtility.DisplayDialog("Error",
+										"The External Sources destination folder cannot be the 'Assets' folder.", "Ok");
+								}
+								else
+								{
+									settings.ExternalSourcesPath = AkUtilities.MakeRelativePath(UnityEngine.Application.dataPath, path);
+									changed = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		
 			UnityEngine.GUILayout.Space(UnityEditor.EditorGUIUtility.standardVerticalSpacing);
 			UnityEngine.GUILayout.Label(Styles.TranslatorSection, UnityEditor.EditorStyles.boldLabel);
 			using (new UnityEngine.GUILayout.VerticalScope("box"))

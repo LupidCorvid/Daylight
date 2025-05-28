@@ -19,5 +19,25 @@ Copyright (c) 2025 Audiokinetic Inc.
 public partial class AkBasePathGetter
 {
 	static string DefaultPlatformName = "Mac";
+
+	public static void AdjustFullBasePathForPlatform(ref string fullBasePath) 
+	{
+		fullBasePath = System.IO.Path.Combine(UnityEngine.Application.streamingAssetsPath, fullBasePath);
+	}
+
+	public static string GetPersistentDataPath()
+	{
+		return UnityEngine.Application.persistentDataPath;
+	}
+
+	public static bool InitBankExists(string tempSoundBankBasePath)
+	{
+		return System.IO.File.Exists(System.IO.Path.Combine(tempSoundBankBasePath, "Init.bnk"));
+	}
+
+	public static string GetDecodedBankPath()
+	{
+		return System.IO.Path.Combine(Instance.SoundBankBasePath, DecodedBankFolder);
+	}
 }
 #endif

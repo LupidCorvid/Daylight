@@ -84,7 +84,7 @@ public class AkSoundEngineController
 		AkCallbackManager.PostCallbacks();
 #if !(AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES)
 		AkBankManager.DoUnloadBanks();
-#else
+#elif WWISE_ADDRESSABLES_24_1_OR_LATER
 		AkAddressableBankManager.Instance.DoUnloadBank();
 #endif
 #if UNITY_WEBGL && !UNITY_EDITOR

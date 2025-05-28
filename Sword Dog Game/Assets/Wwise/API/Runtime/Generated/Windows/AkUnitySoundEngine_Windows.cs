@@ -11,6 +11,8 @@
 
 
 public partial class AkUnitySoundEngine {
+  public static uint JoystickIdToWwiseId(uint joyStickID) { return AkUnitySoundEnginePINVOKE.CSharp_JoystickIdToWwiseId(joyStickID); }
+
   public static uint AK_INVALID_SHARE_SET_ID { get { return AkUnitySoundEnginePINVOKE.CSharp_AK_INVALID_SHARE_SET_ID_get(); } 
   }
 
@@ -1728,7 +1730,7 @@ public partial class AkUnitySoundEngine {
   public const int AK_STOCHASTIC_RESERVE_LENGTH = (4+4);
   public const int AK_MAX_SOUND_PROPAGATION_DEPTH = 8;
   public const int AK_MAX_SOUND_PROPAGATION_WIDTH = 32;
-  public const double AK_SA_DIFFRACTION_DOT_EPSILON = (0.000002);
+  public const float AK_SA_DIFFRACTION_DOT_EPSILON = (0.00005f);
   public const double AK_DEFAULT_GEOMETRY_POSITION_X = (0.0);
   public const double AK_DEFAULT_GEOMETRY_POSITION_Y = (0.0);
   public const double AK_DEFAULT_GEOMETRY_POSITION_Z = (0.0);

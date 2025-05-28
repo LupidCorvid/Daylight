@@ -150,7 +150,7 @@ public class AkWwisePicker : UnityEditor.EditorWindow
 				{
 					AkUtilities.GenerateSoundbanks();
 				}
-				else
+				else if(!AkUtilities.GeneratingSoundBanks)
 				{
 					UnityEngine.Debug.LogError("Access to Wwise is required to generate the SoundBanks. Please go to Edit > Project Settings... and set the Wwise Application Path found in the Wwise Integration view.");
 				}
@@ -212,6 +212,7 @@ public class AkWwisePicker : UnityEditor.EditorWindow
 	[UnityEditor.MenuItem("CONTEXT/AkEvent/Select in Wwise Picker")]
 	[UnityEditor.MenuItem("CONTEXT/AkState/Select in Wwise Picker")]
 	[UnityEditor.MenuItem("CONTEXT/AkSwitch/Select in Wwise Picker")]
+	[UnityEditor.MenuItem("CONTEXT/AkWwiseTrigger/Select in Wwise Picker")]
 	static void SelectItemInWwisePicker(UnityEditor.MenuCommand command)
 	{
 		AkTriggerHandler component = (AkTriggerHandler)command.context;

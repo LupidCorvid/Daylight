@@ -22,6 +22,34 @@ public partial class AkCommonUserSettings
 	{
 		settings.uSampleRate = m_SampleRate;
 	}
+	
+	protected partial string GetPluginPath()
+	{
+#if UNITY_EDITOR_WIN
+		return System.IO.Path.GetFullPath(AkUtilities.GetPathInPackage(@"Runtime\Plugins\Windows\x86_64\DSP"));
+#elif UNITY_STANDALONE_WIN
+		string potentialPath = System.IO.Path.Combine(UnityEngine.Application.dataPath, "Plugins" + System.IO.Path.DirectorySeparatorChar);
+		string architectureName = "x86";
+#if UNITY_64
+		architectureName += "_64";
+#endif
+		if(System.IO.File.Exists(System.IO.Path.Combine(potentialPath, "AkUnitySoundEngine.dll")))
+		{
+			return potentialPath;
+		}
+		else if(System.IO.File.Exists(System.IO.Path.Combine(potentialPath, architectureName, "AkUnitySoundEngine.dll")))
+		{
+			return System.IO.Path.Combine(potentialPath, architectureName);
+		}
+		else
+		{
+			UnityEngine.Debug.Log("Cannot find Wwise plugin path");
+			return null;
+		}
+#else
+		return System.IO.Path.Combine(UnityEngine.Application.dataPath, "Plugins" + System.IO.Path.DirectorySeparatorChar);		
+#endif
+	}
 }
 #endif
 

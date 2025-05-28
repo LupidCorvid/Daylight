@@ -48,6 +48,8 @@ class AkUnitySoundEnginePINVOKE {
   }
 
 
+  [global::System.Runtime.InteropServices.DllImport("AkUnitySoundEngine", EntryPoint="CSharp_JoystickIdToWwiseId")]
+  public static extern uint CSharp_JoystickIdToWwiseId(uint jarg1);
   [global::System.Runtime.InteropServices.DllImport("AkUnitySoundEngine", EntryPoint="CSharp_AK_INVALID_SHARE_SET_ID_get")]
   public static extern uint CSharp_AK_INVALID_SHARE_SET_ID_get();
   [global::System.Runtime.InteropServices.DllImport("AkUnitySoundEngine", EntryPoint="CSharp_AK_INVALID_CACHE_ID_get")]

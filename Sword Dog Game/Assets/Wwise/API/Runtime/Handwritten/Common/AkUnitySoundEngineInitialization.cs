@@ -257,6 +257,6 @@ public class AkUnitySoundEngineInitialization
 }
 
 #if WWISE_ADDRESSABLES_23_1_OR_LATER
-[System.Obsolete(AkUnitySoundEngine.Deprecation_2024_1_0)]
+[System.Obsolete(AkUnitySoundEngine.Ak_Sound_Engine_Init_Rename_2024_1_0)]
 public class AkSoundEngineInitialization  : AkUnitySoundEngineInitialization {}
 #endif

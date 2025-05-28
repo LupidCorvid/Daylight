@@ -77,7 +77,7 @@ namespace Wwise.API.Editor.SoundBankDirectoryWatcher.Common
 			}
 			
 			if (System.DateTime.Now.Subtract(s_lastFileCheck).Seconds >= SecondsBetweenChecks &&
-			    !UnityEditor.EditorApplication.isCompiling && !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+			    !UnityEditor.EditorApplication.isCompiling && !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode && !AkUtilities.GeneratingSoundBanks)
 			{
 				var filename = System.IO.Path.Combine(AkBasePathGetter.GetWwiseRootOutputPath());
 				var wProjPath = System.IO.Path.Combine(AkBasePathGetter.GetWwiseProjectPath());

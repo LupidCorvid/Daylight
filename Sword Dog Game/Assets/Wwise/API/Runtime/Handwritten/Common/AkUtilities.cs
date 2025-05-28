@@ -108,7 +108,7 @@ public partial class AkUtilities
 
 	public static bool IsSoundbankGenerationAvailable()
 	{
-		return GetWwiseConsole() != null;
+		return GetWwiseConsole() != null && !GeneratingSoundBanks;
 	}
 
 	/// Executes a command-line. Blocks the calling thread until the new process has completed. Returns the logged stdout in one big string.
@@ -167,11 +167,13 @@ public partial class AkUtilities
 		return null;
 	}
 
+	public static bool GeneratingSoundBanks = false;
+
 	// Generate all the SoundBanks for all the supported platforms in the Wwise project. This effectively calls Wwise for the project
 	// that is configured in the UnityWwise integration.
 	public static void GenerateSoundbanks(System.Collections.Generic.List<string> platforms = null)
 	{
-
+		GeneratingSoundBanks = true;
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
 		AkWwiseEditorSettings.Instance.CheckGeneratedBanksPath();
 #endif
@@ -215,6 +217,11 @@ public partial class AkUtilities
 			}
 		}
 
+		System.Threading.Tasks.Task.Run(() => RunSoundBankGeneration(command, arguments));
+	}
+
+	private static void RunSoundBankGeneration(string command, string arguments)
+	{
 		var output = ExecuteCommandLine(command, arguments);
 		if (output.Contains("Process completed successfully."))
 		{
@@ -228,7 +235,7 @@ public partial class AkUtilities
 		{
 			UnityEngine.Debug.LogErrorFormat("WwiseUnity: SoundBanks generation error:\n{0}", output);
 		}
-
+		GeneratingSoundBanks = false;
 		UnityEditor.AssetDatabase.Refresh();
 	}
 
@@ -372,7 +379,109 @@ public partial class AkUtilities
 		var pathInXml = string.Format("/WwiseDocument/ProjectInfo/Project/PropertyList/Property[@Name='{0}']", "SoundBankHeaderFilePath");
 		var expression = System.Xml.XPath.XPathExpression.Compile(pathInXml);
 		var rootOutputPath = Navigator.SelectSingleNode(expression).GetAttribute("Value", "");
+#if UNITY_EDITOR_OSX
+		rootOutputPath = ParseOsxPathFromWinePath(rootOutputPath);
+		if (!Path.IsPathRooted(rootOutputPath))
+		{
+			string projectPath = Path.GetDirectoryName(WwiseProjectPath);
+			projectPath = ParseOsxPathFromWinePath(projectPath);
+			rootOutputPath = GetFullPath(projectPath, rootOutputPath);
+		}
+#endif
 		return rootOutputPath;
+	}
+	
+	public static void SetWwiseRootOutputPath(string WwiseProjectPath, string destinationPath)
+	{
+		try
+		{
+			if (WwiseProjectPath.Length == 0)
+			{
+				return;
+			}
+
+			if (!System.IO.File.Exists(WwiseProjectPath))
+			{
+				return;
+			}
+
+			s_ProjectBankPaths.Clear();
+
+			var doc = new System.Xml.XmlDocument();
+			doc.Load(WwiseProjectPath);
+			var Navigator = doc.CreateNavigator();
+
+			// Navigate the wproj file (XML format) to where generated SoundBank paths are stored
+			var it = Navigator.Select("//Property[@Name='SoundBankHeaderFilePath']");
+			foreach (System.Xml.XPath.XPathNavigator node in it)
+			{
+				if (node.MoveToAttribute("Value", ""))
+				{
+					var path = $"{destinationPath}";
+					FixSlashes(ref path);
+					node.SetValue(path);
+				}
+			}
+			doc.Save(WwiseProjectPath);
+		}
+		catch (System.Exception ex)
+		{
+			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+		}
+	}
+	
+	public static void SetPlatformsSoundBankPath(string WwiseProjectPath, string destinationPath)
+	{
+		try
+		{
+			if (WwiseProjectPath.Length == 0)
+			{
+				return;
+			}
+
+			if (!System.IO.File.Exists(WwiseProjectPath))
+			{
+				return;
+			}
+
+			s_ProjectBankPaths.Clear();
+
+			var doc = new System.Xml.XmlDocument();
+			doc.Load(WwiseProjectPath);
+			var Navigator = doc.CreateNavigator();
+
+			// Gather the mapping of Custom platform to Base platform
+			var itpf = Navigator.Select("//Platform");
+			s_BaseToCustomPF.Clear();
+			foreach (System.Xml.XPath.XPathNavigator node in itpf)
+			{
+				System.Collections.Generic.List<string> customList = null;
+				var basePF = node.GetAttribute("ReferencePlatform", "");
+				if (!s_BaseToCustomPF.TryGetValue(basePF, out customList))
+				{
+					customList = new System.Collections.Generic.List<string>();
+					s_BaseToCustomPF[basePF] = customList;
+				}
+
+				customList.Add(node.GetAttribute("Name", ""));
+			}
+
+			// Navigate the wproj file (XML format) to where generated SoundBank paths are stored
+			var it = Navigator.Select("//Property[@Name='SoundBankPaths']/ValueList/Value");
+			foreach (System.Xml.XPath.XPathNavigator node in it)
+			{
+				var pf = node.GetAttribute("Platform", "");
+				var path = $"{destinationPath}/{pf}";
+				FixSlashes(ref path);
+				node.SetValue(path);
+				s_ProjectBankPaths[pf] = path;
+			}
+			doc.Save(WwiseProjectPath);
+		}
+		catch (System.Exception ex)
+		{
+			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+		}
 	}
 
 	public static void SetSoundbanksDestinationFoldersInWproj(string WwiseProjectPath, string destinationPath)
@@ -430,6 +539,44 @@ public partial class AkUtilities
 					FixSlashes(ref path);
 					node.SetValue(path);
 				}
+			}
+			doc.Save(WwiseProjectPath);
+		}
+		catch (System.Exception ex)
+		{
+			UnityEngine.Debug.LogError("WwiseUnity: Error while reading project " + WwiseProjectPath + ". Exception: " + ex.Message);
+		}
+	}
+	
+	public static void SetExternalSourceDestinationFolderInWproj(string WwiseProjectPath, string destinationPath)
+	{
+		try
+		{
+			if (WwiseProjectPath.Length == 0)
+			{
+				return;
+			}
+
+			if (!System.IO.File.Exists(WwiseProjectPath))
+			{
+				return;
+			}
+
+			s_ProjectBankPaths.Clear();
+
+			var doc = new System.Xml.XmlDocument();
+			doc.Load(WwiseProjectPath);
+			var navigator = doc.CreateNavigator();
+
+			// Navigate the wproj file (XML format) to where generated SoundBank paths are stored
+			var it = navigator.Select("//Property[@Name='ExternalSourcesOutputPath']/ValueList/Value");
+			foreach (System.Xml.XPath.XPathNavigator node in it)
+			{
+				var pf = node.GetAttribute("Platform", "");
+				var path = $"{destinationPath}/{pf}";
+				FixSlashes(ref path);
+				node.SetValue(path);
+				s_ProjectBankPaths[pf] = path;
 			}
 			doc.Save(WwiseProjectPath);
 		}
@@ -968,7 +1115,7 @@ public partial class AkUtilities
 			path += separatorChar;
 		}
 	}
-
+	
 	public static void FixSlashes(ref string path)
 	{
 		var separatorChar = System.IO.Path.DirectorySeparatorChar;
