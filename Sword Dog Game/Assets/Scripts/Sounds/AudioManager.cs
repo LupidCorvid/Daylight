@@ -172,7 +172,7 @@ public class AudioManager : MonoBehaviour
         {
             mute = !mute;
         }
-        SettingsManager.currentSettings.musicMute = mute;
+        // SettingsManager.currentSettings.musicMute = mute;
 
         // Volume controls (hold down + or -)
         musicMixer.SetFloat("Volume", musicVolume);
