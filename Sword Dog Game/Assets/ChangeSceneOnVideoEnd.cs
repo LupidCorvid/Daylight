@@ -12,6 +12,7 @@ public class ChangeSceneOnVideoEnd : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CanvasManager.HideHUD(true);
         videoPlayer.loopPointReached += VideoEnded;
     }
 
