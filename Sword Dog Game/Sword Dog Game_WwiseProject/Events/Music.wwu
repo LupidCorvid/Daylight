@@ -107,6 +107,27 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="SecondTalkRicken" ID="{E61DA118-288E-412C-BB3D-C18CF642164B}">
+							<ChildrenList>
+								<Action Name="" ID="{293C08D3-4ECD-4ED5-B23C-2E33B6759F6D}" ShortID="886779064">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ricken" ID="{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{9DA642D0-2078-4BF5-A05B-3307CF580CC8}" ShortID="119875843">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="NPC" ID="{B003FCC9-2B8E-4166-94CB-8DBAA38FC9E6}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Event Name="PlayMenu" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}">
@@ -145,10 +166,14 @@
 					<ChildrenList>
 						<Action Name="" ID="{59E00D27-A55F-4B98-9868-6FD269C2C396}" ShortID="84860480">
 							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="FadeTime" Type="Real64" Value="1"/>
 							</PropertyList>
-							<ReferenceList/>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{8E6E5C42-2FBD-4F9E-AF41-3E445C124042}" ShortID="419238969">
 							<PropertyList>
@@ -410,8 +435,67 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="TalkGeneral" ID="{7D1C3D36-9B6B-44EF-8D66-FB3622F7462D}">
+							<ChildrenList>
+								<Action Name="" ID="{5D6BC277-5BE2-466A-9AB6-00F3D2614F5B}" ShortID="838994905">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="41"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PlayNPC" ID="{DB23B3C3-A929-4DBC-8A39-70EDB2999231}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E72C9A69-A5E2-4CA0-AAA8-28BF0A21349B}" ShortID="865047574">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="General" ID="{8C2660EF-D4E6-4087-B338-5B58C3B835B7}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="EndNPC" ID="{7F4653B6-B23A-416C-938C-238C6F1CFB06}">
+					<ChildrenList>
+						<Action Name="" ID="{F9C5AB7B-C440-4703-B765-2F7CCBEC7EFF}" ShortID="1031241672">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="NPC" ID="{B003FCC9-2B8E-4166-94CB-8DBAA38FC9E6}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{AA2E5D5D-7A50-4D4B-9237-A754FBC87EE3}" ShortID="699943782">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{85639FDA-7396-43B9-AE17-3D84B4350591}" ShortID="489680152">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

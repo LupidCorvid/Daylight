@@ -22,7 +22,6 @@
 											<TransitionInfo/>
 										</MusicTransition>
 										<MusicTransition Name="Transition" ID="{29F63DFB-8A21-4F98-9C8C-27C7843DD058}">
-											<ReferenceList/>
 											<TransitionInfo/>
 										</MusicTransition>
 									</ChildrenList>
@@ -977,7 +976,7 @@
 																							</Point>
 																							<Point>
 																								<XPos>3</XPos>
-																								<YPos>-0</YPos>
+																								<YPos>0</YPos>
 																								<Flags>0</Flags>
 																							</Point>
 																							<Point>
@@ -1530,7 +1529,7 @@
 																							</Point>
 																							<Point>
 																								<XPos>2</XPos>
-																								<YPos>-0</YPos>
+																								<YPos>0</YPos>
 																								<Flags>0</Flags>
 																							</Point>
 																							<Point>
@@ -1635,7 +1634,7 @@
 																							</Point>
 																							<Point>
 																								<XPos>5</XPos>
-																								<YPos>-0</YPos>
+																								<YPos>0</YPos>
 																								<Flags>37</Flags>
 																							</Point>
 																						</PointList>
@@ -2566,14 +2565,24 @@
 									<Custom>
 										<MusicPlaylistItem Name="" ID="{B2A072AB-B5B5-443B-BA6E-6DDB0518DC43}" ShortID="966359383">
 											<ChildrenList>
-												<MusicPlaylistItem Name="" ID="{231E1ECA-4579-4AB0-BEC7-57846A4502F0}" ShortID="204577012">
+												<MusicPlaylistItem Name="" ID="{618DFB44-A8E6-4BB8-8F35-D40C1585547F}" ShortID="425881942">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="RickenIntro" ID="{8D5404FB-64EA-42A3-9D49-73825D001C1D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{C4AF816E-FCB3-4662-AB34-F906835ED889}" ShortID="441631153">
 													<PropertyList>
 														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Segment">
-															<ObjectRef Name="RickenTheme" ID="{9D59A2BF-A495-4BF0-9450-A6B4922CF7D9}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+															<ObjectRef Name="RickenTheme" ID="{8B521CF5-268D-414B-9417-4C6CD8C9D9DA}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 														</Reference>
 													</ReferenceList>
 												</MusicPlaylistItem>
@@ -2598,9 +2607,9 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<MusicSegment Name="RickenTheme" ID="{9D59A2BF-A495-4BF0-9450-A6B4922CF7D9}" ShortID="827147094">
+								<MusicSegment Name="RickenTheme" ID="{8B521CF5-268D-414B-9417-4C6CD8C9D9DA}" ShortID="575226378">
 									<PropertyList>
-										<Property Name="EndPosition" Type="Real64" Value="83220.3174603175"/>
+										<Property Name="EndPosition" Type="Real64" Value="110202.372532704"/>
 										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
 										<Property Name="Tempo" Type="Real64" Value="70"/>
 									</PropertyList>
@@ -2613,14 +2622,14 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<MusicTrack Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{5A69E5B1-90AE-4F0D-83B4-87EE4E20E825}" ShortID="383941589">
+										<MusicTrack Name="Ricken-Guitar_70bpm4-4_L24M-P0_0625M" ID="{E3F269B1-93BC-4480-AA5B-47C7F38E67D2}" ShortID="930326268">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
-														<MusicTransition Name="Root" ID="{C1B38466-9071-41A4-895E-75AF1B262A3D}">
+														<MusicTransition Name="Root" ID="{A90689E2-52E9-4FC8-91F0-CB8D53362CE6}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -2630,7 +2639,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{78E4B61F-B55C-42FB-8183-BF13E89D3CD2}">
+												<AudioFileSource Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{71162237-FDD4-42D5-8DDD-DF1C576B89C4}">
 													<Language>SFX</Language>
 													<AudioFile>Ricken-Guitar_70bpm4-4_L24M-P0M.wav</AudioFile>
 													<MediaIDList>
@@ -2642,18 +2651,18 @@
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
-															<MusicTrackSequence Name="" ID="{FF09D468-056D-4135-86B5-DB6EE39CB5BF}">
+															<MusicTrackSequence Name="" ID="{C40BEC70-975E-4A06-AF43-7070C8D5060B}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{24F06018-6ED1-4F2F-A1AE-98D4F8A21A8D}">
+																				<MusicClip Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{2665A25A-7539-4012-A564-AE311F940708}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{78E4B61F-B55C-42FB-8183-BF13E89D3CD2}"/>
+																					<AudioSourceRef Name="Ricken-Guitar_70bpm4-4_L24M-P0M" ID="{71162237-FDD4-42D5-8DDD-DF1C576B89C4}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
@@ -2665,14 +2674,14 @@
 												</ObjectList>
 											</ObjectLists>
 										</MusicTrack>
-										<MusicTrack Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{A6AAC72C-4917-4E9C-BF72-699A3AC97F6D}" ShortID="438823349">
+										<MusicTrack Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{97C0010B-E0DA-404C-B045-03B24180A27F}" ShortID="198279942">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
-														<MusicTransition Name="Root" ID="{834E27FF-F33B-4AF7-BF55-2C8BF41AB017}">
+														<MusicTransition Name="Root" ID="{DBFD3DCF-AA4B-4D00-920A-6AE64222781C}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -2682,59 +2691,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{030A25C1-2883-43E2-B3FA-013CD369AEE0}">
-													<Language>SFX</Language>
-													<AudioFile>Ricken-Mandolin_70bpm4-4_L24M-P0M.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="323769210"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Sequences">
-													<Reference>
-														<Local>
-															<MusicTrackSequence Name="" ID="{94824008-08F6-4B53-95E6-EA67B4473D88}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<Reference>
-																			<Local>
-																				<MusicClip Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{70AF6BE8-9790-4798-B683-5EC0D63C2281}">
-																					<PropertyList>
-																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
-																						<Property Name="FadeInMode" Type="int16" Value="0"/>
-																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																					</PropertyList>
-																					<AudioSourceRef Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{030A25C1-2883-43E2-B3FA-013CD369AEE0}"/>
-																				</MusicClip>
-																			</Local>
-																		</Reference>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</Local>
-													</Reference>
-												</ObjectList>
-											</ObjectLists>
-										</MusicTrack>
-										<MusicTrack Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{4301694A-289A-4A5B-A0B2-85B20911D088}" ShortID="1023078908">
-											<ReferenceList>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
-												</Reference>
-												<Reference Name="TransitionRoot">
-													<Custom>
-														<MusicTransition Name="Root" ID="{E57C7DC0-5B8F-44E6-9339-A243C4EAC620}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</Custom>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{AD5AC8DA-BEFE-4ABA-8826-953D432C9472}">
+												<AudioFileSource Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{52D91B30-BE98-4256-B719-B66028FC0966}">
 													<Language>SFX</Language>
 													<AudioFile>Ricken-Percussion_70bpm4-4_L24M-P0M.wav</AudioFile>
 													<MediaIDList>
@@ -2746,18 +2703,19 @@
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
-															<MusicTrackSequence Name="" ID="{C3DCDCB8-8225-4753-9A72-1F0B753ABA9A}">
+															<MusicTrackSequence Name="" ID="{51A835B5-AD6B-42A5-84DE-9131489097D6}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{51709419-09A7-49C0-B351-5409845DBF1C}">
+																				<MusicClip Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{85610C07-A969-4C6A-97A5-0B8F28606E70}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="214.285714285714"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{AD5AC8DA-BEFE-4ABA-8826-953D432C9472}"/>
+																					<AudioSourceRef Name="Ricken-Percussion_70bpm4-4_L24M-P0M" ID="{52D91B30-BE98-4256-B719-B66028FC0966}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
@@ -2769,14 +2727,14 @@
 												</ObjectList>
 											</ObjectLists>
 										</MusicTrack>
-										<MusicTrack Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{AE4131CA-F317-4FA9-BD40-4A912B1028C6}" ShortID="645705486">
+										<MusicTrack Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{3311A0C3-CD60-4EF2-B248-C2AB8A36FE8F}" ShortID="726215074">
 											<ReferenceList>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
-														<MusicTransition Name="Root" ID="{052F40EE-6CD0-4E00-924D-736C4F0316B5}">
+														<MusicTransition Name="Root" ID="{EE07D016-F7D5-41C9-BAAA-119FA5C8AF36}">
 															<PropertyList>
 																<Property Name="IsFolder" Type="bool" Value="True"/>
 															</PropertyList>
@@ -2786,7 +2744,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{FAE102F8-29BE-45CA-8F45-DBB2D11B5248}">
+												<AudioFileSource Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{279A1156-E351-4EBA-8BF6-E3158A8C64EA}">
 													<Language>SFX</Language>
 													<AudioFile>Ricken-Violin_70bpm4-4_L24M-P0M.wav</AudioFile>
 													<MediaIDList>
@@ -2798,18 +2756,146 @@
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
-															<MusicTrackSequence Name="" ID="{E5EC8FB1-AC0D-4800-B2E2-CCE4866DE761}">
+															<MusicTrackSequence Name="" ID="{1B50EEA1-9391-42A3-A514-EF8AAC3B484C}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
 																		<Reference>
 																			<Local>
-																				<MusicClip Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{ED4BECE0-F069-4E49-A929-15B8F42D7EBF}">
+																				<MusicClip Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{CBF7A6C5-6497-4DFC-B37F-9F80589E6247}">
 																					<PropertyList>
+																						<Property Name="BeginTrimOffset" Type="Real64" Value="41142.8571428571"/>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="214.285714285714"/>
 																					</PropertyList>
-																					<AudioSourceRef Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{FAE102F8-29BE-45CA-8F45-DBB2D11B5248}"/>
+																					<AudioSourceRef Name="Ricken-Violin_70bpm4-4_L24M-P0M" ID="{279A1156-E351-4EBA-8BF6-E3158A8C64EA}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{1FFB3ADB-4306-4E76-9C81-AC782DCEEB7D}" ShortID="48071491">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{24F6FB57-7F45-4361-A901-4AA20623E434}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{F903527E-D590-40C5-A00B-685872A13371}">
+													<Language>SFX</Language>
+													<AudioFile>Ricken-Mandolin_70bpm4-4_L24M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="323769210"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{07DA6450-9801-4A42-91DA-0D7C66B2A9C9}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{58558588-E5F7-4E70-A169-F8613D5DFBC7}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="41142.8571428571"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="214.285714285714"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{F903527E-D590-40C5-A00B-685872A13371}"/>
+																					<PropertyCurveList>
+																						<PropertyCurve PropertyName="Highpass">
+																							<Curve Name="" ID="{E66A246F-0425-4AEC-BCF3-EBA7F24BE697}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>41.14286</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Lowpass">
+																							<Curve Name="" ID="{02DFCD82-FE75-4AC2-A413-CFA65BEFA399}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>41.14286</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Volume">
+																							<Curve Name="" ID="{798AE67D-20EC-4AF2-808A-2C6CB8AFE6D8}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="3"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>41.14286</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																					</PropertyCurveList>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{CC842670-18D0-4579-99A3-53618722ED7B}">
+																					<PropertyList>
+																						<Property Name="BeginTrimOffset" Type="Real64" Value="68571.4285714286"/>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="214.285714285714"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Ricken-Mandolin_70bpm4-4_L24M-P0M" ID="{F903527E-D590-40C5-A00B-685872A13371}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
@@ -2826,15 +2912,105 @@
 										<ObjectList Name="Cues">
 											<Reference>
 												<Local>
-													<MusicCue Name="Entry Cue" ID="{4ABACFC1-5D42-4C09-A678-0BD6E50C6997}"/>
+													<MusicCue Name="Entry Cue" ID="{F9C71C79-69C5-436E-8A4B-CCF9C4879B09}">
+														<PropertyList>
+															<Property Name="TimeMs" Type="Real64" Value="214.285714285714"/>
+														</PropertyList>
+													</MusicCue>
 												</Local>
 											</Reference>
 											<Reference>
 												<Local>
-													<MusicCue Name="Exit Cue" ID="{E9330FA1-215E-4747-A571-DD9D7823ADD6}">
+													<MusicCue Name="Exit Cue" ID="{85593B5E-4C70-452E-AFCD-183E071CAFC0}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="1000"/>
+															<Property Name="TimeMs" Type="Real64" Value="82499.9999999999"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+								<MusicSegment Name="RickenIntro" ID="{8D5404FB-64EA-42A3-9D49-73825D001C1D}" ShortID="160906497">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="16346.8480725624"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Ricken-Intro_70bpm4-4_L5_5M-P0M" ID="{DB748BF5-1030-4DF9-A549-BD52EBF45CBE}" ShortID="565703983">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{22DEF0FF-D55B-4E58-ACB9-CD34C046961A}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Ricken-Intro_70bpm4-4_L5_5M-P0M" ID="{62F10571-F7AF-418B-97B5-07FFF64A2E85}">
+													<Language>SFX</Language>
+													<AudioFile>Ricken-Intro_70bpm4-4_L5.5M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="963305899"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{46E35339-D93B-449C-8315-7922E7DB856B}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Ricken-Intro_70bpm4-4_L5_5M-P0M" ID="{49A4C38A-3131-4C04-96C6-E4018581CCB3}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="16346.8480725624"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Ricken-Intro_70bpm4-4_L5_5M-P0M" ID="{62F10571-F7AF-418B-97B5-07FFF64A2E85}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{B0C72C84-2975-47A3-B616-1138992080A1}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{C3EF8BF5-5CB9-404A-ADD8-4E457D40E657}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="15428.5714285714"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -2859,15 +3035,27 @@
 								<Reference Name="PlaylistRoot">
 									<Custom>
 										<MusicPlaylistItem Name="" ID="{86237BBE-41DA-42E1-9EE4-FB7555C87F02}" ShortID="762190468">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="0"/>
+											</PropertyList>
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{F8E69CAB-97EC-4AA7-AEB2-BEB35EC88261}" ShortID="262026475">
 													<PropertyList>
-														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Segment">
-															<ObjectRef Name="GeneralTheme" ID="{1820A926-1714-46ED-BEB7-96E6EF154226}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+															<ObjectRef Name="GeneralThemeMandolin" ID="{1820A926-1714-46ED-BEB7-96E6EF154226}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{2CD47B21-4004-469C-9932-8F1BC940711C}" ShortID="469382851">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="GeneralThemeViolin" ID="{F896E46C-974D-44CE-B480-D68D64763D16}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 														</Reference>
 													</ReferenceList>
 												</MusicPlaylistItem>
@@ -2892,9 +3080,9 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<MusicSegment Name="GeneralTheme" ID="{1820A926-1714-46ED-BEB7-96E6EF154226}" ShortID="790522638">
+								<MusicSegment Name="GeneralThemeMandolin" ID="{1820A926-1714-46ED-BEB7-96E6EF154226}" ShortID="790522638">
 									<PropertyList>
-										<Property Name="EndPosition" Type="Real64" Value="83220.3174603175"/>
+										<Property Name="EndPosition" Type="Real64" Value="86400"/>
 										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
 										<Property Name="Tempo" Type="Real64" Value="100"/>
 									</PropertyList>
@@ -2998,6 +3186,7 @@
 																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="General_Guitar_100bpm4-4_L34M-P0M" ID="{7BC82B1F-116E-43A0-ACB1-A68392583F79}"/>
 																				</MusicClip>
@@ -3050,6 +3239,7 @@
 																						<Property Name="EndTrimOffset" Type="Real64" Value="81734.2403628118"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="General_Mandolin_100bpm4-4_L34M-P0M" ID="{36889693-8024-462D-8F6B-006C4423A9C6}"/>
 																				</MusicClip>
@@ -3102,60 +3292,9 @@
 																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
 																						<Property Name="FadeInMode" Type="int16" Value="0"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="General_Percussion_100bpm4-4_L34M-P0M" ID="{4D1DD3CD-58F1-456B-A928-BEC081CF83EE}"/>
-																				</MusicClip>
-																			</Local>
-																		</Reference>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</Local>
-													</Reference>
-												</ObjectList>
-											</ObjectLists>
-										</MusicTrack>
-										<MusicTrack Name="General_Violin_100bpm4-4_L34M-P0M" ID="{ADB6568D-81B7-44CC-8810-A508AB7D8CCE}" ShortID="327869102">
-											<ReferenceList>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
-												</Reference>
-												<Reference Name="TransitionRoot">
-													<Custom>
-														<MusicTransition Name="Root" ID="{C844F0A9-B653-4755-85BE-5129CC68C888}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</Custom>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="General_Violin_100bpm4-4_L34M-P0M" ID="{E4EDB11E-6EDE-43DE-8A4D-02E811118C3A}">
-													<Language>SFX</Language>
-													<AudioFile>General_Violin_100bpm4-4_L34M-P0M.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="796921075"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Sequences">
-													<Reference>
-														<Local>
-															<MusicTrackSequence Name="" ID="{B12C0B5A-9F4A-4147-80D5-87DF3F902E7C}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<Reference>
-																			<Local>
-																				<MusicClip Name="General_Violin_100bpm4-4_L34M-P0M" ID="{A9F1EF75-70C2-4345-92DA-81A702DC8BF9}">
-																					<PropertyList>
-																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
-																						<Property Name="FadeInMode" Type="int16" Value="0"/>
-																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																					</PropertyList>
-																					<AudioSourceRef Name="General_Violin_100bpm4-4_L34M-P0M" ID="{E4EDB11E-6EDE-43DE-8A4D-02E811118C3A}"/>
 																				</MusicClip>
 																			</Local>
 																		</Reference>
@@ -3172,7 +3311,11 @@
 										<ObjectList Name="Cues">
 											<Reference>
 												<Local>
-													<MusicCue Name="Entry Cue" ID="{A21D12EA-3829-4EDE-8F4F-DB43084FA783}"/>
+													<MusicCue Name="Entry Cue" ID="{A21D12EA-3829-4EDE-8F4F-DB43084FA783}">
+														<PropertyList>
+															<Property Name="TimeMs" Type="Real64" Value="150"/>
+														</PropertyList>
+													</MusicCue>
 												</Local>
 											</Reference>
 											<Reference>
@@ -3180,7 +3323,258 @@
 													<MusicCue Name="Exit Cue" ID="{9224EFE3-4ECF-409F-8F0C-B9227973B8D6}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="1000"/>
+															<Property Name="TimeMs" Type="Real64" Value="81750"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+								<MusicSegment Name="GeneralThemeViolin" ID="{F896E46C-974D-44CE-B480-D68D64763D16}" ShortID="697561941">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="86400"/>
+										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
+										<Property Name="Tempo" Type="Real64" Value="100"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="General_Bass_100bpm4-4_L34M-P0M" ID="{F5C384F9-0FB3-4F39-9A08-F1F0594A2B75}" ShortID="776396161">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{DD6E9B99-9F35-4554-8D89-1EC4A6314025}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="General_Bass_100bpm4-4_L34M-P0M" ID="{BD616A5A-92E1-4733-AABB-01CC519A07DC}">
+													<Language>SFX</Language>
+													<AudioFile>General_Bass_100bpm4-4_L34M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="595485989"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{2250408C-B184-41E1-89DC-BADA045B3A05}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="General_Bass_100bpm4-4_L34M-P0M" ID="{F0BFF35B-3A60-4779-A2F9-8D59432195BF}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="General_Bass_100bpm4-4_L34M-P0M" ID="{BD616A5A-92E1-4733-AABB-01CC519A07DC}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="General_Guitar_100bpm4-4_L34M-P0M" ID="{68FD8C32-E38A-4BBD-82E7-462690DF66EC}" ShortID="425044284">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{EF5BEBAC-1EF6-48C5-8EAD-B3E4210F2AD9}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="General_Guitar_100bpm4-4_L34M-P0M" ID="{E304824B-4475-4DA3-8E5F-AC452A9DF138}">
+													<Language>SFX</Language>
+													<AudioFile>General_Guitar_100bpm4-4_L34M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="941214974"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{5F527E54-579F-44C4-A2D6-8F70C6CF493B}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="General_Guitar_100bpm4-4_L34M-P0M" ID="{806F3004-FC98-4E8F-B2E8-194F69381A11}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="General_Guitar_100bpm4-4_L34M-P0M" ID="{E304824B-4475-4DA3-8E5F-AC452A9DF138}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="General_Percussion_100bpm4-4_L34M-P0M" ID="{4B08148E-8D84-4345-A77C-E60ABFEBCBCD}" ShortID="86368107">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{205D4AD6-FFE7-454B-9271-6486A4391DF3}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="General_Percussion_100bpm4-4_L34M-P0M" ID="{C6C4DC42-D0D3-4E7A-9E9C-AF500693A9E7}">
+													<Language>SFX</Language>
+													<AudioFile>General_Percussion_100bpm4-4_L34M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="580927582"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{3C27993C-BDC6-4F3F-9CBE-1DEC64451840}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="General_Percussion_100bpm4-4_L34M-P0M" ID="{C2A75EBC-F76B-4091-9A66-3C4BC769421A}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="General_Percussion_100bpm4-4_L34M-P0M" ID="{C6C4DC42-D0D3-4E7A-9E9C-AF500693A9E7}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+										<MusicTrack Name="General_Violin_100bpm4-4_L34M-P0M" ID="{F03663B4-B4D2-495A-8FE5-A211A9DD13E2}" ShortID="500054012">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{FD1929BF-F783-45EE-8B60-DA4FAA3301CE}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="General_Violin_100bpm4-4_L34M-P0M" ID="{1F0B4E30-0913-4483-B00D-A5E2F4101CD7}">
+													<Language>SFX</Language>
+													<AudioFile>General_Violin_100bpm4-4_L34M-P0M.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="796921075"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{EB6B379F-EC02-4164-841E-774841AE7467}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="General_Violin_100bpm4-4_L34M-P0M" ID="{00047E5A-F2C2-4F7B-A1F9-ED1C04AFACBD}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="83220.3174603175"/>
+																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																						<Property Name="PlayAt" Type="Real64" Value="150"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="General_Violin_100bpm4-4_L34M-P0M" ID="{1F0B4E30-0913-4483-B00D-A5E2F4101CD7}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{E9FE906D-8F7D-4227-9EB2-96A67AE83671}">
+														<PropertyList>
+															<Property Name="TimeMs" Type="Real64" Value="150"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{83F58043-01A6-4269-B4D1-F80C1986C0DD}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="81750"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>

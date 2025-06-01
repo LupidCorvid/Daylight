@@ -10,6 +10,10 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="SecondTalkRicken" ID="{E61DA118-288E-412C-BB3D-C18CF642164B}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="NextPhase" ID="{3D817837-1F21-4131-B64D-CB9CC41710B2}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
 							<Position X="1" Y="0"/>
 						</Module>
@@ -32,9 +36,11 @@
 							<Value>9.86504313748112E-316</Value>
 						</RTPCValue>
 					</RTPCValueList>
-					<CurrentStateList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Ricken" ID="{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}"/>
+					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
+						<CurrentSwitchRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
 				<SoundcasterSession Name="Town" ID="{B8985342-92E4-45C0-92DF-143E9885EFA4}">
@@ -48,12 +54,20 @@
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="TalkGeneral" ID="{7D1C3D36-9B6B-44EF-8D66-FB3622F7462D}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="EnterBlacksmith" ID="{F6569331-4881-46C0-A2A8-076C9A2B6BF0}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="ExitBlacksmith" ID="{E7E64663-6AE9-48D4-8840-47A095975635}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
 							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EndNPC" ID="{7F4653B6-B23A-416C-938C-238C6F1CFB06}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="2"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="EnterDojo" ID="{6045530D-2531-46A4-BA7F-209BB4522132}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
@@ -83,6 +97,7 @@
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true">
 						<CurrentStateRef Name="Town" ID="{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}"/>
+						<CurrentStateRef Name="General" ID="{8C2660EF-D4E6-4087-B338-5B58C3B835B7}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
