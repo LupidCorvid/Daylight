@@ -34,7 +34,58 @@
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"/>
+						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="Town" ID="{B8985342-92E4-45C0-92DF-143E9885EFA4}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="EnterTown" ID="{37435602-5FA7-4680-BCD6-A07F2A8B2803}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterShop" ID="{1FEE4C9C-BA85-47E7-A22B-F20A69CFB41F}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterBlacksmith" ID="{F6569331-4881-46C0-A2A8-076C9A2B6BF0}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitBlacksmith" ID="{E7E64663-6AE9-48D4-8840-47A095975635}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterDojo" ID="{6045530D-2531-46A4-BA7F-209BB4522132}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitDojo" ID="{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterMedic" ID="{8ED1777D-1A3F-425A-A2DF-0599503F5263}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitMedic" ID="{78D83DD9-647A-4FA3-BD90-CFF18945E005}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterHouse" ID="{421E9E39-A369-4D4E-8190-C259051B76D5}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="4" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitHouse" ID="{DAD5B685-92D5-432D-8D26-2D49FF325906}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="4" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Town" ID="{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>

@@ -49,7 +49,6 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="SecondTalkRicken" ID="{51BFB3CC-E315-4AAE-9B58-C5F9DFF9D74E}"/>
 						<Event Name="EnterTutorial" ID="{D07DA31D-A355-4CC4-97DA-9A42AC6DEEC4}">
 							<ChildrenList>
 								<Action Name="" ID="{B1D787A7-AE1D-4CDF-8372-F86B185626B4}" ShortID="148977730">
@@ -110,11 +109,309 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
-				<Event Name="PlayIntro" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}">
+				<Event Name="PlayMenu" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}">
 					<ChildrenList>
-						<Action Name="" ID="{96C0A4D8-8B82-4A51-BAD0-1F7B49D46CDC}" ShortID="11446891"/>
+						<Action Name="" ID="{96C0A4D8-8B82-4A51-BAD0-1F7B49D46CDC}" ShortID="11446891">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MainMenuTheme" ID="{C3A3CCE2-FEF8-4311-B763-900623AAF9BF}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="PlayArea" ID="{5559362A-722C-4EB7-8F9C-A1C5852D91D0}">
+					<ChildrenList>
+						<Action Name="" ID="{C602E943-530D-4D34-B6D5-01EACDB2A773}" ShortID="472474134">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList/>
+						</Action>
+						<Action Name="" ID="{D2E9B88A-7693-4D9D-BDFF-A1CFF8D389BB}" ShortID="269281997">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PlayNPC" ID="{DB23B3C3-A929-4DBC-8A39-70EDB2999231}">
+					<ChildrenList>
+						<Action Name="" ID="{59E00D27-A55F-4B98-9868-6FD269C2C396}" ShortID="84860480">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList/>
+						</Action>
+						<Action Name="" ID="{8E6E5C42-2FBD-4F9E-AF41-3E445C124042}" ShortID="419238969">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="NPC" ID="{B003FCC9-2B8E-4166-94CB-8DBAA38FC9E6}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PlayCredits" ID="{238ABA62-3005-41F2-84AB-D136EF7B352B}"/>
+				<Event Name="LeaveArea" ID="{2F53384C-78F0-4F24-8796-45652BA07317}">
+					<ChildrenList>
+						<Action Name="" ID="{258EBF17-8F36-4BAD-B89D-EA4D96A0233E}" ShortID="545749511">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{8DF3A846-5D9F-45E9-A445-DD0279AC3BD7}" ShortID="65281325">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Folder Name="Town" ID="{A76358F4-1350-413F-B6EB-A1C16F09E091}" ShortID="581836796">
+					<ChildrenList>
+						<Event Name="EnterMedic" ID="{8ED1777D-1A3F-425A-A2DF-0599503F5263}">
+							<ChildrenList>
+								<Action Name="" ID="{4277AB03-F8FD-42C6-B9DB-41A36288FAEC}" ShortID="1050164291">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MortarAndPestle_120bpm4-4_L72M-P0M" ID="{D6FBC048-0A0D-4F75-B042-BDCF314A0D94}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{C0A7B99F-D408-42FD-8D49-15F90CD8F43E}" ShortID="39877445">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-HandDrums_120bpm4-4_L72M-P0M" ID="{1C2E77AB-640E-4AFE-AD3D-1EE086383FDC}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{A7DB4D4D-8317-403E-9A96-ABDFC555DC68}" ShortID="557677564">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MandolinSolo_120bpm4-4_L72M-P0_25M" ID="{879AE866-E5D3-4EEF-98DA-7DCF52F55940}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ExitMedic" ID="{78D83DD9-647A-4FA3-BD90-CFF18945E005}">
+							<ChildrenList>
+								<Action Name="" ID="{45A2DC9D-4F4E-4C62-98D4-9891E3652738}" ShortID="32402412">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MortarAndPestle_120bpm4-4_L72M-P0M" ID="{D6FBC048-0A0D-4F75-B042-BDCF314A0D94}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{3712DD04-1282-49C7-A6D3-033B16A227B1}" ShortID="880505119">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-4"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MandolinSolo_120bpm4-4_L72M-P0_25M" ID="{879AE866-E5D3-4EEF-98DA-7DCF52F55940}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{86E9D9CE-B14E-473E-A073-1BDD645A5207}" ShortID="374381524">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-HandDrums_120bpm4-4_L72M-P0M" ID="{1C2E77AB-640E-4AFE-AD3D-1EE086383FDC}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterShop" ID="{1FEE4C9C-BA85-47E7-A22B-F20A69CFB41F}">
+							<ChildrenList>
+								<Action Name="" ID="{6483F2D0-AA24-41D0-9A1B-FD883F34322F}" ShortID="516816914">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ShopkeeperBell" ID="{8FCE4E1B-C493-4C9E-B77E-31D0BDAF02FD}" WorkUnitID="{A0134AAD-4D98-4C15-AA2D-214F2FD048B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterDojo" ID="{6045530D-2531-46A4-BA7F-209BB4522132}">
+							<ChildrenList>
+								<Action Name="" ID="{3C345C14-F34C-4A10-9612-67FBEE5246E1}" ShortID="636101669">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-SwordStrikes_120bpm4-4_L72M-P0M" ID="{EF48D38F-77C6-4BD8-B728-A8D486609D4D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ExitDojo" ID="{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}">
+							<ChildrenList>
+								<Action Name="" ID="{C6B816CC-5694-4343-B67F-A6E5FE3B2925}" ShortID="964102598">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-SwordStrikes_120bpm4-4_L72M-P0M" ID="{EF48D38F-77C6-4BD8-B728-A8D486609D4D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterBlacksmith" ID="{F6569331-4881-46C0-A2A8-076C9A2B6BF0}">
+							<ChildrenList>
+								<Action Name="" ID="{736DB3FB-7397-48B2-801E-DC749CC1685A}" ShortID="993077601">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-AnvilStrikes_120bpm4-4_L72M-P0M" ID="{E03A66C9-D533-4558-9AB2-7AE149494B20}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ExitBlacksmith" ID="{E7E64663-6AE9-48D4-8840-47A095975635}">
+							<ChildrenList>
+								<Action Name="" ID="{183FF49B-AF6D-4007-943A-41ED2978493D}" ShortID="211863917">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-AnvilStrikes_120bpm4-4_L72M-P0M" ID="{E03A66C9-D533-4558-9AB2-7AE149494B20}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterHouse" ID="{421E9E39-A369-4D4E-8190-C259051B76D5}">
+							<ChildrenList>
+								<Action Name="" ID="{BCD6EFD9-45DE-46E0-A14E-7E1C5F5BFD6D}" ShortID="151971668">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MandolinSolo_120bpm4-4_L72M-P0_25M" ID="{879AE866-E5D3-4EEF-98DA-7DCF52F55940}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ExitHouse" ID="{DAD5B685-92D5-432D-8D26-2D49FF325906}">
+							<ChildrenList>
+								<Action Name="" ID="{8E2397C7-E33F-44FF-987E-D1FC8D9283D9}" ShortID="94681479">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MandolinSolo_120bpm4-4_L72M-P0_25M" ID="{879AE866-E5D3-4EEF-98DA-7DCF52F55940}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterTown" ID="{37435602-5FA7-4680-BCD6-A07F2A8B2803}">
+							<ChildrenList>
+								<Action Name="" ID="{17538C97-9EE6-4F20-B407-91EC1788E28A}" ShortID="559382673">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{7787E1EB-96BD-4998-A22C-953B5F1AB5F2}" ShortID="205773285">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town" ID="{075DE43C-5AFB-4EFD-BF02-F1DAF01BCB0B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{F6859AE4-D002-4355-BEB8-A3B12643231C}" ShortID="795037925">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town" ID="{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{C73FAE8D-72FB-4B34-899C-7CB84C3FAE1B}" ShortID="847041463">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -3,7 +3,29 @@
 	<AudioDevices>
 		<WorkUnit Name="Default Work Unit" ID="{DEE0ED89-62AE-41F4-9A1F-A5F478C13F75}" PersistMode="Standalone">
 			<ChildrenList>
-				<AudioDevice Name="System" ID="{A143B3D5-3651-442C-B416-03DB64DFCC81}" PluginName="System" CompanyID="0" PluginID="174" PluginType="7"/>
+				<AudioDevice Name="System" ID="{A143B3D5-3651-442C-B416-03DB64DFCC81}" PluginName="System" CompanyID="0" PluginID="174" PluginType="7">
+					<ObjectLists>
+						<ObjectList Name="Effects">
+							<Reference>
+								<Local>
+									<EffectSlot Name="" ID="{2C9AD859-B983-4AAE-BF95-2B99260C0028}" ShortID="694134022">
+										<PropertyList>
+											<Property Name="Bypass" Type="bool" Value="True"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="Effect">
+												<Custom>
+													<Effect Name="Mastering Suite (Custom)" ID="{A13AA037-0798-439D-9F2E-7F26C9396368}" ShortID="702313679" PluginName="Mastering Suite" CompanyID="0" PluginID="186" PluginType="3">														<PluginData/>
+													</Effect>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
+				</AudioDevice>
 				<AudioDevice Name="No_Output" ID="{1A1FDF4D-B4B5-490E-8D5A-37B7FFE7238F}" PluginName="No Output" CompanyID="0" PluginID="181" PluginType="7"/>
 			</ChildrenList>
 		</WorkUnit>
