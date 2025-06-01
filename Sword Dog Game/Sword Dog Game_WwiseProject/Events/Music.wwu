@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="Music" ID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Prologue" ID="{C60616ED-D6F9-4203-A6A1-4AF1C4B72593}" ShortID="397429457">
+					<ChildrenList>
+						<Event Name="FirstTalkRicken" ID="{26690F9C-B223-41A3-B400-3B690FA14198}">
+							<ChildrenList>
+								<Action Name="" ID="{A9E8732A-FD6D-4458-B134-90C95A1304F5}" ShortID="576937458">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="23"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="FightBoss" ID="{427A9803-2ADF-4390-8D32-7DC4F34BB543}">
+							<ChildrenList>
+								<Action Name="" ID="{E7958289-4141-4BE7-9F97-4A6565B1595E}" ShortID="743005909">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="DefeatBoss" ID="{5E330E21-3013-45F3-8FE3-48EEDFEFD522}">
+							<ChildrenList>
+								<Action Name="" ID="{7D04C3FA-46AE-4794-AAEF-08190B8BE0BD}" ShortID="640278335">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Prologue" ID="{8E73F560-5D66-400E-9E20-7D974A80368A}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="SecondTalkRicken" ID="{51BFB3CC-E315-4AAE-9B58-C5F9DFF9D74E}"/>
+						<Event Name="EnterTutorial" ID="{D07DA31D-A355-4CC4-97DA-9A42AC6DEEC4}">
+							<ChildrenList>
+								<Action Name="" ID="{B1D787A7-AE1D-4CDF-8372-F86B185626B4}" ShortID="148977730">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Prologue" ID="{8E73F560-5D66-400E-9E20-7D974A80368A}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{98B67AC4-A412-48CD-A7F2-078FF5A64A7D}" ShortID="597391969">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="23"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{767531B4-F0CF-4D2C-984D-EE950514B9F4}" ShortID="131267467">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="BypassGameParameterInternalTransition" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E4136DE7-26F7-4B30-B655-D10EA93CC8C3}" ShortID="927873010">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Prologue" ID="{8E73F560-5D66-400E-9E20-7D974A80368A}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="NextPhase" ID="{3D817837-1F21-4131-B64D-CB9CC41710B2}">
+							<ChildrenList>
+								<Action Name="" ID="{3C60EA96-15F8-4E3C-80E6-FC4274015C3E}" ShortID="697224988">
+									<PropertyList>
+										<Property Name="AbsoluteOrRelative" Type="int16" Value="1"/>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Event Name="PlayIntro" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}">
+					<ChildrenList>
+						<Action Name="" ID="{96C0A4D8-8B82-4A51-BAD0-1F7B49D46CDC}" ShortID="11446891"/>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
