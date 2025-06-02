@@ -53,7 +53,7 @@
 						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Town" ID="{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}"/>
+						<CurrentStateRef Name="Forest" ID="{9A759AF7-505C-42BA-BE96-63FBC2039DE7}"/>
 						<CurrentStateRef Name="Ricken" ID="{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
@@ -124,6 +124,25 @@
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
 					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="MenuIntro" ID="{F6505B93-E09C-4411-86D9-555EF0E4A439}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="PlayMenu" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="FadeOutAll" ID="{7B4305BB-21C1-4494-8287-00FAE06FDCFE}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="PlayIntro" ID="{7102F3FE-8197-48C7-AB26-5A6371F25453}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

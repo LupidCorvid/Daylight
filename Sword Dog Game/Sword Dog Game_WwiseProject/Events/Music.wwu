@@ -201,13 +201,6 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
-						<Action Name="" ID="{8DF3A846-5D9F-45E9-A445-DD0279AC3BD7}" ShortID="65281325">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 					</ChildrenList>
 				</Event>
 				<Folder Name="Town" ID="{A76358F4-1350-413F-B6EB-A1C16F09E091}" ShortID="581836796">
@@ -511,6 +504,28 @@
 						<Action Name="" ID="{A8B520D2-670E-4821-8F59-0F52F7DE91DD}" ShortID="1046718931">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="10"/>
+							</PropertyList>
+							<ReferenceList/>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PlayIntro" ID="{7102F3FE-8197-48C7-AB26-5A6371F25453}">
+					<ChildrenList>
+						<Action Name="" ID="{8A9EBB21-6207-4ECD-8C45-950FAD36DFC1}" ShortID="502265349">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="IntroCutscene" ID="{F5604168-E57E-4B1C-A933-C097F489C6C8}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="FadeOutAll" ID="{7B4305BB-21C1-4494-8287-00FAE06FDCFE}">
+					<ChildrenList>
+						<Action Name="" ID="{87419FCD-E5C0-4FE5-9642-6F66E252CDE4}" ShortID="803900991">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
 							</PropertyList>
 							<ReferenceList/>
 						</Action>
