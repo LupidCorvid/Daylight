@@ -222,9 +222,10 @@ public class AudioManager : MonoBehaviour
             sfxMixer.SetFloat("Reverb", -4f);
         else
             sfxMixer.SetFloat("Reverb", -10000f);
-        
+
         // sfxVolume is a float from 0.0-1.0 but we'd want 1.0 to correspond to 10dB => *10f
-        targetSFXVolume = SettingsManager.currentSettings.sfxVolume*10f - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
+        //targetSFXVolume = SettingsManager.currentSettings.sfxVolume*10f - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
+        targetSFXVolume = SettingsManager.currentSettings.sfxVolume;
         if (ChangeScene.changingScene || GameSaver.loading)
         {
             actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.1f);

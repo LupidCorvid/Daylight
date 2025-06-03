@@ -10,6 +10,7 @@ public class SwordPickupBehavior : InteractRoomEvent
     public Vector2 miniBubbleOffset = new(0, 2);
     public Animator swordAnim;
     private bool interacted = false;
+    public AK.Wwise.Event NextPhaseEvent;
 
     public void spawnPrompt()
     {
@@ -29,6 +30,7 @@ public class SwordPickupBehavior : InteractRoomEvent
     {
         RoomManager.currentRoom.callRoomEvent(eventName);
         actuallyHidePrompt();
+        NextPhaseEvent?.Post(AudioManager.WwiseGlobal);
         interacted = true;
     }
 
