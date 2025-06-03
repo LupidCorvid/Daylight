@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{89C218AE-9E0B-8562-B379-0ABAC724E516}",
+    "Hash": "{007164E8-0B27-B674-CB2E-8D0278200E3E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -36,14 +36,164 @@
     },
     "Busses": [
      {
+      "Id": "393239870",
+      "Name": "SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\SFX",
+      "GUID": "{4ED7D43E-89E9-410D-B131-701D8834AA7C}"
+     },
+     {
       "Id": "3803692087",
       "Name": "Master Audio Bus",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Music",
+      "GUID": "{33677A02-E487-4986-BBA7-0597F3E1E146}"
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "988953028",
+      "Name": "SFXVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SFXVolume",
+      "GUID": "{D20E2E34-BE3B-4203-B5D7-01603254E83A}"
+     },
+     {
+      "Id": "2346531308",
+      "Name": "MusicVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\MusicVolume",
+      "GUID": "{9D496F38-CADF-498D-8F22-D6AEC2DC686D}"
+     },
+     {
+      "Id": "2827251531",
+      "Name": "ProloguePhase",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\ProloguePhase",
+      "GUID": "{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}"
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "662417162",
+      "Name": "NPC",
+      "ObjectPath": "\\States\\Music\\NPC",
+      "GUID": "{1B9D20F5-E433-4D23-B12D-E8D935BE8B0E}",
+      "States": [
+       {
+        "Id": "133642231",
+        "Name": "General",
+        "ObjectPath": "\\States\\Music\\NPC\\General",
+        "GUID": "{8C2660EF-D4E6-4087-B338-5B58C3B835B7}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Music\\NPC\\None",
+        "GUID": "{FECB5516-BED1-46B2-9AA9-99B58CC226D2}"
+       },
+       {
+        "Id": "4021494753",
+        "Name": "Ricken",
+        "ObjectPath": "\\States\\Music\\NPC\\Ricken",
+        "GUID": "{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}"
+       }
+      ]
+     },
+     {
+      "Id": "3686139462",
+      "Name": "Area",
+      "ObjectPath": "\\States\\Music\\Area",
+      "GUID": "{3FBD974B-FE34-4411-B597-93D980A59C79}",
+      "States": [
+       {
+        "Id": "491961918",
+        "Name": "Forest",
+        "ObjectPath": "\\States\\Music\\Area\\Forest",
+        "GUID": "{9A759AF7-505C-42BA-BE96-63FBC2039DE7}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Music\\Area\\None",
+        "GUID": "{C06950D0-FDF7-4A2E-9DC3-3AFC48FC25B5}"
+       },
+       {
+        "Id": "749373321",
+        "Name": "Caves",
+        "ObjectPath": "\\States\\Music\\Area\\Caves",
+        "GUID": "{604CA339-FB15-45E7-974F-49BCDDD0CD77}"
+       },
+       {
+        "Id": "1850388778",
+        "Name": "Desert",
+        "ObjectPath": "\\States\\Music\\Area\\Desert",
+        "GUID": "{CE8F7BFD-BD05-45AD-BFC8-D356F3ABBAD9}"
+       },
+       {
+        "Id": "2777163414",
+        "Name": "MountainCaves",
+        "ObjectPath": "\\States\\Music\\Area\\MountainCaves",
+        "GUID": "{A9BC382F-0425-4311-A4C2-703009E33BF4}"
+       },
+       {
+        "Id": "3047821848",
+        "Name": "DesertCaves",
+        "ObjectPath": "\\States\\Music\\Area\\DesertCaves",
+        "GUID": "{419C9EA3-64D2-45C0-8B63-2DC8A1335B3A}"
+       },
+       {
+        "Id": "3091570009",
+        "Name": "Town",
+        "ObjectPath": "\\States\\Music\\Area\\Town",
+        "GUID": "{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}"
+       },
+       {
+        "Id": "3802555985",
+        "Name": "Ocean",
+        "ObjectPath": "\\States\\Music\\Area\\Ocean",
+        "GUID": "{3090792C-606F-45B7-994F-4A6332021FD4}"
+       },
+       {
+        "Id": "3992294315",
+        "Name": "Mountains",
+        "ObjectPath": "\\States\\Music\\Area\\Mountains",
+        "GUID": "{B088E07D-817A-4831-9AA2-A5517D336839}"
+       },
+       {
+        "Id": "4203473902",
+        "Name": "Prologue",
+        "ObjectPath": "\\States\\Music\\Area\\Prologue",
+        "GUID": "{633B8798-413E-49C6-B95C-BEE16AAB2E4F}"
+       }
+      ]
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "4203473902",
+      "Name": "Prologue",
+      "ObjectPath": "\\Switches\\Default Work Unit\\Prologue",
+      "GUID": "{A3593679-A0D3-4ED6-A6FF-BB885657290B}",
+      "Switches": [
+       {
+        "Id": "1560169506",
+        "Name": "Boss",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Prologue\\Boss",
+        "GUID": "{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"
+       },
+       {
+        "Id": "3762955427",
+        "Name": "Tutorial",
+        "ObjectPath": "\\Switches\\Default Work Unit\\Prologue\\Tutorial",
+        "GUID": "{DF830F92-5012-4D10-A507-9E8A44804743}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{F6ED31D3-77B5-E6C9-47E3-E996898C9D6E}"
+  "FileHash": "{030F5CC9-6C76-3E4C-B1E7-315C0F540D5E}"
  }
 }

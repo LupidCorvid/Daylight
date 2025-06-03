@@ -494,6 +494,7 @@
 						<Action Name="" ID="{7410DAD3-2D30-4B79-A9F9-E97FF74580E2}" ShortID="353203918">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="8"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList/>
 						</Action>
@@ -504,6 +505,7 @@
 						<Action Name="" ID="{A8B520D2-670E-4821-8F59-0F52F7DE91DD}" ShortID="1046718931">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="10"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList/>
 						</Action>
@@ -512,6 +514,9 @@
 				<Event Name="PlayIntro" ID="{7102F3FE-8197-48C7-AB26-5A6371F25453}">
 					<ChildrenList>
 						<Action Name="" ID="{8A9EBB21-6207-4ECD-8C45-950FAD36DFC1}" ShortID="502265349">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="0.1"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="IntroCutscene" ID="{F5604168-E57E-4B1C-A933-C097F489C6C8}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
@@ -526,6 +531,7 @@
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="3"/>
 								<Property Name="FadeTime" Type="Real64" Value="1"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList/>
 						</Action>

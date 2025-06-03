@@ -25,6 +25,8 @@ public class PauseScreen : MonoBehaviour
 
     public SettingsMiniMenu miniSettings;
 
+    public AK.Wwise.Event PauseEvent, ResumeEvent, FadeOutEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +94,7 @@ public class PauseScreen : MonoBehaviour
     {
         if (!canPause)
             return;
+        PauseEvent?.Post(AudioManager.WwiseGlobal);
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
         paused = true;
         Time.timeScale = 0;
@@ -116,6 +119,7 @@ public class PauseScreen : MonoBehaviour
     {
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
         paused = false;
+        ResumeEvent?.Post(AudioManager.WwiseGlobal);
         Time.timeScale = 1;
         foreach (AudioSource source in sources)
         {
@@ -188,6 +192,7 @@ public class PauseScreen : MonoBehaviour
         SwordFollow.created = false;
         closePrompt();
         unPause();
+        FadeOutEvent?.Post(AudioManager.WwiseGlobal);
         ChangeScene.changingScene = true;
         // CanvasManager.HideHUD(true);
         AudioManager.instance.FadeOutCurrent();

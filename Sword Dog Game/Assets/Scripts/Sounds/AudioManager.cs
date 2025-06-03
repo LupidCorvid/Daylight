@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    public static GameObject WwiseGlobal;
     public AudioMixer musicMixer, sfxMixer, globalSfxMixer;
     public AudioMixerGroup musicMixerGroup;
     public MusicClip currentSong = null;
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+
         if (SettingsManager.currentSettings != null)
         {
             musicVolume = SettingsManager.currentSettings.musicVolume;
@@ -191,6 +193,8 @@ public class AudioManager : MonoBehaviour
         }
         SettingsManager.currentSettings.musicVolume = musicVolume;
         SettingsManager.currentSettings.sfxVolume = sfxVolume;
+        AkUnitySoundEngine.SetRTPCValue("MusicVolume", 100*(Mathf.Pow(10,musicVolume / 20) - 0.00001f));
+        AkUnitySoundEngine.SetRTPCValue("SFXVolume", 100*(Mathf.Pow(10, sfxVolume / 20) - 0.00001f));
 
         float pitch;
         musicMixer.GetFloat("Pitch", out pitch);
