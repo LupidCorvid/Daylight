@@ -32,6 +32,29 @@ Accept{
 [c][CE,AloeQuestAssign]Thank you![wi] [exit]
 }
 
-PrologueDialog{
-[c]Ah [gvar,playerName]! I had heard tales of your travails and return from that rather imaginative boy. Now, I had also heard that you took quite a blow to that noggin of yours, as well. Let me take a looksie and patch you right up, dearie...[CE,heal][w, .1] There you go! [wi][c][reemote, 3] Hm?[w, .1] Tut tut tut...[w, .05] That boy...[w, .05]  No need to worry, dearie. It's nothing too serious, but you warriors sure have a habit of using up all my [IA,<color=#FFDC30>]teardrop aloe[IA,</color>]. Now I've run out. [wi][c] Would you be kind enough to fetch some for me? You can find some to the west of town. [wi] [c]
+Prologue5.1{
+[sh,Meryl][abf,10][ss, .05]
+Ah PLAYER! I have heard tales of your mission from that rather imaginative boy. [wi] [c]
+I also heard that you took quite a blow to that noggin of yours. [wi] [c]
+Let me take a looksie and patch you right up,[w, .1] dearie[ss,.15]...[ss, .05]
+
+[prompt, "Alright, doc.",[llf,P5.1Response1], "No thanks.",[llf,P5.1Response2]]
+
+}
+P5.1Response1{
+[sh,Meryl][abf,10][ss, .05][c][CE,heal]There, you should be good as new! [wi] [exit]
+}
+P5.1Response2{
+[c]Are you sure? Really, I insist.
+[prompt, "Actually...",[llf,P5.1Response3], "No thanks.",[llf,P5.1Response4]]
+}
+P5.1Response3{
+[c]That's what I thought.[w, .1] Never be afraid to ask for a quick heal,[w, .1] dearie! [wi] [exit]
+}
+P5.1Response4{
+[c]Alright then,[w, .1] if you're sure. [wi] [exit]
+}
+
+Prologue5.2{
+[sh,Meryl][abf,10][ss, .05] Test [wi] [exit]
 }
