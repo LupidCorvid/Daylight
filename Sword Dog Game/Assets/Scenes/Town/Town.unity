@@ -594,6 +594,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 0}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &33026566
 Transform:
@@ -15087,6 +15091,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 1024801515}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &1858836444
 Transform:
@@ -16288,6 +16296,7 @@ GameObject:
   - component: {fileID: 2045204254}
   - component: {fileID: 2045204255}
   - component: {fileID: 2045204256}
+  - component: {fileID: 2045204257}
   m_Layer: 0
   m_Name: OpenShopCutscene
   m_TagString: Untagged
@@ -16323,6 +16332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
+  - {fileID: 2045204257}
   - {fileID: 2045204256}
   cutsceneNumber: 0
   cutsceneName: OpenShop
@@ -16367,6 +16377,32 @@ MonoBehaviour:
   ignoreCameraBounds: 0
   resetBarsOnExit: 0
   cameraRb: {fileID: 0}
+--- !u!114 &2045204257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045204253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9728628b99ef74796aae17202df49117, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: 
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &2053245879
 GameObject:
   m_ObjectHideFlags: 0
