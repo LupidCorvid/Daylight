@@ -51,7 +51,10 @@
 								</ObjectList>
 							</ObjectLists>
 						</Bus>
-						<Bus Name="SFX" ID="{4ED7D43E-89E9-410D-B131-701D8834AA7C}">
+						<Bus Name="GlobalSFX" ID="{4ED7D43E-89E9-410D-B131-701D8834AA7C}">
+							<ChildrenList>
+								<Bus Name="SFX" ID="{2B0BE0F5-F5E9-428A-A616-98CFD6B43D48}"/>
+							</ChildrenList>
 							<ObjectLists>
 								<ObjectList Name="RTPC">
 									<Reference>

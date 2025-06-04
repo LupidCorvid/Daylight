@@ -14,9 +14,11 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID DEFEATBOSS = 2214005863U;
+        static const AkUniqueID DIE = 445985469U;
         static const AkUniqueID ENDNPC = 3630201441U;
         static const AkUniqueID ENTERBLACKSMITH = 3862063455U;
         static const AkUniqueID ENTERDOJO = 2407129755U;
+        static const AkUniqueID ENTERFOREST = 2024283954U;
         static const AkUniqueID ENTERHOUSE = 3190755319U;
         static const AkUniqueID ENTERMEDIC = 3549296221U;
         static const AkUniqueID ENTERSHOP = 1104863757U;
@@ -29,6 +31,7 @@ namespace AK
         static const AkUniqueID FADEOUTALL = 3208992266U;
         static const AkUniqueID FIGHTBOSS = 2874785730U;
         static const AkUniqueID FIRSTTALKRICKEN = 3096686399U;
+        static const AkUniqueID HURT = 3193947170U;
         static const AkUniqueID LEAVEAREA = 1553760757U;
         static const AkUniqueID NEXTPHASE = 513969863U;
         static const AkUniqueID PAUSE = 3092587493U;
@@ -107,6 +110,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID GLOBALSFX = 2883715697U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID MUSIC = 3991942870U;
         static const AkUniqueID SFX = 393239870U;

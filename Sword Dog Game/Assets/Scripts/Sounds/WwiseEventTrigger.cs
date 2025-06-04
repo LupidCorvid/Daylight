@@ -7,6 +7,8 @@ public class WwiseEventTrigger : MonoBehaviour
     public AK.Wwise.Event Event;
     public bool Global = true;
     public GameObject Object;
+    public string CheckState = "";
+    public AK.Wwise.State CheckStateValue;
     public bool KillOnActivate = false;
 
     // Start is called before the first frame update
@@ -25,7 +27,17 @@ public class WwiseEventTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && Event != null && !CutsceneController.inCutscene)
         {
-            Event.Post(Global ? AudioManager.WwiseGlobal : Object);
+            if (CheckState == "" || CheckStateValue == null)
+            {
+                Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+            }
+            else
+            {
+                uint stateID;
+                AkUnitySoundEngine.GetState(CheckState, out stateID);
+                if (stateID != CheckStateValue.Id)
+                    Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+            }
             if (KillOnActivate)
                 Destroy(gameObject);
         }

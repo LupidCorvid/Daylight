@@ -9,23 +9,16 @@
 							<Reference>
 								<Local>
 									<EffectSlot Name="" ID="{2C9AD859-B983-4AAE-BF95-2B99260C0028}" ShortID="694134022">
-										<PropertyList>
-											<Property Name="Bypass" Type="bool" Value="True"/>
-										</PropertyList>
 										<ReferenceList>
 											<Reference Name="Effect">
 												<Custom>
 													<Effect Name="Mastering Suite (Custom)" ID="{A13AA037-0798-439D-9F2E-7F26C9396368}" ShortID="702313679" PluginName="Mastering Suite" CompanyID="0" PluginID="186" PluginType="3">
 														<PropertyList>
-															<Property Name="Inclusion" Type="bool">
-																<ValueList>
-																	<Value>False</Value>
-																</ValueList>
-															</Property>
 															<Property Name="compressorBand1MakeupGain" Type="Real32" Value="1.333333"/>
 															<Property Name="compressorBand2MakeupGain" Type="Real32" Value="2.666667"/>
 															<Property Name="compressorBand3MakeupGain" Type="Real32" Value="0.3333333"/>
-															<Property Name="compressorBand4MakeupGain" Type="Real32" Value="1.333333"/>
+															<Property Name="compressorBand4MakeupGain" Type="Real32" Value="3.333333"/>
+															<Property Name="limiterThreshold" Type="Real32" Value="-6"/>
 															<Property Name="paramBand1Frequency" Type="Real32" Value="95.6765"/>
 															<Property Name="paramBand1Gain" Type="Real32" Value="2.222222"/>
 															<Property Name="paramBand2Frequency" Type="Real32" Value="182.6855"/>

@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2565580551260284601, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
   m_PrefabInstance: {fileID: 113593364}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 742744905}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eee1b979316323e4f9fb0967c7cf3fb7, type: 3}
@@ -2484,6 +2484,7 @@ GameObject:
   - component: {fileID: 210906022}
   - component: {fileID: 210906021}
   - component: {fileID: 210906028}
+  - component: {fileID: 210906029}
   m_Layer: 0
   m_Name: TownPanCutsceneEnd
   m_TagString: Untagged
@@ -2545,6 +2546,7 @@ MonoBehaviour:
   - {fileID: 210906027}
   - {fileID: 210906022}
   - {fileID: 210906021}
+  - {fileID: 210906029}
   cutsceneNumber: 0
   cutsceneName: P_TownPanEnd
   playingThisCutscene: 0
@@ -2788,6 +2790,21 @@ MonoBehaviour:
   ignoreCameraBounds: 0
   resetBarsOnExit: 0
   cameraRb: {fileID: 0}
+--- !u!114 &210906029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210906011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bf301a3bb662841936a9fcb4283e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  eventName: P_TownPanEnded
+  eventParams: []
 --- !u!1 &229782326
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,8 +5441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
-  - {fileID: 424776982}
   - {fileID: 424776974}
+  - {fileID: 424776982}
   - {fileID: 424776973}
   - {fileID: 424776979}
   - {fileID: 424776976}
@@ -5474,8 +5491,6 @@ MonoBehaviour:
     cutscene: {fileID: 424776971}
   - RequireCompletion: 1
     cutscene: {fileID: 424776972}
-  - RequireCompletion: 1
-    cutscene: {fileID: 424776981}
 --- !u!114 &424776980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5517,14 +5532,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 424776969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
-  Area: 4
-  FadeDuration: 1
-  Stall: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 052e940afb12e4b3b98155b1f3582802, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: 
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &426294456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6065,17 +6089,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &471322936 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
-  m_PrefabInstance: {fileID: 1838528582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e2625dd5de6172439ab6cc98292415b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &484153274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6984,6 +6997,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657321378}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &694160786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7962026614516624368, guid: 99c1d5b180b43934fa6c0bc7eb74b43e, type: 3}
+  m_PrefabInstance: {fileID: 7962026614343422545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &720883326
 GameObject:
   m_ObjectHideFlags: 0
@@ -7372,6 +7390,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &742744905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3703650061167044159, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+  m_PrefabInstance: {fileID: 113593364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &850988307
 GameObject:
   m_ObjectHideFlags: 0
@@ -10607,8 +10630,9 @@ GameObject:
   - component: {fileID: 1225849008}
   - component: {fileID: 1225849011}
   - component: {fileID: 1225849010}
-  - component: {fileID: 1225849012}
   - component: {fileID: 1225849013}
+  - component: {fileID: 1225849012}
+  - component: {fileID: 1225849014}
   m_Layer: 0
   m_Name: FirstTimeEnterCutscene
   m_TagString: Untagged
@@ -10866,7 +10890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
-  - {fileID: 1225849012}
+  - {fileID: 1225849013}
   - {fileID: 1225849005}
   - {fileID: 1225849004}
   - {fileID: 1225849003}
@@ -10874,7 +10898,8 @@ MonoBehaviour:
   - {fileID: 1225848996}
   - {fileID: 1225848995}
   - {fileID: 1225849007}
-  - {fileID: 1225849013}
+  - {fileID: 1225849012}
+  - {fileID: 1225849014}
   - {fileID: 1225849008}
   - {fileID: 1225849011}
   - {fileID: 1225849010}
@@ -10996,14 +11021,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1225848993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: {fileID: 11400000, guid: 8dc152eb20adf4375bf59c1006810dc3, type: 2}
-  Area: 10
-  FadeDuration: 1
-  Stall: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1a5884dc6fc254ee19d84b3446530c90, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: 
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &1225849013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11013,13 +11047,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1225848993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  FadeIn: 0
-  Duration: 2
-  Stall: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5f2e7c27b63044511a6dd095d3b3c23c, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: NPC
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 57b13f590b130442290e7ace4c38c9d7, type: 2}
+--- !u!114 &1225849014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225848993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bf301a3bb662841936a9fcb4283e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  eventName: P_EndTalkRicken
+  eventParams: []
 --- !u!1001 &1237198908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11229,9 +11288,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomState:
     P_FirstTimeEnter_triggered: 0
+    P_EndTalkRicken: 0
     P_TownPan: 0
+    P_TownPanEnded: 0
     P_GeneralFirstTimeEnter: 0
-  musicOnLoad: {fileID: 471322936}
+    P_EndTalkGeneral: 0
+  wwiseOnLoad: {fileID: 1838528584}
+  Ricken: {fileID: 742744905}
+  General: {fileID: 694160786}
   FirstEnterCutsceneCameraBounds: {fileID: 413687491}
 --- !u!1 &1274895193 stripped
 GameObject:
@@ -11530,6 +11594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303923524}
   - component: {fileID: 1303923523}
+  - component: {fileID: 1303923525}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -11577,6 +11642,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1303923525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303923522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fc2fd73d01a46c19bdcc0eca50ab24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 158eb075e9e8a4b95951ec7a77252652, type: 2}
+  decodeBank: 1
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &1328021613
 GameObject:
   m_ObjectHideFlags: 0
@@ -14793,11 +14883,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicOnLoad
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2233812615707291964, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2367763550270492446, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838528584}
   m_SourcePrefab: {fileID: 100100000, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+--- !u!1 &1838528583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2367763550270492446, guid: 4644b377b1e5c8d49b35f459295237a0, type: 3}
+  m_PrefabInstance: {fileID: 1838528582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838528584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838528583}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1bd015f37e0431e82289803e44d681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 052e940afb12e4b3b98155b1f3582802, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  delay: 0
+  CheckState: Area
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1174b31b1052c42fa9f15d1f92eef297, type: 2}
 --- !u!1 &1845291857
 GameObject:
   m_ObjectHideFlags: 0
@@ -16859,9 +16984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - {fileID: 2132174699}
-  - {fileID: 2132174709}
-  - {fileID: 2132174698}
   - {fileID: 2132174710}
+  - {fileID: 2132174698}
   - {fileID: 2132174700}
   - {fileID: 2132174701}
   - {fileID: 2132174703}
@@ -16871,6 +16995,7 @@ MonoBehaviour:
   - {fileID: 2132174707}
   - {fileID: 2132174706}
   - {fileID: 2132174705}
+  - {fileID: 2132174709}
   - {fileID: 2132174711}
   cutsceneNumber: 0
   cutsceneName: P_GeneralFirstTimeEnter
@@ -17071,13 +17196,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132174694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d8e41be98d239478aa514da0c5b4ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  FadeIn: 0
-  Duration: 1
-  Stall: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1a5884dc6fc254ee19d84b3446530c90, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: 
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &2132174710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17087,14 +17222,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132174694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3e9cffd29de44569c3b6d0548cfefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: {fileID: 11400000, guid: 43ea4f03e990f431fa9e9a74995ffa57, type: 2}
-  Area: 11
-  FadeDuration: 1
-  Stall: 0
+  Event:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5446630440a0d406fa44efc9df433fd8, type: 2}
+  Global: 1
+  Object: {fileID: 0}
+  CheckState: 
+  CheckStateValue:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &2132174711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17104,14 +17248,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132174694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c165fcd3c29e478f95830e5f24e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 98bf301a3bb662841936a9fcb4283e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  Music: {fileID: 11400000, guid: 27c384c1ca9ea544aa596639ff1528b7, type: 2}
-  Area: 4
-  FadeDuration: 1
-  Stall: 0
+  eventName: P_EndTalkGeneral
+  eventParams: []
 --- !u!1001 &2134314395
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -63,7 +63,9 @@ public class ChangeScene : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         if (!AudioManager.instance.disableSceneFade && newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT) {
-            AudioManager.instance.FadeOutCurrent();
+            //AudioManager.instance.FadeOutCurrent();
+            AkUnitySoundEngine.PostEvent("LeaveArea", AudioManager.WwiseGlobal);
+            AudioManager.instance.currentArea = newArea;
         }
         yield return new WaitForSeconds(1f);
         if (ContinueMovement)

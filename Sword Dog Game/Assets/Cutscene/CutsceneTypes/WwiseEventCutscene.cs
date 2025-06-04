@@ -7,11 +7,23 @@ public class WwiseEventCutscene : CutsceneData
     public AK.Wwise.Event Event;
     public bool Global = true;
     public GameObject Object;
+    public string CheckState = "";
+    public AK.Wwise.State CheckStateValue;
 
     public override void startSegment()
     {
         base.startSegment();
-        Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        if (CheckState == "" || CheckStateValue == null)
+        {
+            Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        }
+        else
+        {
+            uint stateID;
+            AkUnitySoundEngine.GetState(CheckState, out stateID);
+            if (stateID != CheckStateValue.Id)
+                Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        }
     }
 
     public override void cycleExecution()

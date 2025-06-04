@@ -5,7 +5,8 @@ using UnityEngine;
 public class TownManager : RoomManager
 {
     public TownAreaState roomState;
-    public SwitchMusicOnLoad musicOnLoad;
+    public WwiseEventOnLoad wwiseOnLoad;
+    public GameObject Ricken, General;
 
     public Collider2D FirstEnterCutsceneCameraBounds;
 
@@ -17,19 +18,22 @@ public class TownManager : RoomManager
 
     public void Start() //Called on frame 1
     {
-        if (roomState.P_FirstTimeEnter_triggered)
-        {
-            Debug.Log("fhfjh");
-            musicOnLoad.enabled = true;
-        }
         buildRoom();
     }
 
     //Read in variables from file, things that might change throughout the game
     public void buildRoom()
     {
-        if (roomState.P_FirstTimeEnter_triggered)
+        if (roomState.P_TownPan)
             FirstEnterCutsceneCameraBounds.enabled = false;
+        if (roomState.P_FirstTimeEnter_triggered && roomState.P_TownPanEnded)
+        {
+            wwiseOnLoad.enabled = true;
+        }
+        //if (roomState.P_EndTalkGeneral)
+        //    General.SetActive(false);
+        if (roomState.P_EndTalkRicken)
+            Ricken.SetActive(false);
     }
 
     public override void receivedEvent(string name, params object[] parameters)
@@ -48,6 +52,9 @@ public class TownManager : RoomManager
                     roomState.P_FirstTimeEnter_triggered = true;
                 }
                 break;
+            case "P_EndTalkRicken":
+                roomState.P_EndTalkRicken = true;
+                break;
             //There is a box collider in the scene that will check this case if the player triggers it. 
             case "P_TownPan":
                 if (roomState.P_TownPan == false && roomState.P_FirstTimeEnter_triggered == true)
@@ -55,6 +62,9 @@ public class TownManager : RoomManager
                     CutsceneController.PlayCutscene("P_TownPan");
                     roomState.P_TownPan = true;
                 }
+                break;
+            case "P_TownPanEnded":
+                roomState.P_TownPanEnded = true;
                 break;
             case "P_GeneralFirstTimeEnter":
                 if (roomState.P_TownPan == true && roomState.P_GeneralFirstTimeEnter == false)
@@ -64,6 +74,9 @@ public class TownManager : RoomManager
                     roomState.P_GeneralFirstTimeEnter = true;
                     
                 }
+                break;
+            case "P_EndTalkGeneral":
+                roomState.P_EndTalkGeneral = true;
                 break;
         }
     }

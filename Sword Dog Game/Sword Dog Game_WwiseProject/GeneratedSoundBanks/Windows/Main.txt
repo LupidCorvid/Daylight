@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	445985469	Die			\Music\Die	
 	513969863	NextPhase			\Music\Prologue\NextPhase	
 	781908707	PlayIntro			\Music\PlayIntro	
 	953277036	Resume			\Music\Resume	
@@ -9,6 +10,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1763353983	EnterTutorial			\Music\Prologue\EnterTutorial	
 	1862289782	PlayMenu			\Music\PlayMenu	
 	2009297027	ExitBlacksmith			\Music\Town\ExitBlacksmith	
+	2024283954	EnterForest			\Music\Forest\EnterForest	
 	2104656083	SecondTalkRicken			\Music\Prologue\SecondTalkRicken	
 	2188110408	PlayNPC			\Music\PlayNPC	
 	2214005863	DefeatBoss			\Music\Prologue\DefeatBoss	
@@ -19,6 +21,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3092587493	Pause			\Music\Pause	
 	3096686399	FirstTalkRicken			\Music\Prologue\FirstTalkRicken	
 	3190755319	EnterHouse			\Music\Town\EnterHouse	
+	3193947170	Hurt			\Music\Hurt	
 	3208992266	FadeOutAll			\Music\FadeOutAll	
 	3217358681	ExitMedic			\Music\Town\ExitMedic	
 	3270207375	ExitDojo			\Music\Town\ExitDojo	
@@ -73,7 +76,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	118958707	General_Mandolin_100bpm4-4_L34M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\C2\{C2379553-9E5C-2F49-6ABA-9F6599529788}.wem		\Interactive Music Hierarchy\Music\NPC\General\GeneralThemeMandolin\General_Mandolin_100bpm4-4_L34M-P0M		973790
 	142398602	Prologue-Boss-Guitar_120bpm4-4_L32M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\FB\{FBE135F7-B3FD-11CB-BDB3-38E465671B74}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Boss\BossTheme\Prologue-Boss-Guitar_120bpm4-4_L32M-P0M_M		1321663
 	151484391	Prologue-Tutorial-BongoSideR_120bpm4-4_L8M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\2B\{2B8A95C0-0F42-FF2C-CE89-38BF009503C3}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Tutorial\TutorialTheme\Prologue-Tutorial-BongoSideR_120bpm4-4_L8M-P0M_M		199628
-	152729834	ShopkeeperBell	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\F0\{F0E517A7-D027-3209-8777-E32BD9FFA5DA}.wem		\Actor-Mixer Hierarchy\Ambience\Town\ShopkeeperBell		485540
+	152729834	ShopkeeperBell	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\F0\{F0E517A7-D027-3209-8777-E32BD9FFA5DA}.wem		\Actor-Mixer Hierarchy\SFX\Town\ShopkeeperBell		485540
 	161245697	Ricken-Guitar_70bpm4-4_L24M-P0_0625M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\4C\{4CF1AFE0-1C38-7100-9EE2-D1D4646184A4}.wem		\Interactive Music Hierarchy\Music\NPC\Ricken\RickenTheme\Ricken-Guitar_70bpm4-4_L24M-P0_0625M		1533442
 	189539026	Town-AnvilStrikes_120bpm4-4_L72M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\8C\{8C961088-B32F-871C-14AE-D88DD59C268D}.wem		\Interactive Music Hierarchy\Music\Area\Town\TownTheme\Town-AnvilStrikes_120bpm4-4_L72M-P0M		1898361
 	267191207	Town-GuitarChords_120bpm4-4_L72M-P0_25M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\5B\{5B572E1E-618E-F42E-12DE-973A4AB0796D}.wem		\Interactive Music Hierarchy\Music\Area\Town\TownTheme\Town-GuitarChords_120bpm4-4_L72M-P0_25M		2523849
@@ -92,6 +95,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	580927582	General_Percussion_100bpm4-4_L34M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\F1\{F1DBAD09-F962-D1F4-FA81-5B424721D3D5}.wem		\Interactive Music Hierarchy\Music\NPC\General\GeneralThemeMandolin\General_Percussion_100bpm4-4_L34M-P0M		884275
 	585117794	Prologue-Tutorial-Balalaika_120bpm4-4_L8M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\D4\{D43B6174-A724-B613-3C5F-AFBFA5DA7ADC}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Tutorial\TutorialTheme\Prologue-Tutorial-Balalaika_120bpm4-4_L8M-P0M_M		225164
 	595485989	General_Bass_100bpm4-4_L34M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\57\{57B5FA21-0DDF-713B-63E4-ED239BB7F711}.wem		\Interactive Music Hierarchy\Music\NPC\General\GeneralThemeViolin\General_Bass_100bpm4-4_L34M-P0M		872866
+	691373902	PlayerHurt	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\FA\{FAE583E1-62C4-275F-6E2B-E7E111B108EC}.wem		\Actor-Mixer Hierarchy\SFX\Player\PlayerHurt		193796
 	778112176	Prologue-Boss-Claps_120bpm4-4_L32M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\A1\{A164909E-1FC4-6125-452A-C2E3F59B3580}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Boss\BossTheme\Prologue-Boss-Claps_120bpm4-4_L32M-P0M_M		794688
 	796921075	General_Violin_100bpm4-4_L34M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\F2\{F21390DE-1841-E303-6379-BFEAFBEB60DD}.wem		\Interactive Music Hierarchy\Music\NPC\General\GeneralThemeViolin\General_Violin_100bpm4-4_L34M-P0M		789447
 	859822900	Prologue-Boss-Bass_120bpm4-4_L32M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\1F\{1FECCB00-D681-78A4-B18C-36D52BFB6EDB}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Boss\BossTheme\Prologue-Boss-Bass_120bpm4-4_L32M-P0M_M		600476

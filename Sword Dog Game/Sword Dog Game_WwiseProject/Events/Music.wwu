@@ -193,11 +193,21 @@
 						<Action Name="" ID="{258EBF17-8F36-4BAD-B89D-EA4D96A0233E}" ShortID="545749511">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
-								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{5838732F-A422-444F-9045-F8B09C512B76}" ShortID="969942226">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="None" ID="{C06950D0-FDF7-4A2E-9DC3-3AFC48FC25B5}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -487,6 +497,16 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{16962EE5-906A-4274-B9EB-6F1E4237EEC6}" ShortID="54531951">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="None" ID="{FECB5516-BED1-46B2-9AA9-99B58CC226D2}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Pause" ID="{2C798149-A285-4AC6-A596-3D3378199D9E}">
@@ -534,6 +554,137 @@
 								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList/>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Hurt" ID="{3937B190-A091-490F-84AC-2F2CD47814D9}">
+					<ChildrenList>
+						<Action Name="" ID="{A929B296-69BE-499F-8A67-2666A2557C21}" ShortID="489119863">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="26"/>
+								<Property Name="FadeInCurve" Type="int16" Value="0"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+								<Property Name="Lowpass" Type="int16" Value="70"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX" ID="{2B0BE0F5-F5E9-428A-A616-98CFD6B43D48}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BAE4712F-DB64-43FA-875B-F041A865440E}" ShortID="209731718">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="26"/>
+								<Property Name="FadeInCurve" Type="int16" Value="0"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+								<Property Name="Lowpass" Type="int16" Value="70"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BB323F8C-DDBD-4A99-90CE-B987E28E40B8}" ShortID="1022408514">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PlayerHurt" ID="{541E5EEF-A100-437E-A595-0032F2B968D5}" WorkUnitID="{A0134AAD-4D98-4C15-AA2D-214F2FD048B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{3E3FF32A-34A1-490C-955C-65F9EFB21707}" ShortID="85869744">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="26"/>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX" ID="{2B0BE0F5-F5E9-428A-A616-98CFD6B43D48}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{D383D6EE-F18A-4596-A499-45BAA2CA746A}" ShortID="81410481">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="26"/>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Folder Name="Forest" ID="{975D8C6D-97CF-4DC9-8882-2B4D852D6C6A}" ShortID="186526030">
+					<ChildrenList>
+						<Event Name="EnterForest" ID="{FEB8C9BB-78F0-4FDF-983D-0406E8B4EDDA}">
+							<ChildrenList>
+								<Action Name="" ID="{8FD6BC46-E22D-421D-9E7A-AAD31340E576}" ShortID="951664620">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{08388CF2-8DFC-420D-A7A3-6B835A6FEE5E}" ShortID="697880057">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Forest" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{FDD46977-9DF1-4C7D-A795-2440FE6B8112}" ShortID="199883793">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Forest" ID="{9A759AF7-505C-42BA-BE96-63FBC2039DE7}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{75E964AA-6F84-4391-9BB7-FEB3EBCB1524}" ShortID="719271363">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Event Name="Die" ID="{21919D89-3FCA-478F-8F7E-D82B2D7F035F}">
+					<ChildrenList>
+						<Action Name="" ID="{7FB040F8-35AD-4FE1-8616-29B4B3DCA8FE}" ShortID="859040805">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hurt" ID="{3937B190-A091-490F-84AC-2F2CD47814D9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{2157E672-F6A5-4B0B-B794-2135E2408A43}" ShortID="800043834">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
 						</Action>
 					</ChildrenList>
 				</Event>

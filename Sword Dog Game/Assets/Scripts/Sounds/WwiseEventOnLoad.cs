@@ -8,6 +8,8 @@ public class WwiseEventOnLoad : MonoBehaviour
     public bool Global = true;
     public GameObject Object;
     public float delay = 0;
+    public string CheckState = "";
+    public AK.Wwise.State CheckStateValue;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +26,35 @@ public class WwiseEventOnLoad : MonoBehaviour
                 StartCoroutine(PostEventDelayed());
             }
             else
-                Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+            {
+                if (CheckState == "" || CheckStateValue == null)
+                {
+                    Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+                }
+                else
+                {
+                    uint stateID;
+                    AkUnitySoundEngine.GetState(CheckState, out stateID);
+                    if (stateID != CheckStateValue.Id)
+                        Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+                }
+            }
         }
     }
 
     IEnumerator PostEventDelayed()
     {
         yield return new WaitForSeconds(delay);
-        Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        if (CheckState == "" || CheckStateValue == null)
+        {
+            Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        }
+        else
+        {
+            uint stateID;
+            AkUnitySoundEngine.GetState(CheckState, out stateID);
+            if (stateID != CheckStateValue.Id)
+                Event?.Post(Global ? AudioManager.WwiseGlobal : Object);
+        }
     }
 }
