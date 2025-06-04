@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WwiseEventTrigger : MonoBehaviour
 {
-    public AK.Wwise.Event Event;
+    public AK.Wwise.Event Event, ExitEvent;
     public bool Global = true;
     public GameObject Object;
     public string CheckState = "";
@@ -40,6 +40,24 @@ public class WwiseEventTrigger : MonoBehaviour
             }
             if (KillOnActivate)
                 Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (!KillOnActivate && other.CompareTag("Player") && ExitEvent != null && !CutsceneController.inCutscene)
+        {
+            if (CheckState == "" || CheckStateValue == null)
+            {
+                ExitEvent?.Post(Global ? AudioManager.WwiseGlobal : Object);
+            }
+            else
+            {
+                uint stateID;
+                AkUnitySoundEngine.GetState(CheckState, out stateID);
+                if (stateID != CheckStateValue.Id)
+                    ExitEvent?.Post(Global ? AudioManager.WwiseGlobal : Object);
+            }
         }
     }
 }
