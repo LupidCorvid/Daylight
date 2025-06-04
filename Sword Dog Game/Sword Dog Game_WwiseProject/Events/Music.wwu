@@ -698,6 +698,231 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="Caves" ID="{DBC6647B-383C-4C4C-86F0-056A5266A5C2}" ShortID="819859716">
+					<ChildrenList>
+						<Event Name="EnterCaves" ID="{78772920-3803-4EA1-8703-9675717BF71A}">
+							<ChildrenList>
+								<Action Name="" ID="{B8C38A00-FB90-4710-9E8A-FA9CC19F8A2B}" ShortID="197873356">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{1ADFB18F-A570-456E-A55D-DEB5AFD276EF}" ShortID="443203182">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Caves" ID="{85F608CA-80A5-4062-969F-A04C2CA19DC6}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E6031B35-9F0A-49E8-8E8D-8D7D01A6E778}" ShortID="213108294">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Caves" ID="{604CA339-FB15-45E7-974F-49BCDDD0CD77}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{D86983D4-23B7-468A-9D05-97BD645305B0}" ShortID="771919505">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Ocean" ID="{D409E51D-58F8-40D0-8FA9-E2EEBD64FC8C}" ShortID="484830987">
+					<ChildrenList>
+						<Event Name="EnterOcean" ID="{ACE77E0C-9CEB-40CC-8F56-8897036EF9E3}">
+							<ChildrenList>
+								<Action Name="" ID="{5CAA8AD8-6DDF-4BA9-85DB-E3221AAF8AA8}" ShortID="402795637">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{8354B087-96B0-48AB-A0CA-BA1557998518}" ShortID="606240805">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ocean" ID="{066F6FE1-FAFD-4061-A8F4-C77D88F2A3E5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{5298AA28-977E-4E9E-BB2E-9753D78085C9}" ShortID="108745012">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ocean" ID="{3090792C-606F-45B7-994F-4A6332021FD4}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{46A03A7E-C134-436F-8DB6-A13ACBB5E7D7}" ShortID="914283393">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="DesertCaves" ID="{957B89A7-64F9-432C-ABEA-0D8E3488CC80}" ShortID="278316431">
+					<ChildrenList>
+						<Event Name="EnterDesertCaves" ID="{AEC028C9-0E5D-48C0-AD1E-6096AB46F62C}">
+							<ChildrenList>
+								<Action Name="" ID="{EE312087-333D-4629-A62B-8D6637A2EA91}" ShortID="548665612">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{AD021892-7819-4529-80E9-94F67A202D45}" ShortID="733001443">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="DesertCaves" ID="{DA55FF19-D1FD-4902-B2DE-C511B8BECA42}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{BF02E889-528B-465A-89C4-BFE4E05E5F97}" ShortID="1976115">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="DesertCaves" ID="{419C9EA3-64D2-45C0-8B63-2DC8A1335B3A}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{7AEA0D00-07E5-43A5-91B2-FBFDEB464DA9}" ShortID="904340435">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="MountainCaves" ID="{84BE4884-82CC-46C4-A1E3-4717230F0CD0}" ShortID="1010199259">
+					<ChildrenList>
+						<Event Name="EnterMountainCaves" ID="{7D1CAA98-4D4A-414D-A1DF-9663E92DA573}">
+							<ChildrenList>
+								<Action Name="" ID="{9F5AB616-B9CB-4502-A4B5-557BBAF889FC}" ShortID="331591275">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{C7FA39AE-6FB9-42F5-895A-997EF188DEB6}" ShortID="454801573">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MountainCaves" ID="{C6537836-C94C-4D8D-95EB-E95014863099}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{95B67084-9E1B-4CCD-B066-B2D7DF3466FB}" ShortID="636909016">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MountainCaves" ID="{A9BC382F-0425-4311-A4C2-703009E33BF4}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{FF3EEE55-B092-4CC1-9B28-155759AC421C}" ShortID="1001251197">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Mountains" ID="{342DA698-528A-4E02-A376-75C446C0A2F1}" ShortID="711841335">
+					<ChildrenList>
+						<Event Name="EnterMountains" ID="{E0C372C4-FDE4-4006-A5AD-35A301B0F62C}">
+							<ChildrenList>
+								<Action Name="" ID="{D5C6F0FE-677A-4925-851D-0DA8F30B0B76}" ShortID="222985841">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{EE7397D2-09B8-4460-A607-0049BD75C2C1}" ShortID="380444855">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="16"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Mountains" ID="{0DFEC8A4-A789-4976-8445-3B59211014EA}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{68165558-3C46-403D-9BE5-DFC2CB45C9DE}" ShortID="953285504">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Mountains" ID="{B088E07D-817A-4831-9AA2-A5517D336839}" WorkUnitID="{2A8E5406-D2FD-46DC-B61E-24810BD5DE25}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{DB65AE4A-D757-486B-9DE6-192D2A6D3889}" ShortID="748151850">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

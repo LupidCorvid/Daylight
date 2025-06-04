@@ -17,10 +17,15 @@ namespace AK
         static const AkUniqueID DIE = 445985469U;
         static const AkUniqueID ENDNPC = 3630201441U;
         static const AkUniqueID ENTERBLACKSMITH = 3862063455U;
+        static const AkUniqueID ENTERCAVES = 1967729093U;
+        static const AkUniqueID ENTERDESERTCAVES = 2331186804U;
         static const AkUniqueID ENTERDOJO = 2407129755U;
         static const AkUniqueID ENTERFOREST = 2024283954U;
         static const AkUniqueID ENTERHOUSE = 3190755319U;
         static const AkUniqueID ENTERMEDIC = 3549296221U;
+        static const AkUniqueID ENTERMOUNTAINCAVES = 1067397042U;
+        static const AkUniqueID ENTERMOUNTAINS = 2342301127U;
+        static const AkUniqueID ENTEROCEAN = 3252024581U;
         static const AkUniqueID ENTERSHOP = 1104863757U;
         static const AkUniqueID ENTERTOWN = 1143074605U;
         static const AkUniqueID ENTERTUTORIAL = 1763353983U;
