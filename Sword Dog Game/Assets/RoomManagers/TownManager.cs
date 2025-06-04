@@ -59,16 +59,24 @@ public class TownManager : RoomManager
             case "P_GeneralFirstTimeEnter":
                 if (roomState.P_TownPan == true && roomState.P_GeneralFirstTimeEnter == false)
                 {
-                    print("Debug!");
                     CutsceneController.PlayCutscene("P_GeneralFirstTimeEnter");
                     roomState.P_GeneralFirstTimeEnter = true;
                     
+                }
+                break;
+            case "P_SpeakToMeryl":
+                if(roomState.P_SpeakToMeryl == false && roomState.P_GeneralFirstTimeEnter == true)
+                {
+                    CutsceneController.PlayCutscene("P_SpeakToMeryl");
+                    roomState.P_SpeakToMeryl = true;
                 }
                 break;
         }
     }
 }
 
+//Probably not needed, delete later 
+/*
 public class DojoManager : RoomManager
 {
     public TownAreaState roomState;
@@ -110,3 +118,4 @@ public class MedbayManager : RoomManager
     {
     }
 }
+*/

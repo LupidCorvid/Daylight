@@ -129,6 +129,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int amount)
     {
+        //Placeholder until a heal animation is created
+        if (SwordFollow.instance.activeSelf)
+            SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
+        GetComponent<SimpleFlash>().Flash(1f, 3, true);
+
+
         health += amount;
         UpdateHealth();
         if (dead)

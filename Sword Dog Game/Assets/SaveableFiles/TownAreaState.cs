@@ -8,7 +8,7 @@ using UnityEngine;
 public class TownAreaState
 {
     //Essentially, put all story beats that need to be saved to file as variables here. This guides the direction of the story.
-    public bool P_FirstTimeEnter_triggered = false;
+    public bool P_FirstTimeEnter_triggered = true;
         /* Protag and Ricken walk in.
         * After a slight bit, the textbox appears and "woohoo we made it!"
         * Ricken turns around
@@ -17,14 +17,15 @@ public class TownAreaState
         * Ricken trots off screen quickly
         */
 
-    public bool P_TownPan = false;
+    public bool P_TownPan = true;
         //Pan to three areas of the town, then return control to the character
 
-    public bool P_GeneralFirstTimeEnter = false;
+    public bool P_GeneralFirstTimeEnter = true;
         /* The player walks into town a bit but the General is turned away from the player
          * When the player walks up, the cutscene starts
          * General emotes !
          * General turns around and walks towards player
          * General yammering
         */
+    public bool P_SpeakToMeryl = false;
 }
