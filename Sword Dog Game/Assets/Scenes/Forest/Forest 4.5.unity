@@ -1653,6 +1653,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 1303453318}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &280535169
 Transform:
@@ -4386,6 +4390,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 934328620}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &774821551
 Transform:
@@ -8350,6 +8358,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 1189224888}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &1086557570
 Transform:
@@ -12202,6 +12214,10 @@ MonoBehaviour:
   newArea: 0
   spawnedPrompt: {fileID: 0}
   promptSpawnLocation: {fileID: 862133214}
+  WwiseEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   direction: 3
 --- !u!4 &1908690878
 Transform:
@@ -12229,6 +12245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1914032093}
   - component: {fileID: 1914032092}
+  - component: {fileID: 1914032094}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -12276,6 +12293,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914032094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914032091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fc2fd73d01a46c19bdcc0eca50ab24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 158eb075e9e8a4b95951ec7a77252652, type: 2}
+  decodeBank: 1
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &1967439387
 GameObject:
   m_ObjectHideFlags: 0
