@@ -2849,6 +2849,7 @@
 						<MusicSwitchContainer Name="Forest" ID="{6C89AEED-B866-4445-9C23-BDA149D39DB9}" ShortID="239801135">
 							<PropertyList>
 								<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
 								<Property Name="TimeSignatureUpper" Type="int16" Value="3"/>
 							</PropertyList>
 							<ReferenceList>
@@ -2887,7 +2888,7 @@
 														</Reference>
 													</ReferenceList>
 													<TransitionInfo>
-														<JumpToPlaylistItemRef Name="" ID="{962822A0-96C3-418F-9E01-091F97AA11B1}"/>
+														<JumpToPlaylistItemRef Name="" ID="{3E3C53FA-0DEF-4747-8431-8431185EABF1}"/>
 														<TransitionObjectRef Name="CombatOut" ID="{B6CABEA2-6F76-4EF9-AE6C-062D7DD17C6C}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{3AB35BEF-A1A0-41C1-809F-D5D79992232C}">
@@ -3052,7 +3053,7 @@
 														</Reference>
 													</ReferenceList>
 													<TransitionInfo>
-														<JumpToPlaylistItemRef Name="" ID="{45AC17B2-FC5E-4E49-B2FE-C3519F24BE2C}"/>
+														<JumpToPlaylistItemRef Name="" ID="{7D9C33EA-768A-4E2F-8B1A-B571201E5C6A}"/>
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{26A8A366-91A8-4AD5-960D-FB28B2B4F97D}">
 																<PropertyList>
@@ -3165,6 +3166,10 @@
 										<Reference Name="PlaylistRoot">
 											<Custom>
 												<MusicPlaylistItem Name="" ID="{A5BD3F80-4995-4949-8222-B0D04C6B16C4}" ShortID="413605517">
+													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
+														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+													</PropertyList>
 													<ChildrenList>
 														<MusicPlaylistItem Name="" ID="{A0A19467-1488-4246-95EC-210A770B8953}" ShortID="835825683">
 															<PropertyList>
@@ -3176,26 +3181,22 @@
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
-														<MusicPlaylistItem Name="" ID="{3E1979A2-81F6-4AA9-9F60-C58579812EC5}" ShortID="737155519">
+														<MusicPlaylistItem Name="" ID="{E0BD706C-E023-4265-9F4D-2BCDB4B82F25}" ShortID="540272110">
 															<PropertyList>
 																<Property Name="LoopCount" Type="int16" Value="0"/>
 																<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-																<Property Name="PlayMode" Type="int16" Value="2"/>
+																<Property Name="PlayMode" Type="int16" Value="3"/>
+																<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 															</PropertyList>
 															<ChildrenList>
-																<MusicPlaylistItem Name="" ID="{45AC17B2-FC5E-4E49-B2FE-C3519F24BE2C}" ShortID="525385342">
-																	<PropertyList>
-																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Segment">
-																			<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-																		</Reference>
-																	</ReferenceList>
-																</MusicPlaylistItem>
 																<MusicPlaylistItem Name="" ID="{8E442B27-E523-4836-8323-A075A6B9634B}" ShortID="310706182">
 																	<PropertyList>
 																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>100</Value>
+																			</ValueList>
+																		</Property>
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Segment">
@@ -3206,10 +3207,30 @@
 																<MusicPlaylistItem Name="" ID="{8A7CFA30-71E6-4717-A2F4-3CE79206A429}" ShortID="984200419">
 																	<PropertyList>
 																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>100</Value>
+																			</ValueList>
+																		</Property>
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Segment">
 																			<ObjectRef Name="CombatForestC" ID="{5512DD89-175C-4748-B22D-91901DD4D534}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{7D9C33EA-768A-4E2F-8B1A-B571201E5C6A}" ShortID="997548695">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>0.001</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 																		</Reference>
 																	</ReferenceList>
 																</MusicPlaylistItem>
@@ -3227,6 +3248,21 @@
 													</PropertyList>
 													<ChildrenList>
 														<MusicTransition Name="Transition" ID="{EF29E22F-DE50-41EB-A4A6-4D34DDD60957}">
+															<TransitionInfo/>
+														</MusicTransition>
+														<MusicTransition Name="Transition" ID="{6A730C78-FAF3-457E-B4DB-136216D02884}">
+															<PropertyList>
+																<Property Name="DestinationContextType" Type="int16" Value="2"/>
+																<Property Name="SourceContextType" Type="int16" Value="2"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="DestinationContextObject">
+																	<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																</Reference>
+																<Reference Name="SourceContextObject">
+																	<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																</Reference>
+															</ReferenceList>
 															<TransitionInfo/>
 														</MusicTransition>
 													</ChildrenList>
@@ -3288,7 +3324,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{1F63E5E5-353B-4D37-BD1E-99952E6B5278}"/>
 																						</MusicClip>
@@ -3341,7 +3377,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{5D75EF50-CC63-4C0E-AD7F-5BFC89BFA956}"/>
 																						</MusicClip>
@@ -3389,13 +3425,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{D69592C5-68C8-42CA-A2CE-B7ACAF335A77}">
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{CCAF19A7-BAE0-4599-B7AB-8EAA006E41EE}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="249.488780269456"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{644E6B46-1A0D-4E5D-81B6-987E9F291432}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{F9360339-7788-4DB4-81E0-E2A4EEC4D58C}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-100</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.251</XPos>
+																												<YPos>-2.4367</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3446,7 +3510,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{E1D881B7-3756-4CCE-9BD9-928A4F862DC1}"/>
 																						</MusicClip>
@@ -3499,7 +3563,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{951877CB-64C6-4093-808B-45CC99BE8147}"/>
 																						</MusicClip>
@@ -3547,13 +3611,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{2E91D158-12B6-43ED-9703-37AAB45556F9}">
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{D57EBA5E-CC62-4930-A3E4-7355452172DD}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="249.06778874651"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{5C73AFC2-6E22-4A27-8A25-771BB3D9DEFC}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{989618E5-6A08-42B6-907F-726842877891}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-0.09445</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.251</XPos>
+																												<YPos>2.43668</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3599,13 +3691,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{9AC4BA11-7A83-45EF-8A3C-08A81313848F}">
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{8AF4AB84-4583-4AAB-AA74-F0623AD2D78F}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="245.655901229435"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{7629F0AD-F2A5-4769-B567-CD7FAB509FB2}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{00CBB50D-921C-470F-84C4-A21D36FE832B}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>2.34229</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.251</XPos>
+																												<YPos>2.43668</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3651,13 +3771,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{A2F096CA-3E39-43B6-AAA8-43512D25CE4D}">
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{2899D460-4160-43A6-8B99-16A33BC6DEE8}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="242.244013712359"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{0D7EEA69-5625-4715-9B49-DCD27564FDBA}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{53415525-62B0-4CE0-BE14-9A3C40E38617}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>2.3423</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.251</XPos>
+																												<YPos>0</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3703,13 +3851,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{D7ADBD89-25E8-4989-A623-8487E8D83698}">
+																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{EDD32032-653E-4C7A-95F5-7766C401D5E8}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="232.008351161133"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{281B96E8-B2CC-4E1E-BAFF-401650B0D620}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{3D762531-A16A-4A84-9555-CDA8E54E0875}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-4.96785</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.251</XPos>
+																												<YPos>-2.4367</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3728,7 +3904,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{8A18564B-2807-4E44-A266-D1D0E2F143B8}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="250"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -3738,7 +3914,7 @@
 															<MusicCue Name="Exit Cue" ID="{0A7B969A-850C-4B00-B99F-C7583970905A}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="48250"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -3798,7 +3974,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{6DA59E5B-77E1-4843-A704-62B30391083B}"/>
 																						</MusicClip>
@@ -3851,7 +4027,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{F5B2472F-3660-4B41-B12E-7DDFB1C17E98}"/>
 																						</MusicClip>
@@ -3899,13 +4075,41 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{2D8ECD41-CF63-47CA-AB6D-BB9310D698F9}">
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{0554C7FF-8B2D-42D1-909A-31E73E23C251}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="248.577233674746"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{8141ACA4-A31F-40E4-A52A-C3F48D4054BE}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{3618A043-5E3A-43E7-9795-B3E82EECE05B}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>1.27011</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.50039204634236</XPos>
+																												<YPos>0</YPos>
+																												<Flags>0</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -3956,7 +4160,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{F05FEC70-0A24-46D0-970D-5A126E93FB04}"/>
 																						</MusicClip>
@@ -4009,7 +4213,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{4B701B36-49FA-42C3-8114-2A4ADB57E485}"/>
 																						</MusicClip>
@@ -4057,13 +4261,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{97BAA04A-12B0-4F92-9541-6F4AA95E420E}">
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{568425BA-2293-4C11-8A53-673378B5FBC5}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="244.599997935949"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{C8D44C76-B963-43D5-B8FE-EB2461331354}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{3B014DD6-37ED-4F2E-8C0C-C9D39688CD56}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>1.27007</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4109,11 +4336,86 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{D9A0F70E-74B8-470E-8D44-16779B9331C5}">
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{9450D9F9-DED8-4B84-8FBE-BF994E938F7F}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="1500"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="250"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{513B6200-FCC0-4614-953C-383F84AEA0C8}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Highpass">
+																									<Curve Name="" ID="{876E4CAE-6B52-49B5-AD6F-0FCCF64DAA23}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>0</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.5</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{A6627F9D-D2E7-45FA-9129-8AC800256CBC}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>1.27009</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.5</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																								<PropertyCurve PropertyName="Volume">
+																									<Curve Name="" ID="{202BD47E-4C19-4935-800A-6A74E8D68856}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="3"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>0</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>1.5</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{566051AC-6E09-4E80-B17C-71ACD6DB9DAF}">
+																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1500"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{513B6200-FCC0-4614-953C-383F84AEA0C8}"/>
 																						</MusicClip>
@@ -4161,13 +4463,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{957E553C-7F03-4B7E-BF7C-BA4BA21FE485}">
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{C6BBC80C-9A14-4123-8431-B5D41F5A7753}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{94695F37-4CAD-4F8A-8B51-3ACEA7403D08}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{635341FA-EFF4-4271-A73D-E4C5910CD2CE}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>3.21754</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4213,13 +4538,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{E26C6060-D5B9-40A9-8586-EBEDB9B4734C}">
+																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{09E2FD5D-518F-4A8A-9388-D549865E0F27}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="875"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="127.27154364147"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{7CB2215A-840A-4D53-AAF2-C639CE48A433}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{9BAC8831-0D58-4AF0-A737-176E3DE91EFA}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>0.875</XPos>
+																												<YPos>1.27006</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4238,7 +4586,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{4FB0EE4F-8D0D-4F63-AD5B-73A86505423E}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="625"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -4248,7 +4596,7 @@
 															<MusicCue Name="Exit Cue" ID="{0E96F090-95CB-43B6-9EBD-775F2FC9D4AC}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="48625"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -4308,7 +4656,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{4DD05471-BE7D-4E21-A11A-A9ECBC9AE4E9}"/>
 																						</MusicClip>
@@ -4361,7 +4709,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{81B4819F-81AD-4C17-86C7-18CB7F43B767}"/>
 																						</MusicClip>
@@ -4409,13 +4757,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{089A1B59-1617-4A0F-8733-0CA1A772BC44}">
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{D1F852F8-3EBD-4CC3-90FE-336C1B7C7E94}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="249.645390070921"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{32A28A73-DBBF-4428-B6CC-F4656185A38D}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{577A52A0-9CAA-439E-9739-9C3F9C45D374}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>0.27711</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4466,7 +4837,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{EC7D3856-A198-4C43-894C-7CEFE6CB106C}"/>
 																						</MusicClip>
@@ -4519,7 +4890,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{1E79511A-BE6D-40C8-AE4F-70BCB5CB6206}"/>
 																						</MusicClip>
@@ -4567,13 +4938,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{A36DCF62-E1BE-4D5E-8F3B-EC5A423099BF}">
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{1305E1BE-8CBD-4C97-B5AE-A06C3611EA90}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="260.992907801418"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{AE490F7A-701D-4C97-B8D5-7AE1BCFFC0FA}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{F7298D6A-2576-4AA4-A9C8-2BAA71C686E6}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-0.65149</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4619,13 +5013,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{A25C6EE8-F32A-4541-94C1-126F63594819}">
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{B01E6038-06D6-40E8-9E93-F1923F69F062}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="221.27659574468"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{192F0B23-20FD-42B2-A60D-2CC2CD0B2C3D}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{A31377F6-0115-4D49-A368-A7607E39B148}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>0.277</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4671,13 +5088,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{CB00EE34-CEB0-4839-9C4B-8E7608D397A7}">
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{1035C864-F85D-4941-8038-BDB7FA459F77}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="232.624113475177"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{D6FE4D4A-7345-4731-BDC3-330156BCCA39}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{98D0B540-F355-4D50-8463-B4F18D1FAC22}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>0.27702</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4723,13 +5163,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{09AAE442-ED03-441C-96E8-89529E099FCF}">
+																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{5BD48FBF-D2B0-4865-902E-7B906A378C58}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="375"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="119.148936170213"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{3771FACF-75BD-43F0-950C-F6BEF001190C}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{A8C28834-5FA0-4735-B206-4184D93D782D}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>0.375</XPos>
+																												<YPos>-0.65145</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>48.7215646258503</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -4748,7 +5211,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{FD829F40-CCC2-4C8B-B00C-45A96D41EEDF}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="1125"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -4758,7 +5221,7 @@
 															<MusicCue Name="Exit Cue" ID="{4DB8E7B0-B7CB-47A2-A06F-9860374829C3}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49125"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -4925,6 +5388,10 @@
 										<Reference Name="PlaylistRoot">
 											<Custom>
 												<MusicPlaylistItem Name="" ID="{7D56B621-BB06-4502-A5FD-98076839054B}" ShortID="177817502">
+													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
+														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+													</PropertyList>
 													<ChildrenList>
 														<MusicPlaylistItem Name="" ID="{C760EF55-DC79-401C-956D-8FE6DB02E54A}" ShortID="974480916">
 															<PropertyList>
@@ -4936,26 +5403,21 @@
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
-														<MusicPlaylistItem Name="" ID="{7ADB3661-E7A7-4ACF-B29A-15F2B3102FAA}" ShortID="162221981">
+														<MusicPlaylistItem Name="" ID="{8D7C84BE-1A5A-44C7-BBE3-3A2895C99DBE}" ShortID="890857498">
 															<PropertyList>
-																<Property Name="LoopCount" Type="int16" Value="0"/>
 																<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-																<Property Name="PlayMode" Type="int16" Value="2"/>
+																<Property Name="PlayMode" Type="int16" Value="3"/>
+																<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 															</PropertyList>
 															<ChildrenList>
-																<MusicPlaylistItem Name="" ID="{962822A0-96C3-418F-9E01-091F97AA11B1}" ShortID="50498887">
-																	<PropertyList>
-																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Segment">
-																			<ObjectRef Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-																		</Reference>
-																	</ReferenceList>
-																</MusicPlaylistItem>
 																<MusicPlaylistItem Name="" ID="{7A1DFED9-FF2C-499D-85F8-57F56993A72A}" ShortID="339130778">
 																	<PropertyList>
 																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>100</Value>
+																			</ValueList>
+																		</Property>
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Segment">
@@ -4966,10 +5428,30 @@
 																<MusicPlaylistItem Name="" ID="{DF8D921F-69ED-4021-97F6-AFF95C3928B7}" ShortID="152395333">
 																	<PropertyList>
 																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>100</Value>
+																			</ValueList>
+																		</Property>
 																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Segment">
 																			<ObjectRef Name="ExplorationForestC" ID="{22DA178F-C7B5-436A-93BF-984BA6CE639D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{3E3C53FA-0DEF-4747-8431-8431185EABF1}" ShortID="597102548">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																		<Property Name="Weight" Type="Real64">
+																			<ValueList>
+																				<Value>0.001</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 																		</Reference>
 																	</ReferenceList>
 																</MusicPlaylistItem>
@@ -5048,7 +5530,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-Bass_120bpm3-4_L32M-P0M" ID="{5EEE8391-8F16-460F-8B56-7317DA3FB8A0}"/>
 																						</MusicClip>
@@ -5096,13 +5578,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{602C3681-9231-468E-A204-B754CC278930}">
+																						<MusicClip Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{0267F2CF-1197-4918-8DA4-9ABE4258F31F}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="237.163120567375"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{8F78FED5-1D2D-42DE-8BD7-B66906EF3E62}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{EF2FDDAD-32F5-4B58-A99D-1F26C3C6690C}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>2.34226</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -5148,13 +5653,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{F222C6C8-BC3A-405D-8358-57EE67A8CB7A}">
+																						<MusicClip Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{8E519FE7-FA26-4E42-9C2A-BBFA2922621D}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="237.163120567375"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{D8C9D1DC-355B-4C0B-B2FC-435E356D1484}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{E1E29EAC-CC38-47A3-B417-26F278DF7963}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-0.0945</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -5200,13 +5728,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{B14C0EC7-3098-403E-A74D-43C34C61F2A2}">
+																						<MusicClip Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{5892CEE1-EA30-4C97-AB8C-26AB69742640}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="237.163120567375"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{C5B3B690-87DA-490E-8096-89E0D5626228}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{5CD5DFF3-F3E2-4B4D-999E-3F4D7FCB8278}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-0.09443</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -5252,13 +5803,36 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{CE2B9512-D6BB-4442-86F8-36CDDCBACE06}">
+																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{99B70BF0-F8E3-4292-8631-FA218F373419}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="255.886524822694"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{A25CCDB4-403C-4CAC-A6ED-C6430F00A322}"/>
+																							<PropertyCurveList>
+																								<PropertyCurve PropertyName="Lowpass">
+																									<Curve Name="" ID="{1C610841-E7EF-4F79-A286-703A930612BC}">
+																										<PropertyList>
+																											<Property Name="Flags" Type="int32" Value="1"/>
+																										</PropertyList>
+																										<PointList>
+																											<Point>
+																												<XPos>1.25</XPos>
+																												<YPos>-2.5312</YPos>
+																												<Flags>5</Flags>
+																											</Point>
+																											<Point>
+																												<XPos>50.207641723356</XPos>
+																												<YPos>0</YPos>
+																												<Flags>37</Flags>
+																											</Point>
+																										</PointList>
+																									</Curve>
+																								</PropertyCurve>
+																							</PropertyCurveList>
 																						</MusicClip>
 																					</Local>
 																				</Reference>
@@ -5309,7 +5883,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{FBBADFFA-5FF4-48DC-ABA3-B5336BFE79C7}"/>
 																						</MusicClip>
@@ -5362,7 +5936,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="250"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{32A0C247-38F8-494A-A378-AF4577C267DB}"/>
 																						</MusicClip>
@@ -5383,7 +5957,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{DD38A4A7-C13B-46B3-A609-A785C0B25EA6}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="250"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -5393,7 +5967,7 @@
 															<MusicCue Name="Exit Cue" ID="{9BE11A81-3DEC-4D67-9159-27D75A498EAF}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="48250"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -5453,7 +6027,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-Bass_120bpm3-4_L32M-P0M" ID="{84CE2D12-8822-4C61-8A24-E62D55701BEF}"/>
 																						</MusicClip>
@@ -5506,7 +6080,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-Guitar_120bpm3-4_L32M-P0M" ID="{1194CBCB-FE36-4117-80F1-6F4A124E8AAF}"/>
 																						</MusicClip>
@@ -5554,11 +6128,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{A601A6D4-182C-4726-A0E6-8C5E543D27FF}">
+																						<MusicClip Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{86E44F55-E8A1-4644-BF6B-D9308240EAB9}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="875"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="103.159252095422"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{A4229489-99B4-408D-8399-89D3219C2FC1}"/>
 																						</MusicClip>
@@ -5611,7 +6187,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-Mandolin_120bpm3-4_L32M-P0M" ID="{DED10084-7B6D-431B-9D1A-842AC4673A3C}"/>
 																						</MusicClip>
@@ -5659,11 +6235,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{7263F006-B131-477F-8520-640735831E20}">
+																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{C6732FD5-103C-4F2C-AF48-40E24B343276}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="875"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="121.915479749135"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-875"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{BCAB9B87-EB96-4462-A6C2-6D64C3790214}"/>
 																						</MusicClip>
@@ -5716,7 +6294,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{46DC3D62-D03A-4BEA-BC16-CC3103B5DA55}"/>
 																						</MusicClip>
@@ -5769,7 +6347,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="625"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{DA4CF40F-42F1-402D-9067-4285601C4F30}"/>
 																						</MusicClip>
@@ -5790,7 +6368,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{B347881B-4257-4137-BC14-C3D55CAAC346}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="625"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -5800,7 +6378,7 @@
 															<MusicCue Name="Exit Cue" ID="{2BF2CEAB-B771-4CA5-879D-C98CF3D70E29}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="48625"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -5860,7 +6438,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-Bass_120bpm3-4_L32M-P0M" ID="{53BED56E-8A92-4F2B-A5E7-CDE223C185D8}"/>
 																						</MusicClip>
@@ -5908,11 +6486,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{5476AAE8-34B3-431A-A685-BD55CE56E3AE}">
+																						<MusicClip Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{BE7CFE16-64EA-4C74-9D52-EF3476B4BF15}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1250"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="240.86338495935"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{729091B4-837C-41C6-92F2-94FBFBE105A7}"/>
 																						</MusicClip>
@@ -5960,11 +6540,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{8B8DA3CE-C1D8-4314-BC59-B12D5F288A18}">
+																						<MusicClip Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{F9FB1D7C-0FDF-4BEA-AAD1-9B52ABDFBEA3}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="375"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="105.874015366747"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{EA80ECF7-4CBC-4549-A07D-1782E5B539D2}"/>
 																						</MusicClip>
@@ -6012,11 +6594,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{918BEFF5-9C40-4CDF-9201-FB3AEF01F8EE}">
+																						<MusicClip Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{D3840259-0E82-4503-ABB5-028ADC6AC075}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1375"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="121.75511767176"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{8DDEC02B-40E5-494A-91F8-B3E9748EA470}"/>
 																						</MusicClip>
@@ -6064,11 +6648,13 @@
 																			<ObjectList Name="Clips">
 																				<Reference>
 																					<Local>
-																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{6C5A2C1D-A26C-429B-9543-63ABC6899DF9}">
+																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{B4202760-165B-4FC7-867C-B2CA45B2836F}">
 																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="375"/>
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
-																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeInDuration" Type="Real64" Value="119.108267287591"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-375"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{DF8A7400-763D-4769-8969-8A23E65D5B56}"/>
 																						</MusicClip>
@@ -6121,7 +6707,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{DBAE37EB-45F4-4F3D-BE7B-DCE3BF3D38C1}"/>
 																						</MusicClip>
@@ -6174,7 +6760,7 @@
 																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
 																								<Property Name="FadeInMode" Type="int16" Value="0"/>
 																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1125"/>
 																							</PropertyList>
 																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{A94AA9B9-1C55-4417-A7D6-394B039890C3}"/>
 																						</MusicClip>
@@ -6195,7 +6781,7 @@
 														<Local>
 															<MusicCue Name="Entry Cue" ID="{D094A75A-DE3D-4C0D-AF61-8A643F16B396}">
 																<PropertyList>
-																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="1125"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -6205,7 +6791,7 @@
 															<MusicCue Name="Exit Cue" ID="{88BE2EF4-2ED1-4E08-906B-1569A7531EFD}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49125"/>
 																</PropertyList>
 															</MusicCue>
 														</Local>
@@ -6220,6 +6806,19 @@
 								<ObjectList Name="Arguments">
 									<Reference>
 										<ObjectRef Name="Forest" ID="{F2F915B6-4F13-45EE-A827-47BF546E71E5}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+									</Reference>
+								</ObjectList>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{700C32F4-4604-4361-8EA0-1C4357268EBC}" ShortID="405465298">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Matrix Reverb" CompanyID="0" PluginID="115" PluginType="3">
+														<ObjectRef Name="ForestReverb" ID="{D1F1EAE8-EDEA-486D-954A-BFAC0EE5D29D}" WorkUnitID="{5761E36B-C9D6-4CE6-8D85-7EB1884CFD0A}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
 									</Reference>
 								</ObjectList>
 								<ObjectList Name="Entries">
