@@ -2391,67 +2391,6 @@
 								</MusicSegment>
 							</ChildrenList>
 						</MusicPlaylistContainer>
-						<MusicPlaylistContainer Name="Forest" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" ShortID="257873293">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
-								</Reference>
-								<Reference Name="PlaylistRoot">
-									<Custom>
-										<MusicPlaylistItem Name="" ID="{A5BD3F80-4995-4949-8222-B0D04C6B16C4}" ShortID="413605517"/>
-									</Custom>
-								</Reference>
-								<Reference Name="TransitionRoot">
-									<Custom>
-										<MusicTransition Name="Root" ID="{4ED5077F-E8A1-4A9C-B379-A51AB4D7E5D8}">
-											<PropertyList>
-												<Property Name="IsFolder" Type="bool" Value="True"/>
-											</PropertyList>
-											<ChildrenList>
-												<MusicTransition Name="Transition" ID="{EF29E22F-DE50-41EB-A4A6-4D34DDD60957}">
-													<TransitionInfo/>
-												</MusicTransition>
-											</ChildrenList>
-											<TransitionInfo/>
-										</MusicTransition>
-									</Custom>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<MusicSegment Name="Forest" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" ShortID="177424001">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
-										</Reference>
-									</ReferenceList>
-									<ObjectLists>
-										<ObjectList Name="Cues">
-											<Reference>
-												<Local>
-													<MusicCue Name="Entry Cue" ID="{8A18564B-2807-4E44-A266-D1D0E2F143B8}"/>
-												</Local>
-											</Reference>
-											<Reference>
-												<Local>
-													<MusicCue Name="Exit Cue" ID="{0A7B969A-850C-4B00-B99F-C7583970905A}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="1000"/>
-														</PropertyList>
-													</MusicCue>
-												</Local>
-											</Reference>
-										</ObjectList>
-									</ObjectLists>
-								</MusicSegment>
-							</ChildrenList>
-						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="Caves" ID="{85F608CA-80A5-4062-969F-A04C2CA19DC6}" ShortID="103723492">
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2907,6 +2846,3422 @@
 								</MusicSegment>
 							</ChildrenList>
 						</MusicPlaylistContainer>
+						<MusicSwitchContainer Name="Forest" ID="{6C89AEED-B866-4445-9C23-BDA149D39DB9}" ShortID="239801135">
+							<PropertyList>
+								<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
+								<Property Name="TimeSignatureUpper" Type="int16" Value="3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+								<Reference Name="TransitionRoot">
+									<Custom>
+										<MusicTransition Name="Root" ID="{9EBD7201-20B4-4C52-8A92-D3D134FB6A34}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicTransition Name="Transition" ID="{BF675016-C42B-4CF0-B842-0C0093EA7E7E}">
+													<TransitionInfo/>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{8076E46D-C248-47A3-8B4A-7CFD51AF2A68}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Exploration" ID="{79FE23E6-F7D9-4B3B-8652-24E9EA6F3D7B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{962822A0-96C3-418F-9E01-091F97AA11B1}"/>
+														<TransitionObjectRef Name="CombatOut" ID="{B6CABEA2-6F76-4EF9-AE6C-062D7DD17C6C}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{3AB35BEF-A1A0-41C1-809F-D5D79992232C}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{48B2A712-C145-4645-9323-E42C421A41A3}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+														<TransitionFadeIn>
+															<MusicFade Name="Transition Fade-in" ID="{D06EE339-95EF-4046-9367-89D9CADE1043}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeIn>
+														<TransitionFadeOut>
+															<MusicFade Name="Transition Fade-out" ID="{AF44D111-C6FA-461B-A49B-E322827F7CC7}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeOut>
+													</TransitionInfo>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{E8FC4C32-F5EC-4815-9577-4EDCE7059CAD}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Exploration" ID="{79FE23E6-F7D9-4B3B-8652-24E9EA6F3D7B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="CombatForestB" ID="{898902B7-4D1F-4C80-86AF-F8F1EF2F8A96}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{7A1DFED9-FF2C-499D-85F8-57F56993A72A}"/>
+														<TransitionObjectRef Name="CombatOut" ID="{B6CABEA2-6F76-4EF9-AE6C-062D7DD17C6C}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{19D1BD35-DF98-4430-9FF4-F1D3AC46AE74}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{574FD99A-C9CF-489E-85F0-ACAF093FB82F}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+														<TransitionFadeIn>
+															<MusicFade Name="Transition Fade-in" ID="{B659FDF1-952E-4E0F-BB71-C7AF883B04C4}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeIn>
+														<TransitionFadeOut>
+															<MusicFade Name="Transition Fade-out" ID="{115FC862-AD5E-4BDE-85AD-36DF41EA369E}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeOut>
+													</TransitionInfo>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{34184C60-FC45-4C06-B48D-C20ADBC28045}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Exploration" ID="{79FE23E6-F7D9-4B3B-8652-24E9EA6F3D7B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="CombatForestC" ID="{5512DD89-175C-4748-B22D-91901DD4D534}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{DF8D921F-69ED-4021-97F6-AFF95C3928B7}"/>
+														<TransitionObjectRef Name="CombatOut" ID="{B6CABEA2-6F76-4EF9-AE6C-062D7DD17C6C}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{B88C2ED0-4E89-4210-8C97-10407259EDC0}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{73F69197-D1AF-44C2-AD89-B53DE71679CC}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+														<TransitionFadeIn>
+															<MusicFade Name="Transition Fade-in" ID="{1522B62E-4805-4684-8EC0-3C17A6AD8A16}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeIn>
+														<TransitionFadeOut>
+															<MusicFade Name="Transition Fade-out" ID="{EC0EA26F-5D09-4A07-B749-4A32A2073481}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeOut>
+													</TransitionInfo>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{1F7B3340-4227-46D9-A568-31C3C3F80E62}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Combat" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{45AC17B2-FC5E-4E49-B2FE-C3519F24BE2C}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{26A8A366-91A8-4AD5-960D-FB28B2B4F97D}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{56AE6773-5507-4C64-89A7-289F523A09AA}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+													</TransitionInfo>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{7E830EEE-43EC-4A3E-8359-E19FFCF40471}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Combat" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="ExplorationForestB" ID="{E04EEFDF-1202-4665-BB78-1F8C9737CF90}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{8E442B27-E523-4836-8323-A075A6B9634B}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{E24A0AD9-B986-4200-ADC9-07F6C69AE675}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{D900D973-02B9-4441-AD9B-91D1C4C9320B}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+													</TransitionInfo>
+												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{7597CAF3-268C-478C-8752-410A55AA4358}">
+													<PropertyList>
+														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="DestinationJumpPositionPreset" Type="int16" Value="1"/>
+														<Property Name="DestinationPlaylistJumpTo" Type="int16" Value="1"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="DestinationContextObject">
+															<ObjectRef Name="Combat" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="ExplorationForestC" ID="{22DA178F-C7B5-436A-93BF-984BA6CE639D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<JumpToPlaylistItemRef Name="" ID="{8A7CFA30-71E6-4717-A2F4-3CE79206A429}"/>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{E8E2DA4D-8329-410F-AAB2-101254646451}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{3CDB9033-F6C9-4089-A144-6C7042DCC343}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-0.5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+													</TransitionInfo>
+												</MusicTransition>
+											</ChildrenList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</Custom>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicPlaylistContainer Name="Combat" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" ShortID="257873293">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Music" ID="{B0C2F961-35B4-49F8-AD87-2A1E05C4CD73}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+										</Reference>
+										<Reference Name="PlaylistRoot">
+											<Custom>
+												<MusicPlaylistItem Name="" ID="{A5BD3F80-4995-4949-8222-B0D04C6B16C4}" ShortID="413605517">
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{A0A19467-1488-4246-95EC-210A770B8953}" ShortID="835825683">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Segment">
+																	<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																</Reference>
+															</ReferenceList>
+														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{3E1979A2-81F6-4AA9-9F60-C58579812EC5}" ShortID="737155519">
+															<PropertyList>
+																<Property Name="LoopCount" Type="int16" Value="0"/>
+																<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+																<Property Name="PlayMode" Type="int16" Value="2"/>
+															</PropertyList>
+															<ChildrenList>
+																<MusicPlaylistItem Name="" ID="{45AC17B2-FC5E-4E49-B2FE-C3519F24BE2C}" ShortID="525385342">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{8E442B27-E523-4836-8323-A075A6B9634B}" ShortID="310706182">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="CombatForestB" ID="{898902B7-4D1F-4C80-86AF-F8F1EF2F8A96}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{8A7CFA30-71E6-4717-A2F4-3CE79206A429}" ShortID="984200419">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="CombatForestC" ID="{5512DD89-175C-4748-B22D-91901DD4D534}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+															</ChildrenList>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+											</Custom>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{4ED5077F-E8A1-4A9C-B379-A51AB4D7E5D8}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<MusicTransition Name="Transition" ID="{EF29E22F-DE50-41EB-A4A6-4D34DDD60957}">
+															<TransitionInfo/>
+														</MusicTransition>
+													</ChildrenList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicSegment Name="CombatForestA" ID="{1CE791E1-2F33-4255-BCF0-A4D31312E702}" ShortID="177424001">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="52500"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{00AB4AC5-FB74-4387-AB91-C635BE57DA40}" ShortID="714253328">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{B3A1EAEC-9432-4CDC-AD66-9BE2A18509A6}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{1F63E5E5-353B-4D37-BD1E-99952E6B5278}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1034444182"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{D0DFEE20-1F6C-4637-8AD1-F1F827CBE8E2}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{A9E783DC-3EFB-4135-8325-41999A705EE9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{1F63E5E5-353B-4D37-BD1E-99952E6B5278}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{C282E483-ECE8-421C-A2B6-FBB2AEE14831}" ShortID="791415318">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{28F4E01E-2DB4-410D-9AE9-23713C3527B7}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{5D75EF50-CC63-4C0E-AD7F-5BFC89BFA956}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Drums_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="752787801"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{629235C9-8AE5-4E2A-9A63-14A136162864}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{7F97EB80-F0C1-4E24-A99A-F5AD7AD05F30}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{5D75EF50-CC63-4C0E-AD7F-5BFC89BFA956}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{88951EF4-C43F-47E4-839B-77E2DE0318DC}" ShortID="101086634">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{FB0E06A5-0826-4C3F-AF7F-E1FEC4DD4C3D}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{644E6B46-1A0D-4E5D-81B6-987E9F291432}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Guitar_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="904094496"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{822ACE85-0F66-4C37-AB4F-86CA9E26B3CA}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{D69592C5-68C8-42CA-A2CE-B7ACAF335A77}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{644E6B46-1A0D-4E5D-81B6-987E9F291432}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{088813B8-6FC9-41A3-9B97-A4A55CC0C062}" ShortID="764704292">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{6CAE704F-9EF1-48A2-88EB-5797CF151BB7}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{E1D881B7-3756-4CCE-9BD9-928A4F862DC1}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="950156569"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{DC7CC568-905B-4233-AADA-8750A73B6537}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{3457A857-D313-46AC-9917-9373A6777CC5}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{E1D881B7-3756-4CCE-9BD9-928A4F862DC1}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{E93C4E34-3349-415A-9850-C292A2981799}" ShortID="467188435">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{DA236F94-47CB-4C07-80CF-D16D90536B07}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{951877CB-64C6-4093-808B-45CC99BE8147}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="673383168"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{50F4492B-B52A-49AC-B9F9-BD3B447B510D}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{0F7EF6FD-419D-4DF5-8A40-AB3B9285D3A9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{951877CB-64C6-4093-808B-45CC99BE8147}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{45A72B29-1D99-41E3-BAC9-50FF6C2BB82B}" ShortID="372005591">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{F3024D02-CD78-451D-8367-699A0A2EB898}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{5C73AFC2-6E22-4A27-8A25-771BB3D9DEFC}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-UkeChords_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="704331701"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{FD85013C-C314-4C0C-9492-F8DBC51DF08D}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{2E91D158-12B6-43ED-9703-37AAB45556F9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{5C73AFC2-6E22-4A27-8A25-771BB3D9DEFC}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{45407D2F-6541-465C-AD07-643A89449A78}" ShortID="586548978">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{72FEDBD0-5704-447E-AE96-633BC3C91B9E}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{7629F0AD-F2A5-4769-B567-CD7FAB509FB2}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="398121581"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{42035106-2B01-4C36-9756-CF6209C23031}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{9AC4BA11-7A83-45EF-8A3C-08A81313848F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{7629F0AD-F2A5-4769-B567-CD7FAB509FB2}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{FD81B29B-43B3-4ADA-A931-C5131DA06F42}" ShortID="721574892">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{F15359CE-CBC0-4301-A44A-4EC8A381634C}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{0D7EEA69-5625-4715-9B49-DCD27564FDBA}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="754836740"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{BB5AE79D-0FFF-413F-B8FB-A693CCF680B0}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{A2F096CA-3E39-43B6-AAA8-43512D25CE4D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{0D7EEA69-5625-4715-9B49-DCD27564FDBA}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{FBDC2DA8-E940-4B38-95A9-03C375BC63EE}" ShortID="1045440422">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{A31483CF-B7B3-4703-A1F7-A6C0D2DE78B0}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{281B96E8-B2CC-4E1E-BAFF-401650B0D620}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="507879152"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{6FDBE4A3-773E-4A2B-A1A9-FB7FDEDC9AC2}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{D7ADBD89-25E8-4989-A623-8487E8D83698}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{281B96E8-B2CC-4E1E-BAFF-401650B0D620}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{8A18564B-2807-4E44-A266-D1D0E2F143B8}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{0A7B969A-850C-4B00-B99F-C7583970905A}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="CombatForestB" ID="{898902B7-4D1F-4C80-86AF-F8F1EF2F8A96}" ShortID="972868662">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="52625"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{53E6F46D-27A5-452C-AD06-257907FF4B08}" ShortID="155110030">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{90BEFA76-2246-4605-B64F-31AAD87C5C9A}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{6DA59E5B-77E1-4843-A704-62B30391083B}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1034444182"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{6816703E-7EDC-4794-9C93-CFB8A48DAFD8}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{2C5F44BC-5E06-49B6-AD2B-2704D451EDE7}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{6DA59E5B-77E1-4843-A704-62B30391083B}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{828895D6-F576-4852-BB44-F9D7B1003222}" ShortID="611105794">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{3B2C5BB0-FCFF-42E9-8CFB-079D7EBBB8D4}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{F5B2472F-3660-4B41-B12E-7DDFB1C17E98}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Drums_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="752787801"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{4F8B5779-C114-488A-8F5F-B8D138AA04C6}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{1390CA2F-C36F-4D17-B361-5AA97C39B2A1}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{F5B2472F-3660-4B41-B12E-7DDFB1C17E98}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{C8D33389-1CBB-4577-A0AA-0896FE22BF83}" ShortID="281194683">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{87C2FA54-9DAA-4C62-B411-33C97A77489D}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{8141ACA4-A31F-40E4-A52A-C3F48D4054BE}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Guitar_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="904094496"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{9A26183C-33D0-448A-8A1D-7C7FB1028B98}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{2D8ECD41-CF63-47CA-AB6D-BB9310D698F9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{8141ACA4-A31F-40E4-A52A-C3F48D4054BE}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{F95604E9-DF31-4304-96D6-109DF39C8F49}" ShortID="984829706">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{D9377C67-887C-453D-A408-82918B4AD03F}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{F05FEC70-0A24-46D0-970D-5A126E93FB04}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="950156569"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{4785C55E-A594-4884-818A-52E77FDB5721}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{EC9F3FC1-7403-4571-82AA-80D72443A017}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{F05FEC70-0A24-46D0-970D-5A126E93FB04}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{3925FB06-EE2C-4C74-AAAD-1B084139BAC1}" ShortID="180098947">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{6F0CAB59-7235-4779-8E8E-1EBEC9FB570C}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{4B701B36-49FA-42C3-8114-2A4ADB57E485}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="673383168"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{71250CB9-65C0-4953-878D-EA4083820814}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{4E416EBD-3DD8-4B01-B516-FE5AC4DBF71B}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{4B701B36-49FA-42C3-8114-2A4ADB57E485}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{059D5227-32AF-41EA-B15A-6F5B842F1686}" ShortID="597865929">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{50DADF37-1896-46F2-872D-FE449A7F02B7}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{C8D44C76-B963-43D5-B8FE-EB2461331354}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-UkeChords_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="704331701"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{436CE8F3-AE50-4D66-80EB-E369E1727E26}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{97BAA04A-12B0-4F92-9541-6F4AA95E420E}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{C8D44C76-B963-43D5-B8FE-EB2461331354}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{62244E28-E91E-483C-A058-BFBBA2522F15}" ShortID="499709139">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{911E9F38-E395-48B7-BC36-57A889F685C2}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{513B6200-FCC0-4614-953C-383F84AEA0C8}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="398121581"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{78896595-DE24-42AB-AB18-E6B439DE2B3B}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{D9A0F70E-74B8-470E-8D44-16779B9331C5}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{513B6200-FCC0-4614-953C-383F84AEA0C8}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{3B764B30-D3FB-42EA-96FB-0DEB9D0CD2E6}" ShortID="650127559">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{1C4B4DD9-316A-4652-812D-2B45877FFACD}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{94695F37-4CAD-4F8A-8B51-3ACEA7403D08}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="754836740"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{F03F32A2-B789-4BFC-9D96-D6466C850DB0}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{957E553C-7F03-4B7E-BF7C-BA4BA21FE485}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{94695F37-4CAD-4F8A-8B51-3ACEA7403D08}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{141DE822-A684-4687-8698-BE9B424F1DD6}" ShortID="8875729">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{6E5FC3D3-0F54-4B28-8FDC-F9C5C9E6B1C3}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{7CB2215A-840A-4D53-AAF2-C639CE48A433}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="974570449"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{C7B65B2D-4872-411D-8F41-70D5122165CA}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{E26C6060-D5B9-40A9-8586-EBEDB9B4734C}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{7CB2215A-840A-4D53-AAF2-C639CE48A433}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{4FB0EE4F-8D0D-4F63-AD5B-73A86505423E}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{0E96F090-95CB-43B6-9EBD-775F2FC9D4AC}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="CombatForestC" ID="{5512DD89-175C-4748-B22D-91901DD4D534}" ShortID="720190005">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="52000.5495247744"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{21386F77-196A-4705-BA30-8C96F801BAEA}" ShortID="667096571">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{29BE2EAF-88C6-4F40-84FE-01FBAC4E0C9B}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{4DD05471-BE7D-4E21-A11A-A9ECBC9AE4E9}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1034444182"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{A65C8471-81FE-4CAA-A952-D6A31774A61D}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{E363ED55-148F-48D7-94F3-726C0E2EA00F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Bass_120bpm3-4_L32M-P0M" ID="{4DD05471-BE7D-4E21-A11A-A9ECBC9AE4E9}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{35393BC4-5879-46A2-B0F1-A19E04441C9D}" ShortID="834882543">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{28ABCB1E-8D75-492D-882E-2743E076E225}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{81B4819F-81AD-4C17-86C7-18CB7F43B767}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Drums_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="752787801"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{99EBA26A-9368-4EB4-9A7C-FD08ED17852B}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{4F72A38C-A646-4A27-9DB0-092A3E42D87F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Drums_120bpm3-4_L32M-P0M" ID="{81B4819F-81AD-4C17-86C7-18CB7F43B767}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{937BC94E-75C2-4D57-B4A0-1722E15AACCE}" ShortID="189365398">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{82430D90-AFED-4AD8-BF79-148964B8E694}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{32A28A73-DBBF-4428-B6CC-F4656185A38D}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Guitar_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="904094496"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{F9779959-5C56-450A-A1E9-7612462DF471}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{089A1B59-1617-4A0F-8733-0CA1A772BC44}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Guitar_120bpm3-4_L32M-P1M" ID="{32A28A73-DBBF-4428-B6CC-F4656185A38D}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{18DD45C1-49AA-4F02-9B93-1DD167E8B156}" ShortID="1069708214">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{14732126-4648-4DFD-BAA4-3BCE680E3513}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{EC7D3856-A198-4C43-894C-7CEFE6CB106C}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="950156569"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{37DDE86B-6C74-4864-894E-2BF5DF03F1C2}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{3FD8FCE3-185B-455B-8697-87BCDCA3EE62}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Shaker_120bpm3-4_L32M-P0M" ID="{EC7D3856-A198-4C43-894C-7CEFE6CB106C}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{D1FF7623-9BEE-40C6-B9BB-A74DCED3576B}" ShortID="997759379">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{CCA637C8-87A7-4027-BE69-263A0E3E5BDF}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{1E79511A-BE6D-40C8-AE4F-70BCB5CB6206}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="673383168"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{B221179C-2B82-4FC4-BF58-0CD49A5E2510}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{DD894294-58F4-47E5-AA4D-66948FF12251}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-Tambourine_120bpm3-4_L32M-P0M" ID="{1E79511A-BE6D-40C8-AE4F-70BCB5CB6206}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{E2EE647D-C05D-4BC1-81C6-C45102B73DD7}" ShortID="983839220">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{857587AF-FBD4-46DF-AC0F-3CD262DB3E16}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{AE490F7A-701D-4C97-B8D5-7AE1BCFFC0FA}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-UkeChords_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="704331701"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{14661FAA-03E1-4F19-8D6E-974518EAE56B}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{A36DCF62-E1BE-4D5E-8F3B-EC5A423099BF}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-UkeChords_120bpm3-4_L32M-P1M" ID="{AE490F7A-701D-4C97-B8D5-7AE1BCFFC0FA}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{DC76D705-2653-4FF7-A077-2CD45D20B551}" ShortID="803677972">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{D3606E48-751A-4576-B291-EF3BDC367967}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{192F0B23-20FD-42B2-A60D-2CC2CD0B2C3D}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="398121581"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{465F3B57-FB43-4D58-9444-01F2211BED67}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{A25C6EE8-F32A-4541-94C1-126F63594819}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinArco_120bpm3-4_L32M-P1M" ID="{192F0B23-20FD-42B2-A60D-2CC2CD0B2C3D}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{207AC0D8-8508-4EEC-BD03-D705123AA561}" ShortID="886404100">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{DF27EA6E-4A70-4718-A15C-46BFC19B71C2}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{D6FE4D4A-7345-4731-BDC3-330156BCCA39}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="754836740"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{3ECA4C30-1EE4-4BAF-B632-1E7B84A691B1}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{CB00EE34-CEB0-4839-9C4B-8E7608D397A7}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-Combat-ViolinPizz_120bpm3-4_L32M-P1M" ID="{D6FE4D4A-7345-4731-BDC3-330156BCCA39}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{9EF32E87-6110-4431-BA39-0B155DDCC3EA}" ShortID="667035072">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{260C76D3-4B73-478B-8F74-1CB93EC3E85D}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{3771FACF-75BD-43F0-950C-F6BEF001190C}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="736820568"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{CCB6889C-6138-4906-963E-0BC35A935A44}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{09AAE442-ED03-441C-96E8-89529E099FCF}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{3771FACF-75BD-43F0-950C-F6BEF001190C}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{FD829F40-CCC2-4C8B-B00C-45A96D41EEDF}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{4DB8E7B0-B7CB-47A2-A06F-9860374829C3}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="CombatOut" ID="{B6CABEA2-6F76-4EF9-AE6C-062D7DD17C6C}" ShortID="1024334415">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="5139.25170068027"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-CombatOut-UkeChords_120bpm3-4_L1M-P1M" ID="{B1374AB3-6549-4B71-8793-2756C3A08027}" ShortID="91641866">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{039B545D-5BCA-4247-8E83-CAF5469C3D5C}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-CombatOut-UkeChords_120bpm3-4_L1M-P1M" ID="{C1B759AE-B08F-484C-8785-E40C78CD38B2}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-CombatOut-UkeChords_120bpm3-4_L1M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="712615244"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{88A7444B-B08A-4462-BA9C-74387602EBC6}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-CombatOut-UkeChords_120bpm3-4_L1M-P1M" ID="{07660DBF-81EE-4832-A86A-599AF957A73F}">
+																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1000"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="2653.1746031746"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1000"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-CombatOut-UkeChords_120bpm3-4_L1M-P1M" ID="{C1B759AE-B08F-484C-8785-E40C78CD38B2}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-CombatOut-Guitar_120bpm3-4_L1M-P1M" ID="{D3FDEC15-9F31-4DDF-9974-7C05A4CB9460}" ShortID="993055158">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{04CDD4A5-94FB-40C0-8B81-F7C58E8D084F}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-CombatOut-Guitar_120bpm3-4_L1M-P1M" ID="{2615F8F4-9EB2-40AE-A29E-0CD26E5AF421}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-CombatOut-Guitar_120bpm3-4_L1M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="265399957"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{6E7E3DFD-7525-4F1A-AEAF-1406CA6AEB29}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-CombatOut-Guitar_120bpm3-4_L1M-P1M" ID="{E19FFDFB-EC28-4430-AD21-0253F43684FF}">
+																							<PropertyList>
+																								<Property Name="BeginTrimOffset" Type="Real64" Value="1000"/>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="4139.25170068027"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="-1000"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-CombatOut-Guitar_120bpm3-4_L1M-P1M" ID="{2615F8F4-9EB2-40AE-A29E-0CD26E5AF421}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{9DA9B89E-406A-4332-A27F-89BF323D6E7B}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{ADDD54F4-E990-432B-9D5C-D65E2A24BF19}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+									</ChildrenList>
+								</MusicPlaylistContainer>
+								<MusicPlaylistContainer Name="Exploration" ID="{79FE23E6-F7D9-4B3B-8652-24E9EA6F3D7B}" ShortID="951764712">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Music" ID="{B0C2F961-35B4-49F8-AD87-2A1E05C4CD73}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+										</Reference>
+										<Reference Name="PlaylistRoot">
+											<Custom>
+												<MusicPlaylistItem Name="" ID="{7D56B621-BB06-4502-A5FD-98076839054B}" ShortID="177817502">
+													<ChildrenList>
+														<MusicPlaylistItem Name="" ID="{C760EF55-DC79-401C-956D-8FE6DB02E54A}" ShortID="974480916">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Segment">
+																	<ObjectRef Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																</Reference>
+															</ReferenceList>
+														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{7ADB3661-E7A7-4ACF-B29A-15F2B3102FAA}" ShortID="162221981">
+															<PropertyList>
+																<Property Name="LoopCount" Type="int16" Value="0"/>
+																<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+																<Property Name="PlayMode" Type="int16" Value="2"/>
+															</PropertyList>
+															<ChildrenList>
+																<MusicPlaylistItem Name="" ID="{962822A0-96C3-418F-9E01-091F97AA11B1}" ShortID="50498887">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{7A1DFED9-FF2C-499D-85F8-57F56993A72A}" ShortID="339130778">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="ExplorationForestB" ID="{E04EEFDF-1202-4665-BB78-1F8C9737CF90}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+																<MusicPlaylistItem Name="" ID="{DF8D921F-69ED-4021-97F6-AFF95C3928B7}" ShortID="152395333">
+																	<PropertyList>
+																		<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Segment">
+																			<ObjectRef Name="ExplorationForestC" ID="{22DA178F-C7B5-436A-93BF-984BA6CE639D}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+																		</Reference>
+																	</ReferenceList>
+																</MusicPlaylistItem>
+															</ChildrenList>
+														</MusicPlaylistItem>
+													</ChildrenList>
+												</MusicPlaylistItem>
+											</Custom>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{00D3A2F3-221C-48E2-A4EC-988D2EA4317B}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<ChildrenList>
+														<MusicTransition Name="Transition" ID="{8FE80F1C-E349-44B7-BB5A-AAD7BC6F9241}">
+															<TransitionInfo/>
+														</MusicTransition>
+													</ChildrenList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicSegment Name="ExplorationForestA" ID="{CA967F92-0CB9-4C34-9F0B-C76A774050F5}" ShortID="504290852">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="87721.5646258503"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-A-Bass_120bpm3-4_L32M-P0M" ID="{93B6DF60-FCE4-4A10-8D37-0DFA21259054}" ShortID="953095678">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{8B1449D9-FF19-4E16-96F9-656A1B39E8BC}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-Bass_120bpm3-4_L32M-P0M" ID="{5EEE8391-8F16-460F-8B56-7317DA3FB8A0}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="599268597"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{670A304F-F1F1-4FFE-BD45-B2B91CF119D8}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-Bass_120bpm3-4_L32M-P0M" ID="{D98D50CB-56ED-40AC-8CE2-A082CE47D4D7}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-Bass_120bpm3-4_L32M-P0M" ID="{5EEE8391-8F16-460F-8B56-7317DA3FB8A0}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{A897A8D5-D918-4BD5-8DF2-EB9DA7DA3F91}" ShortID="366304539">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{FD33653A-148F-404B-B1CD-1D3608829B1F}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{8F78FED5-1D2D-42DE-8BD7-B66906EF3E62}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-Guitar_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="43758835"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{AB8594E5-75AD-41D7-9A5C-D6E7D1AAFAEF}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{602C3681-9231-468E-A204-B754CC278930}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-Guitar_120bpm3-4_L32M-P1M" ID="{8F78FED5-1D2D-42DE-8BD7-B66906EF3E62}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{0FE89C42-A583-4758-A0CB-E0E542D9CC29}" ShortID="290267501">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{AF4B6ED1-373C-4695-A5DB-6312CFB44B96}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{D8C9D1DC-355B-4C0B-B2FC-435E356D1484}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-LapHarp_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="2840956"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{6C15A06C-2C32-4181-85A1-E0C11A51DB3A}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{F222C6C8-BC3A-405D-8358-57EE67A8CB7A}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-LapHarp_120bpm3-4_L32M-P1M" ID="{D8C9D1DC-355B-4C0B-B2FC-435E356D1484}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{B185DE28-86EE-4854-8291-88A8AA10A7E4}" ShortID="99353460">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{1B94F819-97BD-4EE9-B54F-4AF41DF764E4}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{C5B3B690-87DA-490E-8096-89E0D5626228}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-Mandolin_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="839902908"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{32C01278-2CE2-47B1-A8B8-A81683C87A6D}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{B14C0EC7-3098-403E-A74D-43C34C61F2A2}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-Mandolin_120bpm3-4_L32M-P1M" ID="{C5B3B690-87DA-490E-8096-89E0D5626228}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{22A2592A-41A2-4CA1-8E29-D9AE6A54A67D}" ShortID="1032406395">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{84812FF9-DE73-433F-AD8D-0BD937C0755D}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{A25CCDB4-403C-4CAC-A6ED-C6430F00A322}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-A-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="507879152"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{F745AB76-810D-45E3-A65C-B0509E7B909A}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{CE2B9512-D6BB-4442-86F8-36CDDCBACE06}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-A-Uke_120bpm3-4_L32M-P1M" ID="{A25CCDB4-403C-4CAC-A6ED-C6430F00A322}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{749D209F-605E-4058-A470-2E0486EBE24C}" ShortID="225353501">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{9BA973DF-C961-4903-B789-A05638FF9653}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{FBBADFFA-5FF4-48DC-ABA3-B5336BFE79C7}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="603889769"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{22845537-4613-45D1-BA3D-5279B541D4AC}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{EBCD01ED-08D7-4908-B811-45C2F07B494B}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{FBBADFFA-5FF4-48DC-ABA3-B5336BFE79C7}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{55D4F96D-33A5-4AA2-9FF2-402AA6A548BF}" ShortID="1008292516">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{6E057B46-9E15-461F-8E10-8C741C975F07}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{32A0C247-38F8-494A-A378-AF4577C267DB}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="574514770"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{BE9E314D-C969-487E-98AD-8C6902EC0B99}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{F68545AA-9638-46A5-A4DB-B2C8A85F962D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{32A0C247-38F8-494A-A378-AF4577C267DB}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{DD38A4A7-C13B-46B3-A609-A785C0B25EA6}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{9BE11A81-3DEC-4D67-9159-27D75A498EAF}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="ExplorationForestB" ID="{E04EEFDF-1202-4665-BB78-1F8C9737CF90}" ShortID="526032636">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="52625"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-B-Bass_120bpm3-4_L32M-P0M" ID="{72C0D464-6646-44DF-B6F6-488021F4D5EE}" ShortID="473107930">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{8CD5DCA5-468D-46B7-BA91-511186F47DD1}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-Bass_120bpm3-4_L32M-P0M" ID="{84CE2D12-8822-4C61-8A24-E62D55701BEF}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="216664752"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{94607E51-9CF3-4AF9-9023-F6ABCE9ACF34}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-Bass_120bpm3-4_L32M-P0M" ID="{AF0D333C-F66F-47E6-8CD5-A7B3E452D63D}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-Bass_120bpm3-4_L32M-P0M" ID="{84CE2D12-8822-4C61-8A24-E62D55701BEF}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-B-Guitar_120bpm3-4_L32M-P0M" ID="{63CD0047-E255-42FC-9E7C-B309CA941F5A}" ShortID="860573930">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{83B5C891-872A-4544-A823-5909CCB0328B}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-Guitar_120bpm3-4_L32M-P0M" ID="{1194CBCB-FE36-4117-80F1-6F4A124E8AAF}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-Guitar_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="366304607"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{10F2C896-4F6C-4351-862D-FE9C729835DF}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-Guitar_120bpm3-4_L32M-P0M" ID="{DF487467-FF99-40B2-BB6F-9C205E6989B8}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-Guitar_120bpm3-4_L32M-P0M" ID="{1194CBCB-FE36-4117-80F1-6F4A124E8AAF}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{56F55A9B-C362-4A64-98C3-4C976F97654E}" ShortID="583301306">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{F760708B-6776-4B9F-87F4-4876E5E50134}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{A4229489-99B4-408D-8399-89D3219C2FC1}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-LapHarp_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="409711252"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{40AB6D66-4BF8-40CA-AC4E-A3D07E100082}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{A601A6D4-182C-4726-A0E6-8C5E543D27FF}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-LapHarp_120bpm3-4_L32M-P1M" ID="{A4229489-99B4-408D-8399-89D3219C2FC1}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-B-Mandolin_120bpm3-4_L32M-P0M" ID="{7882DD38-99BD-49C1-9225-B1711DA2402C}" ShortID="1003417857">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{542D8618-DBDF-4AF1-B936-BF5A4FF4C0C9}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-Mandolin_120bpm3-4_L32M-P0M" ID="{DED10084-7B6D-431B-9D1A-842AC4673A3C}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-Mandolin_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="366152929"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{BF8C3C73-748E-45CD-AF77-7A4C75968198}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-Mandolin_120bpm3-4_L32M-P0M" ID="{B7A8E83B-AB9C-4827-99C7-4E52F2421576}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-Mandolin_120bpm3-4_L32M-P0M" ID="{DED10084-7B6D-431B-9D1A-842AC4673A3C}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{2C18F7C8-A13E-4581-BE6A-D85F4FA44768}" ShortID="729959680">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{B5E6639F-1B9C-4FD5-B317-8F5776D6E8CA}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{BCAB9B87-EB96-4462-A6C2-6D64C3790214}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-B-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="974570449"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{CFBB1F3C-235D-440A-9EF5-759840B983F1}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{7263F006-B131-477F-8520-640735831E20}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-B-Uke_120bpm3-4_L32M-P1M" ID="{BCAB9B87-EB96-4462-A6C2-6D64C3790214}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{6F8E1F36-F0A3-4A5F-A298-10DD4E150277}" ShortID="310689066">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{DB919845-1B73-4DE2-9B72-E7AE5D61C0D4}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{46DC3D62-D03A-4BEA-BC16-CC3103B5DA55}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="603889769"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{6444B344-4172-47B0-B5A1-0E9BAE755EEE}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{CEA5DBFA-966E-422D-B331-4F20AFD61637}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{46DC3D62-D03A-4BEA-BC16-CC3103B5DA55}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{97427863-40A3-4C4C-8A53-93B6C0C0B05D}" ShortID="642596690">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{1B8A162B-B1C6-4767-A082-09D80A75DA2A}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{DA4CF40F-42F1-402D-9067-4285601C4F30}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="574514770"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{B46E3726-73CD-47E7-9271-D861820EAC5F}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{9D0571F2-0F1D-46E9-B9B4-075A7E517FF1}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{DA4CF40F-42F1-402D-9067-4285601C4F30}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{B347881B-4257-4137-BC14-C3D55CAAC346}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{2BF2CEAB-B771-4CA5-879D-C98CF3D70E29}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+										<MusicSegment Name="ExplorationForestC" ID="{22DA178F-C7B5-436A-93BF-984BA6CE639D}" ShortID="904793525">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="95239.0979524162"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="Forest-C-Bass_120bpm3-4_L32M-P0M" ID="{127A35A7-9230-4E14-828C-0E91DB17B3A0}" ShortID="190177734">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{E400F5AD-5A41-40B9-8CE5-20901CD805B6}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-Bass_120bpm3-4_L32M-P0M" ID="{53BED56E-8A92-4F2B-A5E7-CDE223C185D8}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-Bass_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="310169878"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{C02F657F-FC70-40F5-82D3-D317D79C49AB}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-Bass_120bpm3-4_L32M-P0M" ID="{6B8E5E44-D8DF-40EA-B09C-21FF1FAD4D57}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-Bass_120bpm3-4_L32M-P0M" ID="{53BED56E-8A92-4F2B-A5E7-CDE223C185D8}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{D7534E18-E26D-4939-A877-50A9BA138298}" ShortID="482748570">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{7E368B41-0701-4A78-B804-0EB07A745702}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{729091B4-837C-41C6-92F2-94FBFBE105A7}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-Guitar_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="465977886"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{05C3EC4D-B143-4A15-AFC0-A413D6B0BC51}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{5476AAE8-34B3-431A-A685-BD55CE56E3AE}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-Guitar_120bpm3-4_L32M-P1M" ID="{729091B4-837C-41C6-92F2-94FBFBE105A7}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{7E43C5EC-995B-4A23-970C-EC995068C20B}" ShortID="413056873">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{44B4F2BE-6E6A-472E-B994-9D471C30B0E8}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{EA80ECF7-4CBC-4549-A07D-1782E5B539D2}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-LapHarp_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="691216050"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{F9E6F90E-A628-4458-A073-5D4B3C18E935}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{8B8DA3CE-C1D8-4314-BC59-B12D5F288A18}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-LapHarp_120bpm3-4_L32M-P1M" ID="{EA80ECF7-4CBC-4549-A07D-1782E5B539D2}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{BB15FB7D-B89F-4410-A81C-752AE7F09FD2}" ShortID="360022919">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{C6B63C09-0B30-4885-BB43-7A84DA0FD010}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{8DDEC02B-40E5-494A-91F8-B3E9748EA470}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-Mandolin_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1022534605"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{04F9A0B3-DDDE-48C0-85C0-127A39427021}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{918BEFF5-9C40-4CDF-9201-FB3AEF01F8EE}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="50207.641723356"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-Mandolin_120bpm3-4_L32M-P1M" ID="{8DDEC02B-40E5-494A-91F8-B3E9748EA470}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{FCBC1BE7-883A-4000-B676-59638C07E62F}" ShortID="749961456">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{6F6E91FA-61A7-4876-AA6B-8784F916F156}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{DF8A7400-763D-4769-8969-8A23E65D5B56}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-C-Uke_120bpm3-4_L32M-P1M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="736820568"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{34247C02-37AF-4778-A84D-D603A09FCEBC}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{6C5A2C1D-A26C-429B-9543-63ABC6899DF9}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-C-Uke_120bpm3-4_L32M-P1M" ID="{DF8A7400-763D-4769-8969-8A23E65D5B56}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{1CE6DA32-73BC-4DF2-8E82-27A7BBC36A20}" ShortID="40414779">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{F423DED6-6965-4BFD-A919-1A219316B196}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{DBAE37EB-45F4-4F3D-BE7B-DCE3BF3D38C1}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Shaker_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="603889769"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{DC64EA13-412D-461F-9D0E-338FC11AE503}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{A95B6426-378E-40C1-B84C-97660132B1E4}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48721.5646258503"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Shaker_120bpm3-4_L32M-P0M" ID="{DBAE37EB-45F4-4F3D-BE7B-DCE3BF3D38C1}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{BF9EAE72-75E2-415E-9A82-682EB1838C4D}" ShortID="28908649">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{A5CD8913-8082-47D1-BEB3-3459336CE04A}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{A94AA9B9-1C55-4417-A7D6-394B039890C3}">
+															<Language>SFX</Language>
+															<AudioFile>Forest-ABC-Tambourine_120bpm3-4_L32M-P0M.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="574514770"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<Reference>
+																<Local>
+																	<MusicTrackSequence Name="" ID="{A1961D1D-240B-4414-9F28-81AFEA3088F9}">
+																		<ObjectLists>
+																			<ObjectList Name="Clips">
+																				<Reference>
+																					<Local>
+																						<MusicClip Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{850D8C07-F7DB-432B-A073-282AE8BA566F}">
+																							<PropertyList>
+																								<Property Name="EndTrimOffset" Type="Real64" Value="48000"/>
+																								<Property Name="FadeInMode" Type="int16" Value="0"/>
+																								<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																								<Property Name="PlayAt" Type="Real64" Value="1500"/>
+																							</PropertyList>
+																							<AudioSourceRef Name="Forest-ABC-Tambourine_120bpm3-4_L32M-P0M" ID="{A94AA9B9-1C55-4417-A7D6-394B039890C3}"/>
+																						</MusicClip>
+																					</Local>
+																				</Reference>
+																			</ObjectList>
+																		</ObjectLists>
+																	</MusicTrackSequence>
+																</Local>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<Reference>
+														<Local>
+															<MusicCue Name="Entry Cue" ID="{D094A75A-DE3D-4C0D-AF61-8A643F16B396}">
+																<PropertyList>
+																	<Property Name="TimeMs" Type="Real64" Value="1500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<MusicCue Name="Exit Cue" ID="{88BE2EF4-2ED1-4E08-906B-1569A7531EFD}">
+																<PropertyList>
+																	<Property Name="CueType" Type="int16" Value="1"/>
+																	<Property Name="TimeMs" Type="Real64" Value="49500"/>
+																</PropertyList>
+															</MusicCue>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
+									</ChildrenList>
+								</MusicPlaylistContainer>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Arguments">
+									<Reference>
+										<ObjectRef Name="Forest" ID="{F2F915B6-4F13-45EE-A827-47BF546E71E5}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+									</Reference>
+								</ObjectList>
+								<ObjectList Name="Entries">
+									<Reference>
+										<Local>
+											<MultiSwitchEntry Name="" ID="{EB6D556E-C6D1-44C3-9AD5-26101347B6B1}">
+												<ReferenceList>
+													<Reference Name="AudioNode">
+														<ObjectRef Name="Combat" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+													</Reference>
+												</ReferenceList>
+												<ObjectLists>
+													<ObjectList Name="EntryPath">
+														<Reference>
+															<ObjectRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+														</Reference>
+													</ObjectList>
+												</ObjectLists>
+											</MultiSwitchEntry>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MultiSwitchEntry Name="" ID="{3EB67C11-9C5F-4148-9FAC-719670ADC8E1}">
+												<ReferenceList>
+													<Reference Name="AudioNode">
+														<ObjectRef Name="Exploration" ID="{79FE23E6-F7D9-4B3B-8652-24E9EA6F3D7B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+													</Reference>
+												</ReferenceList>
+												<ObjectLists>
+													<ObjectList Name="EntryPath">
+														<Reference>
+															<ObjectRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+														</Reference>
+													</ObjectList>
+												</ObjectLists>
+											</MultiSwitchEntry>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSwitchContainer>
 					</ChildrenList>
 					<ObjectLists>
 						<ObjectList Name="Arguments">
@@ -2974,7 +6329,7 @@
 									<MultiSwitchEntry Name="" ID="{ED1D2B31-1721-474A-965E-C840C680B88D}">
 										<ReferenceList>
 											<Reference Name="AudioNode">
-												<ObjectRef Name="Forest" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+												<ObjectRef Name="Forest" ID="{6C89AEED-B866-4445-9C23-BDA149D39DB9}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 											</Reference>
 										</ReferenceList>
 										<ObjectLists>

@@ -642,16 +642,6 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
-								<Action Name="" ID="{08388CF2-8DFC-420D-A7A3-6B835A6FEE5E}" ShortID="697880057">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="16"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Forest" ID="{1B2E10A7-4E37-4280-9AEA-0F3A668F9278}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
 								<Action Name="" ID="{FDD46977-9DF1-4C7D-A795-2440FE6B8112}" ShortID="199883793">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="22"/>
@@ -662,10 +652,48 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{0BBB9126-48B2-4BDB-A365-F891D487BAF2}" ShortID="247735214">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="23"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 								<Action Name="" ID="{75E964AA-6F84-4391-9BB7-FEB3EBCB1524}" ShortID="719271363">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Area" ID="{677DC3BB-0D84-4604-8506-BDDED27AEBF0}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+											<ObjectRef Name="Forest" ID="{6C89AEED-B866-4445-9C23-BDA149D39DB9}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterCombat" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}">
+							<ChildrenList>
+								<Action Name="" ID="{E32F9676-417A-4D9D-B59F-CAD100B13B50}" ShortID="1016552363">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="23"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EndCombat" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}">
+							<ChildrenList>
+								<Action Name="" ID="{0166F15C-982E-4F5C-8447-0400529255E8}" ShortID="9297226">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="23"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

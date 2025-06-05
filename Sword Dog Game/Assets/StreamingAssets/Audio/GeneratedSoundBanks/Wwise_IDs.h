@@ -15,9 +15,11 @@ namespace AK
     {
         static const AkUniqueID DEFEATBOSS = 2214005863U;
         static const AkUniqueID DIE = 445985469U;
+        static const AkUniqueID ENDCOMBAT = 2627423420U;
         static const AkUniqueID ENDNPC = 3630201441U;
         static const AkUniqueID ENTERBLACKSMITH = 3862063455U;
         static const AkUniqueID ENTERCAVES = 1967729093U;
+        static const AkUniqueID ENTERCOMBAT = 2334212825U;
         static const AkUniqueID ENTERDESERTCAVES = 2331186804U;
         static const AkUniqueID ENTERDOJO = 2407129755U;
         static const AkUniqueID ENTERFOREST = 2024283954U;
@@ -87,6 +89,17 @@ namespace AK
 
     namespace SWITCHES
     {
+        namespace FOREST
+        {
+            static const AkUniqueID GROUP = 491961918U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID COMBAT = 2764240573U;
+                static const AkUniqueID EXPLORATION = 2582085496U;
+            } // namespace SWITCH
+        } // namespace FOREST
+
         namespace PROLOGUE
         {
             static const AkUniqueID GROUP = 4203473902U;
