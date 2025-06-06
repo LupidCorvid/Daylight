@@ -54,7 +54,7 @@ public class BugShroomAI : BaseAI
                 movement.NotMoving();
                 if (target != null && Vector2.Distance(transform.position, target.position) > stopRange)
                 {
-                    if (targetEntity is Player)
+                    if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
                     {
                         AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
                     }
@@ -94,7 +94,7 @@ public class BugShroomAI : BaseAI
     public void Attack()
     {
         state = AIState.attacking;
-        if (targetEntity is Player)
+        if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
         {
             AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
         }

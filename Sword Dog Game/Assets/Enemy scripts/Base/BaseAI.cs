@@ -216,7 +216,7 @@ public class BaseAI
     public virtual void FoundTarget(Entity newTarget)
     {
         targetEntity = newTarget;
-        if (newTarget is Player)
+        if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
             playerCombatCounter++;
     }
 

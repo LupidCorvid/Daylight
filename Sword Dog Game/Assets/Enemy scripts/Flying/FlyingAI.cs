@@ -91,7 +91,7 @@ public class FlyingAI : BaseAI
         {
             case states.idle:
                 // TODO more here
-                if (targetEntity is Player)
+                if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
                 {
                     AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
                 }
@@ -123,7 +123,7 @@ public class FlyingAI : BaseAI
                 }
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_sitToFly"))
                 {
-                    if (targetEntity is Player)
+                    if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
                     {
                         AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
                     }
