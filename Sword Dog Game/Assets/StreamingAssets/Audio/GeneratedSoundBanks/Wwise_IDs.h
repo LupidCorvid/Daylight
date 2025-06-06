@@ -25,6 +25,7 @@ namespace AK
         static const AkUniqueID ENTERHOUSE = 3190755319U;
         static const AkUniqueID ENTERINTERIOR = 176800609U;
         static const AkUniqueID ENTERMEDIC = 3549296221U;
+        static const AkUniqueID ENTERMEDICINSTANT = 3816747828U;
         static const AkUniqueID ENTERMOUNTAINCAVES = 1067397042U;
         static const AkUniqueID ENTERMOUNTAINS = 2342301127U;
         static const AkUniqueID ENTEROCEAN = 3252024581U;

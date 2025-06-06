@@ -211,6 +211,16 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{7787E1EB-96BD-4998-A22C-953B5F1AB5F2}" ShortID="205773285">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="16"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Town" ID="{075DE43C-5AFB-4EFD-BF02-F1DAF01BCB0B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 						<Action Name="" ID="{5838732F-A422-444F-9045-F8B09C512B76}" ShortID="969942226">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="22"/>
@@ -419,16 +429,6 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
-								<Action Name="" ID="{7787E1EB-96BD-4998-A22C-953B5F1AB5F2}" ShortID="205773285">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="16"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Town" ID="{075DE43C-5AFB-4EFD-BF02-F1DAF01BCB0B}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
 								<Action Name="" ID="{F6859AE4-D002-4355-BEB8-A3B12643231C}" ShortID="795037925">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="22"/>
@@ -491,6 +491,42 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="ExitDojo" ID="{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterMedicInstant" ID="{E2D1851F-C387-4186-A65A-B7059FAEB23E}">
+							<ChildrenList>
+								<Action Name="" ID="{29BC888F-7C45-45EF-8946-8691D4F76D26}" ShortID="837954385">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MortarAndPestle_120bpm4-4_L72M-P0M" ID="{D6FBC048-0A0D-4F75-B042-BDCF314A0D94}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{1CD25DBB-E918-47FC-ADAC-6140C761CF64}" ShortID="381446696">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-HandDrums_120bpm4-4_L72M-P0M" ID="{1C2E77AB-640E-4AFE-AD3D-1EE086383FDC}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{1D241F01-332C-4EBB-BB47-3D3F54117D16}" ShortID="392920861">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="Volume" Type="Real64" Value="-200"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Town-MandolinSolo_120bpm4-4_L72M-P0_25M" ID="{879AE866-E5D3-4EEF-98DA-7DCF52F55940}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
