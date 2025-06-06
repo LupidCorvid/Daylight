@@ -20,7 +20,7 @@
 								<Property Name="Max" Type="Real64" Value="101"/>
 								<Property Name="Min" Type="Real64" Value="-1"/>
 								<Property Name="RTPCRamping" Type="int16" Value="1"/>
-								<Property Name="SlewRateDown" Type="Real64" Value="1000"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="600"/>
 								<Property Name="SlewRateUp" Type="Real64" Value="1000"/>
 							</PropertyList>
 						</GameParameter>
@@ -51,6 +51,16 @@
 								<Property Name="RTPCRamping" Type="int16" Value="1"/>
 								<Property Name="SlewRateDown" Type="Real64" Value="10"/>
 								<Property Name="SlewRateUp" Type="Real64" Value="10"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="DojoBlacksmith" ID="{5FFC0E73-FB92-47F2-9836-B59C1E4E131C}"/>
+						<GameParameter Name="PrologueBoss" ID="{A6E9894E-8BA4-4868-A13A-09744231E539}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="Max" Type="Real64" Value="1"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="1"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="1"/>
 							</PropertyList>
 						</GameParameter>
 					</ChildrenList>

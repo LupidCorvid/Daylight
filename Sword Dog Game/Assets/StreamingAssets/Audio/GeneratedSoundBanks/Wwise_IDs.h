@@ -102,7 +102,7 @@ namespace AK
             namespace SWITCH
             {
                 static const AkUniqueID COMBAT = 2764240573U;
-                static const AkUniqueID EXPLORATION = 2582085496U;
+                static const AkUniqueID EXPLORE = 579523862U;
             } // namespace SWITCH
         } // namespace FOREST
 
@@ -122,11 +122,13 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID AMBIENCE = 85412153U;
+        static const AkUniqueID DOJOBLACKSMITH = 252532453U;
         static const AkUniqueID ENEMYAWARE = 3963624107U;
         static const AkUniqueID HEALTH = 3677180323U;
         static const AkUniqueID HEIGHT = 1279776192U;
         static const AkUniqueID INTERIOR = 1132214669U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
+        static const AkUniqueID PROLOGUEBOSS = 3371825121U;
         static const AkUniqueID PROLOGUEPHASE = 2827251531U;
         static const AkUniqueID SFXVOLUME = 988953028U;
     } // namespace GAME_PARAMETERS
