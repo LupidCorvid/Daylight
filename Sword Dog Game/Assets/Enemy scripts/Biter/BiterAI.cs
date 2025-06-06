@@ -60,6 +60,10 @@ public class BiterAI : BaseAI
             case AIStates.idle:
                 if (target != null && Mathf.Abs(target.position.x - transform.position.x) > stopRange)
                 {
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = AIStates.pursuit;
                 }
                 else
@@ -97,6 +101,10 @@ public class BiterAI : BaseAI
 
                 if (Time.time > lastAttack + attackCooldown && !waitingOnChance && !(targetEntity.attacking && Vector2.Dot(enemyBase.facingDir, targetEntity.facingDir) < 0))
                 {
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = AIStates.pursuit;
                     if(Random.Range(0f, 1f) > .25f)
                         waitingOnChance = true;
