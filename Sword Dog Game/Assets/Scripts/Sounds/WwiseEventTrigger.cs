@@ -45,7 +45,7 @@ public class WwiseEventTrigger : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (!KillOnActivate && other.CompareTag("Player") && ExitEvent != null && !CutsceneController.inCutscene)
+        if (!KillOnActivate && other.CompareTag("Player") && other is PolygonCollider2D && ExitEvent != null && !CutsceneController.inCutscene)
         {
             if (CheckState == "" || CheckStateValue == null)
             {

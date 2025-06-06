@@ -33,6 +33,7 @@ namespace AK
         static const AkUniqueID ENTERTUTORIAL = 1763353983U;
         static const AkUniqueID EXITAMBIENCE = 2442109625U;
         static const AkUniqueID EXITBLACKSMITH = 2009297027U;
+        static const AkUniqueID EXITBLACKSMITHDOJO = 1790250137U;
         static const AkUniqueID EXITDOJO = 3270207375U;
         static const AkUniqueID EXITHOUSE = 3795427123U;
         static const AkUniqueID EXITINTERIOR = 3488912141U;

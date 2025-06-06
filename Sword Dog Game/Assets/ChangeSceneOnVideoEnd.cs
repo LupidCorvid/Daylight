@@ -19,6 +19,7 @@ public class ChangeSceneOnVideoEnd : MonoBehaviour
 
     void VideoStarted(VideoPlayer source)
     {
+        videoPlayer.started -= VideoStarted;
         music?.Post(AudioManager.WwiseGlobal);
     }
 

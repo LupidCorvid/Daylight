@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{E5BD8AEF-AF55-406E-9D45-A58356DE14B2}",
     "Language": "SFX",
-    "Hash": "{737BD99E-1B9B-9638-8130-F837BDC858BC}",
+    "Hash": "{9234E45C-E577-56B8-B50D-DA55D069D134}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main",
     "ShortName": "Main",
     "Path": "Main.bnk",
@@ -5457,6 +5457,30 @@
       "DurationMax": "0"
      },
      {
+      "Id": "1790250137",
+      "Name": "ExitBlacksmithDojo",
+      "ObjectPath": "\\Events\\Music\\Town\\ExitBlacksmithDojo",
+      "GUID": "{6C194D70-7810-482A-B056-BA878F8E5FED}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionPostEvent": [
+       {
+        "Id": "2009297027",
+        "Name": "ExitBlacksmith",
+        "ObjectPath": "\\Events\\Music\\Town\\ExitBlacksmith",
+        "GUID": "{E7E64663-6AE9-48D4-8840-47A095975635}"
+       },
+       {
+        "Id": "3270207375",
+        "Name": "ExitDojo",
+        "ObjectPath": "\\Events\\Music\\Town\\ExitDojo",
+        "GUID": "{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}"
+       }
+      ]
+     },
+     {
       "Id": "3270207375",
       "Name": "ExitDojo",
       "ObjectPath": "\\Events\\Music\\Town\\ExitDojo",
@@ -7544,6 +7568,6 @@
     ]
    }
   ],
-  "FileHash": "{8FE3AFB3-187A-BF0F-1DA7-318272EA895A}"
+  "FileHash": "{989BC4C4-88EA-C74A-D1E4-964E8F5CE8C7}"
  }
 }

@@ -472,6 +472,30 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="ExitBlacksmithDojo" ID="{6C194D70-7810-482A-B056-BA878F8E5FED}">
+							<ChildrenList>
+								<Action Name="" ID="{FC8DA267-5B25-4FC9-8426-C574455E2256}" ShortID="334065867">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="41"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ExitBlacksmith" ID="{E7E64663-6AE9-48D4-8840-47A095975635}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{9E2D97E7-ACE1-4819-B0EB-AD40DFE37DC1}" ShortID="210057438">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="41"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ExitDojo" ID="{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Event Name="EndNPC" ID="{7F4653B6-B23A-416C-938C-238C6F1CFB06}">

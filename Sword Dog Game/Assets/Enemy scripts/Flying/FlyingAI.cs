@@ -95,6 +95,7 @@ public class FlyingAI : BaseAI
                 {
                     AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
                 }
+                anim.SetBool("Sitting", false);
                 state = states.pursuit;
                 break;
             case states.sitting:
