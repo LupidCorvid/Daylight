@@ -575,6 +575,7 @@
 								<Property Name="FadeInCurve" Type="int16" Value="0"/>
 								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
 								<Property Name="Lowpass" Type="int16" Value="70"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
@@ -588,6 +589,7 @@
 								<Property Name="FadeInCurve" Type="int16" Value="0"/>
 								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
 								<Property Name="Lowpass" Type="int16" Value="70"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
@@ -607,6 +609,7 @@
 								<Property Name="ActionType" Type="int16" Value="26"/>
 								<Property Name="Delay" Type="Real64" Value="1"/>
 								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
@@ -619,6 +622,7 @@
 								<Property Name="ActionType" Type="int16" Value="26"/>
 								<Property Name="Delay" Type="Real64" Value="1"/>
 								<Property Name="FadeTime" Type="Real64" Value="0.75"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
@@ -671,29 +675,59 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="EnterCombat" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}">
+						<Event Name="MonstersAware" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}">
 							<ChildrenList>
 								<Action Name="" ID="{E32F9676-417A-4D9D-B59F-CAD100B13B50}" ShortID="1016552363">
 									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="23"/>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="100"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+											<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="EndCombat" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}">
+						<Event Name="MonstersUnaware" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}">
 							<ChildrenList>
 								<Action Name="" ID="{0166F15C-982E-4F5C-8447-0400529255E8}" ShortID="9297226">
 									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="23"/>
+										<Property Name="ActionType" Type="int16" Value="38"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}" WorkUnitID="{1F906D38-CA6D-4267-B5DC-B2BEAD81AB16}"/>
+											<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}">
+							<ChildrenList>
+								<Action Name="" ID="{CE03FF5F-239C-4B60-9B96-ADA777E1063E}" ShortID="72637807">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="100"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ExitInterior" ID="{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}">
+							<ChildrenList>
+								<Action Name="" ID="{207838CE-C84C-46D2-A212-9D12F5790FBF}" ShortID="700548637">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -713,10 +747,35 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{1F1C6466-D812-4C0B-81F5-2CF2A2B4301F}" ShortID="738619632">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+								<Property Name="BypassGameParameterInternalTransition" Type="bool" Value="True"/>
+								<Property Name="Delay" Type="Real64" Value="1.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 						<Action Name="" ID="{2157E672-F6A5-4B0B-B794-2135E2408A43}" ShortID="800043834">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{03F20385-55A9-4B17-A710-92B7494295A8}" ShortID="675924763">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="26"/>
+								<Property Name="Delay" Type="Real64" Value="1.5"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">

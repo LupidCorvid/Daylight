@@ -10,10 +10,38 @@
 					</ChildrenList>
 				</SwitchGroup>
 				<SwitchGroup Name="Forest" ID="{F2F915B6-4F13-45EE-A827-47BF546E71E5}">
+					<PropertyList>
+						<Property Name="UseGameParameter" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
 						<Switch Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}"/>
 						<Switch Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}"/>
 					</ChildrenList>
+					<SwitchOnRTPC>
+						<GameParameterRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"/>
+						<Curve Name="" ID="{F80BECC3-1879-4FF0-A6D7-D5CFD071B8C1}">
+							<PropertyList>
+								<Property Name="Flags" Type="int32" Value="65537"/>
+							</PropertyList>
+							<PointList>
+								<Point>
+									<XPos>-1</XPos>
+									<YPos>1</YPos>
+									<Flags>5</Flags>
+								</Point>
+								<Point>
+									<XPos>50</XPos>
+									<YPos>2</YPos>
+									<Flags>0</Flags>
+								</Point>
+								<Point>
+									<XPos>101</XPos>
+									<YPos>2</YPos>
+									<Flags>37</Flags>
+								</Point>
+							</PointList>
+						</Curve>
+					</SwitchOnRTPC>
 				</SwitchGroup>
 			</ChildrenList>
 		</WorkUnit>

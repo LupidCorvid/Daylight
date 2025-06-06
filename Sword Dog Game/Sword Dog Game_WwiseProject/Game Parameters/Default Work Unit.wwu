@@ -3,25 +3,64 @@
 	<GameParameters>
 		<WorkUnit Name="Default Work Unit" ID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}" PersistMode="Standalone">
 			<ChildrenList>
-				<GameParameter Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="0"/>
-						<Property Name="Max" Type="Real64" Value="5"/>
-						<Property Name="RTPCRamping" Type="int16" Value="1"/>
-						<Property Name="SlewRateDown" Type="Real64" Value="1"/>
-						<Property Name="SlewRateUp" Type="Real64" Value="1"/>
-					</PropertyList>
-				</GameParameter>
-				<GameParameter Name="MusicVolume" ID="{9D496F38-CADF-498D-8F22-D6AEC2DC686D}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="0"/>
-					</PropertyList>
-				</GameParameter>
-				<GameParameter Name="SFXVolume" ID="{D20E2E34-BE3B-4203-B5D7-01603254E83A}">
-					<PropertyList>
-						<Property Name="InitialValue" Type="Real64" Value="0"/>
-					</PropertyList>
-				</GameParameter>
+				<Folder Name="GameArea" ID="{F9F51024-2900-430F-BE0F-95EDC9D9FBA9}" ShortID="655980587">
+					<ChildrenList>
+						<GameParameter Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="Max" Type="Real64" Value="5"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="1"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="1"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="Max" Type="Real64" Value="101"/>
+								<Property Name="Min" Type="Real64" Value="-1"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="30"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="1000"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="20"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="100"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="20"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="20"/>
+							</PropertyList>
+						</GameParameter>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Global" ID="{409190D7-25D6-411D-BA82-A043089F72F3}" ShortID="37359763">
+					<ChildrenList>
+						<GameParameter Name="MusicVolume" ID="{9D496F38-CADF-498D-8F22-D6AEC2DC686D}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="SFXVolume" ID="{D20E2E34-BE3B-4203-B5D7-01603254E83A}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="0"/>
+							</PropertyList>
+						</GameParameter>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

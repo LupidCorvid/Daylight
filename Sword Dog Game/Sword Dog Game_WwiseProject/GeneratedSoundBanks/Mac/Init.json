@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{5C7A07D3-A9FC-6BBD-634C-594A3F25F2E9}",
+    "Hash": "{AC80DD2E-D501-3FC7-9B3B-1F1733DE7A22}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -95,6 +95,12 @@
       "Name": "ProloguePhase",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\ProloguePhase",
       "GUID": "{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}"
+     },
+     {
+      "Id": "3963624107",
+      "Name": "EnemyAware",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\EnemyAware",
+      "GUID": "{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"
      }
     ],
     "StateGroups": [
@@ -199,6 +205,9 @@
       "Name": "Forest",
       "ObjectPath": "\\Switches\\Default Work Unit\\Forest",
       "GUID": "{F2F915B6-4F13-45EE-A827-47BF546E71E5}",
+      "GameParameterRef": {
+       "Id": "3963624107"
+      },
       "Switches": [
        {
         "Id": "2582085496",
@@ -237,6 +246,6 @@
     ]
    }
   ],
-  "FileHash": "{42D7E428-296E-2A01-CDCC-263B0F231B30}"
+  "FileHash": "{D98E69DD-2F21-AA54-C29B-8BE9D58AF579}"
  }
 }

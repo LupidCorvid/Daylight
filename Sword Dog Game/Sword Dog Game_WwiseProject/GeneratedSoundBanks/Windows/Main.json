@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{E5BD8AEF-AF55-406E-9D45-A58356DE14B2}",
     "Language": "SFX",
-    "Hash": "{8976BE91-7771-6943-000C-B9B66F3D28D7}",
+    "Hash": "{B2030EC8-DF93-7197-A32A-9153D12A996F}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main",
     "ShortName": "Main",
     "Path": "Main.bnk",
@@ -629,25 +629,6 @@
         "Name": "Hurt",
         "ObjectPath": "\\Events\\Music\\Hurt",
         "GUID": "{3937B190-A091-490F-84AC-2F2CD47814D9}"
-       }
-      ]
-     },
-     {
-      "Id": "2627423420",
-      "Name": "EndCombat",
-      "ObjectPath": "\\Events\\Music\\Forest\\EndCombat",
-      "GUID": "{103B03E5-A708-412B-9054-6F96C154F5F1}",
-      "MaxAttenuation": "0",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0",
-      "ActionSetSwitch": [
-       {
-        "GroupId": "491961918",
-        "Id": "2582085496",
-        "Name": "Exploration",
-        "ObjectPath": "\\Switches\\Default Work Unit\\Forest\\Exploration",
-        "GUID": "{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}"
        }
       ]
      },
@@ -1856,25 +1837,6 @@
         "Name": "Caves",
         "ObjectPath": "\\States\\Music\\Area\\Caves",
         "GUID": "{604CA339-FB15-45E7-974F-49BCDDD0CD77}"
-       }
-      ]
-     },
-     {
-      "Id": "2334212825",
-      "Name": "EnterCombat",
-      "ObjectPath": "\\Events\\Music\\Forest\\EnterCombat",
-      "GUID": "{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}",
-      "MaxAttenuation": "0",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0",
-      "ActionSetSwitch": [
-       {
-        "GroupId": "491961918",
-        "Id": "2764240573",
-        "Name": "Combat",
-        "ObjectPath": "\\Switches\\Default Work Unit\\Forest\\Combat",
-        "GUID": "{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}"
        }
       ]
      },
@@ -5712,6 +5674,26 @@
       ]
      },
      {
+      "Id": "2526784182",
+      "Name": "MonstersAware",
+      "ObjectPath": "\\Events\\Music\\Forest\\MonstersAware",
+      "GUID": "{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3272068613",
+      "Name": "MonstersUnaware",
+      "ObjectPath": "\\Events\\Music\\Forest\\MonstersUnaware",
+      "GUID": "{103B03E5-A708-412B-9054-6F96C154F5F1}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "513969863",
       "Name": "NextPhase",
       "ObjectPath": "\\Events\\Music\\Prologue\\NextPhase",
@@ -7167,6 +7149,12 @@
       "Name": "ProloguePhase",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\ProloguePhase",
       "GUID": "{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}"
+     },
+     {
+      "Id": "3963624107",
+      "Name": "EnemyAware",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\EnemyAware",
+      "GUID": "{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"
      }
     ],
     "StateGroups": [
@@ -7271,6 +7259,9 @@
       "Name": "Forest",
       "ObjectPath": "\\Switches\\Default Work Unit\\Forest",
       "GUID": "{F2F915B6-4F13-45EE-A827-47BF546E71E5}",
+      "GameParameterRef": {
+       "Id": "3963624107"
+      },
       "Switches": [
        {
         "Id": "2582085496",
@@ -7309,6 +7300,6 @@
     ]
    }
   ],
-  "FileHash": "{65188FB5-D4DA-103B-AB99-1F8378071BD3}"
+  "FileHash": "{B2EB0B99-1826-9798-7845-15878C68D217}"
  }
 }

@@ -15,11 +15,9 @@ namespace AK
     {
         static const AkUniqueID DEFEATBOSS = 2214005863U;
         static const AkUniqueID DIE = 445985469U;
-        static const AkUniqueID ENDCOMBAT = 2627423420U;
         static const AkUniqueID ENDNPC = 3630201441U;
         static const AkUniqueID ENTERBLACKSMITH = 3862063455U;
         static const AkUniqueID ENTERCAVES = 1967729093U;
-        static const AkUniqueID ENTERCOMBAT = 2334212825U;
         static const AkUniqueID ENTERDESERTCAVES = 2331186804U;
         static const AkUniqueID ENTERDOJO = 2407129755U;
         static const AkUniqueID ENTERFOREST = 2024283954U;
@@ -40,6 +38,8 @@ namespace AK
         static const AkUniqueID FIRSTTALKRICKEN = 3096686399U;
         static const AkUniqueID HURT = 3193947170U;
         static const AkUniqueID LEAVEAREA = 1553760757U;
+        static const AkUniqueID MONSTERSAWARE = 2526784182U;
+        static const AkUniqueID MONSTERSUNAWARE = 3272068613U;
         static const AkUniqueID NEXTPHASE = 513969863U;
         static const AkUniqueID PAUSE = 3092587493U;
         static const AkUniqueID PLAYAREA = 1670305508U;
@@ -115,6 +115,7 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID ENEMYAWARE = 3963624107U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID PROLOGUEPHASE = 2827251531U;
         static const AkUniqueID SFXVOLUME = 988953028U;
