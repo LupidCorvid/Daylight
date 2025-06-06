@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{E5BD8AEF-AF55-406E-9D45-A58356DE14B2}",
     "Language": "SFX",
-    "Hash": "{261F7FC6-C8DC-0AC3-8938-8A837556D6D5}",
+    "Hash": "{737BD99E-1B9B-9638-8130-F837BDC858BC}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main",
     "ShortName": "Main",
     "Path": "Main.bnk",
@@ -1273,6 +1273,16 @@
         "GUID": "{FECB5516-BED1-46B2-9AA9-99B58CC226D2}"
        }
       ]
+     },
+     {
+      "Id": "1656162925",
+      "Name": "EnterAmbience",
+      "ObjectPath": "\\Events\\Music\\EnterAmbience",
+      "GUID": "{FDF994FD-52B7-4BFF-AB25-E8892564DF0C}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "3862063455",
@@ -2929,7 +2939,7 @@
      {
       "Id": "176800609",
       "Name": "EnterInterior",
-      "ObjectPath": "\\Events\\Music\\Forest\\EnterInterior",
+      "ObjectPath": "\\Events\\Music\\EnterInterior",
       "GUID": "{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
@@ -5427,6 +5437,16 @@
       ]
      },
      {
+      "Id": "2442109625",
+      "Name": "ExitAmbience",
+      "ObjectPath": "\\Events\\Music\\ExitAmbience",
+      "GUID": "{EE882445-C481-450E-854E-4A40BFB1B6BD}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2009297027",
       "Name": "ExitBlacksmith",
       "ObjectPath": "\\Events\\Music\\Town\\ExitBlacksmith",
@@ -5459,7 +5479,7 @@
      {
       "Id": "3488912141",
       "Name": "ExitInterior",
-      "ObjectPath": "\\Events\\Music\\Forest\\ExitInterior",
+      "ObjectPath": "\\Events\\Music\\ExitInterior",
       "GUID": "{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
@@ -5840,7 +5860,7 @@
      {
       "Id": "2526784182",
       "Name": "MonstersAware",
-      "ObjectPath": "\\Events\\Music\\Forest\\MonstersAware",
+      "ObjectPath": "\\Events\\Music\\MonstersAware",
       "GUID": "{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
@@ -5850,7 +5870,7 @@
      {
       "Id": "3272068613",
       "Name": "MonstersUnaware",
-      "ObjectPath": "\\Events\\Music\\Forest\\MonstersUnaware",
+      "ObjectPath": "\\Events\\Music\\MonstersUnaware",
       "GUID": "{103B03E5-A708-412B-9054-6F96C154F5F1}",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
@@ -7524,6 +7544,6 @@
     ]
    }
   ],
-  "FileHash": "{7D215BB8-9A70-6640-A8CB-043B4251FDE1}"
+  "FileHash": "{8FE3AFB3-187A-BF0F-1DA7-318272EA895A}"
  }
 }

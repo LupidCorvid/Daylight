@@ -565,6 +565,36 @@
 							</PropertyList>
 							<ReferenceList/>
 						</Action>
+						<Action Name="" ID="{4A2747EF-85DA-4B7D-97D9-8C8F344DB27C}" ShortID="1063672774">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="39"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{49E796D0-7E64-4020-B82B-3E64471BB9A2}" ShortID="450055902">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="39"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{09A1D65B-A4A0-406F-B71C-AD3A65EC4C1E}" ShortID="834558766">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="39"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Hurt" ID="{3937B190-A091-490F-84AC-2F2CD47814D9}">
@@ -659,6 +689,11 @@
 								<Action Name="" ID="{B3FDE9EE-83E2-4E0C-9D20-B0410BBAA54E}" ShortID="42172115">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="39"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -669,6 +704,11 @@
 								<Action Name="" ID="{7B37DD13-DCAF-4118-B052-29FF7138A2B8}" ShortID="709850522">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="39"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -679,6 +719,11 @@
 								<Action Name="" ID="{86A8F3FA-BABE-4C19-8062-41AB67403507}" ShortID="972750606">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="39"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -689,6 +734,11 @@
 								<Action Name="" ID="{754A37A6-08A4-454F-9167-C4D27C1490D7}" ShortID="881694792">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="39"/>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -700,64 +750,6 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Forest" ID="{6C89AEED-B866-4445-9C23-BDA149D39DB9}" WorkUnitID="{AE9A071A-1554-4D13-96C7-9666499B8454}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="MonstersAware" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}">
-							<ChildrenList>
-								<Action Name="" ID="{E32F9676-417A-4D9D-B59F-CAD100B13B50}" ShortID="1016552363">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-										<Property Name="GameParameterValue" Type="Real64" Value="100"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="MonstersUnaware" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}">
-							<ChildrenList>
-								<Action Name="" ID="{0166F15C-982E-4F5C-8447-0400529255E8}" ShortID="9297226">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}">
-							<ChildrenList>
-								<Action Name="" ID="{CE03FF5F-239C-4B60-9B96-ADA777E1063E}" ShortID="72637807">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-										<Property Name="GameParameterValue" Type="Real64" Value="100"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="ExitInterior" ID="{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}">
-							<ChildrenList>
-								<Action Name="" ID="{207838CE-C84C-46D2-A212-9D12F5790FBF}" ShortID="700548637">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="38"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -1040,6 +1032,93 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="ExitInterior" ID="{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}">
+					<ChildrenList>
+						<Action Name="" ID="{207838CE-C84C-46D2-A212-9D12F5790FBF}" ShortID="700548637">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}">
+					<ChildrenList>
+						<Action Name="" ID="{CE03FF5F-239C-4B60-9B96-ADA777E1063E}" ShortID="72637807">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+								<Property Name="GameParameterValue" Type="Real64" Value="100"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ExitAmbience" ID="{EE882445-C481-450E-854E-4A40BFB1B6BD}">
+					<ChildrenList>
+						<Action Name="" ID="{167F1A5C-39B8-4F3E-8C7F-EC2C92F936BB}" ShortID="434369151">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnterAmbience" ID="{FDF994FD-52B7-4BFF-AB25-E8892564DF0C}">
+					<ChildrenList>
+						<Action Name="" ID="{8384646C-B0E7-447D-B3B4-C3F8D1F39171}" ShortID="327390101">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+								<Property Name="GameParameterValue" Type="Real64" Value="100"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="MonstersAware" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}">
+					<ChildrenList>
+						<Action Name="" ID="{E32F9676-417A-4D9D-B59F-CAD100B13B50}" ShortID="1016552363">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+								<Property Name="GameParameterValue" Type="Real64" Value="100"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="MonstersUnaware" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}">
+					<ChildrenList>
+						<Action Name="" ID="{0166F15C-982E-4F5C-8447-0400529255E8}" ShortID="9297226">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}" WorkUnitID="{DA9E4C88-DA6C-40E8-83F4-00CE3A896032}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -16,6 +16,7 @@ namespace AK
         static const AkUniqueID DEFEATBOSS = 2214005863U;
         static const AkUniqueID DIE = 445985469U;
         static const AkUniqueID ENDNPC = 3630201441U;
+        static const AkUniqueID ENTERAMBIENCE = 1656162925U;
         static const AkUniqueID ENTERBLACKSMITH = 3862063455U;
         static const AkUniqueID ENTERCAVES = 1967729093U;
         static const AkUniqueID ENTERDESERTCAVES = 2331186804U;
@@ -30,6 +31,7 @@ namespace AK
         static const AkUniqueID ENTERSHOP = 1104863757U;
         static const AkUniqueID ENTERTOWN = 1143074605U;
         static const AkUniqueID ENTERTUTORIAL = 1763353983U;
+        static const AkUniqueID EXITAMBIENCE = 2442109625U;
         static const AkUniqueID EXITBLACKSMITH = 2009297027U;
         static const AkUniqueID EXITDOJO = 3270207375U;
         static const AkUniqueID EXITHOUSE = 3795427123U;

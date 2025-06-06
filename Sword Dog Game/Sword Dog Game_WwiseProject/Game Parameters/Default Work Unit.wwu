@@ -27,6 +27,7 @@
 						<GameParameter Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}">
 							<PropertyList>
 								<Property Name="InitialValue" Type="Real64" Value="0"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
 							</PropertyList>
 						</GameParameter>
 						<GameParameter Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}">
@@ -42,13 +43,16 @@
 								<Property Name="InitialValue" Type="Real64" Value="0"/>
 								<Property Name="RTPCRamping" Type="int16" Value="1"/>
 								<Property Name="SlewRateDown" Type="Real64" Value="20"/>
-								<Property Name="SlewRateUp" Type="Real64" Value="20"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="100"/>
 							</PropertyList>
 						</GameParameter>
 						<GameParameter Name="Health" ID="{E5A1D388-71EB-42A5-8158-06375573F942}">
 							<PropertyList>
 								<Property Name="InitialValue" Type="Real64" Value="8"/>
 								<Property Name="Max" Type="Real64" Value="8"/>
+								<Property Name="RTPCRamping" Type="int16" Value="1"/>
+								<Property Name="SlewRateDown" Type="Real64" Value="10"/>
+								<Property Name="SlewRateUp" Type="Real64" Value="10"/>
 							</PropertyList>
 						</GameParameter>
 					</ChildrenList>
