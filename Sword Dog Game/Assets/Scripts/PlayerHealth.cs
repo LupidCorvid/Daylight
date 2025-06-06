@@ -83,7 +83,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateHealth(bool damage = true)
     {
+        AkUnitySoundEngine.SetRTPCValue("Health", health);
         int temp = health;
+
         if (CanvasManager.hearts == null)
             return;
 
