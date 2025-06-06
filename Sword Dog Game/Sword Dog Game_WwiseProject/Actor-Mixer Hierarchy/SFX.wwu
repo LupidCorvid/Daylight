@@ -32,6 +32,13 @@
 				<Folder Name="Player" ID="{ACF91B16-793F-4B09-8166-E08F8C85AFED}" ShortID="306130790">
 					<ChildrenList>
 						<Sound Name="PlayerHurt" ID="{541E5EEF-A100-437E-A595-0032F2B968D5}" ShortID="399652854">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{E6303838-AD03-4850-B742-29701D66325C}"/>
@@ -49,6 +56,32 @@
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{8905DCF1-7030-49BE-8722-A71B26FDD2A2}" ShortID="164671078">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+														<ObjectRef Name="PlayerHurtDelay" ID="{3901AB7E-E6E2-472E-8965-F18A2757FC80}" WorkUnitID="{5761E36B-C9D6-4CE6-8D85-7EB1884CFD0A}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{6A0E3BB6-5F06-4643-9727-5D087E5B577C}" ShortID="450669656">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+														<ObjectRef Name="PlayerHurtReverb" ID="{D3BA5D6B-94F6-4528-9F13-384455B2E77A}" WorkUnitID="{5761E36B-C9D6-4CE6-8D85-7EB1884CFD0A}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
 							<ActiveSourceList>
 								<ActiveSource Name="PlayerHurt" ID="{39F8D0F8-5F2A-44DA-8643-4A0A1C0426B4}" Platform="Linked"/>
 							</ActiveSourceList>

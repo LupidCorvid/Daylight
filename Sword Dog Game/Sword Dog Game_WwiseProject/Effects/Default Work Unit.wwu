@@ -23,6 +23,22 @@
 						<Property Name="WetLevel" Type="Real32" Value="-42"/>
 					</PropertyList>
 				</Effect>
+				<Effect Name="PlayerHurtDelay" ID="{3901AB7E-E6E2-472E-8965-F18A2757FC80}" PluginName="Wwise Delay" CompanyID="0" PluginID="106" PluginType="3">
+					<PropertyList>
+						<Property Name="DelayTime" Type="Real32" Value="0.21"/>
+						<Property Name="Feedback" Type="Real32" Value="22.5"/>
+						<Property Name="WetDryMix" Type="Real32" Value="9"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="PlayerHurtReverb" ID="{D3BA5D6B-94F6-4528-9F13-384455B2E77A}" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+					<PropertyList>
+						<Property Name="Density" Type="Real32" Value="23"/>
+						<Property Name="DryLevel" Type="Real32" Value="-5.3"/>
+						<Property Name="ReverbLevel" Type="Real32" Value="-42"/>
+						<Property Name="RoomShape" Type="Real32" Value="56"/>
+						<Property Name="RoomSize" Type="Real32" Value="-17"/>
+					</PropertyList>
+				</Effect>
 			</ChildrenList>
 		</WorkUnit>
 	</Effects>
