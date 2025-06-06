@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{E5BD8AEF-AF55-406E-9D45-A58356DE14B2}",
     "Language": "SFX",
-    "Hash": "{9234E45C-E577-56B8-B50D-DA55D069D134}",
+    "Hash": "{8BEF8F64-BE39-2465-4CC1-2929837B9BF2}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main",
     "ShortName": "Main",
     "Path": "Main.bnk",
@@ -585,6 +585,22 @@
        "GUID": "{D1F1EAE8-EDEA-486D-954A-BFAC0EE5D29D}",
        "LibName": "Wwise Matrix Reverb",
        "LibId": "7536643"
+      },
+      {
+       "Id": "856022598",
+       "Name": "PlayerHurtDelay",
+       "ObjectPath": "\\Effects\\Default Work Unit\\PlayerHurtDelay",
+       "GUID": "{3901AB7E-E6E2-472E-8965-F18A2757FC80}",
+       "LibName": "Wwise Delay",
+       "LibId": "6946819"
+      },
+      {
+       "Id": "2011420057",
+       "Name": "PlayerHurtReverb",
+       "ObjectPath": "\\Effects\\Default Work Unit\\PlayerHurtReverb",
+       "GUID": "{D3BA5D6B-94F6-4528-9F13-384455B2E77A}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
       },
       {
        "Id": "2115226147",
@@ -5571,7 +5587,17 @@
        {
         "Id": "691373902"
        }
-      ]
+      ],
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "856022598"
+        },
+        {
+         "Id": "2011420057"
+        }
+       ]
+      }
      },
      {
       "Id": "1553760757",
@@ -7568,6 +7594,6 @@
     ]
    }
   ],
-  "FileHash": "{843D8967-4C63-AFFC-A70E-31751C2DA7B5}"
+  "FileHash": "{64715390-C494-FA12-E34A-C71E652E3D3E}"
  }
 }

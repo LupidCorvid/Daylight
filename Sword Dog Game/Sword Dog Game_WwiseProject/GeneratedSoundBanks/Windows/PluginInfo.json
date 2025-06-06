@@ -4,6 +4,13 @@
   "BasePlatform": "Windows",
   "PluginLibs": [
    {
+    "LibName": "Wwise Delay",
+    "LibId": "6946819",
+    "Type": "Effect",
+    "DLL": "AkDelay",
+    "StaticLib": "AkDelayFX"
+   },
+   {
     "LibName": "Wwise Peak Limiter",
     "LibId": "7208963",
     "Type": "Effect",
@@ -16,6 +23,13 @@
     "Type": "Effect",
     "DLL": "AkMatrixReverb",
     "StaticLib": "AkMatrixReverbFX"
+   },
+   {
+    "LibName": "Wwise RoomVerb",
+    "LibId": "7733251",
+    "Type": "Effect",
+    "DLL": "AkRoomVerb",
+    "StaticLib": "AkRoomVerbFX"
    },
    {
     "LibName": "System",
@@ -35,6 +49,6 @@
     "StaticLib": "MasteringSuiteFX"
    }
   ],
-  "FileHash": "{034EDE6E-E932-8DF0-4ED5-43CFF6A603B5}"
+  "FileHash": "{A3A1B305-0624-585C-D16B-6501137CF451}"
  }
 }

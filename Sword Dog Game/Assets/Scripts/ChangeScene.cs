@@ -67,6 +67,8 @@ public class ChangeScene : MonoBehaviour
             AkUnitySoundEngine.PostEvent("LeaveArea", AudioManager.WwiseGlobal);
             AudioManager.instance.currentArea = newArea;
         }
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         yield return new WaitForSeconds(1f);
         if (ContinueMovement)
             maintainMovement = false;
@@ -132,7 +134,8 @@ public class ChangeScene : MonoBehaviour
     {
         if (MainMenuManager.inMainMenu)
         {
-            AudioManager.instance.Stop();
+            AkUnitySoundEngine.PostEvent("FadeOutAll", AudioManager.WwiseGlobal);
+            //AudioManager.instance.Stop();
             MainMenuManager.inMainMenu = false;
         }
     }

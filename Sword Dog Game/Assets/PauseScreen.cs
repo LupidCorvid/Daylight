@@ -193,6 +193,8 @@ public class PauseScreen : MonoBehaviour
         closePrompt();
         unPause();
         FadeOutEvent?.Post(AudioManager.WwiseGlobal);
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         ChangeScene.changingScene = true;
         // CanvasManager.HideHUD(true);
         AudioManager.instance.FadeOutCurrent();

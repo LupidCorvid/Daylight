@@ -102,6 +102,8 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
             //AudioManager.instance.FadeOutCurrent();
             AkUnitySoundEngine.PostEvent("LeaveArea", AudioManager.WwiseGlobal);
         }
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         WwiseEvent?.Post(AudioManager.WwiseGlobal);
         yield return new WaitForSeconds(1f);
         SwordFollow.DisableMovement();
