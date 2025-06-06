@@ -22,6 +22,7 @@ namespace AK
         static const AkUniqueID ENTERDOJO = 2407129755U;
         static const AkUniqueID ENTERFOREST = 2024283954U;
         static const AkUniqueID ENTERHOUSE = 3190755319U;
+        static const AkUniqueID ENTERINTERIOR = 176800609U;
         static const AkUniqueID ENTERMEDIC = 3549296221U;
         static const AkUniqueID ENTERMOUNTAINCAVES = 1067397042U;
         static const AkUniqueID ENTERMOUNTAINS = 2342301127U;
@@ -32,6 +33,7 @@ namespace AK
         static const AkUniqueID EXITBLACKSMITH = 2009297027U;
         static const AkUniqueID EXITDOJO = 3270207375U;
         static const AkUniqueID EXITHOUSE = 3795427123U;
+        static const AkUniqueID EXITINTERIOR = 3488912141U;
         static const AkUniqueID EXITMEDIC = 3217358681U;
         static const AkUniqueID FADEOUTALL = 3208992266U;
         static const AkUniqueID FIGHTBOSS = 2874785730U;
@@ -115,7 +117,11 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID ENEMYAWARE = 3963624107U;
+        static const AkUniqueID HEALTH = 3677180323U;
+        static const AkUniqueID HEIGHT = 1279776192U;
+        static const AkUniqueID INTERIOR = 1132214669U;
         static const AkUniqueID MUSICVOLUME = 2346531308U;
         static const AkUniqueID PROLOGUEPHASE = 2827251531U;
         static const AkUniqueID SFXVOLUME = 988953028U;

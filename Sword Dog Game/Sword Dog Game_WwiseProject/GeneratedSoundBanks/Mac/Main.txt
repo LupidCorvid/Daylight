@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	176800609	EnterInterior			\Music\Forest\EnterInterior	
 	445985469	Die			\Music\Die	
 	513969863	NextPhase			\Music\Prologue\NextPhase	
 	781908707	PlayIntro			\Music\PlayIntro	
@@ -32,6 +33,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3252024581	EnterOcean			\Music\Ocean\EnterOcean	
 	3270207375	ExitDojo			\Music\Town\ExitDojo	
 	3272068613	MonstersUnaware			\Music\Forest\MonstersUnaware	
+	3488912141	ExitInterior			\Music\Forest\ExitInterior	
 	3549296221	EnterMedic			\Music\Town\EnterMedic	
 	3630201441	EndNPC			\Music\EndNPC	
 	3795427123	ExitHouse			\Music\Town\ExitHouse	
@@ -67,8 +69,12 @@ State	ID	Name	State Group			Notes
 	4203473902	Prologue	Area			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	2827251531	ProloguePhase			\Default Work Unit\ProloguePhase	
-	3963624107	EnemyAware			\Default Work Unit\EnemyAware	
+	85412153	Ambience			\Default Work Unit\GameArea\Ambience	
+	1132214669	Interior			\Default Work Unit\GameArea\Interior	
+	1279776192	Height			\Default Work Unit\GameArea\Height	
+	2827251531	ProloguePhase			\Default Work Unit\GameArea\ProloguePhase	
+	3677180323	Health			\Default Work Unit\GameArea\Health	
+	3963624107	EnemyAware			\Default Work Unit\GameArea\EnemyAware	
 
 Effect plug-ins	ID	Name	Type				Notes
 	154365698	ForestReverb	Wwise Matrix Reverb			
@@ -76,7 +82,7 @@ Effect plug-ins	ID	Name	Type				Notes
 	2885755355	CavesLimiter	Wwise Peak Limiter			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	2840956	Forest-A-LapHarp_120bpm3-4_L32M-P1M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\66\{666B772F-E9B5-7531-E90C-359802FA56D8}.wem		\Interactive Music Hierarchy\Music\Area\Forest\Exploration\ExplorationForestA\Forest-A-LapHarp_120bpm3-4_L32M-P1M		617599
+	2840956	Forest-A-LapHarp_120bpm3-4_L32M-P1M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\66\{666B772F-E9B5-7531-E90C-359802FA56D8}.wem		\Interactive Music Hierarchy\Music\Area\Forest\Combat\CombatForestA\Forest-A-LapHarp_120bpm3-4_L32M-P1M		617599
 	7652518	Prologue-Tutorial-Mandolin5th_120bpm4-4_L8M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\AD\{AD9A54D9-F3A5-10BE-A064-D1F20ED8CC9D}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Tutorial\TutorialTheme\Prologue-Tutorial-Mandolin5th_120bpm4-4_L8M-P0M_M		257760
 	21989375	Prologue-Boss-BongoL_120bpm4-4_L32M-P0M_M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\20\{209AE471-BB57-9BBF-165A-8A63B44334BD}.wem		\Interactive Music Hierarchy\Music\Area\Prologue\Boss\BossTheme\Prologue-Boss-BongoL_120bpm4-4_L32M-P0M_M		894912
 	27200161	Cave_80bpm4-4_L92M-P0M	Y:\Daylight\Sword Dog Game\Sword Dog Game_WwiseProject\.cache\13\{1308CD1A-50ED-BA70-E912-73DA92DD8EDC}.wem		\Interactive Music Hierarchy\Music\Area\Caves\Caves\Cave_80bpm4-4_L92M-P0M		3801074

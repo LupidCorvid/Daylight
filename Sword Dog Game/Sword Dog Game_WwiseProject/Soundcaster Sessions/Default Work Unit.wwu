@@ -56,12 +56,16 @@
 							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
+							<GameParameterRef Name="Health" ID="{E5A1D388-71EB-42A5-8158-06375573F942}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
 							<GameParameterRef Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}"/>
 							<Value>0</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}"/>
-							<Value>0</Value>
+							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"/>
@@ -85,7 +89,7 @@
 						<CurrentStateRef Name="Ricken" ID="{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}"/>
+						<CurrentSwitchRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}"/>
 						<CurrentSwitchRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
@@ -180,34 +184,38 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="Die" ID="{21919D89-3FCA-478F-8F7E-D82B2D7F035F}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="MonstersAware" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
 							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="MonstersUnaware" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Die" ID="{21919D89-3FCA-478F-8F7E-D82B2D7F035F}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
-							<Position X="3" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
-							<Position X="4" Y="0"/>
-						</Module>
-						<Module>
 							<ObjectRef Name="ExitInterior" ID="{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
-							<Position X="5" Y="0"/>
+							<Position X="2" Y="1"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Health" ID="{E5A1D388-71EB-42A5-8158-06375573F942}"/>
+							<Value>0</Value>
+						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}"/>
 							<Value>0</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}"/>
-							<Value>0</Value>
+							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"/>
@@ -222,7 +230,7 @@
 						<CurrentStateRef Name="Forest" ID="{9A759AF7-505C-42BA-BE96-63FBC2039DE7}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Exploration" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}"/>
+						<CurrentSwitchRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}"/>
 						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>

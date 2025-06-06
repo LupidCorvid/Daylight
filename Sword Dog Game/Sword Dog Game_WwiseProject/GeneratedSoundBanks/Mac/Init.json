@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{AC80DD2E-D501-3FC7-9B3B-1F1733DE7A22}",
+    "Hash": "{E3C53F07-BC05-E3B6-9426-66A308EBC5F9}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -79,27 +79,51 @@
     ],
     "GameParameters": [
      {
+      "Id": "85412153",
+      "Name": "Ambience",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\Ambience",
+      "GUID": "{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}"
+     },
+     {
       "Id": "988953028",
       "Name": "SFXVolume",
-      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SFXVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Global\\SFXVolume",
       "GUID": "{D20E2E34-BE3B-4203-B5D7-01603254E83A}"
+     },
+     {
+      "Id": "1132214669",
+      "Name": "Interior",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\Interior",
+      "GUID": "{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}"
+     },
+     {
+      "Id": "1279776192",
+      "Name": "Height",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\Height",
+      "GUID": "{C35A4820-BC18-43D3-97A0-C9081DC39CAB}"
      },
      {
       "Id": "2346531308",
       "Name": "MusicVolume",
-      "ObjectPath": "\\Game Parameters\\Default Work Unit\\MusicVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\Global\\MusicVolume",
       "GUID": "{9D496F38-CADF-498D-8F22-D6AEC2DC686D}"
      },
      {
       "Id": "2827251531",
       "Name": "ProloguePhase",
-      "ObjectPath": "\\Game Parameters\\Default Work Unit\\ProloguePhase",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\ProloguePhase",
       "GUID": "{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}"
+     },
+     {
+      "Id": "3677180323",
+      "Name": "Health",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\Health",
+      "GUID": "{E5A1D388-71EB-42A5-8158-06375573F942}"
      },
      {
       "Id": "3963624107",
       "Name": "EnemyAware",
-      "ObjectPath": "\\Game Parameters\\Default Work Unit\\EnemyAware",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\GameArea\\EnemyAware",
       "GUID": "{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"
      }
     ],
@@ -246,6 +270,6 @@
     ]
    }
   ],
-  "FileHash": "{D98E69DD-2F21-AA54-C29B-8BE9D58AF579}"
+  "FileHash": "{BF6641F8-B9FC-C6D9-32EE-C3ED73130254}"
  }
 }
