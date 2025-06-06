@@ -6,7 +6,7 @@ public class TownManager : RoomManager
 {
     public TownAreaState roomState;
     public WwiseEventOnLoad wwiseOnLoad;
-    public GameObject Ricken, General;
+    public GameObject Ricken, General, PanCutscenePrompt;
 
     public Collider2D FirstEnterCutsceneCameraBounds;
 
@@ -28,6 +28,7 @@ public class TownManager : RoomManager
             FirstEnterCutsceneCameraBounds.enabled = false;
         if (roomState.P_FirstTimeEnter_triggered && roomState.P_TownPanEnded)
         {
+            PanCutscenePrompt.SetActive(false);
             wwiseOnLoad.enabled = true;
         }
         //if (roomState.P_EndTalkGeneral)

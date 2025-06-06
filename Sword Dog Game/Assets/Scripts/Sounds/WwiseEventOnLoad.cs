@@ -16,7 +16,6 @@ public class WwiseEventOnLoad : MonoBehaviour
     {
         if (Event != null)
         {
-            Debug.Log("Hello! " + Event);
             if (CutsceneController.inCutscene && CutsceneController.cutsceneControlMusic)
             {
                 return;
