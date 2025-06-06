@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
         else
             SwimmingUpdate();
 
-        
+        AkUnitySoundEngine.SetRTPCValue("Height", Mathf.Clamp(transform.position.y * 2 + 50, 0, 100));
     }
 
     public void GroundMovementUpdate()
