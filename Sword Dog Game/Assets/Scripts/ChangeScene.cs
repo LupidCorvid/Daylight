@@ -91,6 +91,8 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
