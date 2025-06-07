@@ -200,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = true;
         created = true;
 
+        //Set bounds of collider for use by downward raycasts in slope detection
         upperLeftCorner = new Vector2((-cldr.bounds.extents.x * 1) + cldr.offset.x, cldr.bounds.extents.y + cldr.offset.y);
         upperRightCorner = new Vector2((cldr.bounds.extents.x * 1) + cldr.offset.x, upperLeftCorner.y);
         
@@ -229,6 +230,8 @@ public class PlayerMovement : MonoBehaviour
         stops--;
     }
 
+    //Pit/hazard respawn (not death respawn)
+    //Moves the player to the last known safe space when they fall into a pit
     public void GoToResetPoint()
     {
         if (GetComponent<PlayerHealth>().health > 0)
@@ -252,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
             submergeTracker.player = this;
         }
 
+        //Swimming is number of budies of water player is in (its a counter so multiple touching or close by bodies of water aren't an issue)
         if (Swimming < 1 && (submergeTracker.wade.waterDepth <= 0 /*&& isGrounded*/))
             GroundMovementUpdate();
         else if (Swimming > 0 && (submergeTracker.wade.waterDepth <= 0) && Mathf.Abs(rb.velocity.y) < 2)
@@ -264,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundMovementUpdate()
     {
-
+        //If last frame you were in water, translate the water positioning to land positioning
         if (waterRotation)
         {
             ChangeToLandRotation();
@@ -295,6 +299,7 @@ public class PlayerMovement : MonoBehaviour
         //if (CutsceneController.cutsceneFreezePlayerRb)
         //    rb.sharedMaterial = immovable;
 
+        //Check flags that stop movement
         if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene)
         {
             // remember previous movement input
@@ -304,8 +309,10 @@ public class PlayerMovement : MonoBehaviour
             //moveX = Input.GetAxisRaw("Horizontal");
             //Disable moving while attacking
 
+            //Dash
             if(dashStartTime + dashTime > Time.time)
             {
+                //During dash
                 Vector2 dashDir = facingRight ? Vector2.right : Vector2.left;
 
                 rb.velocity = new Vector2(dashDir.x * dashVel, rb.velocity.y);
@@ -321,6 +328,7 @@ public class PlayerMovement : MonoBehaviour
                 
             }
 
+            //Read movement input
             if (!stopMovement)
                 moveX = inputManager.actions["Move"].ReadValue<Vector2>().x;
             else
@@ -331,7 +339,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //moveX = inputManager.actions["Move"].
-
+            
+            //Stop player from walking into walls (so the walk animation doesn't play while they aren't moving)
             if (wallOnRight && moveX > 0) moveX = 0;
             if (wallOnLeft && moveX < 0) moveX = 0;
 
@@ -408,6 +417,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
+            //Sprint cancel/interrupt conditions
             if (isSprinting && (inputManager.actions["Sprint"].WasReleasedThisFrame() || (moveX == 0 && Mathf.Abs(rb.velocity.x) <= 0.01f) || stamina <= 0 || !trotting || (moveX != 0 && Mathf.Abs(realVelocity) < 0.01f) || !canSprint))
             {
                 isSprinting = false;
@@ -425,6 +435,7 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("sprinting", isSprinting || timeSinceSprint < 0.1f);
 
+            //Sprint windup?
             if (isSprinting && !isSkidding)
             {
                 timeSinceSprint = 0;
@@ -498,18 +509,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         float waveTanAngle = submergeTracker.inWater.getTanAngleAtPoint(submergeTracker.inWater.getXLocalFromWorldSpace(transform.position.x));
-        //turnTowards(new Vector2(Mathf.Cos(waveTanAngle), Mathf.Sin(waveTanAngle)));
-        //transform.rotation = Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg),
-        //    Mathf.Clamp(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5), Time.deltaTime * 15, 360));
+
+        //Match angle of wave player is wading on
         if (Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg)) < 15)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), Time.deltaTime * 15);
         else
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg), 
                 Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5));
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, waveTanAngle * Mathf.Rad2Deg),
-        //    Mathf.DeltaAngle(transform.rotation.eulerAngles.z, waveTanAngle * Mathf.Rad2Deg) * Time.deltaTime * 5);
 
         //Will have to rotate to level out. Can't be instant as you wade for a couple of frames when entering and exiting water
 
@@ -559,6 +565,7 @@ public class PlayerMovement : MonoBehaviour
         ///End anim stuff
 
 
+        //Player left/right wading movement
         if (inputMovement.x > 0)
         {
             facingRight = true;
@@ -574,6 +581,7 @@ public class PlayerMovement : MonoBehaviour
 
         float swimSpeed = 10f * inputMovement.magnitude * (.5f + (Mathf.Clamp01(Mathf.Cos(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, inputAngle)))));
 
+        //Slow player down more if they aren't pressing any direction
         if (inputManager.actions["move"].IsPressed())
         {
             //turnTowards(new Vector2(inputMovement.x, inputMovement.y));
@@ -584,6 +592,7 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 2f;
 
+        //apply movement (conditional to cap speed)
         if (((rb.velocity + (inputMovement * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
         {
             //rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
@@ -595,7 +604,7 @@ public class PlayerMovement : MonoBehaviour
         //Change final constant to make it snappier
         transform.position += Vector3.up * (WaterLevel - transform.position.y) * Time.deltaTime * 2;
 
-
+        //Wading jump
         if(inputManager.actions["jump"].WasPressedThisFrame())
         {
             //Jump();
@@ -617,8 +626,10 @@ public class PlayerMovement : MonoBehaviour
         //moveX = Input.GetAxisRaw("Horizontal");
         //Disable moving while attacking
 
+        //Dash
         if (dashStartTime + dashTime > Time.time)
         {
+            //During dash
             Vector2 dashDir = facingRight ? Vector2.right : Vector2.left;
 
             rb.velocity = new Vector2(dashDir.x * dashVel, rb.velocity.y);
@@ -732,6 +743,7 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.drag = 1.5f;
 
+        //Apply movement in forward direction
         if(((rb.velocity + (Vector2)(transform.rotation * Vector2.right * swimSpeed)) * Time.deltaTime).magnitude < speed * 25)
         {
             rb.velocity += (Vector2)(transform.rotation * Vector2.right * swimSpeed) * Time.deltaTime;
@@ -743,13 +755,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Used by swimming only
     public void turnTowards(Vector2 inputDir)
     {
         float angle;
         inputDir.Normalize();
         angle = (Mathf.Atan2(inputDir.y, inputDir.x) * Mathf.Rad2Deg);
 
-
+        //Skip if its already at that angle
         angle = Mathf.DeltaAngle(transform.eulerAngles.z, angle);
         if (Mathf.Abs(angle) <= 0.01)
         {
@@ -796,6 +809,7 @@ public class PlayerMovement : MonoBehaviour
         // check if the player is against a wall
         CheckWall();
 
+        //Hand calculated velocity
         realVelocity = (transform.position.x - lastPosition.x) / Time.fixedDeltaTime;
         lastPosition = transform.position;
 
@@ -969,6 +983,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Translates land into water positioning (mostly rotation changes)
     public void ChangeToWaterRotation()
     {
         if (!facingRight)
@@ -991,6 +1006,7 @@ public class PlayerMovement : MonoBehaviour
         //turnTowards(Quaternion.Euler(0, 0, slopeSideAngle) * Vector2.right);
     }
 
+    //Translates water into land position (mostly rotation changes)
     public void ChangeToLandRotation()
     {
         if (transform.localScale.y < 0)
@@ -1085,6 +1101,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("speed", speedMultiplier);
     }
 
+    //Update slope angle
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
@@ -1093,6 +1110,7 @@ public class PlayerMovement : MonoBehaviour
         SlopeCheckVertical(checkPos);
     }
 
+    //Wrapper for slope check recursive call
     private float? SlopeCheckHorizontal(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
         float? returnVal = OldSlopeCheck(upperLeftCorner, upperRightCorner, 5);
@@ -1116,6 +1134,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    //Old method for getting slope, left in case it is reused
     public float? GetAvgNormal(Vector2 upperLeftCorner, Vector2 upperRightCorner)
     {
         int numSamples = 15;
@@ -1167,6 +1186,7 @@ public class PlayerMovement : MonoBehaviour
             return null;
     }
 
+    //Currently used slope check
     private float? OldSlopeCheck(Vector2 upperLeftCorner, Vector2 upperRightCorner, int runs = 0)
     {
         float? returnAngle = null;
@@ -1328,6 +1348,7 @@ public class PlayerMovement : MonoBehaviour
         return side;
     }
 
+    //Get slope of surface standing on
     public float FindSurfaceRotation()
     {
         float? angle = SlopeCheckHorizontal(upperLeftCorner, upperRightCorner);
@@ -1404,6 +1425,8 @@ public class PlayerMovement : MonoBehaviour
     private void SlopeCheckVertical(Vector2 checkPos)
     {
         // anim.SetBool("ground_close", false);
+        //Down raycast to get slope player is on (at the center)
+        //Differs from horizontalSlopeCheck version as horizontal takes two raycasts, one at left and one at right side. This is just one at center
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         // Debug.DrawLine(checkPos, hit.point, Color.cyan, 0);
         if (hit || isGrounded)
@@ -1436,6 +1459,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Check for a wall on either side of the player
     void CheckWall()
     {
         wallOnLeft = wallOnRight = false;
@@ -1460,6 +1484,7 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
+    //Check if the player is on the ground, as well as a ceiling
     void CheckGround()
     {
         SlopeCheck();
@@ -1474,6 +1499,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool needsClean = false;
 
+        //Scan colliders groundedCheck is touching for any ground
         foreach(Collider2D collision in groundCheck.triggersInContact)
         {
             //Debug.Log(LayerMask.GetMask("Terrain"));
@@ -1500,6 +1526,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //If any colliders were deleted in groundCheck, tell it to remove any null values
         if (needsClean)
             groundCheck.clean();
 
@@ -1521,6 +1548,7 @@ public class PlayerMovement : MonoBehaviour
             behindGroundCheck.clean();
 
         // TODO this may break with the sword - need to check later
+        // Respawn for falling into pits (not death respawn)
         bool isHazard = rb.IsTouchingLayers(LayerMask.NameToLayer("WorldHazard"));
         if (!isHazard) {
             if (isGrounded)
@@ -1543,6 +1571,7 @@ public class PlayerMovement : MonoBehaviour
             cldr1.enabled = true;
         }
 
+        //Check for roofs (used to prevent spam jumping just to hit your head)
         needsClean = false;
         foreach (Collider2D collision in roofCheck.triggersInContact)
         {
