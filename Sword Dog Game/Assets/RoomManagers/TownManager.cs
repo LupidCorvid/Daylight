@@ -28,8 +28,11 @@ public class TownManager : RoomManager
             FirstEnterCutsceneCameraBounds.enabled = false;
         if (roomState.P_FirstTimeEnter_triggered && roomState.P_TownPanEnded)
         {
-            PanCutscenePrompt.SetActive(false);
             wwiseOnLoad.enabled = true;
+        }
+        if (!roomState.P_TownPan)
+        {
+            PanCutscenePrompt.SetActive(true);
         }
         //if (roomState.P_EndTalkGeneral)
         //    General.SetActive(false);
@@ -62,6 +65,7 @@ public class TownManager : RoomManager
                 {
                     CutsceneController.PlayCutscene("P_TownPan");
                     roomState.P_TownPan = true;
+                    PanCutscenePrompt.SetActive(false);
                 }
                 break;
             case "P_TownPanEnded":
