@@ -20,7 +20,18 @@ public class ChangeSceneOnVideoEnd : MonoBehaviour
     void VideoStarted(VideoPlayer source)
     {
         videoPlayer.started -= VideoStarted;
-        music?.Post(AudioManager.WwiseGlobal);
+        if (PauseScreen.paused)
+        {
+            PauseScreen.ResumeAction += StartMusic;
+            return;
+        }
+        StartMusic();
+    }
+
+    void StartMusic()
+    {
+        PauseScreen.ResumeAction -= StartMusic;
+        music?.Post(AudioManager.WwiseGlobal); 
     }
 
     void VideoEnded(VideoPlayer source)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PauseScreen : MonoBehaviour
     public SettingsMiniMenu miniSettings;
 
     public AK.Wwise.Event PauseEvent, ResumeEvent, FadeOutEvent;
+
+    public static Action ResumeAction;
 
     // Start is called before the first frame update
     void Start()
@@ -120,6 +123,7 @@ public class PauseScreen : MonoBehaviour
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
         paused = false;
         ResumeEvent?.Post(AudioManager.WwiseGlobal);
+        ResumeAction?.Invoke();
         Time.timeScale = 1;
         foreach (AudioSource source in sources)
         {
