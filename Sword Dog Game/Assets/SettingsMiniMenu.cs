@@ -69,19 +69,7 @@ public class SettingsMiniMenu : MonoBehaviour
     public void fullScreenToggled()
     {
         SettingsManager.currentSettings.fullScreen = fullScreen.state;
-        if (SettingsManager.currentSettings.fullScreen)
-        {
-            SettingsManager.currentSettings.xRes = (float)Screen.width / Display.main.systemWidth;
-            SettingsManager.currentSettings.yRes = (float)Screen.height / Display.main.systemHeight;
-            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
-        }
-        else
-        {
-            SettingsManager.currentSettings.xRes = Mathf.Clamp(SettingsManager.currentSettings.xRes, 0.1f, 1.0f);
-            SettingsManager.currentSettings.yRes = Mathf.Clamp(SettingsManager.currentSettings.yRes, 4 / 9f, 1.0f);
-            Screen.SetResolution((int)(SettingsManager.currentSettings.xRes * Display.main.systemWidth), (int)(SettingsManager.currentSettings.yRes * Display.main.systemHeight), false);
-            Screen.SetResolution((int)(SettingsManager.currentSettings.xRes * Display.main.systemWidth), (int)(SettingsManager.currentSettings.yRes * Display.main.systemHeight), false);
-        }
+        Screen.SetResolution(Display.main.systemWidth, (int)(9 / 16f * Display.main.systemWidth), SettingsManager.currentSettings.fullScreen);
     }
 
     public void vSyncToggled()

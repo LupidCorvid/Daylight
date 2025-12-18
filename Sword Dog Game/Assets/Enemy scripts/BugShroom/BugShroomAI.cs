@@ -54,6 +54,10 @@ public class BugShroomAI : BaseAI
                 movement.NotMoving();
                 if (target != null && Vector2.Distance(transform.position, target.position) > stopRange)
                 {
+                    if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = AIState.seeking;
                 }
                 else if (target != null && lastAttack + attackCooldown < Time.time)
@@ -90,6 +94,10 @@ public class BugShroomAI : BaseAI
     public void Attack()
     {
         state = AIState.attacking;
+        if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
+        {
+            AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+        }
         anim.SetTrigger("Attacking");
         lastAttack = Time.time;
     }

@@ -5,15 +5,33 @@ using UnityEngine.Video;
 
 public class ChangeSceneOnVideoEnd : MonoBehaviour
 {
-
     public string toScene = "";
     public VideoPlayer videoPlayer;
+    public AK.Wwise.Event music;
     
     // Start is called before the first frame update
     void Start()
     {
+        videoPlayer.started += VideoStarted;
         CanvasManager.HideHUD(true);
         videoPlayer.loopPointReached += VideoEnded;
+    }
+
+    void VideoStarted(VideoPlayer source)
+    {
+        videoPlayer.started -= VideoStarted;
+        if (PauseScreen.paused)
+        {
+            PauseScreen.ResumeAction += StartMusic;
+            return;
+        }
+        StartMusic();
+    }
+
+    void StartMusic()
+    {
+        PauseScreen.ResumeAction -= StartMusic;
+        music?.Post(AudioManager.WwiseGlobal); 
     }
 
     void VideoEnded(VideoPlayer source)

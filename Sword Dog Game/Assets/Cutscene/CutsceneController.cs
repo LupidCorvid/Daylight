@@ -21,6 +21,7 @@ public class CutsceneController : MonoBehaviour
     public bool stopInteractions;
     public bool stopMovement;
     public bool hideUI;
+    public bool instantHideUI;
     public bool controlMusic;
     public bool FreezePlayerRigidbody = false;
 
@@ -184,10 +185,10 @@ public class CutsceneController : MonoBehaviour
             cutsceneStopInteractions = true;
         if (stopMovement)
             cutsceneStopMovement = true;
-        if (hideUI)
+        if (hideUI || instantHideUI)
         {
             cutsceneHideUI = true;
-            CanvasManager.HideHUD();
+            CanvasManager.HideHUD(instantHideUI);
         }
         if (controlMusic)
             cutsceneControlMusic = true;

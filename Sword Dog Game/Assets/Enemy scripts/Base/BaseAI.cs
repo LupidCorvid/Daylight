@@ -91,6 +91,8 @@ public class BaseAI
 
     public static List<Transform> possibleTargets = new List<Transform>();
 
+    public static int playerCombatCounter = 0;
+
     public float aggroRange
     {
         get
@@ -100,6 +102,18 @@ public class BaseAI
         set
         {
             enemyBase.aggroRange = value;
+        }
+    }
+
+    public float forgetRange
+    {
+        get
+        {
+            return enemyBase.forgetRange;
+        }
+        set
+        {
+            enemyBase.forgetRange = value;
         }
     }
 
@@ -115,7 +129,10 @@ public class BaseAI
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        enemyBase.killed += () =>
+        {
+            if (targetEntity is Player) UntrackPlayerCombat();
+        };
     }
 
     // Update is called once per frame
@@ -124,8 +141,10 @@ public class BaseAI
         if (enemyBase.stunned)
             return;
 
-        if(lastTargetSearch + FindTargetsWaitTime < Time.time && (target == null || enemyBase.GetIfEnemies(targetEntity) == false))
+        if(lastTargetSearch + FindTargetsWaitTime < Time.time && (target == null || enemyBase.GetIfEnemies(targetEntity) == false || Vector2.Distance(target.position, transform.position) >= forgetRange))
         {
+            Entity oldTargetEntity = targetEntity;
+
             if(targetEntity != null && enemyBase.GetIfEnemies(targetEntity) == false)
             {
                 targetEntity = null;
@@ -133,6 +152,21 @@ public class BaseAI
 
             targetEntity = GetTarget();
             lastTargetSearch = Time.time;
+
+            if (oldTargetEntity != targetEntity && oldTargetEntity != null && oldTargetEntity is Player)
+            {
+                UntrackPlayerCombat();
+            }
+        }
+    }
+
+    private void UntrackPlayerCombat()
+    {
+        playerCombatCounter--;
+        if (playerCombatCounter < 0) playerCombatCounter = 0;
+        if (playerCombatCounter == 0)
+        {
+            AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
         }
     }
 
@@ -173,7 +207,7 @@ public class BaseAI
                 nearestTarget = target;
             }
         }
-        if(target != null)
+        if(nearestTarget != null)
             FoundTarget(nearestTarget);
 
         return nearestTarget;
@@ -182,6 +216,8 @@ public class BaseAI
     public virtual void FoundTarget(Entity newTarget)
     {
         targetEntity = newTarget;
+        if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
+            playerCombatCounter++;
     }
 
     public virtual void applyAttackDamage()

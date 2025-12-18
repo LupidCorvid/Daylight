@@ -67,6 +67,12 @@ crashlytics-build.properties
 *.xcf
 *.xcf.meta
 
-# Wwise (TEMPORARY)
-Wwise/
-Assets/Wwise.meta
+# Wwise files
+.cache
+*.akd
+*.prof
+*.validationcache
+/Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset*
+
+# Crash files
+mono_crash*

@@ -83,7 +83,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateHealth(bool damage = true)
     {
+        AkUnitySoundEngine.SetRTPCValue("Health", health);
         int temp = health;
+
         if (CanvasManager.hearts == null)
             return;
 
@@ -116,6 +118,10 @@ public class PlayerHealth : MonoBehaviour
                 {
                     Die();
                 }
+                else
+                {
+                    AkUnitySoundEngine.PostEvent("Hurt", AudioManager.WwiseGlobal);
+                }
 
                 if (SwordFollow.instance.activeSelf)
                     SwordFollow.instance.GetComponent<SimpleFlash>().Flash(1f, 3, true);
@@ -144,6 +150,7 @@ public class PlayerHealth : MonoBehaviour
         dead = true;
         rb.velocity = new Vector2(0, rb.velocity.y);
         anim.SetTrigger("death");
+        AkUnitySoundEngine.PostEvent("Die", AudioManager.WwiseGlobal);
         CutsceneController.PlayCutscene("PlayerDeath");
     }
 

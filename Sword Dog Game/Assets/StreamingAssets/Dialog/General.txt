@@ -4,46 +4,42 @@ Default{
 }
 
 Prologue4{
-[sh,The General][abf,6][ss, .05][gvar, playerName]! Where have you been?! You and Ricken- [wi] 
-[c][emote, 3] Wh-[w, .1] Where's Ricken?[w, .3] He[ss,.15]...[ss, .05][w, .2][IA,<size=60%>] He didn't- [IA,</size>] [wi] [exit]
+[unskpbl][sh,The General][abf,6][ss, .05][gvar, playerName]! Where have you been?! You and Ricken- [wi] [c][emote, 3] Wh-[w, .1] Where's Ricken?[w, .3] He...[w, .2][IA,<size=60%>] He didn't-[IA,</size>] [wi] [exit]
 }
 
 Prologue4.1{
-[sh,The General][abf,6][ss, .05] Haaa,[w, .1] that's good to hear.[w, .1] You had me worried that another warrior- [wi] [c][ss,.15] ...[ss, .05] [wi] [c] Nevermind my worries[ss,.15]...[ss, .05] [wi] 
-[c][gvar, playerName], report![w, .1] How did the dispatch mission go? [wi] [exit]
+[unskpbl][sh,The General][abf,6][ss, .035] Haaa, [w, .1] that's good to hear. [w, .1] You had me worried that another warrior- [wi] [c] ... [wi] [c] Nevermind my worries... [wi] 
+[c][gvar, playerName], report! [w, .1] How did the dispatch mission go? [wi] [exit]
 }
 
 Prologue4.2{
-[sh,The General][abf,6][ss, .05]
-I see. [wi] [c]
-I'd assume the monster that ambushed you and dragged you off into the forest was one of the ones that escaped. [wi] [c]
-With a situation like that,[w, .1] let's just count ourselves lucky Ricken only came back with a "broken" leg. [wi] [c]
-But as the last two of the elder's pupils,[w, .1] you two should have been able to complete that mission blindfolded. [wi] [c]
-I can't lie,[w, .1] soldier,[w, .1] I'm disappointed in you. [wi] [c]
-I hope you realize this means that our little monster problem is worsening by the second.
-[prompt, "We're sorry...",[llf,P4.2Response1], "I'll make sure this doesn't happen again.",[llf,P4.2Response2], "...",[llf,P4.2Response3]]
-This town's the last safe haven for dogkind.[w, .1] We need you and your partner on the field of battle now more than ever. [wi] [c]
-And it looks to me like you and your fellow rookie need training and easier missions[ss,.15]...[ss, .05] [wi] [c]
-Now,[w, .1] go see Medic Meryl.[w, .1] She's requested for someone to handle a supply run. [wi] [c]
-She's currently in her office right over there. [wi] [exit]
+[unskpbl][sh,The General][abf,6][ss, .035]
+[c]Let me get this straight... [w, .2] [wi]
+[c]After successfully dispatching several of the assigned monsters... [wi]
+[c]Something,[w, .2] presumably a monster,[w, .2] snuck up behind you and knocked you unconscious...[wi]
+[c]When you awoke,[w, .1] not in the place where you were struck,[w, .1] you could only assume that said assailant had dragged you deeper into the forest... [wi]
+[c]However, Ricken managed to fend off said attacker;[w, .2] that is,[w, .2] until more monsters appeared... [wi]
+[c]When Ricken had been backed into a corner,[w, .1] you had finally managed to catch up to him,[w, .2] swoop in,[w, .2] rescue him,[w, .2] and return safely in order to report this ordeal back to me... [wi]
+[c]Your report in short:[w, .2] the monsters are getting closer. [wi] 
+[c] [ss, .03] [emote, 0] [IA,<size=120%>] [TFX, Shake, 1.2] I wished you had reported back to me something I didn't already know![/TFX,Shake][IA,</size>] [wi]
+[c] [ss, .035] [IA,<size=60%>][TFX, Wave, 5, 3, 50]*Sigh*[/TFX,Wave][IA,</size>] While I'm thankful we didn't lose another rising warrior,[w, .1] hearing that the last of the elder's pupils couldn't even accomplish such a simple task is disheartening. [wi]
+[c]Not [IA,<i>]only[IA,</i>] for me...[w, .2] but for your fellow villagers who look up to us in order to safeguard and protect them. [prompt, "We're sorry...",[llf,P4.2Response1], "I'll make sure this doesn't happen again.",[llf,P4.2Response2], "...",[llf,P4.2Response3]]
+[c] [ss, .05] Clearly, you and your fellow rookie need training and easier missions.[w, .2] [wi]
+[c]Report over.[w, .2] Go patrol around the town and see if anyone is in need of assistance. [wi]
+[c]You are dismissed. [wi] [exit]
 }
 
 P4.2Response1{
-[sh,The General][abf,6][ss, .05]
-[c][ss, .03][IA,<size=120%>][TFX, Shake, .8] I don't want apologies,[w, .1] soldier.[w, .1] I want results![/TFX,Shake][IA,</size>][wi]
+[unskpbl][sh,The General][abf,6][ss, .035]
+[c][ss, .03][IA,<size=120%>][TFX, Shake, .8] I don't want apologies, boy.[w, .1] I want results![/TFX,Shake][IA,</size>] [wi]
 }
 P4.2Response2{
-[sh,The General][abf,6][ss, .05]
-[c] You'd better![w, .1] It would be in your best interest if you want to keep your rank.[wi]
+[unskpbl][sh,The General][abf,6][ss, .035]
+[c] You'd better![w, .1] It would be in your best interest if you want to keep your rank. [wi]
 }
 P4.2Response3{
-[sh,The General][abf,6][ss, .05]
-[c][ss, .03][IA,<size=120%>][TFX, Shake, .8] Quit standing around looking sorry for yourself![/TFX,Shake][IA,</size>][wi]
-}
-
-Prologue4.3{
-[sh,The General][abf,6][ss, .05]
-Report over.[w, .1] You are dismissed. [wi] [exit]
+[unskpbl][sh,The General][abf,6][ss, .05]
+[c][ss, .03][IA,<size=120%>][TFX, Shake, .8] Quit standing around looking sorry for yourself![/TFX,Shake][IA,</size>] [wi]
 }
 
 Prologue5.1{
@@ -51,8 +47,8 @@ Prologue5.1{
 }
 
 Prologue5.1HasAloe{
-[sh,The General][abf,6][ss, .05]
-[c] You lot, we're having a mandatory town meeting. Meet me outside as soon as possible.[wi][CE, LeavePromptly] [exit]
+[unskpbl][sh,The General][abf,6][ss, .035]
+[c] You lot, we're having a mandatory town meeting. Meet me outside as soon as possible. [wi] [CE, LeavePromptly] [exit]
 }
 
 Forest1{

@@ -86,6 +86,7 @@ public class EnterHouse : MonoBehaviour
     {
         //houseBack.GetComponent<BoxCollider2D>().enabled = true;
         playerIsInsideHouse = true;
+        AkUnitySoundEngine.PostEvent("EnterHouse", AudioManager.WwiseGlobal);
         insideCollidersActive(true);
         NPCsActive(true);
     }
@@ -94,6 +95,7 @@ public class EnterHouse : MonoBehaviour
     {
         playerIsInsideHouse = false;
         increaseAlphaOnHouse = true;
+        AkUnitySoundEngine.PostEvent("ExitHouse", AudioManager.WwiseGlobal);
         //houseBack.GetComponent<BoxCollider2D>().enabled = false;
         insideCollidersActive(false);
         NPCsActive(false);

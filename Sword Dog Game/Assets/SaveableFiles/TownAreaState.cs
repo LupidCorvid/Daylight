@@ -17,8 +17,13 @@ public class TownAreaState
         * Ricken trots off screen quickly
         */
 
+    public bool P_EndTalkRicken = false;
+        //Player finishes talking to Ricken. Ricken should no longer be standing where he is.
+
     public bool P_TownPan = false;
         //Pan to three areas of the town, then return control to the character
+
+    public bool P_TownPanEnded = false;
 
     public bool P_GeneralFirstTimeEnter = false;
         /* The player walks into town a bit but the General is turned away from the player
@@ -27,4 +32,7 @@ public class TownAreaState
          * General turns around and walks towards player
          * General yammering
         */
+
+    public bool P_EndTalkGeneral = false;
+        //Player finishes talking to General. General should no longer be standing where he is.
 }

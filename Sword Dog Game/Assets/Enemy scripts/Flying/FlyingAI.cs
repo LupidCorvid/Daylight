@@ -12,6 +12,7 @@ public class FlyingAI : BaseAI
 
     public enum states
     {
+        idle,
         sitting,
         gettingUp,
         lunging,
@@ -79,9 +80,24 @@ public class FlyingAI : BaseAI
             return;
 
         if (target == null)
-            return;//Need idle for this case
+        {
+            if (state != states.sitting)
+            {
+                state = states.idle;
+            }
+            return;
+        }
         switch(state)
         {
+            case states.idle:
+                // TODO more here
+                if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
+                {
+                    AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                }
+                anim.SetBool("Sitting", false);
+                state = states.pursuit;
+                break;
             case states.sitting:
                 perchedPoint = transform.position;
                 if (target != null)
@@ -106,7 +122,13 @@ public class FlyingAI : BaseAI
                     moveToPoint(perchedPoint + Vector2.up * 2);
                 }
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_sitToFly"))
+                {
+                    if (targetEntity is Player && !PauseScreen.quit && !ChangeScene.changingScene)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = states.pursuit;
+                }
                 break;
 
             case states.pursuit:
@@ -129,6 +151,10 @@ public class FlyingAI : BaseAI
                         windUpTarget += (Vector2)(targetRb.velocity * Random.Range(0, 1f/windupSpeedScalar)); //UpperRange time should be length of telegraph anim
                     if ((!facingLeft && windUpTarget.x - transform.position.x <= 3) || (facingLeft && windUpTarget.x - transform.position.x >= -3))
                     {
+                        if (targetEntity is Player)
+                        {
+                            AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                        }
                         state = states.pursuit;
                     }
                     else
@@ -145,6 +171,10 @@ public class FlyingAI : BaseAI
                     anim.SetTrigger("Turn");
                     ((FlyingEnemy)enemyBase).scaleAnimator = 1;
                     state = states.turning;
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                 }
 
                 break;
@@ -157,6 +187,10 @@ public class FlyingAI : BaseAI
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("mon4_turn"))
                 {
                     updateFacingDirection();
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = states.pursuit;
                     anim.ResetTrigger("Turn");
                 }
@@ -208,7 +242,13 @@ public class FlyingAI : BaseAI
                 //rotateToDirection((Vector2)transform.position - targetPosition);
                 rotateToDirection(Vector2.right * (rb.velocity.normalized.x) * 64 + Vector2.up * 8);
                 if (Vector2.Distance(windUpTarget, transform.position) > 4.5f)
+                {
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = states.pursuit;
+                }
                 break;
         }
         
