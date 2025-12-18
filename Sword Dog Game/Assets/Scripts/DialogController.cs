@@ -129,6 +129,8 @@ public class DialogController : MonoBehaviour
     }
     public void openBox()
     {
+        if(PlayerMenuManager.open)
+            PlayerMenuManager.main.closeMenu();
         CanvasManager.HideHUD();
         anim.SetBool("requestClose", false);
         panel.alpha = panelAlpha;

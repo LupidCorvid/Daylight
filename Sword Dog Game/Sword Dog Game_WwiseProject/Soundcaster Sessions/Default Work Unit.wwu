@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{30EBFED9-5513-4A6D-A158-9CCF6778EE2D}" SchemaVersion="123">
+	<SoundcasterSessions>
+		<WorkUnit Name="Default Work Unit" ID="{30EBFED9-5513-4A6D-A158-9CCF6778EE2D}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="Prologue" ID="{220EE6E9-4F14-4EF3-AA77-F176024F7321}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="EnterTutorial" ID="{D07DA31D-A355-4CC4-97DA-9A42AC6DEEC4}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SecondTalkRicken" ID="{E61DA118-288E-412C-BB3D-C18CF642164B}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SecondTalkRicken" ID="{E61DA118-288E-412C-BB3D-C18CF642164B}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="NextPhase" ID="{3D817837-1F21-4131-B64D-CB9CC41710B2}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Pause" ID="{2C798149-A285-4AC6-A596-3D3378199D9E}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Hurt" ID="{3937B190-A091-490F-84AC-2F2CD47814D9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="FirstTalkRicken" ID="{26690F9C-B223-41A3-B400-3B690FA14198}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Resume" ID="{F66F4551-5B33-47A3-847A-F3C5E43E2DAB}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="LeaveArea" ID="{2F53384C-78F0-4F24-8796-45652BA07317}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="FightBoss" ID="{427A9803-2ADF-4390-8D32-7DC4F34BB543}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterForest" ID="{FEB8C9BB-78F0-4FDF-983D-0406E8B4EDDA}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="DefeatBoss" ID="{5E330E21-3013-45F3-8FE3-48EEDFEFD522}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="4" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="SFXVolume" ID="{D20E2E34-BE3B-4203-B5D7-01603254E83A}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Health" ID="{E5A1D388-71EB-42A5-8158-06375573F942}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}"/>
+							<Value>9.27027031241173E-316</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"/>
+							<Value>9.55315491010969E-316</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="DojoBlacksmith" ID="{5FFC0E73-FB92-47F2-9836-B59C1E4E131C}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="PrologueBoss" ID="{A6E9894E-8BA4-4868-A13A-09744231E539}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="MusicVolume" ID="{9D496F38-CADF-498D-8F22-D6AEC2DC686D}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="ProloguePhase" ID="{DDFFF254-D8F5-4D4D-A387-99DF2514FE22}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}"/>
+							<Value>0</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Forest" ID="{9A759AF7-505C-42BA-BE96-63FBC2039DE7}"/>
+						<CurrentStateRef Name="Ricken" ID="{DC4E1C8A-AA13-451C-9F01-2B7515D0968B}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Combat" ID="{E3029C9C-BFA1-4851-80F2-AEB74C29D11E}"/>
+						<CurrentSwitchRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="Town" ID="{B8985342-92E4-45C0-92DF-143E9885EFA4}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="EnterTown" ID="{37435602-5FA7-4680-BCD6-A07F2A8B2803}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterShop" ID="{1FEE4C9C-BA85-47E7-A22B-F20A69CFB41F}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="TalkGeneral" ID="{7D1C3D36-9B6B-44EF-8D66-FB3622F7462D}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterBlacksmith" ID="{F6569331-4881-46C0-A2A8-076C9A2B6BF0}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitBlacksmith" ID="{E7E64663-6AE9-48D4-8840-47A095975635}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EndNPC" ID="{7F4653B6-B23A-416C-938C-238C6F1CFB06}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterDojo" ID="{6045530D-2531-46A4-BA7F-209BB4522132}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitDojo" ID="{FC5CE28F-D126-450F-8148-DDEEC1BDD3A9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterMedic" ID="{8ED1777D-1A3F-425A-A2DF-0599503F5263}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitMedic" ID="{78D83DD9-647A-4FA3-BD90-CFF18945E005}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterHouse" ID="{421E9E39-A369-4D4E-8190-C259051B76D5}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="4" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitHouse" ID="{DAD5B685-92D5-432D-8D26-2D49FF325906}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="4" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="SFXVolume" ID="{D20E2E34-BE3B-4203-B5D7-01603254E83A}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="DojoBlacksmith" ID="{5FFC0E73-FB92-47F2-9836-B59C1E4E131C}"/>
+							<Value>50</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Town" ID="{D127A303-2D4C-4E9B-BEAC-A41ACE8ACFE6}"/>
+						<CurrentStateRef Name="General" ID="{8C2660EF-D4E6-4087-B338-5B58C3B835B7}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Boss" ID="{37B6A980-0D45-4C71-8A63-A26B1ABFCAB5}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="MenuIntro" ID="{F6505B93-E09C-4411-86D9-555EF0E4A439}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="PlayMenu" ID="{F0DE5252-7B65-48C3-9DFD-0E02F09D56C9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="FadeOutAll" ID="{7B4305BB-21C1-4494-8287-00FAE06FDCFE}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="PlayIntro" ID="{7102F3FE-8197-48C7-AB26-5A6371F25453}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+				<SoundcasterSession Name="Forest" ID="{DB49B88B-FE3A-4FEB-A60D-5DD22A7E3263}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="EnterForest" ID="{FEB8C9BB-78F0-4FDF-983D-0406E8B4EDDA}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Die" ID="{21919D89-3FCA-478F-8F7E-D82B2D7F035F}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MonstersAware" ID="{4F6DD085-D544-41AB-9639-DBCCB8F1C6A0}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="EnterInterior" ID="{CBA664DF-DD3C-4767-9653-F8B20EB0BE84}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="MonstersUnaware" ID="{103B03E5-A708-412B-9054-6F96C154F5F1}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="ExitInterior" ID="{7A87DAA7-487D-4C18-8BE7-9268F5A1C704}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Hurt" ID="{3937B190-A091-490F-84AC-2F2CD47814D9}" WorkUnitID="{ED14089A-C00F-4BD6-B64D-B23CFE24CB5F}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Health" ID="{E5A1D388-71EB-42A5-8158-06375573F942}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Height" ID="{C35A4820-BC18-43D3-97A0-C9081DC39CAB}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Ambience" ID="{EE34EA9B-DF55-443E-A3A7-6B04A511E3E3}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="EnemyAware" ID="{F2A2DEF1-FB2E-449E-BC37-06891D24B337}"/>
+							<Value>9.55315491010969E-316</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Interior" ID="{DEF2D47C-F14D-4FE5-A6B0-096A48D49D42}"/>
+							<Value>0</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Forest" ID="{9A759AF7-505C-42BA-BE96-63FBC2039DE7}"/>
+						<CurrentStateRef Name="General" ID="{8C2660EF-D4E6-4087-B338-5B58C3B835B7}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Explore" ID="{FB081C3D-2DA0-41D1-8DB3-B2C995344F2C}"/>
+						<CurrentSwitchRef Name="Tutorial" ID="{DF830F92-5012-4D10-A507-9E8A44804743}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundcasterSessions>
+</WwiseDocument>

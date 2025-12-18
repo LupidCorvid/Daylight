@@ -83,7 +83,7 @@ public class PlayerMenuManager : MonoBehaviour
                 {
                     closeMenu();
                 }
-                else
+                else if (!DialogController.main.inDialog && !CutsceneController.inCutscene)
                 {
                     openMenu();
                 }

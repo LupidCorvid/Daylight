@@ -117,7 +117,13 @@ public class RockLobberAI : BaseAI
                 movement.NotMoving();
 
             if (Vector2.Distance(target.position, transform.position) <= 7)
+            {
+                if (targetEntity is Player)
+                {
+                    AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                }
                 state = AIstate.meleeAttacking;
+            }
             else if (Vector2.Distance(target.position, transform.position) <= stopRange * .66f)
             {
                 if (target.transform.position.x < transform.position.x)
@@ -127,7 +133,13 @@ public class RockLobberAI : BaseAI
 
             }
             else if (lastAttack + attackCooldown < Time.time && !float.IsNaN(getAttackAngle()))
+            {
+                if (targetEntity is Player)
+                {
+                    AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                }
                 state = AIstate.rangedAttacking;
+            }
         }
         else if (state == AIstate.meleeAttacking)
         {

@@ -305,12 +305,13 @@ public class WaterFX : MonoBehaviour
             return;
 
         //Apply parallaxToTopSection
-        Vector3[] newVerts = new Vector3[mesh.vertexCount];
+        List<Vector3> newVerts = new List<Vector3>(mesh.vertexCount);
 
-        for(int i = 0; i < (numSegments * 2 + 2); i++)
-        {
-            newVerts[i] = mesh.vertices[i];
-        }
+        mesh.GetVertices(newVerts);
+        //for (int i = 0; i < (numSegments * 2 + 2); i++)
+        //{
+        //    newVerts[i] = mesh.vertices[i];
+        //}
 
         for (int i = (numSegments * 2 + 2); i < (numSegments * 2 + 2)*2; i++)
         {
@@ -351,7 +352,7 @@ public class WaterFX : MonoBehaviour
                 newVerts[i] = new Vector3(worldSpace.x + ((worldSpace.x - cam.transform.position.x) * -depth) * parallaxFXScalar.x, worldSpace.y + ((worldSpace.y - cam.transform.position.y) * -depth / 5f) * parallaxFXScalar.y, transform.position.z) - transform.position;
         }
 
-        mesh.vertices = newVerts;
+        mesh.vertices = newVerts.ToArray();
     }
 
     public void ApplyAdjacencyEffects()

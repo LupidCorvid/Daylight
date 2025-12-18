@@ -101,6 +101,10 @@ public class Player : Entity
 
     public override void TakeDamage(int damage, Entity source)
     {
+        if (source != null && source is EnemyBase)
+        {
+            AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+        }
         base.TakeDamage(damage, source);
         playerHealth.TakeDamage(damage);
     }

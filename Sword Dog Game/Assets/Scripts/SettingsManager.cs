@@ -46,19 +46,13 @@ public class SettingsManager : MonoBehaviour
 
     public static void UpdateFullscreen()
     {
-        if (currentSettings.fullScreen)
-        {
-            currentSettings.xRes = (float)Screen.width / Display.main.systemWidth;
-            currentSettings.yRes = (float)Screen.height / Display.main.systemHeight;
-            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
-        }
-        else
-        {
-            currentSettings.xRes = Mathf.Clamp(currentSettings.xRes, 0.1f, 1.0f);
-            currentSettings.yRes = Mathf.Clamp(currentSettings.yRes, 4 / 9f, 1.0f);
-            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
-            Screen.SetResolution((int)(currentSettings.xRes * Display.main.systemWidth), (int)(currentSettings.yRes * Display.main.systemHeight), false);
-        }
+        //if (currentSettings.fullScreen)
+        //{
+        //    currentSettings.xRes = (float)Screen.width / Display.main.systemWidth;
+        //    currentSettings.yRes = (float)Screen.height / Display.main.systemHeight;
+            
+        //}
+        Screen.SetResolution(Display.main.systemWidth, (int)(9 / 16f * Display.main.systemWidth), currentSettings.fullScreen);
     }
 
     public static void SaveSettings()

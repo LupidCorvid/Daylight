@@ -69,6 +69,10 @@ public class LungerAI : BaseAI
             {
                 if(lastLunge + cooldown < Time.time)
                 {
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     state = AIStates.charging;
                     //chargeStart = Time.time;
                     chargeStart = START_LEAP_TIME;

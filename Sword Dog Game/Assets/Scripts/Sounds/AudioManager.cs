@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    public static GameObject WwiseGlobal;
     public AudioMixer musicMixer, sfxMixer, globalSfxMixer;
     public AudioMixerGroup musicMixerGroup;
     public MusicClip currentSong = null;
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+
         if (SettingsManager.currentSettings != null)
         {
             musicVolume = SettingsManager.currentSettings.musicVolume;
@@ -172,7 +174,7 @@ public class AudioManager : MonoBehaviour
         {
             mute = !mute;
         }
-        SettingsManager.currentSettings.musicMute = mute;
+        // SettingsManager.currentSettings.musicMute = mute;
 
         // Volume controls (hold down + or -)
         musicMixer.SetFloat("Volume", musicVolume);
@@ -191,6 +193,8 @@ public class AudioManager : MonoBehaviour
         }
         SettingsManager.currentSettings.musicVolume = musicVolume;
         SettingsManager.currentSettings.sfxVolume = sfxVolume;
+        AkUnitySoundEngine.SetRTPCValue("MusicVolume", 100*(Mathf.Pow(10,musicVolume / 20) - 0.00001f));
+        AkUnitySoundEngine.SetRTPCValue("SFXVolume", 100*(Mathf.Pow(10, sfxVolume / 20) - 0.00001f));
 
         float pitch;
         musicMixer.GetFloat("Pitch", out pitch);
@@ -218,9 +222,10 @@ public class AudioManager : MonoBehaviour
             sfxMixer.SetFloat("Reverb", -4f);
         else
             sfxMixer.SetFloat("Reverb", -10000f);
-        
+
         // sfxVolume is a float from 0.0-1.0 but we'd want 1.0 to correspond to 10dB => *10f
-        targetSFXVolume = SettingsManager.currentSettings.sfxVolume*10f - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
+        //targetSFXVolume = SettingsManager.currentSettings.sfxVolume*10f - Mathf.Clamp(2 * Camera.main.orthographicSize, 10, 100);
+        targetSFXVolume = SettingsManager.currentSettings.sfxVolume;
         if (ChangeScene.changingScene || GameSaver.loading)
         {
             actualSFXVolume = Mathf.Lerp(actualSFXVolume, -80, 0.1f);

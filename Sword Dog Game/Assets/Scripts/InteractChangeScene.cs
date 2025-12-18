@@ -16,6 +16,8 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
 
     public Transform promptSpawnLocation;
 
+    public AK.Wwise.Event WwiseEvent;
+
     private bool _inRange = false;
     public bool inRange
     {
@@ -97,8 +99,12 @@ public class InteractChangeScene : MonoBehaviour, IInteractable
         DialogController.main.closeBox();
         if (newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT)
         {
-            AudioManager.instance.FadeOutCurrent();
+            //AudioManager.instance.FadeOutCurrent();
+            AkUnitySoundEngine.PostEvent("LeaveArea", AudioManager.WwiseGlobal);
         }
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
+        WwiseEvent?.Post(AudioManager.WwiseGlobal);
         yield return new WaitForSeconds(1f);
         SwordFollow.DisableMovement();
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();

@@ -8,6 +8,7 @@ public class EnemyBase : Entity
 {
 
     public float aggroRange = 10;
+    public float forgetRange = 20;
 
     public BaseAI ai;
     public BaseMovement movement;

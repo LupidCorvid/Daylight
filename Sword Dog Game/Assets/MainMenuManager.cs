@@ -30,6 +30,9 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager main;
     public static GameObject instance;
 
+    public GameObject WwiseGlobal;
+    public AK.Wwise.Event FadeOut;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,6 +122,7 @@ public class MainMenuManager : MonoBehaviour
             QuestsManager.main.RefreshListings();
             InventoryManager.main?.refreshInventory();
             AudioManager.instance.FadeOutCurrent();
+            main.FadeOut?.Post(main.WwiseGlobal);
             DialogSource.stringVariables = GameSaver.currData.dialogStringVariables;
             //ChangeScene.LoadScene("Prologue Area", "", false);
             ChangeScene.LoadScene("Introduction", "", false);
@@ -180,6 +184,7 @@ public class MainMenuManager : MonoBehaviour
             //GameSaver.main.LoadGame();
             SaveSystem.current.saveDataIndex = lastSaveNum;
             AudioManager.instance.FadeOutCurrent();
+            FadeOut?.Post(WwiseGlobal);
             GameSaver.main.LoadGame();
         }
         
@@ -192,17 +197,25 @@ public class MainMenuManager : MonoBehaviour
             GameSaver.currData = data; //Isn't needed?
             //GameSaver.main.LoadGame();
             AudioManager.instance.FadeOutCurrent();
+            main.FadeOut?.Post(main.WwiseGlobal);
             GameSaver.main.LoadGame();
         }
     }
 
-
     public void Quit()
     {
+        if (!quit)
+            StartCoroutine(QuitGame());
         quit = true;
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        
+    }
+
+    private IEnumerator QuitGame()
+    {
+        Crossfade.current.StartFade();
+        FadeOut?.Post(WwiseGlobal);
+        yield return new WaitForSeconds(1.0f);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

@@ -63,8 +63,12 @@ public class ChangeScene : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         if (!AudioManager.instance.disableSceneFade && newArea != AudioManager.instance.currentArea && newArea != AudioManager.GameArea.CURRENT) {
-            AudioManager.instance.FadeOutCurrent();
+            //AudioManager.instance.FadeOutCurrent();
+            AkUnitySoundEngine.PostEvent("LeaveArea", AudioManager.WwiseGlobal);
+            AudioManager.instance.currentArea = newArea;
         }
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         yield return new WaitForSeconds(1f);
         if (ContinueMovement)
             maintainMovement = false;
@@ -87,6 +91,8 @@ public class ChangeScene : MonoBehaviour
         EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
         GameObject.Destroy(eventSystem?.gameObject);
         DisableMenuMusic();
+        AkUnitySoundEngine.PostEvent("MonstersUnaware", AudioManager.WwiseGlobal);
+        BaseAI.playerCombatCounter = 0;
         SceneHelper.LoadScene(scene);
         clearCollisions?.Invoke();
         clearInteractables?.Invoke();
@@ -130,7 +136,8 @@ public class ChangeScene : MonoBehaviour
     {
         if (MainMenuManager.inMainMenu)
         {
-            AudioManager.instance.Stop();
+            AkUnitySoundEngine.PostEvent("FadeOutAll", AudioManager.WwiseGlobal);
+            //AudioManager.instance.Stop();
             MainMenuManager.inMainMenu = false;
         }
     }

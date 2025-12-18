@@ -100,6 +100,10 @@ public class SpeyederAI : BaseAI
                 {
                     lastLand = Time.time;
                     state = states.landStop;
+                    if (targetEntity is Player)
+                    {
+                        AkUnitySoundEngine.PostEvent("MonstersAware", AudioManager.WwiseGlobal);
+                    }
                     //applyAttackDamage();
                     anim.SetTrigger("Land");
                 }
