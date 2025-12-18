@@ -230,7 +230,11 @@ public class CutsceneController : MonoBehaviour
 
     private void Update()
     {
-        if(cutsceneNumber < cutscenes.Count && playingThisCutscene)
+        if (cutsceneNumber < cutscenes.Count && playingThisCutscene)
+        {
             cutscenes[cutsceneNumber].cycleExecution();
+            //Bandaid fix for being in cutscenes as one transitions to another
+            inCutscene = true;
+        }
     }
 }
