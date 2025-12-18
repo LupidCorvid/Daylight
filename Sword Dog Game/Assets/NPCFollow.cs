@@ -158,18 +158,20 @@ public class NPCFollow : MonoBehaviour
             if(swordAnim != null)
                 swordAnim?.Play(swordTurnAnim);
             turnStartTime = Time.time;
-        }
-        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName) && turnMinTime + turnStartTime < Time.time)
-        {
-            turning = false;
-            if(flipAnimator)
+
+            if (flipAnimator)
                 anim.transform.localScale = new Vector3(anim.transform.localScale.x * -1, anim.transform.localScale.y, anim.transform.localScale.z);
             else
                 gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
 
+
             Entity ent = gameObject.GetComponent<Entity>();
             if (ent != null)
-                ent.facingDir = (((gameObject.transform.localScale.x < 0) ^ SpriteFacesRight ) ? Vector2.right : Vector2.left);
+                ent.facingDir = (((gameObject.transform.localScale.x < 0) ^ SpriteFacesRight) ? Vector2.right : Vector2.left);
+        }
+        else if (!anim.GetCurrentAnimatorStateInfo(0).IsName(turnAnimName) && turnMinTime + turnStartTime < Time.time)
+        {
+            turning = false;
         }
     }
 
