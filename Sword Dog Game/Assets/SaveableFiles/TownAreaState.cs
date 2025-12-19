@@ -34,5 +34,12 @@ public class TownAreaState
         */
 
     public bool P_EndTalkGeneral = false;
-        //Player finishes talking to General. General should no longer be standing where he is.
+    //Player finishes talking to General. General should no longer be standing where he is.
+
+    //Quest for meryl given and progress is stored in quest manager
+
+    public bool P_TownMeeting = false;
+    //Has the player attended the town meeting?
+    //This will be active if the quest for meryl has been completed but this flag is not set
+    
 }

@@ -122,6 +122,10 @@ public class MerylBehavior : DialogNPC
                 CanvasManager.main.queuedQuestNotif = ("Completed quest: " + new MerylAloeQuest().questDescription);
                 QuestsManager.main.setQuestCompletion(1, true);
                 break;
+            case "MerylPrologTalkFinish":
+                dialog[0] = "[lf,Meryl.txt,Default]";
+                Debug.Log("Finished meryl prologue heal");
+                break;
         }
     }
     public void healUser()

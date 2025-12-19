@@ -21,7 +21,7 @@ Quest{
 }
 
 QuestPrompt{
-Hey,[w,.05] I was running low on one of my main healing ingredients,[w,.05] [IA,<color=#FFDC30>]teardrop aloe[IA,</color>].[w,.05] Could you get 2 for me?[w,.1] I will pay you for your time.[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
+[c]Hey,[w,.05] I was running low on one of my main healing ingredients,[w,.05] [IA,<color=#FFDC30>]teardrop aloe[IA,</color>].[w,.05] Could you get 2 for me?[w,.1] I will pay you for your time.[prompt, Accept, [llf,Accept], Decline, [llf,Exit]] [wi] [exit]
 }
 
 QuestFinish{
@@ -34,25 +34,28 @@ Accept{
 
 Prologue5.1{
 [sh,Meryl][abf,10][ss, .05]
-Ah PLAYER! I have heard tales of your mission from that rather imaginative boy. [wi] [c]
-I also heard that you took quite a blow to that noggin of yours. [wi] [c]
-Let me take a looksie and patch you right up,[w, .1] dearie[ss,.15]...[ss, .05]
-
-[prompt, "Alright, doc.",[llf,P5.1Response1], "No thanks.",[llf,P5.1Response2]]
-
+[c]Ah PLAYER! I have heard tales of your mission from that rather imaginative boy. [wi]
+[c]I also heard that you took quite a blow to that noggin of yours. [wi]
+[c]Let me take a looksie and patch you right up,[w, .1] dearie[ss,.15]...[ss, .05][prompt, "Alright doc.",[llf,P5.1Response1], "No thanks.",[llf,P5.1Response2]] [CE,MerylPrologTalkFinish][reemote,4]
+[c]Hm?[w,.1] Ricken?[w,.1] Tut tut tut...[w,.1] that boy...[w,.1]
+[c]Ah,[w,.05] no need to worry.[w,.1] It's nothing too serious,[w,.025] but you warriors sure have a habit of using up all my teardrop aloe.[w,.1] Now I've run out...[wi]
+[c]Oh?[w,.1] You're willing to go collect some teardrop aloe for me?[wi]
+[c]Are you sure?[w,.1] After all,[w,.05] you just got back.[w,.1] Have you had any time to rest-[reemote,5][w,.2]
+[c]Well if you insist... don't strain yourself,[w,.05] but I need teardrop aloe and it tends to be found to the west of town. [CE,AloeQuestAssign][wi]
+[c]Thank you,[w,.05] stay safe out there.[wi] [exit]
 }
 P5.1Response1{
-[sh,Meryl][abf,10][ss, .05][c][CE,heal]There, you should be good as new! [wi] [exit]
+[sh,Meryl][abf,10][ss, .05][c][CE,heal]There, you should be good as new! [wi]
 }
 P5.1Response2{
 [c]Are you sure? Really, I insist.
 [prompt, "Actually...",[llf,P5.1Response3], "No thanks.",[llf,P5.1Response4]]
 }
 P5.1Response3{
-[c]That's what I thought.[w, .1] Never be afraid to ask for a quick heal,[w, .1] dearie! [wi] [exit]
+[c]That's what I thought.[w, .1] Never be afraid to ask for a quick heal,[w, .1] dearie! [wi]
 }
 P5.1Response4{
-[c]Alright then,[w, .1] if you're sure. [wi] [exit]
+[c]Alright then,[w, .1] if you're sure. [wi]
 }
 
 Prologue5.2{

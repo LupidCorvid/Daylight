@@ -37,7 +37,7 @@ Transform:
   - {fileID: 1491214156947781031}
   - {fileID: 9146669988803489333}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &97294771630012862
 SpriteRenderer:
@@ -111,6 +111,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3328643770172790151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ MonoBehaviour:
   dialog:
   - '[lf,Meryl.txt]'
   numInteractions: 0
-  loopInteractions: 0
+  loopInteractions: 1
   alreadyTalking: 0
   barkSpawnLocation: {fileID: 8044847901171861568}
   promptPrefab: {fileID: 7392982453682323073, guid: 78e0046984eb9e447bb4adb45ea821ee, type: 3}

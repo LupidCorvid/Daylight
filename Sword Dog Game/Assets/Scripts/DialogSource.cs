@@ -178,6 +178,7 @@ public class DialogSource
         6 - Worry
         7 - sad
         8 - talk
+        [e,text] //Just wraps text to disable command parsing, useful for being able to use "," inside commands
      */
     public DialogSource(string dialog)
     {
@@ -1009,6 +1010,10 @@ public class DialogSource
             case "unskpbl":
                 skippableText = false;
                 break;
+            case "e":
+                dialog = dialog.Insert(position,input[1]);
+                break;
+
             default:
                 Debug.LogWarning("Found empty or invalid dialog command " + input[0]);
                 //Maybe make it just output the input (i.e. [tester]) if there is no command found and assume that it was not intended as a command call
