@@ -101,7 +101,6 @@ public class MerylBehavior : DialogNPC
     public override void interact(Entity user)
     {
         base.interact(user);
-        QuestsManager.main.setQuestProgress(new MerylAloeQuest(), user.getAssociatedInventory().CountItem(new TeardropAloe()));
     }
 
     public override void eventCalled(params string[] input)

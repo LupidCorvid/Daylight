@@ -17,7 +17,7 @@ Revive{
 }
 
 Quest{
-[c][GQA,1,[GQP,1,[llf,QuestFinish]],[llf,QuestPrompt]]Let me know once you have gotten the 2 [IA,<color=#FFDC30>]teardrop aloe[IA,</color>]. [wi] [exit]
+[c][GQA,1,[GQP,1,[llf,QuestFinish]],[llf,QuestPrompt]]Let me know once you have gotten the 2 [IA,<color=#FFDC30>]teardrop aloe[IA,</color>]. It can be found to the west of town. [wi] [exit]
 }
 
 QuestPrompt{
@@ -36,11 +36,11 @@ Prologue5.1{
 [sh,Meryl][abf,10][ss, .05]
 [c]Ah PLAYER! I have heard tales of your mission from that rather imaginative boy. [wi]
 [c]I also heard that you took quite a blow to that noggin of yours. [wi]
-[c]Let me take a looksie and patch you right up,[w, .1] dearie[ss,.15]...[ss, .05][prompt, "Alright doc.",[llf,P5.1Response1], "No thanks.",[llf,P5.1Response2]] [CE,MerylPrologTalkFinish][reemote,4]
+[c]Let me take a looksie and patch you right up,[w, .1] dearie[ss,.15]...[ss, .05][prompt, "Alright doc.",[llf,P5.1Response1], "No thanks.",[llf,P5.1Response2]] [CE,MerylPrologTalkFinish][reemote,3]
 [c]Hm?[w,.1] Ricken?[w,.1] Tut tut tut...[w,.1] that boy...[w,.1]
 [c]Ah,[w,.05] no need to worry.[w,.1] It's nothing too serious,[w,.025] but you warriors sure have a habit of using up all my teardrop aloe.[w,.1] Now I've run out...[wi]
 [c]Oh?[w,.1] You're willing to go collect some teardrop aloe for me?[wi]
-[c]Are you sure?[w,.1] After all,[w,.05] you just got back.[w,.1] Have you had any time to rest-[reemote,5][w,.2]
+[c]Are you sure?[w,.1] After all,[w,.05] you just got back.[w,.1] Have you had any time to rest-[reemote,4][w,.5]
 [c]Well if you insist... don't strain yourself,[w,.05] but I need teardrop aloe and it tends to be found to the west of town. [CE,AloeQuestAssign][wi]
 [c]Thank you,[w,.05] stay safe out there.[wi] [exit]
 }
@@ -60,4 +60,17 @@ P5.1Response4{
 
 Prologue5.2{
 [sh,Meryl][abf,10][ss, .05] Test [wi] [exit]
+}
+
+AloeQuestFinished{
+[sh,Meryl][abf,10][ss, .05]
+[c]Oh,[w,.05] Dearie![w,.1] 
+[c]I was beginning to worry.[w,.1] After your harrowing encounter earlier today,[w,.05], I though that you might have[ss,.15][emote,5]...[ss,.05] [w,.1]
+[c]It's good to see you've returned unharmed[wi]
+[c]Well? Did you find the herb okay?[wi]
+[c]Hm.[w,.15] Hm?[w,.15] Mhmm... [wi]
+[c]Yes,[w,.05] this looks to be the correct herb,[w,.05]the right amount,[w,.05] and well maintained too.[w,.1] Good job![wi]
+[c]You don't know how many times I request young'uns like yourself to go out and collect for me only for them to return with my items in a condition I know they didn't find them in. [wi]
+[c]Oh,[w,.05] it makes me wish these ol' bones were more cooperative so that I could go out and collect them myself! [wi]
+[c]But![w,.1] I know you're not here to listen to an old woman babble about how good the days were before monsters roamed. I'll go patch Ricken up, lickety-split.[wi] [exit]
 }
