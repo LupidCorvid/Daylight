@@ -966,6 +966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 701263919}
   - component: {fileID: 701263920}
+  - component: {fileID: 701263927}
   - component: {fileID: 701263921}
   - component: {fileID: 701263923}
   - component: {fileID: 701263922}
@@ -1007,6 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscenes:
+  - {fileID: 701263927}
   - {fileID: 701263921}
   - {fileID: 701263923}
   - {fileID: 701263922}
@@ -1144,6 +1146,27 @@ MonoBehaviour:
   overrideDialog: 1
   dialog: '[lf,Prologue/Prologue_scene_1_Ricken.txt,Prologue5.1HasAloe] [exit]'
   restorePriorDialog: 1
+--- !u!114 &701263927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701263918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7544282153493438230371120e94c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  objectsToMove:
+  - objectToMove: {fileID: 0}
+    getFromName: 1
+    transformName: Player(Clone)
+    newLocation: {x: 8.79, y: -1.34, z: 0}
+    newScale: {x: -1, y: 1, z: 1}
+    newRotation: 0
+    relativePosition: 0
 --- !u!1 &758442087
 GameObject:
   m_ObjectHideFlags: 0

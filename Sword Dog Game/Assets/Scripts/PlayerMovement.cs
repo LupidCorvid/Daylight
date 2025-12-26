@@ -300,7 +300,8 @@ public class PlayerMovement : MonoBehaviour
         //    rb.sharedMaterial = immovable;
 
         //Check flags that stop movement
-        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene)
+        if (!PlayerHealth.dead && !CutsceneController.cutsceneStopMovement && !MenuManager.inMenu && !PlayerMenuManager.open && DialogController.main?.source?.waiting != true && !DialogController.main?.pausePlayerMovement  == true && !ChangeScene.changingScene
+            && !DevConsole.inConsole)
         {
             // remember previous movement input
             prevMoveX = moveX;

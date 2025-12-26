@@ -77,7 +77,7 @@ public class PlayerMenuManager : MonoBehaviour
 
         if(InputReader.inputs != null && InputReader.inputs.actions["Inventory"].WasPressedThisFrame())
         {
-            if (!PauseScreen.paused && PauseScreen.canPause && !MenuManager.inMenu)
+            if (!PauseScreen.paused && PauseScreen.canPause && !MenuManager.inMenu && !DevConsole.inConsole)
             {
                 if (open)
                 {

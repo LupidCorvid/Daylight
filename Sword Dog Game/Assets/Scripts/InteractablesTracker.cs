@@ -56,7 +56,7 @@ public class InteractablesTracker : MonoBehaviour
 
     private void Update()
     {
-        if (delay >= maxDelay && InputReader.inputs.actions["Interact"].WasPressedThisFrame() && !PauseScreen.paused)
+        if (delay >= maxDelay && InputReader.inputs.actions["Interact"].WasPressedThisFrame() && !PauseScreen.paused && !DevConsole.inConsole)
         {
             //nearest?.interact(transform.parent.gameObject);
             nearest?.interact(attachedEntity);
