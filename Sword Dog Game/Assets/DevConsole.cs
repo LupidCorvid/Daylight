@@ -111,6 +111,9 @@ public class DevConsole : MonoBehaviour
                         QuestsManager.main.setQuestCompletion(int.Parse(parts[1]), true);
                         commandResult = "Completed quest " + QuestsManager.main.getQuest(int.Parse(parts[1])).questDescription;
                         break;
+                    case "heal":
+                        Player.controller.entityBase.heal();
+                        break;
                     default:
                         commandResult = "Unrecognized command " + parts[0];
                         break;
