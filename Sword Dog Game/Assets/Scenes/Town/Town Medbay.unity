@@ -970,9 +970,11 @@ GameObject:
   - component: {fileID: 701263921}
   - component: {fileID: 701263923}
   - component: {fileID: 701263922}
+  - component: {fileID: 701263928}
   - component: {fileID: 701263924}
   - component: {fileID: 701263925}
   - component: {fileID: 701263926}
+  - component: {fileID: 701263929}
   m_Layer: 0
   m_Name: AloeQuestFinishedCutscene
   m_TagString: Untagged
@@ -1012,9 +1014,11 @@ MonoBehaviour:
   - {fileID: 701263921}
   - {fileID: 701263923}
   - {fileID: 701263922}
+  - {fileID: 701263928}
   - {fileID: 701263924}
   - {fileID: 701263925}
   - {fileID: 701263926}
+  - {fileID: 701263929}
   cutsceneNumber: 0
   cutsceneName: AloeQuestFinish
   playingThisCutscene: 0
@@ -1072,6 +1076,13 @@ MonoBehaviour:
     transformName: 
     newLocation: {x: 18, y: -1.1, z: 0}
     newScale: {x: -1, y: 1, z: 1}
+    newRotation: 0
+    relativePosition: 0
+  - objectToMove: {fileID: 1239558261}
+    getFromName: 1
+    transformName: Player(Clone)
+    newLocation: {x: 5, y: -1.1, z: 0}
+    newScale: {x: 1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
 --- !u!114 &701263923
@@ -1144,7 +1155,8 @@ MonoBehaviour:
   getInteractorByName: 1
   interactorName: Player(Clone)
   overrideDialog: 1
-  dialog: '[lf,Prologue/Prologue_scene_1_Ricken.txt,Prologue5.1HasAloe] [exit]'
+  dialog: '[lf,Story dialogue/Prologue/Prologue_scene_1_Ricken.txt,Prologue5.1HasAloe]
+    [exit]'
   restorePriorDialog: 1
 --- !u!114 &701263927
 MonoBehaviour:
@@ -1167,6 +1179,60 @@ MonoBehaviour:
     newScale: {x: -1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
+--- !u!114 &701263928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701263918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points:
+  - zoom: 6
+    speed: 10
+    point: {x: 18, y: 0.61}
+    letterbox: 0
+    transition: 0
+    hideUI: 0
+    instantUI: 0
+    relPosition: 0
+    minSpeed: 0
+    targTransform: {fileID: 0}
+    useTransformX: 0
+    useTransformY: 0
+  target: {fileID: 0}
+  freeCameraOnExit: 0
+  freeHudOnExit: 0
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  resetBarsOnExit: 0
+  cameraRb: {fileID: 0}
+--- !u!114 &701263929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701263918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fedc074b0b65246a4a415526efafc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finished: 0
+  points: []
+  target: {fileID: 0}
+  freeCameraOnExit: 1
+  freeHudOnExit: 1
+  useMainCamera: 1
+  ignoreCameraBounds: 0
+  resetBarsOnExit: 0
+  cameraRb: {fileID: 0}
 --- !u!1 &758442087
 GameObject:
   m_ObjectHideFlags: 0
