@@ -1061,14 +1061,14 @@ MonoBehaviour:
   - objectToMove: {fileID: 171249067}
     getFromName: 0
     transformName: 
-    newLocation: {x: 24.6, y: -0.9, z: 0}
+    newLocation: {x: 24.6, y: -1.1, z: 0}
     newScale: {x: -1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
   - objectToMove: {fileID: 1239558261}
     getFromName: 0
     transformName: 
-    newLocation: {x: 22, y: -0.9, z: 0}
+    newLocation: {x: 18, y: -1.1, z: 0}
     newScale: {x: -1, y: 1, z: 1}
     newRotation: 0
     relativePosition: 0
@@ -1142,8 +1142,8 @@ MonoBehaviour:
   getInteractorByName: 1
   interactorName: Player(Clone)
   overrideDialog: 1
-  dialog: '[lf,Ricken_Prologue_scene_1_Ricken,Prologue5.1HasAloe]'
-  restorePriorDialog: 0
+  dialog: '[lf,Prologue/Prologue_scene_1_Ricken.txt,Prologue5.1HasAloe] [exit]'
+  restorePriorDialog: 1
 --- !u!1 &758442087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2209,6 +2209,10 @@ PrefabInstance:
     - target: {fileID: 6490230159200725461, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.620224
       objectReference: {fileID: 0}
     - target: {fileID: 6712416993626590192, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
