@@ -46,6 +46,7 @@ public class DevConsole : MonoBehaviour
         consoleGroup.blocksRaycasts = false;
         consoleGroup.interactable = false;
         inConsole = false;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void TextChanged(string newText)
@@ -80,7 +81,7 @@ public class DevConsole : MonoBehaviour
                 switch (parts[0])
                 {
                     case "give_item":
-                        if (parts.Length > 2)
+                        if (parts.Length <= 2)
                         {
                             Player.controller.entityBase.getAssociatedInventory().AddItem(ItemDatabase.main.getItemFromId(int.Parse(parts[1])));
                             commandResult = "Gave 1 " + ItemDatabase.main.getItemFromId(int.Parse(parts[1])).name;

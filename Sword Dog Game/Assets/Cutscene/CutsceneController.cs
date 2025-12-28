@@ -8,7 +8,13 @@ public class CutsceneController : MonoBehaviour
     [SerializeField]
     public List<CutsceneData> cutscenes = new List<CutsceneData>();
 
-    public static bool inCutscene = false;
+    public static bool inCutscene
+    {
+        get
+        {
+            return numCutscenesPlaying > 0;
+        }
+    }
 
     public int cutsceneNumber = 0;
 
@@ -36,7 +42,7 @@ public class CutsceneController : MonoBehaviour
     public bool RemoveOnDestroy = true;
     public bool OverwriteCopies = false;
 
-    
+    static int numCutscenesPlaying = 0;
 
     //Maybe make a different cutscene holder so that multiple cutscenes can be saved without needing multiple controllers (although currently mutliple controllers is fine)
 
@@ -176,7 +182,6 @@ public class CutsceneController : MonoBehaviour
     {
         if (cutscenes.Count <= 0)
             return;
-        inCutscene = true;
         playingThisCutscene = true;
         cutsceneNumber = 0;
         cutscenes[0].startSegment();
@@ -195,6 +200,7 @@ public class CutsceneController : MonoBehaviour
         if (FreezePlayerRigidbody)
             cutsceneFreezePlayerRb = true;
         StopAllCutscenes += FinishCutscene;
+        numCutscenesPlaying++;
     }
 
     public void FinishCutscene()
@@ -224,8 +230,8 @@ public class CutsceneController : MonoBehaviour
         if (playingThisCutscene && FreezePlayerRigidbody && cutsceneFreezePlayerRb)
             cutsceneFreezePlayerRb = false;
 
-        inCutscene = false;
         playingThisCutscene = false;
+        numCutscenesPlaying--;
     }
 
     private void Update()
@@ -233,8 +239,6 @@ public class CutsceneController : MonoBehaviour
         if (cutsceneNumber < cutscenes.Count && playingThisCutscene)
         {
             cutscenes[cutsceneNumber].cycleExecution();
-            //Bandaid fix for being in cutscenes as one transitions to another
-            inCutscene = true;
         }
     }
 }

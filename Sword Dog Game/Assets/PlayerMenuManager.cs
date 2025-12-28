@@ -87,6 +87,10 @@ public class PlayerMenuManager : MonoBehaviour
                 {
                     openMenu();
                 }
+                else
+                {
+                    Debug.Log(DialogController.main.inDialog + " " + CutsceneController.inCutscene);
+                }
             }
         }
 

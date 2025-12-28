@@ -191,6 +191,7 @@ public class PauseScreen : MonoBehaviour
 
     public IEnumerator BackToMenu() {
         quit = true;
+        CutsceneController.StopAllCutscenes();
         //GameSaver.main.SaveGame();
         PlayerMovement.created = false;
         SwordFollow.created = false;
@@ -205,7 +206,6 @@ public class PauseScreen : MonoBehaviour
         Crossfade.current.StartFade();
         DialogController.main.closeBox();
         yield return new WaitForSeconds(1f);
-        CutsceneController.inCutscene = false;
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         ChangeScene.clearCollisions?.Invoke();
         ChangeScene.clearInteractables?.Invoke();
