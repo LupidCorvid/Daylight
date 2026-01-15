@@ -189,9 +189,6 @@ public class DialogSource
     public static Dictionary<string, string> getBlocks(string loadedText)
     {
         Dictionary<string, string> blocks = new Dictionary<string, string>();
-
-        // Normalize line endings on different OS's
-        loadedText = loadedText.Replace(Environment.NewLine, "\r\n");
         
         if (loadedText.Length > BLOCKS_SIGNATURE.Length && loadedText.Substring(0, 7) == BLOCKS_SIGNATURE)
         {
@@ -239,8 +236,10 @@ public class DialogSource
             string[] splitPath = filePath.Split("\\");
             filePath = Path.Combine(splitPath);
         }
-        string gottenText = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath), Encoding.UTF8);
-
+        
+        // Handles inconsistent line endings
+        string[] gottenLines = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Dialog", filePath), Encoding.UTF8);
+        string gottenText = string.Join("\r\n", gottenLines);
         return gottenText;
     }
 
