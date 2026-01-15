@@ -1914,7 +1914,6 @@
 									<ChildrenList>
 										<MusicTrack Name="Town-AnvilStrikes_120bpm4-4_L72M-P0M" ID="{E03A66C9-D533-4558-9AB2-7AE149494B20}" ShortID="511618843">
 											<PropertyList>
-												<Property Name="OverrideOutput" Type="bool" Value="True"/>
 												<Property Name="OverridePositioning" Type="bool" Value="True"/>
 												<Property Name="SpeakerPanning" Type="int16" Value="2"/>
 												<Property Name="Volume" Type="Real64">
@@ -1925,7 +1924,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -1970,7 +1969,7 @@
 																						<PointList>
 																							<Point>
 																								<XPos>0</XPos>
-																								<YPos>-0</YPos>
+																								<YPos>0</YPos>
 																								<Flags>5</Flags>
 																							</Point>
 																							<Point>
@@ -2381,7 +2380,6 @@
 										</MusicTrack>
 										<MusicTrack Name="Town-SwordStrikes_120bpm4-4_L72M-P0M" ID="{EF48D38F-77C6-4BD8-B728-A8D486609D4D}" ShortID="826177391">
 											<PropertyList>
-												<Property Name="OverrideOutput" Type="bool" Value="True"/>
 												<Property Name="OverridePositioning" Type="bool" Value="True"/>
 												<Property Name="SpeakerPanning" Type="int16" Value="2"/>
 												<Property Name="Volume" Type="Real64">
@@ -2392,7 +2390,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
+													<ObjectRef Name="Music" ID="{33677A02-E487-4986-BBA7-0597F3E1E146}" WorkUnitID="{C7FB03B0-2040-45B8-93F0-500206E14D20}"/>
 												</Reference>
 												<Reference Name="TransitionRoot">
 													<Custom>
@@ -2484,7 +2482,7 @@
 																					</Point>
 																					<Point>
 																						<XPos>100</XPos>
-																						<YPos>-0</YPos>
+																						<YPos>0</YPos>
 																						<Flags>37</Flags>
 																					</Point>
 																				</PointList>
