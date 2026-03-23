@@ -55461,6 +55461,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &182048483
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108997,6 +108998,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &289771246
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134507,7 +134509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518578389629448043, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.6202393
+      value: -6.620163
       objectReference: {fileID: 0}
     - target: {fileID: 6712416993626590192, guid: f12b246e8bfe4d44bb90f60e9ca4a5eb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -199487,6 +199489,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &512124447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209804,6 +209807,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &565238328
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -209866,16 +209870,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1608314271201688361, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1608314271201688361, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1608314271201688361, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1608314271201688361, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dface613981782c4a83dba22c5cc3bfc, type: 2}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -209886,11 +209894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 64.77
+      value: 65.33
       objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.09
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 3703650061167044128, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
       propertyPath: m_LocalPosition.z
@@ -212046,6 +212054,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &586764264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -277605,6 +277614,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &780791991
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283584,6 +283594,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &809256637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -389026,6 +389037,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1183472403
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -448841,6 +448853,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1313072772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580156,6 +580169,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1683745160 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3703650061167044159, guid: 98e7e04e43c5b56469aa4a2346ed8e98, type: 3}
@@ -603265,6 +603279,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1811240218
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -611983,6 +611998,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1865021768
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -804055,6 +804071,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!199 &4216066963791004775
 ParticleSystemRenderer:
   serializedVersion: 6
